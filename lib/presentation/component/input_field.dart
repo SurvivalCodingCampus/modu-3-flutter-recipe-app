@@ -25,7 +25,8 @@ class InputField extends StatelessWidget {
         SizedBox(
           height: 55,
           width: 315,
-          child: TextField(
+          child: TextFormField(
+            initialValue: value,
             onChanged: onValueChange,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
@@ -42,10 +43,6 @@ class InputField extends StatelessWidget {
               hintText: placeHolder,
               hintStyle: TextStyles.smallTextRegular.copyWith(
                 color: ColorStyles.gray4,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: ColorStyles.gray4, width: 1.5),
               ),
             ),
           ),
