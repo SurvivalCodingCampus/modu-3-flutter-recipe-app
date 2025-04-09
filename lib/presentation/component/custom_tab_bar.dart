@@ -16,8 +16,17 @@ class CustomTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int tabCount = tabTitles.length;
+
+    // 탭 개수에 따라 여백과 간격 계산
+    final double horizontalPadding = calculateHorizontalPadding(tabCount);
+    final double tabSpacing = calculateTabSpacing(tabCount);
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: 12,
+      ),
       decoration: BoxDecoration(
         color: ColorStyle.white, //ColorStyle.primary40,
         borderRadius: BorderRadius.circular(10),
@@ -33,7 +42,9 @@ class CustomTabBar extends StatelessWidget {
 
               return Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: EdgeInsets.only(
+                    right: index == tabCount - 1 ? 0 : tabSpacing,
+                  ),
                   child: GestureDetector(
                     onTap: () {
                       onTabSelected?.call(index);
@@ -64,5 +75,31 @@ class CustomTabBar extends StatelessWidget {
             }).toList(),
       ),
     );
+  }
+
+  double calculateHorizontalPadding(int tabCount) {
+    // 탭 개수가 1개 이하인 경우 예외 처리
+    if (tabCount <= 1) {
+      return 0; // 1개 이하일 경우 좌우 여백을 0으로 처리
+    }
+
+    // 탭 개수가 2개 이상일 때 여백 계산
+    double padding = 30 - (tabCount - 2) * 5; // 선형 보간 계산식
+
+    // 최소 좌우 여백을 10px로 제한
+    return padding < 10 ? 10 : padding;
+  }
+
+  double calculateTabSpacing(int tabCount) {
+    // 탭 개수가 1개 이하인 경우 예외 처리
+    if (tabCount <= 1) {
+      return 0; // 1개 이하일 경우 탭 간격을 0으로 처리
+    }
+
+    // 탭 개수가 2개 이상일 때 간격 계산
+    double spacing = 15 - (tabCount - 2) * 4; // 선형 보간 계산식
+
+    // 최소 탭 간격을 5px로 제한
+    return spacing < 5 ? 5 : spacing;
   }
 }

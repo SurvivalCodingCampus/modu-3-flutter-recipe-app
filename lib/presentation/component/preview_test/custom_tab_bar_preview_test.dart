@@ -10,8 +10,18 @@ void main() {
   );
 }
 
-class CustomTabBarPreviewPage extends StatelessWidget {
+class CustomTabBarPreviewPage extends StatefulWidget {
   const CustomTabBarPreviewPage({super.key});
+
+  @override
+  State<CustomTabBarPreviewPage> createState() =>
+      _CustomTabBarPreviewPageState();
+}
+
+class _CustomTabBarPreviewPageState extends State<CustomTabBarPreviewPage> {
+  int _tabsTwoSelectedIndex = 0;
+  int _tabsThreeSelectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +34,20 @@ class CustomTabBarPreviewPage extends StatelessWidget {
             CustomTabBar(
               tabTitles: ['test', 'test2'],
               onTabSelected: (index) {
-                print(index);
+                setState(() {
+                  _tabsTwoSelectedIndex = index;
+                });
               },
-              selectedIndex: 0,
+              selectedIndex: _tabsTwoSelectedIndex,
+            ),
+            CustomTabBar(
+              tabTitles: ['test', 'test2', 'test3'],
+              onTabSelected: (index) {
+                setState(() {
+                  _tabsThreeSelectedIndex = index;
+                });
+              },
+              selectedIndex: _tabsThreeSelectedIndex,
             ),
           ],
         ),
