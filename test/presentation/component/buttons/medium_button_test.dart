@@ -37,7 +37,9 @@ class MediumButtonTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: MediumButton(text: text, onPressed: () => onPressed())),
+      home: Scaffold(
+        body: MediumButton(text: text, onPressed: () => onPressed()),
+      ),
     );
   }
 }

@@ -37,7 +37,9 @@ class SmallButtonTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: SmallButton(text: text, onPressed: () => onPressed())),
+      home: Scaffold(
+        body: SmallButton(text: text, onPressed: () => onPressed()),
+      ),
     );
   }
 }
