@@ -41,17 +41,7 @@ class AppButton extends StatelessWidget {
           color: AppColor.primary100,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(text, style: _textStyle().copyWith(color: AppColor.white)),
-            if (type != ButtonType.small)
-              Padding(
-                padding: const EdgeInsets.only(left: 24),
-                child: Icon(Icons.arrow_forward, color: AppColor.white),
-              ),
-          ],
-        ),
+        child: _child(),
       ),
     );
   }
@@ -84,6 +74,29 @@ class AppButton extends StatelessWidget {
         return AppTextstyle.normalBold;
       case ButtonType.small:
         return AppTextstyle.smallBold;
+    }
+  }
+
+  Widget _child() {
+    switch (type) {
+      case ButtonType.big || ButtonType.medium:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(text, style: _textStyle().copyWith(color: AppColor.white)),
+            Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Icon(Icons.arrow_forward, color: AppColor.white),
+            ),
+          ],
+        );
+      case ButtonType.small:
+        return Center(
+          child: Text(
+            text,
+            style: _textStyle().copyWith(color: AppColor.white),
+          ),
+        );
     }
   }
 }
