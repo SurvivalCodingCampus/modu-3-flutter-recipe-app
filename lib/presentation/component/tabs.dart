@@ -15,9 +15,10 @@ class Tabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 375,
       height: 58,
+      color: ColorStyles.white,
       child: Row(
         children: [
           for (int i = 0; i < labels.length; i++) ...[

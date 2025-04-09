@@ -16,61 +16,71 @@ class ComponentTest extends StatelessWidget {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 36),
-            child: Column(
-              children: [
-                SizedBox(height: 30),
-                BigButton(
-                  name: 'Button',
-                  color: ColorStyles.primary100,
-                  icon: Icons.arrow_forward,
-                  onClick: () {
-                    print('나는 빅버튼');
-                  },
-                ),
-                SizedBox(height: 12),
-                MediumButton(
-                  name: 'Button',
-                  color: ColorStyles.primary100,
-                  icon: Icons.arrow_forward,
-                  onClick: () {
-                    print('나는 미디움버튼');
-                  },
-                ),
-                SizedBox(height: 12),
-                SmallButton(
-                  name: 'Button',
-                  color: ColorStyles.primary100,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  BigButton(
+                    name: 'Button',
+                    color: ColorStyles.primary100,
+                    icon: Icons.arrow_forward,
+                    onClick: () {
+                      print('나는 빅버튼');
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  MediumButton(
+                    name: 'Button',
+                    color: ColorStyles.primary100,
+                    icon: Icons.arrow_forward,
+                    onClick: () {
+                      print('나는 미디움버튼');
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  SmallButton(
+                    name: 'Button',
+                    color: ColorStyles.primary100,
 
-                  onClick: () {
-                    print('나는 스몰버튼');
-                  },
-                ),
-                SizedBox(height: 12),
-                InputField(
-                  label: 'Label',
-                  placeHolder: 'PlaceHolder',
-                  value: 'value',
-                  onValueChange: (value) {
-                    print('입력이 변경되었습니다.');
-                  },
-                ),
-                SizedBox(height: 12),
-                Tabs(
-                  labels: ['label', 'label'],
-                  selectedIndex: 0,
-                  onValueChange: (index) {
-                    print('클릭된 인덱스 : $index');
-                  },
-                ),
-                SizedBox(height: 12),
-                Tabs(
-                  labels: ['label', 'label'],
-                  selectedIndex: 1,
-                  onValueChange: (index) {
-                    print('클릭된 인덱스 : $index');
-                  },
-                ),
-              ],
+                    onClick: () {
+                      print('나는 스몰버튼');
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  InputField(
+                    label: 'Label',
+                    placeHolder: 'PlaceHolder',
+                    value: 'value',
+                    onValueChange: (value) {
+                      print('입력이 변경되었습니다.');
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  InputField(
+                    label: 'Label',
+                    placeHolder: 'PlaceHolder',
+                    value: '',
+                    onValueChange: (value) {
+                      print('입력이 변경되었습니다.');
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  Tabs(
+                    labels: ['label', 'label'],
+                    selectedIndex: 0,
+                    onValueChange: (index) {
+                      print('클릭된 인덱스 : $index');
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  Tabs(
+                    labels: ['label', 'label', 'label'],
+                    selectedIndex: 1,
+                    onValueChange: (index) {
+                      print('클릭된 인덱스 : $index');
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
