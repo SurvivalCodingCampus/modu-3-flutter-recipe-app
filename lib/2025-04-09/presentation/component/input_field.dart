@@ -48,7 +48,6 @@ class InputWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextField(
-                key: const Key('input_field'),
                 onChanged: (v) {
                   onValueChange?.call(v);
                 },
