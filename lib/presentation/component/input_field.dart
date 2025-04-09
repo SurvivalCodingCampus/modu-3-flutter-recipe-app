@@ -26,43 +26,51 @@ class InputField extends StatelessWidget {
 
     return Column(
       children: [
-        Text(
-          labelTitle,
-          style: AppTextStyles.smallRegular(color: ColorStyle.labelColour),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            labelTitle,
+            style: AppTextStyles.smallRegular(color: ColorStyle.labelColour),
+          ),
         ),
-        TextField(
-          controller: TextEditingController(text: value),
-          onChanged: (value) {
-            onValueChange?.call(value);
-          },
-          style: AppTextStyles.extraSmallRegular(color: ColorStyle.black),
-          decoration: InputDecoration(
-            hintText: placeholderText,
-            filled: true,
-            fillColor: ColorStyle.white,
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: placeholderVerticalPadding,
-              horizontal: placeholderHorizontalPadding,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(rounded),
-              borderSide: const BorderSide(
-                color: ColorStyle.gray4,
-                width: borderWidth,
+        const SizedBox(height: 8),
+        SizedBox(
+          height: 55,
+          child: TextField(
+            controller: TextEditingController(text: value),
+            onChanged: (value) {
+              onValueChange?.call(value);
+            },
+            style: AppTextStyles.extraSmallRegular(color: ColorStyle.black),
+            decoration: InputDecoration(
+              hintText: placeholderText,
+              hintStyle: AppTextStyles.smallRegular(color: ColorStyle.gray4),
+              filled: true,
+              fillColor: ColorStyle.white,
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: placeholderVerticalPadding,
+                horizontal: placeholderHorizontalPadding,
               ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(rounded),
-              borderSide: const BorderSide(
-                color: ColorStyle.primary80,
-                width: borderWidth,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(rounded),
+                borderSide: const BorderSide(
+                  color: ColorStyle.gray4,
+                  width: borderWidth,
+                ),
               ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(rounded),
-              borderSide: const BorderSide(
-                color: ColorStyle.gray4,
-                width: borderWidth,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(rounded),
+                borderSide: const BorderSide(
+                  color: ColorStyle.primary80,
+                  width: borderWidth,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(rounded),
+                borderSide: const BorderSide(
+                  color: ColorStyle.gray4,
+                  width: borderWidth,
+                ),
               ),
             ),
           ),

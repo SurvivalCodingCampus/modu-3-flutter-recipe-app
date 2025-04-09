@@ -40,7 +40,7 @@ class CustomButton extends StatelessWidget {
       case CustomButtonSize.small:
         width = responsiveWidth(context, ratio: 0.464);
         height = 37;
-        fontStyle = AppTextStyles.extraSmallRegular(color: ColorStyle.white);
+        fontStyle = AppTextStyles.extraSmallBold(color: ColorStyle.white);
         // rounded = 10;
         break;
     }

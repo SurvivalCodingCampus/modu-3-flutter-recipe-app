@@ -24,6 +24,7 @@ class CustomTabBar extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children:
             tabTitles.asMap().entries.map((e) {
               final index = e.key;
