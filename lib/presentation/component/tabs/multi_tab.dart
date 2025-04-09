@@ -11,8 +11,8 @@ class MultiTab extends StatelessWidget {
     super.key,
     required this.labels,
     required this.onValueChange,
-    int selectIndex = 0,
-  }) : selectedIndex = selectIndex;
+    this.selectedIndex = 0,
+  });
 
   List<Widget> buildButtons() {
     return labels
