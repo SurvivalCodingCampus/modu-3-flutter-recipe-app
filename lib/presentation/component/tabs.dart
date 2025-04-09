@@ -26,7 +26,7 @@ class Tabs extends StatelessWidget {
                 onValueChange(i);
               },
               child: Container(
-                width: 300/labels.length,
+                width: 300 / labels.length,
                 height: 33,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -48,7 +48,7 @@ class Tabs extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 15),
+            if (i < labels.length - 1) SizedBox(width: 15),
           ],
         ],
       ),
