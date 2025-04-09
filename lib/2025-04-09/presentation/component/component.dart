@@ -59,4 +59,3 @@ class _ComponentState extends State<Component> {
     );
   }
 }
-

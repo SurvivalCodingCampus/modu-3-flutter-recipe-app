@@ -18,8 +18,6 @@ void main() {
     );
     final Finder buttonFinder = find.byType(ElevatedButton);
 
-
-
     await tester.tap(buttonFinder.at(0));
     await tester.tap(buttonFinder.at(1));
     await tester.tap(buttonFinder.at(2));
@@ -28,5 +26,20 @@ void main() {
     expect(tapCount, 3);
 
 
+  });
+  testWidgets('ButtonsWidget2', (WidgetTester tester) async {
+    var tapCount = 0;
+
+    await tester.pumpWidget(
+        MaterialApp(
+            home: ButtonsWidget(
+              onClick: () {
+                tapCount ++;
+              },
+            )
+        )
+    );
+    final Finder buttonFinder = find.byType(ElevatedButton);
+    expect(buttonFinder, findsNWidgets(3));
   });
 }

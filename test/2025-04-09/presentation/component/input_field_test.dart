@@ -26,7 +26,5 @@ void main() {
     await tester.pump();
 
     expect(input, 'hello');
-
-
   });
 }
