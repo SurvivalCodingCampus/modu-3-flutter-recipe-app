@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/button/big_button.dart';
 import 'package:recipe_app/presentation/component/button/medium_button.dart';
 import 'package:recipe_app/presentation/component/button/small_button.dart';
+import 'package:recipe_app/presentation/component/custom_text_field.dart';
 
 import 'package:recipe_app/ui/text_font_style.dart';
 
@@ -37,6 +38,14 @@ class HomeView extends StatelessWidget {
               text: 'Button',
               onTap: () {
                 print('Small Button click 성공');
+              },
+            ),
+            SizedBox(height: 10),
+            CustomTextField(
+              label: 'label',
+              placeHolder: 'placeHolder',
+              onValueChange: (value) {
+                print(value);
               },
             ),
           ],
