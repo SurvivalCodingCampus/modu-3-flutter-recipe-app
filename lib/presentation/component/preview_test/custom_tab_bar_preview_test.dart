@@ -5,17 +5,17 @@ void main() {
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CustomButtonPreviewPage(),
+      home: CustomTabBarPreviewPage(),
     ),
   );
 }
 
-class CustomButtonPreviewPage extends StatelessWidget {
-  const CustomButtonPreviewPage({super.key});
+class CustomTabBarPreviewPage extends StatelessWidget {
+  const CustomTabBarPreviewPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('CustomButton Preview')),
+      appBar: AppBar(title: const Text('CustomTabBar Preview')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

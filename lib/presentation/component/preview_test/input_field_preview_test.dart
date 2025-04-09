@@ -5,18 +5,19 @@ void main() {
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CustomButtonPreviewPage(),
+      home: InputFieldPreviewPage(),
     ),
   );
 }
 
-class CustomButtonPreviewPage extends StatelessWidget {
-  const CustomButtonPreviewPage({super.key});
+class InputFieldPreviewPage extends StatelessWidget {
+  const InputFieldPreviewPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     String text = '';
     return Scaffold(
-      appBar: AppBar(title: const Text('CustomButton Preview')),
+      appBar: AppBar(title: const Text('InputField Preview')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

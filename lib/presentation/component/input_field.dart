@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_sytle.dart';
+import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
 class InputField extends StatelessWidget {

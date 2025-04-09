@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_sytle.dart';
+import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
 class CustomTabBar extends StatelessWidget {
@@ -10,7 +10,7 @@ class CustomTabBar extends StatelessWidget {
   const CustomTabBar({
     super.key,
     required this.tabTitles,
-    required this.onTabSelected,
+    this.onTabSelected,
     this.selectedIndex = 0,
   });
 
