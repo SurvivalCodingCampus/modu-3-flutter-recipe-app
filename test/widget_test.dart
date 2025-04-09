@@ -7,25 +7,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/main.dart';
+import 'package:recipe_app/presentation/component/big_button.dart';
 
 void main() {
+  int tapCount = 0;
 
-
-/*
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('BigButton test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(
+      MaterialApp(
+        home: BigButton(lable: 'BigButton', onClick: () {
+          tapCount++;
+        }),
+      )
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    final Finder BigButtonFinder = find.text('BigButton');
+    expect(BigButtonFinder, findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.tap(BigButtonFinder);
     await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  }); */
+    expect(tapCount, 1);
+  });
 }

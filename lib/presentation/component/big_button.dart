@@ -49,16 +49,3 @@ class BigButton extends StatelessWidget {
 
 
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: BigButton(lable: 'Button',
-          onClick: () {
-            print('buttonTest');
-          },
-        ),
-      ),
-    ),
-  );
-}
