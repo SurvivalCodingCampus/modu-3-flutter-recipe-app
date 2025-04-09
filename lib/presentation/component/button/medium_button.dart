@@ -30,11 +30,11 @@ class MediumButton extends StatelessWidget {
                 width: 114,
                 child: Text(
                   text,
-                  style: TextFontStyle.normalBold(color: Colors.white),
+                  style: TextFontStyle.normalBold(color: ColorStyle.white),
                   textAlign: TextAlign.center,
                 ),
               ),
-              Icon(Icons.arrow_forward, color: Colors.white, size: 20),
+              Icon(Icons.arrow_forward, color: ColorStyle.white, size: 20),
             ],
           ),
         ),

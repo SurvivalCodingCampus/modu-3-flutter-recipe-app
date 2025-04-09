@@ -25,7 +25,7 @@ class CustomTextField extends StatelessWidget {
           padding: EdgeInsets.only(top: 5),
           width: 315,
           child: TextField(
-            style: TextFontStyle.smallRegular(color: Colors.black),
+            style: TextFontStyle.smallRegular(color: ColorStyle.black),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(20),
               hintText: placeHolder,

@@ -29,7 +29,7 @@ class SmallButton extends StatelessWidget {
                 width: 114,
                 child: Text(
                   text,
-                  style: TextFontStyle.smallBold(color: Colors.white),
+                  style: TextFontStyle.smallBold(color: ColorStyle.white),
                   textAlign: TextAlign.center,
                 ),
               ),
