@@ -6,9 +6,7 @@ import 'package:recipe_app/presentation/component/components.dart'
 
 void main() {
   testWidgets('SmallButton 렌더링이 정상적으로 이루어져야한다.', (WidgetTester tester) async {
-    await tester.pumpWidget(
-      SmallButtonTest(text: 'Render', onPressed: () {})
-    );
+    await tester.pumpWidget(SmallButtonTest(text: 'Render', onPressed: () {}));
 
     Finder result = find.text('Render');
     expect(result, findsOneWidget);
@@ -18,7 +16,7 @@ void main() {
     int count = 0;
 
     await tester.pumpWidget(
-     SmallButtonTest(text: 'Render', onPressed: () => count++)
+      SmallButtonTest(text: 'Render', onPressed: () => count++),
     );
 
     await tester.tap(find.byType(SmallButton));
@@ -30,15 +28,16 @@ class SmallButtonTest extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const SmallButtonTest({super.key, required this.text, required this.onPressed});
+  const SmallButtonTest({
+    super.key,
+    required this.text,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SmallButton(
-        text: text,
-        onPressed: () => onPressed()
-      ),
+      home: Scaffold(body: SmallButton(text: text, onPressed: () => onPressed())),
     );
   }
 }
