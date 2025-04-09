@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/presentation/component/button_widget.dart';
 
 void main() {
-  testWidgets('Button Widget onClick 테스트', (WidgetTester tester) async {
+  testWidgets('BigButton 테스트', (WidgetTester tester) async {
     bool isClicked = false;
     await tester.pumpWidget(
         MaterialApp(
@@ -28,6 +28,46 @@ void main() {
     expect(bigButtonFinder, findsOneWidget);
 
     await tester.tap(bigButtonFinder);
+    await tester.pump();
+    expect(isClicked, isTrue);
+  });
+  testWidgets('MediumButton 테스트', (WidgetTester tester) async {
+    bool isClicked = false;
+    await tester.pumpWidget(
+        MaterialApp(
+          home: ButtonWidget(
+              buttonSize: ButtonSize.medium,
+              buttonText: 'Button',
+              onClick: () {
+                isClicked = !isClicked;
+              }
+          ),
+        )
+    );
+    final Finder mediumButtonFinder = find.text('Button');
+    expect(mediumButtonFinder, findsOneWidget);
+
+    await tester.tap(mediumButtonFinder);
+    await tester.pump();
+    expect(isClicked, isTrue);
+  });
+  testWidgets('SmallButton 테스트', (WidgetTester tester) async {
+    bool isClicked = false;
+    await tester.pumpWidget(
+        MaterialApp(
+          home: ButtonWidget(
+              buttonSize: ButtonSize.small,
+              buttonText: 'Button',
+              onClick: () {
+                isClicked = !isClicked;
+              }
+          ),
+        )
+    );
+    final Finder smallButtonFinder = find.text('Button');
+    expect(smallButtonFinder, findsOneWidget);
+
+    await tester.tap(smallButtonFinder);
     await tester.pump();
     expect(isClicked, isTrue);
   });
