@@ -30,18 +30,17 @@ class InputField extends StatelessWidget {
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: ColorStyles.gray4),
+              borderSide: BorderSide(color: ColorStyles.gray4, width: 1.5),
             ),
             focusColor: ColorStyles.primary80,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: ColorStyles.primary80),
+              borderSide: BorderSide(color: ColorStyles.primary80, width: 1.5),
             ),
             hintStyle: TextStyles.smallTextRegular.copyWith(
               color: ColorStyles.gray4,
             ),
             hintText: placeholder,
-            fillColor: ColorStyles.black,
           ),
         ),
       ],
