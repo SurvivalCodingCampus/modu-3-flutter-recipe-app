@@ -29,18 +29,18 @@ class Recipe {
 }
 
 class RecipeWidget extends StatelessWidget {
-  final void Function(String name) onTapName;
-  final void Function(Recipe recipe) onTapImageUrl;
-  final void Function(Recipe recipe) onTap;
+  final void Function(String name)? onTapName;
+  final void Function(Recipe recipe)? onTapImageUrl;
+  final void Function(Recipe recipe)? onTap;
 
   final Recipe recipe;
 
   const RecipeWidget({
     super.key,
     required this.recipe,
-    required this.onTapName,
-    required this.onTapImageUrl,
-    required this.onTap,
+    this.onTapName,
+    this.onTapImageUrl,
+    this.onTap,
   });
 
   @override
@@ -48,23 +48,35 @@ class RecipeWidget extends StatelessWidget {
     return Center(
       child: GestureDetector(
         onTap: () {
-          onTap(recipe);
+          onTap?.call(recipe);
         },
         child: Container(
-          color: Colors.blue,
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
                 onTap: () {
-                  onTapName(recipe.name);
+                  onTapName?.call(recipe.name);
                 },
-                child: Text(recipe.name, style: TextStyle(fontSize: 40)),
+                child: Row(
+                  children: [
+                    Icon(Icons.arrow_forward),
+                    Text(
+                      recipe.name,
+                      style: TextStyle(fontSize: 40),
+                      key: const Key('name'),
+                    ),
+                  ],
+                ),
               ),
               GestureDetector(
                 onTap: () {
-                  onTapImageUrl(recipe);
+                  onTapImageUrl?.call(recipe);
                 },
                 child: Text(recipe.imageUrl, style: TextStyle(fontSize: 40)),
               ),
