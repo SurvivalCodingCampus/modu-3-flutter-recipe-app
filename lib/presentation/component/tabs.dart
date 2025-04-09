@@ -27,11 +27,12 @@ class Tabs extends StatelessWidget {
                   .map(
                     (e) =>
                         e == labels[selectedIndex]
-                            ? _SelectedTab(label: e, width: tabWidth)
+                            ? GestureDetector(
+                              onTap: () => onTap(labels.indexOf(e)),
+                              child: _SelectedTab(label: e, width: tabWidth),
+                            )
                             : GestureDetector(
-                              onTap: () {
-                                onTap(labels.indexOf(e));
-                              },
+                              onTap: () => onTap(labels.indexOf(e)),
                               child: _UnSelectedTab(label: e, width: tabWidth),
                             ),
                   )
