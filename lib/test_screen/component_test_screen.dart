@@ -6,8 +6,8 @@ import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
-class ComponentTest extends StatelessWidget {
-  const ComponentTest({super.key});
+class ComponentTestScreen extends StatelessWidget {
+  const ComponentTestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

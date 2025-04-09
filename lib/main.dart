@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/test_folder/component_test.dart';
+import 'package:recipe_app/test_screen/component_test_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         // textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: ComponentTest(),
+      home: ComponentTestScreen(),
     );
   }
 }
