@@ -5,11 +5,13 @@ class LabelInputField extends StatelessWidget {
   final String label;
   final String hintText;
   final String? value;
+  final Function(String) onValueChange;
   const LabelInputField({
     super.key,
     required this.label,
     required this.hintText,
     this.value,
+    required this.onValueChange,
   });
 
   @override
@@ -35,6 +37,7 @@ class LabelInputField extends StatelessWidget {
           height: 55,
           child: TextField(
             controller: controller,
+            onChanged: onValueChange,
             decoration: InputDecoration(
               hintText: hintText,
               enabledBorder: OutlineInputBorder(
