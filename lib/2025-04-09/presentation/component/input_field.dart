@@ -2,19 +2,19 @@
 import 'package:recipe_app/ui/color.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: InputWidget(
-          onValueChange: (input) {
-            print('Label: $input');
-          },
-        ),
-      ),
-    ),
-  );
-}
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       home: Scaffold(
+//         body: InputWidget(
+//           onValueChange: (input) {
+//             print('Label: $input');
+//           },
+//         ),
+//       ),
+//     ),
+//   );
+// }
 
 class InputWidget extends StatelessWidget {
   final String? label;

@@ -5,21 +5,21 @@ import 'package:recipe_app/ui/color.dart';
 
 
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: TabsWidget(
-          labels: ['1','2','3'],
-          selectedindex: 0,
-          onValueChange: (index) {
-            print('index : $index');
-          },
-        ),
-      ),
-    ),
-  );
-}
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       home: Scaffold(
+//         body: TabsWidget(
+//           labels: ['1','2','3'],
+//           selectedindex: 0,
+//           onValueChange: (index) {
+//             print('index : $index');
+//           },
+//         ),
+//       ),
+//     ),
+//   );
+// }
 
 
 

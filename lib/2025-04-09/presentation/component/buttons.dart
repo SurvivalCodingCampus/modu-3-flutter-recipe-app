@@ -5,19 +5,19 @@ import 'package:recipe_app/ui/color.dart';
 
 import '../../../ui/text.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: ButtonsWidget(
-          onClick: () {
-            print('그만눌러');
-          },
-        )
-      ),
-    ),
-  );
-}
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       home: Scaffold(
+//         body: ButtonsWidget(
+//           onClick: () {
+//             print('그만눌러');
+//           },
+//         )
+//       ),
+//     ),
+//   );
+// }
 
 // class Button {
 //   final String text;
@@ -39,6 +39,7 @@ class ButtonsWidget extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //Big Button
           Padding(
