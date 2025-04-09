@@ -26,7 +26,7 @@ class InputField extends StatelessWidget {
           height: 55,
           width: 315,
           child: TextField(
-            
+            onChanged: onValueChange,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

@@ -50,7 +50,9 @@ class ComponentTest extends StatelessWidget {
                   label: 'Label',
                   placeHolder: 'PlaceHolder',
                   value: 'value',
-                  onValueChange: (value) {},
+                  onValueChange: (value) {
+                    print('입력이 변경되었습니다.');
+                  },
                 ),
                 SizedBox(height: 12),
                 Tabs(
