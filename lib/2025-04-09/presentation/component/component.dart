@@ -24,6 +24,7 @@ class _ComponentState extends State<Component> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ButtonsWidget(
               onClick: () {
@@ -47,7 +48,7 @@ class _ComponentState extends State<Component> {
             const SizedBox(height: 10,),
             TabsWidget(
               labels: ['1','2','3'],
-              selectedindex: 0,
+              selectedindex: 2,
               onValueChange: (value) {
                 selectedValue = value;
               }
