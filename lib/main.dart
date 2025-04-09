@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/components.dart';
+import 'package:recipe_app/ui/text_styles.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,39 +16,89 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: Text('Recipe App')),
         body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  spacing: 10,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              spacing: 16,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BigButton(text: "Button", onPressed: () {}),
-                    MediumButton(text: "Button", onPressed: () {}),
-                    SmallButton(text: "Button", onPressed: () {}),
+                    Text('Buttons', style: TextStyles.headerTextBold),
+                    Column(
+                      spacing: 16,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 315,
+                          child: BigButton(
+                            text: "Button",
+                            onPressed: () => print('Big Button pressed'),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 243,
+                          child: MediumButton(
+                            text: "Button",
+                            onPressed: () => print('Medium Button pressed'),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 174,
+                          child: SmallButton(
+                            text: "Button",
+                            onPressed: () => print('Small Button pressed'),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.all(16),
-                child: InputField(
-                  label: 'Label',
-                  onValueChange: (value) {},
-                  placeholder: 'Placeholder',
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('InputField', style: TextStyles.headerTextBold),
+                    Column(
+                      spacing: 10,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InputField(
+                          label: 'Label',
+                          onValueChange: (value) {},
+                          placeholder: 'Placeholder',
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.all(16),
-                child: MultiTab(
-                  labels: ['Tab 1', 'Tab 2'],
-                  onValueChange: (index) {
-                    print(index);
-                  },
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('MultiTab', style: TextStyles.headerTextBold),
+                    Column(
+                      spacing: 16,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MultiTab(
+                          labels: ['Tab 1', 'Tab 2'],
+                          onValueChange: (index) {
+                            print(index);
+                          },
+                        ),
+                        MultiTab(
+                          labels: ['Tab 1', 'Tab 2', 'Tab 3'],
+                          selectedIndex: 2,
+                          onValueChange: (index) {
+                            print(index);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

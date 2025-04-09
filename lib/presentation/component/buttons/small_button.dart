@@ -10,22 +10,20 @@ class SmallButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(ColorStyles.primary100),
-        padding: WidgetStateProperty.all(
-          const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        height: 37,
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        decoration: BoxDecoration(
+          color: ColorStyles.primary100,
+          borderRadius: BorderRadius.circular(10),
         ),
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
-        fixedSize: WidgetStateProperty.all(Size(174, 37)),
-      ),
-      onPressed: onPressed,
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyles.smallTextBold.copyWith(color: ColorStyles.white),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyles.smallTextBold.copyWith(color: ColorStyles.white),
+          ),
         ),
       ),
     );

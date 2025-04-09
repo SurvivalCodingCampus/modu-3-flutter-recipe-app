@@ -10,22 +10,31 @@ class MediumButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(ColorStyles.primary100),
-        padding: WidgetStateProperty.all(
-          const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        height: 54,
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        decoration: BoxDecoration(
+          color: ColorStyles.primary100,
+          borderRadius: BorderRadius.circular(10),
         ),
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
-        fixedSize: WidgetStateProperty.all(Size(243, 54)),
-      ),
-      onPressed: onPressed,
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyles.normalTextBold.copyWith(color: ColorStyles.white),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 11,
+          children: [
+            Text(
+              text,
+              style: TextStyles.normalTextBold.copyWith(
+                color: ColorStyles.white,
+              ),
+            ),
+            const Icon(
+              Icons.arrow_right_alt,
+              size: 20,
+              color: ColorStyles.white,
+            ),
+          ],
         ),
       ),
     );
