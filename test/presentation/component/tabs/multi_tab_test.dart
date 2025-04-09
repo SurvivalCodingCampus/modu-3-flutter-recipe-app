@@ -61,7 +61,7 @@ class MultiTabTest extends StatelessWidget {
         body: MultiTab(
           onValueChange: onValueChange,
           labels: labels,
-          selectIndex: selectedIndex,
+          selectedIndex: selectedIndex,
         ),
       ),
     );
