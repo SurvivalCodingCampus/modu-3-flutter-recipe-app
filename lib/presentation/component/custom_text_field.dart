@@ -5,13 +5,13 @@ import 'package:recipe_app/ui/text_font_style.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
-  final String placeHolder;
+  final String placeholder;
   final void Function(String value) onValueChange;
 
   const CustomTextField({
     super.key,
     required this.label,
-    required this.placeHolder,
+    required this.placeholder,
     required this.onValueChange,
   });
 
@@ -28,7 +28,7 @@ class CustomTextField extends StatelessWidget {
             style: TextFontStyle.smallRegular(color: ColorStyle.black),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(20),
-              hintText: placeHolder,
+              hintText: placeholder,
               hintStyle: TextFontStyle.smallRegular(color: ColorStyle.gray4),
               labelStyle: TextFontStyle.smallRegular(),
               enabledBorder: OutlineInputBorder(

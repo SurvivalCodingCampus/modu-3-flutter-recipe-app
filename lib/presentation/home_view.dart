@@ -49,7 +49,7 @@ class HomeView extends StatelessWidget {
             SizedBox(height: 10),
             CustomTextField(
               label: 'label',
-              placeHolder: 'placeHolder',
+              placeholder: 'placeHolder',
               onValueChange: (value) {
                 print(value);
               },
