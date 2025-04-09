@@ -49,9 +49,7 @@ class _ComponentPreviewPageState extends State<ComponentPreviewPage> {
               placeholderText: '이름을 입력하세요',
               value: _inputText,
               onValueChange: (value) {
-                setState(() {
-                  _inputText = value;
-                });
+                _inputText = value;
               },
             ),
             const SizedBox(height: 24),
