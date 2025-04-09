@@ -40,6 +40,7 @@ class InputFieldWidget extends StatelessWidget {
             width: 315,
             height: 55,
             child: TextField(
+              key: const Key('textField'),
               controller: controller,
               onChanged: (text) {
                 onValueChange(controller.text);
