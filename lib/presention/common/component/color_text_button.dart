@@ -27,7 +27,9 @@ class ColorTextButton extends StatelessWidget {
       width: buttonWidth,
       height: buttonHeight,
       child: InkWell(
-        onTap: onPreesed,
+        onTap: (){
+          onPreesed.call();
+        },
         borderRadius: BorderRadius.circular(buttonRadius),
         child: Ink(
           decoration: BoxDecoration(
