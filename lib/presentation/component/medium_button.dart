@@ -34,7 +34,7 @@ class MediumButton extends StatelessWidget {
               style: TextStyles.normalTextBold.copyWith(color: Colors.white),
             ),
 
-            Icon(icon, color: Colors.white),
+            Icon(icon, color: Colors.white, size: 20),
           ],
         ),
       ),
