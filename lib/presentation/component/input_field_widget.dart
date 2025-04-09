@@ -31,9 +31,7 @@ class InputFieldWidget extends StatelessWidget {
                 height: 21,
                 child: Text(
                   label,
-                  style: TextStyles.smallRegular.copyWith(
-                    color: ColorStyles.labelColor,
-                  ),
+                  style: TextStyles.smallRegular(color: ColorStyles.labelColor),
                 ),
               ),
             ],

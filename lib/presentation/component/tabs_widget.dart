@@ -20,9 +20,7 @@ class TabsWidget extends StatelessWidget {
     return Container(
       width: 375,
       height: 58,
-      decoration: BoxDecoration(
-          color: ColorStyles.white
-      ),
+      decoration: BoxDecoration(color: ColorStyles.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(labels.length, (index) {
@@ -34,13 +32,20 @@ class TabsWidget extends StatelessWidget {
               width: 300 / labels.length,
               height: 33,
               decoration: BoxDecoration(
-                  color: index == selectedIndex ? ColorStyles.primary100 : ColorStyles.white,
-                  borderRadius: BorderRadius.circular(10)
+                color:
+                    index == selectedIndex
+                        ? ColorStyles.primary100
+                        : ColorStyles.white,
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
-                child: Text(labels[index],
-                  style: TextStyles.smallBold.copyWith(
-                      color: index == selectedIndex? ColorStyles.white : ColorStyles.primary80
+                child: Text(
+                  labels[index],
+                  style: TextStyles.smallBold(
+                    color:
+                        index == selectedIndex
+                            ? ColorStyles.white
+                            : ColorStyles.primary80,
                   ),
                 ),
               ),

@@ -47,15 +47,9 @@ class ButtonWidget extends StatelessWidget {
           child: Text(
             buttonText,
             style: switch (buttonSize) {
-              ButtonSize.big => TextStyles.normalBold.copyWith(
-                color: ColorStyles.white,
-              ),
-              ButtonSize.medium => TextStyles.normalBold.copyWith(
-                color: ColorStyles.white,
-              ),
-              ButtonSize.small => TextStyles.smallBold.copyWith(
-                color: ColorStyles.white,
-              ),
+              ButtonSize.big => TextStyles.normalBold(color: ColorStyles.white),
+              ButtonSize.medium => TextStyles.normalBold(color: ColorStyles.white),
+              ButtonSize.small => TextStyles.smallBold(color: ColorStyles.white),
             },
           ),
         ),
