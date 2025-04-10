@@ -5,6 +5,7 @@ import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/presentation/component/label_input_field.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
+import 'package:recipe_app/presentation/component/rating_dialog.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
@@ -41,6 +42,7 @@ class ComponentsWidget extends StatefulWidget {
 class _ComponentsWidgetState extends State<ComponentsWidget> {
   bool _isSelected = false;
   bool isPressed = false;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +129,18 @@ class _ComponentsWidgetState extends State<ComponentsWidget> {
                   ),
                   const SizedBox(height: 10),
                   FilterButton(text: 'text', isSelected: _isSelected),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const RatingDialog(title: 'Rate Recipe');
+                        },
+                      );
+                    },
+                    child: const Text("Open Rating Dialog"),
+                  ),
                 ],
               ),
             ),
