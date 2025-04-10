@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:recipe_app/presentation/component/rating_dialog.dart';
+import 'package:recipe_app/presentation/component/rating_dialog_alert.dart';
 import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
@@ -52,6 +52,23 @@ class RatingScreen extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: 12),
+                  SmallButton(
+                    name: 'Alert Dialog',
+                    onClick: () async {
+                      return await showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return RatingDialogAlert(
+                            title: '별점 주기',
+                            actionName: '결정!',
+                            onChange: (p0) => print('결정한 별점 : $p0'),
+                          );
+                        },
+                      );
+                    },
+                    color: ColorStyles.warning1,
+                  ),
                 ],
               ),
             ),
