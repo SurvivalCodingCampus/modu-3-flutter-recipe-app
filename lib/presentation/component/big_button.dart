@@ -44,7 +44,7 @@ class _BigButtonState extends State<BigButton> {
           });
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.8, // 화면의 80%
+          width: MediaQuery.of(context).size.width * 0.85, // 화면의 80%
           padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 85),
           decoration: BoxDecoration(
             color: backgroundColor, // 버튼 색상

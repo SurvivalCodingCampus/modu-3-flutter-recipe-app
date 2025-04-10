@@ -24,7 +24,7 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.8, // 화면의 80%
+      width: MediaQuery.of(context).size.width * 0.85, // 화면의 80%
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
