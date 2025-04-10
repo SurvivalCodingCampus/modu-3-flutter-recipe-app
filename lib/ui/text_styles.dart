@@ -78,6 +78,13 @@ abstract class TextStyles {
     fontFamily: 'Poppins',
   );
 
+  static const TextStyle labelTextBold = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    height: 1.5,
+    fontFamily: 'Poppins',
+  );
+
   static const TextStyle smallTextRegular = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
