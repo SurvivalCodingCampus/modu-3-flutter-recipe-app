@@ -21,7 +21,7 @@ class MultiTab extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onValueChange(labels.indexOf(label)),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                 decoration: BoxDecoration(
                   color:
                       selectedIndex == labels.indexOf(label)
