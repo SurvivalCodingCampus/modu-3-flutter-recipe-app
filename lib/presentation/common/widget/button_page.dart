@@ -8,8 +8,11 @@ class ButtonPage extends StatelessWidget {
 
   final List<Map<String, dynamic>> buttonColor = [
     {'buttonColor': ColorStyle.primary100, 'textColor': ColorStyle.white},
-    {'buttonColor': ColorStyle.primary100.withValues(alpha: 0.8),'textColor': ColorStyle.white},
-    {'buttonColor': ColorStyle.gray4,'textColor': ColorStyle.white},
+    {
+      'buttonColor': ColorStyle.primary100.withValues(alpha: 0.8),
+      'textColor': ColorStyle.white,
+    },
+    {'buttonColor': ColorStyle.gray4, 'textColor': ColorStyle.white},
   ];
 
   @override
@@ -21,10 +24,15 @@ class ButtonPage extends StatelessWidget {
           children:
               buttonColor.map((e) {
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 10,top: 10),
+                  padding: const EdgeInsets.only(
+                    bottom: 10,
+                    top: 10,
+                    left: 30,
+                    right: 30,
+                  ),
                   child: ColorTextButton(
                     buttonHeight: 60,
-                    buttonWidth: 315,
+                    buttonWidth: MediaQuery.of(context).size.width,
                     buttonText: "Button",
                     buttonColor: e["buttonColor"],
                     textColor: ColorStyle.white,
@@ -37,37 +45,42 @@ class ButtonPage extends StatelessWidget {
         Wrap(
           alignment: WrapAlignment.center,
           children:
-          buttonColor.map((e) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 10,top: 10),
-              child: ColorTextButton(
-                buttonHeight: 54,
-                buttonWidth: 243,
-                buttonText: "Button",
-                buttonColor: e["buttonColor"],
-                textColor: ColorStyle.white,
-                onPreesed: () {},
-                buttonRadius: 10,
-              ),
-            );
-          }).toList(),
+              buttonColor.map((e) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 10,
+                    top: 10,
+                    left: 30,
+                    right: 30,
+                  ),
+                  child: ColorTextButton(
+                    buttonHeight: 54,
+                    buttonWidth: MediaQuery.of(context).size.width / 2,
+                    buttonText: "Button",
+                    buttonColor: e["buttonColor"],
+                    textColor: ColorStyle.white,
+                    onPreesed: () {},
+                    buttonRadius: 10,
+                  ),
+                );
+              }).toList(),
         ),
         Column(
           children:
-          buttonColor.map((e) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 10,top: 10),
-              child: ColorTextButton(
-                buttonHeight: 37,
-                buttonWidth: 174,
-                buttonText: "Button",
-                buttonColor: e["buttonColor"],
-                textColor: ColorStyle.white,
-                onPreesed: () {},
-                buttonRadius: 10,
-              ),
-            );
-          }).toList(),
+              buttonColor.map((e) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10, top: 10),
+                  child: ColorTextButton(
+                    buttonHeight: 37,
+                    buttonWidth: MediaQuery.of(context).size.width / 3,
+                    buttonText: "Button",
+                    buttonColor: e["buttonColor"],
+                    textColor: ColorStyle.white,
+                    onPreesed: () {},
+                    buttonRadius: 10,
+                  ),
+                );
+              }).toList(),
         ),
       ],
     );

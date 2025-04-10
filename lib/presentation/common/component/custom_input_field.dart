@@ -14,7 +14,7 @@ class CustomInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -22,6 +22,7 @@ class CustomInputField extends StatelessWidget {
           Text(labelString, style: AppTextStyles.smallRegular()),
           TextField(
             autofocus: false,
+            focusNode : focusNode,
             controller: textEditingController,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(

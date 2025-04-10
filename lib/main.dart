@@ -42,7 +42,20 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [],
+                children: [
+                  ButtonPage(),
+                  CustomInputField(labelString: 'labelTest'),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: CustomTabs(labels: labels, selectedIndex: selectedIndex,
+                      onValueChange: (selectedIndex) {
+                        print(selectedIndex);
+                      }),
+                  )
+                ],
               ),
             ),
           ),

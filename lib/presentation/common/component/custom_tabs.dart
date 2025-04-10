@@ -17,7 +17,7 @@ class CustomTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: ColorStyle.white,
-      height: 58,
+      height: 70,
       padding: EdgeInsets.all(10),
       child: Row(
         children:
@@ -31,6 +31,7 @@ class CustomTabs extends StatelessWidget {
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
+                    height: double.infinity,
                     decoration: BoxDecoration(
                       color:
                           selectedIndex == labels.indexOf(e)
@@ -38,15 +39,18 @@ class CustomTabs extends StatelessWidget {
                               : ColorStyle.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text(
-                      e,
-                      style:
-                          selectedIndex == labels.indexOf(e)
-                              ? AppTextStyles.smallBold(color: ColorStyle.white)
-                              : AppTextStyles.smallBold(
-                                color: ColorStyle.primary80,
-                              ),
-                      textAlign: TextAlign.center,
+                    child: Center(
+                      child: Text(
+                        e,
+                        style:
+                            selectedIndex == labels.indexOf(e)
+                                ? AppTextStyles.smallBold(color: ColorStyle.white)
+                                : AppTextStyles.smallBold(
+                                  color: ColorStyle.primary80,
+                                ),
+                        textAlign: TextAlign.center,
+
+                      ),
                     ),
                   ),
                 ),
