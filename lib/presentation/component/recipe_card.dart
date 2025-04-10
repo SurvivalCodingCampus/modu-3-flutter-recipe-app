@@ -101,15 +101,14 @@ class RecipeCard extends StatelessWidget {
               top: 10,
               right: 10,
               child: Container(
-                width: 37,
-                height: 16,
-                padding: const EdgeInsets.symmetric(vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                 decoration: BoxDecoration(
                   color: ColorStyles.secondary20,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Image.asset('assets/icons/star.png', width: 8, height: 8),
                     const SizedBox(width: 3),

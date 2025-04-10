@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/model.dart';
 import 'package:recipe_app/presentation/component/big_button.dart';
+import 'package:recipe_app/presentation/component/filter_button.dart';
+import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/presentation/component/label_input_field.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
@@ -29,8 +31,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ComponentsWidget extends StatelessWidget {
+class ComponentsWidget extends StatefulWidget {
   const ComponentsWidget({super.key});
+
+  @override
+  State<ComponentsWidget> createState() => _ComponentsWidgetState();
+}
+
+class _ComponentsWidgetState extends State<ComponentsWidget> {
+  bool _isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +111,18 @@ class ComponentsWidget extends StatelessWidget {
                       rating: 4.0,
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  RatingButton(
+                    rating: 5,
+                    isSelected: _isSelected,
+                    onTap: () {
+                      setState(() {
+                        _isSelected = !_isSelected;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  FilterButton(text: 'text', isSelected: _isSelected),
                 ],
               ),
             ),
