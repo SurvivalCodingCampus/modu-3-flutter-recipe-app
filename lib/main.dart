@@ -36,8 +36,12 @@ class MyApp extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RatingDialog(),
-                SizedBox(height: 16,),
+                RatingDialog(
+                  onChange: (int) {
+                    print(int);
+                  },
+                ),
+                SizedBox(height: 16),
                 RecipeCard(
                   imagePath: '../assets/images/bibimbop.png',
                   title: 'Traditional Korean Rice \n Food\n',
