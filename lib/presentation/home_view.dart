@@ -1,75 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/button/big_button.dart';
+import 'package:recipe_app/presentation/component/button/enum/button_type.dart';
 import 'package:recipe_app/presentation/component/button/medium_button.dart';
 import 'package:recipe_app/presentation/component/button/small_button.dart';
-import 'package:recipe_app/presentation/tabs/custom_three_tabs.dart';
-import 'package:recipe_app/presentation/tabs/custom_two_tabs.dart';
-import 'package:recipe_app/presentation/component/custom_text_field.dart';
-import 'package:recipe_app/ui/color_style.dart';
+import 'package:recipe_app/presentation/component/rating.dart';
 
-import 'package:recipe_app/ui/text_font_style.dart';
-
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  List<String> stars = ['5', '4', '3', '2', '1'];
+  List<String> filters = ['All', 'Newest', 'Oldest', 'Popularity'];
+  List<String> categorys = [
+    'All',
+    'Cereal',
+    'Vegetables',
+    'Dinner',
+    'Chinese',
+    'Local Dish',
+    'Fruit',
+    'BreakFast',
+    'Spanish',
+    'Lunch',
+  ];
+  Set<String> seleted = {};
+  ButtonType currentType = ButtonType.standard;
+  int starIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '홈 화면',
-          style: TextFontStyle.largeBold(color: ColorStyle.black),
-        ),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BigButton(
-              text: 'Button',
-              onTap: () {
-                print('Big Button click 성공');
-              },
-            ),
-            SizedBox(height: 10),
-            MediumButton(
-              text: 'Button',
-              onTap: () {
-                print('Medium Button click 성공');
-              },
-            ),
-            SizedBox(height: 10),
-            SmallButton(
-              text: 'Button',
-              onTap: () {
-                print('Small Button click 성공');
-              },
-            ),
-            SizedBox(height: 10),
-            CustomTextField(
-              label: 'label',
-              placeholder: 'placeHolder',
-              onValueChange: (value) {
-                print(value);
-              },
-            ),
-            SizedBox(height: 10),
-            CustomTwoTabs(
-              labels: ['Label', 'Label'],
-              onValueChange: (index) {
-                print(index);
-              },
-            ),
-            SizedBox(height: 10),
-            CustomThreeTabs(
-              labels: ['Label', 'Label', 'Label'],
-              onValueChange: (index) {
-                print(index);
-              },
-            ),
-          ],
-        ),
+      body: Column(
+        spacing: 20,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          BigButton(
+            text: 'Button',
+            onTap: () {
+              print('버튼');
+            },
+          ),
+          MediumButton(
+            text: 'Button',
+            onTap: () {
+              print('버튼');
+            },
+          ),
+          SmallButton(
+            text: 'Button',
+            onTap: () {
+              print('버튼');
+            },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => Rating(
+                        title: 'Rate Recipe',
+                        actionName: 'Send',
+                        onChange: (index) {
+                          print(index);
+                        },
+                      ),
+                ),
+              );
+            },
+            child: Icon(Icons.ac_unit_sharp),
+          ),
+        ],
       ),
     );
   }
