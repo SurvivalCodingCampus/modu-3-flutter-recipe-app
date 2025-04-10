@@ -19,7 +19,7 @@ class BigButton extends StatelessWidget {
     return GestureDetector(
       onTap: onClick,
       child: Container(
-        width: 310,
+        width: double.infinity,
         height: 60,
         padding: EdgeInsets.symmetric(vertical: 18, horizontal: 85),
         decoration: BoxDecoration(
