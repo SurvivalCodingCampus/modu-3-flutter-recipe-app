@@ -17,12 +17,7 @@ import 'component/recipe_card.dart';
 class ComponentTestScreen extends StatefulWidget {
   const ComponentTestScreen({super.key});
 
-  @override
-  State<ComponentTestScreen> createState() => _ComponentTestScreenState();
-}
-
-class _ComponentTestScreenState extends State<ComponentTestScreen> {
-  final List<Recipe> recipes = [
+  static const List<Recipe> recipes = [
     Recipe(
       recipeId: 1,
       name: 'Traditional spare ribs baked',
@@ -32,13 +27,19 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
       foodImage: 'assets/images/recipe_images/Traditional spare ribs baked.png',
     ),
   ];
-  final List<Ingredient> ingredients = [
+  static const List<Ingredient> ingredients = [
     Ingredient(
       name: 'Tomatos',
       weight: '500g',
       ingredientImage: 'assets/images/ingredient_images/tomato.png',
     ),
   ];
+
+  @override
+  State<ComponentTestScreen> createState() => _ComponentTestScreenState();
+}
+
+class _ComponentTestScreenState extends State<ComponentTestScreen> {
 
   int tabSelectedIndex = 0;
 
@@ -107,11 +108,11 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                       selectedIndex: tabSelectedIndex,
                     ),
                   ),
-                  IngredientItem(ingredient: ingredients.first),
+                  IngredientItem(ingredient: ComponentTestScreen.ingredients.first),
                   SizedBox(
                     height: 200,
                     child: RecipeCard(
-                      recipe: recipes.first,
+                      recipe: ComponentTestScreen.recipes.first,
                       isBookmarked: isBookmarked,
                       onBookmark: (name) {
                         if (isBookmarked == true) {
