@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/model.dart';
 import 'package:recipe_app/ui/ui.dart';
 
-class IngridentItem extends StatelessWidget {
+class IngredientItem extends StatelessWidget {
   final Ingredient ingredient;
-  const IngridentItem({super.key, required this.ingredient});
+  const IngredientItem({super.key, required this.ingredient});
 
   @override
   Widget build(BuildContext context) {

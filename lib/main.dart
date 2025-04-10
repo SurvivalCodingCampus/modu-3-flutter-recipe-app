@@ -11,7 +11,7 @@ import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
 import 'package:recipe_app/ui/ui.dart';
 
-import 'presentation/component/ingrident_item.dart';
+import 'presentation/component/ingredient_item.dart';
 
 void main() {
   runApp(const MyApp());
@@ -96,7 +96,7 @@ class _ComponentsWidgetState extends State<ComponentsWidget> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  const IngridentItem(
+                  const IngredientItem(
                     ingredient: Ingredient(
                       id: '1',
                       name: 'Tomato',
