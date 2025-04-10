@@ -101,4 +101,11 @@ abstract class AppTextStyles {
     height: 17 / 11,
     color: color,
   );
+
+  static TextStyle smallLabel({Color? color}) => GoogleFonts.poppins(
+    fontWeight: FontWeight.w400,
+    fontSize: 8,
+    height: 12 / 8,
+    color: color,
+  );
 }

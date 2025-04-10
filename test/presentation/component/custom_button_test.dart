@@ -56,7 +56,7 @@ void main() {
           home: CustomButton(
             title: clickMeText,
             size: CustomButtonSize.medium,
-            onPressed: () {
+            onTap: () {
               wasPressed = true;
             },
           ),
