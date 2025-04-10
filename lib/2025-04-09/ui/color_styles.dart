@@ -10,4 +10,5 @@ abstract class ColorStyles {
   static const Color uneabledTextFieldColor = Color(0xFFD9D9D9);
   static const Color bigContainerColor = Color(0xFFDBEBE7);
   static const Color unSelectedTextColor = Color(0xFF71B1A1);
+  static const Color disableButtonColor = Color(0xFFD9D9D9);
 }
