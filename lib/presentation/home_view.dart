@@ -1,75 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/button/big_button.dart';
-import 'package:recipe_app/presentation/component/button/medium_button.dart';
-import 'package:recipe_app/presentation/component/button/small_button.dart';
-import 'package:recipe_app/presentation/tabs/custom_three_tabs.dart';
-import 'package:recipe_app/presentation/tabs/custom_two_tabs.dart';
-import 'package:recipe_app/presentation/component/custom_text_field.dart';
-import 'package:recipe_app/ui/color_style.dart';
 
-import 'package:recipe_app/ui/text_font_style.dart';
+import 'package:recipe_app/presentation/component/input_field.dart';
 
-class HomeView extends StatelessWidget {
+import 'package:recipe_app/presentation/component/tabs.dart';
+
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  int seletedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '홈 화면',
-          style: TextFontStyle.largeBold(color: ColorStyle.black),
-        ),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BigButton(
-              text: 'Button',
-              onTap: () {
-                print('Big Button click 성공');
-              },
-            ),
-            SizedBox(height: 10),
-            MediumButton(
-              text: 'Button',
-              onTap: () {
-                print('Medium Button click 성공');
-              },
-            ),
-            SizedBox(height: 10),
-            SmallButton(
-              text: 'Button',
-              onTap: () {
-                print('Small Button click 성공');
-              },
-            ),
-            SizedBox(height: 10),
-            CustomTextField(
-              label: 'label',
-              placeholder: 'placeHolder',
-              onValueChange: (value) {
-                print(value);
-              },
-            ),
-            SizedBox(height: 10),
-            CustomTwoTabs(
-              labels: ['Label', 'Label'],
-              onValueChange: (index) {
-                print(index);
-              },
-            ),
-            SizedBox(height: 10),
-            CustomThreeTabs(
-              labels: ['Label', 'Label', 'Label'],
-              onValueChange: (index) {
-                print(index);
-              },
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 20,
+        children: [
+          InputField(
+            label: 'label',
+            placeholder: 'placeholder',
+            onValueChange: (value) {
+              print(value);
+            },
+          ),
+          Tabs(
+            labels: ['label1', 'label2'],
+            onValueChange: (index) {
+              setState(() {
+                seletedIndex = index;
+              });
+            },
+            selectedIndex: seletedIndex,
+          ),
+        ],
       ),
     );
   }
