@@ -8,16 +8,16 @@ class IngredientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Ingredient ingredient1 = Ingredient(
-      id: 'testId',
+      id: 'tomato_id',
       imageUrl:
-          '/Users/eastar/Documents/github/modu-3-flutter-recipe-app/assets/images/tomatos.png',
+          'assets/images/tomatos.png',
       name: 'Tomatos',
       weight: 500,
     );
     final Ingredient ingredient2 = Ingredient(
-      id: 'testId',
+      id: 'cabbage_id',
       imageUrl:
-          '/Users/eastar/Documents/github/modu-3-flutter-recipe-app/assets/images/cabbage.png',
+          'assets/images/cabbage.png',
       name: 'Cabbage',
       weight: 300,
     );

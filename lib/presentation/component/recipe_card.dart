@@ -68,9 +68,7 @@ class RecipeCard extends StatelessWidget {
                 SizedBox(
                   width: 17,
                   height: 17,
-                  child: Image.asset(
-                    '/Users/eastar/Documents/github/modu-3-flutter-recipe-app/assets/images/clock_icon.png',
-                  ),
+                  child: Image.asset('assets/images/clock_icon.png'),
                 ),
                 SizedBox(width: 5),
                 Text(
@@ -83,9 +81,7 @@ class RecipeCard extends StatelessWidget {
                 SizedBox(
                   width: 24,
                   height: 24,
-                  child: Image.asset(
-                    '/Users/eastar/Documents/github/modu-3-flutter-recipe-app/assets/images/bookmark_icon.png',
-                  ),
+                  child: Image.asset('assets/images/bookmark_icon.png'),
                 ),
               ],
             ),

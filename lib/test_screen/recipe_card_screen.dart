@@ -16,20 +16,14 @@ class RecipeCardScreen extends StatelessWidget {
       user: user1,
       cookingTime: '20 min',
       rate: 4.0,
-      media: Media(
-        imageUrl:
-            '/Users/eastar/Documents/github/modu-3-flutter-recipe-app/assets/images/recipe1.png',
-      ),
+      media: Media(imageUrl: 'assets/images/recipe1.png'),
     );
     final Recipe recipe2 = Recipe(
       title: 'spice roasted chicken with flavored rice',
       user: user2,
       cookingTime: '25 min',
       rate: 4.1,
-      media: Media(
-        imageUrl:
-            '/Users/eastar/Documents/github/modu-3-flutter-recipe-app/assets/images/recipe2.png',
-      ),
+      media: Media(imageUrl: 'assets/images/recipe2.png'),
     );
 
     return SafeArea(

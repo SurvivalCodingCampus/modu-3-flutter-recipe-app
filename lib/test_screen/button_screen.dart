@@ -83,17 +83,21 @@ class ButtonScreen extends StatelessWidget {
                               (e) => FilterButton(
                                 value: e,
                                 color: ColorStyles.primary100,
-                                ontap: () {},
+                                ontap: () {
+                                  print('${e.name} 필터 선택됨');
+                                },
                               ),
                             )
                             .toList(),
                   ),
                   SizedBox(height: 12),
+                  Text('Categorys'),
+                  SizedBox(height: 12),
                   Wrap(
                     spacing: 10,
                     runSpacing: 10,
                     children:
-                        Categorys.values
+                        Categories.values
                             .map(
                               (e) => FilterButton(
                                 value: e,

@@ -7,7 +7,7 @@ part 'media.g.dart';
 abstract class Media with _$Media {
   const factory Media({
     @Default('') final String imageId,
-    @Default('') final String thunbNailUrl,
+    @Default('') final String thumbNailUrl,
     @Default('') final String imageUrl,
     @Default('') final String recipeVideoUrl,
   }) = _Media;

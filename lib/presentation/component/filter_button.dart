@@ -40,27 +40,27 @@ class _FilterButtonState extends State<FilterButton> {
       }
     }
 
-    if (widget.value is Categorys) {
+    if (widget.value is Categories) {
       switch (widget.value) {
-        case Categorys.all:
+        case Categories.all:
           title = 'all';
-        case Categorys.breakfast:
+        case Categories.breakfast:
           title = 'breakfast';
-        case Categorys.cereal:
+        case Categories.cereal:
           title = 'cereal';
-        case Categorys.chinese:
+        case Categories.chinese:
           title = 'chinese';
-        case Categorys.dinner:
+        case Categories.dinner:
           title = 'dinner';
-        case Categorys.fruit:
+        case Categories.fruit:
           title = 'fruit';
-        case Categorys.localDish:
+        case Categories.localDish:
           title = 'localDish';
-        case Categorys.lunch:
+        case Categories.lunch:
           title = 'lunch';
-        case Categorys.spanish:
+        case Categories.spanish:
           title = 'spanish';
-        case Categorys.vegetables:
+        case Categories.vegetables:
           title = 'vegetables';
       }
     }

@@ -13,14 +13,14 @@ abstract class Recipe with _$Recipe {
   const factory Recipe({
     @Default('') final String recipeId,
     @Default('') final String title,
-    @Default([]) final List<Ingredient> ingridients,
+    @Default([]) final List<Ingredient> ingredients,
     @Default(Review()) final Review review,
     @Default(User()) final User user,
     @Default(null) final DateTime? createdAt,
     @Default(Media()) final Media media,
     @Default([]) final List<String> recipeStep,
     @Default('') final String cookingTime,
-    @Default([]) final List<Categorys> categoryList,
+    @Default([]) final List<Categories> categoryList,
     @Default(0) final double rate,
   }) = _Recipe;
 

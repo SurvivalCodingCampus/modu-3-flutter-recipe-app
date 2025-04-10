@@ -23,12 +23,22 @@ class IngredientItem extends StatelessWidget {
           SizedBox(
             width: 52,
             height: 52,
-            child: Image.asset(ingredient.imageUrl),
+            child: Image.asset(
+              ingredient.imageUrl,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.image_not_supported);
+              },
+            ),
           ),
           SizedBox(width: 16),
           Text(ingredient.name, style: TextStyles.normalTextBold),
           Expanded(child: SizedBox()),
-          Text('${ingredient.weight}g', style: TextStyles.smallTextRegular.copyWith(color: ColorStyles.gray3)),
+          Text(
+            '${ingredient.weight}g',
+            style: TextStyles.smallTextRegular.copyWith(
+              color: ColorStyles.gray3,
+            ),
+          ),
         ],
       ),
     );

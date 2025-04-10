@@ -40,21 +40,21 @@ class _RatingDialogState extends State<RatingDialog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (int i = 0; i < 5; i++) ...[
+              for (int i = 1; i < 6; i++) ...[
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      selectedIndex = (i + 1);
+                      selectedIndex = (i);
                     });
-                    widget.onChange(i + 1);
+                    widget.onChange(i);
                   },
                   child: Icon(
-                    selectedIndex > i ? Icons.star : Icons.star_border,
+                    selectedIndex >= i ? Icons.star : Icons.star_border,
                     color: ColorStyles.rating,
                     size: 20,
                   ),
                 ),
-                if (i != 4) SizedBox(width: 10),
+                if (i != 5) SizedBox(width: 10),
               ],
             ],
           ),
@@ -75,7 +75,7 @@ class _RatingDialogState extends State<RatingDialog> {
                   widget.actionName,
                   style: TextStyles.smallTextRegular.copyWith(
                     color: ColorStyles.white,
-                    fontSize: 8,
+                    // fontSize: 8,
                   ),
                 ),
               ),
