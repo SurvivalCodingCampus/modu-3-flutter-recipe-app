@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/presentation/common/component/color_change_text_button.dart';
+import 'package:recipe_app/presentation/common/component/color_text_button.dart';
 import 'package:recipe_app/presentation/common/component/filter_button.dart';
 import 'package:recipe_app/presentation/common/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/common/component/rating_button.dart';
+import 'package:recipe_app/presentation/common/component/rating_card.dart';
 import 'package:recipe_app/presentation/common/component/recipe_card.dart';
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
@@ -187,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                           tabActiveInt == 0
                               ? ColorStyle.primary100
                               : ColorStyle.gray4,
-                      textColor:  ColorStyle.white,
+                      textColor: ColorStyle.white,
                       tabActive: tabActiveInt,
                       buttonRadius: 10,
                       onTapDown: (details) {
@@ -205,6 +207,26 @@ class _HomePageState extends State<HomePage> {
                           tabActiveInt = 0;
                         });
                       },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                    child: ColorTextButton(
+                      buttonHeight: 56,
+                      buttonWidth: double.infinity,
+                      buttonText: 'RatingDialog',
+                      buttonColor: ColorStyle.primary100,
+                      textColor: ColorStyle.white,
+                      onPressed:
+                          () => showDialog(
+                            context: context,
+                            builder:
+                                (BuildContext context) =>
+                                    Dialog(child: RatingCard()),
+                          ).then((value) {
+                            print("별점 $value을 주었습니다!");
+                          }),
+                      buttonRadius: 10,
                     ),
                   ),
                 ],
