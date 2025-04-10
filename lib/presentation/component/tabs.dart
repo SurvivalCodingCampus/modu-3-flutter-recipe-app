@@ -22,21 +22,29 @@ class Tabs extends StatelessWidget {
       child: SizedBox(
         height: 33,
         child: Row(
-          children:
-              labels
-                  .map(
-                    (e) =>
-                        e == labels[selectedIndex]
-                            ? GestureDetector(
-                              onTap: () => onTap(labels.indexOf(e)),
-                              child: _SelectedTab(label: e, width: tabWidth),
-                            )
-                            : GestureDetector(
-                              onTap: () => onTap(labels.indexOf(e)),
-                              child: _UnSelectedTab(label: e, width: tabWidth),
-                            ),
-                  )
-                  .toList(),
+          children: List.generate(labels.length, (index) {
+            final label = labels[index];
+            final isSelected = index == selectedIndex;
+            final tabWidget = GestureDetector(
+              onTap: () => onTap(index),
+              child:
+                  isSelected
+                      ? _SelectedTab(label: label, width: tabWidth)
+                      : _UnSelectedTab(label: label, width: tabWidth),
+            );
+
+            // 마지막 아이템이 아니면 간격 추가
+            if (index < labels.length - 1) {
+              return Row(
+                children: [
+                  tabWidget,
+                  const SizedBox(width: 8), // ← 여기서 간격 조정
+                ],
+              );
+            } else {
+              return tabWidget;
+            }
+          }),
         ),
       ),
     );
