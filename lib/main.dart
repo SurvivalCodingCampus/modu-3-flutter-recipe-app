@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/buttons/select_button.dart';
 import 'package:recipe_app/presentation/component/components.dart';
 import 'package:recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
@@ -150,6 +151,38 @@ class MyApp extends StatelessWidget {
                       imagePath: 'assets/images/card-3.png',
                       rating: 4.0,
                       author: 'Mark Kelvin',
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          spacing: 5,
+                          children: [
+                            SelectButton(
+                              icon: Icons.star,
+                              text: '5',
+                              onTap: () {},
+                            ),
+                            SelectButton(
+                              icon: Icons.star,
+                              text: '5',
+                              onTap: () {},
+                            ),
+                          ],
+                        ),
+                        Row(
+                          spacing: 5,
+                          children: [
+                            SelectButton(text: 'Text', onTap: () {}),
+                            SelectButton(text: 'Text', onTap: () {}),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
