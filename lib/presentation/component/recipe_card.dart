@@ -64,13 +64,15 @@ class _RecipeCardState extends State<RecipeCard> {
               top: 10,
               right: 10,
               child: Container(
-                width: 37,
-                height: 16,
+                // width: 37,
+                // height: 16,
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 decoration: BoxDecoration(
                   color: ColorStyles.secondary20,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.star, color: ColorStyles.rating, size: 13),

@@ -8,7 +8,6 @@ import 'package:recipe_app/presentation/component/pushed_button/medium_tap_butto
 import 'package:recipe_app/presentation/component/pushed_button/small_tap_button.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/component/tabs.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,18 +32,7 @@ class MyApp extends StatelessWidget {
                 SizedBox(height: 10),
                 SmallTapButton(text: 'Button'),
                 SizedBox(height: 10),
-                InputField(
-                  label: 'Lable',
-                  holder: 'Placeholder',
-                  value: '',
-                  onChanged: (value) {},
-                ),
-                SizedBox(height: 10),
-                Tabs(
-                  labels: ['어제', '오늘', '내일'],
-                  selectedIndex: 1,
-                  onChanged: (value) {},
-                ),
+                InputField(label: '검색', holder: '검색어를 입력해주세요'),
                 SizedBox(height: 10),
                 IngredientItem(
                   ingredientImage:
@@ -62,11 +50,26 @@ class MyApp extends StatelessWidget {
                   time: '20 min',
                 ),
                 SizedBox(height: 10),
+                RecipeCard(
+                  imageUrl:
+                      'https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png',
+                  title: 'Spicy Nelly',
+                  name: 'Chef John',
+                  rating: '4.0',
+                  time: '20 min',
+                ),
+                SizedBox(height: 10),
                 RatingButton(rate: 5),
+                SizedBox(height: 10),
+                RatingButton(rate: 4),
                 SizedBox(height: 10),
                 FilterButton(text: ['All', 'Breakfast', 'Lunch', 'Dinner']),
                 SizedBox(height: 10),
+                FilterButton(text: ['계절', '봄', '여름', '가을', '겨울']),
+                SizedBox(height: 10),
                 RatingDialog(title: '별점', actionName: '보내기'),
+                SizedBox(height: 10),
+                RatingDialog(title: 'Rate recipe', actionName: 'Send'),
               ],
             ),
           ),
