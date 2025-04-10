@@ -32,8 +32,9 @@ class Tabs extends StatelessWidget {
             child: TabBar(
               onTap: onValueChange,
               labelStyle: TextStyles.selectedLabelText,
-              unselectedLabelColor: ColorStyles.unSelectedTextColor,
-              unselectedLabelStyle: TextStyles.unSelectedLabelText,
+              unselectedLabelStyle: TextStyles.selectedLabelText.copyWith(
+                color: ColorStyles.unSelectedTextColor,
+              ),
               indicator: BoxDecoration(
                 color: ColorStyles.buttonColor,
                 borderRadius: BorderRadius.all(Radius.circular(10)),

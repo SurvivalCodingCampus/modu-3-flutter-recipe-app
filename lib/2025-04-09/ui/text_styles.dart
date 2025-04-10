@@ -1,41 +1,32 @@
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'color_styles.dart';
 
 abstract class TextStyles {
-  static const TextStyle buttonText = TextStyle(
+  static TextStyle buttonText = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    fontFamily: 'Poppins',
     color: ColorStyles.textColor,
   );
-  static const TextStyle smallButtonText = TextStyle(
+  static TextStyle smallButtonText = GoogleFonts.poppins(
     fontSize: 11,
     fontWeight: FontWeight.w600,
-    fontFamily: 'Poppins',
     color: ColorStyles.textColor,
   );
-  static const TextStyle labelText = TextStyle(
+  static TextStyle labelText = GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    fontFamily: 'Poppins',
     color: ColorStyles.labelColor,
   );
-  static const TextStyle hintText = TextStyle(
+  static TextStyle hintText = GoogleFonts.poppins(
     fontSize: 11,
     fontWeight: FontWeight.w400,
-    fontFamily: 'Poppins',
     color: ColorStyles.uneabledTextFieldColor,
   );
-  static const TextStyle selectedLabelText = TextStyle(
+  static TextStyle selectedLabelText = GoogleFonts.poppins(
     fontSize: 11,
     fontWeight: FontWeight.w600,
-    fontFamily: 'Poppins',
     color: ColorStyles.textColor,
-  );
-  static const TextStyle unSelectedLabelText = TextStyle(
-    fontSize: 11,
-    fontWeight: FontWeight.w600,
-    fontFamily: 'Poppins',
   );
 }

@@ -22,8 +22,8 @@ class InputField extends StatelessWidget {
             onChanged: onValueChange,
             decoration: InputDecoration(
               hintText: 'Placeholder',
-              contentPadding: EdgeInsets.fromLTRB(20, 20, 0, 0),
               hintStyle: TextStyle(color: ColorStyles.uneabledTextFieldColor),
+              contentPadding: EdgeInsets.fromLTRB(20, 20, 0, 0),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(
