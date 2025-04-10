@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/components.dart';
+import 'package:recipe_app/presentation/component/ingredient_item.dart';
+import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 
 void main() {
@@ -95,6 +97,26 @@ class MyApp extends StatelessWidget {
                           },
                         ),
                       ],
+                    ),
+                  ],
+                ),
+                Column(
+                  spacing: 10,
+                  children: [
+                    IngredientItem(
+                      name: 'Tomato',
+                      imagePath: 'assets/images/tomato.png',
+                      weight: '100g',
+                    ),
+                    IngredientItem(
+                      name: 'Cabbage',
+                      imagePath: 'assets/images/cabbage.png',
+                      weight: '300g',
+                    ),
+                    IngredientItem(
+                      name: 'Taco',
+                      imagePath: 'assets/images/taco.png',
+                      weight: '1t',
                     ),
                   ],
                 ),
