@@ -3,10 +3,10 @@ import 'package:recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
-class IngredientComponent extends StatelessWidget {
+class IngredientItem extends StatelessWidget {
   final Ingredient ingredient;
 
-  const IngredientComponent({super.key, required this.ingredient});
+  const IngredientItem({super.key, required this.ingredient});
 
   @override
   Widget build(BuildContext context) {

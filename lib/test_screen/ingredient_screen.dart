@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/model/ingredient.dart';
-import 'package:recipe_app/presentation/component/ingredient_component.dart';
+import 'package:recipe_app/presentation/component/ingredient_item.dart';
 
 class IngredientScreen extends StatelessWidget {
   const IngredientScreen({super.key});
@@ -31,9 +31,9 @@ class IngredientScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 24),
-                  IngredientComponent(ingredient: ingredient1),
+                  IngredientItem(ingredient: ingredient1),
                   SizedBox(height: 12),
-                  IngredientComponent(ingredient: ingredient2),
+                  IngredientItem(ingredient: ingredient2),
                   SizedBox(height: 12),
                 ],
               ),
