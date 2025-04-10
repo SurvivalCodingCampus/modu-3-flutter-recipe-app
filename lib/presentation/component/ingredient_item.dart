@@ -28,6 +28,7 @@ class IngredientItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: ColorStyles.white,
                   borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(image: AssetImage(ingredient.ingredientImage))
                 ),
               ),
               Expanded(
