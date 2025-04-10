@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/2025-04-09/presentation/component/buttons.dart';
+import 'package:recipe_app/2025-04-09/presentation/component/button.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/input_field.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/tabs.dart';
 
