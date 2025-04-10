@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 
 class ColorTextButton extends StatelessWidget {
@@ -11,7 +10,7 @@ class ColorTextButton extends StatelessWidget {
   final double buttonRadius;
   final void Function() onPressed;
 
-  const ColorTextButton({
+  const ColorTextButton({super.key, 
     required this.buttonHeight,
     required this.buttonWidth,
     required this.buttonText,

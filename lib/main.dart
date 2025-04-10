@@ -1,10 +1,7 @@
-import 'dart:developer' as dev;
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipe_app/presentation/common/component/custom_tabs.dart';
-import 'package:recipe_app/presentation/common/widget/button_page.dart';
-import 'package:recipe_app/presentation/common/component/custom_input_field.dart';
+import 'package:recipe_app/presentation/common/component/ingredient_item.dart';
+import 'package:recipe_app/presentation/common/ui/color_style.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,19 +40,32 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ButtonPage(),
-                  CustomInputField(labelString: 'labelTest'),
-                  SizedBox(height: 30),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: CustomTabs(
-                      labels: labels,
-                      selectedIndex: selectedIndex,
-                      onValueChange: (selectedIndex) {
-                        print(selectedIndex);
-                      },
+                    padding:  EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        IngredientItem(
+                          backgroundColor: ColorStyle.gray4,
+                          imagePath: 'assets/sample_image/strawberry.png',
+                          imageType: ImageType.path,
+                          name: 'StrawBerry',
+                          content: '500g',
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        IngredientItem(
+                          backgroundColor: ColorStyle.gray4,
+                          imagePath: 'assets/sample_image/lemon.png',
+                          imageType: ImageType.path,
+                          name: 'Lemon',
+                          content: '500g',
+                        ),
+                      ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

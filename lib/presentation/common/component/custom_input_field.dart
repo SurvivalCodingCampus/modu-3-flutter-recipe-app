@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 
@@ -7,7 +6,7 @@ class CustomInputField extends StatelessWidget {
   final String labelString;
   final FocusNode? focusNode;
 
-  CustomInputField({required this.labelString, this.focusNode});
+  CustomInputField({super.key, required this.labelString, this.focusNode});
 
   final TextEditingController textEditingController = TextEditingController();
 

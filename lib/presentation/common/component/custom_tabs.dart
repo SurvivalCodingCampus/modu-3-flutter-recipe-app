@@ -7,7 +7,7 @@ class CustomTabs extends StatelessWidget {
   final int selectedIndex;
   final void Function(int index) onValueChange;
 
-  const CustomTabs({
+  const CustomTabs({super.key, 
     required this.labels,
     required this.selectedIndex,
     required this.onValueChange,
