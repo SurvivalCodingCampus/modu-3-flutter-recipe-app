@@ -29,7 +29,8 @@ class TabsWidget extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Container(
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 200),
                   decoration: BoxDecoration(
                     color:
                         index == selectedIndex
