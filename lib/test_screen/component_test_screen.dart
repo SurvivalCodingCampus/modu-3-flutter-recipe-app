@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/big_button.dart';
+
 import 'package:recipe_app/presentation/component/input_field.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
 import 'package:recipe_app/presentation/component/small_button.dart';
+
 import 'package:recipe_app/presentation/component/tabs.dart';
+import 'package:recipe_app/test_screen/button_screen.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
 class ComponentTestScreen extends StatelessWidget {
@@ -20,29 +23,13 @@ class ComponentTestScreen extends StatelessWidget {
               child: Column(
                 children: [
                   BigButton(
-                    name: 'Button',
+                    name: '버튼 스크린',
                     color: ColorStyles.primary100,
                     icon: Icons.arrow_forward,
                     onClick: () {
-                      print('나는 빅버튼');
-                    },
-                  ),
-                  SizedBox(height: 12),
-                  MediumButton(
-                    name: 'Button',
-                    color: ColorStyles.primary100,
-                    icon: Icons.arrow_forward,
-                    onClick: () {
-                      print('나는 미디움버튼');
-                    },
-                  ),
-                  SizedBox(height: 12),
-                  SmallButton(
-                    name: 'Button',
-                    color: ColorStyles.primary100,
-
-                    onClick: () {
-                      print('나는 스몰버튼');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ButtonScreen()),
+                      );
                     },
                   ),
                   SizedBox(height: 12),
