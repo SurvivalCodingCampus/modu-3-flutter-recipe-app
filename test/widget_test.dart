@@ -1,30 +1,34 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:recipe_app/main.dart';
+import 'package:recipe_app/presentation/component/big_buttons.dart'; // 너의 경로에 맞게 수정
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('1. Big 버튼 클릭 시 print 출력되는지 테스트', (WidgetTester tester) async {
+    final printLogs = <String>[];
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await runZonedGuarded(() async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: BigButton(),
+          ),
+        ),
+      );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      await tester.tap(find.byType(ElevatedButton));
+      await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      expect(
+        printLogs.contains('Big 버튼 클릭됨!'),
+        isTrue,
+        reason: 'Big 버튼 클릭 시 print가 호출되어야 합니다.',
+      );
+    }, (e, s) {},
+      zoneSpecification: ZoneSpecification(
+        print: (_, __, ___, String msg) {
+          printLogs.add(msg); // print 메시지 수집
+        },
+      ));
   });
 }
