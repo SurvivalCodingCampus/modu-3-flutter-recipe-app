@@ -16,7 +16,7 @@ void main() {
             buttonText: 'button',
             buttonColor: ColorStyle.primary100,
             textColor: ColorStyle.white,
-            onPreesed: () {
+            onPressed: () {
               _count++;
               print("테스트 카운터 $_count");
             },

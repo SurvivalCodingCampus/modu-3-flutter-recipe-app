@@ -35,8 +35,8 @@ class ButtonPage extends StatelessWidget {
                     buttonWidth: MediaQuery.of(context).size.width,
                     buttonText: "Button",
                     buttonColor: e["buttonColor"],
-                    textColor: ColorStyle.white,
-                    onPreesed: () {},
+                    textColor: e["textColor"],
+                    onPressed: () {},
                     buttonRadius: 10,
                   ),
                 );
@@ -59,7 +59,7 @@ class ButtonPage extends StatelessWidget {
                     buttonText: "Button",
                     buttonColor: e["buttonColor"],
                     textColor: ColorStyle.white,
-                    onPreesed: () {},
+                    onPressed: () {},
                     buttonRadius: 10,
                   ),
                 );
@@ -76,7 +76,7 @@ class ButtonPage extends StatelessWidget {
                     buttonText: "Button",
                     buttonColor: e["buttonColor"],
                     textColor: ColorStyle.white,
-                    onPreesed: () {},
+                    onPressed: () {},
                     buttonRadius: 10,
                   ),
                 );

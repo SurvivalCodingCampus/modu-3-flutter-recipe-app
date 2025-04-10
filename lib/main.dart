@@ -45,16 +45,17 @@ class HomePage extends StatelessWidget {
                 children: [
                   ButtonPage(),
                   CustomInputField(labelString: 'labelTest'),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  SizedBox(height: 30),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: CustomTabs(labels: labels, selectedIndex: selectedIndex,
+                    child: CustomTabs(
+                      labels: labels,
+                      selectedIndex: selectedIndex,
                       onValueChange: (selectedIndex) {
                         print(selectedIndex);
-                      }),
-                  )
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

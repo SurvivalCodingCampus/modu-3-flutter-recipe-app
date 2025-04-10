@@ -9,7 +9,7 @@ class ColorTextButton extends StatelessWidget {
   final Color buttonColor;
   final Color textColor;
   final double buttonRadius;
-  final void Function() onPreesed;
+  final void Function() onPressed;
 
   const ColorTextButton({
     required this.buttonHeight,
@@ -17,7 +17,7 @@ class ColorTextButton extends StatelessWidget {
     required this.buttonText,
     required this.buttonColor,
     required this.textColor,
-    required this.onPreesed,
+    required this.onPressed,
     required this.buttonRadius,
   });
 
@@ -28,7 +28,7 @@ class ColorTextButton extends StatelessWidget {
       height: buttonHeight,
       child: InkWell(
         onTap: (){
-          onPreesed.call();
+          onPressed.call();
         },
         borderRadius: BorderRadius.circular(buttonRadius),
         child: Ink(
