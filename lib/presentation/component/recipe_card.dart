@@ -9,7 +9,7 @@ class RecipeCard extends StatelessWidget {
   final String imagePath;
   final String author;
   final String title;
-  final double rating;
+  final int rating;
   final int cookTime;
 
   const RecipeCard({
@@ -77,7 +77,7 @@ class RecipeCard extends StatelessWidget {
           children: [
             Icon(Icons.star, color: ColorStyles.rating, size: 16),
             Text(
-              '$rating',
+              '${rating.toDouble()}',
               style: TextStyles.smallTextRegular.copyWith(
                 color: ColorStyles.black,
               ),
