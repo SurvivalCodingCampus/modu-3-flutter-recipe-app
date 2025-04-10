@@ -15,7 +15,8 @@ class BigButton extends StatelessWidget {
         onTap();
       },
       child: Container(
-        width: 315,
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           color: ColorStyle.primary100,
           borderRadius: BorderRadius.circular(10),
