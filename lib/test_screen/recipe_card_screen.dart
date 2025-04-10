@@ -10,7 +10,7 @@ class RecipeCardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final User user1 = User(name: 'Chef John');
-    final User user2 = User(name: 'Mark Kelvin');
+    final User user2 = User(name: 'Mark Kelvin');    
     final Recipe recipe1 = Recipe(
       title: 'Traditional spare ribs baked',
       user: user1,

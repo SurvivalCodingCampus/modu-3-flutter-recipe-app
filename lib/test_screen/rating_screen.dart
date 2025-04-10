@@ -30,6 +30,28 @@ class RatingScreen extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: 12),
+                  RatingDialog(
+                    title: 'Rate recipe',
+                    actionName: 'Send',
+                    onChange: (int rate) {
+                      print('별점 $rate점을 주었습니다.');
+                    },
+                    onButtonTap: () {
+                      print("버튼을 클릭했습니다.");
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  RatingDialog(
+                    title: 'Rate recipe',
+                    actionName: 'Send',
+                    onChange: (int rate) {
+                      print('별점 $rate점을 주었습니다.');
+                    },
+                    onButtonTap: () {
+                      print("버튼을 클릭했습니다.");
+                    },
+                  ),
+                  SizedBox(height: 12),
                 ],
               ),
             ),
