@@ -1,13 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/model/ingredient.dart';
+import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/data/model/user.dart';
 import 'package:recipe_app/presentation/component/input_field_widget.dart';
 import 'package:recipe_app/presentation/component/tabs_widget.dart';
 
 import 'component/button_widget.dart';
 import 'component/ingredient_item.dart';
+import 'component/recipe_card.dart';
 
-class ComponentTestScreen extends StatelessWidget {
+class ComponentTestScreen extends StatefulWidget {
   const ComponentTestScreen({super.key});
+
+  @override
+  State<ComponentTestScreen> createState() => _ComponentTestScreenState();
+}
+
+class _ComponentTestScreenState extends State<ComponentTestScreen> {
+
+  final List<Recipe> recipes = [
+    Recipe(
+      recipeId: 1,
+      name: 'Traditional spare ribs baked',
+      cookTime: '20 min',
+      chef: User(name: 'Chef John'),
+      rate: 4.0,
+      foodImage:
+      'assets/images/recipe_images/Traditional spare ribs baked.png',
+    ),
+  ];
+  final List<Ingredient> ingredients = [
+    Ingredient(
+      name: 'Tomatos',
+      weight: '500g',
+      ingredientImage: 'assets/images/ingredient_images/tomato.png',
+    ),
+  ];
+
+  bool isBookmarked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +91,29 @@ class ComponentTestScreen extends StatelessWidget {
                     selectedIndex: 0,
                   ),
                 ),
-                IngredientItem(ingredient: Ingredient(name: 'Tomatos', weight: '500g')),
-
+                IngredientItem(
+                  ingredient: ingredients.first
+                ),
+                SizedBox(
+                  height: 200,
+                  child: RecipeCard(
+                    recipe: recipes.first,
+                    isBookmarked: isBookmarked,
+                    onBookmark: (name) {
+                      if(isBookmarked == true) {
+                        print('$name 북마크가 해제 되었습니다');
+                        setState(() {
+                          isBookmarked = !isBookmarked;
+                        });
+                      } else {
+                        print('$name이 북마크 되었습니다');
+                        setState(() {
+                          isBookmarked = !isBookmarked;
+                        });
+                      }
+                    },
+                  ),
+                ),
               ],
             ),
           ),
