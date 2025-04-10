@@ -18,7 +18,7 @@ enum ButtonSize {
   });
 }
 
-class ButtonWidget extends StatelessWidget {
+class ButtonWidget extends StatefulWidget {
   final VoidCallback onClick;
   final ButtonSize buttonSize;
   final String buttonText;
@@ -31,22 +31,46 @@ class ButtonWidget extends StatelessWidget {
   });
 
   @override
+  State<ButtonWidget> createState() => _ButtonWidgetState();
+}
+
+class _ButtonWidgetState extends State<ButtonWidget> {
+
+  bool isDisabled = false;
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onClick();
+        widget.onClick();
+        setState(() {
+          isDisabled = false;
+        });
       },
-      child: Container(
-        width: buttonSize.width,
-        height: buttonSize.height,
+      onTapDown: (_) {
+        setState(() {
+          isDisabled = true;
+        });
+      },
+      onTapCancel: () {
+        setState(() {
+          isDisabled = false;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 100),
+        width: widget.buttonSize.width,
+        height: widget.buttonSize.height,
         decoration: BoxDecoration(
-          color: ColorStyles.primary100,
-          borderRadius: BorderRadius.circular(buttonSize.border),
+          color: isDisabled == true
+              ? ColorStyles.gray4
+              : ColorStyles.primary100,
+          borderRadius: BorderRadius.circular(widget.buttonSize.border),
         ),
         child: Center(
           child: Text(
-            buttonText,
-            style: switch (buttonSize) {
+            widget.buttonText,
+            style: switch (widget.buttonSize) {
               ButtonSize.big => TextStyles.normalBold(color: ColorStyles.white),
               ButtonSize.medium => TextStyles.normalBold(color: ColorStyles.white),
               ButtonSize.small => TextStyles.smallBold(color: ColorStyles.white),
