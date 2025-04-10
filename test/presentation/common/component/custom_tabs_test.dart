@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presention/common/component/custom_tabs.dart';
+import 'package:recipe_app/presentation/common/component/custom_tabs.dart';
 
 void main() {
   List<String> labels = ["레시피", "소개"];

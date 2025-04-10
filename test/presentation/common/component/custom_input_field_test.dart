@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presention/common/component/custom_input_field.dart';
+import 'package:recipe_app/presentation/common/component/custom_input_field.dart';
 
 void main() {
   testWidgets('custom_input_field test', (tester) async{

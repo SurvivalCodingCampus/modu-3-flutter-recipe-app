@@ -2,9 +2,9 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipe_app/presention/common/component/custom_tabs.dart';
-import 'package:recipe_app/presention/common/widget/button_page.dart';
-import 'package:recipe_app/presention/common/component/custom_input_field.dart';
+import 'package:recipe_app/presentation/common/component/custom_tabs.dart';
+import 'package:recipe_app/presentation/common/widget/button_page.dart';
+import 'package:recipe_app/presentation/common/component/custom_input_field.dart';
 
 void main() {
   runApp(MyApp());

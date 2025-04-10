@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presention/common/component/color_text_button.dart';
-import 'package:recipe_app/presention/common/ui/color_style.dart';
+import 'package:recipe_app/presentation/common/component/color_text_button.dart';
+import 'package:recipe_app/presentation/common/ui/color_style.dart';
 
 void main() {
   int _count = 0;

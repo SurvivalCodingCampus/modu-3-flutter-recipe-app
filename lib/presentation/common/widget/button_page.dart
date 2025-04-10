@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presention/common/ui/color_style.dart';
+import 'package:recipe_app/presentation/common/ui/color_style.dart';
 
 import '../component/color_text_button.dart';
 
