@@ -61,14 +61,17 @@ class _RatingDialogState extends State<RatingDialog> {
           SizedBox(height: 5),
           GestureDetector(
             onTap: () {
-              widget.onButtonTap();
+              if (selectedIndex != 0) {
+                widget.onButtonTap();
+              }
             },
             child: Container(
               height: 20,
               width: 61,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                color: ColorStyles.rating,
+                color:
+                    selectedIndex == 0 ? ColorStyles.gray4 : ColorStyles.rating,
               ),
               child: Center(
                 child: Text(

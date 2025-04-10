@@ -57,7 +57,7 @@ class RatingScreen extends StatelessWidget {
                     onClick: () async {
                       return await showDialog(
                         context: context,
-                        barrierDismissible: false,
+                        barrierDismissible: true,
                         builder: (context) {
                           return RatingDialogAlert(
                             title: '별점 주기',

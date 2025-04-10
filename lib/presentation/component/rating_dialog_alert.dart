@@ -50,15 +50,18 @@ class _RatingDialogAlertState extends State<RatingDialogAlert> {
         Center(
           child: GestureDetector(
             onTap: () {
-              widget.onChange(selectedIndex);
-              Navigator.of(context).pop();
+              if (selectedIndex != 0) {
+                widget.onChange(selectedIndex);
+                Navigator.of(context).pop();
+              }
             },
             child: Container(
               height: 20,
               width: 61,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                color: ColorStyles.rating,
+                color:
+                    selectedIndex == 0 ? ColorStyles.gray4 : ColorStyles.rating,
               ),
               child: Center(
                 child: Text(
