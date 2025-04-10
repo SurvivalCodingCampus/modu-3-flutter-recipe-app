@@ -44,7 +44,7 @@ class RecipeCard extends StatelessWidget {
           child: Align(
             alignment: Alignment.topRight,
             child: Container(
-              width: 37,
+              width: 50,
               height: 20,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -112,6 +112,7 @@ class RecipeCard extends StatelessWidget {
                       ),
                       SizedBox(width: 12),
                       GestureDetector(
+                        key: const Key('recipeCardBookmarkButton'),
                         onTap: () {
                           onBookmark(recipe.name);
                         },
