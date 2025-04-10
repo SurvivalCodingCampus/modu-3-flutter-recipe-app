@@ -19,6 +19,7 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = TextEditingController(text: value);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,7 +30,7 @@ class InputField extends StatelessWidget {
           height: 80,
           child: TextField(
             style: TextStyles.normalRegular,
-            controller: TextEditingController(text: value),
+            controller: controller,
             onChanged: onChanged,
             decoration: InputDecoration(
               hintText: holder,

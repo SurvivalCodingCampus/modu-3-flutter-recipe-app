@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-const String kFontFamily = 'Poppins';
-
 abstract class TextStyles {
   // Bold
   static const TextStyle titleBold = TextStyle(
