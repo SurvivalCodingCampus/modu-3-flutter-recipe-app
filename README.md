@@ -9,4 +9,4 @@ Flutter로 만드는 레시피 앱
 
 ### 결과 화면
 
-![1단계 UI 연습] (./assets/screenshots/step1.png)
+![1단계 UI 연습](./assets/screenshots/step1.png)
