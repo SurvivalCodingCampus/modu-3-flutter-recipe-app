@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/buttons/select_button.dart';
 import 'package:recipe_app/presentation/component/components.dart';
-import 'package:recipe_app/presentation/component/ingredient_item.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-
-import 'presentation/component/rating_dialog.dart';
+import 'package:recipe_app/ui/ui.dart';
 
 void main() {
   runApp(const MyApp());
