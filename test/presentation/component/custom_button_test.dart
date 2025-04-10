@@ -29,6 +29,25 @@ void main() {
       expect(find.text(smallText), findsOneWidget);
     });
 
+    testWidgets('[리팩토링 테스트] 렌더링: big, medium, small 버튼 각각 표시되는지', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Column(
+            children: const [
+              BigButton(title: bigText),
+              MediumButton(title: mediumText),
+              SmallButton(title: smallText),
+            ],
+          ),
+        ),
+      );
+      expect(find.text(bigText), findsOneWidget);
+      expect(find.text(mediumText), findsOneWidget);
+      expect(find.text(smallText), findsOneWidget);
+    });
+
     testWidgets('클릭 시 콜백이 잘 동작하는지', (WidgetTester tester) async {
       bool wasPressed = false;
 
