@@ -19,8 +19,8 @@ class CustomTabBar extends StatelessWidget {
     final int tabCount = tabTitles.length;
 
     // 탭 개수에 따라 여백과 간격 계산
-    final double horizontalPadding = calculateHorizontalPadding(tabCount);
-    final double tabSpacing = calculateTabSpacing(tabCount);
+    final double horizontalPadding = _calculateHorizontalPadding(tabCount);
+    final double tabSpacing = _calculateTabSpacing(tabCount);
 
     return Container(
       padding: EdgeInsets.symmetric(
@@ -34,50 +34,47 @@ class CustomTabBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children:
-            tabTitles.asMap().entries.map((e) {
-              final index = e.key;
-              final title = e.value;
-              final isSelected = index == selectedIndex;
-
-              return Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    right: index == tabCount - 1 ? 0 : tabSpacing,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      onTabSelected?.call(index);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      decoration: BoxDecoration(
-                        color:
-                            isSelected
-                                ? ColorStyle.primary100
-                                : ColorStyle.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        title,
-                        style: AppTextStyles.smallBold(
-                          color:
-                              isSelected
-                                  ? ColorStyle.white
-                                  : ColorStyle.primary80,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
+        children: _buildExpandedTabs(tabCount, tabSpacing),
       ),
     );
   }
 
-  double calculateHorizontalPadding(int tabCount) {
+  List<Expanded> _buildExpandedTabs(int tabCount, double tabSpacing) {
+    return tabTitles.asMap().entries.map((e) {
+      final index = e.key;
+      final title = e.value;
+      final isSelected = index == selectedIndex;
+
+      return Expanded(
+        child: Padding(
+          padding: EdgeInsets.only(
+            right: index == tabCount - 1 ? 0 : tabSpacing,
+          ),
+          child: GestureDetector(
+            onTap: () {
+              onTabSelected?.call(index);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                color: isSelected ? ColorStyle.primary100 : ColorStyle.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style: AppTextStyles.smallBold(
+                  color: isSelected ? ColorStyle.white : ColorStyle.primary80,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  double _calculateHorizontalPadding(int tabCount) {
     // 탭 개수가 1개 이하인 경우 예외 처리
     if (tabCount <= 1) {
       return 0; // 1개 이하일 경우 좌우 여백을 0으로 처리
@@ -90,7 +87,7 @@ class CustomTabBar extends StatelessWidget {
     return padding < 10 ? 10 : padding;
   }
 
-  double calculateTabSpacing(int tabCount) {
+  double _calculateTabSpacing(int tabCount) {
     // 탭 개수가 1개 이하인 경우 예외 처리
     if (tabCount <= 1) {
       return 0; // 1개 이하일 경우 탭 간격을 0으로 처리
