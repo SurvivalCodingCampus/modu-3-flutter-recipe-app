@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/model/user.dart';
+import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/input_field_widget.dart';
+import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/presentation/component/tabs_widget.dart';
 
 import 'component/button_widget.dart';
@@ -17,7 +19,6 @@ class ComponentTestScreen extends StatefulWidget {
 }
 
 class _ComponentTestScreenState extends State<ComponentTestScreen> {
-
   final List<Recipe> recipes = [
     Recipe(
       recipeId: 1,
@@ -25,8 +26,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
       cookTime: '20 min',
       chef: User(name: 'Chef John'),
       rate: 4.0,
-      foodImage:
-      'assets/images/recipe_images/Traditional spare ribs baked.png',
+      foodImage: 'assets/images/recipe_images/Traditional spare ribs baked.png',
     ),
   ];
   final List<Ingredient> ingredients = [
@@ -38,6 +38,8 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
   ];
 
   bool isBookmarked = false;
+  bool isRatingButtonSelected = false;
+  bool isFilterButtonSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -91,16 +93,14 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                     selectedIndex: 0,
                   ),
                 ),
-                IngredientItem(
-                  ingredient: ingredients.first
-                ),
+                IngredientItem(ingredient: ingredients.first),
                 SizedBox(
                   height: 200,
                   child: RecipeCard(
                     recipe: recipes.first,
                     isBookmarked: isBookmarked,
                     onBookmark: (name) {
-                      if(isBookmarked == true) {
+                      if (isBookmarked == true) {
                         print('$name 북마크가 해제 되었습니다');
                         setState(() {
                           isBookmarked = !isBookmarked;
@@ -113,6 +113,29 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                       }
                     },
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    RatingButton(
+                      text: '5',
+                      isSelected: isRatingButtonSelected,
+                      onClick: () {
+                        setState(() {
+                          isRatingButtonSelected = !isRatingButtonSelected;
+                        });
+                      },
+                    ),
+                    FilterButton(
+                      text: 'Text',
+                      isSelected: isFilterButtonSelected,
+                      onClick: () {
+                        setState(() {
+                          isFilterButtonSelected = !isFilterButtonSelected;
+                        });
+                      },
+                    )
+                  ],
                 ),
               ],
             ),
