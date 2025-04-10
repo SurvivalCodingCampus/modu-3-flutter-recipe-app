@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   static const String _timerIcon = "assets/icons/timer.png";
   static const String _bookmarkIcon = "assets/icons/bookmark.png";
 
@@ -11,6 +11,7 @@ class RecipeCard extends StatelessWidget {
   final String title;
   final int rating;
   final int cookTime;
+  final VoidCallback onBookmark;
 
   const RecipeCard({
     super.key,
@@ -19,7 +20,15 @@ class RecipeCard extends StatelessWidget {
     required this.title,
     required this.cookTime,
     required this.rating,
+    required this.onBookmark,
   });
+
+  @override
+  State<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+  bool isBookmarked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +39,7 @@ class RecipeCard extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(imagePath),
+              image: AssetImage(widget.imagePath),
               fit: BoxFit.cover,
             ),
             color: Colors.white,
@@ -62,7 +71,7 @@ class RecipeCard extends StatelessWidget {
     );
   }
 
-  Positioned _buildRating() {
+  Widget _buildRating() {
     return Positioned(
       top: 10,
       right: 10,
@@ -77,7 +86,7 @@ class RecipeCard extends StatelessWidget {
           children: [
             Icon(Icons.star, color: ColorStyles.rating, size: 16),
             Text(
-              '${rating.toDouble()}',
+              '${widget.rating.toDouble()}',
               style: TextStyles.smallTextRegular.copyWith(
                 color: ColorStyles.black,
               ),
@@ -88,30 +97,30 @@ class RecipeCard extends StatelessWidget {
     );
   }
 
-  Positioned _buildTitle() {
+  Widget _buildTitle() {
     return Positioned(
       left: 10,
       width: 170,
       bottom: 22,
       child: Text(
-        title,
+        widget.title,
         style: TextStyles.smallTextBold.copyWith(color: ColorStyles.white),
       ),
     );
   }
 
-  Positioned _buildAuthor() {
+  Widget _buildAuthor() {
     return Positioned(
       left: 10,
       bottom: 10,
       child: Text(
-        'By $author',
+        'By ${widget.author}',
         style: TextStyles.labelTextBold.copyWith(color: ColorStyles.white),
       ),
     );
   }
 
-  Positioned _buildCookTime() {
+  Widget _buildCookTime() {
     return Positioned(
       right: 44,
       bottom: 10,
@@ -121,10 +130,10 @@ class RecipeCard extends StatelessWidget {
           SizedBox(
             width: 17,
             height: 17,
-            child: Image.asset(_timerIcon, color: ColorStyles.gray4),
+            child: Image.asset(RecipeCard._timerIcon, color: ColorStyles.gray4),
           ),
           Text(
-            '$cookTime min',
+            '${widget.cookTime} min',
             style: TextStyles.smallTextRegular.copyWith(
               color: ColorStyles.gray4,
             ),
@@ -134,17 +143,28 @@ class RecipeCard extends StatelessWidget {
     );
   }
 
-  Positioned _buildBookMarkButton() => Positioned(
+  Widget _buildBookMarkButton() => Positioned(
     right: 10,
     bottom: 10,
-    child: Container(
-      width: 24,
-      height: 24,
-      decoration: BoxDecoration(
-        color: ColorStyles.white,
-        borderRadius: BorderRadius.circular(12),
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+          isBookmarked = !isBookmarked;
+          widget.onBookmark();
+        });
+      },
+      child: Container(
+        width: 24,
+        height: 24,
+        decoration: BoxDecoration(
+          color: isBookmarked ? ColorStyles.primary80 : ColorStyles.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Image.asset(
+          RecipeCard._bookmarkIcon,
+          color: isBookmarked ? ColorStyles.white : ColorStyles.gray4,
+        ),
       ),
-      child: Image.asset(_bookmarkIcon, color: ColorStyles.primary80),
     ),
   );
 }
