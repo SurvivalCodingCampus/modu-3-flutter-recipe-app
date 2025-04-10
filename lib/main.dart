@@ -120,6 +120,39 @@ class MyApp extends StatelessWidget {
                     ),
                   ],
                 ),
+                Column(
+                  children: [
+                    RecipeCard(
+                      cookTime: 10,
+                      title: 'spice roasted chicken  with flavored rice',
+                      imagePath: 'assets/images/card-1.png',
+                      rating: 4.0,
+                      author: 'Mark Kelvin',
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    RecipeCard(
+                      cookTime: 10,
+                      title: 'Traditional spare ribs baked',
+                      imagePath: 'assets/images/card-2.png',
+                      rating: 4.0,
+                      author: 'Mark Kelvin',
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    RecipeCard(
+                      cookTime: 10,
+                      title: 'Spicy fried rice mix chicken bali',
+                      imagePath: 'assets/images/card-3.png',
+                      rating: 4.0,
+                      author: 'Mark Kelvin',
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
