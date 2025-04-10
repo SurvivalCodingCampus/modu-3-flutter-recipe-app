@@ -6,7 +6,7 @@ class RatingDialog extends StatefulWidget {
   final String title;
   final String actionName;
   final void Function(int) onChange;
-  final Function onButtonTap;
+  final VoidCallback onButtonTap;
   const RatingDialog({
     super.key,
     required this.title,
