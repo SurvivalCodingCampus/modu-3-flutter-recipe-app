@@ -39,9 +39,12 @@ class _BigButtonState extends State<BigButton> {
         });
       },
       child: ElevatedButton(
-        onPressed: () {
-          callOnClick();
-        },
+        onPressed:
+            _enable
+                ? () {
+                  callOnClick();
+                }
+                : null,
         style:
             _enable ? ButtonStyles.elevatedButton : ButtonStyles.disableButton,
         child: Container(

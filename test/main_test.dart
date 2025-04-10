@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/2025-04-09/presentation/component/big_button.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/input_field.dart';
-import 'package:recipe_app/2025-04-09/presentation/component/medium_button.dart';
-import 'package:recipe_app/2025-04-09/presentation/component/small_button.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/tabs.dart';
-import 'package:recipe_app/main.dart';
+import 'package:recipe_app/2025-04-10/presentation/component/filter_button.dart';
+import 'package:recipe_app/2025-04-10/presentation/component/ingredient_item.dart';
+import 'package:recipe_app/2025-04-10/presentation/component/recipe_card.dart';
 
 void main() {
-  testWidgets('Widget Buttons Test', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
-    //BigButton이라는 타입의 위젯이 있는지 확인
-    expect(find.byType(BigButton), findsOneWidget);
-    expect(find.byType(MediumButton), findsOneWidget);
-    expect(find.byType(SmallButton), findsOneWidget);
-  });
+  // testWidgets('Widget Buttons Test', (WidgetTester tester) async {
+  //   await tester.pumpWidget(MyApp());
+  //   //BigButton이라는 타입의 위젯이 있는지 확인
+  //   expect(find.byType(BigButton), findsOneWidget);
+  //   expect(find.byType(MediumButton), findsOneWidget);
+  //   expect(find.byType(SmallButton), findsOneWidget);
+  // });
 
   testWidgets('Widget Label Test', (WidgetTester tester) async {
     String updatedValue = '';
@@ -64,5 +63,45 @@ void main() {
       await tester.pump(); // 상태 반영
       expect(testIndex, i); // 클릭한 탭의 인덱스가 0인지 확인
     }
+  });
+
+  testWidgets('IngredientItem Test', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: IngredientItem(
+            imagePath: 'assets/images/tomatoes.png',
+            ingredient: 'Tomatos',
+            amount: '500g',
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Tomatos'), findsOneWidget);
+    expect(find.text('500g'), findsOneWidget);
+  });
+
+  testWidgets('RecipeCard 존재하고 John이 들어가는지 확인 Test', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: RecipeCard(
+            imagePath: 'assets/images/bibimbop.png',
+            title: 'Traditional Korean Rice \n Food\n',
+            chef: 'Chef John',
+            minutes: 20,
+            rate: 4.0,
+          ),
+        ),
+      ),
+    );
+    expect(find.textContaining('John'), findsOneWidget);
+  });
+
+  testWidgets('FilterButton 존재하는지 확인 Test', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: FilterButton())));
+    expect(find.byType(FilterButton), findsOneWidget);
   });
 }

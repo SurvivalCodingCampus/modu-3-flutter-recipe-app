@@ -38,7 +38,7 @@ class _RatingButtonState extends State<RatingButton> {
               ? ButtonStyles2.selectedButton
               : ButtonStyles2.unSelectedButton,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(

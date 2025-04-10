@@ -22,7 +22,6 @@ class _RatingDialogState extends State<RatingDialog> {
           //알람창 실행할때마다 별 0으로 초기화
           _stars = 0;
         });
-
         showDialog(
           context: context,
           builder:
@@ -30,6 +29,7 @@ class _RatingDialogState extends State<RatingDialog> {
                 title: Center(
                   child: Text('Rate recipe', style: TextStyles2.rateRecipeText),
                 ),
+                //AlertDialog에서도 상태변화가 생기려면 StatefulBuilder 사용해주기
                 content: StatefulBuilder(
                   builder:
                       (context, setStateDialog) => Column(

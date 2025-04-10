@@ -39,7 +39,12 @@ class _MediumButtonState extends State<MediumButton> {
         });
       },
       child: ElevatedButton(
-        onPressed: callOnClick,
+        onPressed:
+            _enabled
+                ? () {
+                  callOnClick();
+                }
+                : null,
         style:
             _enabled ? ButtonStyles.elevatedButton : ButtonStyles.disableButton,
         child: Container(

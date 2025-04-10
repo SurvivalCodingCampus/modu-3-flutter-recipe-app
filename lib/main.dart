@@ -43,11 +43,31 @@ class MyApp extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 RecipeCard(
-                  imagePath: '../assets/images/bibimbop.png',
+                  imagePath: 'assets/images/bibimbop.png',
                   title: 'Traditional Korean Rice \n Food\n',
                   chef: 'Chef John',
                   minutes: 20,
                   rate: 4.0,
+                ),
+                SizedBox(height: 10),
+                RecipeCard(
+                  imagePath: '../assets/images/jjigae.png',
+                  title: 'Traditional Korean Stew \n Food\n',
+                  chef: 'Chef Kim',
+                  minutes: 15,
+                  rate: 4.5,
+                ),
+                SizedBox(height: 16),
+                IngredientItem(
+                  imagePath: 'assets/images/tomatoes.png',
+                  ingredient: 'Tomatos',
+                  amount: '500g',
+                ),
+                SizedBox(height: 10),
+                IngredientItem(
+                  imagePath: '../assets/images/carrot.png',
+                  ingredient: 'Carrots',
+                  amount: '3Kg',
                 ),
                 SizedBox(height: 16),
                 RatingButton(),
@@ -88,12 +108,6 @@ class MyApp extends StatelessWidget {
                   onValueChange: (int) {
                     print('$int');
                   },
-                ),
-                SizedBox(height: 16),
-                IngredientItem(
-                  imagePath: '../assets/images/tomatoes.png',
-                  ingredient: 'Tomatos',
-                  amount: '500g',
                 ),
               ],
             ),

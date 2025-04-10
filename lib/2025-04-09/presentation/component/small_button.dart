@@ -38,7 +38,12 @@ class _SmallButtonState extends State<SmallButton> {
         });
       },
       child: ElevatedButton(
-        onPressed: callOnClick,
+        onPressed:
+            _enable
+                ? () {
+                  callOnClick();
+                }
+                : null,
         style:
             _enable ? ButtonStyles.elevatedButton : ButtonStyles.disableButton,
         child: Container(
