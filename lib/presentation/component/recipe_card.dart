@@ -147,6 +147,7 @@ class _RecipeCardState extends State<RecipeCard> {
     right: 10,
     bottom: 10,
     child: GestureDetector(
+      key: Key('bookmark_button'),
       onTap: () {
         setState(() {
           isBookmarked = !isBookmarked;
