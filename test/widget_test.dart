@@ -4,27 +4,69 @@
 // utility in the flutter_test package. For example, you can send tap and scroll
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:recipe_app/main.dart';
+import 'package:recipe_app/presentation/component/big_button.dart';
+import 'package:recipe_app/presentation/component/medium_Button.dart';
+import 'package:recipe_app/presentation/component/small_button.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  int tapCount = 0;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('BigButton test', (WidgetTester tester) async {
+    tapCount = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: BigButton(lable: 'BigButton', onClick: () {
+          tapCount++;
+        }),
+      )
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    final Finder BigButtonFinder = find.text('BigButton');
+    expect(BigButtonFinder, findsOneWidget);
+
+    await tester.tap(BigButtonFinder);
     await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(tapCount, 1);
   });
+
+  testWidgets('MediumButton test', (WidgetTester tester) async {
+    tapCount = 0;
+    await tester.pumpWidget(
+        MaterialApp(
+          home: MediumButton(lable: 'MediumButton', onClick: () {
+            tapCount++;
+          }),
+        )
+    );
+
+    final Finder MediumButtonFinder = find.text('MediumButton');
+    expect(MediumButtonFinder, findsOneWidget);
+
+    await tester.tap(MediumButtonFinder);
+    await tester.pump();
+    expect(tapCount, 1);
+  });
+
+  testWidgets('SmallButton test', (WidgetTester tester) async {
+    tapCount = 0;
+    await tester.pumpWidget(
+        MaterialApp(
+          home: SmallButton(lable: 'SmallButton', onClick: () {
+            tapCount++;
+          }),
+        )
+    );
+
+    final Finder SmallButtonFinder = find.text('SmallButton');
+    expect(SmallButtonFinder, findsOneWidget);
+
+    await tester.tap(SmallButtonFinder);
+    await tester.pump();
+    expect(tapCount, 1);
+  });
+
+
 }
