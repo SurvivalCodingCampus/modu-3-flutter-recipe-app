@@ -37,6 +37,8 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
     ),
   ];
 
+  int tabSelectedIndex = 0;
+
   bool isBookmarked = false;
   bool isRatingButtonSelected = false;
   bool isFilterButtonSelected = false;
@@ -88,9 +90,12 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                   child: TabsWidget(
                     onValueChange: (index) {
                       print('index가 $index로 바뀌었습니다.');
+                      setState(() {
+                        tabSelectedIndex = index;
+                      });
                     },
                     labels: ['Label0', 'Label1'],
-                    selectedIndex: 0,
+                    selectedIndex: tabSelectedIndex,
                   ),
                 ),
                 IngredientItem(ingredient: ingredients.first),
