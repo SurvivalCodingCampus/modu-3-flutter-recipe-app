@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/base/widgets/textfield/app_textfield.dart';
+import 'package:recipe_app/presentation/widgets/base/textfield/app_textfield.dart';
 
 void main() {
   testWidgets('text field widget test', (tester) async {

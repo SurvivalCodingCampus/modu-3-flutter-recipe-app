@@ -3,7 +3,7 @@ import 'package:recipe_app/core/enum/buttom_enum.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
 
-class AppButton extends StatelessWidget {
+class AppButton extends StatefulWidget {
   // Todo
   // TextStyle 설정
   // --- text style ---
@@ -15,6 +15,7 @@ class AppButton extends StatelessWidget {
   // size
   final double? width;
   final double? height;
+  final Color? bgColor;
 
   const AppButton({
     required this.text,
@@ -25,20 +26,38 @@ class AppButton extends StatelessWidget {
     this.width,
     this.height,
     required this.onClick,
+    this.bgColor,
     super.key,
   });
 
   @override
+  State<AppButton> createState() => _AppButtonState();
+}
+
+class _AppButtonState extends State<AppButton> {
+  bool isDisable = false;
+
+  @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTapDown: (details) {
+        setState(() {
+          isDisable = true;
+        });
+      },
+      onTapUp: (details) {
+        setState(() {
+          isDisable = false;
+        });
+      },
+      onTap: widget.onClick,
       borderRadius: BorderRadius.circular(10),
-      onTap: onClick,
       child: Container(
-        width: width ?? _width(),
-        margin: EdgeInsets.symmetric(horizontal: horizontalMargin),
+        width: widget.width ?? _width(),
+        margin: EdgeInsets.symmetric(horizontal: widget.horizontalMargin),
         padding: EdgeInsets.symmetric(vertical: _verticalPadding()),
         decoration: BoxDecoration(
-          color: AppColor.primary100,
+          color: bgColor(),
           borderRadius: BorderRadius.circular(10),
         ),
         child: _child(),
@@ -47,7 +66,7 @@ class AppButton extends StatelessWidget {
   }
 
   double _verticalPadding() {
-    switch (type) {
+    switch (widget.type) {
       case ButtonType.big:
         return 18;
       case ButtonType.medium:
@@ -58,9 +77,9 @@ class AppButton extends StatelessWidget {
   }
 
   double _width() {
-    switch (type) {
+    switch (widget.type) {
       case ButtonType.big:
-        return 315;
+        return double.infinity;
       case ButtonType.medium:
         return 243;
       case ButtonType.small:
@@ -69,21 +88,24 @@ class AppButton extends StatelessWidget {
   }
 
   TextStyle _textStyle() {
-    switch (type) {
+    switch (widget.type) {
       case ButtonType.big || ButtonType.medium:
-        return AppTextstyle.normalBold;
+        return AppTextStyle.normalBold;
       case ButtonType.small:
-        return AppTextstyle.smallBold;
+        return AppTextStyle.smallBold;
     }
   }
 
   Widget _child() {
-    switch (type) {
+    switch (widget.type) {
       case ButtonType.big || ButtonType.medium:
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(text, style: _textStyle().copyWith(color: AppColor.white)),
+            Text(
+              widget.text,
+              style: _textStyle().copyWith(color: AppColor.white),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 24),
               child: Icon(Icons.arrow_forward, color: AppColor.white),
@@ -93,10 +115,20 @@ class AppButton extends StatelessWidget {
       case ButtonType.small:
         return Center(
           child: Text(
-            text,
+            widget.text,
             style: _textStyle().copyWith(color: AppColor.white),
           ),
         );
     }
+  }
+
+  Color bgColor() {
+    if (isDisable || widget.onClick == null) {
+      return AppColor.grey4;
+    }
+    if (widget.bgColor != null) {
+      return widget.bgColor!;
+    }
+    return AppColor.primary100;
   }
 }

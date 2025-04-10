@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-abstract class AppTextstyle {
+abstract class AppTextStyle {
   // base
   static TextStyle baseTextStyle(
     double size,
@@ -38,4 +38,6 @@ abstract class AppTextstyle {
   static TextStyle normalRegular = regularStyle(16, 24);
   static TextStyle smallRegular = regularStyle(14, 21);
   static TextStyle smallerRegular = regularStyle(11, 17);
+
+  static TextStyle smallLabel = regularStyle(8, 12);
 }

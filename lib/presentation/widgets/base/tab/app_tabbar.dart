@@ -11,10 +11,10 @@ class AppTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return TabBar(
       onTap: onValueChange,
-      unselectedLabelStyle: AppTextstyle.smallBold.copyWith(
+      unselectedLabelStyle: AppTextStyle.smallBold.copyWith(
         color: AppColor.primary80,
       ),
-      labelStyle: AppTextstyle.smallBold.copyWith(color: AppColor.white),
+      labelStyle: AppTextStyle.smallBold.copyWith(color: AppColor.white),
       // 하단 선 제거
       dividerColor: Colors.transparent,
       padding: const EdgeInsets.symmetric(horizontal: 8),
