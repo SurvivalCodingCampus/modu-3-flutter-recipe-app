@@ -14,38 +14,29 @@ class Tabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double paddingValue = 12;
-    final totalWidth = MediaQuery.of(context).size.width - paddingValue * 2;
-    final tabWidth = totalWidth / labels.length;
+    // final double paddingValue = 12;
+    // final totalWidth = MediaQuery.of(context).size.width - paddingValue * 2;
+    // final tabWidth = totalWidth / labels.length;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: paddingValue),
-      child: SizedBox(
-        height: 33,
-        child: Row(
-          children: List.generate(labels.length, (index) {
-            final label = labels[index];
-            final isSelected = index == selectedIndex;
-            final tabWidget = GestureDetector(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Row(
+        children: List.generate(labels.length * 2 - 1, (i) {
+          if (i.isOdd) return const SizedBox(width: 8); // 간격 추가
+
+          final index = i ~/ 2;
+          final label = labels[index];
+          final isSelected = index == selectedIndex;
+
+          return Expanded(
+            child: GestureDetector(
               onTap: () => onTap(index),
               child:
                   isSelected
-                      ? _SelectedTab(label: label, width: tabWidth)
-                      : _UnSelectedTab(label: label, width: tabWidth),
-            );
-
-            // 마지막 아이템이 아니면 간격 추가
-            if (index < labels.length - 1) {
-              return Row(
-                children: [
-                  tabWidget,
-                  const SizedBox(width: 8), // ← 여기서 간격 조정
-                ],
-              );
-            } else {
-              return tabWidget;
-            }
-          }),
-        ),
+                      ? _SelectedTab(label: label)
+                      : _UnSelectedTab(label: label),
+            ),
+          );
+        }),
       ),
     );
   }
@@ -53,13 +44,12 @@ class Tabs extends StatelessWidget {
 
 class _SelectedTab extends StatelessWidget {
   final String label;
-  final double width;
-  const _SelectedTab({required this.label, required this.width});
+
+  const _SelectedTab({required this.label});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
       height: 33,
       decoration: BoxDecoration(
         color: ColorStyles.primary100,
@@ -77,13 +67,12 @@ class _SelectedTab extends StatelessWidget {
 
 class _UnSelectedTab extends StatelessWidget {
   final String label;
-  final double width;
-  const _UnSelectedTab({required this.label, required this.width});
+
+  const _UnSelectedTab({required this.label});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
       height: 33,
       decoration: BoxDecoration(
         color: ColorStyles.white,
