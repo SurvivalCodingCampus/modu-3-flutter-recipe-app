@@ -16,6 +16,11 @@ class InputField extends StatelessWidget {
     required this.onValueChange,
   });
 
+  OutlineInputBorder _border(Color color) => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(color: color, width: 1.5),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,15 +33,9 @@ class InputField extends StatelessWidget {
         TextField(
           onChanged: onValueChange,
           decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: ColorStyles.gray4, width: 1.5),
-            ),
+            border: _border(ColorStyles.gray4),
             focusColor: ColorStyles.primary80,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: ColorStyles.primary80, width: 1.5),
-            ),
+            focusedBorder: _border(ColorStyles.primary80),
             hintStyle: TextStyles.smallTextRegular.copyWith(
               color: ColorStyles.gray4,
             ),
