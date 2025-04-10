@@ -4,7 +4,6 @@ import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
 class Tabs extends StatelessWidget {
-  final String? label;
   final List<String> labels;
   final int selectedIndex;
   final void Function(int) onChanged;
@@ -14,7 +13,6 @@ class Tabs extends StatelessWidget {
     required this.labels,
     required this.selectedIndex,
     required this.onChanged,
-    this.label,
   });
 
   @override
