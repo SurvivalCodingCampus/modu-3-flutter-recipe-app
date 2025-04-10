@@ -15,10 +15,10 @@ class SmallButton extends StatefulWidget {
   });
 
   @override
-  State<SmallButton> createState() => _BigButtonState();
+  State<SmallButton> createState() => _SmallButtonState();
 }
 
-class _BigButtonState extends State<SmallButton> {
+class _SmallButtonState extends State<SmallButton> {
   final Duration animaitionDuration = Duration(milliseconds: 100);
 
   bool isTapDown = false;

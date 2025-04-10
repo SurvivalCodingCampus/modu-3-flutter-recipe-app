@@ -20,7 +20,7 @@ abstract class Recipe with _$Recipe {
     @Default(Media()) final Media media,
     @Default([]) final List<String> recipeStep,
     @Default('') final String cookingTime,
-    @Default([]) final List<Category> categoryList,
+    @Default([]) final List<Categorys> categoryList,
     @Default(0) final double rate,
   }) = _Recipe;
 

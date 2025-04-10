@@ -11,7 +11,7 @@ abstract class Filter with _$Filter {
   const factory Filter({
     @Default(Time.all) final Time time,
     @Default(Rate.star1) final Rate rate,
-    @Default(Category.all) final Category category,
+    @Default(Categorys.all) final Categorys category,
   }) = _Filter;
 
   factory Filter.fromJson(Map<String, dynamic> json) => _$FilterFromJson(json);

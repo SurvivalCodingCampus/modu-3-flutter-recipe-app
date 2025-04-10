@@ -10,13 +10,14 @@ _Filter _$FilterFromJson(Map<String, dynamic> json) => _Filter(
   time: $enumDecodeNullable(_$TimeEnumMap, json['time']) ?? Time.all,
   rate: $enumDecodeNullable(_$RateEnumMap, json['rate']) ?? Rate.star1,
   category:
-      $enumDecodeNullable(_$CategoryEnumMap, json['category']) ?? Category.all,
+      $enumDecodeNullable(_$CategorysEnumMap, json['category']) ??
+      Categorys.all,
 );
 
 Map<String, dynamic> _$FilterToJson(_Filter instance) => <String, dynamic>{
   'time': _$TimeEnumMap[instance.time]!,
   'rate': _$RateEnumMap[instance.rate]!,
-  'category': _$CategoryEnumMap[instance.category]!,
+  'category': _$CategorysEnumMap[instance.category]!,
 };
 
 const _$TimeEnumMap = {
@@ -34,15 +35,15 @@ const _$RateEnumMap = {
   Rate.star5: 'star5',
 };
 
-const _$CategoryEnumMap = {
-  Category.all: 'all',
-  Category.cereal: 'cereal',
-  Category.vegetables: 'vegetables',
-  Category.dinner: 'dinner',
-  Category.chinese: 'chinese',
-  Category.localDish: 'localDish',
-  Category.fruit: 'fruit',
-  Category.breakfast: 'breakfast',
-  Category.spanish: 'spanish',
-  Category.lunch: 'lunch',
+const _$CategorysEnumMap = {
+  Categorys.all: 'all',
+  Categorys.cereal: 'cereal',
+  Categorys.vegetables: 'vegetables',
+  Categorys.dinner: 'dinner',
+  Categorys.chinese: 'chinese',
+  Categorys.localDish: 'localDish',
+  Categorys.fruit: 'fruit',
+  Categorys.breakfast: 'breakfast',
+  Categorys.spanish: 'spanish',
+  Categorys.lunch: 'lunch',
 };

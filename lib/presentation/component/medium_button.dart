@@ -17,10 +17,10 @@ class MediumButton extends StatefulWidget {
   });
 
   @override
-  State<MediumButton> createState() => _BigButtonState();
+  State<MediumButton> createState() => _MediumButtonState();
 }
 
-class _BigButtonState extends State<MediumButton> {
+class _MediumButtonState extends State<MediumButton> {
   final Duration animaitionDuration = Duration(milliseconds: 100);
 
   bool isTapDown = false;

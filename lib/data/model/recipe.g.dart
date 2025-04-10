@@ -38,7 +38,7 @@ _Recipe _$RecipeFromJson(Map<String, dynamic> json) => _Recipe(
   cookingTime: json['cookingTime'] as String? ?? '',
   categoryList:
       (json['categoryList'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$CategoryEnumMap, e))
+          ?.map((e) => $enumDecode(_$CategorysEnumMap, e))
           .toList() ??
       const [],
   rate: (json['rate'] as num?)?.toDouble() ?? 0,
@@ -55,19 +55,19 @@ Map<String, dynamic> _$RecipeToJson(_Recipe instance) => <String, dynamic>{
   'recipeStep': instance.recipeStep,
   'cookingTime': instance.cookingTime,
   'categoryList':
-      instance.categoryList.map((e) => _$CategoryEnumMap[e]!).toList(),
+      instance.categoryList.map((e) => _$CategorysEnumMap[e]!).toList(),
   'rate': instance.rate,
 };
 
-const _$CategoryEnumMap = {
-  Category.all: 'all',
-  Category.cereal: 'cereal',
-  Category.vegetables: 'vegetables',
-  Category.dinner: 'dinner',
-  Category.chinese: 'chinese',
-  Category.localDish: 'localDish',
-  Category.fruit: 'fruit',
-  Category.breakfast: 'breakfast',
-  Category.spanish: 'spanish',
-  Category.lunch: 'lunch',
+const _$CategorysEnumMap = {
+  Categorys.all: 'all',
+  Categorys.cereal: 'cereal',
+  Categorys.vegetables: 'vegetables',
+  Categorys.dinner: 'dinner',
+  Categorys.chinese: 'chinese',
+  Categorys.localDish: 'localDish',
+  Categorys.fruit: 'fruit',
+  Categorys.breakfast: 'breakfast',
+  Categorys.spanish: 'spanish',
+  Categorys.lunch: 'lunch',
 };

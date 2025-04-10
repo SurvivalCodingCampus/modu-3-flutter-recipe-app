@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Recipe {
 
- String get recipeId; String get title; List<Ingredient> get ingridients; Review get review; User get user; DateTime? get createdAt; Media get media; List<String> get recipeStep; String get cookingTime; List<Category> get categoryList; double get rate;
+ String get recipeId; String get title; List<Ingredient> get ingridients; Review get review; User get user; DateTime? get createdAt; Media get media; List<String> get recipeStep; String get cookingTime; List<Categorys> get categoryList; double get rate;
 /// Create a copy of Recipe
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $RecipeCopyWith<$Res>  {
   factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) _then) = _$RecipeCopyWithImpl;
 @useResult
 $Res call({
- String recipeId, String title, List<Ingredient> ingridients, Review review, User user, DateTime? createdAt, Media media, List<String> recipeStep, String cookingTime, List<Category> categoryList, double rate
+ String recipeId, String title, List<Ingredient> ingridients, Review review, User user, DateTime? createdAt, Media media, List<String> recipeStep, String cookingTime, List<Categorys> categoryList, double rate
 });
 
 
@@ -78,7 +78,7 @@ as DateTime?,media: null == media ? _self.media : media // ignore: cast_nullable
 as Media,recipeStep: null == recipeStep ? _self.recipeStep : recipeStep // ignore: cast_nullable_to_non_nullable
 as List<String>,cookingTime: null == cookingTime ? _self.cookingTime : cookingTime // ignore: cast_nullable_to_non_nullable
 as String,categoryList: null == categoryList ? _self.categoryList : categoryList // ignore: cast_nullable_to_non_nullable
-as List<Category>,rate: null == rate ? _self.rate : rate // ignore: cast_nullable_to_non_nullable
+as List<Categorys>,rate: null == rate ? _self.rate : rate // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }
@@ -117,7 +117,7 @@ $MediaCopyWith<$Res> get media {
 @JsonSerializable()
 
 class _Recipe implements Recipe {
-  const _Recipe({this.recipeId = '', this.title = '', final  List<Ingredient> ingridients = const [], this.review = const Review(), this.user = const User(), this.createdAt = null, this.media = const Media(), final  List<String> recipeStep = const [], this.cookingTime = '', final  List<Category> categoryList = const [], this.rate = 0}): _ingridients = ingridients,_recipeStep = recipeStep,_categoryList = categoryList;
+  const _Recipe({this.recipeId = '', this.title = '', final  List<Ingredient> ingridients = const [], this.review = const Review(), this.user = const User(), this.createdAt = null, this.media = const Media(), final  List<String> recipeStep = const [], this.cookingTime = '', final  List<Categorys> categoryList = const [], this.rate = 0}): _ingridients = ingridients,_recipeStep = recipeStep,_categoryList = categoryList;
   factory _Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 
 @override@JsonKey() final  String recipeId;
@@ -141,8 +141,8 @@ class _Recipe implements Recipe {
 }
 
 @override@JsonKey() final  String cookingTime;
- final  List<Category> _categoryList;
-@override@JsonKey() List<Category> get categoryList {
+ final  List<Categorys> _categoryList;
+@override@JsonKey() List<Categorys> get categoryList {
   if (_categoryList is EqualUnmodifiableListView) return _categoryList;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_categoryList);
@@ -183,7 +183,7 @@ abstract mixin class _$RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
   factory _$RecipeCopyWith(_Recipe value, $Res Function(_Recipe) _then) = __$RecipeCopyWithImpl;
 @override @useResult
 $Res call({
- String recipeId, String title, List<Ingredient> ingridients, Review review, User user, DateTime? createdAt, Media media, List<String> recipeStep, String cookingTime, List<Category> categoryList, double rate
+ String recipeId, String title, List<Ingredient> ingridients, Review review, User user, DateTime? createdAt, Media media, List<String> recipeStep, String cookingTime, List<Categorys> categoryList, double rate
 });
 
 
@@ -212,7 +212,7 @@ as DateTime?,media: null == media ? _self.media : media // ignore: cast_nullable
 as Media,recipeStep: null == recipeStep ? _self._recipeStep : recipeStep // ignore: cast_nullable_to_non_nullable
 as List<String>,cookingTime: null == cookingTime ? _self.cookingTime : cookingTime // ignore: cast_nullable_to_non_nullable
 as String,categoryList: null == categoryList ? _self._categoryList : categoryList // ignore: cast_nullable_to_non_nullable
-as List<Category>,rate: null == rate ? _self.rate : rate // ignore: cast_nullable_to_non_nullable
+as List<Categorys>,rate: null == rate ? _self.rate : rate // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }

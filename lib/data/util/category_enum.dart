@@ -1,4 +1,4 @@
-enum Category {
+enum Categorys {
   all,
   cereal,
   vegetables,

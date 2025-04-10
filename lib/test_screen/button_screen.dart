@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/data/util/category_enum.dart';
+import 'package:recipe_app/data/util/time_enum.dart';
 import 'package:recipe_app/presentation/component/big_button.dart';
+import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
+import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/ui/color_style.dart';
+import 'package:recipe_app/ui/text_style.dart';
 
 class ButtonScreen extends StatelessWidget {
   const ButtonScreen({super.key});
@@ -19,6 +24,11 @@ class ButtonScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 24),
+                  Text(
+                    "Big, Medium, Small Buttons",
+                    style: TextStyles.largeTextRegular,
+                  ),
+                  SizedBox(height: 12),
                   BigButton(
                     name: 'Big Button',
                     color: ColorStyles.primary100,
@@ -44,6 +54,54 @@ class ButtonScreen extends StatelessWidget {
                     onClick: () {
                       print('나는 스몰버튼');
                     },
+                  ),
+                  SizedBox(height: 24),
+                  Text("Rating Button", style: TextStyles.largeTextRegular),
+                  SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(5, (index) {
+                      return RatingButton(
+                        rate: '${index + 1}',
+                        color: ColorStyles.primary100,
+                        ontap: () {
+                          print('레이팅 ${index + 1} 버튼 클릭');
+                        },
+                      );
+                    }),
+                  ),
+                  SizedBox(height: 24),
+                  Text("Filter Button", style: TextStyles.largeTextRegular),
+                  SizedBox(height: 12),
+                  Text('Time'),
+                  SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children:
+                        Time.values
+                            .map(
+                              (e) => FilterButton(
+                                value: e,
+                                color: ColorStyles.primary100,
+                                ontap: () {},
+                              ),
+                            )
+                            .toList(),
+                  ),
+                  SizedBox(height: 12),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children:
+                        Categorys.values
+                            .map(
+                              (e) => FilterButton(
+                                value: e,
+                                color: ColorStyles.primary100,
+                                ontap: () {},
+                              ),
+                            )
+                            .toList(),
                   ),
                 ],
               ),

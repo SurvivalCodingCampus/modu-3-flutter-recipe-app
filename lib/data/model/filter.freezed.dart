@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Filter {
 
- Time get time; Rate get rate; Category get category;
+ Time get time; Rate get rate; Categorys get category;
 /// Create a copy of Filter
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $FilterCopyWith<$Res>  {
   factory $FilterCopyWith(Filter value, $Res Function(Filter) _then) = _$FilterCopyWithImpl;
 @useResult
 $Res call({
- Time time, Rate rate, Category category
+ Time time, Rate rate, Categorys category
 });
 
 
@@ -71,7 +71,7 @@ class _$FilterCopyWithImpl<$Res>
 time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
 as Time,rate: null == rate ? _self.rate : rate // ignore: cast_nullable_to_non_nullable
 as Rate,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as Category,
+as Categorys,
   ));
 }
 
@@ -82,12 +82,12 @@ as Category,
 @JsonSerializable()
 
 class _Filter implements Filter {
-  const _Filter({this.time = Time.all, this.rate = Rate.star1, this.category = Category.all});
+  const _Filter({this.time = Time.all, this.rate = Rate.star1, this.category = Categorys.all});
   factory _Filter.fromJson(Map<String, dynamic> json) => _$FilterFromJson(json);
 
 @override@JsonKey() final  Time time;
 @override@JsonKey() final  Rate rate;
-@override@JsonKey() final  Category category;
+@override@JsonKey() final  Categorys category;
 
 /// Create a copy of Filter
 /// with the given fields replaced by the non-null parameter values.
@@ -122,7 +122,7 @@ abstract mixin class _$FilterCopyWith<$Res> implements $FilterCopyWith<$Res> {
   factory _$FilterCopyWith(_Filter value, $Res Function(_Filter) _then) = __$FilterCopyWithImpl;
 @override @useResult
 $Res call({
- Time time, Rate rate, Category category
+ Time time, Rate rate, Categorys category
 });
 
 
@@ -144,7 +144,7 @@ class __$FilterCopyWithImpl<$Res>
 time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
 as Time,rate: null == rate ? _self.rate : rate // ignore: cast_nullable_to_non_nullable
 as Rate,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as Category,
+as Categorys,
   ));
 }
 
