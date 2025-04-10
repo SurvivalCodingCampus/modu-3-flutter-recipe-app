@@ -35,8 +35,10 @@ class InputField extends StatelessWidget {
             focusNode: focusNode,
             enableInteractiveSelection: false,
             onSubmitted: (value) {
-              print('onSubmitted');
               onValueChange(value);
+            },
+            onTapOutside: (event) {
+              onValueChange(controller.text);
             },
             decoration: InputDecoration(
               hintText: isFocused || hasText ? '' : 'Placeholder',
