@@ -8,7 +8,8 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: Scaffold(body: CustomInputField(labelString: '아이디'),),
+        home: Scaffold(body: CustomInputField(labelString: '아이디',focusNode:
+        focusNode,),),
       )
     );
 
@@ -16,19 +17,18 @@ void main() {
 
     expect(labelTextFider, findsOneWidget);
 
-    // 초기 상태 확인
+
     expect(focusNode.hasFocus, false);
 
-    // 필드에 포커스 주기
+
     focusNode.requestFocus();
     await tester.pump();
 
-    // 포커스 상태 확인
+
     expect(focusNode.hasFocus, true);
 
-    // 텍스트 입력 테스트
     await tester.enterText(find.byType(TextField), '테스트');
-    
+
     expect(find.text('테스트'), findsOneWidget);
   });
 }

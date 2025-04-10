@@ -5,8 +5,9 @@ import 'package:recipe_app/presention/common/ui/text_styles.dart';
 
 class CustomInputField extends StatelessWidget {
   final String labelString;
+  final FocusNode? focusNode;
 
-  CustomInputField({required this.labelString});
+  CustomInputField({required this.labelString, this.focusNode});
 
   final TextEditingController textEditingController = TextEditingController();
 
