@@ -57,12 +57,13 @@ class _SmallButtonState extends State<SmallButton> {
 
           children: [
             Container(
-              height: 24,
+              constraints: BoxConstraints(minHeight: 24),
               width: 114,
               alignment: Alignment.center,
               child: Text(
                 widget.name,
                 style: TextStyles.normalTextBold.copyWith(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
