@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recipe_app/presentation/common/component/filter_button.dart';
 import 'package:recipe_app/presentation/common/component/ingredient_item.dart';
+import 'package:recipe_app/presentation/common/component/rating_button.dart';
 import 'package:recipe_app/presentation/common/component/recipe_card.dart';
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
@@ -24,10 +26,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
+
   List<String> labels = ["Label1", "Label2"];
 
   final List<Map<String, dynamic>> sampleImageList = [
@@ -66,6 +74,9 @@ class HomePage extends StatelessWidget {
       'imageType': ImageType.path,
     },
   ];
+
+  bool filterButtonSelected = false;
+  bool ratingButtonSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +128,54 @@ class HomePage extends StatelessWidget {
                               imageType: image["imageType"],
                             );
                           }).toList(),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: FilterButton(
+                            text: 'Text',
+                            isSelected: filterButtonSelected,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: FilterButton(
+                            text: 'Text',
+                            isSelected: !filterButtonSelected,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: RatingButton(
+                            text: 'Text',
+                            isSelected: ratingButtonSelected,
+                            icon: Icons.star,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: RatingButton(
+                            text: 'Text',
+                            isSelected: !ratingButtonSelected,
+                            icon: Icons.star,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
