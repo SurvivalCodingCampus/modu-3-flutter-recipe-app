@@ -77,7 +77,9 @@ class _RatingDialogButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onClick();
+        if(selectedRate >= 1) {
+          onClick();
+        }
       },
       child: Container(
         width: ButtonSize.small.width,
