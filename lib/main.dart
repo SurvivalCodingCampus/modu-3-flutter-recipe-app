@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recipe_app/presentation/common/component/color_change_text_button.dart';
 import 'package:recipe_app/presentation/common/component/filter_button.dart';
 import 'package:recipe_app/presentation/common/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/common/component/rating_button.dart';
@@ -77,6 +78,7 @@ class _HomePageState extends State<HomePage> {
 
   bool filterButtonSelected = false;
   bool ratingButtonSelected = false;
+  int tabActiveInt = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -141,9 +143,7 @@ class _HomePageState extends State<HomePage> {
                             isSelected: filterButtonSelected,
                           ),
                         ),
-                        SizedBox(
-                          width: 20,
-                        ),
+                        SizedBox(width: 20),
                         Expanded(
                           child: FilterButton(
                             text: 'Text',
@@ -165,9 +165,7 @@ class _HomePageState extends State<HomePage> {
                             icon: Icons.star,
                           ),
                         ),
-                        SizedBox(
-                          width: 20,
-                        ),
+                        SizedBox(width: 20),
                         Expanded(
                           child: RatingButton(
                             text: 'Text',
@@ -176,6 +174,37 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                    child: ColorChangeTextButton(
+                      buttonHeight: 60,
+                      buttonWidth: double.infinity,
+                      buttonText: 'Button',
+                      buttonColor:
+                          tabActiveInt == 0
+                              ? ColorStyle.primary100
+                              : ColorStyle.gray4,
+                      textColor:  ColorStyle.white,
+                      tabActive: tabActiveInt,
+                      buttonRadius: 10,
+                      onTapDown: (details) {
+                        setState(() {
+                          tabActiveInt = 1;
+                        });
+                      },
+                      onTapUp: (details) {
+                        setState(() {
+                          tabActiveInt = 0;
+                        });
+                      },
+                      onTapCancel: () {
+                        setState(() {
+                          tabActiveInt = 0;
+                        });
+                      },
                     ),
                   ),
                 ],
