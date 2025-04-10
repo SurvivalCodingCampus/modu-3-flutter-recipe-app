@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/components.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/ui/color_styles.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Recipe App',
+      theme: ThemeData(
+        scaffoldBackgroundColor: ColorStyles.white,
+        appBarTheme: AppBarTheme(backgroundColor: ColorStyles.white),
+      ),
       home: Scaffold(
-        appBar: AppBar(title: Text('Recipe App')),
+        appBar: AppBar(title: const Text('Recipe App')),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -25,7 +29,6 @@ class MyApp extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Buttons', style: TextStyles.headerTextBold),
                     Column(
                       spacing: 16,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +61,6 @@ class MyApp extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('InputField', style: TextStyles.headerTextBold),
                     Column(
                       spacing: 10,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +77,6 @@ class MyApp extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('MultiTab', style: TextStyles.headerTextBold),
                     Column(
                       spacing: 16,
                       crossAxisAlignment: CrossAxisAlignment.start,
