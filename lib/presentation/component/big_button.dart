@@ -1,21 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:recipe_app/ui/ui.dart';
 
 class BigButton extends StatefulWidget {
   final String text;
-  final bool isPressed;
-  final Function(TapDownDetails details)? onTapDown;
-  final GestureTapUpCallback? onTapUp;
-  final VoidCallback? onTapCancel;
+  final VoidCallback? onTap;
 
-  const BigButton({
-    super.key,
-    required this.text,
-    this.onTapDown,
-    this.onTapUp,
-    this.onTapCancel,
-    required this.isPressed,
-  });
+  const BigButton({Key? key, required this.text, this.onTap}) : super(key: key);
 
   @override
   State<BigButton> createState() => _BigButtonState();
@@ -27,14 +19,15 @@ class _BigButtonState extends State<BigButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: widget.onTapDown,
-      onTapUp: widget.onTapUp,
-      onTapCancel: widget.onTapCancel,
+      onTapDown: (details) => setState(() => isPressed = true),
+      onTapUp: (details) => setState(() => isPressed = false),
+      onTapCancel: () => setState(() => isPressed = false),
+      onTap: widget.onTap,
       child: Container(
         width: double.infinity,
         height: 60,
         decoration: BoxDecoration(
-          color: !widget.isPressed ? ColorStyles.primary100 : ColorStyles.gray4,
+          color: !isPressed ? ColorStyles.primary100 : ColorStyles.gray4,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(

@@ -40,8 +40,8 @@ class ComponentsWidget extends StatefulWidget {
 }
 
 class _ComponentsWidgetState extends State<ComponentsWidget> {
-  bool _isSelected = false;
-  bool isPressed = false;
+  final bool _isSelected = false;
+
   int selectedIndex = 0;
 
   @override
@@ -56,29 +56,11 @@ class _ComponentsWidgetState extends State<ComponentsWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Column(
                 children: [
-                  BigButton(
-                    text: 'Button',
-                    isPressed: isPressed,
-                    onTapDown: (details) => setState(() => isPressed = true),
-                    onTapUp: (details) => setState(() => isPressed = false),
-                    onTapCancel: () => setState(() => isPressed = false),
-                  ),
+                  const BigButton(text: 'Button'),
                   const SizedBox(height: 10),
-                  MediumButton(
-                    text: 'Button',
-                    isPressed: isPressed,
-                    onTapDown: (details) => setState(() => isPressed = true),
-                    onTapUp: (details) => setState(() => isPressed = false),
-                    onTapCancel: () => setState(() => isPressed = false),
-                  ),
+                  const MediumButton(text: 'Button'),
                   const SizedBox(height: 10),
-                  SmallButton(
-                    text: 'Button',
-                    isPressed: isPressed,
-                    onTapDown: (details) => setState(() => isPressed = true),
-                    onTapUp: (details) => setState(() => isPressed = false),
-                    onTapCancel: () => setState(() => isPressed = false),
-                  ),
+                  const SmallButton(text: 'Button'),
                   const SizedBox(height: 10),
                   LabelInputField(
                     label: 'label',
@@ -118,17 +100,9 @@ class _ComponentsWidgetState extends State<ComponentsWidget> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  RatingButton(
-                    rating: 5,
-                    isSelected: _isSelected,
-                    onTap: () {
-                      setState(() {
-                        _isSelected = !_isSelected;
-                      });
-                    },
-                  ),
+                  const RatingButton(rating: 5),
                   const SizedBox(height: 10),
-                  FilterButton(text: 'text', isSelected: _isSelected),
+                  const FilterButton(text: 'text'),
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
