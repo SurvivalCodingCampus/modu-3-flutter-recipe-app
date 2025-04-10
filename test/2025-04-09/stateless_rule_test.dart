@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/2025-04-09/stateless_rule.dart';
+import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/presentation/component/recipe_widget.dart';
 
 void main() {
   testWidgets('RecipeWidget test', (WidgetTester tester) async {
@@ -10,12 +11,13 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: RecipeWidget(recipe: recipe,
+        home: RecipeWidget(
+          recipe: recipe,
           onTapName: (String name) {
             tapCount++;
           },
         ),
-      )
+      ),
     );
 
     final Finder nameTextFinder = find.text(recipe.name);
@@ -31,6 +33,5 @@ void main() {
     await tester.tap(nameTextFinder);
     await tester.pump();
     expect(tapCount, 2);
-
   });
 }
