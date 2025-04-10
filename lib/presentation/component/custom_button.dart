@@ -26,7 +26,7 @@ class CustomButton extends StatelessWidget {
 
     switch (size) {
       case CustomButtonSize.big:
-        width = responsiveWidth(context, ratio: 0.84);
+        width = double.infinity; //responsiveWidth(context, ratio: 0.84);
         height = 60;
         fontStyle = AppTextStyles.normalBold(color: ColorStyle.white);
         // rounded = 10;
