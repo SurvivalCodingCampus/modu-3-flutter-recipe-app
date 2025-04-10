@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/custom_tab_bar.dart';
+import 'package:recipe_app/presentation/component/tabs.dart';
 
 void main() {
   runApp(
@@ -31,7 +31,7 @@ class _CustomTabBarPreviewPageState extends State<CustomTabBarPreviewPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomTabBar(
+            Tabs(
               tabTitles: ['test', 'test2'],
               onTabSelected: (index) {
                 setState(() {
@@ -40,7 +40,7 @@ class _CustomTabBarPreviewPageState extends State<CustomTabBarPreviewPage> {
               },
               selectedIndex: _tabsTwoSelectedIndex,
             ),
-            CustomTabBar(
+            Tabs(
               tabTitles: ['test', 'test2', 'test3'],
               onTabSelected: (index) {
                 setState(() {

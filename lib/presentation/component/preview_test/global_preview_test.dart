@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/custom_button.dart';
-import 'package:recipe_app/presentation/component/custom_tab_bar.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
+import 'package:recipe_app/presentation/component/tabs.dart';
 
 void main() {
   runApp(
@@ -32,7 +32,7 @@ class _ComponentPreviewPageState extends State<ComponentPreviewPage> {
         child: Column(
           children: [
             /// 📌 CustomTabBar
-            CustomTabBar(
+            Tabs(
               tabTitles: ['Tab 1', 'Tab 2'],
               selectedIndex: _selectedTabIndex,
               onTabSelected: (index) {

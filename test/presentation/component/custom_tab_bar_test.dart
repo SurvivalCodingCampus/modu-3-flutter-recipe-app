@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/component/custom_tab_bar.dart';
+import 'package:recipe_app/presentation/component/tabs.dart';
 
 void main() {
   const tabs = ['전체', '한식', '양식'];
@@ -11,7 +11,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: CustomTabBar(
+          body: Tabs(
             tabTitles: tabs,
             selectedIndex: 0,
             onTabSelected: (index) {

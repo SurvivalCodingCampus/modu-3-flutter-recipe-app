@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
-class CustomTabBar extends StatelessWidget {
+class Tabs extends StatelessWidget {
   final List<String> tabTitles;
   final void Function(int)? onTabSelected;
   final int selectedIndex;
 
-  const CustomTabBar({
+  const Tabs({
     super.key,
     required this.tabTitles,
     this.onTabSelected,

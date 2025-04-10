@@ -5,6 +5,21 @@ import 'package:recipe_app/ui/ui_size.dart';
 
 enum CustomButtonSize { big, medium, small }
 
+class BigButton extends CustomButton {
+  const BigButton({super.key, required super.title, super.onPressed})
+    : super(size: CustomButtonSize.big);
+}
+
+class MediumButton extends CustomButton {
+  const MediumButton({super.key, required super.title, super.onPressed})
+    : super(size: CustomButtonSize.medium);
+}
+
+class SmallButton extends CustomButton {
+  const SmallButton({super.key, required super.title, super.onPressed})
+    : super(size: CustomButtonSize.small);
+}
+
 class CustomButton extends StatelessWidget {
   final String title;
   final CustomButtonSize size;
