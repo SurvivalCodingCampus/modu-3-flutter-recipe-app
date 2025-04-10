@@ -49,28 +49,27 @@ class ButtonsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildButton(
-              size: const Size(315, 60),
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              onPressed: onClick,
-            ),
-            _buildButton(
-              size: const Size(243, 54),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              onPressed: onClick,
-            ),
-            _buildButton(
-              size: const Size(174, 37),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              onPressed: onClick,
-              showIcon: false,
-            ),
-          ],
-        )
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildButton(
+          size: const Size(315, 60),
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          onPressed: onClick,
+        ),
+        _buildButton(
+          size: const Size(243, 54),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          onPressed: onClick,
+        ),
+        _buildButton(
+          size: const Size(174, 37),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          onPressed: onClick,
+          showIcon: false,
+        ),
+      ],
     );
   }
 }
