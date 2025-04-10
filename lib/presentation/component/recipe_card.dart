@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
@@ -19,6 +18,7 @@ class RecipeCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
           image: AssetImage(recipe.media.imageUrl),
+          onError: (_, __) => print('Image load failed'),
           fit: BoxFit.cover,
         ),
       ),
@@ -99,11 +99,12 @@ class RecipeCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.star, color: ColorStyles.rating, size: 12),
-                  SizedBox(width: 1.0),
+                  Icon(Icons.star, color: ColorStyles.rating, size: 7),
+                  SizedBox(width: 2.0),
                   Text(
                     recipe.rate.toString(),
-                    style: TextStyles.smallerTextRegular.copyWith(fontSize: 9),
+                    style: TextStyles.smallerTextRegular.copyWith(fontSize: 8),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

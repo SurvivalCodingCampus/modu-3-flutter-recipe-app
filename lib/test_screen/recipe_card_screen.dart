@@ -21,8 +21,8 @@ class RecipeCardScreen extends StatelessWidget {
     final Recipe recipe2 = Recipe(
       title: 'spice roasted chicken with flavored rice',
       user: user2,
-      cookingTime: '25 min',
-      rate: 4.1,
+      cookingTime: '30분',
+      rate: 4.5,
       media: Media(imageUrl: 'assets/images/recipe2.png'),
     );
 

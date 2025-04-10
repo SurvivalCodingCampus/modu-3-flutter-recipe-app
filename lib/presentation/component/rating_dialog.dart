@@ -75,7 +75,7 @@ class _RatingDialogState extends State<RatingDialog> {
                   widget.actionName,
                   style: TextStyles.smallTextRegular.copyWith(
                     color: ColorStyles.white,
-                    // fontSize: 8,
+                    fontSize: 8,
                   ),
                 ),
               ),
