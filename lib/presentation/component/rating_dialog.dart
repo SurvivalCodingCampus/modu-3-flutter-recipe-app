@@ -5,8 +5,8 @@ import 'package:recipe_app/ui/ui.dart';
 
 class RatingDialog extends StatefulWidget {
   final String title;
-
-  const RatingDialog({super.key, required this.title});
+  final VoidCallback? onTap;
+  const RatingDialog({super.key, required this.title, this.onTap});
 
   @override
   State<RatingDialog> createState() => _RatingDialogState();
@@ -63,23 +63,26 @@ class _RatingDialogState extends State<RatingDialog> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color:
-                          selectedIndex > 0
-                              ? ColorStyles.rating
-                              : ColorStyles.gray4,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Send',
-                        style: TextStyles.smallTextSmallLabel.copyWith(
-                          color: ColorStyles.white,
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color:
+                            selectedIndex > 0
+                                ? ColorStyles.rating
+                                : ColorStyles.gray4,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Send',
+                          style: TextStyles.smallTextSmallLabel.copyWith(
+                            color: ColorStyles.white,
+                          ),
                         ),
                       ),
                     ),
