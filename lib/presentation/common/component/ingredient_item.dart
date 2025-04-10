@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/common/enum/image_type.dart';
+import 'package:recipe_app/presentation/common/enum/return_image_widget.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
-
-enum ImageType { network, file, path }
 
 class IngredientItem extends StatelessWidget {
   final Color backgroundColor;
@@ -24,18 +24,6 @@ class IngredientItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget imageWidget;
-    switch (imageType) {
-      case ImageType.file:
-        imageWidget = Image.file(File(imagePath), fit: BoxFit.contain);
-
-      case ImageType.network:
-        imageWidget = Image.network(imagePath, fit: BoxFit.contain);
-
-      case ImageType.path:
-        imageWidget = Image.asset(imagePath, fit: BoxFit.contain);
-    }
-
     return Container(
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
       decoration: BoxDecoration(
@@ -52,11 +40,17 @@ class IngredientItem extends StatelessWidget {
               color: ColorStyle.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Center(child: SizedBox(width: 40, child: imageWidget)),
+            child: Center(
+              child: SizedBox(
+                width: 40,
+                child: returnImageWidget(
+                  imageType: imageType,
+                  imagePath: imagePath,
+                ),
+              ),
+            ),
           ),
-          SizedBox(
-            width: 16,
-          ),
+          SizedBox(width: 16),
           Expanded(
             child: Text(
               name,
