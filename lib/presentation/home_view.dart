@@ -3,6 +3,7 @@ import 'package:recipe_app/presentation/component/button/big_button.dart';
 import 'package:recipe_app/presentation/component/button/enum/button_type.dart';
 import 'package:recipe_app/presentation/component/button/medium_button.dart';
 import 'package:recipe_app/presentation/component/button/small_button.dart';
+import 'package:recipe_app/presentation/component/rating.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -27,7 +28,9 @@ class _HomeViewState extends State<HomeView> {
     'Lunch',
   ];
   Set<String> seleted = {};
-  ButtonType buttonType = ButtonType.standard;
+  ButtonType currentType = ButtonType.standard;
+  int starIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +56,24 @@ class _HomeViewState extends State<HomeView> {
             onTap: () {
               print('버튼');
             },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => Rating(
+                        title: 'Rate Recipe',
+                        actionName: 'Send',
+                        onChange: (index) {
+                          print(index);
+                        },
+                      ),
+                ),
+              );
+            },
+            child: Icon(Icons.ac_unit_sharp),
           ),
         ],
       ),
