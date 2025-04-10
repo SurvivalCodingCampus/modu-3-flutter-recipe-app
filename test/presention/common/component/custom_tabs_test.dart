@@ -13,12 +13,13 @@ void main() {
           body: CustomTabs(
             labels: labels,
             selectedIndex: selectedIndex,
-            onValueChange: () {},
+            onValueChange: (selectedIndex) {
+              print(selectedIndex);
+            },
           ),
         ),
       ),
     );
-    // TODO: Implement test
     labels.map((e) => expect(find.text(e), findsOneWidget));
   });
 }

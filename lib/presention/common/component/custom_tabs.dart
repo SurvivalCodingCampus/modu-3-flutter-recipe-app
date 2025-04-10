@@ -5,7 +5,7 @@ import 'package:recipe_app/presention/common/ui/text_styles.dart';
 class CustomTabs extends StatelessWidget {
   final List<String> labels;
   final int selectedIndex;
-  final VoidCallback? onValueChange;
+  final void Function(int index)? onValueChange;
 
   const CustomTabs({
     required this.labels,
@@ -24,7 +24,11 @@ class CustomTabs extends StatelessWidget {
             labels.map((e) {
               return Expanded(
                 child: GestureDetector(
-                  onTap: onValueChange,
+                  onTap: () {
+                    if (onValueChange != null) {
+                      onValueChange!(labels.indexOf(e));
+                    }
+                  },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(

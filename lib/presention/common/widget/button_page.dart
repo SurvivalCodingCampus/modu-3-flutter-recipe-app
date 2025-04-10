@@ -8,8 +8,8 @@ class ButtonPage extends StatelessWidget {
 
   final List<Map<String, dynamic>> buttonColor = [
     {'buttonColor': ColorStyle.primary100, 'textColor': ColorStyle.white},
-    {'buttonColor': ColorStyle.primary100.withValues(alpha: 0.8)},
-    {'buttonColor': ColorStyle.gray4},
+    {'buttonColor': ColorStyle.primary100.withValues(alpha: 0.8),'textColor': ColorStyle.white},
+    {'buttonColor': ColorStyle.gray4,'textColor': ColorStyle.white},
   ];
 
   @override
