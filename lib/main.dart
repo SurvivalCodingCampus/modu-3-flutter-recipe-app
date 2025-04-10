@@ -40,6 +40,7 @@ class ComponentsWidget extends StatefulWidget {
 
 class _ComponentsWidgetState extends State<ComponentsWidget> {
   bool _isSelected = false;
+  bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -55,23 +56,26 @@ class _ComponentsWidgetState extends State<ComponentsWidget> {
                 children: [
                   BigButton(
                     text: 'Button',
-                    onTap: () {
-                      print('Big Button Pressed');
-                    },
+                    isPressed: isPressed,
+                    onTapDown: (details) => setState(() => isPressed = true),
+                    onTapUp: (details) => setState(() => isPressed = false),
+                    onTapCancel: () => setState(() => isPressed = false),
                   ),
                   const SizedBox(height: 10),
                   MediumButton(
                     text: 'Button',
-                    onTap: () {
-                      print('Medium Button Pressed');
-                    },
+                    isPressed: isPressed,
+                    onTapDown: (details) => setState(() => isPressed = true),
+                    onTapUp: (details) => setState(() => isPressed = false),
+                    onTapCancel: () => setState(() => isPressed = false),
                   ),
                   const SizedBox(height: 10),
                   SmallButton(
                     text: 'Button',
-                    onTap: () {
-                      print('Small Button Pressed');
-                    },
+                    isPressed: isPressed,
+                    onTapDown: (details) => setState(() => isPressed = true),
+                    onTapUp: (details) => setState(() => isPressed = false),
+                    onTapCancel: () => setState(() => isPressed = false),
                   ),
                   const SizedBox(height: 10),
                   LabelInputField(

@@ -1,27 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/ui.dart';
 
-class BigButton extends StatelessWidget {
+class BigButton extends StatefulWidget {
   final String text;
-  final VoidCallback onTap;
-  const BigButton({super.key, required this.text, required this.onTap});
+  final bool isPressed;
+  final Function(TapDownDetails details)? onTapDown;
+  final GestureTapUpCallback? onTapUp;
+  final VoidCallback? onTapCancel;
+
+  const BigButton({
+    super.key,
+    required this.text,
+    this.onTapDown,
+    this.onTapUp,
+    this.onTapCancel,
+    required this.isPressed,
+  });
+
+  @override
+  State<BigButton> createState() => _BigButtonState();
+}
+
+class _BigButtonState extends State<BigButton> {
+  bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTapDown: widget.onTapDown,
+      onTapUp: widget.onTapUp,
+      onTapCancel: widget.onTapCancel,
       child: Container(
-        width: 315,
+        width: double.infinity,
         height: 60,
         decoration: BoxDecoration(
-          color: ColorStyles.primary100,
+          color: !widget.isPressed ? ColorStyles.primary100 : ColorStyles.gray4,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              text,
+              widget.text,
               style: TextStyles.normalTextBold.copyWith(
                 color: ColorStyles.white,
               ),
