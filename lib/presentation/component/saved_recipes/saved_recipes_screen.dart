@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/component/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/component/saved_recipes/saved_recipes.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
@@ -10,6 +10,7 @@ class SavedRecipesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorStyles.white,
       appBar: AppBar(
         title: Text(
           'Saved Recipes',
