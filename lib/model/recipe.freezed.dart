@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Recipe {
 
- String get id; String get title; String get imageUrl; double get rate; int get cookingTime;
+ int get id; String get title; Picture get picture; double get rate; int get cookingTime; String get chef; List<Ingredients> get ingredients;
 /// Create a copy of Recipe
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $RecipeCopyWith<Recipe> get copyWith => _$RecipeCopyWithImpl<Recipe>(this as Rec
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Recipe&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.rate, rate) || other.rate == rate)&&(identical(other.cookingTime, cookingTime) || other.cookingTime == cookingTime));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Recipe&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.picture, picture) || other.picture == picture)&&(identical(other.rate, rate) || other.rate == rate)&&(identical(other.cookingTime, cookingTime) || other.cookingTime == cookingTime)&&(identical(other.chef, chef) || other.chef == chef)&&const DeepCollectionEquality().equals(other.ingredients, ingredients));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,title,imageUrl,rate,cookingTime);
+int get hashCode => Object.hash(runtimeType,id,title,picture,rate,cookingTime,chef,const DeepCollectionEquality().hash(ingredients));
 
 @override
 String toString() {
-  return 'Recipe(id: $id, title: $title, imageUrl: $imageUrl, rate: $rate, cookingTime: $cookingTime)';
+  return 'Recipe(id: $id, title: $title, picture: $picture, rate: $rate, cookingTime: $cookingTime, chef: $chef, ingredients: $ingredients)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $RecipeCopyWith<$Res>  {
   factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) _then) = _$RecipeCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String imageUrl, double rate, int cookingTime
+ int id, String title, Picture picture, double rate, int cookingTime, String chef, List<Ingredients> ingredients
 });
 
 
@@ -63,14 +63,16 @@ class _$RecipeCopyWithImpl<$Res>
 
 /// Create a copy of Recipe
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? imageUrl = null,Object? rate = null,Object? cookingTime = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? picture = null,Object? rate = null,Object? cookingTime = null,Object? chef = null,Object? ingredients = null,}) {
   return _then(Recipe(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String,rate: null == rate ? _self.rate : rate // ignore: cast_nullable_to_non_nullable
+as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,picture: null == picture ? _self.picture : picture // ignore: cast_nullable_to_non_nullable
+as Picture,rate: null == rate ? _self.rate : rate // ignore: cast_nullable_to_non_nullable
 as double,cookingTime: null == cookingTime ? _self.cookingTime : cookingTime // ignore: cast_nullable_to_non_nullable
-as int,
+as int,chef: null == chef ? _self.chef : chef // ignore: cast_nullable_to_non_nullable
+as String,ingredients: null == ingredients ? _self.ingredients : ingredients // ignore: cast_nullable_to_non_nullable
+as List<Ingredients>,
   ));
 }
 

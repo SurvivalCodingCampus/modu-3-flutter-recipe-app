@@ -29,7 +29,7 @@ class IngredientItem extends StatelessWidget {
         ),
         title: Text(item.name, style: TextFontStyle.normalBold()),
         trailing: Text(
-          '${item.weight.toString()}g',
+          '${item.imageUrl.toString()}g',
           style: TextFontStyle.smallRegular(color: ColorStyle.gray3),
         ),
       ),
