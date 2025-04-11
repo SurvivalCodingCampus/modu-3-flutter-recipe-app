@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/app_image.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
@@ -7,7 +8,7 @@ import '../../ui/ui_size.dart';
 class RecipeCard extends StatelessWidget {
   final String title;
   final String imagePath;
-  final int cookTime;
+  final String cookTime;
   final String authorName;
   final double rating;
   final bool isFavorite;
@@ -32,8 +33,8 @@ class RecipeCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: Stack(
           children: [
-            Image.asset(
-              imagePath,
+            AppImage(
+              path: imagePath,
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
@@ -94,7 +95,7 @@ class RecipeCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    '$cookTime min',
+                    cookTime,
                     style: AppTextStyles.smallRegular(color: ColorStyle.gray4),
                   ),
                   const SizedBox(width: 10),
