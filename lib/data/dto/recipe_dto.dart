@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:recipe_app/data/dto/dto.dart';
 
+part 'recipe_dto.g.dart';
+
+@JsonSerializable()
 class RecipeDto {
   final String? category;
   final num? id;
@@ -10,7 +14,7 @@ class RecipeDto {
   final num? rating;
   final List<RecipeIngredientDto>? ingredients;
 
-  RecipeDto({
+  const RecipeDto({
     this.category,
     this.id,
     this.name,
@@ -20,4 +24,9 @@ class RecipeDto {
     this.rating,
     this.ingredients,
   });
+
+  factory RecipeDto.fromJson(Map<String, dynamic> json) =>
+      _$RecipeDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RecipeDtoToJson(this);
 }
