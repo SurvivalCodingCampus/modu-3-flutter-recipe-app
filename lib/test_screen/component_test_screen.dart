@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:recipe_app/data/data_source/mock_recipe_data_source.dart';
+import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/big_button.dart';
 
 import 'package:recipe_app/presentation/component/input_field.dart';
 
 import 'package:recipe_app/presentation/component/tabs.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/test_screen/button_screen.dart';
 import 'package:recipe_app/test_screen/ingredient_screen.dart';
 import 'package:recipe_app/test_screen/rating_screen.dart';
@@ -23,6 +28,29 @@ class ComponentTestScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  BigButton(
+                    name: 'SavedRecipes',
+                    color: ColorStyles.secondary100,
+                    icon: Icons.arrow_forward,
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder:
+                              (context) => SavedRecipesScreen(
+                                viewModel: SavedRecipesViewModel(
+                                  recipeRepository: MockRecipeRepositoryImpl(
+                                    recipeDataSource: MockRecipeDataSource(
+                                      client: http.Client(),
+                                      url: 'testUrl',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 36),
                   BigButton(
                     name: 'Ingredient',
                     color: ColorStyles.primary100,

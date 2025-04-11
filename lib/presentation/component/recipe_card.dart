@@ -51,7 +51,7 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'By ${recipe.user.name}',
+                    'By ${recipe.chef}',
                     style: TextStyles.smallerTextRegular.copyWith(
                       color: ColorStyles.white,
                     ),
@@ -102,7 +102,7 @@ class RecipeCard extends StatelessWidget {
                   Icon(Icons.star, color: ColorStyles.rating, size: 7),
                   SizedBox(width: 2.0),
                   Text(
-                    recipe.rate.toString(),
+                    recipe.rating.toString(),
                     style: TextStyles.smallerTextRegular.copyWith(fontSize: 8),
                     overflow: TextOverflow.ellipsis,
                   ),
