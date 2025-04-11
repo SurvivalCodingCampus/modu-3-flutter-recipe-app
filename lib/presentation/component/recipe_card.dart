@@ -39,7 +39,7 @@ class _RecipeCardState extends State<RecipeCard> {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(widget.imagePath),
+              image: NetworkImage(widget.imagePath),
               fit: BoxFit.cover,
             ),
             color: Colors.white,
@@ -84,7 +84,7 @@ class _RecipeCardState extends State<RecipeCard> {
         child: Row(
           spacing: 2,
           children: [
-            Icon(Icons.star, color: ColorStyles.rating, size: 16),
+            const Icon(Icons.star, color: ColorStyles.rating, size: 16),
             Text(
               '${widget.rating.toDouble()}',
               style: TextStyles.smallTextRegular.copyWith(
@@ -147,7 +147,7 @@ class _RecipeCardState extends State<RecipeCard> {
     right: 10,
     bottom: 10,
     child: GestureDetector(
-      key: Key('bookmark_button'),
+      key: const Key('bookmark_button'),
       onTap: () {
         setState(() {
           isBookmarked = !isBookmarked;
