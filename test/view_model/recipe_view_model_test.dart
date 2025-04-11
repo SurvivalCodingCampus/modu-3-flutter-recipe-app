@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/data/data_source/data_source.dart';
 import 'package:recipe_app/data/repository/repository.dart';
-import 'package:recipe_app/presentation/component/saved_recipes/saved_recipes.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes.dart';
 
 void main() {
   group('Recipe ViewModel 테스트', () {

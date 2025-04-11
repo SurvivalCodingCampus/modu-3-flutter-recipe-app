@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/component/saved_recipes/saved_recipes.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 class SavedRecipesScreen extends StatelessWidget {

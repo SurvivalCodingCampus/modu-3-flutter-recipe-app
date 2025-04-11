@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/data_source/data_source.dart';
 import 'package:recipe_app/data/repository/repository.dart';
-import 'package:recipe_app/presentation/component/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/component/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 
 void main() {
   runApp(const MyApp());
