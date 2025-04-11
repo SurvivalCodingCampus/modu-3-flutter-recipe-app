@@ -18,6 +18,7 @@ abstract class Recipe with _$Recipe {
     @Default(Review()) final Review review,
     @Default('') final String chef,
     @Default(null) final DateTime? createdAt,
+    @JsonKey(name: 'image') @Default('') final String imageUrl,
     @Default(Media()) final Media media,
     @Default([]) final List<String> recipeStep,
     @JsonKey(name: 'time') @Default('') final String cookingTime,

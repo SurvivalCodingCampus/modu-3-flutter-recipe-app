@@ -17,7 +17,7 @@ class RecipeCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
-          image: AssetImage(recipe.media.imageUrl),
+          image: NetworkImage(recipe.imageUrl),
           onError: (_, __) => print('Image load failed'),
           fit: BoxFit.cover,
         ),
