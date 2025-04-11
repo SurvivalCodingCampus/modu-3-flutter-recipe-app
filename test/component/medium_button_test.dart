@@ -6,12 +6,7 @@ void main() {
   testWidgets('Medium Button 테스트', (tester) async {
     final btnName = '미디움 버튼';
     int tapCount = 0;
-    final mediumBtn = MediumButton(
-      text: btnName,
-      onTap: () {
-        tapCount++;
-      },
-    );
+    final mediumBtn = MediumButton(text: btnName);
 
     // 위젯을 빌드합니다.
     await tester.pumpWidget(MaterialApp(home: mediumBtn));

@@ -6,12 +6,7 @@ void main() {
   testWidgets('Big Button 테스트', (tester) async {
     final btnName = '빅 버튼';
     int tapCount = 0;
-    final smallBtn = SmallButton(
-      text: btnName,
-      onTap: () {
-        tapCount++;
-      },
-    );
+    final smallBtn = SmallButton(text: btnName);
 
     // 위젯을 빌드합니다.
     await tester.pumpWidget(MaterialApp(home: smallBtn));
