@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/data/mocks/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
 import '../../saved_recipes/saved_recipes_view_model.dart';
 import 'component_preview.dart';
@@ -19,6 +20,17 @@ class MainMenuScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            _buildMenuButton(
+              context,
+              title: '0. 스플래시 화면',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SplashScreen()),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
             _buildMenuButton(
               context,
               title: '1. 로그인 화면',
