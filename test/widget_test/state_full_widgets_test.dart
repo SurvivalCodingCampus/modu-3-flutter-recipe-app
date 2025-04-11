@@ -15,7 +15,7 @@ void main() {
   group('컴포넌트 테스트', () {
     testWidgets('IngredientItem 테스트', (widgetTester) async {
       // 1. 테스트용 데이터 생성
-      final ingredient = Ingredient(
+      final ingredient = const Ingredient(
         name: '당근',
         weight: 120,
         imageUrl:
@@ -39,7 +39,7 @@ void main() {
 
     testWidgets('RecipeCard 테스트', (widgetTester) async {
       // 1. 테스트용 더미 Recipe 데이터 생성
-      final recipe = Recipe(
+      final recipe = const Recipe(
         title: '불고기',
         cookingTime: '30분',
         rate: 4.5,
@@ -155,7 +155,6 @@ void main() {
               title: '평가해주세요',
               actionName: '등록',
               onChange: (val) => changedValue = val,
-              onButtonTap: () {},
             ),
           ),
         ),
