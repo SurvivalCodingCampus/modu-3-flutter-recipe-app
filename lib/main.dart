@@ -104,7 +104,7 @@ class App extends StatelessWidget {
                 ),
               ],
             ),
-        '/splash': (context) => SplashScreen(),
+        '/splash': (context) => const SplashScreen(),
         '/others':
             (context) => ComponentsScreen(
               title: 'Others',
