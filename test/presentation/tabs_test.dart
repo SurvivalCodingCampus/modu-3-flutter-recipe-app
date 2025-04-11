@@ -18,14 +18,21 @@ void main() {
       MaterialApp(
         home: TabsWidget(
           labels: ['Label', 'Label2'],
-          selectedIndex: 1,
+          selectedIndex: 0,
           onValueChange: (index) {
             selectedIndex = index;
           },
         ),
       ),
     );
+
+    // 초기값 확인
+    expect(selectedIndex, 0);
+
     await tester.tap(find.text('Label2'));
+
+    //UI 업테이트를 위해 필요
+    await tester.pump();
     expect(selectedIndex, 1);
   });
 }

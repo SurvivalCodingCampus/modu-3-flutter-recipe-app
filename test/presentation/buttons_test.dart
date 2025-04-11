@@ -36,12 +36,18 @@ void main() {
     );
 
     await tester.tap(find.text('Big'));
+    // UI 업데이트를 위해 사용
+    await tester.pump();
     expect(bigClicked, isTrue);
 
     await tester.tap(find.text('Medium'));
+
+    await tester.pump();
     expect(mediumClicked, isTrue);
 
     await tester.tap(find.text('Small'));
+
+    await tester.pump();
     expect(smallClicked, isTrue);
   });
 }

@@ -63,6 +63,7 @@ class TabsWidget extends StatelessWidget {
           final isSelected = index == selectedIndex;
 
           return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
                 onTap: () => onValueChange(index),

@@ -15,7 +15,7 @@ import 'package:recipe_app/presentaiton/ui/text_styles.dart';
 void main() {
   final String placeHolder = 'Placeholder';
 
-  testWidgets('value의 값 저장', (WidgetTester tester) async {
+  testWidgets('텍스트 필드가 비어 있을 때 플레이스홀더가 표시되는지 확인', (WidgetTester tester) async {
     final String value = '';
 
     await tester.pumpWidget(

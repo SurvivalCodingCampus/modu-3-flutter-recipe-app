@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class InputFieldWidget extends StatelessWidget implements TextStyles {
+class InputFieldWidget extends StatelessWidget {
   final String label;
   final String placeHolder;
   final String value;
