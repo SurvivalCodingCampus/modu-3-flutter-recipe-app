@@ -30,7 +30,7 @@ class _RatingDialogState extends State<RatingDialog> {
         color: ColorStyles.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
-          BoxShadow(
+          const BoxShadow(
             color: ColorStyles.gray2,
             blurRadius: 1,
             offset: Offset(0, 0.5),
