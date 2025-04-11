@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Saved recipes', style: TextStyles.mediumBold(),),
+        title: Text('Saved recipes', style: TextStyles.mediumBold()),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -26,24 +26,32 @@ class HomeScreen extends StatelessWidget {
               }
               return Column(
                 children:
-                    viewModel.recipes
-                        .map(
-                          (recipe) => Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: RecipeCard(
-                              recipe: recipe,
-                              isBookmarked: viewModel.user.bookmarks.contains(recipe.id),
-                              onBookmark: (int id) {
-                                if(viewModel.user.bookmarks.contains(recipe.id)) {
-                                  viewModel.deleteBookmarkToUserModel(id);
-                                } else {
-                                  viewModel.saveBookmarkToUserModel(id);
-                                }
-                              },
-                            ),
-                          ),
-                        )
-                        .toList(),
+                    viewModel.recipes.isEmpty
+                        ? [
+                          const SizedBox(height: 40),
+                          const Text('저장된 레시피가 없습니다.'),
+                        ]
+                        : viewModel.recipes
+                            .map(
+                              (recipe) => Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: RecipeCard(
+                                  recipe: recipe,
+                                  isBookmarked: viewModel.user.bookmarks
+                                      .contains(recipe.id),
+                                  onBookmark: (int id) {
+                                    if (viewModel.user.bookmarks.contains(
+                                      recipe.id,
+                                    )) {
+                                      viewModel.deleteBookmarkToUserModel(id);
+                                    } else {
+                                      viewModel.saveBookmarkToUserModel(id);
+                                    }
+                                  },
+                                ),
+                              ),
+                            )
+                            .toList(),
               );
             },
           ),
