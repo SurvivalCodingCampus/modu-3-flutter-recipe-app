@@ -1,9 +1,7 @@
 import 'package:recipe_app/dto/ingredients_dto.dart';
 import 'package:recipe_app/dto/picture_dto.dart';
 
-class RecipeDto {}
-
-class Recipe {
+class RecipeDto {
   final String? category;
   final num? id;
   final String? title;
@@ -13,7 +11,7 @@ class Recipe {
   final num? rating;
   final List<IngredientsDto>? ingredients;
 
-  Recipe({
+  RecipeDto({
     this.category,
     this.id,
     this.title,
@@ -24,8 +22,8 @@ class Recipe {
     this.ingredients,
   });
 
-  factory Recipe.fromJson(Map<String, dynamic> json) {
-    return Recipe(
+  factory RecipeDto.fromJson(Map<String, dynamic> json) {
+    return RecipeDto(
       category: json['category'] as String?,
       id: json['id'] as num?,
       title: json['title'] as String?,

@@ -1,5 +1,5 @@
-import 'package:recipe_app/model/recipe.dart';
+import 'package:recipe_app/dto/recipe_dto.dart';
 
 abstract interface class RecipeDataSource {
-  Future<List<Recipe>> getRecipes();
+  Future<List<RecipeDto>> getRecipes();
 }
