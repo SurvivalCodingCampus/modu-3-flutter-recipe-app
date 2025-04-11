@@ -4,6 +4,7 @@ import 'package:recipe_app/2025-04-09/presentation/component/input_field.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/small_button.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/tabs.dart';
 import 'package:recipe_app/2025-04-09/ui/color_styles.dart';
+import 'package:recipe_app/2025-04-10/model/recipe.dart';
 import 'package:recipe_app/2025-04-10/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/2025-04-10/presentation/component/rating_button.dart';
 import 'package:recipe_app/2025-04-10/presentation/component/rating_dialog.dart';
@@ -43,19 +44,23 @@ class MyApp extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 RecipeCard(
-                  imagePath: 'assets/images/bibimbop.png',
-                  title: 'Traditional Korean Rice \n Food\n',
-                  chef: 'Chef John',
-                  minutes: 20,
-                  rate: 4.0,
+                  recipe: Recipe(
+                    imagePath: 'assets/images/bibimbop.png',
+                    title: 'Traditional Korean Rice \n Food\n',
+                    chef: 'Chef John',
+                    minutes: 20,
+                    rate: 4.0,
+                  ),
                 ),
                 SizedBox(height: 10),
                 RecipeCard(
-                  imagePath: '../assets/images/jjigae.png',
-                  title: 'Traditional Korean Stew \n Food\n',
-                  chef: 'Chef Kim',
-                  minutes: 15,
-                  rate: 4.5,
+                  recipe: Recipe(
+                    imagePath: '../assets/images/jjigae.png',
+                    title: 'Traditional Korean Stew \n Food\n',
+                    chef: 'Chef Kim',
+                    minutes: 15,
+                    rate: 4.5,
+                  ),
                 ),
                 SizedBox(height: 16),
                 IngredientItem(

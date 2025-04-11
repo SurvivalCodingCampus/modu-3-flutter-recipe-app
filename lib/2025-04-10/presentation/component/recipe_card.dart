@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/2025-04-10/model/recipe.dart';
 import 'package:recipe_app/2025-04-10/ui/color_styles2.dart';
 import 'package:recipe_app/2025-04-10/ui/text_styles2.dart';
 
 class RecipeCard extends StatefulWidget {
-  final String imagePath;
-  final String title;
-  final String chef;
-  final double rate;
-  final int minutes;
+  final Recipe recipe;
 
-  const RecipeCard({
-    super.key,
-    required this.title,
-    required this.chef,
-    required this.rate,
-    required this.minutes,
-    required this.imagePath,
-  });
+  const RecipeCard({super.key, required this.recipe});
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -41,7 +31,7 @@ class _RecipeCardState extends State<RecipeCard> {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               image: DecorationImage(
-                image: AssetImage(widget.imagePath),
+                image: AssetImage(widget.recipe.imagePath),
                 fit: BoxFit.fill,
               ),
             ),
@@ -83,7 +73,7 @@ class _RecipeCardState extends State<RecipeCard> {
                       ),
                       SizedBox(width: 2),
                       Text(
-                        widget.rate.toStringAsFixed(1),
+                        widget.recipe.rate.toStringAsFixed(1),
                         style: TextStyles2.rateText.copyWith(
                           color: Colors.black,
                         ),
@@ -99,11 +89,11 @@ class _RecipeCardState extends State<RecipeCard> {
             bottom: 15,
             child: Text.rich(
               TextSpan(
-                text: widget.title,
+                text: widget.recipe.title,
                 style: TextStyles2.menuIntroduceText,
                 children: [
                   TextSpan(
-                    text: 'By ${widget.chef}',
+                    text: 'By ${widget.recipe.chef}',
                     style: TextStyles2.chefNameText,
                   ),
                 ],
@@ -123,7 +113,7 @@ class _RecipeCardState extends State<RecipeCard> {
                 SizedBox(width: 3),
                 Text.rich(
                   TextSpan(
-                    text: widget.minutes.toString(),
+                    text: widget.recipe.minutes.toString(),
                     style: TextStyles2.cookingTimeText,
                     children: [
                       TextSpan(
