@@ -6,7 +6,7 @@ part 'ingredient_amount_dto.g.dart';
 
 @freezed
 abstract class IngredientAmountDto with _$IngredientAmountDto {
-  const factory IngredientAmountDto({IngredientDto? ingredients, int? amount}) =
+  const factory IngredientAmountDto({IngredientDto? ingredient, int? amount}) =
       _IngredientAmountDto;
 
   factory IngredientAmountDto.fromJson(Map<String, dynamic> json) =>

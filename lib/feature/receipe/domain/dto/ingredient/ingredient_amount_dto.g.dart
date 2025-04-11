@@ -8,11 +8,11 @@ part of 'ingredient_amount_dto.dart';
 
 _IngredientAmountDto _$IngredientAmountDtoFromJson(Map<String, dynamic> json) =>
     _IngredientAmountDto(
-      ingredients:
-          json['ingredients'] == null
+      ingredient:
+          json['ingredient'] == null
               ? null
               : IngredientDto.fromJson(
-                json['ingredients'] as Map<String, dynamic>,
+                json['ingredient'] as Map<String, dynamic>,
               ),
       amount: (json['amount'] as num?)?.toInt(),
     );
@@ -20,6 +20,6 @@ _IngredientAmountDto _$IngredientAmountDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$IngredientAmountDtoToJson(
   _IngredientAmountDto instance,
 ) => <String, dynamic>{
-  'ingredients': instance.ingredients,
+  'ingredient': instance.ingredient,
   'amount': instance.amount,
 };

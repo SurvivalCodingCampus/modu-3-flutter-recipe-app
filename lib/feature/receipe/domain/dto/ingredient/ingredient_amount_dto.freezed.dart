@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$IngredientAmountDto {
 
- IngredientDto? get ingredients; int? get amount;
+ IngredientDto? get ingredient; int? get amount;
 /// Create a copy of IngredientAmountDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $IngredientAmountDtoCopyWith<IngredientAmountDto> get copyWith => _$IngredientAm
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is IngredientAmountDto&&(identical(other.ingredients, ingredients) || other.ingredients == ingredients)&&(identical(other.amount, amount) || other.amount == amount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is IngredientAmountDto&&(identical(other.ingredient, ingredient) || other.ingredient == ingredient)&&(identical(other.amount, amount) || other.amount == amount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ingredients,amount);
+int get hashCode => Object.hash(runtimeType,ingredient,amount);
 
 @override
 String toString() {
-  return 'IngredientAmountDto(ingredients: $ingredients, amount: $amount)';
+  return 'IngredientAmountDto(ingredient: $ingredient, amount: $amount)';
 }
 
 
@@ -49,11 +49,11 @@ abstract mixin class $IngredientAmountDtoCopyWith<$Res>  {
   factory $IngredientAmountDtoCopyWith(IngredientAmountDto value, $Res Function(IngredientAmountDto) _then) = _$IngredientAmountDtoCopyWithImpl;
 @useResult
 $Res call({
- IngredientDto? ingredients, int? amount
+ IngredientDto? ingredient, int? amount
 });
 
 
-$IngredientDtoCopyWith<$Res>? get ingredients;
+$IngredientDtoCopyWith<$Res>? get ingredient;
 
 }
 /// @nodoc
@@ -66,9 +66,9 @@ class _$IngredientAmountDtoCopyWithImpl<$Res>
 
 /// Create a copy of IngredientAmountDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ingredients = freezed,Object? amount = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ingredient = freezed,Object? amount = freezed,}) {
   return _then(_self.copyWith(
-ingredients: freezed == ingredients ? _self.ingredients : ingredients // ignore: cast_nullable_to_non_nullable
+ingredient: freezed == ingredient ? _self.ingredient : ingredient // ignore: cast_nullable_to_non_nullable
 as IngredientDto?,amount: freezed == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int?,
   ));
@@ -77,13 +77,13 @@ as int?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$IngredientDtoCopyWith<$Res>? get ingredients {
-    if (_self.ingredients == null) {
+$IngredientDtoCopyWith<$Res>? get ingredient {
+    if (_self.ingredient == null) {
     return null;
   }
 
-  return $IngredientDtoCopyWith<$Res>(_self.ingredients!, (value) {
-    return _then(_self.copyWith(ingredients: value));
+  return $IngredientDtoCopyWith<$Res>(_self.ingredient!, (value) {
+    return _then(_self.copyWith(ingredient: value));
   });
 }
 }
@@ -93,10 +93,10 @@ $IngredientDtoCopyWith<$Res>? get ingredients {
 @JsonSerializable()
 
 class _IngredientAmountDto implements IngredientAmountDto {
-  const _IngredientAmountDto({this.ingredients, this.amount});
+  const _IngredientAmountDto({this.ingredient, this.amount});
   factory _IngredientAmountDto.fromJson(Map<String, dynamic> json) => _$IngredientAmountDtoFromJson(json);
 
-@override final  IngredientDto? ingredients;
+@override final  IngredientDto? ingredient;
 @override final  int? amount;
 
 /// Create a copy of IngredientAmountDto
@@ -112,16 +112,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IngredientAmountDto&&(identical(other.ingredients, ingredients) || other.ingredients == ingredients)&&(identical(other.amount, amount) || other.amount == amount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IngredientAmountDto&&(identical(other.ingredient, ingredient) || other.ingredient == ingredient)&&(identical(other.amount, amount) || other.amount == amount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ingredients,amount);
+int get hashCode => Object.hash(runtimeType,ingredient,amount);
 
 @override
 String toString() {
-  return 'IngredientAmountDto(ingredients: $ingredients, amount: $amount)';
+  return 'IngredientAmountDto(ingredient: $ingredient, amount: $amount)';
 }
 
 
@@ -132,11 +132,11 @@ abstract mixin class _$IngredientAmountDtoCopyWith<$Res> implements $IngredientA
   factory _$IngredientAmountDtoCopyWith(_IngredientAmountDto value, $Res Function(_IngredientAmountDto) _then) = __$IngredientAmountDtoCopyWithImpl;
 @override @useResult
 $Res call({
- IngredientDto? ingredients, int? amount
+ IngredientDto? ingredient, int? amount
 });
 
 
-@override $IngredientDtoCopyWith<$Res>? get ingredients;
+@override $IngredientDtoCopyWith<$Res>? get ingredient;
 
 }
 /// @nodoc
@@ -149,9 +149,9 @@ class __$IngredientAmountDtoCopyWithImpl<$Res>
 
 /// Create a copy of IngredientAmountDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ingredients = freezed,Object? amount = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ingredient = freezed,Object? amount = freezed,}) {
   return _then(_IngredientAmountDto(
-ingredients: freezed == ingredients ? _self.ingredients : ingredients // ignore: cast_nullable_to_non_nullable
+ingredient: freezed == ingredient ? _self.ingredient : ingredient // ignore: cast_nullable_to_non_nullable
 as IngredientDto?,amount: freezed == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int?,
   ));
@@ -161,13 +161,13 @@ as int?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$IngredientDtoCopyWith<$Res>? get ingredients {
-    if (_self.ingredients == null) {
+$IngredientDtoCopyWith<$Res>? get ingredient {
+    if (_self.ingredient == null) {
     return null;
   }
 
-  return $IngredientDtoCopyWith<$Res>(_self.ingredients!, (value) {
-    return _then(_self.copyWith(ingredients: value));
+  return $IngredientDtoCopyWith<$Res>(_self.ingredient!, (value) {
+    return _then(_self.copyWith(ingredient: value));
   });
 }
 }
