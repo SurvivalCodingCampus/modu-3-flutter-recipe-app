@@ -9,7 +9,7 @@ class InputFieldExampleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('InputField 예제', style: AppTextStyles.largeBold()),
+        title: Text('InputField 미리보기', style: AppTextStyles.largeBold()),
       ),
       body: Column(
         children: [

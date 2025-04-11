@@ -35,7 +35,9 @@ class _TabsExampleScreen extends State<TabsExampleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Tabs 예제', style: AppTextStyles.largeBold())),
+      appBar: AppBar(
+        title: Text('Tabs 미리보기', style: AppTextStyles.largeBold()),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

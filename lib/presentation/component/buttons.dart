@@ -5,12 +5,11 @@ import 'package:recipe_app/ui/text_styles.dart';
 
 enum ButtonSize { big, medium, small }
 
-class Buttons extends StatelessWidget {
+class Buttons extends StatefulWidget {
   final String text;
   final ButtonSize size;
   final VoidCallback? onPressed;
   final bool isDisabled;
-  final bool showArrow;
   final IconData? icon;
   final bool isPressed;
 
@@ -20,7 +19,6 @@ class Buttons extends StatelessWidget {
     required this.onPressed,
     this.size = ButtonSize.medium,
     this.isDisabled = false,
-    this.showArrow = false,
     this.icon,
     this.isPressed = false,
   });
@@ -47,13 +45,20 @@ class Buttons extends StatelessWidget {
   };
 
   @override
+  State<Buttons> createState() => _ButtonsState();
+}
+
+class _ButtonsState extends State<Buttons> {
+  bool _isPressed = false;
+  @override
   Widget build(BuildContext context) {
-    final style = _styleMap[size]!;
+    final style = Buttons._styleMap[widget.size]!;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    final showIcon = (size == ButtonSize.big || size == ButtonSize.medium);
+    final showIcon =
+        (widget.size == ButtonSize.big || widget.size == ButtonSize.medium);
     double buttonWidth;
-    switch (size) {
+    switch (widget.size) {
       case ButtonSize.big:
         buttonWidth = double.infinity;
         break;
@@ -65,15 +70,42 @@ class Buttons extends StatelessWidget {
         break;
     }
 
-    return InkWell(
-      onTap: isDisabled ? null : onPressed,
-      borderRadius: BorderRadius.circular(style.radius),
-      child: Ink(
+    final Color backgroundColor =
+        widget.isDisabled
+            ? ColorStyle.gray4
+            : _isPressed
+            ? ColorStyle.gray4
+            : ColorStyle.primary100;
+
+    return GestureDetector(
+      onTap: widget.isDisabled ? null : widget.onPressed,
+      onTapDown: (_) {
+        if (!widget.isDisabled) {
+          setState(() {
+            _isPressed = true;
+          });
+        }
+      },
+      onTapUp: (_) {
+        if (!widget.isDisabled) {
+          setState(() {
+            _isPressed = false;
+          });
+        }
+      },
+      onTapCancel: () {
+        if (!widget.isDisabled) {
+          setState(() {
+            _isPressed = false;
+          });
+        }
+      },
+      child: Container(
         width: buttonWidth, // 반응형
         height: style.height,
         padding: style.padding,
         decoration: BoxDecoration(
-          color: isDisabled ? ColorStyle.gray4 : ColorStyle.primary100,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(style.radius),
         ),
         child: Row(
@@ -84,7 +116,7 @@ class Buttons extends StatelessWidget {
               height: 24,
               child: Center(
                 child: Text(
-                  text,
+                  widget.text,
                   style: style.textStyle,
                   textAlign: TextAlign.center,
                 ),
@@ -92,7 +124,7 @@ class Buttons extends StatelessWidget {
             ),
             if (showIcon) ...[
               const SizedBox(width: 11),
-              Icon(icon, color: ColorStyle.white, size: 20),
+              Icon(widget.icon, color: ColorStyle.white, size: 20),
             ],
           ],
         ),

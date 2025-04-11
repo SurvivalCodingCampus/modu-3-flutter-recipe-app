@@ -9,7 +9,7 @@ class ButtonExampleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Button 예제', style: AppTextStyles.largeBold()),
+        title: Text('Button 미리보기', style: AppTextStyles.largeBold()),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

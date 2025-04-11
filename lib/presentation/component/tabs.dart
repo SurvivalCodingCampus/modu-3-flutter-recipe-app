@@ -29,16 +29,19 @@ class Tabs extends StatelessWidget {
                   onValueChange(labelIndex);
                 },
 
-                child: Container(
-                  // child: AnimatedContainer(
-                  // duration: const Duration(microseconds: 700),
+                // child: Container(
+                child: AnimatedContainer(
+                  duration: const Duration(microseconds: 700),
+                  curve: Curves.easeInOut,
+                  // Curves.decelerate (초반에 빠르고 점점 느려짐)
+                  // Curves.elasticOut (쫀득한 튕김 효과)
                   width: 375 / labels.length,
                   height: 33,
                   decoration: BoxDecoration(
                     color:
                         labelIndex == selectIndex
                             ? ColorStyle.primary100
-                            : null,
+                            : Colors.transparent,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
