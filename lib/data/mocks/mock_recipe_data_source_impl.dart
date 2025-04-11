@@ -12,12 +12,17 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
 
   @override
   Future<List<RecipeDto>> fetchRecipes() async {
-    final jsonStr = await rootBundle.loadString(_path);
-    final decoded = json.decode(jsonStr);
+    try {
+      final jsonStr = await rootBundle.loadString(_path);
+      final decoded = json.decode(jsonStr);
 
-    return (decoded['recipes'] as List)
-        .map((e) => RecipeDto.fromJson(Map<String, dynamic>.from(e)))
-        .toList();
+      return (decoded['recipes'] as List)
+          .map((e) => RecipeDto.fromJson(Map<String, dynamic>.from(e)))
+          .toList();
+    } catch (e) {
+      // 예외 처리
+      throw Exception('recipes 를 읽을 수 없음 : $e');
+    }
   }
 }
 

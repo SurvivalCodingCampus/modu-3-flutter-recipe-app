@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
-import 'presentation/component/preview_test/dev_main_menu_screen.dart';
+import 'presentation/preview_test/dev_main_menu_screen.dart';
 
 void main() {
   runApp(const MyApp());

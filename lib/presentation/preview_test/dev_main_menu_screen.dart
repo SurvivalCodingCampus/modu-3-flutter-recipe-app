@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/mocks/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
-import '../../saved_recipes/saved_recipes_view_model.dart';
 import 'component_preview.dart';
 import 'login_preview_transformed.dart';
 
@@ -46,16 +43,10 @@ class MainMenuScreen extends StatelessWidget {
               context,
               title: '2. 저장된 레시피 화면',
               onTap: () {
-                final viewModel = SavedRecipesViewModel(
-                  RecipeRepositoryImpl(
-                    remoteDataSource: null,
-                    localDataSource: MockRecipeDataSourceImpl(),
-                  ),
-                );
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => SavedRecipesScreen(viewModel: viewModel),
+                    builder: (_) => SavedRecipesScreen.withMock(),
                   ),
                 );
               },
