@@ -2,20 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
-class SmallButton extends StatelessWidget {
+class SmallButton extends StatefulWidget {
   final String text;
   final VoidCallback onClick;
+  final Color color;
 
-  const SmallButton({super.key, required this.text, required this.onClick});
+  const SmallButton({
+    super.key,
+    required this.text,
+    required this.onClick,
+    this.color = ColorStyle.primary100,
+  });
+
+  @override
+  State<SmallButton> createState() => _SmallButtonState();
+}
+
+class _SmallButtonState extends State<SmallButton> {
+  bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onClick,
+      onTapDown: (down) {
+        setState(() {
+          isPressed = true;
+        });
+      },
+      onTapUp: (up) {
+        setState(() {
+          isPressed = false;
+        });
+      },
+      onTapCancel: () {
+        setState(() {
+          isPressed = false;
+        });
+      },
+      onTap: widget.onClick,
       child: Container(
         height: 37,
         decoration: BoxDecoration(
-          color: ColorStyle.primary100,
+          color: isPressed ? ColorStyle.gray4 : widget.color,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -25,7 +53,7 @@ class SmallButton extends StatelessWidget {
               width: 114,
               child: Center(
                 child: Text(
-                  text,
+                  widget.text,
                   style: AppTextStyles.smallBold.copyWith(
                     color: ColorStyle.white,
                   ),
