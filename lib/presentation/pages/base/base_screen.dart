@@ -7,6 +7,7 @@ class BaseScreen extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final bool resizeToAvoidBottomInset;
   final FloatingActionButton? floatingActionButton;
+  final bool isSafeArea;
   const BaseScreen({
     required this.child,
     this.bgColor = Colors.white,
@@ -14,6 +15,7 @@ class BaseScreen extends StatelessWidget {
     this.resizeToAvoidBottomInset = false,
     this.appBar,
     this.floatingActionButton,
+    this.isSafeArea = true,
     super.key,
   });
 
@@ -28,7 +30,7 @@ class BaseScreen extends StatelessWidget {
         resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         appBar: appBar,
         backgroundColor: bgColor,
-        body: child,
+        body: isSafeArea ? SafeArea(child: child) : child,
         bottomNavigationBar: bottomNavigationBar,
         floatingActionButton: floatingActionButton,
       ),
