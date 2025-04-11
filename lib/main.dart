@@ -6,6 +6,7 @@ import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/components.dart';
 import 'package:recipe_app/presentation/recipe/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/recipe/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 final RecipeDataSource recipeDataSource = MockRecipeDataSource();
@@ -103,6 +104,7 @@ class App extends StatelessWidget {
                 ),
               ],
             ),
+        '/splash': (context) => SplashScreen(),
         '/others':
             (context) => ComponentsScreen(
               title: 'Others',
@@ -218,6 +220,12 @@ class HomeScreen extends StatelessWidget {
               text: 'Saved Recipes',
               onPressed: () {
                 Navigator.of(context).pushNamed('/recipe/saved');
+              },
+            ),
+            MediumButton(
+              text: 'Splash Screen',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/splash');
               },
             ),
           ],
