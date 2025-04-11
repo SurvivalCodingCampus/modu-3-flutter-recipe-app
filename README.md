@@ -19,6 +19,6 @@ Flutter로 만드는 레시피 앱
 
 ![2단계 UI 연습](./assets/screenshots/stack.png)
 
-| AlertDialog Widget   별점 0개        | AlertDialog Widget        별점 4개   |
-|-----------------------------------|-----------------------------------|
-| !(./assets/screenshots/rate0.png) | !(./assets/screenshots/rate4.png) |
+| AlertDialog Widget   별점 0개          | AlertDialog Widget        별점 4개     |
+|-------------------------------------|-------------------------------------|
+| ![](./assets/screenshots/rate0.png) | ![](./assets/screenshots/rate4.png) |
