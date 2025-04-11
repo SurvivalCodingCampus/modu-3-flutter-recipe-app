@@ -39,7 +39,7 @@ class RatingButton extends StatelessWidget {
                 color: isSelected ? ColorStyle.white : ColorStyle.primary80,
               ),
             ),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
             Icon(
               Icons.star,
               size: 20,

@@ -41,7 +41,7 @@ class RecipeCard extends StatelessWidget {
 
             Container(
               height: 200,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [ColorStyle.black, Colors.transparent],
                   begin: Alignment.bottomCenter,
@@ -87,17 +87,21 @@ class RecipeCard extends StatelessWidget {
               bottom: 10,
               child: Row(
                 children: [
-                  Icon(Icons.timer_outlined, size: 17, color: ColorStyle.gray4),
-                  SizedBox(width: 5),
+                  const Icon(
+                    Icons.timer_outlined,
+                    size: 17,
+                    color: ColorStyle.gray4,
+                  ),
+                  const SizedBox(width: 5),
                   Text(
                     '$cookTime min',
                     style: AppTextStyles.smallRegular(color: ColorStyle.gray4),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Container(
                     height: 24,
                     width: 24,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: ColorStyle.white,
                     ),
@@ -127,8 +131,8 @@ class RecipeCard extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.star, size: 8.5, color: ColorStyle.rating),
-                    SizedBox(width: 3.25),
+                    const Icon(Icons.star, size: 8.5, color: ColorStyle.rating),
+                    const SizedBox(width: 3.25),
                     Text(
                       rating.toStringAsFixed(1),
                       style: AppTextStyles.smallLabel(),

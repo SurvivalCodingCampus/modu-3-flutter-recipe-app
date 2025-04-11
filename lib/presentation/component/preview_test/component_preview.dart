@@ -240,25 +240,25 @@ class _PreviewHomePageState extends State<PreviewHomePage> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            IngredientItem(
+            const IngredientItem(
               title: '양배추',
               imagePath: 'assets/images/ingredient/cabbage.png',
               weight: '520g',
             ),
             const SizedBox(height: 8),
-            IngredientItem(
+            const IngredientItem(
               title: '빵',
               imagePath: 'assets/images/ingredient/slice_bread.png',
               weight: '200g',
             ),
             const SizedBox(height: 8),
-            IngredientItem(
+            const IngredientItem(
               title: '토마토',
               imagePath: 'assets/images/ingredient/tomato.png',
               weight: '150g',
             ),
             const SizedBox(height: 8),
-            IngredientItem(
+            const IngredientItem(
               title: '타코',
               imagePath: 'assets/images/ingredient/taco.png',
               weight: '90g',
