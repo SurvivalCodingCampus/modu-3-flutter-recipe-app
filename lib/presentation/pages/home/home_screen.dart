@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/pages/base/base_screen.dart';
+import 'package:recipe_app/presentation/pages/home/view_model/home_view_model.dart';
 import 'package:recipe_app/presentation/widgets/recipe/recipe_card.dart';
 
 class HomeScreen extends StatelessWidget {

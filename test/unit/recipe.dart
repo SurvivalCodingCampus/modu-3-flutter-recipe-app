@@ -1,11 +1,33 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:recipe_app/core/modules/error_handling/result.dart';
+import 'package:recipe_app/core/modules/exception/custom_exception.dart';
+import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
+import 'package:recipe_app/feature/receipe/data/repository/recipe_repository.dart';
+import 'package:recipe_app/feature/receipe/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/feature/receipe/domain/data_source/mock/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/feature/receipe/domain/data_source/recipe_data_source.dart';
 import 'package:recipe_app/feature/receipe/domain/dto/recipe_dto.dart';
 
-class MockRecipeDataSourceImpl implements RecipeDataSource {
-  @override
-  Future<List<RecipeDto>> getRecipes() async {
-    Future.delayed(const Duration(seconds: 2));
-    return [
+void main() {
+  group('recipe test', () {
+    final RecipeDataSource dataSource = MockRecipeDataSourceImpl();
+    final RecipeRepository repo = RecipeRepositoryImpl(dataSource);
+    test('recipe mock data test', () async {
+      final resp = await repo.getRecipes();
+      switch (resp) {
+        case Success<List<Recipe>>():
+          expect(resp.data, mock);
+          break;
+        case Error<List<Recipe>>():
+          expect(resp.error, const NetworkException());
+          break;
+      }
+    });
+  });
+}
+
+final mock =
+    [
       {
         "category": "Indian",
         "id": 1,
@@ -306,5 +328,3 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
         ],
       },
     ].map((e) => RecipeDto.fromJson(e)).toList();
-  }
-}
