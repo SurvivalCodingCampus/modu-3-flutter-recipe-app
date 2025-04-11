@@ -19,6 +19,7 @@ dependencies:
   google_fonts: ^6.2.1
   freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
+  network_image_mock: ^2.1.1
 
 dev_dependencies:
   flutter_test:
