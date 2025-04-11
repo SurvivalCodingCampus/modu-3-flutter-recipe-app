@@ -16,10 +16,11 @@ class Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 375,
+      width: double.infinity,
       height: 58,
       color: ColorStyles.white,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           for (int i = 0; i < labels.length; i++) ...[
             GestureDetector(

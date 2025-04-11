@@ -24,7 +24,7 @@ class InputField extends StatelessWidget {
         SizedBox(height: 5),
         SizedBox(
           height: 55,
-          width: 315,
+          width: double.infinity,
           child: TextFormField(
             initialValue: value,
             onChanged: onValueChange,
