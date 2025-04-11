@@ -46,3 +46,9 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+
+# generate file
+.g.dart
+
+# Freezed file
+.freezed.dart
