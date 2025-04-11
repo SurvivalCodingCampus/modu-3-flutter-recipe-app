@@ -51,7 +51,6 @@ class SplashScreen extends StatelessWidget {
                       color: ColorStyles.white,
                     ),
                   ),
-
                   const Spacer(),
                   Text(
                     'Get Cooking',
@@ -67,7 +66,6 @@ class SplashScreen extends StatelessWidget {
                       color: ColorStyles.white,
                     ),
                   ),
-
                   const SizedBox(height: 60),
                   BigButton(
                     text: 'Start Cooking',
