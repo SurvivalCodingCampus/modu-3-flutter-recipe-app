@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/components.dart';
-
 import '../../ui/ui.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -14,86 +13,74 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(backgroundImageUrl),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.network(backgroundImageUrl, fit: BoxFit.cover),
+          ),
+
+          Positioned.fill(
+            child: Container(
               decoration: BoxDecoration(
-                color: ColorStyles.black,
-                borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    ColorStyles.black.withAlpha(10),
+                    ColorStyles.black.withAlpha(0),
                     ColorStyles.black.withAlpha(255),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 83.0,
-                vertical: 104,
-              ),
-              child: Center(
-                child: Column(
-                  spacing: 14,
-                  children: [
-                    Image.network(hatIconImageUrl, width: 79),
-                    Text(
-                      '100K+ Premium Recipe',
-                      style: TextStyles.mediumTextBold.copyWith(
-                        color: ColorStyles.white,
-                      ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 40.0,
+              vertical: kToolbarHeight,
+            ),
+            child: Center(
+              child: Column(
+                children: [
+                  const SizedBox(height: 60),
+                  Image.network(hatIconImageUrl, width: 79),
+                  const SizedBox(height: 14),
+                  Text(
+                    '100K+ Premium Recipe',
+                    style: TextStyles.mediumTextBold.copyWith(
+                      color: ColorStyles.white,
                     ),
-                    const SizedBox(height: 222),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 31,
-                            vertical: 20,
-                          ),
-                          child: Text(
-                            'Get \nCooking',
-                            textAlign: TextAlign.center,
-                            style: TextStyles.titleTextBold.copyWith(
-                              color: ColorStyles.white,
-                              height: 1.2,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          'Simple way to find Tasty Recipe',
-                          style: TextStyles.normalTextRegular.copyWith(
-                            color: ColorStyles.white,
-                          ),
-                        ),
-                        const SizedBox(height: 64),
-                      ],
+                  ),
+
+                  const Spacer(),
+                  Text(
+                    'Get Cooking',
+                    textAlign: TextAlign.center,
+                    style: TextStyles.titleTextBold.copyWith(
+                      color: ColorStyles.white,
+                      height: 1.2,
                     ),
-                    BigButton(
-                      text: 'Start Cooking',
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/');
-                      },
+                  ),
+                  Text(
+                    'Simple way to find Tasty Recipe',
+                    style: TextStyles.normalTextRegular.copyWith(
+                      color: ColorStyles.white,
                     ),
-                  ],
-                ),
+                  ),
+
+                  const SizedBox(height: 60),
+                  BigButton(
+                    text: 'Start Cooking',
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/');
+                    },
+                  ),
+                  const SizedBox(height: 84),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
