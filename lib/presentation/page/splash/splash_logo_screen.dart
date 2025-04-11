@@ -67,8 +67,6 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
               }
             });
           }
-        } else {
-          print("로고 안 보여줌");
         }
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
