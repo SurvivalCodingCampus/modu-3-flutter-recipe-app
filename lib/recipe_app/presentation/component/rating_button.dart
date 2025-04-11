@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/2025-04-10/ui/button_styles2.dart';
-import 'package:recipe_app/2025-04-10/ui/color_styles2.dart';
-import 'package:recipe_app/2025-04-10/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class RatingButton extends StatefulWidget {
   const RatingButton({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/2025-04-10/ui/color_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 
 abstract class ButtonStyles2 {
   static final ButtonStyle unSelectedButton = ElevatedButton.styleFrom(

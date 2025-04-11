@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/input_field.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/tabs.dart';
-import 'package:recipe_app/2025-04-10/model/recipe.dart';
-import 'package:recipe_app/2025-04-10/presentation/component/filter_button.dart';
-import 'package:recipe_app/2025-04-10/presentation/component/ingredient_item.dart';
-import 'package:recipe_app/2025-04-10/presentation/component/recipe_card.dart';
+import 'package:recipe_app/recipe_app/model/recipe.dart';
+import 'package:recipe_app/recipe_app/presentation/component/filter_button.dart';
+import 'package:recipe_app/recipe_app/presentation/component/ingredient_item.dart';
+import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 
 //test 이름에 한글 포함하면 오류 생길 확률 높으니 영어로 작성해두기
 
