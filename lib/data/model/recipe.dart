@@ -1,26 +1,31 @@
-import 'user.dart';
+import 'package:recipe_app/data/model/ingredient_with_amount.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:recipe_app/data/type/category_filter.dart';
 
-class Recipe {
-  final int recipeId;
+part 'recipe.freezed.dart';
+
+// ignore_for_file: annotate_overrides
+@freezed
+class Recipe with _$Recipe {
+  final int id;
+  final CategoryFilter category;
   final String name;
-  final String cookTime;
-  final User chef;
-  final double rate;
-  final String foodImage;
+  final String time;
+  final String chef;
+  final double rating;
+  final String image;
+  final List<IngredientWithAmount> ingredients;
 
   const Recipe({
-    required this.recipeId,
+    required this.id,
+    required this.category,
     required this.name,
-    required this.cookTime,
+    required this.time,
     required this.chef,
-    required this.rate,
-    required this.foodImage
+    required this.rating,
+    required this.image,
+    required this.ingredients
   });
-
-  @override
-  String toString() {
-    return 'Recipe{recipeId: $recipeId, name: $name, cookTime: $cookTime, chef: $chef, rate: $rate, foodImage: $foodImage}';
-  }
 
   // final int commentCount;
   // final int serve;
