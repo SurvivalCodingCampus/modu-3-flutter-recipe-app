@@ -12,6 +12,8 @@ class SavedRecipesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorStyles.white,
       appBar: AppBar(
+        backgroundColor: ColorStyles.white,
+        surfaceTintColor: ColorStyles.white,
         title: Text(
           'Saved Recipes',
           style: TextStyles.mediumTextBold.copyWith(
@@ -24,6 +26,9 @@ class SavedRecipesScreen extends StatelessWidget {
         child: ListenableBuilder(
           listenable: viewModel,
           builder: (context, child) {
+            if (viewModel.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
             return ListView.separated(
               itemBuilder: (context, index) {
                 return RecipeCard(recipe: viewModel.savedRecipes[index]);
