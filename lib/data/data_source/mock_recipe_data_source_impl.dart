@@ -126,7 +126,7 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
             "amount": 100
           }
         ]
-      },
+      }
     ]
   ''';
 
