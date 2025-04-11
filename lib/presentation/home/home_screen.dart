@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             listenable: viewModel,
             builder: (context, snapshot) {
               if (viewModel.isLoading) {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
               return Column(
                 children:
