@@ -1,7 +1,9 @@
+import 'package:recipe_app/core/modules/exception/custom_exception.dart';
+
 sealed class Result<T> {
   const factory Result.success(T data) = Success;
 
-  const factory Result.error(Exception error) = Error;
+  const factory Result.error(CustomException error) = Error;
 }
 
 class Success<T> implements Result<T> {
@@ -11,7 +13,7 @@ class Success<T> implements Result<T> {
 }
 
 class Error<T> implements Result<T> {
-  final Exception error;
+  final CustomException error;
 
   const Error(this.error);
 }
