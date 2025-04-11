@@ -63,7 +63,7 @@ class AppTextField extends StatelessWidget {
       obscureText: obsecure,
       textAlign: textAlign,
       textAlignVertical: TextAlignVertical.top,
-      style: AppTextstyle.smallRegular,
+      style: AppTextStyle.smallRegular,
       onChanged: onChanged,
       controller: controller,
       decoration: InputDecoration(
@@ -84,7 +84,7 @@ class AppTextField extends StatelessWidget {
             contentPadding ??
             const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
         hintText: hintText,
-        hintStyle: AppTextstyle.smallRegular,
+        hintStyle: AppTextStyle.smallRegular,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
