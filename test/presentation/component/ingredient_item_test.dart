@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/presentation/component/ingredient_item.dart';
-import 'package:recipe_app/presentation/component_test_screen.dart';
+import 'package:recipe_app/presentation/component/component_test_screen.dart';
 
 void main() {
   testWidgets('IngredientItem 테스트', (WidgetTester tester) async {
