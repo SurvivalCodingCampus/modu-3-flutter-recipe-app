@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/common/page_animation_move.dart';
 import 'package:recipe_app/presentation/common/component/color_text_button.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
+import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
 
 class SplashLogoScreen extends StatefulWidget {
@@ -122,9 +124,7 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
                 ),
               ),
             ),
-            SizedBox(
-              height: 64,
-            ),
+            SizedBox(height: 64),
             FadeTransition(
               opacity: _textOpacity,
               child: SlideTransition(
@@ -133,11 +133,17 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
                   alignment: Alignment.center,
                   child: ColorTextButton(
                     buttonHeight: 54,
-                    buttonWidth: MediaQuery.of(context).size.width /2 ,
+                    buttonWidth: MediaQuery.of(context).size.width / 2,
                     buttonText: "Start Cooking",
                     buttonColor: ColorStyle.primary100,
                     textColor: ColorStyle.white,
-                    onPressed: () {},
+                    onPressed: () {
+                      PageAnimationMove().pushWithFade(
+                        context: context,
+                        second: 1,
+                        page: SavedRecipesScreen(),
+                      );
+                    },
                     buttonRadius: 10,
                   ),
                 ),
