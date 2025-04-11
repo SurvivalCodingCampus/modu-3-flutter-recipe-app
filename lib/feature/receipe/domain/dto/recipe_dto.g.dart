@@ -14,6 +14,10 @@ _RecipeDto _$RecipeDtoFromJson(Map<String, dynamic> json) => _RecipeDto(
   chef: json['chef'] as String?,
   time: json['time'] as String?,
   rating: (json['rating'] as num?)?.toDouble(),
+  ingredients:
+      (json['ingredients'] as List<dynamic>?)
+          ?.map((e) => IngredientAmountDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
 );
 
 Map<String, dynamic> _$RecipeDtoToJson(_RecipeDto instance) =>
@@ -25,4 +29,5 @@ Map<String, dynamic> _$RecipeDtoToJson(_RecipeDto instance) =>
       'chef': instance.chef,
       'time': instance.time,
       'rating': instance.rating,
+      'ingredients': instance.ingredients,
     };
