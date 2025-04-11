@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:network_image_mock/network_image_mock.dart';
 import 'package:recipe_app/presentation/component/components.dart'
     show RecipeCard;
 
@@ -10,18 +13,22 @@ void main() {
   const String author = 'Test Author';
   const int cookTime = 30;
   const int rating = 5;
-  const String imagePath = 'assets/images/card-1.png';
+  const String imagePath = '';
+
+  setUpAll(() => HttpOverrides.global = null);
 
   testWidgets('RecipeCard 렌더링이 정상적으로 이루어져야한다.', (WidgetTester tester) async {
-    await tester.pumpWidget(
-      TestClass(
-        child: RecipeCard(
-          title: title,
-          author: author,
-          cookTime: cookTime,
-          imagePath: imagePath,
-          rating: rating,
-          onBookmark: () {},
+    await mockNetworkImagesFor(
+      () async => await tester.pumpWidget(
+        TestClass(
+          child: RecipeCard(
+            title: title,
+            author: author,
+            cookTime: cookTime,
+            imagePath: imagePath,
+            rating: rating,
+            onBookmark: () {},
+          ),
         ),
       ),
     );
@@ -34,22 +41,24 @@ void main() {
   ) async {
     int count = 0;
 
-    await tester.pumpWidget(
-      TestClass(
-        child: RecipeCard(
-          title: title,
-          author: author,
-          cookTime: cookTime,
-          imagePath: imagePath,
-          rating: rating,
-          onBookmark: () {
-            count++;
-          },
+    await mockNetworkImagesFor(
+      () async => await tester.pumpWidget(
+        TestClass(
+          child: RecipeCard(
+            title: title,
+            author: author,
+            cookTime: cookTime,
+            imagePath: imagePath,
+            rating: rating,
+            onBookmark: () {
+              count++;
+            },
+          ),
         ),
       ),
     );
 
-    await tester.tap(find.byKey(Key('bookmark_button')));
+    await tester.tap(find.byKey(const Key('bookmark_button')));
     expect(count, 1);
   });
 }
