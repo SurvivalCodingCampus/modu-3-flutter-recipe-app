@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/ui/color_style.dart';
 
 import 'presentation/component/preview_test/dev_main_menu_screen.dart';
 
@@ -11,8 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MainMenuScreen(),
+    return MaterialApp(
+      title: 'Recipe App',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: ColorStyle.primary100),
+      ),
+      home: const MainMenuScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
