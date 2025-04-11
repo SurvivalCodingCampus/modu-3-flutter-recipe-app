@@ -13,8 +13,11 @@ void main() {
       );
 
       expect(viewModel.savedRecipes, isEmpty);
+
       await viewModel.fetchSavedRecipes();
-      expect(viewModel.savedRecipes, isNotEmpty);
+
+      expect(viewModel.savedRecipes.length, greaterThan(0));
+      expect(viewModel.savedRecipes.first.name, isNotNull);
     });
   });
 }
