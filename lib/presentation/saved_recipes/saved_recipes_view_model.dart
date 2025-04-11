@@ -34,7 +34,7 @@ class SavedRecipesViewModel extends ChangeNotifier {
           break;
       }
     } catch (e) {
-      _state = UiState.error('예상치 못한 오류가 발생했습니다.');
+      _state = const UiState.error('예상치 못한 오류가 발생');
       debugPrint('load() failed: $e');
     }
 
