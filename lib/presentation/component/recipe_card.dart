@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/app_image.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
@@ -32,8 +33,8 @@ class RecipeCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: Stack(
           children: [
-            Image.asset(
-              imagePath,
+            AppImage(
+              path: imagePath,
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
