@@ -1,43 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/big_button.dart';
+import 'package:recipe_app/presentation/component/alert/rating_dialog.dart';
+import 'package:recipe_app/presentation/component/filter_button.dart';
+import 'package:recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
-import 'package:recipe_app/presentation/component/medium_button.dart';
-import 'package:recipe_app/presentation/component/small_button.dart';
-import 'package:recipe_app/presentation/component/tabs.dart';
+import 'package:recipe_app/presentation/component/pushed_button/big_tap_button.dart';
+import 'package:recipe_app/presentation/component/pushed_button/medium_tap_button.dart';
+import 'package:recipe_app/presentation/component/pushed_button/small_tap_button.dart';
+import 'package:recipe_app/presentation/component/rating_button.dart';
+import 'package:recipe_app/presentation/component/recipe_card.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              BigButton(text: 'Button'),
-              SizedBox(height: 10),
-              MediumButton(text: 'Button'),
-              SizedBox(height: 10),
-              SmallButton(text: 'Button'),
-              SizedBox(height: 10),
-              InputField(
-                label: 'Lable',
-                holder: 'Placeholder',
-                value: '',
-                onChanged: (value) {},
-              ),
-              SizedBox(height: 10),
-              Tabs(
-                labels: ['어제', '오늘', '내일'],
-                selectedIndex: 1,
-                onChanged: (value) {},
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BigTapButton(text: 'Button'),
+                SizedBox(height: 10),
+                MediumTapButton(text: 'Button'),
+                SizedBox(height: 10),
+                SmallTapButton(text: 'Button'),
+                SizedBox(height: 10),
+                InputField(label: '검색', holder: '검색어를 입력해주세요'),
+                SizedBox(height: 10),
+                IngredientItem(
+                  ingredientImage:
+                      'https://s3-alpha-sig.figma.com/img/3c30/4e61/3dd3e1dd1f7360a6ef1c04399b0609ab?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Z1o~faIwyt6-juKGeztJ2D8GDEM66ccRS8CMg0e4-Ldw9tXRosaROZFDCQrLROVxG9RuaxwLP5ZjfgM7fRROYE4OVoiEQWdPjxN~9cWWWzFiG79eK-ZeDreGZBlJ39ps1vi~gaImP6HY83~-MVt7rBouxK2LvI9y2T-dnIbJzpO3FKVDyL~BQ328ez6-5Ef40tsgLqIlb3JCcClbRpDU5sh0fd4YhRTM88ELeC1brmBVIwJukIy85zZWy88zprw78~fpQ8eu9uPHFDq8j677ng4J7fO942x19hUwK9zgxiQe9R2EDS60ZOTydWh12UYGDq6MiAz~tDjcYV0mEUQm9Q__',
+                  ingredientName: '토마토',
+                  ingredientQuantity: '500g',
+                ),
+                SizedBox(height: 10),
+                RecipeCard(
+                  imageUrl:
+                      'https://cdn.pixabay.com/photo/2017/11/10/15/04/steak-2936531_1280.jpg',
+                  title: 'Traditional spare ribs baked',
+                  name: 'Chef John',
+                  rating: '4.0',
+                  time: '20 min',
+                ),
+                SizedBox(height: 10),
+                RecipeCard(
+                  imageUrl:
+                      'https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png',
+                  title: 'Spicy Nelly',
+                  name: 'Chef John',
+                  rating: '4.0',
+                  time: '20 min',
+                ),
+                SizedBox(height: 10),
+                RatingButton(rate: 5),
+                SizedBox(height: 10),
+                RatingButton(rate: 4),
+                SizedBox(height: 10),
+                FilterButton(text: ['All', 'Breakfast', 'Lunch', 'Dinner']),
+                SizedBox(height: 10),
+                FilterButton(text: ['계절', '봄', '여름', '가을', '겨울']),
+                SizedBox(height: 10),
+                RatingDialog(title: '별점', actionName: '보내기'),
+                SizedBox(height: 10),
+                RatingDialog(title: 'Rate recipe', actionName: 'Send'),
+              ],
+            ),
           ),
         ),
       ),
