@@ -9,31 +9,13 @@ import 'package:recipe_app/presentation/component/tabs_widget.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
-import 'component/button_widget.dart';
-import 'component/ingredient_item.dart';
-import 'component/rating_dialog.dart';
-import 'component/recipe_card.dart';
+import 'button_widget.dart';
+import 'ingredient_item.dart';
+import 'rating_dialog.dart';
+import 'recipe_card.dart';
 
 class ComponentTestScreen extends StatefulWidget {
   const ComponentTestScreen({super.key});
-
-  static const List<Recipe> recipes = [
-    Recipe(
-      recipeId: 1,
-      name: 'Traditional spare ribs baked',
-      cookTime: '20 min',
-      chef: User(name: 'Chef John'),
-      rate: 4.0,
-      foodImage: 'assets/images/recipe_images/Traditional spare ribs baked.png',
-    ),
-  ];
-  static const List<Ingredient> ingredients = [
-    Ingredient(
-      name: 'Tomatos',
-      weight: '500g',
-      ingredientImage: 'assets/images/ingredient_images/tomato.png',
-    ),
-  ];
 
   @override
   State<ComponentTestScreen> createState() => _ComponentTestScreenState();
@@ -108,27 +90,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                       selectedIndex: tabSelectedIndex,
                     ),
                   ),
-                  IngredientItem(ingredient: ComponentTestScreen.ingredients.first),
-                  SizedBox(
-                    height: 200,
-                    child: RecipeCard(
-                      recipe: ComponentTestScreen.recipes.first,
-                      isBookmarked: isBookmarked,
-                      onBookmark: (name) {
-                        if (isBookmarked == true) {
-                          print('$name 북마크가 해제 되었습니다');
-                          setState(() {
-                            isBookmarked = !isBookmarked;
-                          });
-                        } else {
-                          print('$name이 북마크 되었습니다');
-                          setState(() {
-                            isBookmarked = !isBookmarked;
-                          });
-                        }
-                      },
-                    ),
-                  ),
+                  // IngredientItem(ingredient: ComponentTestScreen.ingredients.first),
                   SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
