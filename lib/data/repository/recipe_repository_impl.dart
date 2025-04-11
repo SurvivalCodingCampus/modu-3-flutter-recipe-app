@@ -9,8 +9,7 @@ class RecipeRepositoryImpl implements RecipeRepository {
 
   @override
   Future<List<Recipe>> findAll() async {
-    final recipes = await _dataSource.fetch();
-    return recipes;
+    return await _dataSource.fetch();
   }
 
   @override
