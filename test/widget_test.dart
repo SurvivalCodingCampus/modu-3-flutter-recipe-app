@@ -1,34 +1,51 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/component/big_buttons.dart'; // 너의 경로에 맞게 수정
+import 'package:recipe_app/presentation/component/score_dialog.dart';
 
 void main() {
-  testWidgets('1. Big 버튼 클릭 시 print 출력되는지 테스트', (WidgetTester tester) async {
-    final printLogs = <String>[];
+  testWidgets('ScoreDialog UI and interaction test', (WidgetTester tester) async {
+    int? selectedScore;
 
-    await runZonedGuarded(() async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: BigButton(),
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ScoreDialog(
+            title: 'Rate recipe',
+            actionName: 'Send',
+            onChange: (score) {
+              selectedScore = score;
+            },
           ),
         ),
-      );
+      ),
+    );
 
-      await tester.tap(find.byType(ElevatedButton));
-      await tester.pump();
+    // 제목이 보이는지
+    expect(find.text('Rate recipe'), findsOneWidget);
 
-      expect(
-        printLogs.contains('Big 버튼 클릭됨!'),
-        isTrue,
-        reason: 'Big 버튼 클릭 시 print가 호출되어야 합니다.',
-      );
-    }, (e, s) {},
-      zoneSpecification: ZoneSpecification(
-        print: (_, __, ___, String msg) {
-          printLogs.add(msg); // print 메시지 수집
-        },
-      ));
+    // 별 5개가 보이는지 (IconButton이 5개)
+    expect(find.byIcon(Icons.star), findsNWidgets(5));
+
+    // 초기 상태에서는 Send 버튼이 비활성화 (회색 배경)
+    final sendButton = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
+    final buttonStyle = sendButton.style!;
+    final backgroundColor = buttonStyle.backgroundColor?.resolve({}) ?? Colors.transparent;
+    expect(backgroundColor, const Color(0xFFBDBDBD)); // 회색
+
+    // 별 하나 누르기 (별 인덱스 2를 클릭하면 3점이 됨)
+    await tester.tap(find.byIcon(Icons.star).at(2));
+    await tester.pump();
+
+    // 버튼이 활성화 되었는지 (노란색 배경)
+    final updatedSendButton = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
+    final updatedColor = updatedSendButton.style?.backgroundColor?.resolve({}) ?? Colors.transparent;
+    expect(updatedColor, Colors.amber);
+
+    // 버튼 누르기
+    await tester.tap(find.text('Send'));
+    await tester.pumpAndSettle();
+
+    // 콜백이 정상적으로 호출되었는지
+    expect(selectedScore, 3);
   });
 }

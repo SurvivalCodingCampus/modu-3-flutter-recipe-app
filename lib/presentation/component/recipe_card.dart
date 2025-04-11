@@ -1,0 +1,148 @@
+import 'package:flutter/material.dart';
+
+class RecipeCard extends StatelessWidget {
+  final String recipeName;
+  final String chefName;
+  final String recipeImgUrl;
+  final int recipeTime;
+  final double recipeRating;
+
+  const RecipeCard({
+    super.key,
+    required this.recipeName,
+    required this.chefName,
+    required this.recipeImgUrl,
+    required this.recipeTime,
+    required this.recipeRating,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 315,
+      height: 150,
+      decoration: BoxDecoration(
+        color: const Color(0xFFD9D9D9),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Stack(
+          children: [
+            // 배경 이미지
+            Image.asset(
+              recipeImgUrl,
+              width: 315,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
+
+            // 그라데이션 오버레이
+            Container(
+              width: 315,
+              height: 400,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.7),
+                  ],
+                ),
+              ),
+            ),
+
+            // ⭐ 별점 (오른쪽 상단)
+            Positioned(
+              top: 12,
+              right: 12,
+              child: Container(
+                width: 37,
+                height: 16,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFE1B3),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  '⭐ $recipeRating',
+                  style: const TextStyle(
+                    fontSize: 10, // 높이에 맞춰 폰트도 줄이기
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+
+            // 🍖 레시피명 (줄바꿈 포함) + 셰프명 (왼쪽 하단)
+            Positioned(
+              left: 10,
+              bottom: 10,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    recipeName, // 예: "Ribs\nwith Sauce"
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      height: 1.2,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'By $chefName',
+                    style: const TextStyle(
+                      color: Color(0xFFD9D9D9),
+                      fontSize: 8,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // ⏱ 시간 + 북마크 아이콘 (오른쪽 하단)
+            Positioned(
+              bottom: 12,
+              right: 12,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.timer_outlined, // 타이머 아이콘
+                    color: Colors.white,
+                    size: 14,
+                  ),
+                  Text(
+                    ' $recipeTime min',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.bookmark_border,
+                      color: Color.fromARGB(255, 126, 174, 166),
+                      size: 12,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
