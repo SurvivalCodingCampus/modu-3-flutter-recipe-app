@@ -17,7 +17,7 @@ class IngredientItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 315,
+      width: double.infinity,
       height: 76,
       decoration: BoxDecoration(
         color: ColorStyles2.containerColor,

@@ -10,3 +10,13 @@ Flutter로 만드는 레시피 앱
 ### 결과 화면
 
 ![1단계 UI 연습](./assets/screenshots/step1.png)
+
+### 2단계 - UI 컴포넌트 연습 2
+
+- Container, Stack, StatefulWidget, AlertDialog 등 위젯 연습
+
+### 결과 화면
+
+| 여러 Widget                                                              | AlertDialog Widget                                                         |
+|------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| ![pr1.png](..%2F..%2FOneDrive%2F%B9%D9%C5%C1%20%C8%AD%B8%E9%2Fpr1.png) | ![rate4.png](..%2F..%2FOneDrive%2F%B9%D9%C5%C1%20%C8%AD%B8%E9%2Frate4.png) |

@@ -44,7 +44,7 @@ class _RatingDialogState extends State<RatingDialog> {
                                   setState(() {
                                     _stars = index + 1;
                                   });
-                                  setStateDialog(() {}); // ⭐️ 다이얼로그 내 UI 갱신
+                                  setStateDialog(() {});
                                 },
                                 iconSize: 35,
                                 icon: Icon(

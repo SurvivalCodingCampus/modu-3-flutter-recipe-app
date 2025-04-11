@@ -37,7 +37,7 @@ class _RecipeCardState extends State<RecipeCard> {
         children: [
           Container(
             height: 150,
-            width: 315,
+            width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               image: DecorationImage(
@@ -48,7 +48,7 @@ class _RecipeCardState extends State<RecipeCard> {
           ),
           Container(
             height: 150,
-            width: 315,
+            width: double.infinity,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               gradient: LinearGradient(
