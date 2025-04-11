@@ -11,7 +11,7 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Stack(
         children: [
@@ -24,7 +24,7 @@ class RecipeCard extends StatelessWidget {
             child: Row(
               spacing: 5,
               children: [
-                Icon(Icons.timer_outlined, color: ColorStyle.white),
+                const Icon(Icons.timer_outlined, color: ColorStyle.white),
                 Text(
                   '${recipe.cookingTime} min',
                   style: TextFontStyle.smallRegular(color: ColorStyle.gray4),
@@ -32,11 +32,11 @@ class RecipeCard extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     padding: EdgeInsets.zero,
-                    minimumSize: Size(30, 30),
+                    minimumSize: const Size(30, 30),
                   ),
-                  child: Icon(Icons.save, color: ColorStyle.primary80),
+                  child: const Icon(Icons.save, color: ColorStyle.primary80),
                 ),
               ],
             ),
@@ -71,7 +71,7 @@ class RecipeCard extends StatelessWidget {
   Container gradationUi() {
     return Container(
       height: 200,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -104,7 +104,7 @@ class RecipeCard extends StatelessWidget {
             spacing: 3,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.star, color: ColorStyle.rating, size: 16),
+              const Icon(Icons.star, color: ColorStyle.rating, size: 16),
               Text(recipe.rate.toString(), style: TextFontStyle.smallRegular()),
             ],
           ),

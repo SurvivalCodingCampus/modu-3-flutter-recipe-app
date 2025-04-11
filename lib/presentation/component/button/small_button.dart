@@ -35,7 +35,7 @@ class _SmallButtonState extends State<SmallButton> {
         });
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 100),
         width: 174,
         decoration: BoxDecoration(
           color:

@@ -29,7 +29,7 @@ class _RatingState extends State<Rating> {
       elevation: 10,
       backgroundColor: ColorStyle.white,
       content: Container(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           spacing: 15,
@@ -37,7 +37,7 @@ class _RatingState extends State<Rating> {
           children: [
             Text(widget.title, style: TextFontStyle.smallRegular()),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 10,
@@ -55,15 +55,18 @@ class _RatingState extends State<Rating> {
                     },
                     child: TweenAnimationBuilder(
                       tween: Tween(begin: 1.0, end: isSelected ? 1.2 : 1.0),
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
                       builder: (context, value, child) {
                         return Transform.scale(
                           scale: value,
                           child:
                               isSelected
-                                  ? Icon(Icons.star, color: ColorStyle.rating)
-                                  : Icon(
+                                  ? const Icon(
+                                    Icons.star,
+                                    color: ColorStyle.rating,
+                                  )
+                                  : const Icon(
                                     Icons.star_border,
                                     color: ColorStyle.rating,
                                   ),
@@ -94,8 +97,11 @@ class _RatingState extends State<Rating> {
                 });
               },
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 500),
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                duration: const Duration(milliseconds: 500),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 4,
+                  horizontal: 20,
+                ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   color: getSendButtonColor(

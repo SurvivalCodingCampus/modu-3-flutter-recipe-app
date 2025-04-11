@@ -6,6 +6,9 @@ class RecipeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomeView(), debugShowCheckedModeBanner: false);
+    return const MaterialApp(
+      home: HomeView(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }

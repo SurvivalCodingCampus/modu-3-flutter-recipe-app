@@ -22,7 +22,7 @@ class FilterButton extends StatelessWidget {
       onTap: onChanged,
       child: IntrinsicWidth(
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 500),
           decoration: BoxDecoration(
             border: Border.all(width: 1, color: ColorStyle.primary80),
             borderRadius: BorderRadius.circular(10),
@@ -51,7 +51,7 @@ class FilterButton extends StatelessWidget {
                                 : ColorStyle.primary100,
                       ),
                     )
-                    : SizedBox.shrink(),
+                    : const SizedBox.shrink(),
               ],
             ),
           ),

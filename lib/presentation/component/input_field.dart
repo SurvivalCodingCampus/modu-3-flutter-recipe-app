@@ -24,22 +24,25 @@ class InputField extends StatelessWidget {
         children: [
           Text(label, style: TextFontStyle.smallRegular()),
           Container(
-            padding: EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(top: 5),
             width: double.infinity,
             child: TextField(
               style: TextFontStyle.smallRegular(color: ColorStyle.black),
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(20),
+                contentPadding: const EdgeInsets.all(20),
                 hintText: placeholder,
                 hintStyle: TextFontStyle.smallRegular(color: ColorStyle.gray4),
                 labelStyle: TextFontStyle.smallRegular(),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: ColorStyle.gray4, width: 1.5),
+                  borderSide: const BorderSide(
+                    color: ColorStyle.gray4,
+                    width: 1.5,
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: ColorStyle.primary80,
                     width: 1.5,
                   ),
