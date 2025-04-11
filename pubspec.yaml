@@ -71,6 +71,7 @@ flutter:
   assets:
     - assets/screenshots/
     - assets/images/
+    - assets/record/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
