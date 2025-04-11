@@ -19,25 +19,24 @@ class SavedRecipesScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
-      body: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-          child: ListenableBuilder(
-            listenable: savedRecipesViewModelviewModel,
-            builder: (context, child) {
-              if (savedRecipesViewModelviewModel.isLoading) {
-                return CircularProgressIndicator();
-              }
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children:
-                    savedRecipesViewModelviewModel.recipes
-                        .map((recipe) => RecipeCard(recipe: recipe))
-                        .toList(),
-              );
-            },
-          ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: ListenableBuilder(
+          listenable: savedRecipesViewModelviewModel,
+          builder: (context, child) {
+            if (savedRecipesViewModelviewModel.isLoading) {
+              return CircularProgressIndicator();
+            }
+            return ListView.separated(
+              itemBuilder: (context, index) {
+                return RecipeCard(
+                  recipe: savedRecipesViewModelviewModel.recipes[index],
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 20),
+              itemCount: savedRecipesViewModelviewModel.recipes.length,
+            );
+          },
         ),
       ),
     );
