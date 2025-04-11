@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/component/custom_text_field.dart';
+import 'package:recipe_app/presentation/component/input_field.dart';
 
 void main() {
   group('TextField Test', () {
@@ -11,7 +11,7 @@ void main() {
       widgetTester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: CustomTextField(
+            body: InputField(
               label: label,
               placeholder: placeholder,
               onValueChange: (value) {
