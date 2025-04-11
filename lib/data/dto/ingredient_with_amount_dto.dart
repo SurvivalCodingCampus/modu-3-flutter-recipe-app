@@ -8,9 +8,10 @@ class IngredientWithAmountDto {
 
   factory IngredientWithAmountDto.fromJson(Map<String, dynamic> json) {
     return IngredientWithAmountDto(
-      ingredient: json['ingredient'] != null
-          ? IngredientDto.fromJson(json['ingredient'])
-          : null,
+      ingredient:
+          json['ingredient'] != null
+              ? IngredientDto.fromJson(json['ingredient'])
+              : null,
       amount: json['amount'] as num?,
     );
   }
