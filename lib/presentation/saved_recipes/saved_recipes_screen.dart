@@ -23,6 +23,10 @@ class SavedRecipesScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: 24),
+                    if (viewModel.isLoading)
+                      const Center(child: CircularProgressIndicator()),
+                    if (!viewModel.isLoading && viewModel.recipes.isEmpty)
+                      const Center(child: Text("저장된 레시피가 없습니다.")),
                     for (final recipe in viewModel.recipes) ...[
                       RecipeCard(recipe: recipe),
                       SizedBox(height: 24),
