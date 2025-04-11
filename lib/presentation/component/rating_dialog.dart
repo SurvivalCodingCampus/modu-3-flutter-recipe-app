@@ -54,8 +54,7 @@ class _RatingDialogState extends State<RatingDialog> {
           buttonText: widget.actionName,
           onClick: () {
             widget.onChange(selectedRate);
-            Navigator.of(context).pop();
-          },
+            },
         )
       ],
     );

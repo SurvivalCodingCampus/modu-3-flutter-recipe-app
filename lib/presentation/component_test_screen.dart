@@ -185,6 +185,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
             actionName: 'Send',
             onChange: (int rateValue) {
               print('별점: ${'⭐' * rateValue}');
+              Navigator.of(context).pop();
             },
           ),
         );
