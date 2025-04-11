@@ -3,6 +3,7 @@ description: "A new Flutter project."
 publish_to: "none"
 
 scripts:
+  test: flutter test -r github ./test
   test:unit: flutter test -r github ./test/data
   test:widget: flutter test -r  github ./test
   build: dart run build_runner build --delete-conflicting-outputs
