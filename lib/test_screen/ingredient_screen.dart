@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/model/ingredient.dart';
+import 'package:recipe_app/data/model/ingredients.dart';
 import 'package:recipe_app/presentation/component/ingredient_item.dart';
 
 class IngredientScreen extends StatelessWidget {
@@ -8,29 +9,29 @@ class IngredientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Ingredient ingredient1 = Ingredient(
-      id: 'tomato_id',
-      imageUrl: 'assets/images/tomatos.png',
+      id: 0,
+      image: 'assets/images/tomatos.png',
       name: 'Tomatos',
-      weight: 500,
     );
     final Ingredient ingredient2 = Ingredient(
-      id: 'cabbage_id',
-      imageUrl: 'assets/images/cabbage.png',
+      id: 1,
+      image: 'assets/images/cabbage.png',
       name: 'Cabbage',
-      weight: 300,
     );
     final Ingredient ingredient3 = Ingredient(
-      id: 'taco_id',
-      imageUrl: 'assets/images/taco.png',
+      id: 2,
+      image: 'assets/images/taco.png',
       name: 'Taco',
-      weight: 1234,
     );
     final Ingredient ingredient4 = Ingredient(
-      id: 'slice_bread_id',
-      imageUrl: 'assets/images/slice_bread.png',
+      id: 3,
+      image: 'assets/images/slice_bread.png',
       name: 'Slice Bread',
-      weight: 987,
     );
+    final Ingredients ingredients1 = Ingredients(ingredient: ingredient1, amount: 500);
+    final Ingredients ingredients2 = Ingredients(ingredient: ingredient2, amount: 300);
+    final Ingredients ingredients3 = Ingredients(ingredient: ingredient3, amount: 1234);
+    final Ingredients ingredients4 = Ingredients(ingredient: ingredient4, amount: 987);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text('Ingredient 컴포넌트')),
@@ -41,13 +42,13 @@ class IngredientScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 24),
-                  IngredientItem(ingredient: ingredient1),
+                  IngredientItem(ingredients: ingredients1),
                   SizedBox(height: 12),
-                  IngredientItem(ingredient: ingredient2),
+                  IngredientItem(ingredients: ingredients2),
                   SizedBox(height: 12),
-                  IngredientItem(ingredient: ingredient3),
+                  IngredientItem(ingredients: ingredients3),
                   SizedBox(height: 12),
-                  IngredientItem(ingredient: ingredient4),
+                  IngredientItem(ingredients: ingredients4),
                   SizedBox(height: 12),
                 ],
               ),

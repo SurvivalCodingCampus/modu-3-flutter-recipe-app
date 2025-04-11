@@ -9,4 +9,11 @@ enum Categories {
   breakfast,
   spanish,
   lunch,
+  indian,
+  asian,
+  japanese,
+  american,
+  british,
+  italian,
+  french,
 }

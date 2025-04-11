@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/data/model/ingredient.dart';
+import 'package:recipe_app/data/model/ingredients.dart';
 import 'package:recipe_app/data/model/media.dart';
 import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/model/user.dart';
@@ -15,17 +16,18 @@ void main() {
   group('컴포넌트 테스트', () {
     testWidgets('IngredientItem 테스트', (widgetTester) async {
       // 1. 테스트용 데이터 생성
-      final ingredient = const Ingredient(
+      final ingredient = Ingredient(
         name: '당근',
-        weight: 120,
-        imageUrl:
+        image:
             'assets/images/carrot.png', // 실제 asset 없어도 됨 (Image widget만 확인할 거니까)
       );
+
+      final ingredients = Ingredients(ingredient: ingredient, amount: 120);
 
       // 2. IngredientItem 위젯 렌더링
       await widgetTester.pumpWidget(
         MaterialApp(
-          home: Scaffold(body: IngredientItem(ingredient: ingredient)),
+          home: Scaffold(body: IngredientItem(ingredients: ingredients)),
         ),
       );
 
@@ -42,8 +44,8 @@ void main() {
       final recipe = const Recipe(
         title: '불고기',
         cookingTime: '30분',
-        rate: 4.5,
-        user: User(name: '요리왕비룡'),
+        rating: 4.5,
+        chef: '요리왕비룡',
         media: Media(imageUrl: 'assets/images/recipe4.png'),
       );
 

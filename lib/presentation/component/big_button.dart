@@ -60,7 +60,7 @@ class _BigButtonState extends State<BigButton> {
           children: [
             Container(
               height: 24,
-              width: 114,
+              width: 120,
               alignment: Alignment.center,
               child: Text(
                 widget.name,

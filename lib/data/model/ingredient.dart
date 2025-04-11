@@ -6,10 +6,9 @@ part 'ingredient.g.dart';
 @freezed
 abstract class Ingredient with _$Ingredient {
   const factory Ingredient({
-    @Default('') final String id,
+    @Default(0) final int id,
     @Default('') final String name,
-    @Default(0) final int weight,
-    @Default('') final String imageUrl,
+    @Default('') final String image,
   }) = _Ingredient;
 
   factory Ingredient.fromJson(Map<String, dynamic> json) =>
