@@ -9,4 +9,10 @@ abstract class ButtonStyles {
     ),
     backgroundColor: ColorStyles.buttonColor,
   );
+  static final ButtonStyle disableButton = ElevatedButton.styleFrom(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+    backgroundColor: ColorStyles.disableButtonColor,
+  );
 }
