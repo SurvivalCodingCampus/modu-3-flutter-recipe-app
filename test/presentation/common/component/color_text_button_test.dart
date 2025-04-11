@@ -4,7 +4,7 @@ import 'package:recipe_app/presentation/common/component/color_text_button.dart'
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 
 void main() {
-  int _count = 0;
+  int count = 0;
 
   testWidgets('ColorTextButton test', (tester) async {
     await tester.pumpWidget(
@@ -17,8 +17,8 @@ void main() {
             buttonColor: ColorStyle.primary100,
             textColor: ColorStyle.white,
             onPressed: () {
-              _count++;
-              print("테스트 카운터 $_count");
+              count++;
+              print("테스트 카운터 $count");
             },
             buttonRadius: 10,
           ),
@@ -31,7 +31,7 @@ void main() {
     await tester.pump();
 
     expect(titleFider, findsOneWidget);
-    expect(_count, 1);
+    expect(count, 1);
   });
 
 }

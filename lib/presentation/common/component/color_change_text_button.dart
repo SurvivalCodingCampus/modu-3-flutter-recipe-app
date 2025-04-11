@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 
-class ColorTextButton extends StatelessWidget {
+class ColorChangeTextButton extends StatelessWidget {
   final double buttonWidth;
   final double buttonHeight;
   final String buttonText;
   final Color buttonColor;
   final Color textColor;
   final double buttonRadius;
-  final void Function() onPressed;
+  final int tabActive;
+  final void Function(TapDownDetails) onTapDown;
+  final void Function(TapUpDetails) onTapUp;
+  final void Function() onTapCancel;
 
-  const ColorTextButton({super.key, 
+  const ColorChangeTextButton({
+    super.key,
     required this.buttonHeight,
     required this.buttonWidth,
     required this.buttonText,
     required this.buttonColor,
     required this.textColor,
-    required this.onPressed,
+    required this.tabActive,
     required this.buttonRadius,
+    required this.onTapDown,
+    required this.onTapUp,
+    required this.onTapCancel,
   });
 
   @override
@@ -26,8 +33,14 @@ class ColorTextButton extends StatelessWidget {
       width: buttonWidth,
       height: buttonHeight,
       child: InkWell(
-        onTap: (){
-          onPressed.call();
+        onTapUp: (details) {
+          onTapUp.call(details);
+        },
+        onTapDown: (details) {
+          onTapDown.call(details);
+        },
+        onTapCancel: () {
+          onTapCancel.call();
         },
         borderRadius: BorderRadius.circular(buttonRadius),
         child: Ink(
@@ -44,13 +57,11 @@ class ColorTextButton extends StatelessWidget {
                 style: AppTextStyles.normalBold(color: textColor),
               ),
               SizedBox(width: 10),
-              Icon(Icons.arrow_forward, color: textColor,)
+              Icon(Icons.arrow_forward, color: textColor),
             ],
           ),
         ),
       ),
     );
   }
-
-
 }

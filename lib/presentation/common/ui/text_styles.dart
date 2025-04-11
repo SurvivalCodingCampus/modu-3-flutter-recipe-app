@@ -94,6 +94,13 @@ import 'package:google_fonts/google_fonts.dart';
     color: color,
   );
 
+  static TextStyle smallRegularLable({Color? color}) => GoogleFonts.poppins(
+    fontWeight: FontWeight.w400,
+    fontSize: 8,
+    height: 21 / 8,
+    color: color,
+  );
+
   static TextStyle extraSmallRegular({Color? color}) => GoogleFonts.poppins(
     fontWeight: FontWeight.w400,
     fontSize: 11,
