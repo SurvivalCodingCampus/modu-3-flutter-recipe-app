@@ -23,6 +23,7 @@ dev_dependencies:
   build_runner: ^2.4.15
   freezed: ^3.0.6
   json_serializable: ^6.9.4
+  network_image_mock: ^2.0.1
 
 flutter:
   uses-material-design: true
@@ -36,4 +37,5 @@ flutter:
           weight: 700
 
   assets:
-    - assets/
+    - assets/fonts/
+    - assets/images/

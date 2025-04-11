@@ -29,6 +29,7 @@ class _FMediumButtonState extends State<FMediumButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
         widget.voidCallback();
       },
@@ -36,6 +37,9 @@ class _FMediumButtonState extends State<FMediumButton> {
         _changeButtonType(FButtonType.disabledState);
       },
       onTapUp: (_) {
+        _changeButtonType(FButtonType.defaultState);
+      },
+      onTapCancel: () {
         _changeButtonType(FButtonType.defaultState);
       },
       child: Container(
@@ -48,10 +52,11 @@ class _FMediumButtonState extends State<FMediumButton> {
         alignment: Alignment.center,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Flexible(
               child: ConstrainedBox(
-                constraints: BoxConstraints(minWidth: 114),
+                constraints: const BoxConstraints(minWidth: 114),
                 child: Text(
                   widget.text,
                   style: TextStyles.normalTextBold(),

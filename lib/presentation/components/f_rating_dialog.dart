@@ -42,7 +42,7 @@ class _FRatingDialogState extends State<FRatingDialog> {
         _resetRate();
         showDialog(
           context: context,
-          barrierColor: Color.fromRGBO(0, 0, 0, 0.3),
+          barrierColor: const Color.fromRGBO(0, 0, 0, 0.3),
           builder: (BuildContext context) {
             return StatefulBuilder(
               builder: (context, setDialogState) {
@@ -64,7 +64,7 @@ class _FRatingDialogState extends State<FRatingDialog> {
         child: Container(
           width: 170,
           height: 91,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(8),
@@ -76,7 +76,7 @@ class _FRatingDialogState extends State<FRatingDialog> {
                 widget.title,
                 style: TextStyles.smallerTextRegular(color: AppColors.black),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Row(
                 spacing: 10,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +85,7 @@ class _FRatingDialogState extends State<FRatingDialog> {
                       return _buildStarIcon(index, setDialogState);
                     }).toList(),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               _buildActionButton(_selectedRating != 0, context, setDialogState),
             ],
           ),
@@ -123,9 +123,9 @@ class _FRatingDialogState extends State<FRatingDialog> {
       },
       child: IntrinsicWidth(
         child: ConstrainedBox(
-          constraints: BoxConstraints(minWidth: 61),
+          constraints: const BoxConstraints(minWidth: 61),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             height: 20,
             alignment: Alignment.center,
             decoration: BoxDecoration(

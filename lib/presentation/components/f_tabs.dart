@@ -17,7 +17,7 @@ class FTabs extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 58,
-      padding: EdgeInsets.fromLTRB(20, 12, 20, 13),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 13),
       color: AppColors.white,
       child: Row(
         children:

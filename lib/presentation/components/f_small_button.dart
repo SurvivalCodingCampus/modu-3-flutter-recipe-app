@@ -34,6 +34,9 @@ class _FSmallButtonState extends State<FSmallButton> {
       onTapUp: (_) {
         _changeButtonType(FButtonType.defaultState);
       },
+      onTapCancel: () {
+        _changeButtonType(FButtonType.defaultState);
+      },
       child: Container(
         width: 174,
         height: 37,
@@ -47,7 +50,7 @@ class _FSmallButtonState extends State<FSmallButton> {
           children: [
             Flexible(
               child: ConstrainedBox(
-                constraints: BoxConstraints(minWidth: 114),
+                constraints: const BoxConstraints(minWidth: 114),
                 child: Text(
                   widget.text,
                   style: TextStyles.normalTextBold(),

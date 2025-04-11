@@ -43,13 +43,13 @@ class FInputField extends StatelessWidget {
                 hintStyle: TextStyles.smallerTextRegular(color: AppColors.gray4),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(color: AppColors.gray4, width: 1.5),
+                  borderSide: const BorderSide(color: AppColors.gray4, width: 1.5),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(color: AppColors.primary80, width: 1.5),
+                  borderSide: const BorderSide(color: AppColors.primary80, width: 1.5),
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               ),
               style: TextStyles.smallerTextRegular(color: AppColors.black),
               key: _textFieldKey,

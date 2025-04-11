@@ -36,14 +36,14 @@ class FIngredientItem extends StatelessWidget {
               height: 40,
               fit: BoxFit.cover,
               errorBuilder: (_, _, _) {
-                return Icon(Icons.image_not_supported, size: 24);
+                return const Icon(Icons.image_not_supported, size: 24);
               },
               loadingBuilder:  (_, widget, imageChunkEvent) {
                 if (imageChunkEvent == null) {
                   return widget;
                 }
 
-                return Icon(Icons.fastfood, size: 24);
+                return const Icon(Icons.fastfood, size: 24);
               },
             ),
           ),
@@ -52,7 +52,7 @@ class FIngredientItem extends StatelessWidget {
 
           Flexible(
             child: ConstrainedBox(
-              constraints: BoxConstraints(minWidth: 114),
+              constraints: const BoxConstraints(minWidth: 114),
               child: Text(
                 ingredient.name,
                 style: TextStyles.normalTextBold(color: AppColors.black),

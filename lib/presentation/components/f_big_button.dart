@@ -34,6 +34,9 @@ class _FBigButtonState extends State<FBigButton> {
       onTapUp: (_) {
         _changeButtonType(FButtonType.defaultState);
       },
+      onTapCancel: () {
+        _changeButtonType(FButtonType.defaultState);
+      },
       child: Container(
         width: double.infinity,
         height: 60,
@@ -47,7 +50,7 @@ class _FBigButtonState extends State<FBigButton> {
           children: [
             Flexible(
               child: ConstrainedBox(
-                constraints: BoxConstraints(minWidth: 114),
+                constraints: const BoxConstraints(minWidth: 114),
                 child: Text(
                   widget.text,
                   style: TextStyles.normalTextBold(),

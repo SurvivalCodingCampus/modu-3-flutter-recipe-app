@@ -12,7 +12,7 @@ class FRatingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntrinsicWidth(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         height: 28,
         alignment: Alignment.center,
         decoration: BoxDecoration(
