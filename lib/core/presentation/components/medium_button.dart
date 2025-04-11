@@ -35,6 +35,7 @@ class _MediumButtonState extends State<MediumButton> {
       },
       onTap: widget.onClick,
       child: Container(
+        width: 243,
         height: 54,
         decoration: BoxDecoration(
           color: isPressed ? ColorStyle.gray4 : ColorStyle.primary100,
@@ -43,17 +44,16 @@ class _MediumButtonState extends State<MediumButton> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 114,
-              child: Text(
-                widget.text,
-                style: AppTextStyles.normalBold.copyWith(
-                  color: ColorStyle.white,
-                ),
-              ),
+            Text(
+              widget.text,
+              style: AppTextStyles.normalBold.copyWith(color: ColorStyle.white),
             ),
             const SizedBox(width: 11),
-            Icon(Icons.arrow_forward, weight: 20, color: ColorStyle.white),
+            const Icon(
+              Icons.arrow_forward,
+              weight: 20,
+              color: ColorStyle.white,
+            ),
           ],
         ),
       ),

@@ -6,34 +6,37 @@ import 'package:recipe_app/core/presentation/components/input_field.dart';
 import 'package:recipe_app/core/presentation/components/medium_button.dart';
 import 'package:recipe_app/core/presentation/components/multi_tabs.dart';
 import 'package:recipe_app/core/presentation/components/rating_button.dart';
-import 'package:recipe_app/core/presentation/components/rating_dialog.dart';
 import 'package:recipe_app/core/presentation/components/rating_dialog_drag.dart';
 import 'package:recipe_app/core/presentation/components/recipe_card.dart';
 import 'package:recipe_app/core/presentation/components/small_button.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/data/enums/category.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 
 class ComponentTestScreen extends StatefulWidget {
   const ComponentTestScreen({super.key});
 
   @override
-  _ComponentTestScreenState createState() => _ComponentTestScreenState();
+  State<ComponentTestScreen> createState() => _ComponentTestScreenState();
 }
 
 class _ComponentTestScreenState extends State<ComponentTestScreen> {
   int tabSelectedValue = 0;
   bool isRatingSelected = false;
   bool isFilterSelected = false;
-  final Recipe recipe = Recipe(
+  final Recipe recipe = const Recipe(
     foodName: 'Traditional spare ribs baked',
     chef: 'Chef John',
-    time: 20,
+    time: '20 min',
     rate: 4.0,
     image: 'assets/images/food.png',
+    ingredients: [],
+    category: Category.unknown,
   );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -53,7 +56,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                   },
                 ),
                 MultiTabs(
-                  labels: ['Label1', 'Label2'],
+                  labels: const ['Label1', 'Label2'],
                   selectedIndex: tabSelectedValue,
                   onValueChange: (value) {
                     setState(() {
@@ -61,7 +64,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                     });
                   },
                 ),
-                IngredientItem(
+                const IngredientItem(
                   ingredientName: 'Tomaots',
                   imageName: 'assets/images/tomato.png',
                   amount: '500g',
@@ -101,7 +104,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                       context: context,
                     );
                   },
-                  child: Text('show alert'),
+                  child: const Text('show alert'),
                 ),
               ],
             ),
