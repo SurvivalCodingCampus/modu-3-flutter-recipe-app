@@ -18,4 +18,14 @@ abstract class ButtonStyles2 {
       side: BorderSide(color: ColorStyles2.rateButtonColor),
     ),
   );
+
+  static final ButtonStyle splashScreenButton = ElevatedButton.styleFrom(
+    backgroundColor: ColorStyles2.splashButtonColor,
+    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      side: BorderSide(color: ColorStyles2.splashButtonColor),
+    ),
+    minimumSize: Size(243, 54),
+  );
 }

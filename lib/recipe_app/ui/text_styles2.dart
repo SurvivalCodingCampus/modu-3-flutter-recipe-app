@@ -48,4 +48,9 @@ abstract class TextStyles2 {
     fontWeight: FontWeight.w600,
     color: ColorStyles2.titleBlackColor,
   );
+  static TextStyle splashScreenText = GoogleFonts.poppins(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
 }

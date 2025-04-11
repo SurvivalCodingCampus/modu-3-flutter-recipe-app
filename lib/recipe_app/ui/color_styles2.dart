@@ -9,4 +9,5 @@ abstract class ColorStyles2 {
   static const chefName = Color(0xFFD9D9D9);
   static const minuteColor = Color(0xFFA9A9A9);
   static const rateButtonColor = Color(0xFF71B1A1);
+  static const splashButtonColor = Color(0xFF129575);
 }
