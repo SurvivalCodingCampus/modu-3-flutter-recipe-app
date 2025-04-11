@@ -12,6 +12,7 @@ abstract class Recipe with _$Recipe {
     required int id,
     required Category category,
     required String name,
+    required String chef,
     required String imageUrl,
     required double rating,
     required int cookTime,

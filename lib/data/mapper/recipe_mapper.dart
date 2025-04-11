@@ -12,11 +12,12 @@ extension RecipeMapper on RecipeDTO {
       name: name ?? 'N/A',
       imageUrl: imageUrl ?? 'N/A',
       ingredients:
-          ingredients
+          ingredients!
               .cast<Map<String, dynamic>>()
               .map((e) => IngredientDTO.fromJson(e['ingredient']))
               .map((e) => e.toModel())
               .toList(),
+      chef: chef ?? 'N/A',
       category:
           category != null ? Category.fromString(category!) : Category.none,
       rating: rating ?? 0.0,

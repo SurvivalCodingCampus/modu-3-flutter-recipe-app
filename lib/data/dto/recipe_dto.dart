@@ -7,6 +7,7 @@ class RecipeDTO {
   int? id;
   String? category;
   String? name;
+  String? chef;
 
   @JsonKey(name: 'image')
   String? imageUrl;
@@ -16,16 +17,17 @@ class RecipeDTO {
   String? cookTime;
 
   @JsonKey(name: 'ingredients')
-  List<Map<String, dynamic>> ingredients;
+  List<Map<String, dynamic>>? ingredients;
 
   RecipeDTO({
-    required this.id,
-    required this.category,
-    required this.name,
-    required this.imageUrl,
-    required this.rating,
-    required this.cookTime,
-    required this.ingredients,
+    this.id,
+    this.category,
+    this.name,
+    this.imageUrl,
+    this.chef,
+    this.rating,
+    this.cookTime,
+    this.ingredients,
   });
 
   factory RecipeDTO.fromJson(Map<String, dynamic> json) =>
