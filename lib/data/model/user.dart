@@ -1,17 +1,16 @@
-
 class User {
+  final int id;
   final String name;
+  final String image;
+  final String address;
 
   const User({
+    required this.id,
     required this.name,
+    required this.image,
+    required this.address
   });
 
-  @override
-  String toString() {
-    return 'User{name: $name}';
-  }
-
-  // final int userId;
   // final String email;
   // final String password;
   // final String job;
@@ -22,5 +21,5 @@ class User {
   // final List<String> follower;
   // final List<String> following;
   // final List<int> notifications;
-  // final String city;
+
 }
