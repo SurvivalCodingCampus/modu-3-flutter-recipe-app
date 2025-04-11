@@ -40,13 +40,7 @@ class HomeScreen extends StatelessWidget {
                                   isBookmarked: viewModel.user.bookmarks
                                       .contains(recipe.id),
                                   onBookmark: (int id) {
-                                    if (viewModel.user.bookmarks.contains(
-                                      recipe.id,
-                                    )) {
-                                      viewModel.deleteBookmarkToUserModel(id);
-                                    } else {
-                                      viewModel.saveBookmarkToUserModel(id);
-                                    }
+                                    viewModel.toggleBookmark(id);
                                   },
                                 ),
                               ),

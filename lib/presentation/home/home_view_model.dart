@@ -35,6 +35,14 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleBookmark(int id) {
+    if (user.bookmarks.contains(id)) {
+      deleteBookmarkToUserModel(id);
+    } else {
+      saveBookmarkToUserModel(id);
+    }
+  }
+
   void saveBookmarkToUserModel(int id) {
     _user.bookmarks.add(id);
     notifyListeners();
