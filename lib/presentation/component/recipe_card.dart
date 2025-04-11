@@ -32,7 +32,14 @@ class RecipeCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: recipe.image,
                 fit: BoxFit.cover,
-                placeholder: (context, url) => CircularProgressIndicator(),
+                placeholder:
+                    (context, url) => Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
