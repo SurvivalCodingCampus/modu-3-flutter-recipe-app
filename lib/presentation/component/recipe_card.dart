@@ -40,59 +40,66 @@ class RecipeCard extends StatelessWidget {
               bottom: 10,
               right: 10,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 200,
-                        child: Text(
-                          recipe.name,
-                          style: TextStyles.smallTextBold.copyWith(
-                            color: ColorStyles.white,
-                          ),
-                          maxLines: 2,
-                        ),
-                      ),
-                      Text(
-                        recipe.chef,
-                        style: TextStyles.smallTextSmallLabel.copyWith(
-                          color: ColorStyles.gray4,
-                        ),
-                      ),
-                    ],
+                  Expanded(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final nameWidth = constraints.maxWidth * 0.635;
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: nameWidth,
+                              child: Text(
+                                recipe.name,
+                                style: TextStyles.smallTextBold.copyWith(
+                                  color: ColorStyles.white,
+                                ),
+                                maxLines: 2,
+                              ),
+                            ),
+                            Text(
+                              recipe.chef,
+                              style: TextStyles.smallTextSmallLabel.copyWith(
+                                color: ColorStyles.gray4,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                  const Spacer(),
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/icons/timer.png',
-                        width: 17,
-                        height: 17,
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        '${recipe.totalTimeMinutes} min',
-                        style: TextStyles.smallerTextRegular.copyWith(
-                          color: ColorStyles.gray4,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 24,
-                        height: 24,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorStyles.white,
-                        ),
-                        child: Image.asset(
-                          'assets/icons/book_mark.png',
-                          width: 17,
-                          height: 17,
-                        ),
-                      ),
-                    ],
+                ],
+              ),
+            ),
+            Positioned(
+              right: 10,
+              bottom: 10,
+              child: Row(
+                children: [
+                  Image.asset('assets/icons/timer.png', width: 17, height: 17),
+                  const SizedBox(width: 5),
+                  Text(
+                    '${recipe.totalTimeMinutes} min',
+                    style: TextStyles.smallerTextRegular.copyWith(
+                      color: ColorStyles.gray4,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Container(
+                    width: 24,
+                    height: 24,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorStyles.white,
+                    ),
+                    child: Image.asset(
+                      'assets/icons/book_mark.png',
+                      width: 17,
+                      height: 17,
+                    ),
                   ),
                 ],
               ),
