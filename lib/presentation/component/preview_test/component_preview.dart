@@ -273,7 +273,7 @@ class _PreviewHomePageState extends State<PreviewHomePage> {
             RecipeCard(
               title: 'Traditional spare ribs baked',
               imagePath: 'assets/images/foods/food1.png',
-              cookTime: 20,
+              cookTime: '20 min',
               authorName: 'Chef John',
               rating: 3.5,
               isFavorite: true,
@@ -283,7 +283,7 @@ class _PreviewHomePageState extends State<PreviewHomePage> {
             RecipeCard(
               title: 'spice roasted chicken with flavored rice',
               imagePath: 'assets/images/foods/food2.png',
-              cookTime: 20,
+              cookTime: '20 min',
               authorName: 'Mark Kelvin',
               rating: 4.0,
               isFavorite: false,
@@ -293,7 +293,7 @@ class _PreviewHomePageState extends State<PreviewHomePage> {
             RecipeCard(
               title: 'Spicy fried rice mix chicken bali',
               imagePath: 'assets/images/foods/food3.png',
-              cookTime: 30,
+              cookTime: '30 min',
               authorName: 'Spicy Nelly',
               rating: 4.5,
               isFavorite: true,
@@ -303,7 +303,7 @@ class _PreviewHomePageState extends State<PreviewHomePage> {
             RecipeCard(
               title: 'Lamb chops with fruity couscous and mint',
               imagePath: 'assets/images/foods/food4.png',
-              cookTime: 35,
+              cookTime: '35 min',
               authorName: '강지원',
               rating: 5.0,
               isFavorite: false,

@@ -7,7 +7,7 @@ import '../../ui/ui_size.dart';
 class RecipeCard extends StatelessWidget {
   final String title;
   final String imagePath;
-  final int cookTime;
+  final String cookTime;
   final String authorName;
   final double rating;
   final bool isFavorite;
@@ -94,7 +94,7 @@ class RecipeCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    '$cookTime min',
+                    cookTime,
                     style: AppTextStyles.smallRegular(color: ColorStyle.gray4),
                   ),
                   const SizedBox(width: 10),
