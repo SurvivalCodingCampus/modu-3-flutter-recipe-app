@@ -17,6 +17,8 @@ Flutter로 만드는 레시피 앱
 
 ### 결과 화면
 
-| 여러 Widget                                                              | AlertDialog Widget                                                         |
-|------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| ![pr1.png](..%2F..%2FOneDrive%2F%B9%D9%C5%C1%20%C8%AD%B8%E9%2Fpr1.png) | ![rate4.png](..%2F..%2FOneDrive%2F%B9%D9%C5%C1%20%C8%AD%B8%E9%2Frate4.png) |
+![2단계 UI 연습](./assets/screenshots/stack.png)
+
+| AlertDialog Widget   별점 0개        | AlertDialog Widget        별점 4개   |
+|-----------------------------------|-----------------------------------|
+| !(./assets/screenshots/rate0.png) | !(./assets/screenshots/rate4.png) |
