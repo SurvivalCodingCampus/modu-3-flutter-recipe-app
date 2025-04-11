@@ -21,10 +21,13 @@ class SavedRecipesScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
-                  children:
-                      viewModel.recipes.map((recipe) {
-                        return RecipeCard(recipe: recipe);
-                      }).toList(),
+                  children: [
+                    SizedBox(height: 24),
+                    for (final recipe in viewModel.recipes) ...[
+                      RecipeCard(recipe: recipe),
+                      SizedBox(height: 24),
+                    ],
+                  ],
                 ),
               ),
             ),

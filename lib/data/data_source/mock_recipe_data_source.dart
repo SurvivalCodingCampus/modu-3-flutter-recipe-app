@@ -15,7 +15,9 @@ class MockRecipeDataSource implements RecipeDataSource {
   @override
   Future<List<Map<String, dynamic>>> getRecipeMaps() async {
     String jsonString =
-        await File('${Directory.current.path}/assets/json').readAsString();
+        await File(
+          '/Users/eastar/Documents/github/modu-3-flutter-recipe-app/assets/json/recipes.json',
+        ).readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     List recipeList = jsonMap["recipes"];
     final List<Map<String, dynamic>> result =
