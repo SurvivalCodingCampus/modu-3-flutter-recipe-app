@@ -9,6 +9,7 @@ import 'package:recipe_app/presentation/component/input_field.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/test_screen/button_screen.dart';
 import 'package:recipe_app/test_screen/ingredient_screen.dart';
 import 'package:recipe_app/test_screen/rating_screen.dart';
@@ -47,6 +48,17 @@ class ComponentTestScreen extends StatelessWidget {
                                 ),
                               ),
                         ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  BigButton(
+                    name: 'SplashScreen',
+                    color: ColorStyles.secondary100,
+                    icon: Icons.arrow_forward,
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SplashScreen()),
                       );
                     },
                   ),
