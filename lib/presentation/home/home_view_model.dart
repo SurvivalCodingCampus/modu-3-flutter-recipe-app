@@ -35,12 +35,12 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void saveBookmarkToUserModel(int id) async {
+  void saveBookmarkToUserModel(int id) {
     _user.bookmarks.add(id);
     notifyListeners();
   }
 
-  void deleteBookmarkToUserModel(int id) async {
+  void deleteBookmarkToUserModel(int id) {
     _user.bookmarks.remove(id);
     notifyListeners();
   }
