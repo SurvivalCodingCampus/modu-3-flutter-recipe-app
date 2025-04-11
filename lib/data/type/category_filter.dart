@@ -11,4 +11,5 @@ enum CategoryFilter {
   Indian,
   Italian,
   Asian,
+  Unknown
 }
