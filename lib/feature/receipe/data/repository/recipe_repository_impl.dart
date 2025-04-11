@@ -8,7 +8,7 @@ import 'package:recipe_app/feature/receipe/domain/data_source/recipe_data_source
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource _dataSource;
 
-  RecipeRepositoryImpl(this._dataSource);
+  const RecipeRepositoryImpl(this._dataSource);
 
   @override
   Future<Result<List<Recipe>>> getRecipes() async {

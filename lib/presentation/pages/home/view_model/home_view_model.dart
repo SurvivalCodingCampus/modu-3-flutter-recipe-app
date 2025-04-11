@@ -30,5 +30,6 @@ class HomeViewModel with ChangeNotifier {
         _state = BaseState.error;
         break;
     }
+    notifyListeners();
   }
 }

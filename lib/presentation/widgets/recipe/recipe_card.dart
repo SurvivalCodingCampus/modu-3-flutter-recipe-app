@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
+import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
 
 class RecipeCard extends StatelessWidget {
   final int recipeId;
@@ -63,7 +64,7 @@ class RecipeCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.star, size: 16, color: AppColor.rating),
+                      const Icon(Icons.star, size: 16, color: AppColor.rating),
                       const SizedBox(width: 4),
                       Text('$starCount', style: AppTextStyle.smallRegular),
                     ],
@@ -101,7 +102,10 @@ class RecipeCard extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Icon(Icons.timer_outlined, color: AppColor.white),
+                            const Icon(
+                              Icons.timer_outlined,
+                              color: AppColor.white,
+                            ),
                             const SizedBox(width: 4),
                             Text(
                               '$duration min',
@@ -112,11 +116,11 @@ class RecipeCard extends StatelessWidget {
                             const SizedBox(width: 10),
                             Container(
                               padding: const EdgeInsets.all(4),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: AppColor.white,
                                 shape: BoxShape.circle,
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.bookmark_outline,
                                 color: AppColor.primary80,
                               ),

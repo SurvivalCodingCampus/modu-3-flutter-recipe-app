@@ -4,7 +4,7 @@ import 'package:recipe_app/feature/receipe/domain/dto/recipe_dto.dart';
 class MockRecipeDataSourceImpl implements RecipeDataSource {
   @override
   Future<List<RecipeDto>> getRecipes() async {
-    Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     return [
       {
         "category": "Indian",
