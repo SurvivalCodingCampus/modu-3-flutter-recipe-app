@@ -1,0 +1,18 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:network_image_mock/network_image_mock.dart';
+import 'package:recipe_app/presentation/splash/splash_screen.dart';
+
+void main() {
+  setUpAll(() => HttpOverrides.global = null);
+
+  testWidgets('SplashScreen 렌더링이 정상적으로 이루어져야한다.', (WidgetTester tester) async {
+    await mockNetworkImagesFor(() async {
+      await tester.pumpWidget(const MaterialApp(home: SplashScreen()));
+
+      expect(find.text('100K+ Premium Recipe'), findsOneWidget);
+    });
+  });
+}

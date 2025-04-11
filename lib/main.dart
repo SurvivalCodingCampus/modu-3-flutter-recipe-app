@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/data/data_source/interface/recipe_data_source.dart';
+import 'package:recipe_app/data/data_source/mock/mock_recipe_data_source.dart';
+import 'package:recipe_app/data/repository/interface/recipe_repository.dart';
+import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/components.dart';
+import 'package:recipe_app/presentation/recipe/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/recipe/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/ui/ui.dart';
+
+final RecipeDataSource recipeDataSource = MockRecipeDataSource();
+final RecipeRepository recipeRepository = RecipeRepositoryImpl(
+  recipeDataSource,
+);
+final SavedRecipesViewModel savedRecipesViewModel = SavedRecipesViewModel(
+  recipeRepository,
+);
 
 void main() {
   runApp(const App());
@@ -75,13 +90,13 @@ class App extends StatelessWidget {
               title: 'Tabs',
               children: [
                 MultiTab(
-                  labels: ['Tab 1', 'Tab 2'],
+                  labels: const ['Tab 1', 'Tab 2'],
                   onValueChange: (index) {
                     debugPrint('$index');
                   },
                 ),
                 MultiTab(
-                  labels: ['Tab 1', 'Tab 2', 'Tab 3'],
+                  labels: const ['Tab 1', 'Tab 2', 'Tab 3'],
                   selectedIndex: 2,
                   onValueChange: (index) {
                     debugPrint('$index');
@@ -89,26 +104,27 @@ class App extends StatelessWidget {
                 ),
               ],
             ),
+        '/splash': (context) => const SplashScreen(),
         '/others':
             (context) => ComponentsScreen(
               title: 'Others',
               children: [
-                Column(
+                const Column(
                   children: [
                     Column(
                       spacing: 10,
                       children: [
-                        const IngredientItem(
+                        IngredientItem(
                           name: 'Tomato',
                           imagePath: 'assets/images/tomato.png',
                           weight: '100g',
                         ),
-                        const IngredientItem(
+                        IngredientItem(
                           name: 'Cabbage',
                           imagePath: 'assets/images/cabbage.png',
                           weight: '300g',
                         ),
-                        const IngredientItem(
+                        IngredientItem(
                           name: 'Taco',
                           imagePath: 'assets/images/taco.png',
                           weight: '1t',
@@ -156,6 +172,8 @@ class App extends StatelessWidget {
                 ),
               ],
             ),
+        '/recipe/saved':
+            (context) => SavedRecipesScreen(viewModel: savedRecipesViewModel),
       },
     );
   }
@@ -196,6 +214,18 @@ class HomeScreen extends StatelessWidget {
               text: 'Other Components',
               onPressed: () {
                 Navigator.of(context).pushNamed('/others');
+              },
+            ),
+            MediumButton(
+              text: 'Saved Recipes',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/recipe/saved');
+              },
+            ),
+            MediumButton(
+              text: 'Splash Screen',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/splash');
               },
             ),
           ],
