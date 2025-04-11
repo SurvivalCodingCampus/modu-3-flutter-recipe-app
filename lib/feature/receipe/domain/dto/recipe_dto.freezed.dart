@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RecipeDto {
 
- int get id; String get category; String get name; String get image; String get chef; String get time; double get rating;
+ int? get id; String? get category; String? get name; String? get image; String? get chef; String? get time; double? get rating;
 /// Create a copy of RecipeDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $RecipeDtoCopyWith<$Res>  {
   factory $RecipeDtoCopyWith(RecipeDto value, $Res Function(RecipeDto) _then) = _$RecipeDtoCopyWithImpl;
 @useResult
 $Res call({
- int id, String category, String name, String image, String chef, String time, double rating
+ int? id, String? category, String? name, String? image, String? chef, String? time, double? rating
 });
 
 
@@ -66,16 +66,16 @@ class _$RecipeDtoCopyWithImpl<$Res>
 
 /// Create a copy of RecipeDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? category = null,Object? name = null,Object? image = null,Object? chef = null,Object? time = null,Object? rating = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? category = freezed,Object? name = freezed,Object? image = freezed,Object? chef = freezed,Object? time = freezed,Object? rating = freezed,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as String,chef: null == chef ? _self.chef : chef // ignore: cast_nullable_to_non_nullable
-as String,time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
-as String,rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
-as double,
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String?,chef: freezed == chef ? _self.chef : chef // ignore: cast_nullable_to_non_nullable
+as String?,time: freezed == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
+as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 
@@ -86,16 +86,16 @@ as double,
 @JsonSerializable()
 
 class _RecipeDto implements RecipeDto {
-  const _RecipeDto({required this.id, required this.category, required this.name, required this.image, required this.chef, required this.time, required this.rating});
+  const _RecipeDto({this.id, this.category, this.name, this.image, this.chef, this.time, this.rating});
   factory _RecipeDto.fromJson(Map<String, dynamic> json) => _$RecipeDtoFromJson(json);
 
-@override final  int id;
-@override final  String category;
-@override final  String name;
-@override final  String image;
-@override final  String chef;
-@override final  String time;
-@override final  double rating;
+@override final  int? id;
+@override final  String? category;
+@override final  String? name;
+@override final  String? image;
+@override final  String? chef;
+@override final  String? time;
+@override final  double? rating;
 
 /// Create a copy of RecipeDto
 /// with the given fields replaced by the non-null parameter values.
@@ -130,7 +130,7 @@ abstract mixin class _$RecipeDtoCopyWith<$Res> implements $RecipeDtoCopyWith<$Re
   factory _$RecipeDtoCopyWith(_RecipeDto value, $Res Function(_RecipeDto) _then) = __$RecipeDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String category, String name, String image, String chef, String time, double rating
+ int? id, String? category, String? name, String? image, String? chef, String? time, double? rating
 });
 
 
@@ -147,16 +147,16 @@ class __$RecipeDtoCopyWithImpl<$Res>
 
 /// Create a copy of RecipeDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? category = null,Object? name = null,Object? image = null,Object? chef = null,Object? time = null,Object? rating = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? category = freezed,Object? name = freezed,Object? image = freezed,Object? chef = freezed,Object? time = freezed,Object? rating = freezed,}) {
   return _then(_RecipeDto(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as String,chef: null == chef ? _self.chef : chef // ignore: cast_nullable_to_non_nullable
-as String,time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
-as String,rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
-as double,
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String?,chef: freezed == chef ? _self.chef : chef // ignore: cast_nullable_to_non_nullable
+as String?,time: freezed == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
+as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 

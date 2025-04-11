@@ -6,13 +6,13 @@ part 'recipe_dto.g.dart';
 @freezed
 abstract class RecipeDto with _$RecipeDto {
   const factory RecipeDto({
-    required int id,
-    required String category,
-    required String name,
-    required String image,
-    required String chef,
-    required String time,
-    required double rating,
+    int? id,
+    String? category,
+    String? name,
+    String? image,
+    String? chef,
+    String? time,
+    double? rating,
     // required List<IngredientWithAmount> ingredients,
   }) = _RecipeDto;
 
