@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SavedRecipesScreen(
-        viewModel: SavedRecipesViewModel(repository)..loadRecipesData(),
+        savedRecipesViewModelviewModel: SavedRecipesViewModel(repository)
+          ..loadRecipesData(),
       ),
     );
   }

@@ -21,14 +21,14 @@ class MockRecipeDataImpl implements RecipeDataSource {
         rate: 4.5,
       ),
       Recipe(
-        imagePath: '../assets/images/sushi.png',
+        imagePath: 'assets/images/sushi.png',
         title: 'Traditional Japan Food \n Food\n',
         chef: 'Master Nagano',
         minutes: 10,
         rate: 5.0,
       ),
       Recipe(
-        imagePath: '../assets/images/chicken.png',
+        imagePath: 'assets/images/chicken.png',
         title: 'Korean Style Chicken \n Food\n',
         chef: 'Cooking Mama',
         minutes: 40,

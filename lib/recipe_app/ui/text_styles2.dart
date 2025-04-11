@@ -7,7 +7,7 @@ abstract class TextStyles2 {
   static TextStyle ingredientsText = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.bold,
-    color: ColorStyles2.ingredientColor,
+    color: ColorStyles2.titleBlackColor,
   );
   static TextStyle amountText = GoogleFonts.poppins(
     fontSize: 14,
@@ -41,6 +41,11 @@ abstract class TextStyles2 {
   static TextStyle rateRecipeText = GoogleFonts.poppins(
     fontSize: 20,
     fontWeight: FontWeight.w400,
-    color: ColorStyles2.ingredientColor,
+    color: ColorStyles2.titleBlackColor,
+  );
+  static TextStyle savedRecipesText = GoogleFonts.poppins(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: ColorStyles2.titleBlackColor,
   );
 }

@@ -12,16 +12,16 @@ class SavedRecipesViewModel with ChangeNotifier {
   //List내용 임의로 변형시키지 못함
   List<Recipe> get recipes => List.unmodifiable(_recipes);
 
-  bool _isLoding = false;
+  bool _isLoading = false;
 
-  bool get isLoding => _isLoding;
+  bool get isLoading => _isLoading;
 
   Future<void> loadRecipesData() async {
-    _isLoding = true;
+    _isLoading = true;
     notifyListeners();
 
     _recipes = await _recipeRepository.fetchRecipes();
-    _isLoding = false;
+    _isLoading = false;
     notifyListeners();
   }
 }
