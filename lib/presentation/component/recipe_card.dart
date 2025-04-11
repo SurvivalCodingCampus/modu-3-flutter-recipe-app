@@ -26,7 +26,7 @@ class RecipeCard extends StatelessWidget {
               children: [
                 const Icon(Icons.timer_outlined, color: ColorStyle.white),
                 Text(
-                  '${recipe.cookingTime} min',
+                  '${recipe.time} min',
                   style: TextFontStyle.smallRegular(color: ColorStyle.gray4),
                 ),
                 ElevatedButton(
@@ -85,7 +85,7 @@ class RecipeCard extends StatelessWidget {
     return SizedBox(
       height: 200,
       width: double.infinity,
-      child: Image.network(recipe.picture.imageUrl, fit: BoxFit.cover),
+      child: Image.network(recipe.pictures.imageUrl, fit: BoxFit.cover),
     );
   }
 
@@ -105,7 +105,10 @@ class RecipeCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Icon(Icons.star, color: ColorStyle.rating, size: 16),
-              Text(recipe.rate.toString(), style: TextFontStyle.smallRegular()),
+              Text(
+                recipe.rating.toString(),
+                style: TextFontStyle.smallRegular(),
+              ),
             ],
           ),
         ),
