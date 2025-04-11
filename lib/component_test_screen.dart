@@ -21,8 +21,6 @@ class ComponentTestScreen extends StatefulWidget {
 }
 
 class _ComponentTestScreenState extends State<ComponentTestScreen> {
-  final bool _isSelected = false;
-
   int selectedIndex = 0;
 
   @override
