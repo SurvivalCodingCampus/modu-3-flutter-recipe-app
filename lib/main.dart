@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/components.dart';
-import 'package:recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/ui/ui.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,91 +15,215 @@ class MyApp extends StatelessWidget {
       title: 'Recipe App',
       theme: ThemeData(
         scaffoldBackgroundColor: ColorStyles.white,
-        appBarTheme: AppBarTheme(backgroundColor: ColorStyles.white),
+        appBarTheme: const AppBarTheme(backgroundColor: ColorStyles.white),
       ),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Recipe App')),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              spacing: 16,
-              crossAxisAlignment: CrossAxisAlignment.start,
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/buttons':
+            (context) => ComponentsScreen(
+              title: 'Buttons',
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                BigButton(
+                  text: "Button",
+                  onPressed: () => debugPrint('Big Button pressed'),
+                ),
+                MediumButton(
+                  text: "Button",
+                  onPressed: () => debugPrint('Medium Button pressed'),
+                ),
+                SmallButton(
+                  text: "Button",
+                  onPressed: () => debugPrint('Small Button pressed'),
+                ),
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Column(
-                      spacing: 16,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
+                      spacing: 8,
                       children: [
-                        SizedBox(
-                          width: 315,
-                          child: BigButton(
-                            text: "Button",
-                            onPressed: () => print('Big Button pressed'),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 243,
-                          child: MediumButton(
-                            text: "Button",
-                            onPressed: () => print('Medium Button pressed'),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 174,
-                          child: SmallButton(
-                            text: "Button",
-                            onPressed: () => print('Small Button pressed'),
-                          ),
-                        ),
+                        SelectButton(icon: Icons.star, text: '5', onTap: () {}),
+                        SelectButton(icon: Icons.star, text: '5', onTap: () {}),
+                      ],
+                    ),
+                    Row(
+                      spacing: 8,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SelectButton(text: 'Text', onTap: () {}),
+                        SelectButton(text: 'Text', onTap: () {}),
                       ],
                     ),
                   ],
                 ),
+                const Divider(),
+              ],
+            ),
+        '/forms':
+            (context) => ComponentsScreen(
+              title: 'Forms',
+              children: [
+                InputField(
+                  label: 'Label',
+                  onValueChange: (value) {},
+                  placeholder: 'Placeholder',
+                ),
+              ],
+            ),
+        '/tabs':
+            (context) => ComponentsScreen(
+              title: 'Tabs',
+              children: [
+                MultiTab(
+                  labels: ['Tab 1', 'Tab 2'],
+                  onValueChange: (index) {
+                    debugPrint('$index');
+                  },
+                ),
+                MultiTab(
+                  labels: ['Tab 1', 'Tab 2', 'Tab 3'],
+                  selectedIndex: 2,
+                  onValueChange: (index) {
+                    debugPrint('$index');
+                  },
+                ),
+              ],
+            ),
+        '/others':
+            (context) => ComponentsScreen(
+              title: 'Others',
+              children: [
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
                       spacing: 10,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        InputField(
-                          label: 'Label',
-                          onValueChange: (value) {},
-                          placeholder: 'Placeholder',
+                        const IngredientItem(
+                          name: 'Tomato',
+                          imagePath: 'assets/images/tomato.png',
+                          weight: '100g',
+                        ),
+                        const IngredientItem(
+                          name: 'Cabbage',
+                          imagePath: 'assets/images/cabbage.png',
+                          weight: '300g',
+                        ),
+                        const IngredientItem(
+                          name: 'Taco',
+                          imagePath: 'assets/images/taco.png',
+                          weight: '1t',
                         ),
                       ],
                     ),
                   ],
                 ),
+                const Divider(),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 10,
                   children: [
-                    Column(
-                      spacing: 16,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MultiTab(
-                          labels: ['Tab 1', 'Tab 2'],
-                          onValueChange: (index) {
-                            print(index);
-                          },
-                        ),
-                        MultiTab(
-                          labels: ['Tab 1', 'Tab 2', 'Tab 3'],
-                          selectedIndex: 2,
-                          onValueChange: (index) {
-                            print(index);
-                          },
-                        ),
-                      ],
+                    RecipeCard(
+                      cookTime: 10,
+                      title: 'spice roasted chicken  with flavored rice',
+                      imagePath: 'assets/images/card-1.png',
+                      rating: 4,
+                      author: 'Mark Kelvin',
+                      onBookmark: () {},
                     ),
+                    RecipeCard(
+                      cookTime: 10,
+                      title: 'Traditional spare ribs baked',
+                      imagePath: 'assets/images/card-2.png',
+                      rating: 4,
+                      author: 'Mark Kelvin',
+                      onBookmark: () {},
+                    ),
+                    RecipeCard(
+                      cookTime: 10,
+                      title: 'Spicy fried rice mix chicken bali',
+                      imagePath: 'assets/images/card-3.png',
+                      rating: 3,
+                      author: 'Mark Kelvin',
+                      onBookmark: () {},
+                    ),
+                    const Divider(),
+                    RatingDialog(
+                      title: 'Rate recipe',
+                      buttonName: 'Send',
+                      onSubmit: (int rating) => debugPrint('$rating'),
+                    ),
+                    const SizedBox(height: 50),
                   ],
                 ),
               ],
             ),
+      },
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          spacing: 16,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            MediumButton(
+              text: 'Button Components',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/buttons');
+              },
+            ),
+            MediumButton(
+              text: 'Form Components',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/forms');
+              },
+            ),
+            MediumButton(
+              text: 'Tabs Components',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/tabs');
+              },
+            ),
+            MediumButton(
+              text: 'Other Components',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/others');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ComponentsScreen extends StatelessWidget {
+  final List<Widget> children;
+  final String title;
+
+  const ComponentsScreen({
+    super.key,
+    required this.children,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(spacing: 16, children: children),
           ),
         ),
       ),
