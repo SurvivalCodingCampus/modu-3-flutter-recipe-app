@@ -15,9 +15,7 @@ class MockRecipeDataSource implements RecipeDataSource {
   @override
   Future<List<Map<String, dynamic>>> getRecipeMaps() async {
     String jsonString =
-        await File(
-          '${Directory.current.path}/lib/data/json/recipes.json',
-        ).readAsString();
+        await File('${Directory.current.path}/assets/json').readAsString();
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     List recipeList = jsonMap["recipes"];
     final List<Map<String, dynamic>> result =
