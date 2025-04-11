@@ -28,7 +28,7 @@ class IngredientItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: ColorStyles.white,
                   borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(image: AssetImage(ingredient.ingredientImage))
+                  image: DecorationImage(image: NetworkImage(ingredient.image))
                 ),
               ),
               Expanded(
@@ -41,10 +41,10 @@ class IngredientItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                ingredient.weight,
-                style: TextStyles.smallRegular(color: ColorStyles.gray3),
-              ),
+              // Text(
+              //   ingredient.,
+              //   style: TextStyles.smallRegular(color: ColorStyles.gray3),
+              // ),
             ],
           ),
         ),
