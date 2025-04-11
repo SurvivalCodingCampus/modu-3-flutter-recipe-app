@@ -9,7 +9,7 @@ class RecipeCard extends StatelessWidget {
   final String recipeName;
   final String recipeAuthor;
   final String imagePath;
-  final int recipeTime;
+  final String recipeTime;
   final double recipeRate;
   final ImageType imageType;
 
@@ -95,26 +95,29 @@ class RecipeCard extends StatelessWidget {
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              recipeName,
-                              style: AppTextStyles.smallBold(
-                                color: ColorStyle.white,
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                recipeName,
+                                softWrap: true,
+                                style: AppTextStyles.smallBold(
+                                  color: ColorStyle.white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              recipeAuthor,
-                              style: AppTextStyles.smallRegularLable(
-                                color: ColorStyle.white,
+                              Text(
+                                recipeAuthor,
+                                style: AppTextStyles.smallRegularLable(
+                                  color: ColorStyle.white,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         Row(
                           children: [
@@ -124,7 +127,7 @@ class RecipeCard extends StatelessWidget {
                               size: 17,
                             ),
                             Text(
-                              '$recipeTime min',
+                              '$recipeTime',
                               style: AppTextStyles.smallRegular(
                                 color: ColorStyle.white,
                               ),

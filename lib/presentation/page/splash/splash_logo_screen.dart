@@ -4,6 +4,7 @@ import 'package:recipe_app/presentation/common/component/color_text_button.dart'
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
 
 class SplashLogoScreen extends StatefulWidget {
@@ -141,7 +142,9 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
                       PageAnimationMove().pushWithFade(
                         context: context,
                         second: 1,
-                        page: SavedRecipesScreen(),
+                        page: SavedRecipesScreen(
+                          model: SavedRecipesViewModel()..fetchData(),
+                        ),
                       );
                     },
                     buttonRadius: 10,
