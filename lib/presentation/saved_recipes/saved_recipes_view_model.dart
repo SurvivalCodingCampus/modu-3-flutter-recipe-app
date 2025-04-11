@@ -18,6 +18,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
+    await Future.delayed(const Duration(seconds: 1));
     _savedRecipes = await _recipeRepository.getRecipes();
     _isLoading = false;
     notifyListeners();

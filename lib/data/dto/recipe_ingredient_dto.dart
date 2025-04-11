@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:recipe_app/data/dto/dto.dart';
 
 part 'recipe_ingredient_dto.g.dart';
@@ -8,7 +8,7 @@ class RecipeIngredientDto {
   final IngredientDto? ingredient;
   final num? amount;
 
-  RecipeIngredientDto({this.ingredient, this.amount});
+  const RecipeIngredientDto({this.ingredient, this.amount});
 
   factory RecipeIngredientDto.fromJson(Map<String, dynamic> json) =>
       _$RecipeIngredientDtoFromJson(json);
