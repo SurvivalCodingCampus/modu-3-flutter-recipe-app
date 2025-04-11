@@ -45,7 +45,7 @@ abstract class TextStyles {
     color: color,
   );
 
-  static TextStyle extraSmallBold({Color? color}) => GoogleFonts.poppins(
+  static TextStyle smallerBold({Color? color}) => GoogleFonts.poppins(
     fontWeight: FontWeight.bold,
     fontSize: 11,
     height: 17 / 11,
@@ -95,10 +95,10 @@ abstract class TextStyles {
     color: color,
   );
 
-  static TextStyle extraSmallRegular({Color? color}) => GoogleFonts.poppins(
+  static TextStyle smallerRegular({Color? color}) => GoogleFonts.poppins(
     fontWeight: FontWeight.w400,
     fontSize: 11,
-    height: 27 / 11,
+    height: 17 / 11,
     color: color,
   );
 }
