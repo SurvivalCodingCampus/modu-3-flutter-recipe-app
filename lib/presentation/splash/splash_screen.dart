@@ -36,7 +36,7 @@ class SplashScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 60),
+                    padding: const EdgeInsets.only(top: 60 + kToolbarHeight),
                     child: Column(
                       children: [
                         Image.asset(
@@ -56,7 +56,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 50),
+                    padding: const EdgeInsets.only(bottom: 50 + kToolbarHeight),
                     child: Column(
                       children: [
                         Text(
