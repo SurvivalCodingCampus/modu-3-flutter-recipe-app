@@ -10,14 +10,6 @@ import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 //test 이름에 한글 포함하면 오류 생길 확률 높으니 영어로 작성해두기
 
 void main() {
-  // testWidgets('Widget Buttons Test', (WidgetTester tester) async {
-  //   await tester.pumpWidget(MyApp());
-  //   //BigButton이라는 타입의 위젯이 있는지 확인
-  //   expect(find.byType(BigButton), findsOneWidget);
-  //   expect(find.byType(MediumButton), findsOneWidget);
-  //   expect(find.byType(SmallButton), findsOneWidget);
-  // });
-
   testWidgets('Widget Label Test', (WidgetTester tester) async {
     String updatedValue = '';
 
