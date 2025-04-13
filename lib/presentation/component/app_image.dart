@@ -73,6 +73,7 @@ class _AppImageState extends State<AppImage> {
               width: widget.width,
               height: widget.height,
               fit: widget.fit,
+              errorBuilder: (_, __, ___) => _errorPlaceholder(),
             ),
             if (widget.overlayBuilder != null) widget.overlayBuilder!(context),
           ],
@@ -82,10 +83,10 @@ class _AppImageState extends State<AppImage> {
   }
 
   Widget _errorPlaceholder() => Container(
-    color: ColorStyle.primary60,
+    color: ColorStyle.warning,
     width: widget.width,
     height: widget.height,
-    child: const Icon(Icons.broken_image),
+    child: const Icon(Icons.photo, color: ColorStyle.black),
   );
 
   Widget _skeletonAnimation() {
