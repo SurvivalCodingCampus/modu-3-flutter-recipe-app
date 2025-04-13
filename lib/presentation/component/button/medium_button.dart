@@ -35,7 +35,7 @@ class _MediumButtonState extends State<MediumButton> {
         });
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 100),
         width: 243,
         decoration: BoxDecoration(
           color:
@@ -50,15 +50,18 @@ class _MediumButtonState extends State<MediumButton> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 11),
-                width: 114,
+                margin: const EdgeInsets.symmetric(horizontal: 11),
                 child: Text(
                   widget.text,
                   style: TextFontStyle.normalBold(color: ColorStyle.white),
                   textAlign: TextAlign.center,
                 ),
               ),
-              Icon(Icons.arrow_forward, color: ColorStyle.white, size: 20),
+              const Icon(
+                Icons.arrow_forward,
+                color: ColorStyle.white,
+                size: 20,
+              ),
             ],
           ),
         ),
