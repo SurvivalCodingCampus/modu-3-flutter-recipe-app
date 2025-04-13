@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../component/medium_Button.dart';
+import '../component/rating_dialog.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
 
@@ -82,6 +83,7 @@ class SplashScreen extends StatelessWidget {
                 // 버튼
                 MediumButton(lable: 'Start Cooking',
                   onClick: () {
+                    _showRatingDialog(context);
                     print('Start Cooking');
                   },
                 ),
@@ -90,6 +92,27 @@ class SplashScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showRatingDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero, // 여백 제거
+          content: RatingDialog(
+            title: "Rate recipe",
+            actionName: "Send",
+            onChange: (rating) {
+              // 선택된 평점을 처리하는 코드
+              print("선택된 평점: $rating");
+              // 다이얼로그 닫기
+              Navigator.of(context).pop();
+            },
+          ),
+        );
+      },
     );
   }
 }
