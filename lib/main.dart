@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyanAccent),
       ),
 
-      //home: SplashScreen(),
-      home: SavedRecipesScreen(viewModel: SavedRecipesViewModel(MockRecipeRepositoryImpl())),
+      home: SplashScreen(),
+      //home: SavedRecipesScreen(viewModel: SavedRecipesViewModel(MockRecipeRepositoryImpl())),
 
     );
   }
