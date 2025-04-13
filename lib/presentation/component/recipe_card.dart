@@ -55,7 +55,7 @@ class RecipeCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'by ${recipe.id}',
+                  'by ${recipe.chef}',
                   style: TextFontStyle.extraSmallRegular(
                     color: ColorStyle.white,
                   ),

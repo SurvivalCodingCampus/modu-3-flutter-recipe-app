@@ -51,7 +51,6 @@ class _MediumButtonState extends State<MediumButton> {
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 11),
-                width: 114,
                 child: Text(
                   widget.text,
                   style: TextFontStyle.normalBold(color: ColorStyle.white),
