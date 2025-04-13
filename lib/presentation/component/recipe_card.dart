@@ -1,25 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../data/model/recipe_model.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
 class RecipeCard extends StatefulWidget {
-  final String? title;
-  final String imageUrl;
-  final String rating;
-  final String time;
-  final String? name;
+  final Recipe recipe;
   final VoidCallback? bookMark;
 
-  const RecipeCard({
-    super.key,
-    this.title,
-    required this.imageUrl,
-    required this.rating,
-    required this.time,
-    this.name,
-    this.bookMark,
-  });
+  const RecipeCard({super.key, required this.recipe, this.bookMark});
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -37,6 +26,8 @@ class _RecipeCardState extends State<RecipeCard> {
 
   @override
   Widget build(BuildContext context) {
+    final recipe = widget.recipe;
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 30),
       child: ClipRRect(
@@ -44,7 +35,7 @@ class _RecipeCardState extends State<RecipeCard> {
         child: Stack(
           children: [
             Image.network(
-              widget.imageUrl,
+              recipe.imageUrl,
               width: double.infinity,
               height: 150,
               fit: BoxFit.cover,
@@ -64,8 +55,6 @@ class _RecipeCardState extends State<RecipeCard> {
               top: 10,
               right: 10,
               child: Container(
-                // width: 37,
-                // height: 16,
                 padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 decoration: BoxDecoration(
                   color: ColorStyles.secondary20,
@@ -73,11 +62,11 @@ class _RecipeCardState extends State<RecipeCard> {
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.star, color: ColorStyles.rating, size: 13),
+                    SizedBox(width: 2),
                     Text(
-                      widget.rating,
+                      recipe.rating.toStringAsFixed(1),
                       style: TextStyles.smallRegular.copyWith(
                         color: ColorStyles.black,
                         fontSize: 8,
@@ -94,14 +83,14 @@ class _RecipeCardState extends State<RecipeCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.title ?? '',
+                    recipe.name,
                     style: TextStyles.smallBold.copyWith(
                       color: ColorStyles.white,
                       fontSize: 14,
                     ),
                   ),
                   Text(
-                    'by ${widget.name ?? ''}',
+                    'by ${recipe.chef}',
                     style: TextStyles.smallerRegular.copyWith(
                       color: ColorStyles.white,
                       fontSize: 8,
@@ -118,7 +107,7 @@ class _RecipeCardState extends State<RecipeCard> {
                   Icon(Icons.access_time, color: ColorStyles.gray4, size: 17),
                   SizedBox(width: 5),
                   Text(
-                    widget.time,
+                    recipe.time,
                     style: TextStyles.smallerRegular.copyWith(
                       color: ColorStyles.gray4,
                       fontSize: 11,
