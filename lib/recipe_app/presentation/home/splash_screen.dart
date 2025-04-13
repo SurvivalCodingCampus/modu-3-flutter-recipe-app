@@ -95,7 +95,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                   MaterialPageRoute(
                                     builder:
                                         (context) => SavedRecipesScreen(
-                                          savedRecipesViewModelviewModel:
+                                          savedRecipesViewModel:
                                               SavedRecipesViewModel(
                                                 widget.repository,
                                               )..loadRecipesData(),

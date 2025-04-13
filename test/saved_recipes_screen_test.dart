@@ -16,7 +16,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: SavedRecipesScreen(
-            savedRecipesViewModelviewModel: SavedRecipesViewModel(repository)
+            savedRecipesViewModel: SavedRecipesViewModel(repository)
               ..loadRecipesData(),
           ),
         ),

@@ -4,12 +4,9 @@ import 'package:recipe_app/recipe_app/presentation/home/saved_recipes_view_model
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
-  final SavedRecipesViewModel savedRecipesViewModelviewModel;
+  final SavedRecipesViewModel savedRecipesViewModel;
 
-  const SavedRecipesScreen({
-    super.key,
-    required this.savedRecipesViewModelviewModel,
-  });
+  const SavedRecipesScreen({super.key, required this.savedRecipesViewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +19,20 @@ class SavedRecipesScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: ListenableBuilder(
-          listenable: savedRecipesViewModelviewModel,
+          listenable: savedRecipesViewModel,
           builder: (context, child) {
-            if (savedRecipesViewModelviewModel.isLoading) {
-              return CircularProgressIndicator();
+            if (savedRecipesViewModel.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (savedRecipesViewModel.recipes.isEmpty) {
+              return const Center(child: Text('저장된 레시피가 없습니다.'));
             }
             return ListView.separated(
               itemBuilder: (context, index) {
-                return RecipeCard(
-                  recipe: savedRecipesViewModelviewModel.recipes[index],
-                );
+                return RecipeCard(recipe: savedRecipesViewModel.recipes[index]);
               },
               separatorBuilder: (context, index) => const SizedBox(height: 20),
-              itemCount: savedRecipesViewModelviewModel.recipes.length,
+              itemCount: savedRecipesViewModel.recipes.length,
             );
           },
         ),
