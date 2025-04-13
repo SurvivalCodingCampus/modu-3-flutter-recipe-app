@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
-import 'package:recipe_app/presentation/saved_recipes_screen/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyanAccent),
       ),
+
+      //home: SplashScreen(),
       home: SavedRecipesScreen(viewModel: SavedRecipesViewModel(MockRecipeRepositoryImpl())),
-      // const MyHomePage(title: 'Flutter Demo Home Page'),
+
     );
   }
 }

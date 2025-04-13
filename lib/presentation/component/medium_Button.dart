@@ -58,7 +58,7 @@ class _MediumButtonState extends State<MediumButton> {
                       color: ColorStyle.white
                   )
               ),
-              const SizedBox(width: 20),
+              const SizedBox(width: 15),
               const Icon(
                 Icons.arrow_forward,
                 color: Colors.white,

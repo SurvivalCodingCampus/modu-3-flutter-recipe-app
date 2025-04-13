@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 
 import '../../data/model/recipe.dart' show Recipe;
 import '../component/recipe_card.dart';
