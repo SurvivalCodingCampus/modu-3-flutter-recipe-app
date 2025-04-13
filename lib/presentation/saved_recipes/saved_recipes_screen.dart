@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/model/recipe.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
-  final List<Recipe> _recipe;
-  const SavedRecipesScreen({super.key, required List<Recipe> recipe})
-    : _recipe = recipe;
+  final SavedRecipesViewModel _viewModel;
+  const SavedRecipesScreen({
+    super.key,
+    required SavedRecipesViewModel savedRecipesViewModel,
+  }) : _viewModel = savedRecipesViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,16 @@ class SavedRecipesScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: _recipe.length,
-              itemBuilder: (context, index) {
-                final recipe = _recipe[index];
-                return RecipeCard(recipe: recipe);
+            child: ListenableBuilder(
+              listenable: _viewModel,
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemCount: _viewModel.recipes.length,
+                  itemBuilder: (context, index) {
+                    final recipe = _viewModel.recipes[index];
+                    return RecipeCard(recipe: recipe);
+                  },
+                );
               },
             ),
           ),

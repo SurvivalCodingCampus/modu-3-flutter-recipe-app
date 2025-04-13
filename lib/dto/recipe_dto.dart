@@ -7,7 +7,7 @@ class RecipeDto {
   final String? title;
   final PicturesDto? picture;
   final String? chef;
-  final String? time;
+  final int? time;
   final num? rating;
   final List<IngredientsDto>? ingredients;
 
@@ -32,7 +32,7 @@ class RecipeDto {
               ? PicturesDto.fromJson(json['picture'])
               : null,
       chef: json['chef'] as String?,
-      time: json['time']?.toString(),
+      time: json['time'],
       rating: json['rating'] as num?,
       ingredients:
           (json['ingredients'] as List<dynamic>?)

@@ -1,15 +1,15 @@
-class Ingredient {
+class IngredientDto {
   final num? id;
   final String? name;
-  final String? image;
+  final String? imageUrl;
 
-  Ingredient({this.id, this.name, this.image});
+  IngredientDto({this.id, this.name, this.imageUrl});
 
-  factory Ingredient.fromJson(Map<String, dynamic> json) {
-    return Ingredient(
+  factory IngredientDto.fromJson(Map<String, dynamic> json) {
+    return IngredientDto(
       id: json['id'] as num?,
       name: json['name'] as String?,
-      image: json['image'] as String?,
+      imageUrl: json['image'] as String?,
     );
   }
 }
