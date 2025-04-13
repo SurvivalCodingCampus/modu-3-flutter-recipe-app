@@ -1,12 +1,14 @@
 import 'package:recipe_app/data/dto/ingredient_item_dto.dart';
-
+import '../model/ingredients_model.dart';
 import '../model/recipe_ingredient.dart';
 import 'ingredient_mapper.dart';
 
 extension RecipeIngredientMapper on RecipeIngredientDto {
   RecipeIngredient toRecipeIngredient() {
     return RecipeIngredient(
-      ingredient: ingredient!.toIngredient(),
+      ingredient:
+          ingredient?.toIngredient() ??
+          Ingredient(id: 0, name: '', imageUrl: ''),
       amount: amount ?? 0,
     );
   }

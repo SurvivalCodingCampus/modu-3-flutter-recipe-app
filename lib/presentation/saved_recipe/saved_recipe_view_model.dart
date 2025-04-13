@@ -14,6 +14,9 @@ class SavedRecipeViewModel with ChangeNotifier {
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
+  String? _errorMessage;
+
+  String? get errorMessage => _errorMessage;
 
   Future<void> fetchSavedRecipes() async {
     try {
@@ -24,6 +27,8 @@ class SavedRecipeViewModel with ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _isLoading = false;
+      print('Error fetching saved recipes: $e');
+      _errorMessage = e.toString();
       notifyListeners();
     }
   }

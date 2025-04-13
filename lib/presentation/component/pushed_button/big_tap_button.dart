@@ -56,6 +56,8 @@ class _BigTapButtonState extends State<BigTapButton> {
                   color: ColorStyles.white,
                   fontSize: 16,
                 ),
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
             ),
             Icon(Icons.arrow_forward, color: ColorStyles.white),

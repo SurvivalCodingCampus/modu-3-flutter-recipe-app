@@ -4,7 +4,7 @@ import 'package:recipe_app/presentation/saved_recipe/saved_recipe_view_model.dar
 
 void main() {
   group('SavedRecipeViewModel test', () {
-    test('fetchApp', () async {
+    test('fetchSavedRecipes_loadRecipes', () async {
       final mockRepository = MockRecipeRepositoryImpl();
       final viewModel = SavedRecipeViewModel(mockRepository);
 
@@ -12,8 +12,18 @@ void main() {
       expect(viewModel.isLoading, false);
 
       await viewModel.fetchSavedRecipes();
+      expect(viewModel.isLoading, true);
       expect(viewModel.savedRecipes.length, 3);
+    });
+    test('fetchSavedRecipes_error', () async {
+      final mockRepository = MockRecipeRepositoryImpl();
+      final viewModel = SavedRecipeViewModel(mockRepository);
+      expect(viewModel.savedRecipes, []);
       expect(viewModel.isLoading, false);
+      await viewModel.fetchSavedRecipes();
+      expect(viewModel.isLoading, false);
+      expect(viewModel.savedRecipes, []);
+      expect(viewModel.errorMessage, isNotNull);
     });
   });
 }

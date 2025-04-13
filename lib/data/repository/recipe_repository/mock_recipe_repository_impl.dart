@@ -1,5 +1,9 @@
+import 'package:recipe_app/data/model/procedure_model.dart';
 import 'package:recipe_app/data/model/recipe_model.dart';
 import 'package:recipe_app/data/repository/recipe_repository/recipe_repository.dart';
+
+import '../../model/ingredients_model.dart';
+import '../../model/recipe_ingredient.dart';
 
 class MockRecipeRepositoryImpl implements RecipeRepository {
   @override
@@ -13,8 +17,15 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
         chef: 'Chef 1',
         time: '10 min',
         rating: 4.5,
-        ingredients: [],
-        procedures: [],
+        ingredients: [
+          RecipeIngredient(
+            ingredient: Ingredient(id: 1, name: '소금', imageUrl: 'salt.png'),
+            amount: 10,
+          ),
+        ],
+        procedures: [
+          Procedure(recipeId: 1, steps: ['Step 1', 'Step 2']),
+        ],
         id: 1,
       ),
       Recipe(
@@ -24,8 +35,15 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
         chef: 'Chef 2',
         time: '20 min',
         rating: 4.2,
-        ingredients: [],
-        procedures: [],
+        ingredients: [
+          RecipeIngredient(
+            ingredient: Ingredient(id: 2, name: '소금', imageUrl: 'salt.png'),
+            amount: 10,
+          ),
+        ],
+        procedures: [
+          Procedure(recipeId: 2, steps: ['Step 1', 'Step 2']),
+        ],
         id: 2,
       ),
       Recipe(
@@ -35,8 +53,15 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
         chef: 'Chef 3',
         time: '30 min',
         rating: 4.8,
-        ingredients: [],
-        procedures: [],
+        ingredients: [
+          RecipeIngredient(
+            ingredient: Ingredient(id: 3, name: '소금', imageUrl: 'salt.png'),
+            amount: 10,
+          ),
+        ],
+        procedures: [
+          Procedure(recipeId: 3, steps: ['Step 1', 'Step 2']),
+        ],
         id: 3,
       ),
     ];

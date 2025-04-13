@@ -46,7 +46,9 @@ class MyApp extends StatelessWidget {
                 SizedBox(height: 10),
                 FilterButton(text: ['All', 'Breakfast', 'Lunch', 'Dinner']),
                 SizedBox(height: 10),
-                FilterButton(text: ['계절', '봄', '여름', '가을', '겨울']),
+                FilterButton(
+                  text: ['계절', '봄', '여름', '가을', '겨울', '가나다라마', '2', '3'],
+                ),
                 SizedBox(height: 10),
                 RatingDialog(title: '별점', actionName: '보내기'),
                 SizedBox(height: 10),
