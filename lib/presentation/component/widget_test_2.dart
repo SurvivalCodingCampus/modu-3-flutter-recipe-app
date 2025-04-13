@@ -9,6 +9,8 @@ import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
 
+import '../../data/model/recipe.dart';
+
 void main() {
   runApp(
     MaterialApp(
@@ -23,31 +25,33 @@ void main() {
 
 
             SizedBox(height: 16,),
-            RecipeCard(
-              imageUrl: 'https://assets.bonappetit.com/photos/5e7a6c79edf206000862e452/16:9/w_2287,h_1286,c_limit/Cooking-Home-Collection.jpg',
-              recipeName: 'Traditional spare big ribs baked',
-              chefName: 'Alex lau',
-              rating: 4.0,
-              cookingTime: '20 min',
-              isBookmarked: false,
-              onBookmarkChanged: (isBookmarked) {
-                print('Bookmark changed: $isBookmarked');
-              },
+            RecipeCard( recipe:
+              Recipe(imageUrl: 'https://assets.bonappetit.com/photos/5e7a6c79edf206000862e452/16:9/w_2287,h_1286,c_limit/Cooking-Home-Collection.jpg',
+              recipeName:  'Traditional spare big ribs baked',
+              chefName:  'Alex lau',
+              rating:  4.0,
+              cookingTime:  '20 min',
+              isBookmarked:  false)
+              , onBookmarkChanged: (isBookmarked) {
+              print('Bookmark changed: $isBookmarked');
+              }
+            ),
 
-            ),
+
+
             SizedBox(height: 16,),
-            RecipeCard(
-              imageUrl: 'https://c.ndtvimg.com/2018-12/9c7qbvm_turkey_625x300_13_December_18.jpg',
-              recipeName: 'Roast Turkey with Cranberry Sauce Recipe',
-              chefName: 'Lokesh Jarodia',
-              rating: 3.2,
-              cookingTime: '50 min',
-              isBookmarked: true,
-              onBookmarkChanged: (isBookmarked) {
-                // 북마크 상태가 변경되었을 때 수행할 작업
-                print('Bookmark changed: $isBookmarked');
-              },
-            ),
+            // RecipeCard(
+            //   imageUrl: 'https://c.ndtvimg.com/2018-12/9c7qbvm_turkey_625x300_13_December_18.jpg',
+            //   recipeName: 'Roast Turkey with Cranberry Sauce Recipe',
+            //   chefName: 'Lokesh Jarodia',
+            //   rating: 3.2,
+            //   cookingTime: '50 min',
+            //   isBookmarked: true,
+            //   onBookmarkChanged: (isBookmarked) {
+            //    북마크 상태가 변경되었을 때 수행할 작업
+            //     print('Bookmark changed: $isBookmarked');
+            //   },
+            // ),
 
             SizedBox(height: 16,), // 공백 추가
             Row(

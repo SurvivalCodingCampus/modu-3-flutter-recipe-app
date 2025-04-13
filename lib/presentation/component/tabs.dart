@@ -31,6 +31,7 @@ class _TabsState extends State<Tabs> {
         children: List.generate(
           widget.labels.length,
               (index) => Expanded(
+
             child: GestureDetector(
               onTap: () {
                 setState(() {
