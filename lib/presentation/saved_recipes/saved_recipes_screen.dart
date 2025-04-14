@@ -15,13 +15,16 @@ class SavedRecipesScreen extends StatelessWidget {
       builder: (context, child) {
         if (viewModel.state.isLoading) {
           return Scaffold(
-            appBar: AppBar(title: const Text('Saved Recipes')),
+            appBar: AppBar(
+              title: const Text('Saved Recipes'),
+              centerTitle: true,
+            ),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
 
         return Scaffold(
-          appBar: AppBar(title: const Text('Saved Recipes')),
+          appBar: AppBar(title: const Text('Saved Recipes'), centerTitle: true),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView.separated(
