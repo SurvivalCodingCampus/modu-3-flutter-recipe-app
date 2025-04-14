@@ -13,6 +13,9 @@ class SearchViewModel with ChangeNotifier {
   SearchState _state = const SearchState();
   SearchState get state => _state;
 
+  // UI 변경 유무 상태값
+  bool get isChangeUI => _state.isFiltered || _state.searchText.isNotEmpty;
+
   void fetchSearchData() async {
     try {
       _state = state.copyWith(viewState: ViewState.loading);
@@ -39,10 +42,16 @@ class SearchViewModel with ChangeNotifier {
     required int rate,
     required String category,
   }) {
+    // 현재 검색됐는지 안됐는지에 따라
+    // 다르게 기본 베이스 데이터를 설정
+    List<Recipe> baseData = _state.originalData;
+    if (_state.searchText.isNotEmpty) {
+      baseData = _state.data;
+    }
     // time은 뭘 원하는지 모르겠어서 패스
     _state = state.copyWith(
       data:
-          _state.originalData.where((e) {
+          baseData.where((e) {
             // 기본 필터 조건을 먼저 설정
             final isRatingValid =
                 rate == 0 || (e.rating >= rate && e.rating < rate + 1);
@@ -52,24 +61,25 @@ class SearchViewModel with ChangeNotifier {
             return isRatingValid && isCategoryValid;
           }).toList(),
       viewState: ViewState.complete,
-      isFiltered: true,
+      isFiltered: rate != 0 && category != 'All',
     );
     notifyListeners();
   }
 
   void searchData(String text) {
     _state = state.copyWith(searchText: text);
+    // 현재 필터링됐는지 안됐는지에 따라
+    // 다르게 기본 베이스 데이터를 설정
+    List<Recipe> baseData = _state.originalData;
+    if (_state.isFiltered) {
+      baseData = _state.data;
+    }
     if (text.isEmpty) {
-      _state = state.copyWith(
-        data: _state.originalData,
-        viewState: ViewState.complete,
-        isFiltered: false,
-      );
+      _state = state.copyWith(data: baseData, viewState: ViewState.complete);
     } else {
       _state = state.copyWith(
-        data: _state.originalData.where((e) => e.name.contains(text)).toList(),
+        data: baseData.where((e) => e.name.contains(text)).toList(),
         viewState: ViewState.complete,
-        isFiltered: true,
       );
     }
     notifyListeners();

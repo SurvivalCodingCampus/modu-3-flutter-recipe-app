@@ -41,9 +41,9 @@ class _SearchScreenState extends State<SearchScreen> {
         listenable: viewModel..fetchSearchData(),
         builder: (context, child) {
           final state = viewModel.state;
+          final isChangeUI = viewModel.isChangeUI;
           final viewState = state.viewState;
           final recipes = state.data;
-          final isFiltered = state.isFiltered;
 
           return StateHandling(
             viewState,
@@ -81,10 +81,10 @@ class _SearchScreenState extends State<SearchScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          isFiltered ? 'Search Result' : 'Recent Search',
+                          isChangeUI ? 'Search Result' : 'Recent Search',
                           style: AppTextStyle.normalBold,
                         ),
-                        if (isFiltered)
+                        if (isChangeUI)
                           Text(
                             '${recipes.length} results',
                             style: AppTextStyle.smallerRegular.copyWith(
