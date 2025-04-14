@@ -64,7 +64,7 @@ class _RecipeCardState extends State<RecipeCard> {
                 width: 37,
                 height: 16,
                 decoration: BoxDecoration(
-                  color: ColorStyles2.starRateContainerColor,
+                  color: ColorStyles2.secondary20,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
@@ -72,11 +72,7 @@ class _RecipeCardState extends State<RecipeCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.star,
-                        color: ColorStyles2.starColor,
-                        size: 7.5,
-                      ),
+                      Icon(Icons.star, color: ColorStyles2.rating, size: 7.5),
                       SizedBox(width: 2),
                       Text(
                         widget.recipe.rate.toStringAsFixed(1),

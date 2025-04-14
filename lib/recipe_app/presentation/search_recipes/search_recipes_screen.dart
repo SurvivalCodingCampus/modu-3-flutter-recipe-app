@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
-class SearchRecipesScreen extends StatelessWidget {
+class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel searchRecipesViewModel;
 
   const SearchRecipesScreen({super.key, required this.searchRecipesViewModel});
+
+  @override
+  State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
+}
+
+class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
+  TextEditingController _searchController = TextEditingController();
+  bool _isSearching = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +48,20 @@ class SearchRecipesScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
+                      TextField(
+                        controller: _searchController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: ColorStyles2.gray4),
+                          ),
+                          prefixIcon: Icon(Icons.search, size: 18),
+                          prefixIconColor: ColorStyles2.gray4,
+                          hintText: 'Search recipe',
+                          hintStyle: TextStyles2.smallerTextRegular,
+                        ),
+                      ),
+                      SizedBox(height: 15),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -50,10 +73,11 @@ class SearchRecipesScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 15),
                       ListenableBuilder(
-                        listenable: searchRecipesViewModel..fetchRecipes(),
+                        listenable:
+                            widget.searchRecipesViewModel..fetchRecipes(),
                         builder: (context, child) {
                           final state =
-                              searchRecipesViewModel.searchRecipesState;
+                              widget.searchRecipesViewModel.searchRecipesState;
                           if (state.isRecipesLoading == true) {
                             return CircularProgressIndicator();
                           }

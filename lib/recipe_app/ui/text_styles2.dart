@@ -53,4 +53,9 @@ abstract class TextStyles2 {
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );
+  static TextStyle smallerTextRegular = GoogleFonts.poppins(
+    fontSize: 11,
+    fontWeight: FontWeight.w400,
+    color: ColorStyles2.gray4,
+  );
 }

@@ -51,7 +51,7 @@ class _RatingDialogState extends State<RatingDialog> {
                                   index + 1 <= _stars
                                       ? Icons.star
                                       : Icons.star_border,
-                                  color: ColorStyles2.starColor,
+                                  color: ColorStyles2.rating,
                                 ),
                               ),
                             ),
@@ -70,7 +70,7 @@ class _RatingDialogState extends State<RatingDialog> {
                                 backgroundColor:
                                     _stars == 0
                                         ? ColorStyles2.containerColor
-                                        : ColorStyles2.starColor,
+                                        : ColorStyles2.rating,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 50.0,
                                   vertical: 20.0,
