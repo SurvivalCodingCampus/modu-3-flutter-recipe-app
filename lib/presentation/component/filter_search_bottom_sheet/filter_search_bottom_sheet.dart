@@ -74,7 +74,9 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                           return FilterButton(
                             title: t.label,
                             isSelected: _state.time == t,
-                            onPressed: () => _updateTime(t),
+                            onPressed: () {
+                              // Time값이 없어서 아무것도 하지 않음
+                            },
                           );
                         }).toList(),
                   ),
