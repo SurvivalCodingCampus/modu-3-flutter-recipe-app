@@ -1,16 +1,35 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:recipe_app/domain/model/model.dart';
+
 import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
+import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 class FilterDialog extends StatefulWidget {
-  const FilterDialog({super.key});
+  final Filter filter;
+  final Function(Filter) onTapFilter;
+
+  const FilterDialog({
+    super.key,
+    required this.filter,
+    required this.onTapFilter,
+  });
 
   @override
   State<FilterDialog> createState() => _FilterDialogState();
 }
 
 class _FilterDialogState extends State<FilterDialog> {
+  late Filter filter;
+
+  @override
+  void initState() {
+    super.initState();
+    filter = widget.filter;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -41,7 +60,14 @@ class _FilterDialogState extends State<FilterDialog> {
                     ...['All', 'Newest', 'Oldest', 'Popularity'].map(
                       (e) => Padding(
                         padding: const EdgeInsets.only(right: 15),
-                        child: FilterButton(text: e),
+                        child: FilterButton(
+                          text: e,
+                          isSelected: filter.time == e,
+                          onTap:
+                              () => setState(
+                                () => filter = filter.copyWith(time: e),
+                              ),
+                        ),
                       ),
                     ),
                   ],
@@ -59,7 +85,14 @@ class _FilterDialogState extends State<FilterDialog> {
                     ...[5, 4, 3, 2, 1].map(
                       (e) => Padding(
                         padding: const EdgeInsets.only(right: 15),
-                        child: RatingButton(rating: e.toDouble()),
+                        child: RatingButton(
+                          rating: e,
+                          isSelected: filter.rate == e,
+                          onTap:
+                              () => setState(
+                                () => filter = filter.copyWith(rate: e),
+                              ),
+                        ),
                       ),
                     ),
                   ],
@@ -88,9 +121,29 @@ class _FilterDialogState extends State<FilterDialog> {
                       'Breakfast',
                       'Spanish',
                       'Lunch',
-                    ].map((e) => FilterButton(text: e)),
+                    ].map(
+                      (e) => FilterButton(
+                        text: e,
+                        isSelected: filter.category == e,
+                        onTap:
+                            () => setState(
+                              () => filter = filter.copyWith(category: e),
+                            ),
+                      ),
+                    ),
                   ],
                 ),
+                const SizedBox(height: 30),
+                Center(
+                  child: SmallButton(
+                    text: 'Filter',
+                    onTap: () {
+                      widget.onTapFilter(filter);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                const SizedBox(height: 22),
               ],
             ),
           ],

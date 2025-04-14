@@ -81,9 +81,9 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const RatingButton(rating: 5),
+                  const RatingButton(rating: 5, isSelected: false),
                   const SizedBox(height: 10),
-                  const FilterButton(text: 'text'),
+                  FilterButton(text: 'text', isSelected: false, onTap: () {}),
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {

@@ -38,6 +38,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
           widget.onValueChanged!('');
         }
       },
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
       decoration: InputDecoration(
         prefixIcon: Image.asset(
           'assets/icons/search.png',

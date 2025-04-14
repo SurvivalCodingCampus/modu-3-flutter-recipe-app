@@ -10,6 +10,7 @@ extension RecipeMapper on RecipeDto {
       chef: chef ?? '',
       totalTimeMinutes: time ?? '',
       rating: rating != null ? rating!.toDouble() : 0.0,
+      category: category ?? '',
     );
   }
 }

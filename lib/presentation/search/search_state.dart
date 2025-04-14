@@ -13,11 +13,14 @@ class SearchState with _$SearchState {
   final String title;
   @override
   final String resultsCount;
+  @override
+  final Filter filter;
 
   const SearchState({
     this.recipes = const [],
     this.isLoading = false,
     this.title = 'Recent Search',
     this.resultsCount = '',
+    this.filter = const Filter(time: 'All', rate: 0, category: 'All'),
   });
 }

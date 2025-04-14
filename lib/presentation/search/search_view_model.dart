@@ -51,4 +51,36 @@ class SearchViewModel with ChangeNotifier {
     );
     notifyListeners();
   }
+
+  void getFilteredRecipes(Filter filter) async {
+    print(filter);
+    final allRecipes =
+        _previousSearchedRecipes.isNotEmpty
+            ? _previousSearchedRecipes // 검색 결과가 있다면 그 결과만 필터링
+            : await _repository.getRecipes(); // 아니면 전체 레시피
+
+    print('🐶 $allRecipes');
+    final filteredData =
+        allRecipes
+            .where((e) {
+              if (filter.time == 'All') {
+                return true;
+              }
+              return e.time == filter.time;
+            })
+            .where((e) => e.rating >= filter.rate)
+            .where((e) {
+              if (filter.category == 'All') {
+                return true;
+              }
+              return filter.category == e.category;
+            })
+            .toList();
+    print('🍎 $filteredData');
+
+    _previousSearchedRecipes = filteredData;
+
+    _state = state.copyWith(recipes: filteredData);
+    notifyListeners();
+  }
 }
