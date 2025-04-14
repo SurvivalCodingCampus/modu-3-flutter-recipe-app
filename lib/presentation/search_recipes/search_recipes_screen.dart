@@ -105,6 +105,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                           builder: (context) {
                             return FilterScreen(
                               viewModel: widget.filterScreenViewModel,
+                              searchRecipesViewModel: widget.viewModel,
                             );
                           },
                         );

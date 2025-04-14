@@ -12,6 +12,57 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   SearchRecipesState get state => _state;
 
+  String? _categoryFilter;
+  int? _rateFilter;
+  String? _TimeFilter;
+
+  Future<void> updateFilters({
+    String? category,
+    required int? rate,
+    String? time,
+  }) async {
+    _categoryFilter = category;
+    _rateFilter = rate;
+    _TimeFilter = time;
+    await fetchFilteredRecipes();
+  }
+
+  Future<void> fetchFilteredRecipes() async {
+    _state = _state.copyWith(isLoading: true);
+    notifyListeners();
+
+    try {
+      final recipes = await _recipeRepository.searchRecipes(state.keyword);
+      final keyword = state.keyword.toLowerCase();
+
+      final filtered =
+          recipes.where((recipe) {
+            final matchesCategory =
+                _categoryFilter == null || recipe.category == _categoryFilter;
+            final matchesTime =
+                _TimeFilter == null || recipe.time == _TimeFilter;
+            final matchesRate =
+                _rateFilter == null || recipe.rating >= _rateFilter!;
+
+            return matchesCategory && matchesTime && matchesRate;
+          }).toList();
+      _state = _state.copyWith(
+        isLoading: false,
+        recipes: recipes,
+        filteredRecipes: filtered,
+        isFiltered:
+            keyword.isNotEmpty ||
+            _categoryFilter != null ||
+            _TimeFilter != null ||
+            _rateFilter != null,
+      );
+    } catch (e) {
+      _state = _state.copyWith(isLoading: false);
+      print('Error fetching recipes: $e');
+    }
+    notifyListeners();
+  }
+
   Future<void> fetchSearchRecipes() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();

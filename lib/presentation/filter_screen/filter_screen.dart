@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 import '../component/filter_button.dart';
 import '../component/rating_button.dart';
 import '../component/small_button.dart';
+import '../search_recipes/search_recipes_view_model.dart';
 import 'filter_screen_view_model.dart';
 
 class FilterScreen extends StatelessWidget {
   final FilterScreenViewModel viewModel;
+  final SearchRecipesViewModel searchRecipesViewModel;
 
-  const FilterScreen({super.key, required this.viewModel});
+  const FilterScreen({
+    super.key,
+    required this.viewModel,
+    required this.searchRecipesViewModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +106,8 @@ class FilterScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Wrap(
+                      spacing: 2,
+                      runSpacing: 10,
                       children:
                           viewModel.state.categoryList.map((category) {
                             return FilterButton(
@@ -120,6 +129,11 @@ class FilterScreen extends StatelessWidget {
                   child: SmallButton(
                     text: 'Filter',
                     onClick: () {
+                      searchRecipesViewModel.updateFilters(
+                        category: viewModel.state.selectedCategory,
+                        rate: viewModel.state.rate,
+                        time: viewModel.state.selectedTime,
+                      );
                       Navigator.pop(context);
                     },
                   ),
