@@ -29,9 +29,18 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         backgroundColor: Colors.white,
       ),
       body: Center(
-        child: Row(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 15,
+                ),
+                textStyle: const TextStyle(fontSize: 18),
+                backgroundColor: Colors.amber,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -45,9 +54,18 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   ),
                 );
               },
-              child: Text('SavedRecipes'),
+              child: const Text('저장된 레시피'),
             ),
+            const SizedBox(height: 20),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 15,
+                ),
+                textStyle: const TextStyle(fontSize: 18),
+                backgroundColor: Colors.amber,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -62,7 +80,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   ),
                 );
               },
-              child: Text('SearchRecipes'),
+              child: const Text('레시피 검색'),
             ),
           ],
         ),

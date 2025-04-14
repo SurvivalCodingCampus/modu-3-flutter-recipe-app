@@ -29,18 +29,11 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   void initState() {
     super.initState();
     widget.searchRecipesViewModel.fetchRecipes();
-    _searchController.addListener(() {
-      final String keyword = _searchController.text;
-      _isSearching = true;
-      widget.searchRecipesViewModel.searchRecipes(keyword);
-      _searchController.value = _searchController.value.copyWith(text: keyword);
-    });
   }
 
   @override
   void dispose() {
     _searchController.dispose();
-    _isSearching = false;
     super.dispose();
   }
 
