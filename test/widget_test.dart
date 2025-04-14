@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/component/score_dialog.dart';
+import 'package:recipe_app/presentation/component/widgets/score_dialog.dart';
 
 void main() {
   testWidgets('ScoreDialog UI and interaction test', (WidgetTester tester) async {

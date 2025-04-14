@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/ui/color_style.dart';
 
 class RecipeCard extends StatelessWidget {
   final String recipeName;
@@ -30,23 +31,26 @@ class RecipeCard extends StatelessWidget {
         child: Stack(
           children: [
             // 배경 이미지
-            Image.asset(
+            Image.network(
               recipeImgUrl,
-              width: 315,
-              height: 150,
               fit: BoxFit.cover,
+              width: double.infinity,
+              height: 180,
+              errorBuilder:
+                  (context, error, stackTrace) =>
+                      const Icon(Icons.broken_image),
             ),
 
             // 그라데이션 오버레이
             Container(
-              width: 315,
+              width: double.infinity,
               height: 400,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.1),
                     Colors.black.withOpacity(0.7),
                   ],
                 ),
@@ -90,12 +94,15 @@ class RecipeCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       height: 1.2,
                     ),
+                    softWrap: true,
+                    maxLines: 2, // 최대 2줄로 제한
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 6),
                   Text(
                     'By $chefName',
                     style: const TextStyle(
-                      color: Color(0xFFD9D9D9),
+                      color: ColorStyle.gray4,
                       fontSize: 8,
                       fontWeight: FontWeight.w400,
                     ),
@@ -136,7 +143,7 @@ class RecipeCard extends StatelessWidget {
                       color: Color.fromARGB(255, 126, 174, 166),
                       size: 12,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
