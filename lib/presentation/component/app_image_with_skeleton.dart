@@ -8,7 +8,7 @@ class AppImage extends StatefulWidget {
   final BoxFit fit;
   final BorderRadius borderRadius;
   final VoidCallback? onImageLoaded;
-  final Widget Function(BuildContext context)? overlayBuilder;
+  final Widget Function(BuildContext context)? overlayBuilder; //오버레이 넣는 위젯 부분
 
   const AppImage({
     super.key,
