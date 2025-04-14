@@ -6,6 +6,8 @@ import 'package:recipe_app/presentation/common/component/recipe_search_card.dart
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
+import 'package:recipe_app/presentation/page/search_recipes/filter_search/filter_search_screen.dart';
+import 'package:recipe_app/presentation/page/search_recipes/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/presentation/page/search_recipes/search_recipes_view_model.dart';
 
 class SearchRecipesScreen extends StatefulWidget {
@@ -124,7 +126,26 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       ),
                       SizedBox(width: 20),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                height: 484,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(50),
+                                    topRight: Radius.circular(50)
+                                  )
+                                ),
+                                child: FilterSearchScreen(
+                                  viewModel: FilterSearchViewModel(),
+                                ),
+                              );
+                            },
+                          );
+                        },
                         borderRadius: BorderRadius.circular(10),
                         child: Ink(
                           decoration: BoxDecoration(
