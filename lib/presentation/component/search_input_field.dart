@@ -4,15 +4,12 @@ import 'package:recipe_app/presentation/ui/text_styles.dart';
 
 class SearchInputField extends StatefulWidget {
   final void Function(String value) onValueChange;
-
-  final TextEditingController controller;
+  final String searchText;
   final FocusNode focusNode;
-  final String titleLabel;
 
   const SearchInputField({
     super.key,
-    required this.titleLabel,
-    required this.controller,
+    required this.searchText,
     required this.focusNode,
     required this.onValueChange,
   });
@@ -24,7 +21,7 @@ class SearchInputField extends StatefulWidget {
 class _SearchInputFieldState extends State<SearchInputField> {
   bool get isFocused => widget.focusNode.hasFocus;
 
-  bool get hasText => widget.controller.text.isNotEmpty;
+  bool get hasText => widget.searchText.trim().isNotEmpty;
   Color _textColor = ColorStyle.gray4;
 
   @override
@@ -36,26 +33,26 @@ class _SearchInputFieldState extends State<SearchInputField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
-
-
-            controller: widget.controller,
+            //controller: widget.controller,
             focusNode: widget.focusNode,
             enableInteractiveSelection: false,
             onSubmitted: (value) {
               widget.onValueChange(value);
-              setState(() {
-                _textColor =
-                    value.isEmpty ? ColorStyle.gray4 : ColorStyle.black;
-              });
+               // setState(() {
+               //  _textColor =
+               //      value.trim().isEmpty ? ColorStyle.gray4 : ColorStyle.black;
+               // });
             },
             onTapOutside: (event) {
-              widget.onValueChange(widget.controller.text);
+              //widget.onValueChange(widget.controller.text);
             },
             onChanged: (value) {
-              setState(() {
+               widget.onValueChange(value);
+
+               setState(() {
                 _textColor =
-                    value.isEmpty ? ColorStyle.gray4 : ColorStyle.black;
-              });
+                    value.trim().isEmpty ? ColorStyle.gray4 : ColorStyle.black;
+               });
             },
             decoration: InputDecoration(
               hintText: isFocused || hasText ? '' : 'Search recipe',

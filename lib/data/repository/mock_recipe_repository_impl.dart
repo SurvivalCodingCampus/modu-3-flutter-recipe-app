@@ -27,7 +27,7 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
       ),
       Recipe(
         imageUrl: 'assets/images/food3.png',
-        recipeName: 'Spicy Korean Kimchi Stew',
+        recipeName: 'Traditional Spicy Korean Kimchi Stew',
         chefName: 'Chef Minsoo',
         rating: 4.7,
         cookingTime: '40 min',
@@ -43,7 +43,7 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
       ),
       Recipe(
         imageUrl: 'assets/images/food5.png',
-        recipeName: 'Vegetarian Tofu Stir-fry',
+        recipeName: 'Grilled Vegetarian Tofu Stir-fry',
         chefName: 'Chef Yu',
         rating: 4.2,
         cookingTime: '15 min',

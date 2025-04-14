@@ -6,12 +6,10 @@ import '../../data/model/recipe.dart';
 
 class RecipeThumbnailCard extends StatelessWidget {
   final Recipe recipe;
-  final Function(bool) onBookmarkChanged;
 
   RecipeThumbnailCard({
     super.key,
     required this.recipe,
-    required this.onBookmarkChanged,
   });
 
   @override

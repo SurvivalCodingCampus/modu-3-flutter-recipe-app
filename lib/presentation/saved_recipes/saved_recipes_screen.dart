@@ -22,7 +22,7 @@ class SavedRecipesScreen extends StatelessWidget {
       ),
       body: ListenableBuilder(
           listenable: viewModel..fetchRecipes(),
-        builder: (context, child) {
+          builder: (context, child) {
           if (viewModel.state.isLoading) {
             return CircularProgressIndicator();
           }
