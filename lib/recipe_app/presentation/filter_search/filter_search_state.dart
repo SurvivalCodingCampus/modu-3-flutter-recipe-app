@@ -1,19 +1,19 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
 
-part 'search_recipes_state.freezed.dart';
+part 'filter_searrch_state.freezed.dart';
 
 @freezed
-class SearchRecipesState with _$SearchRecipesState {
+class FilterSearchState with _$FilterSearchState {
   final List<Recipe> recipes;
-  final String keyword;
   final bool isRecipesLoading;
-  final List<Recipe> searchRecipes;
+  final String filter;
+  final List<Recipe> filteredRecipes;
 
-  const SearchRecipesState({
+  const FilterSearchState({
     this.recipes = const [],
-    this.keyword = '',
     this.isRecipesLoading = false,
-    this.searchRecipes = const [],
+    this.filter = '',
+    this.filteredRecipes = const [],
   });
 }

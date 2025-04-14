@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search.dart';
 import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
@@ -115,7 +116,14 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                             width: 40,
                             height: 40,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return FilterSearch();
+                                  },
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: ColorStyles2.primary100,
                                 padding: EdgeInsets.all(5),
