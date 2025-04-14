@@ -71,43 +71,82 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       ),
                     ),
                     const SizedBox(width: 20),
-                    GestureDetector(
-                      onTap: () async {
-                        FocusScope.of(context).unfocus();
+                    SizedBox(
+                      height: 52,
+                      width: 40,
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Positioned(
+                            top: 6,
+                            child: GestureDetector(
+                              onTap: () async {
+                                FocusScope.of(context).unfocus();
 
-                        final result =
-                            await showModalBottomSheet<FilterSearchState>(
-                              context: context,
-                              isScrollControlled: true,
-                              backgroundColor: ColorStyle.white,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(50),
+                                final result = await showModalBottomSheet<
+                                  FilterSearchState
+                                >(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  backgroundColor: ColorStyle.white,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(50),
+                                    ),
+                                  ),
+                                  builder:
+                                      (context) => FilterSearchBottomSheet(
+                                        state: state.filterSearchState,
+                                      ),
+                                );
+                                if (result != null) {
+                                  widget.viewModel.applyFilter(result);
+                                }
+                              },
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: ColorStyle.primary100,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: AppImage(
+                                    path:
+                                        'assets/images/icons/icon_setting.png',
+                                    width: 20,
+                                    height: 20,
+                                  ),
                                 ),
                               ),
-                              builder:
-                                  (context) => FilterSearchBottomSheet(
-                                    state: state.filterSearchState,
-                                  ),
-                            );
-                        if (result != null) {
-                          widget.viewModel.applyFilter(result);
-                        }
-                      },
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: ColorStyle.primary100,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Center(
-                          child: AppImage(
-                            path: 'assets/images/icons/icon_setting.png',
-                            width: 20,
-                            height: 20,
+                            ),
                           ),
-                        ),
+                          if (!state.filterSearchState.isinitial)
+                            Positioned(
+                              top: 0,
+                              right: -6,
+                              child: GestureDetector(
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  widget.viewModel.applyFilter(
+                                    const FilterSearchState(),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(2),
+                                  decoration: const BoxDecoration(
+                                    color: ColorStyle.primary40,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.close,
+                                    size: 12,
+                                    color: ColorStyle.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                   ],
@@ -124,12 +163,14 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                         style: AppTextStyles.normalBold(),
                       ),
                       const Spacer(),
-                      Text(
-                        '${filtered.length} results',
-                        style: AppTextStyles.smallRegular(
-                          color: ColorStyle.gray3,
+                      if (query.isNotEmpty ||
+                          !state.filterSearchState.isinitial)
+                        Text(
+                          '${filtered.length} results',
+                          style: AppTextStyles.smallRegular(
+                            color: ColorStyle.gray3,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),
