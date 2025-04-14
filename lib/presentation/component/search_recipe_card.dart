@@ -16,43 +16,55 @@ class SearchRecipeCard extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: Stack(
         children: [
-          SizedBox.expand(
+          Container(
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            clipBehavior: Clip.hardEdge,
             child: Image.network(recipe.image,
             fit: BoxFit.cover,),
           ),
           Align(
             alignment: Alignment.topRight,
-            child: Container(
-              width: 37,
-              height: 16,
-              decoration: BoxDecoration(
-                color: ColorStyles.secondary20,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.star,color: ColorStyles.rating, size: 10),
-                  Text(recipe.rating.toString(), style: TextStyle(fontSize: 10),),
-                ],
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                width: 37,
+                height: 16,
+                decoration: BoxDecoration(
+                  color: ColorStyles.secondary20,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.star,color: ColorStyles.rating, size: 10),
+                    Text(recipe.rating.toString(), style: TextStyle(fontSize: 10),),
+                  ],
+                ),
               ),
             ),
           ),
           Align(
             alignment: Alignment.bottomLeft,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  recipe.name,
-                  style: TextStyles.normalTextRegular.copyWith(color: Colors.white),
-                ),
-                Text(
-                  'By ${recipe.chef}',
-                  style: TextStyles.smallerTextRegular.copyWith(color: Colors.white),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    recipe.name,
+                    style: TextStyles.normalTextRegular.copyWith(color: Colors.white),
+                  ),
+                  Text(
+                    'By ${recipe.chef}',
+                    style: TextStyles.smallerTextRegular.copyWith(color: Colors.white),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
