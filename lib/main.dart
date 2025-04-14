@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(),
+      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       home: SearchScreen(
         recipes: List.generate(
           10,
