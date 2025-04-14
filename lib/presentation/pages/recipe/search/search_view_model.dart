@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/core/modules/error_handling/result.dart';
-import 'package:recipe_app/core/modules/state/base_state.dart';
 import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository.dart';
 import 'package:recipe_app/presentation/pages/recipe/search/search_state.dart';
@@ -11,8 +10,8 @@ class SearchViewModel with ChangeNotifier {
 
   SearchViewModel(this._searchRepository);
 
-  ListBaseState<Recipe> _state = const SearchState();
-  ListBaseState<Recipe> get state => _state;
+  SearchState _state = const SearchState();
+  SearchState get state => _state;
 
   void fetchSearchData() async {
     try {

@@ -12,11 +12,4 @@ class ListBaseState<T> {
     List<T> data = const [],
     this.viewState = ViewState.loading,
   }) : _data = data;
-
-  ListBaseState<T> copyWith({List<T>? data, ViewState? viewState}) {
-    return ListBaseState<T>(
-      data: data ?? _data,
-      viewState: viewState ?? this.viewState,
-    );
-  }
 }
