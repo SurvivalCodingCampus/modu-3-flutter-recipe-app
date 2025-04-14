@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/button_widget.dart';
-import 'package:recipe_app/presentation/home/home_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
 import '../../data/data_source/mock_recipe_data_source_impl.dart';
 import '../../data/repository/recipe_repository_impl.dart';
-import '../home/home_view_model.dart';
+import '../saved_recipes/saved_recipes_view_model.dart';
 
 class SplashScreen extends StatelessWidget {
 
@@ -87,8 +87,8 @@ class SplashScreen extends StatelessWidget {
                           buttonText: 'Start Cooking',
                           onClick: () {
                             Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => HomeScreen(
-                                viewModel: HomeViewModel(
+                              MaterialPageRoute(builder: (context) => SavedRecipesScreen(
+                                viewModel: SavedRecipesViewModel(
                                   recipeRepository: RecipeRepositoryImpl(
                                     recipeDataSource: MockRecipeDataSourceImpl(),
                                   ),

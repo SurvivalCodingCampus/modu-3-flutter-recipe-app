@@ -4,7 +4,7 @@ import 'package:recipe_app/data/repository/recipe_repository.dart';
 
 import '../../data/model/recipe.dart';
 
-class HomeViewModel with ChangeNotifier {
+class SavedRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
 
   bool _isLoading = false;
@@ -24,7 +24,7 @@ class HomeViewModel with ChangeNotifier {
   bool get isLoading => _isLoading;
   List<Recipe> get recipes => List.unmodifiable(_recipes);
 
-  HomeViewModel({required RecipeRepository recipeRepository})
+  SavedRecipesViewModel({required RecipeRepository recipeRepository})
     : _recipeRepository = recipeRepository {
     _isLoading = true;
   }
