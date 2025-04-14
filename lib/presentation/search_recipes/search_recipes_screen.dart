@@ -183,6 +183,14 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
 
                     UiSuccess() => Builder(
                       builder: (context) {
+                        if (filtered.isEmpty) {
+                          return Center(
+                            child: Text(
+                              '표시할 레시피가 없어요 😢',
+                              style: AppTextStyles.normalBold(),
+                            ),
+                          );
+                        }
                         return GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
