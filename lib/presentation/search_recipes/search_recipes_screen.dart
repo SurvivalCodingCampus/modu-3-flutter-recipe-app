@@ -3,9 +3,9 @@ import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/presentation/component/filter_list.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/search_recipes.dart/filter_search_bottom_sheet.dart';
-import 'package:recipe_app/presentation/search_recipes.dart/filter_search_view_model.dart';
-import 'package:recipe_app/presentation/search_recipes.dart/search_recipes_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_sheet.dart';
+import 'package:recipe_app/presentation/search_recipes/filter_search_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 

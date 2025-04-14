@@ -3,7 +3,7 @@ import 'package:recipe_app/data/model/filter.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/data/util/rate_enum.dart';
 import 'package:recipe_app/data/util/time_enum.dart';
-import 'package:recipe_app/presentation/search_recipes.dart/search_recipes_state.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;

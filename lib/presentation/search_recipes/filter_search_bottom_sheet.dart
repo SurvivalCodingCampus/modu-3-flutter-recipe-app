@@ -5,8 +5,8 @@ import 'package:recipe_app/data/util/time_enum.dart';
 import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/presentation/component/small_button.dart';
-import 'package:recipe_app/presentation/search_recipes.dart/filter_search_view_model.dart';
-import 'package:recipe_app/presentation/search_recipes.dart/search_recipes_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/filter_search_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/data/util/category_enum.dart';
 import 'package:recipe_app/data/util/rate_enum.dart';
 import 'package:recipe_app/data/util/time_enum.dart';
-import 'package:recipe_app/presentation/search_recipes.dart/filter_search_state.dart';
+import 'package:recipe_app/presentation/search_recipes/filter_search_state.dart';
 
 class FilterSearchViewModel with ChangeNotifier {
 
