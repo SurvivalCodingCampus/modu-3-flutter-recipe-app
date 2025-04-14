@@ -180,13 +180,16 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                           if (state.recipes.isEmpty) {
                             return Center(child: Text('레시피가 없습니다'));
                           }
+                          final size = MediaQuery.of(context).size;
+                          final aspectRatio =
+                              size.width > size.height ? 3 / 1 : 3 / 2;
                           return GridView.count(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             crossAxisCount: 2,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
-                            childAspectRatio: 3 / 2,
+                            childAspectRatio: aspectRatio,
                             children:
                                 state.recipes
                                     .map(
