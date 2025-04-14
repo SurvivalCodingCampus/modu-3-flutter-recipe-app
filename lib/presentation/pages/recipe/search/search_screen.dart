@@ -18,12 +18,15 @@ class SearchScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: AppTextField(
+                    prefixIcon: const Icon(Icons.search, color: AppColor.grey4),
                     borderColor: AppColor.grey4,
-                    contentPadding: const EdgeInsets.all(10),
+                    textColor: AppColor.grey4,
+                    contentPadding: const EdgeInsets.all(8),
                     controller: TextEditingController(),
                     hintText: 'Search recipe',
                   ),
                 ),
+                const SizedBox(width: 20),
                 const FilterSearchButton(),
               ],
             ),

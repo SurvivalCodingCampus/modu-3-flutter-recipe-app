@@ -11,7 +11,7 @@ class FilterSearchButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       onTap: () {},
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: AppColor.primary100,

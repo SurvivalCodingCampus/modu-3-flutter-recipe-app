@@ -25,6 +25,7 @@ class AppTextField extends StatelessWidget {
   final bool isDense;
   final TextAlign textAlign;
   final VoidCallback? onTap;
+  final Color? textColor;
   const AppTextField({
     required this.controller,
     required this.hintText,
@@ -47,6 +48,7 @@ class AppTextField extends StatelessWidget {
     this.fillColor,
     this.borderColor,
     this.contentPadding,
+    this.textColor,
     super.key,
   });
 
@@ -71,6 +73,7 @@ class AppTextField extends StatelessWidget {
         counterText: '',
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
+        prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
@@ -84,7 +87,7 @@ class AppTextField extends StatelessWidget {
             contentPadding ??
             const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
         hintText: hintText,
-        hintStyle: AppTextStyle.smallRegular,
+        hintStyle: AppTextStyle.smallRegular.copyWith(color: textColor),
         enabledBorder: OutlineInputBorder(
           borderSide:
               borderColor != null
