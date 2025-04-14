@@ -8,10 +8,12 @@ class SearchRecipesState with _$SearchRecipesState {
   final List<Recipe> recipes;
   final String keyword;
   final bool isRecipesLoading;
+  final List<Recipe> filteredRecipes;
 
   const SearchRecipesState({
     this.recipes = const [],
     this.keyword = '',
     this.isRecipesLoading = false,
+    this.filteredRecipes = const [],
   });
 }

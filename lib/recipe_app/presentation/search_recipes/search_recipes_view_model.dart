@@ -12,12 +12,23 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   SearchRecipesState get searchRecipesState => _searchRecipesState;
 
-  //view에서 모든 레시피 모델가져오는 메서드
+  //view에서 모든 레시피 가져오는 메서드
   Future<void> fetchRecipes() async {
     _searchRecipesState = searchRecipesState.copyWith(isRecipesLoading: true);
     notifyListeners();
     _searchRecipesState = _searchRecipesState.copyWith(
       recipes: await recipeRepository.fetchRecipes(),
+      isRecipesLoading: false,
+    );
+    notifyListeners();
+  }
+
+  //view에서 검색어가 포함된 레시피 가져오는 메서드
+  Future<void> searchRecipes(String keyword) async {
+    _searchRecipesState = searchRecipesState.copyWith(isRecipesLoading: true);
+    notifyListeners();
+    _searchRecipesState = _searchRecipesState.copyWith(
+      recipes: await recipeRepository.searchRecipes(keyword),
       isRecipesLoading: false,
     );
     notifyListeners();
