@@ -30,7 +30,6 @@ class _InputFieldState extends State<InputField> {
 
   @override
   void dispose() {
-    _textEditingController.dispose();
     super.dispose();
   }
 
