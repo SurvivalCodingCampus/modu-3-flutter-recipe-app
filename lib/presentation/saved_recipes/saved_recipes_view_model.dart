@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/repository/recipe/recipe_repository.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 

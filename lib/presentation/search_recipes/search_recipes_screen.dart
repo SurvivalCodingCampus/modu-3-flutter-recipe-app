@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/presentation/component/recipe_grid_card.dart';
 import 'package:recipe_app/presentation/component/search_input_field.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
 
 class SearchRecipesScreen extends StatelessWidget {
-  const SearchRecipesScreen({super.key});
+  final SearchRecipesViewModel _viewModel;
+  const SearchRecipesScreen({
+    super.key,
+    required SearchRecipesViewModel viewModel,
+  }) : _viewModel = viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +50,27 @@ class SearchRecipesScreen extends StatelessWidget {
               ],
             ),
             Text('Recent Search', style: TextFontStyle.normalBold()),
+
+            Expanded(
+              child: ListenableBuilder(
+                listenable: _viewModel,
+                builder: (context, child) {
+                  return GridView.builder(
+                    itemCount: _viewModel.state.recipes.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 15,
+                        ),
+                    itemBuilder: (context, index) {
+                      final recipe = _viewModel.state.recipes[index];
+                      return RecipeGridCard(recipe: recipe);
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

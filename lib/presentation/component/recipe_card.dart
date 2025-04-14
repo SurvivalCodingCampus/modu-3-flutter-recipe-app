@@ -51,14 +51,16 @@ class RecipeCard extends StatelessWidget {
                   width: 150,
                   child: Text(
                     recipe.title,
-                    style: TextFontStyle.smallBold(color: ColorStyle.white),
+                    style: TextFontStyle.smallBold(
+                      color: ColorStyle.white,
+                    ).copyWith(fontSize: 11),
                   ),
                 ),
                 Text(
                   'by ${recipe.chef}',
                   style: TextFontStyle.extraSmallRegular(
                     color: ColorStyle.white,
-                  ),
+                  ).copyWith(fontSize: 8),
                 ),
               ],
             ),
@@ -104,10 +106,10 @@ class RecipeCard extends StatelessWidget {
             spacing: 3,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.star, color: ColorStyle.rating, size: 16),
+              const Icon(Icons.star, color: ColorStyle.rating, size: 12),
               Text(
                 recipe.rating.toString(),
-                style: TextFontStyle.smallRegular(),
+                style: TextFontStyle.smallRegular().copyWith(fontSize: 11),
               ),
             ],
           ),
