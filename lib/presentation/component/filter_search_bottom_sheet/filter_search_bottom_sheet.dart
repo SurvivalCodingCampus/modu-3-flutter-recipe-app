@@ -68,7 +68,7 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   Text('Time', style: AppTextStyles.smallBold()),
                   const SizedBox(height: 8),
                   Wrap(
-                    spacing: 8,
+                    spacing: 10,
                     children:
                         FilterTime.values.map((t) {
                           return FilterButton(
@@ -84,7 +84,7 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   Text('Rate', style: AppTextStyles.smallBold()),
                   const SizedBox(height: 8),
                   Wrap(
-                    spacing: 8,
+                    spacing: 10,
                     children:
                         [5, 4, 3, 2, 1].map((r) {
                           return RatingButton(
@@ -102,10 +102,10 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   ),
                   const SizedBox(height: 16),
                   Text('Category', style: AppTextStyles.smallBold()),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
+                    spacing: 10,
+                    runSpacing: 10,
                     children:
                         FilterCategory.values.map((c) {
                           final isSelected =
