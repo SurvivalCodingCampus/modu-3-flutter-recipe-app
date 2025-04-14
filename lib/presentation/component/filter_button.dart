@@ -31,44 +31,37 @@ class _FilterButtonState extends State<FilterButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Wrap(
+      spacing: 2,
+      runSpacing: 6,
       children:
           List.generate(widget.text.length, (index) {
-            return Expanded(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
-                color: Colors.transparent,
-                child: GestureDetector(
-                  onTap: () => toggleSelect(index),
-                  child: Container(
-                    width: 50,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: ColorStyles.primary100,
-                        width: 1,
-                      ),
+            return Container(
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              color: Colors.transparent,
+              child: GestureDetector(
+                onTap: () => toggleSelect(index),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: ColorStyles.primary100, width: 1),
+                    color:
+                        isSelectedList[index]
+                            ? ColorStyles.primary100
+                            : ColorStyles.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    widget.text[index],
+                    style: TextStyles.smallerRegular.copyWith(
                       color:
                           isSelectedList[index]
-                              ? ColorStyles.primary100
-                              : ColorStyles.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          widget.text[index],
-                          style: TextStyles.smallerRegular.copyWith(
-                            color:
-                                isSelectedList[index]
-                                    ? ColorStyles.white
-                                    : ColorStyles.primary80,
-                            fontSize: 11,
-                          ),
-                        ),
-                      ],
+                              ? ColorStyles.white
+                              : ColorStyles.primary80,
+                      fontSize: 11,
                     ),
                   ),
                 ),

@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/presentation/saved_recipe/saved_recipe_view_model.dart';
+
+class SavedRecipeScreen extends StatefulWidget {
+  final SavedRecipeViewModel viewModel;
+
+  const SavedRecipeScreen({super.key, required this.viewModel});
+
+  @override
+  State<SavedRecipeScreen> createState() => _SavedRecipeScreenState();
+}
+
+class _SavedRecipeScreenState extends State<SavedRecipeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.fetchSavedRecipes();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Saved Recipes'), centerTitle: true),
+      body: ListenableBuilder(
+        listenable: widget.viewModel,
+        builder: (BuildContext context, Widget? child) {
+          if (widget.viewModel.isLoading) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (widget.viewModel.savedRecipes.isEmpty) {
+            return Center(child: Text('No saved recipes found.'));
+          }
+          return ListView.builder(
+            itemCount: widget.viewModel.savedRecipes.length,
+            itemBuilder: (BuildContext context, int index) {
+              final recipe = widget.viewModel.savedRecipes[index];
+              return Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: RecipeCard(recipe: recipe),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}

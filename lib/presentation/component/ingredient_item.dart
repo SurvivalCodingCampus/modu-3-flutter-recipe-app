@@ -35,18 +35,29 @@ class IngredientItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: ColorStyles.white,
-              image: DecorationImage(
-                image: NetworkImage(ingredientImage),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                ingredientImage,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(Icons.broken_image, color: ColorStyles.gray3),
+                  );
+                },
               ),
             ),
           ),
           SizedBox(width: 16),
-          Text(
-            ingredientName,
-            style: TextStyles.normalBold.copyWith(
-              color: ColorStyles.black,
-              fontSize: 16,
+          Expanded(
+            child: Text(
+              ingredientName,
+              style: TextStyles.normalBold.copyWith(
+                color: ColorStyles.black,
+                fontSize: 16,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Spacer(),

@@ -50,14 +50,14 @@ class _BigTapButtonState extends State<BigTapButton> {
             Container(
               color: Colors.transparent,
               padding: EdgeInsets.symmetric(horizontal: 30),
-              width: 114,
-              height: 24,
               child: Text(
                 widget.text,
                 style: TextStyles.normalBold.copyWith(
                   color: ColorStyles.white,
                   fontSize: 16,
                 ),
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
             ),
             Icon(Icons.arrow_forward, color: ColorStyles.white),

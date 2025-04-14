@@ -53,6 +53,8 @@ class _SmallTapButtonState extends State<SmallTapButton> {
                 color: ColorStyles.white,
                 fontSize: 11,
               ),
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
             ),
           ],
         ),

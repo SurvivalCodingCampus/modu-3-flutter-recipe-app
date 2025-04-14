@@ -22,7 +22,7 @@ class RatingDialog extends StatefulWidget {
 }
 
 class _RatingDialogState extends State<RatingDialog> {
-  int _selectedStar = 0;
+  int? _selectedStar;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _RatingDialogState extends State<RatingDialog> {
                   setState(() {
                     _selectedStar = index + 1;
                   });
-                  widget.onChange?.call(_selectedStar);
+                  widget.onChange?.call(_selectedStar!);
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 5),
@@ -62,7 +62,7 @@ class _RatingDialogState extends State<RatingDialog> {
                   height: 20,
                   color: Colors.transparent,
                   child: Icon(
-                    _selectedStar >= index + 1
+                    _selectedStar != null && _selectedStar! >= index + 1
                         ? Icons.star
                         : Icons.star_border_outlined,
                     size: 20,
@@ -80,7 +80,9 @@ class _RatingDialogState extends State<RatingDialog> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               color:
-                  _selectedStar != 0 ? ColorStyles.rating : ColorStyles.gray4,
+                  _selectedStar != null
+                      ? ColorStyles.rating
+                      : ColorStyles.gray4,
             ),
             child: Text(
               widget.actionName,

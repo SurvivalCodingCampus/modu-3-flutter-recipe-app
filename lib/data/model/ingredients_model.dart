@@ -1,46 +1,36 @@
-class Ingredients {
-  final String id;
+class Ingredient {
+  final int id;
   final String name;
   final String imageUrl;
-  final String amount;
 
-  const Ingredients({
+  const Ingredient({
     required this.id,
     required this.name,
     required this.imageUrl,
-    required this.amount,
   });
 
-  Ingredients copyWith({
-    String? id,
-    String? name,
-    String? imageUrl,
-    String? amount,
-  }) {
-    return Ingredients(
+  Ingredient copyWith({int? id, String? name, String? imageUrl}) {
+    return Ingredient(
       id: id ?? this.id,
       name: name ?? this.name,
       imageUrl: imageUrl ?? this.imageUrl,
-      amount: amount ?? this.amount,
     );
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Ingredients &&
+      other is Ingredient &&
           runtimeType == other.runtimeType &&
           id == other.id &&
           name == other.name &&
-          imageUrl == other.imageUrl &&
-          amount == other.amount;
+          imageUrl == other.imageUrl;
 
   @override
-  int get hashCode =>
-      id.hashCode ^ name.hashCode ^ imageUrl.hashCode ^ amount.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ imageUrl.hashCode;
 
   @override
   String toString() {
-    return 'Ingredients{id: $id, name: $name, imageUrl: $imageUrl, amount: $amount}';
+    return 'Ingredient{id: $id, name: $name, imageUrl: $imageUrl, }';
   }
 }

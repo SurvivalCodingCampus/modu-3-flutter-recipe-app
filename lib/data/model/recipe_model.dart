@@ -1,13 +1,16 @@
+import 'package:recipe_app/data/model/procedure_model.dart';
+import 'package:recipe_app/data/model/recipe_ingredient.dart';
+
 class Recipe {
   final String category;
-  final String id;
+  final int id;
   final String name;
   final String imageUrl;
   final String chef;
   final String time;
   final double rating;
-  final List<String> ingredients;
-  final List<String> procedures;
+  final List<RecipeIngredient> ingredients;
+  final List<Procedure> procedures;
 
   const Recipe({
     required this.category,
@@ -50,14 +53,14 @@ class Recipe {
 
   Recipe copyWith({
     String? category,
-    String? id,
+    int? id,
     String? name,
     String? imageUrl,
     String? chef,
     String? time,
     double? rating,
-    List<String>? ingredients,
-    List<String>? procedures,
+    List<RecipeIngredient>? ingredients,
+    List<Procedure>? procedures,
   }) {
     return Recipe(
       category: category ?? this.category,

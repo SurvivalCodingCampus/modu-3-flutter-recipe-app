@@ -7,7 +7,6 @@ import 'package:recipe_app/presentation/component/pushed_button/big_tap_button.d
 import 'package:recipe_app/presentation/component/pushed_button/medium_tap_button.dart';
 import 'package:recipe_app/presentation/component/pushed_button/small_tap_button.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,31 +40,15 @@ class MyApp extends StatelessWidget {
                   ingredientQuantity: '500g',
                 ),
                 SizedBox(height: 10),
-                RecipeCard(
-                  imageUrl:
-                      'https://cdn.pixabay.com/photo/2017/11/10/15/04/steak-2936531_1280.jpg',
-                  title: 'Traditional spare ribs baked',
-                  name: 'Chef John',
-                  rating: '4.0',
-                  time: '20 min',
-                ),
-                SizedBox(height: 10),
-                RecipeCard(
-                  imageUrl:
-                      'https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png',
-                  title: 'Spicy Nelly',
-                  name: 'Chef John',
-                  rating: '4.0',
-                  time: '20 min',
-                ),
-                SizedBox(height: 10),
                 RatingButton(rate: 5),
                 SizedBox(height: 10),
                 RatingButton(rate: 4),
                 SizedBox(height: 10),
                 FilterButton(text: ['All', 'Breakfast', 'Lunch', 'Dinner']),
                 SizedBox(height: 10),
-                FilterButton(text: ['계절', '봄', '여름', '가을', '겨울']),
+                FilterButton(
+                  text: ['계절', '봄', '여름', '가을', '겨울', '가나다라마', '2', '3'],
+                ),
                 SizedBox(height: 10),
                 RatingDialog(title: '별점', actionName: '보내기'),
                 SizedBox(height: 10),
