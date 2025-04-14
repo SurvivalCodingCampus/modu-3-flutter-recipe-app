@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen(viewModel: HomeViewModel(MockRecipeRepositoryImpl())..fetchRecipes()),
+      home: HomeScreen(viewModel: HomeViewModel(MockRecipeRepositoryImpl())),
     );
   }
 }

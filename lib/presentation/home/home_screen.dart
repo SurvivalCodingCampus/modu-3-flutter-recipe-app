@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Home')),
       body: ListenableBuilder(
-        listenable: viewModel,
+        listenable: viewModel..fetchRecipes(),
         builder: (context, child) {
           if (viewModel.isLoading) {
             return CircularProgressIndicator();
