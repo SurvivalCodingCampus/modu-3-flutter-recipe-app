@@ -18,8 +18,8 @@ class _CategoryFilterButtonState extends State<CategoryFilterButton> {
       width: double.infinity,
       child: Wrap(
         alignment: WrapAlignment.start,
-        runSpacing: 5,
-        spacing: 10,
+        runSpacing: 10,
+        spacing: 15,
         children: [
           _CategoryFilterButton('All'),
           _CategoryFilterButton('Cereal'),
@@ -39,22 +39,25 @@ class _CategoryFilterButtonState extends State<CategoryFilterButton> {
 
   Widget _CategoryFilterButton(String text) {
     bool isSelected = selectedFilter == text;
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          selectedFilter = text;
-        });
-      },
-      style:
-          isSelected
-              ? ButtonStyles2.selectedButton
-              : ButtonStyles2.unSelectedButton,
-      child: Text(
-        text,
+    return SizedBox(
+      height: 30,
+      child: ElevatedButton(
+        onPressed: () {
+          setState(() {
+            selectedFilter = text;
+          });
+        },
         style:
             isSelected
-                ? TextStyles2.starRateText.copyWith(color: Colors.white)
-                : TextStyles2.starRateText,
+                ? ButtonStyles2.selectedButton
+                : ButtonStyles2.unSelectedButton,
+        child: Text(
+          text,
+          style:
+              isSelected
+                  ? TextStyles2.starRateText.copyWith(color: Colors.white)
+                  : TextStyles2.starRateText,
+        ),
       ),
     );
   }

@@ -120,7 +120,9 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 showModalBottomSheet(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return FilterSearchBottomSheet();
+                                    return FilterSearchBottomSheet(
+                                      filterSearchViewModel: null,
+                                    );
                                   },
                                 );
                               },

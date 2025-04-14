@@ -30,34 +30,37 @@ class _RatingButtonState extends State<RatingButton> {
 
   Widget _ratingButtonWidget(int rate) {
     final bool isSelected = selectedRate == rate;
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          selectedRate = rate;
-        });
-      },
-      style:
-          isSelected
-              ? ButtonStyles2.selectedButton
-              : ButtonStyles2.unSelectedButton,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            rate.toString(),
-            style:
-                isSelected
-                    ? TextStyles2.starRateText.copyWith(color: Colors.white)
-                    : TextStyles2.starRateText,
-          ),
-          SizedBox(width: 6),
-          Icon(
-            Icons.star,
-            color: isSelected ? Colors.white : ColorStyles2.primary80,
-            size: 18,
-          ),
-        ],
+    return SizedBox(
+      height: 30,
+      child: ElevatedButton(
+        onPressed: () {
+          setState(() {
+            selectedRate = rate;
+          });
+        },
+        style:
+            isSelected
+                ? ButtonStyles2.selectedButton
+                : ButtonStyles2.unSelectedButton,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              rate.toString(),
+              style:
+                  isSelected
+                      ? TextStyles2.starRateText.copyWith(color: Colors.white)
+                      : TextStyles2.starRateText,
+            ),
+            SizedBox(width: 6),
+            Icon(
+              Icons.star,
+              color: isSelected ? Colors.white : ColorStyles2.primary80,
+              size: 18,
+            ),
+          ],
+        ),
       ),
     );
   }

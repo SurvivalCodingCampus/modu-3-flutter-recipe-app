@@ -16,8 +16,7 @@ class _TimeFilterButtonState extends State<TimeFilterButton> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      spacing: 10,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 15,
       children: [
         _timeFilterButton('All'),
         _timeFilterButton('Newest'),
@@ -29,22 +28,25 @@ class _TimeFilterButtonState extends State<TimeFilterButton> {
 
   Widget _timeFilterButton(String text) {
     bool isSelected = selectedFilter == text;
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          selectedFilter = text;
-        });
-      },
-      style:
-          isSelected
-              ? ButtonStyles2.selectedButton
-              : ButtonStyles2.unSelectedButton,
-      child: Text(
-        text,
+    return SizedBox(
+      height: 30,
+      child: ElevatedButton(
+        onPressed: () {
+          setState(() {
+            selectedFilter = text;
+          });
+        },
         style:
             isSelected
-                ? TextStyles2.starRateText.copyWith(color: Colors.white)
-                : TextStyles2.starRateText,
+                ? ButtonStyles2.selectedButton
+                : ButtonStyles2.unSelectedButton,
+        child: Text(
+          text,
+          style:
+              isSelected
+                  ? TextStyles2.starRateText.copyWith(color: Colors.white)
+                  : TextStyles2.starRateText,
+        ),
       ),
     );
   }

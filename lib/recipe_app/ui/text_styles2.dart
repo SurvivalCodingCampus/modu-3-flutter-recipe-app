@@ -63,4 +63,9 @@ abstract class TextStyles2 {
     fontWeight: FontWeight.w600,
     color: Colors.black,
   );
+  static TextStyle smallerTextSemiBold = GoogleFonts.poppins(
+    fontSize: 11,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
 }

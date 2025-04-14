@@ -7,13 +7,13 @@ part 'filter_search_state.freezed.dart';
 class FilterSearchState with _$FilterSearchState {
   final List<Recipe> recipes;
   final bool isRecipesLoading;
-  final String filter;
+  final List<String> filters;
   final List<Recipe> filteredRecipes;
 
   const FilterSearchState({
     this.recipes = const [],
     this.isRecipesLoading = false,
-    this.filter = '',
+    this.filters = const [],
     this.filteredRecipes = const [],
   });
 }
