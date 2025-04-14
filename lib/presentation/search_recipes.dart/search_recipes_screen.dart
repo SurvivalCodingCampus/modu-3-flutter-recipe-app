@@ -71,7 +71,9 @@ class SearchRecipesScreen extends StatelessWidget {
                           style: TextStyles.normalTextBold,
                         ),
                         Text(
-                          viewModel.state.isSearched ? "255 results" : "",
+                          viewModel.state.isSearched
+                              ? "${viewModel.state.recipeList.length} results"
+                              : "",
                           style: TextStyles.smallTextRegular.copyWith(
                             color: ColorStyles.gray3,
                           ),
