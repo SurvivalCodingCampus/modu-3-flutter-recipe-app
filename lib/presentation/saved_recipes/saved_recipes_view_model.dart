@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 import '../../data/model/recipe.dart';
 import '../../data/repository/recipe_ropository.dart';
@@ -6,24 +7,21 @@ import '../../data/repository/recipe_ropository.dart';
 class SavedRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
 
-  List<Recipe> _recipes = [];
-  List<Recipe> get recipes => List.unmodifiable(_recipes);
+  //상태
+  SavedRecipesState _state = const SavedRecipesState();
 
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  SavedRecipesState get state => _state;
 
-  SavedRecipesViewModel(this._recipeRepository) {
-    // fetchRecipes(); //SavedRecipesScreen에서 ListenableBuilder 최소 실행시 로딩.
-  }
+  SavedRecipesViewModel(this._recipeRepository);
 
   void fetchRecipes() async {
-
-    _isLoading = true;
+    _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    _recipes = await _recipeRepository.getRecipes();
-    _isLoading = false;
+    _state = state.copyWith(
+      recipes: await _recipeRepository.getRecipes(),
+      isLoading: false,
+    );
     notifyListeners();
   }
-
 }
