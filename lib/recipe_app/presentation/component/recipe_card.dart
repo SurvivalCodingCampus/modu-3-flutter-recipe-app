@@ -6,8 +6,13 @@ import '../../data/model/recipe.dart';
 
 class RecipeCard extends StatefulWidget {
   final Recipe recipe;
+  final bool showTimerAndBookmark;
 
-  const RecipeCard({super.key, required this.recipe});
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.showTimerAndBookmark,
+  });
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -97,6 +102,7 @@ class _RecipeCardState extends State<RecipeCard> {
                     widget.recipe.title,
                     style: TextStyles2.menuIntroduceText,
                     maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 3),
                   Text(
@@ -107,45 +113,46 @@ class _RecipeCardState extends State<RecipeCard> {
               ),
             ),
           ),
-          Positioned(
-            right: 12,
-            bottom: 10,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.timer_outlined,
-                  color: ColorStyles2.chefName,
-                  size: 17,
-                ),
-                SizedBox(width: 3),
-                Text.rich(
-                  TextSpan(
-                    text: widget.recipe.minutes.toString(),
-                    style: TextStyles2.cookingTimeText,
-                    children: [
-                      TextSpan(
-                        text: ' min',
-                        style: TextStyles2.cookingTimeText,
-                      ),
-                    ],
+          if (widget.showTimerAndBookmark)
+            Positioned(
+              right: 12,
+              bottom: 10,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.timer_outlined,
+                    color: ColorStyles2.chefName,
+                    size: 17,
                   ),
-                ),
-                SizedBox(width: 8),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
+                  SizedBox(width: 3),
+                  Text.rich(
+                    TextSpan(
+                      text: widget.recipe.minutes.toString(),
+                      style: TextStyles2.cookingTimeText,
+                      children: [
+                        TextSpan(
+                          text: ' min',
+                          style: TextStyles2.cookingTimeText,
+                        ),
+                      ],
+                    ),
                   ),
-                  width: 24,
-                  height: 24,
-                  child: Icon(
-                    _bookMark ? Icons.bookmark : Icons.bookmark_border,
-                    size: 16,
+                  SizedBox(width: 8),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    width: 24,
+                    height: 24,
+                    child: Icon(
+                      _bookMark ? Icons.bookmark : Icons.bookmark_border,
+                      size: 16,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
