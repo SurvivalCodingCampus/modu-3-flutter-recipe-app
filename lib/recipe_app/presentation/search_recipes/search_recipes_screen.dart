@@ -85,9 +85,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 controller: _searchController,
                                 textAlignVertical: TextAlignVertical.center,
                                 decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical: 12,
-                                  ),
+                                  contentPadding: EdgeInsets.all(3),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(10),
