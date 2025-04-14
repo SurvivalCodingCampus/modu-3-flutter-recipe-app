@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/ui/color_styles.dart';
 import 'package:recipe_app/presentation/ui/text_styles.dart';
 
+import '../../data/model/recipe.dart';
+
 class RecipeCard extends StatelessWidget {
-  final String imageUrl;
+  final Recipe recipe;
+  final Function(bool) onBookmarkChanged;
+
+  RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.onBookmarkChanged,
+  });
+
+  /*  final String imageUrl;
   final String recipeName;
   final String chefName;
   final double rating;
@@ -21,6 +32,8 @@ class RecipeCard extends StatelessWidget {
     required this.isBookmarked,
     required this.onBookmarkChanged,
   });
+*/
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +48,11 @@ class RecipeCard extends StatelessWidget {
         children: [
           // 배경 이미지
           Positioned.fill(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-            ),
+            // child: Image.network(
+            //   recipe.imageUrl,
+            //   fit: BoxFit.cover,
+            // ),
+            child: Image.asset(recipe.imageUrl, fit:  BoxFit.cover)
           ),
 
           // 그라데이션
@@ -77,7 +91,7 @@ class RecipeCard extends StatelessWidget {
                           const Icon(Icons.star, size: 10, color: ColorStyle.rating),
                           const SizedBox(width: 4),
                           Text(
-                            rating.toString(),
+                              recipe.rating.toString(),
                             style: AppTextStyles.extraSmallBold
                           ),
                         ],
@@ -100,7 +114,7 @@ class RecipeCard extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            recipeName,
+                            recipe.recipeName,
                             style: AppTextStyles.smallBold.copyWith(
                               color: ColorStyle.white
                             ),
@@ -108,7 +122,7 @@ class RecipeCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            'By $chefName',
+                            'By ${recipe.chefName}',
                             style: AppTextStyles.extraSmallRegular.copyWith(
                               color: ColorStyle.gray4
                             ),
@@ -141,7 +155,7 @@ class RecipeCard extends StatelessWidget {
                                   const Icon(Icons.access_time, color: ColorStyle.white, size: 16),
                                   const SizedBox(width: 4),
                                   Text(
-                                    cookingTime,
+                                      recipe.cookingTime,
                                     style: AppTextStyles.smallRegular.copyWith(
                                       color: ColorStyle.white,
                                     )
@@ -155,7 +169,7 @@ class RecipeCard extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   // 상태 변경은 직접 하지 않고, 콜백으로 부모에게 알린다
-                                  onBookmarkChanged(!isBookmarked);
+                                  onBookmarkChanged(!recipe.isBookmarked);
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(8),
@@ -164,8 +178,8 @@ class RecipeCard extends StatelessWidget {
                                     shape: BoxShape.circle,
                                   ),
                                   child: Icon(
-                                    isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                                    color: isBookmarked ? ColorStyle.primary100 : ColorStyle.primary80,
+                                    recipe.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                                    color: recipe.isBookmarked ? ColorStyle.primary100 : ColorStyle.primary80,
                                     size: 20,
                                   ),
                                 ),
@@ -184,4 +198,6 @@ class RecipeCard extends StatelessWidget {
       ),
     );
   }
+
+
 }

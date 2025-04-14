@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#시리얼라이제이션 관련 자동 생성 파일 제외
+*.g.dart
+*.freezed.dart
+
+#테스트 폴더 무시
+lib/sandbox
+lib/architecture
