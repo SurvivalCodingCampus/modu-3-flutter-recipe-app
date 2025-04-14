@@ -29,9 +29,9 @@ class SavedRecipesScreen extends StatelessWidget {
               listenable: _viewModel,
               builder: (context, snapshot) {
                 return ListView.builder(
-                  itemCount: _viewModel.recipes.length,
+                  itemCount: _viewModel.state.recipes.length,
                   itemBuilder: (context, index) {
-                    final recipe = _viewModel.recipes[index];
+                    final recipe = _viewModel.state.recipes[index];
                     return RecipeCard(recipe: recipe);
                   },
                 );

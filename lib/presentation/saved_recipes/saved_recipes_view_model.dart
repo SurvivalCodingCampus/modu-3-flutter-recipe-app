@@ -1,26 +1,26 @@
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/repository/recipe/recipe_repository.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
 
-  List<Recipe> _recipes = [];
-  bool _isLoading = false;
+  SavedRecipesState _state = SavedRecipesState();
+  SavedRecipesState get state => _state;
 
   SavedRecipesViewModel(this._recipeRepository) {
     fetchRecipes();
   }
 
-  List<Recipe> get recipes => List.unmodifiable(_recipes);
-  bool get isLoading => _isLoading;
-
-  void fetchRecipes() async {
-    _isLoading = true;
+  Future<void> fetchRecipes() async {
+    _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    _recipes = await _recipeRepository.getRecipes();
-    _isLoading = false;
+    _state = state.copyWith(
+      recipes: await _recipeRepository.getRecipes(),
+      isLoading: false,
+    );
     notifyListeners();
   }
 }
