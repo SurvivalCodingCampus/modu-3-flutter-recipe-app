@@ -15,8 +15,8 @@ class IngredientItem extends StatelessWidget {
         color: ColorStyle.gray4,
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: EdgeInsets.symmetric(vertical: 12),
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       width: double.infinity,
       child: ListTile(
         leading: ClipRRect(
@@ -29,7 +29,7 @@ class IngredientItem extends StatelessWidget {
         ),
         title: Text(item.name, style: TextFontStyle.normalBold()),
         trailing: Text(
-          '${item.weight.toString()}g',
+          '${item.imageUrl.toString()}g',
           style: TextFontStyle.smallRegular(color: ColorStyle.gray3),
         ),
       ),

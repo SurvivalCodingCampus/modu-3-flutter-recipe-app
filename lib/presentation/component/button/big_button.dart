@@ -35,9 +35,9 @@ class _BigButtonState extends State<BigButton> {
         });
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 100),
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 30),
+        margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           color:
               buttonType == ButtonType.standard
@@ -51,7 +51,7 @@ class _BigButtonState extends State<BigButton> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 11),
+                margin: const EdgeInsets.symmetric(horizontal: 11),
                 width: 114,
                 child: Text(
                   widget.text,
@@ -59,7 +59,11 @@ class _BigButtonState extends State<BigButton> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Icon(Icons.arrow_forward, color: ColorStyle.white, size: 20),
+              const Icon(
+                Icons.arrow_forward,
+                color: ColorStyle.white,
+                size: 20,
+              ),
             ],
           ),
         ),

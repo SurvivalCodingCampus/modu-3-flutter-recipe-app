@@ -73,7 +73,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               );
             },
-            child: Icon(Icons.ac_unit_sharp),
+            child: const Icon(Icons.ac_unit_sharp),
           ),
         ],
       ),

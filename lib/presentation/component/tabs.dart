@@ -28,9 +28,9 @@ class Tabs extends StatelessWidget {
               onValueChange(index);
             },
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               curve: Curves.easeInOut,
-              margin: EdgeInsets.symmetric(vertical: 20),
+              margin: const EdgeInsets.symmetric(vertical: 20),
               decoration: BoxDecoration(
                 color:
                     index == selectedIndex
