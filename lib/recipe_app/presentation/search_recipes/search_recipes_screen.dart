@@ -29,51 +29,61 @@ class SearchRecipesScreen extends StatelessWidget {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Recent Search',
-                style: TextStyles2.normalText.copyWith(
-                  fontWeight: FontWeight.w400,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Recent Search',
+                          style: TextStyles2.normalText.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      ListenableBuilder(
+                        listenable: searchRecipesViewModel..fetchRecipes(),
+                        builder: (context, child) {
+                          final state =
+                              searchRecipesViewModel.searchRecipesState;
+                          if (state.isRecipesLoading == true) {
+                            return CircularProgressIndicator();
+                          }
+                          if (state.recipes.isEmpty) {
+                            return Center(child: Text('레시피가 없습니다'));
+                          }
+                          return GridView.count(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 3 / 2,
+                            children:
+                                state.recipes
+                                    .map(
+                                      (recipe) => RecipeCard(
+                                        recipe: recipe,
+                                        showTimerAndBookmark: false,
+                                      ),
+                                    )
+                                    .toList(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ListenableBuilder(
-                  listenable: searchRecipesViewModel..fetchRecipes(),
-                  builder: (context, child) {
-                    final state = searchRecipesViewModel.searchRecipesState;
-                    if (state.isRecipesLoading == true) {
-                      return CircularProgressIndicator();
-                    }
-                    if (state.recipes.isEmpty) {
-                      return Center(child: Text('레시피가 없습니다'));
-                    }
-                    return GridView.count(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 3 / 2,
-                      children:
-                          state.recipes
-                              .map(
-                                (recipe) => RecipeCard(
-                                  recipe: recipe,
-                                  showTimerAndBookmark: false,
-                                ),
-                              )
-                              .toList(),
-                    );
-                  },
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
