@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/model.dart';
 import 'package:recipe_app/presentation/component/big_button.dart';
+import 'package:recipe_app/presentation/component/filter_icon_button.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
+import 'package:recipe_app/presentation/component/search_text_field.dart';
 import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/ui/ui.dart';
 
@@ -94,6 +96,10 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                     },
                     child: const Text("Open Rating Dialog"),
                   ),
+                  const SizedBox(height: 10),
+                  const SearchTextField(placeholder: 'Placeholder'),
+                  const SizedBox(height: 10),
+                  const FilterIconButton(),
                 ],
               ),
             ),
