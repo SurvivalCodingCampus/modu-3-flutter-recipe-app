@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/presentation/home/saved_recipes_screen.dart';
-import 'package:recipe_app/recipe_app/presentation/home/saved_recipes_view_model.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_screen.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
 import 'package:recipe_app/recipe_app/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
                               'Simple way to find Tasty Recipe',
                               style: TextStyles2.splashScreenText.copyWith(
                                 fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.w300,
                               ),
                             ),
                             SizedBox(height: 50),
