@@ -19,19 +19,19 @@ class SavedRecipesScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ListenableBuilder(
-            listenable: viewModel,
+            listenable: viewModel..fetchRecipes(),
             builder: (context, snapshot) {
-              if (viewModel.isLoading) {
+              if (viewModel.state.isLoading) {
                 return Center(child: CircularProgressIndicator());
               }
               return Column(
                 children:
-                    viewModel.recipes.isEmpty
+                    viewModel.state.recipes.isEmpty
                         ? [
                           const SizedBox(height: 40),
                           const Text('저장된 레시피가 없습니다.'),
                         ]
-                        : viewModel.recipes
+                        : viewModel.state.recipes
                             .map(
                               (recipe) => Padding(
                                 padding: const EdgeInsets.all(10.0),
