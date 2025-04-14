@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '2025-04-09/presentation/component/component.dart';
+import 'presentation/component/component.dart';
 
 
 void main() {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/2025-04-10/presentation/component/rating_dialog.dart';
+import 'package:recipe_app/presentation/component/rating_dialog.dart';
 
 void main() {
   testWidgets('', (WidgetTester tester) async {
