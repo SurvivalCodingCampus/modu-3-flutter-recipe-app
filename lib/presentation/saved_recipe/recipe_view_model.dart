@@ -8,14 +8,14 @@ class RecipeViewModel with ChangeNotifier {
 
   RecipeViewModel(this._recipeRepository);
 
-  List<Recipes> _recipes = [];
+  List<Recipes> _recipes = List.unmodifiable([]);
   bool _isLoading = false;
 
   List<Recipes> get recipes => _recipes;
 
   bool get isLoading => _isLoading;
 
-  void fetchRecipes() async {
+  Future<void> fetchRecipes() async {
     _isLoading = true;
     notifyListeners();
 

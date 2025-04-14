@@ -62,7 +62,7 @@ class _ComponentState extends State<Component> {
               const SizedBox(height: 10),
               Ingredientitem(),
               const SizedBox(height: 10),
-              RecipeCard(),
+              // RecipeCard(),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

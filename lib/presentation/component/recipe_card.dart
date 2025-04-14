@@ -1,25 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color.dart';
 import '../../../ui/text.dart';
+import '../../data/model/ingredients.dart';
+import '../../data/model/recipes.dart';
+
 
 void main() {
   runApp(
     MaterialApp(
       home: Scaffold(
-        body: Center(child: RecipeCard()),
-        backgroundColor: ColorStyles.gray1, // 배경 잘 보이게
+        body: Center(
+          child: RecipeCard(
+            recipe: Recipes(
+              id: 1,
+              name: 'Gopchang Jeongol',
+              image: 'https://cdn.pixabay.com/photo/2017/11/10/15/04/steak-2936531_1280.jpg',
+              chef: 'Bobae',
+              time: '20 min',
+              rating: 4.0,
+              ingredients: <Ingredients>[], category: '',
+            ),
+          ),
+        ),
+        backgroundColor: ColorStyles.gray1,
       ),
     ),
   );
 }
 
 class RecipeCard extends StatelessWidget {
-  const RecipeCard({super.key});
+  final Recipes recipe;
+
+  const RecipeCard({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(8),
       child: Container(
         width: double.infinity,
         height: 200,
@@ -30,8 +47,9 @@ class RecipeCard extends StatelessWidget {
         child: Stack(
           children: [
             SizedBox.expand(
-              child: Image.asset(
-                'assets/images/gopchangjeongol.png',
+              // child: Image.asset(
+              //   'assets/images/gopchangjeongol.png',
+                child: Image.network(recipe.image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -52,7 +70,7 @@ class RecipeCard extends StatelessWidget {
                             height: 16,
                           ),
                           SizedBox(width: 4),
-                          Text('20 min',
+                          Text(recipe.time,
                             style: TextStyle(fontSize: 10, color: Colors.white),
                           ),
                         ],
@@ -83,7 +101,7 @@ class RecipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.star, color: ColorStyles.rating, size: 10),
-                      Text('4.0', style: TextStyle(fontSize: 10)),
+                      Text(recipe.rating.toString(), style: TextStyle(fontSize: 10)),
                     ],
                   ),
                 ),
@@ -98,11 +116,11 @@ class RecipeCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Gopchang Jeongol',
+                      recipe.name,
                       style: TextStyles.normalTextRegular.copyWith(color: Colors.white),
                     ),
                     Text(
-                      'By Bobae',
+                      'By ${recipe.chef}',
                       style: TextStyles.smallerTextRegular.copyWith(color: Colors.white),
                     ),
                   ],

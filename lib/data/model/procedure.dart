@@ -14,10 +14,6 @@ abstract class Procedure with _$Procedure {
     required int recipeId,
     required int step,
     required String content,
-    required String chef,
-    required String time,
-    required double rating,
-    required Ingredients ingredients,
   }) = _Procedure;
   
   factory Procedure.fromJson(Map<String, Object?> json) => _$ProcedureFromJson(json); 
