@@ -26,44 +26,6 @@ class _FilterButtonState extends State<FilterButton> {
 
   @override
   Widget build(BuildContext context) {
-    String title = '';
-    if (widget.value is Time) {
-      switch (widget.value) {
-        case Time.all:
-          title = 'all';
-        case Time.newest:
-          title = 'newest';
-        case Time.oldest:
-          title = 'oldest';
-        case Time.popularity:
-          title = 'popularity';
-      }
-    }
-
-    if (widget.value is Categories) {
-      switch (widget.value) {
-        case Categories.all:
-          title = 'all';
-        case Categories.breakfast:
-          title = 'breakfast';
-        case Categories.cereal:
-          title = 'cereal';
-        case Categories.chinese:
-          title = 'chinese';
-        case Categories.dinner:
-          title = 'dinner';
-        case Categories.fruit:
-          title = 'fruit';
-        case Categories.localDish:
-          title = 'localDish';
-        case Categories.lunch:
-          title = 'lunch';
-        case Categories.spanish:
-          title = 'spanish';
-        case Categories.vegetables:
-          title = 'vegetables';
-      }
-    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -86,7 +48,7 @@ class _FilterButtonState extends State<FilterButton> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              title,
+              widget.value.name,
               style: TextStyles.smallerTextRegular.copyWith(
                 color: isFocused ? ColorStyles.white : widget.color,
               ),

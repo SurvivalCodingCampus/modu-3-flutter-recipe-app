@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/ingredient.dart';
+import 'package:recipe_app/data/model/ingredients.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
 class IngredientItem extends StatelessWidget {
-  final Ingredient ingredient;
+  final Ingredients ingredients;
 
-  const IngredientItem({super.key, required this.ingredient});
+  const IngredientItem({super.key, required this.ingredients});
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +24,17 @@ class IngredientItem extends StatelessWidget {
             width: 52,
             height: 52,
             child: Image.asset(
-              ingredient.imageUrl,
+              ingredients.ingredient.image,
               errorBuilder: (context, error, stackTrace) {
                 return const Icon(Icons.image_not_supported);
               },
             ),
           ),
           SizedBox(width: 16),
-          Text(ingredient.name, style: TextStyles.normalTextBold),
+          Text(ingredients.ingredient.name, style: TextStyles.normalTextBold),
           Expanded(child: SizedBox()),
           Text(
-            '${ingredient.weight}g',
+            '${ingredients.amount}g',
             style: TextStyles.smallTextRegular.copyWith(
               color: ColorStyles.gray3,
             ),
