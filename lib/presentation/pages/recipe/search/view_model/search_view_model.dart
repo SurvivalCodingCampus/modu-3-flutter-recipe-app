@@ -35,6 +35,7 @@ class SearchViewModel with ChangeNotifier {
   }
 
   void searchData(String text) {
+    _state = state.copyWith(searchText: text);
     if (text.isEmpty) {
       _state = state.copyWith(
         data: _state.originalData,
