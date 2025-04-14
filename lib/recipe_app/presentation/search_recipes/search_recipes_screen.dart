@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_bottom_sheet.dart';
+import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel searchRecipesViewModel;
+  final FilterSearchViewModel filterSearchViewModel;
 
-  const SearchRecipesScreen({super.key, required this.searchRecipesViewModel});
+  const SearchRecipesScreen({
+    super.key,
+    required this.searchRecipesViewModel,
+    required this.filterSearchViewModel,
+  });
 
   @override
   State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
@@ -121,7 +127,8 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return FilterSearchBottomSheet(
-                                      filterSearchViewModel: null,
+                                      filterSearchViewModel:
+                                          widget.filterSearchViewModel,
                                     );
                                   },
                                 );

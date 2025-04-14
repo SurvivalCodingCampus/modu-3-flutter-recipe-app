@@ -3,7 +3,9 @@ import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class TimeFilterButton extends StatefulWidget {
-  const TimeFilterButton({super.key});
+  final ValueChanged<String?> changedTimeFilter;
+
+  const TimeFilterButton({super.key, required this.changedTimeFilter});
 
   @override
   State<TimeFilterButton> createState() => _TimeFilterButtonState();
@@ -35,6 +37,7 @@ class _TimeFilterButtonState extends State<TimeFilterButton> {
           setState(() {
             selectedFilter = text;
           });
+          widget.changedTimeFilter(selectedFilter);
         },
         style:
             isSelected

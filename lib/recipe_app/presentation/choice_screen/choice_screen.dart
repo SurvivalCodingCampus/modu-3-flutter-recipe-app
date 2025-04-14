@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_screen.dart';
@@ -7,8 +8,13 @@ import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes
 
 class ChoiceScreen extends StatefulWidget {
   final RecipeRepository repository;
+  final FilterSearchViewModel filterSearchViewModel;
 
-  const ChoiceScreen({super.key, required this.repository});
+  const ChoiceScreen({
+    super.key,
+    required this.repository,
+    required this.filterSearchViewModel,
+  });
 
   @override
   State<ChoiceScreen> createState() => _ChoiceScreenState();
@@ -51,6 +57,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                           searchRecipesViewModel: SearchRecipesViewModel(
                             widget.repository,
                           ),
+                          filterSearchViewModel: widget.filterSearchViewModel,
                         ),
                   ),
                 );

@@ -8,17 +8,11 @@ import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class FilterSearchBottomSheet extends StatefulWidget {
   final FilterSearchViewModel filterSearchViewModel;
-  final VoidCallback onCllick;
 
   const FilterSearchBottomSheet({
     super.key,
     required this.filterSearchViewModel,
-    required this.onCllick,
   });
-
-  void onClick() {
-    onCllick.call();
-  }
 
   @override
   State<FilterSearchBottomSheet> createState() =>
@@ -26,6 +20,10 @@ class FilterSearchBottomSheet extends StatefulWidget {
 }
 
 class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
+  String? selectedTimeFilter;
+  String? selectedCategoryFilter;
+  int? selectedRatingFilter;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,7 +49,14 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   textAlign: TextAlign.start,
                 ),
                 SizedBox(height: 10),
-                TimeFilterButton(),
+                TimeFilterButton(
+                  changedTimeFilter: (value) {
+                    setState(() {
+                      selectedTimeFilter = value;
+                    });
+                    print(selectedTimeFilter);
+                  },
+                ),
               ],
             ),
             Column(
@@ -63,7 +68,14 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   textAlign: TextAlign.start,
                 ),
                 SizedBox(height: 10),
-                RatingButton(),
+                RatingButton(
+                  changedRatingFilter: (value) {
+                    setState(() {
+                      selectedRatingFilter = value;
+                    });
+                    print(selectedRatingFilter);
+                  },
+                ),
               ],
             ),
             Column(
@@ -75,7 +87,14 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   textAlign: TextAlign.start,
                 ),
                 SizedBox(height: 6),
-                CategoryFilterButton(),
+                CategoryFilterButton(
+                  changedCategoryFilter: (value) {
+                    setState(() {
+                      selectedCategoryFilter = value;
+                    });
+                    print(selectedCategoryFilter);
+                  },
+                ),
               ],
             ),
             SizedBox(height: 10),

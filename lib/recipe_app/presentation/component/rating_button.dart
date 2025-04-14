@@ -4,7 +4,9 @@ import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class RatingButton extends StatefulWidget {
-  const RatingButton({super.key});
+  final ValueChanged<int?> changedRatingFilter;
+
+  const RatingButton({super.key, required this.changedRatingFilter});
 
   @override
   State<RatingButton> createState() => _RatingButtonState();
@@ -37,6 +39,7 @@ class _RatingButtonState extends State<RatingButton> {
           setState(() {
             selectedRate = rate;
           });
+          widget.changedRatingFilter(selectedRate);
         },
         style:
             isSelected

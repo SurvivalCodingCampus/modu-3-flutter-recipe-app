@@ -3,7 +3,9 @@ import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class CategoryFilterButton extends StatefulWidget {
-  const CategoryFilterButton({super.key});
+  final ValueChanged<String?> changedCategoryFilter;
+
+  const CategoryFilterButton({super.key, required this.changedCategoryFilter});
 
   @override
   State<CategoryFilterButton> createState() => _CategoryFilterButtonState();
@@ -46,17 +48,18 @@ class _CategoryFilterButtonState extends State<CategoryFilterButton> {
           setState(() {
             selectedFilter = text;
           });
+          widget.changedCategoryFilter(selectedFilter);
         },
         style:
-            isSelected
-                ? ButtonStyles2.selectedButton
-                : ButtonStyles2.unSelectedButton,
+        isSelected
+            ? ButtonStyles2.selectedButton
+            : ButtonStyles2.unSelectedButton,
         child: Text(
           text,
           style:
-              isSelected
-                  ? TextStyles2.starRateText.copyWith(color: Colors.white)
-                  : TextStyles2.starRateText,
+          isSelected
+              ? TextStyles2.starRateText.copyWith(color: Colors.white)
+              : TextStyles2.starRateText,
         ),
       ),
     );
