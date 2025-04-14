@@ -11,7 +11,7 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
     return [
       Recipe(
         imageUrl: 'assets/images/food1.png',
-        recipeName: 'Traditional spare ribs baked',
+        recipeName: 'Traditional spare ribs baked Spicy Korean Kimchi',
         chefName: 'Chef John',
         rating: 4.6,
         cookingTime: '20 min',
@@ -19,7 +19,7 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
       ),
       Recipe(
         imageUrl: 'assets/images/food2.png',
-        recipeName: 'Creamy Alfredo Pasta',
+        recipeName: 'Creamy Alfredo Pasta Creamy Alfredo Pasta',
         chefName: 'Chef Emily',
         rating: 4.3,
         cookingTime: '25 min',
@@ -35,7 +35,7 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
       ),
       Recipe(
         imageUrl: 'assets/images/food4.png',
-        recipeName: 'Grilled Salmon with Lemon',
+        recipeName: 'Grilled Salmon with Lemon Chicken Pizza',
         chefName: 'Chef Angela',
         rating: 4.5,
         cookingTime: '30 min',

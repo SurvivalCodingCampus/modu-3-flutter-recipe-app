@@ -13,7 +13,7 @@ class SavedRecipesViewModel with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   SavedRecipesViewModel(this._recipeRepository) {
-    fetchRecipes();
+    // fetchRecipes(); //SavedRecipesScreen에서 ListenableBuilder 최소 실행시 로딩.
   }
 
   void fetchRecipes() async {

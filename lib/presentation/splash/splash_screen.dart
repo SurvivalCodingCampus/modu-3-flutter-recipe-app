@@ -83,6 +83,7 @@ class SplashScreen extends StatelessWidget {
                 // 버튼
                 MediumButton(lable: 'Start Cooking',
                   onClick: () {
+                  //테스트로 넣어봄
                     _showRatingDialog(context);
                     print('Start Cooking');
                   },
