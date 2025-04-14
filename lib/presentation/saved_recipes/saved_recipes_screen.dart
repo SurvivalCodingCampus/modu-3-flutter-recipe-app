@@ -18,7 +18,7 @@ class SavedRecipesScreen extends StatelessWidget {
         backgroundColor: ColorStyle.primary20,
         scrolledUnderElevation: 0,
         elevation: 0,
-        title: Text('Saved Recipes', style: TextFontStyle.mediumBold()),
+        title: Text('Saved recipes', style: TextFontStyle.mediumBold()),
         centerTitle: true,
       ),
       body: Column(

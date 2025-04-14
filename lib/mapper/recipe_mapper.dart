@@ -3,9 +3,9 @@ import 'package:recipe_app/dto/pictures_dto.dart';
 import 'package:recipe_app/dto/recipe_dto.dart';
 import 'package:recipe_app/mapper/ingredients_mapper.dart';
 import 'package:recipe_app/mapper/picture_mapper.dart';
-import 'package:recipe_app/model/ingredients.dart';
-import 'package:recipe_app/model/pictures.dart';
-import 'package:recipe_app/model/recipe.dart';
+import 'package:recipe_app/data/model/ingredients.dart';
+import 'package:recipe_app/data/model/pictures.dart';
+import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/presentation/component/button/enum/category.dart';
 
 extension RecipeMapper on RecipeDto {
