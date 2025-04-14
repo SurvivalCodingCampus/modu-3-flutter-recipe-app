@@ -33,4 +33,21 @@ class SearchViewModel with ChangeNotifier {
       _state = state.copyWith(viewState: ViewState.error);
     }
   }
+
+  void searchData(String text) {
+    if (text.isEmpty) {
+      _state = state.copyWith(
+        data: _state.originalData,
+        viewState: ViewState.complete,
+        isFiltered: false,
+      );
+    } else {
+      _state = state.copyWith(
+        data: _state.originalData.where((e) => e.name.contains(text)).toList(),
+        viewState: ViewState.complete,
+        isFiltered: true,
+      );
+    }
+    notifyListeners();
+  }
 }

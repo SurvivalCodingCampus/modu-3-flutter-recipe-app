@@ -61,11 +61,13 @@ class _SearchScreenState extends State<SearchScreen> {
                             Icons.search,
                             color: AppColor.grey4,
                           ),
-                          onChanged: (val) {},
+                          onChanged: (val) {
+                            viewModel.searchData(val);
+                          },
                           borderColor: AppColor.grey4,
                           textColor: AppColor.grey4,
                           contentPadding: const EdgeInsets.all(8),
-                          controller: TextEditingController(),
+                          controller: _controller,
                           hintText: 'Search recipe',
                         ),
                       ),
@@ -101,7 +103,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             mainAxisSpacing: 15,
                             crossAxisSpacing: 15,
                           ),
-                      itemCount: 10,
+                      itemCount: recipes.length,
                       itemBuilder: (context, index) {
                         final recipe = recipes[index];
                         return RecipeCard(
