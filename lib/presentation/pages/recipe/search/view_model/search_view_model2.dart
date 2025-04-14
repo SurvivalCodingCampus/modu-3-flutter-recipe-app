@@ -4,7 +4,7 @@ import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository.dart';
-import 'package:recipe_app/presentation/pages/recipe/search/search_state.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/state/search_state.dart';
 
 class SearchViewModel2 with ChangeNotifier {
   final SearchRecipeRepository _searchRepository;

@@ -13,89 +13,96 @@ class FilterSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = FilterViewModel();
-    return Container(
-      padding: const EdgeInsets.all(30),
-      decoration: const BoxDecoration(
-        color: AppColor.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(50),
-          topRight: Radius.circular(50),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Center(child: Text('Filter Search', style: AppTextStyle.smallBold)),
-          Text('Time', style: AppTextStyle.smallBold),
-          const SizedBox(height: 10),
-          Row(
-            children:
-                _time
-                    .map(
-                      (e) => Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: FilterButton(
-                          text: e,
-                          isSelected: viewModel.state.time == e,
-                          onTap: () {
-                            viewModel.filter(time: e);
-                          },
-                        ),
-                      ),
-                    )
-                    .toList(),
-          ),
-          const SizedBox(height: 20),
-          Text('Rate', style: AppTextStyle.smallBold),
-          const SizedBox(height: 10),
-          Row(
-            children:
-                _rates
-                    .map(
-                      (e) => Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: RatingButton(
-                          text: '$e',
-                          isSelected: viewModel.state.rate == e,
-                          onTap: () {
-                            viewModel.filter(rate: e);
-                          },
-                        ),
-                      ),
-                    )
-                    .toList(),
-          ),
-          const SizedBox(height: 20),
-          Text('Category', style: AppTextStyle.smallBold),
-          const SizedBox(height: 10),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            direction: Axis.horizontal,
-            children:
-                _categories
-                    .map(
-                      (e) => FilterButton(
-                        text: e,
-                        isSelected: viewModel.state.category == e,
-                        onTap: () {
-                          viewModel.filter(category: e);
-                        },
-                      ),
-                    )
-                    .toList(),
-          ),
-          const SizedBox(height: 30),
-          Center(
-            child: AppButton(
-              text: 'Filter',
-              onClick: () {},
-              type: ButtonType.small,
+    return ListenableBuilder(
+      listenable: viewModel,
+      builder: (context, child) {
+        return Container(
+          padding: const EdgeInsets.all(30),
+          decoration: const BoxDecoration(
+            color: AppColor.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(50),
+              topRight: Radius.circular(50),
             ),
           ),
-        ],
-      ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text('Filter Search', style: AppTextStyle.smallBold),
+              ),
+              Text('Time', style: AppTextStyle.smallBold),
+              const SizedBox(height: 10),
+              Row(
+                children:
+                    _time
+                        .map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: FilterButton(
+                              text: e,
+                              isSelected: viewModel.state.time == e,
+                              onTap: () {
+                                viewModel.filter(time: e);
+                              },
+                            ),
+                          ),
+                        )
+                        .toList(),
+              ),
+              const SizedBox(height: 20),
+              Text('Rate', style: AppTextStyle.smallBold),
+              const SizedBox(height: 10),
+              Row(
+                children:
+                    _rates
+                        .map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: RatingButton(
+                              text: '$e',
+                              isSelected: viewModel.state.rate == e,
+                              onTap: () {
+                                viewModel.filter(rate: e);
+                              },
+                            ),
+                          ),
+                        )
+                        .toList(),
+              ),
+              const SizedBox(height: 20),
+              Text('Category', style: AppTextStyle.smallBold),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                direction: Axis.horizontal,
+                children:
+                    _categories
+                        .map(
+                          (e) => FilterButton(
+                            text: e,
+                            isSelected: viewModel.state.category == e,
+                            onTap: () {
+                              viewModel.filter(category: e);
+                            },
+                          ),
+                        )
+                        .toList(),
+              ),
+              const SizedBox(height: 30),
+              Center(
+                child: AppButton(
+                  text: 'Filter',
+                  onClick: () {},
+                  type: ButtonType.small,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

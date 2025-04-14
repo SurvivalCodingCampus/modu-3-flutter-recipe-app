@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/constants/image/app_image.dart';
 import 'package:recipe_app/core/style/app_color.dart';
-import 'package:recipe_app/presentation/widgets/recipe/filter_search.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/screen/filter_search_screen.dart';
 
 class FilterSearchButton extends StatelessWidget {
   const FilterSearchButton({super.key});
