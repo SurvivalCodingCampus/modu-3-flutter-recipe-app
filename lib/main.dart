@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/splash_screen/splash_screen.dart';
 
 import 'recipe_app/data/repository/recipe_repository.dart';

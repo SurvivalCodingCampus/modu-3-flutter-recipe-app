@@ -45,21 +45,66 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
                   child: Column(
                     children: [
-                      TextField(
-                        controller: _searchController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(color: ColorStyles2.gray4),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextField(
+                                controller: _searchController,
+                                textAlignVertical: TextAlignVertical.center,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                    borderSide: BorderSide(
+                                      color: ColorStyles2.gray4,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                    borderSide: BorderSide(
+                                      color: ColorStyles2.gray4,
+                                    ),
+                                  ),
+                                  prefixIcon: Icon(Icons.search, size: 18),
+                                  prefixIconColor: ColorStyles2.gray4,
+                                  hintText: 'Search recipe',
+                                  hintStyle: TextStyles2.smallerTextRegular,
+                                ),
+                              ),
+                            ),
                           ),
-                          prefixIcon: Icon(Icons.search, size: 18),
-                          prefixIconColor: ColorStyles2.gray4,
-                          hintText: 'Search recipe',
-                          hintStyle: TextStyles2.smallerTextRegular,
-                        ),
+                          SizedBox(width: 20),
+                          SizedBox(
+                            width: 40,
+                            height: 40,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: ColorStyles2.primary100,
+                                padding: EdgeInsets.all(5),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Image.asset(
+                                '../assets/icons/filter.png',
+                                width: 20,
+                                height: 20,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 15),
                       Align(
