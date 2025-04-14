@@ -18,6 +18,7 @@ class FilterButton extends StatelessWidget {
           color: _bgColor,
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               text,
