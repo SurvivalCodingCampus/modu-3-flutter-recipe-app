@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/app_image.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
 import '../../ui/ui_size.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   final String title;
   final String imagePath;
-  final int cookTime;
+  final String cookTime;
   final String authorName;
   final double rating;
   final bool isFavorite;
@@ -25,29 +26,35 @@ class RecipeCard extends StatelessWidget {
   });
 
   @override
+  State<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Stack(
           children: [
-            Image.asset(
-              imagePath,
+            AppImage(
+              path: widget.imagePath,
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
-            ),
-
-            Container(
-              height: 200,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [ColorStyle.black, Colors.transparent],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ),
-              ),
+              borderRadius: BorderRadius.circular(10),
+              overlayBuilder:
+                  (context) => Container(
+                    height: 200,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [ColorStyle.black, Colors.transparent],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                    ),
+                  ),
             ),
 
             // Title & AuthorName
@@ -61,7 +68,7 @@ class RecipeCard extends StatelessWidget {
                   SizedBox(
                     width: responsiveWidth(context, ratio: 0.6),
                     child: Text(
-                      title,
+                      widget.title,
                       style: AppTextStyles.smallBold(color: ColorStyle.white),
                       maxLines: 5,
                     ),
@@ -71,7 +78,7 @@ class RecipeCard extends StatelessWidget {
                   SizedBox(
                     width: responsiveWidth(context, ratio: 0.6),
                     child: Text(
-                      'By $authorName',
+                      'By ${widget.authorName}',
                       style: AppTextStyles.smallLabel(color: ColorStyle.white),
                       maxLines: 1,
                     ),
@@ -94,7 +101,7 @@ class RecipeCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    '$cookTime min',
+                    widget.cookTime,
                     style: AppTextStyles.smallRegular(color: ColorStyle.gray4),
                   ),
                   const SizedBox(width: 10),
@@ -110,7 +117,7 @@ class RecipeCard extends StatelessWidget {
                         Icons.bookmark_border,
                         size: 16,
                         color:
-                            isFavorite
+                            widget.isFavorite
                                 ? ColorStyle.primary100
                                 : ColorStyle.gray4,
                       ),
@@ -134,7 +141,7 @@ class RecipeCard extends StatelessWidget {
                     const Icon(Icons.star, size: 8.5, color: ColorStyle.rating),
                     const SizedBox(width: 3.25),
                     Text(
-                      rating.toStringAsFixed(1),
+                      widget.rating.toStringAsFixed(1),
                       style: AppTextStyles.smallLabel(),
                     ),
                   ],
