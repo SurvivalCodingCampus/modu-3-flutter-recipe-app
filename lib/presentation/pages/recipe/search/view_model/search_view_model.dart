@@ -42,9 +42,15 @@ class SearchViewModel with ChangeNotifier {
     // time은 뭘 원하는지 모르겠어서 패스
     _state = state.copyWith(
       data:
-          _state.originalData
-              .where((e) => e.rating == rate && e.category == category)
-              .toList(),
+          _state.originalData.where((e) {
+            // 기본 필터 조건을 먼저 설정
+            final isRatingValid =
+                rate == 0 || (e.rating >= rate && e.rating < rate + 1);
+            final isCategoryValid = category == 'All' || e.category == category;
+
+            // 두 조건이 모두 만족하는 경우만 반환
+            return isRatingValid && isCategoryValid;
+          }).toList(),
       viewState: ViewState.complete,
       isFiltered: true,
     );
