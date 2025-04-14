@@ -42,24 +42,23 @@ class SearchViewModel with ChangeNotifier {
     required int rate,
     required String category,
   }) {
-    // 현재 검색됐는지 안됐는지에 따라
-    // 다르게 기본 베이스 데이터를 설정
-    List<Recipe> baseData = _state.originalData;
-    if (_state.searchText.isNotEmpty) {
-      baseData = _state.data;
-    }
-    // time은 뭘 원하는지 모르겠어서 패스
-    _state = state.copyWith(
-      data:
-          baseData.where((e) {
-            // 기본 필터 조건을 먼저 설정
-            final isRatingValid =
-                rate == 0 || (e.rating >= rate && e.rating < rate + 1);
-            final isCategoryValid = category == 'All' || e.category == category;
+    // 필터링된 데이터
+    final filteredData =
+        _state.originalData.where((e) {
+          // 기본 필터 조건을 먼저 설정
+          final isRatingValid =
+              rate == 0 || (e.rating >= rate && e.rating < rate + 1);
+          final isCategoryValid = category == 'All' || e.category == category;
 
-            // 두 조건이 모두 만족하는 경우만 반환
-            return isRatingValid && isCategoryValid;
-          }).toList(),
+          // 두 조건이 모두 만족하는 경우만 반환
+          return isRatingValid && isCategoryValid;
+        }).toList();
+
+    // time은 뭘 원하는지 모르겠어서 작성 X
+    _state = state.copyWith(
+      // 필터링 데이터와 뷰에 보여질 데이터 저장
+      filteredData: filteredData,
+      data: filteredData,
       viewState: ViewState.complete,
       // 하나라도 필터링이 걸려있다면 true
       isFiltered: rate != 0 || category != 'All',
@@ -73,7 +72,7 @@ class SearchViewModel with ChangeNotifier {
     // 다르게 기본 베이스 데이터를 설정
     List<Recipe> baseData = _state.originalData;
     if (_state.isFiltered) {
-      baseData = _state.data;
+      baseData = _state.filteredData;
     }
     if (text.isEmpty) {
       _state = state.copyWith(data: baseData, viewState: ViewState.complete);

@@ -14,7 +14,7 @@ class FilterSearchViewModel with ChangeNotifier {
   void changeData({String? time, int? rate, String? category}) {
     _state = state.copyWith(
       time: time ?? _state.time,
-      rate: rate ?? _state.rate,
+      rate: rate == state.rate ? 0 : (rate ?? _state.rate),
       category: category ?? _state.category,
     );
     notifyListeners();
