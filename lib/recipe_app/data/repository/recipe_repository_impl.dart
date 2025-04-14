@@ -15,7 +15,7 @@ class RecipeRepositoryImpl implements RecipeRepository {
     return recipeList;
   }
 
-  // title과 chef를 모두 소문자로 바꾸고 그 안에 keywor를 포함하고 있는지 찾는 검색 메서드
+  // title과 chef를 모두 소문자로 처리하고 그 안에 keyword를 포함하고 있는지 찾는 검색 메서드
   @override
   Future<List<Recipe>> searchRecipes(String keyword) async {
     final recipeList = await _recipeDataSource.getRecipeData();

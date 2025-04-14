@@ -16,6 +16,26 @@ class SearchRecipesScreen extends StatefulWidget {
 class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
+  late String keyword;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      final String keyword = _searchController.text;
+      _isSearching = true;
+      widget.searchRecipesViewModel.searchRecipes(keyword);
+      _searchController.value = _searchController.value.copyWith(text: keyword);
+    });
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _isSearching = false;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +130,9 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Recent Search',
+                          _isSearching == false
+                              ? 'Recent Search'
+                              : 'Search Result',
                           style: TextStyles2.normalText.copyWith(
                             fontWeight: FontWeight.w400,
                           ),
