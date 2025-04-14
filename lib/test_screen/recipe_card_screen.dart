@@ -36,9 +36,9 @@ class RecipeCardScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 24),
-                  RecipeCard(recipe: recipe1),
+                  RecipeCard(recipe: recipe1, isBig: true,),
                   SizedBox(height: 24),
-                  RecipeCard(recipe: recipe2),
+                  RecipeCard(recipe: recipe2, isBig: true,),
                   SizedBox(height: 24),
                 ],
               ),
