@@ -2,11 +2,11 @@ import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/core/modules/exception/custom_exception.dart';
 import 'package:recipe_app/feature/receipe/data/mapper/recipe_mapper.dart';
 import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
-import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository.dart';
-import 'package:recipe_app/feature/receipe/domain/data_source/home/recipe_data_source.dart';
+import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository.dart';
+import 'package:recipe_app/feature/receipe/domain/data_source/search/search_recipe_data_source.dart';
 
-class SearchRecipeRepositoryImpl implements RecipeRepository {
-  final RecipeDataSource _dataSource;
+class SearchRecipeRepositoryImpl implements SearchRecipeRepository {
+  final SearchRecipeDataSource _dataSource;
 
   const SearchRecipeRepositoryImpl(this._dataSource);
 
