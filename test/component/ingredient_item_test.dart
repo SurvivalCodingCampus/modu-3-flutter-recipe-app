@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/data/model/ingredient.dart';
+import 'package:recipe_app/data/model/ingredient/ingredient.dart';
 import 'package:recipe_app/presentation/component/ingredient_item.dart';
 
 void main() {

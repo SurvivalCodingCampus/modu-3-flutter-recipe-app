@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/data/model/ingredient.dart';
-import 'package:recipe_app/data/model/media.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/model/user.dart';
+import 'package:recipe_app/data/model/ingredient/ingredient.dart';
+import 'package:recipe_app/data/model/media/media.dart';
+import 'package:recipe_app/data/model/recipe/recipe.dart';
+import 'package:recipe_app/data/model/user/user.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 
 void main() {
@@ -16,13 +16,23 @@ void main() {
         ],
         time: 20,
         rating: 4.0,
-        user: User(name: "Mark Kelvin"),
+        user: User(
+          name: "Mark Kelvin",
+          id: 1,
+          userId: 'user1',
+          email: 'user1@email.com',
+          address: '',
+        ),
         media: Media(
           imageId: 'imageId',
-          thunbNailUrl: 'assets/images/tomatos.png',
+          thumbNailUrl: 'assets/images/tomatos.png',
           imageUrl: 'imageUrl',
           recipeVideoUrl: 'recipeVideoUrl',
         ),
+        recipeId: 1,
+        createdAt: DateTime.now(),
+        userName: 'Mark Kelvin',
+        thumbNailUrl: 'assets/images/tomatos.png',
       );
 
       await tester.pumpWidget(

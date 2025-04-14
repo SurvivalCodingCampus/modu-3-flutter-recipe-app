@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/data/model/recipe/recipe.dart';
+import 'package:recipe_app/presentation/component/image_roader.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
@@ -18,12 +18,9 @@ class RecipeCard extends StatelessWidget {
         children: [
           Positioned.fill(
             child:
-                recipe.media.thunbNailUrl.startsWith('http')
-                    ? Image.network(
-                      recipe.media.thunbNailUrl,
-                      fit: BoxFit.cover,
-                    )
-                    : Image.asset(recipe.media.thunbNailUrl, fit: BoxFit.cover),
+                recipe.thumbNailUrl.startsWith('http')
+                    ? RecipeImageLoader(imageUrl: recipe.thumbNailUrl)
+                    : Image.asset(recipe.thumbNailUrl, fit: BoxFit.cover),
           ),
           Positioned.fill(
             child: Container(
@@ -74,7 +71,7 @@ class RecipeCard extends StatelessWidget {
                       ),
 
                       Text(
-                        'By ${recipe.user.name}',
+                        'By ${recipe.userName}',
                         style: AppTextStyles.smallRegular(
                           color: ColorStyle.white,
                         ),

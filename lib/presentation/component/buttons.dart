@@ -112,7 +112,7 @@ class _ButtonsState extends State<Buttons> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: 114,
+              // width: 114,
               height: 24,
               child: Center(
                 child: Text(
