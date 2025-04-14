@@ -18,7 +18,10 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Choice Screen')),
+      appBar: AppBar(
+        title: Text('Choice Screen'),
+        backgroundColor: Colors.white,
+      ),
       body: Center(
         child: Row(
           children: [

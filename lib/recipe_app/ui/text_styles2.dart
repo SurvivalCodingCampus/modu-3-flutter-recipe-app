@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'color_styles2.dart';
 
 abstract class TextStyles2 {
-  static TextStyle ingredientsText = GoogleFonts.poppins(
+  static TextStyle normalText = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.bold,
     color: ColorStyles2.titleBlackColor,

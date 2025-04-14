@@ -42,7 +42,7 @@ class IngredientItem extends StatelessWidget {
                     child: Image.asset(imagePath),
                   ),
                   SizedBox(width: 12),
-                  Text(ingredient, style: TextStyles2.ingredientsText),
+                  Text(ingredient, style: TextStyles2.normalText),
                 ],
               ),
             ),

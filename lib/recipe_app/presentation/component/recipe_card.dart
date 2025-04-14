@@ -56,7 +56,7 @@ class _RecipeCardState extends State<RecipeCard> {
             ),
           ),
           Positioned(
-            right: 12,
+            right: 6,
             top: 10,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 7),
@@ -93,24 +93,30 @@ class _RecipeCardState extends State<RecipeCard> {
           Positioned(
             left: 12,
             bottom: 15,
-            child: SizedBox(
-              width: 200,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.recipe.title,
-                    style: TextStyles2.menuIntroduceText,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 3),
-                  Text(
-                    'By ${widget.recipe.chef}',
-                    style: TextStyles2.chefNameText,
-                  ),
-                ],
-              ),
+            right: widget.showTimerAndBookmark ? 180 : 70,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.recipe.title,
+                  style:
+                      widget.showTimerAndBookmark
+                          ? TextStyles2.menuIntroduceText
+                          : TextStyles2.menuIntroduceText.copyWith(
+                            fontSize: 11,
+                          ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 3),
+                Text(
+                  'By ${widget.recipe.chef}',
+                  style:
+                      widget.showTimerAndBookmark
+                          ? TextStyles2.chefNameText
+                          : TextStyles2.chefNameText.copyWith(fontSize: 8),
+                ),
+              ],
             ),
           ),
           if (widget.showTimerAndBookmark)
