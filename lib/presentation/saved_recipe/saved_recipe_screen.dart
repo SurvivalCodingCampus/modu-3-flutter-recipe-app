@@ -37,7 +37,11 @@ class _SavedRecipeScreenState extends State<SavedRecipeScreen> {
               final recipe = widget.viewModel.savedRecipes[index];
               return Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
-                child: RecipeCard(recipe: recipe),
+                child: RecipeCard(
+                  recipe: recipe,
+                  showBookMarked: true,
+                  showTitle: true,
+                ),
               );
             },
           );

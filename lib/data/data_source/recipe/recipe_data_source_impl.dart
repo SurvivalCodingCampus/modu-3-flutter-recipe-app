@@ -86,4 +86,25 @@ class RecipeDataSourceImpl implements RecipeDataSource {
       return [];
     }
   }
+
+  @override
+  Future<List<Recipe>> searchRecipes(String keyword) async {
+    final allRecipes = await getRecipes();
+    if (keyword.isEmpty) {
+      return allRecipes;
+    }
+    return allRecipes.where((recipe) {
+      final keywordLower = keyword.toLowerCase();
+      return recipe.name.toLowerCase().contains(keywordLower) ||
+          recipe.ingredients.any(
+            (ingredient) =>
+                ingredient.ingredient.name.toLowerCase().contains(keywordLower),
+          ) ||
+          recipe.procedures.any(
+            (procedure) => procedure.steps.any(
+              (step) => step.toLowerCase().contains(keywordLower),
+            ),
+          );
+    }).toList();
+  }
 }
