@@ -16,7 +16,7 @@ void main() {
     );
 
     // 텍스트 필드에 글 작성
-    await tester.enterText(find.byType(TextField), text);
+    await tester.enterText(find.byType(AppTextField), text);
 
     final hintTextFinder = find.text(hintText);
     final textFinder = find.text(text);
