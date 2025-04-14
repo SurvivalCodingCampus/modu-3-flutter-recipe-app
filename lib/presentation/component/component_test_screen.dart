@@ -105,6 +105,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                       ),
                       FilterButton(
                         text: 'Text',
+                        star: true,
                         isSelected: isFilterButtonSelected,
                         onClick: () {
                           setState(() {
