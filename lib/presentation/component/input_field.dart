@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/app_image.dart';
+import 'package:recipe_app/presentation/component/image_component/app_image.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
@@ -27,14 +27,7 @@ class InputField extends StatefulWidget {
   State<InputField> createState() => _InputFieldState();
 
   static Widget searchIcon() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 11),
-      child: AppImage(
-        path: 'assets/images/icons/search_normal.png',
-        width: 20,
-        height: 20,
-      ),
-    );
+    return const AppImage(path: 'assets/images/icons/search_normal.png');
   }
 }
 
@@ -117,7 +110,21 @@ class _InputFieldState extends State<InputField> {
                   width: borderWidth,
                 ),
               ),
-              prefixIcon: widget.iconWidget,
+              prefixIcon:
+                  widget.iconWidget != null
+                      ? Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: widget.iconWidget,
+                        ),
+                      )
+                      : null,
+              prefixIconConstraints: const BoxConstraints(
+                minHeight: 20,
+                minWidth: 40,
+              ),
             ),
           ),
         ),
