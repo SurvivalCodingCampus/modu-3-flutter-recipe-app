@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/core/constants/image/app_image.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/presentation/pages/recipe/search/screen/filter_search_screen.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/view_model/filter_view_model.dart';
 
 class FilterSearchButton extends StatelessWidget {
   const FilterSearchButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = FilterViewModel();
     return InkWell(
       borderRadius: BorderRadius.circular(10),
       onTap: () {
@@ -17,7 +19,7 @@ class FilterSearchButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
           builder: (context) {
-            return const FilterSearch();
+            return FilterSearch(viewModel: viewModel);
           },
         );
       },

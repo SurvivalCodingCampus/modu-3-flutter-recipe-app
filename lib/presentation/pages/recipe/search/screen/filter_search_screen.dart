@@ -8,11 +8,11 @@ import 'package:recipe_app/presentation/widgets/recipe/filter_button.dart';
 import 'package:recipe_app/presentation/widgets/recipe/rating_button.dart';
 
 class FilterSearch extends StatelessWidget {
-  const FilterSearch({super.key});
+  final FilterViewModel viewModel;
+  const FilterSearch({required this.viewModel, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = FilterViewModel();
     return ListenableBuilder(
       listenable: viewModel,
       builder: (context, child) {

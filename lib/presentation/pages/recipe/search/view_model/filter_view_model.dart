@@ -13,4 +13,10 @@ class FilterViewModel with ChangeNotifier {
     _state = state.copyWith(time: time, rate: rate, category: category);
     notifyListeners();
   }
+
+  @override
+  void dispose() {
+    print('disposesd');
+    super.dispose();
+  }
 }

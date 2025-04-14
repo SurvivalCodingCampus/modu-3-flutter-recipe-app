@@ -4,12 +4,14 @@ import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository.dart';
 import 'package:recipe_app/presentation/pages/recipe/search/state/search_state.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/view_model/filter_view_model.dart';
 
 class SearchViewModel with ChangeNotifier {
   final SearchRecipeRepository _searchRepository;
 
   SearchViewModel(this._searchRepository);
 
+  FilterViewModel filterViewModel = FilterViewModel();
   SearchState _state = const SearchState();
   SearchState get state => _state;
 
@@ -33,6 +35,8 @@ class SearchViewModel with ChangeNotifier {
       _state = state.copyWith(viewState: ViewState.error);
     }
   }
+
+  void filterData() {}
 
   void searchData(String text) {
     _state = state.copyWith(searchText: text);
