@@ -7,12 +7,13 @@ void main() {
     test('fetchRecipes', () async {
       final mockRepository = MockRecipeRepositoryImpl();
       final viewModel = HomeViewModel(mockRepository);
+      final state = viewModel.state;
 
-      expect(viewModel.isLoading, false);
-      expect(viewModel.recipes.length, 0);
+      expect(state.isLoading, false);
+      expect(state.recipes.length, 0);
 
       await viewModel.fetchRecipes();
-      expect(viewModel.recipes.isNotEmpty, true);
+      expect(state.recipes.isNotEmpty, true);
     });
   });
 }

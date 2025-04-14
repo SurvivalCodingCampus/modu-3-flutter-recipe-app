@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/presentation/home/home_state.dart';
 
 class HomeViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
 
   // 상태
-  List<Recipe> _recipes = [];
+  HomeState _state = const HomeState();
 
-  List<Recipe> get recipes => List.unmodifiable(_recipes);
-
-  bool _isLoading = false;
-
-  bool get isLoading => _isLoading;
+  HomeState get state => _state;
 
   HomeViewModel(this._recipeRepository);
 
   Future<void> fetchRecipes() async {
-    _isLoading = true;
+    _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    _recipes = await _recipeRepository.getRecipes();
-    _isLoading = false;
+    _state = state.copyWith(
+      recipes: await _recipeRepository.getRecipes(),
+      isLoading: false,
+    );
     notifyListeners();
   }
 }

@@ -14,13 +14,14 @@ class HomeScreen extends StatelessWidget {
       body: ListenableBuilder(
         listenable: viewModel..fetchRecipes(),
         builder: (context, child) {
-          if (viewModel.isLoading) {
+          final state = viewModel.state;
+          if (state.isLoading) {
             return CircularProgressIndicator();
           }
 
           return Column(
             children:
-                viewModel.recipes
+                state.recipes
                     .map((recipe) => RecipeWidget(recipe: recipe))
                     .toList(),
           );
