@@ -1,4 +1,5 @@
 enum CategoryFilter {
+  All,
   Cereal,
   Vegetables,
   Dinner,
@@ -11,5 +12,5 @@ enum CategoryFilter {
   Indian,
   Italian,
   Asian,
-  Unknown
+
 }
