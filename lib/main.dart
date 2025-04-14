@@ -6,6 +6,7 @@ import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/components.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/ui/ui.dart';
 
@@ -174,6 +175,7 @@ class App extends StatelessWidget {
             ),
         '/recipe/saved':
             (context) => SavedRecipesScreen(viewModel: savedRecipesViewModel),
+        '/recipe/search': (context) => SearchRecipesScreen(),
       },
     );
   }
@@ -226,6 +228,12 @@ class HomeScreen extends StatelessWidget {
               text: 'Splash Screen',
               onPressed: () {
                 Navigator.of(context).pushNamed('/splash');
+              },
+            ),
+            MediumButton(
+              text: 'Search Recipes Screen',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/recipe/search');
               },
             ),
           ],
