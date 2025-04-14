@@ -15,17 +15,19 @@ class _TimeFilterButtonState extends State<TimeFilterButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.start,
+      spacing: 10,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _filterButton('All'),
-        _filterButton('Newest'),
-        _filterButton('Oldest'),
-        _filterButton('Popularity'),
+        _timeFilterButton('All'),
+        _timeFilterButton('Newest'),
+        _timeFilterButton('Oldest'),
+        _timeFilterButton('Popularity'),
       ],
     );
   }
 
-  Widget _filterButton(String text) {
+  Widget _timeFilterButton(String text) {
     bool isSelected = selectedFilter == text;
     return ElevatedButton(
       onPressed: () {

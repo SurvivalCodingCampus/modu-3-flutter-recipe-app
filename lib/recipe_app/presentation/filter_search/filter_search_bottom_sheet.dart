@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/presentation/component/filter_button.dart';
+import 'package:recipe_app/recipe_app/presentation/component/category_filter_button.dart';
 import 'package:recipe_app/recipe_app/presentation/component/rating_button.dart';
+import 'package:recipe_app/recipe_app/presentation/component/time_filter_button.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class FilterSearchBottomSheet extends StatelessWidget {
@@ -45,6 +46,18 @@ class FilterSearchBottomSheet extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   RatingButton(),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Category',
+                    style: TextStyles2.smallerTextBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 10),
+                  CategoryFilterButton(),
                 ],
               ),
             ],

@@ -17,15 +17,12 @@ class _RatingButtonState extends State<RatingButton> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      spacing: 5,
       children: [
         _ratingButtonWidget(5),
-        SizedBox(width: 5),
         _ratingButtonWidget(4),
-        SizedBox(width: 5),
         _ratingButtonWidget(3),
-        SizedBox(width: 5),
         _ratingButtonWidget(2),
-        SizedBox(width: 5),
         _ratingButtonWidget(1),
       ],
     );
