@@ -4,8 +4,8 @@ import 'package:recipe_app/data/data_source/mock/mock_recipe_data_source.dart';
 import 'package:recipe_app/data/repository/interface/recipe_repository.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/components.dart';
-import 'package:recipe_app/presentation/recipe/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/recipe/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/ui/ui.dart';
 
