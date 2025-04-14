@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/filter_button.dart';
+import 'package:recipe_app/presentation/component/filter_dialog.dart';
 
 import 'package:recipe_app/presentation/component/filter_icon_button.dart';
 import 'package:recipe_app/presentation/component/grid_recipe_card.dart';
@@ -52,7 +54,17 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      const FilterIconButton(),
+                      FilterIconButton(
+                        onTap: () {
+                          showBottomSheet(
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (context) {
+                              return const FilterDialog();
+                            },
+                          );
+                        },
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
