@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
@@ -25,7 +25,7 @@ class RecipeCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  image: AssetImage(recipe.image),
+                  image: NetworkImage(recipe.image),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -61,7 +61,7 @@ class RecipeCard extends StatelessWidget {
                 spacing: 3,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.star, color: ColorStyle.rating, size: 12),
+                  const Icon(Icons.star, color: ColorStyle.rating, size: 12),
                   Text(
                     recipe.rate.toString(),
                     style: AppTextStyles.smallRegular.copyWith(fontSize: 10),
@@ -101,10 +101,10 @@ class RecipeCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.timer_outlined, color: ColorStyle.white),
+                    const Icon(Icons.timer_outlined, color: ColorStyle.white),
                     const SizedBox(width: 5.0),
                     Text(
-                      '${recipe.time} min',
+                      recipe.time,
                       style: AppTextStyles.smallRegular.copyWith(
                         color: ColorStyle.white,
                       ),
@@ -114,7 +114,7 @@ class RecipeCard extends StatelessWidget {
                 const SizedBox(width: 10.0),
                 GestureDetector(
                   onTap: onBookmarkClick,
-                  child: SizedBox(
+                  child: const SizedBox(
                     width: 24,
                     child: CircleAvatar(
                       backgroundColor: ColorStyle.white,

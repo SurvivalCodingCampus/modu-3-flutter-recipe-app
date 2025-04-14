@@ -41,6 +41,7 @@ class _SmallButtonState extends State<SmallButton> {
       },
       onTap: widget.onClick,
       child: Container(
+        width: 174,
         height: 37,
         decoration: BoxDecoration(
           color: isPressed ? ColorStyle.gray4 : widget.color,
@@ -49,14 +50,11 @@ class _SmallButtonState extends State<SmallButton> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 114,
-              child: Center(
-                child: Text(
-                  widget.text,
-                  style: AppTextStyles.smallBold.copyWith(
-                    color: ColorStyle.white,
-                  ),
+            Center(
+              child: Text(
+                widget.text,
+                style: AppTextStyles.smallBold.copyWith(
+                  color: ColorStyle.white,
                 ),
               ),
             ),

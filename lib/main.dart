@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/presentation/components/component_test_screen.dart';
+import 'package:recipe_app/ui/color_styles.dart';
+
+import 'utils/constant/default_route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      routes: DefaultRoute.routes,
+      initialRoute: DefaultRoute.splash,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: ColorStyle.primary60),
       ),
-      home: ComponentTestScreen(),
     );
   }
 }
