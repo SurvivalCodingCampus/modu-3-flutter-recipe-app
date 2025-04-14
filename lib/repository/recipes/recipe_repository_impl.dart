@@ -19,4 +19,15 @@ class RecipeRepositoryImpl implements RecipeRepository {
 
     return saveRecipes.map((recipe) => recipe.toRecipe()).toList();
   }
+
+  @override
+  Future<List<Recipe>> getAllRecipeList() async {
+    final Map<String, dynamic> response = await dataSource.getRecipes();
+    List<Recipes> saveRecipes = [];
+    response["recipes"].map((Map<String, dynamic> item) {
+      saveRecipes.add(Recipes.fromJson(item));
+    }).toList();
+
+    return saveRecipes.map((recipe) => recipe.toRecipe()).toList();
+  }
 }
