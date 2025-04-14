@@ -20,6 +20,13 @@ class InputField extends StatefulWidget {
 
   @override
   State<InputField> createState() => _InputFieldState();
+
+  static Widget searchIcon() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 11),
+      child: Icon(Icons.search, color: ColorStyle.gray4, size: 20),
+    );
+  }
 }
 
 class _InputFieldState extends State<InputField> {
