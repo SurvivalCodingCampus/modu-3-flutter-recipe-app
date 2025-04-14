@@ -17,7 +17,7 @@ class SearchRecipesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: viewModel,
+      listenable: viewModel..fetchRecipes(),
       builder: (context, snapshot) {
         return GestureDetector(
           onTap: () {
@@ -139,7 +139,6 @@ class SearchRecipesScreen extends StatelessWidget {
                               CategoryFilter categoryFilter,
                               ) {
                             viewModel.setFilter(timeFilter, rateFilter, categoryFilter);
-                            viewModel.searchRecipes();
                             viewModel.toggleFilterSearchBottomSheet();
                           },
                         ),

@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                       recipeRepository: RecipeRepositoryImpl(
                         recipeDataSource: MockRecipeDataSourceImpl(),
                       ),
-                    )..fetchRecipes(),
+                    ),
                   ),
                 ),
               );
