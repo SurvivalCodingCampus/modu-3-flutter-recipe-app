@@ -72,22 +72,30 @@ class _RecipeCardState extends State<RecipeCard> {
             Positioned(
               bottom: 10,
               left: 10,
+              right: 10,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Title
                   SizedBox(
-                    width: responsiveWidth(context, ratio: 0.6),
+                    width:
+                        (widget.showCookTime && widget.showFavorite)
+                            ? responsiveWidth(context, ratio: 0.6)
+                            : double.infinity,
                     child: Text(
                       widget.title,
                       style: AppTextStyles.smallBold(color: ColorStyle.white),
                       maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   const SizedBox(height: 4),
                   // Author name
                   SizedBox(
-                    width: responsiveWidth(context, ratio: 0.6),
+                    width:
+                        (widget.showCookTime && widget.showFavorite)
+                            ? responsiveWidth(context, ratio: 0.6)
+                            : double.infinity,
                     child: Text(
                       'By ${widget.authorName}',
                       style: AppTextStyles.smallLabel(color: ColorStyle.white),
