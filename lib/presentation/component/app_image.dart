@@ -5,8 +5,8 @@ class AppImage extends StatefulWidget {
   final String path;
   final double? width;
   final double? height;
-  final BoxFit fit;
-  final BorderRadius borderRadius;
+  final BoxFit? fit;
+  final BorderRadius? borderRadius;
   final VoidCallback? onImageLoaded;
   final Widget Function(BuildContext context)? overlayBuilder; //오버레이 넣는 위젯 부분
   final Widget Function(BuildContext context, Size size)?
@@ -17,8 +17,8 @@ class AppImage extends StatefulWidget {
     required this.path,
     this.width,
     this.height,
-    this.fit = BoxFit.cover,
-    this.borderRadius = BorderRadius.zero,
+    this.fit,
+    this.borderRadius,
     this.onImageLoaded,
     this.overlayBuilder,
     this.skeletonBuilder,
@@ -39,56 +39,60 @@ class _AppImageState extends State<AppImage> {
       widget.height ?? double.infinity,
     );
 
-    if (isNetwork) {
-      return ClipRRect(
-        borderRadius: widget.borderRadius,
-        child: Stack(
-          children: [
-            Image.network(
-              widget.path,
-              width: widget.width,
-              height: widget.height,
-              fit: widget.fit,
-              frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                final loaded = wasSynchronouslyLoaded || frame != null;
+    return widget.borderRadius != null
+        ? ClipRRect(
+          borderRadius: widget.borderRadius!,
+          child: isNetwork ? _buildNetworkImage(imageSize) : _buildAssetImage(),
+        )
+        : isNetwork
+        ? _buildNetworkImage(imageSize)
+        : _buildAssetImage();
+  }
 
-                if (!_loaded && loaded) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    if (mounted) {
-                      setState(() => _loaded = true);
-                      widget.onImageLoaded?.call();
-                    }
-                  });
+  Widget _buildNetworkImage(Size imageSize) {
+    return Stack(
+      children: [
+        Image.network(
+          widget.path,
+          width: widget.width,
+          height: widget.height,
+          fit: widget.fit,
+          frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+            final loaded = wasSynchronouslyLoaded || frame != null;
+
+            if (!_loaded && loaded) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted) {
+                  setState(() => _loaded = true);
+                  widget.onImageLoaded?.call();
                 }
-                return child;
-              },
-              errorBuilder: (_, __, ___) => _errorPlaceholder(),
-            ),
-            if (!_loaded)
-              widget.skeletonBuilder?.call(context, imageSize) ??
-                  const SizedBox(),
-            if (_loaded && widget.overlayBuilder != null)
-              widget.overlayBuilder!(context),
-          ],
+              });
+            }
+            return child;
+          },
+          errorBuilder: (_, __, ___) => _errorPlaceholder(),
         ),
-      );
-    } else {
-      return ClipRRect(
-        borderRadius: widget.borderRadius,
-        child: Stack(
-          children: [
-            Image.asset(
-              widget.path,
-              width: widget.width,
-              height: widget.height,
-              fit: widget.fit,
-              errorBuilder: (_, __, ___) => _errorPlaceholder(),
-            ),
-            if (widget.overlayBuilder != null) widget.overlayBuilder!(context),
-          ],
+        if (!_loaded)
+          widget.skeletonBuilder?.call(context, imageSize) ?? const SizedBox(),
+        if (_loaded && widget.overlayBuilder != null)
+          widget.overlayBuilder!(context),
+      ],
+    );
+  }
+
+  Widget _buildAssetImage() {
+    return Stack(
+      children: [
+        Image.asset(
+          widget.path,
+          width: widget.width,
+          height: widget.height,
+          fit: widget.fit,
+          errorBuilder: (_, __, ___) => _errorPlaceholder(),
         ),
-      );
-    }
+        if (widget.overlayBuilder != null) widget.overlayBuilder!(context),
+      ],
+    );
   }
 
   Widget _errorPlaceholder() => Container(
