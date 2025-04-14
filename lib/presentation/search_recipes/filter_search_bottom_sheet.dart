@@ -68,18 +68,14 @@ class FilterSearchBottomSheet extends StatelessWidget {
                         rate: '${index + 1}',
                         color: ColorStyles.primary100,
                         ontap: () {
-                          print('레이팅 ${index + 1} 버튼 클릭');
-                          if (index.ceil() == 2) {
-                            viewModel.onTapButton(Rate.star2);
-                          } else if (index.ceil() == 3) {
-                            viewModel.onTapButton(Rate.star3);
-                          } else if (index.ceil() == 4) {
-                            viewModel.onTapButton(Rate.star4);
-                          } else if (index.ceil() == 5) {
-                            viewModel.onTapButton(Rate.star5);
-                          } else {
-                            viewModel.onTapButton(Rate.star1);
-                          }
+                          final rateValues = [
+                            Rate.star1,
+                            Rate.star2,
+                            Rate.star3,
+                            Rate.star4,
+                            Rate.star5,
+                          ];
+                          viewModel.onTapButton(rateValues[index]);
                         },
                       ),
                     ],
