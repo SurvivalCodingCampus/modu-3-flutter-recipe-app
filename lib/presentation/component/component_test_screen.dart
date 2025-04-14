@@ -72,7 +72,6 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                   InputFieldWidget(
                     label: 'Label',
                     placeHolder: 'PlaceHolder',
-                    value: 'PlaceHolder',
                     onValueChange: (String value) {
                       print(value);
                     },
