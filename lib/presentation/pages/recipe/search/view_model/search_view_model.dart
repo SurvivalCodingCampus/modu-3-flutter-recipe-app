@@ -61,7 +61,8 @@ class SearchViewModel with ChangeNotifier {
             return isRatingValid && isCategoryValid;
           }).toList(),
       viewState: ViewState.complete,
-      isFiltered: rate != 0 && category != 'All',
+      // 하나라도 필터링이 걸려있다면 true
+      isFiltered: rate != 0 || category != 'All',
     );
     notifyListeners();
   }
