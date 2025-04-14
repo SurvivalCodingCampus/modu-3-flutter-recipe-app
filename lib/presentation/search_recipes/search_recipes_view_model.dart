@@ -45,26 +45,10 @@ class SearchRecipesViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateQuery(String query) {
-    final current = _state.recipes;
-
-    if (current case UiSuccess(data: final recipes)) {
-      final filtered =
-          query.isEmpty
-              ? recipes
-              : recipes
-                  .where(
-                    (r) => r.name.toLowerCase().contains(query.toLowerCase()),
-                  )
-                  .toList();
-
-      _state = _state.copyWith(query: query, filtered: filtered);
-
-      notifyListeners();
-    }
-  }
-
-  void applyFilter(FilterSearchState filter) {
+  void _applyFilterAndQuery({
+    required String query,
+    required FilterSearchState filter,
+  }) {
     final current = _state.recipes;
 
     if (current case UiSuccess(data: final allRecipes)) {
@@ -72,24 +56,26 @@ class SearchRecipesViewModel with ChangeNotifier {
 
       final filtered =
           allRecipes.where((recipe) {
+            // 카테고리 필터
             final matchCategory =
                 filter.categories.isEmpty ||
                 isAllSelected ||
-                filter.categories.contains(FilterCategory.all) ||
                 filter.categories
                     .map((e) => e.name.toLowerCase())
                     .contains(recipe.category.toLowerCase());
 
-            /*
-            final matchRate =
-                filter.rate == null || recipe.rating >= filter.rate!; // rating 보다 높은 레시피 점색
-            */
+            // 레시피 평점 필터
             final matchRate =
                 filter.rate == null ||
                 (recipe.rating >= filter.rate! &&
-                    recipe.rating < filter.rate! + 1); // rating 점수대 레시피 검색
+                    recipe.rating < filter.rate! + 1);
 
-            return matchCategory && matchRate;
+            // 레시피 이름 필터
+            final matchQuery =
+                query.isEmpty ||
+                recipe.name.toLowerCase().contains(query.toLowerCase());
+
+            return matchCategory && matchRate && matchQuery;
           }).toList();
 
       final cleanedFilter =
@@ -97,10 +83,72 @@ class SearchRecipesViewModel with ChangeNotifier {
 
       _state = _state.copyWith(
         filtered: filtered,
+        query: query,
         filterSearchState: cleanedFilter,
       );
 
       notifyListeners();
     }
+  }
+
+  void updateQuery(String query) {
+    _applyFilterAndQuery(query: query, filter: _state.filterSearchState);
+    // final current = _state.recipes;
+    //
+    // if (current case UiSuccess()) {
+    //   final filtered =
+    //       query.isEmpty
+    //           ? _state.filtered
+    //           : _state.filtered
+    //               .where(
+    //                 (r) => r.name.toLowerCase().contains(query.toLowerCase()),
+    //               )
+    //               .toList();
+    //
+    //   _state = _state.copyWith(query: query, filtered: filtered);
+    //
+    //   notifyListeners();
+    // }
+  }
+
+  void applyFilter(FilterSearchState filter) {
+    _applyFilterAndQuery(query: _state.query, filter: filter);
+    // final current = _state.recipes;
+    //
+    // if (current case UiSuccess()) {
+    //   final isAllSelected = filter.categories.contains(FilterCategory.all);
+    //
+    //   final filtered =
+    //       _state.filtered.where((recipe) {
+    //         final matchCategory =
+    //             filter.categories.isEmpty ||
+    //             isAllSelected ||
+    //             filter.categories.contains(FilterCategory.all) ||
+    //             filter.categories
+    //                 .map((e) => e.name.toLowerCase())
+    //                 .contains(recipe.category.toLowerCase());
+    //
+    //         /*
+    //         final matchRate =
+    //             filter.rate == null || recipe.rating >= filter.rate!; // rating 보다 높은 레시피 점색
+    //         */
+    //         final matchRate =
+    //             filter.rate == null ||
+    //             (recipe.rating >= filter.rate! &&
+    //                 recipe.rating < filter.rate! + 1); // rating 점수대 레시피 검색
+    //
+    //         return matchCategory && matchRate;
+    //       }).toList();
+    //
+    //   final cleanedFilter =
+    //       isAllSelected ? filter.copyWith(categories: []) : filter;
+    //
+    //   _state = _state.copyWith(
+    //     filtered: filtered,
+    //     filterSearchState: cleanedFilter,
+    //   );
+    //
+    //   notifyListeners();
+    // }
   }
 }
