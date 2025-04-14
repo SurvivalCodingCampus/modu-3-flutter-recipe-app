@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 abstract class TextStyles {
+
+
   // Poppins - Bold
   static const TextStyle titleTextBold = TextStyle(
     fontSize: 50,

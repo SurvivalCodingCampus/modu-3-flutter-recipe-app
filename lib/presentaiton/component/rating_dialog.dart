@@ -1,19 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentaiton/ui/color_styles.dart';
 import 'package:recipe_app/presentaiton/ui/text_styles.dart';
 
-class Rating {
-  final String title;
-  final String actionName;
-  final void Function(int) onChange;
+import '../../data/model/rating.dart';
 
-  const Rating({
-    required this.title,
-    required this.actionName,
-    required this.onChange,
-  });
-}
+
 
 class RatingDialog extends StatefulWidget {
   final Rating rating;
@@ -68,8 +59,7 @@ class _RatingDialogState extends State<RatingDialog> {
             onTap:
                 send
                     ? () {
-                      widget.rating.onChange(selectedStar
-                      );
+                      widget.rating.onChange(selectedStar);
                       Navigator.pop(context);
                     }
                     : null,

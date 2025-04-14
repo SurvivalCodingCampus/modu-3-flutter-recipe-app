@@ -1,47 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentaiton/ui/color_styles.dart';
 
+import '../../data/model/recipe.dart';
 import '../ui/text_styles.dart';
 
-class Rate {
-  final double rateStar;
-
-  const Rate({required this.rateStar});
-}
-
-// class Timer {
-//   final int cookTimes;
-//   final String minutes;
-//
-//   const Timer({
-//     required this.cookTimes,
-//     required this.minutes,
-//   });
-// }
 
 class RecipeCard extends StatelessWidget {
-  final String title;
-  final String author;
-  final int cookTimes;
-  final Rate rate;
-  final String imageUrl;
+  final Recipe recipe;
 
-  const RecipeCard({
-    super.key,
-    required this.title,
-    required this.author,
-    required this.cookTimes,
-    required this.rate,
-    required this.imageUrl
-  });
+  RecipeCard({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     String linesText = '';
 
-    for (int i = 0; i < title.length; i += 22) {
-      int end = (i + 22 < title.length) ? i + 22 : title.length;
-      linesText += title.substring(i, end) + '\n';
+    for (int i = 0; i < recipe.title.length; i += 22) {
+      int end = (i + 22 < recipe.title.length) ? i + 22 : recipe.title.length;
+      linesText += recipe.title.substring(i, end) + '\n';
     }
 
     return Stack(
@@ -51,7 +26,7 @@ class RecipeCard extends StatelessWidget {
           child: Stack(
             children: [
               Image.network(
-                imageUrl,
+                recipe.imageUrl,
                 width: 315,
                 height: 150,
                 fit: BoxFit.cover,
@@ -82,10 +57,7 @@ class RecipeCard extends StatelessWidget {
                     children: [
                       Icon(Icons.star, size: 8, color: ColorStyles.secondary60),
                       SizedBox(width: 3),
-                      Text(
-                        '${rate.rateStar}',
-                        style: TextStyles.smallerTextRegular,
-                      ),
+                      Text('${recipe.rateStar}', style: TextStyles.smallerTextRegular),
                     ],
                   ),
                 ),
@@ -94,7 +66,7 @@ class RecipeCard extends StatelessWidget {
                 left: 10,
                 bottom: 10,
                 child: Text(
-                  author,
+                  recipe.author,
                   style: TextStyles.smallerTextRegular.copyWith(
                     color: ColorStyles.gray4,
                   ),
@@ -150,7 +122,7 @@ class RecipeCard extends StatelessWidget {
                 right: 44,
                 bottom: 13.5,
                 child: Text(
-                  '$cookTimes min',
+                  '${recipe.cookTimes} min',
                   style: TextStyles.smallerTextRegular.copyWith(
                     color: ColorStyles.gray4,
                   ),

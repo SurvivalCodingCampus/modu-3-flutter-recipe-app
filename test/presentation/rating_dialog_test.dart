@@ -26,15 +26,15 @@ void main() {
     // 별점 아이콘이 존재하는지 확인
     expect(find.byIcon(Icons.star_border), findsWidgets);
 
-// 별점 탭 동작 테스트
+    // 별점 탭 동작 테스트
     await tester.tap(find.byIcon(Icons.star_border).first);
     await tester.pump();
-// 탭 후 별점 변화 확인
+    // 탭 후 별점 변화 확인
     expect(find.byIcon(Icons.star), findsOneWidget);
 
-// 버튼 동작 테스트
+    // 버튼 동작 테스트
     await tester.tap(find.text('send'));
     await tester.pump();
-// 동작 검증 로직 추가
+    // 동작 검증 로직 추가
   });
 }
