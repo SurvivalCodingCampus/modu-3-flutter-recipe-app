@@ -5,11 +5,18 @@ import 'package:recipe_app/core/style/app_textstyle.dart';
 class FilterButton extends StatelessWidget {
   final String text;
   final bool isSelected;
-  const FilterButton({required this.text, required this.isSelected, super.key});
+  final VoidCallback onTap;
+  const FilterButton({
+    required this.text,
+    required this.isSelected,
+    required this.onTap,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(

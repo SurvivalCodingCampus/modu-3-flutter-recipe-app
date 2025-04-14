@@ -5,11 +5,7 @@ class FilterViewModel with ChangeNotifier {
   FilterState _state = const FilterState();
   FilterState get state => _state;
 
-  void filter({
-    required String time,
-    required int rate,
-    required String category,
-  }) {
+  void filter({String? time, int? rate, String? category}) {
     _state = state.copyWith(time: time, rate: rate, category: category);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/core/enum/buttom_enum.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/view_model/filter_view_model.dart';
 import 'package:recipe_app/presentation/widgets/base/button/app_button.dart';
 import 'package:recipe_app/presentation/widgets/recipe/filter_button.dart';
 import 'package:recipe_app/presentation/widgets/recipe/rating_button.dart';
@@ -11,6 +12,7 @@ class FilterSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = FilterViewModel();
     return Container(
       padding: const EdgeInsets.all(30),
       decoration: const BoxDecoration(
@@ -33,7 +35,13 @@ class FilterSearch extends StatelessWidget {
                     .map(
                       (e) => Padding(
                         padding: const EdgeInsets.only(right: 10),
-                        child: FilterButton(text: e, isSelected: false),
+                        child: FilterButton(
+                          text: e,
+                          isSelected: viewModel.state.time == e,
+                          onTap: () {
+                            viewModel.filter(time: e);
+                          },
+                        ),
                       ),
                     )
                     .toList(),
@@ -47,7 +55,13 @@ class FilterSearch extends StatelessWidget {
                     .map(
                       (e) => Padding(
                         padding: const EdgeInsets.only(right: 8),
-                        child: RatingButton(text: '$e', isSelected: false),
+                        child: RatingButton(
+                          text: '$e',
+                          isSelected: viewModel.state.rate == e,
+                          onTap: () {
+                            viewModel.filter(rate: e);
+                          },
+                        ),
                       ),
                     )
                     .toList(),
@@ -61,7 +75,15 @@ class FilterSearch extends StatelessWidget {
             direction: Axis.horizontal,
             children:
                 _categories
-                    .map((e) => FilterButton(text: e, isSelected: false))
+                    .map(
+                      (e) => FilterButton(
+                        text: e,
+                        isSelected: viewModel.state.category == e,
+                        onTap: () {
+                          viewModel.filter(category: e);
+                        },
+                      ),
+                    )
                     .toList(),
           ),
           const SizedBox(height: 30),
