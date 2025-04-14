@@ -41,7 +41,7 @@ class RecipeCard extends StatelessWidget {
             bottom: 10,
             child: SizedBox(
               height: 60,
-              width: 200,
+              width: isBig ? 200 : 140,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -50,6 +50,8 @@ class RecipeCard extends StatelessWidget {
                     style: TextStyles.smallTextBold.copyWith(
                       color: ColorStyles.white,
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     'By ${recipe.chef}',
