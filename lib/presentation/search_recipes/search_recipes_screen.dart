@@ -99,7 +99,7 @@ class SearchRecipesScreen extends StatelessWidget {
                               ? 'Search Result' : 'Recent Search',
                           style: AppTextStyles.normalBold,
                         ),
-                        //오른쪽 텍스트
+                        //오른쪽
                         Text(
                           viewModel.state.searchKeyword.isNotEmpty
                               ? '${viewModel.state.filteredRecipes.length} result' : '',
