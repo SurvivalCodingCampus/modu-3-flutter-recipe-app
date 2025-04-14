@@ -35,7 +35,7 @@ class SavedRecipesScreen extends StatelessWidget {
 
             UiSuccess(data: final recipes) => ListView.separated(
               itemCount: recipes.length,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               itemBuilder: (context, index) {
                 final recipe = recipes[index];
                 return RecipeCard(
