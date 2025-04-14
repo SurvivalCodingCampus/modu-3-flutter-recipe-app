@@ -38,6 +38,7 @@ enum FilterCategory {
   british,
   italian,
   french,
+  korean,
 }
 
 extension FilterTimeLabel on FilterTime {
@@ -92,6 +93,8 @@ extension FilterCategoryLabel on FilterCategory {
         return 'Italian';
       case FilterCategory.french:
         return 'French';
+      case FilterCategory.korean:
+        return 'Korean';
     }
   }
 }
