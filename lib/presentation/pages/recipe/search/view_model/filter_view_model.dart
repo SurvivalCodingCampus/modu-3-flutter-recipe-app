@@ -1,7 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/presentation/pages/recipe/search/state/filter_state.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/view_model/search_view_model.dart';
 
 class FilterViewModel with ChangeNotifier {
+  final SearchViewModel searchViewModel;
+
+  FilterViewModel(this.searchViewModel);
+
   FilterState _state = const FilterState();
   FilterState get state => _state;
 
@@ -10,13 +15,12 @@ class FilterViewModel with ChangeNotifier {
     if (rate == _state.rate) {
       rate = 0;
     }
+    searchViewModel.filterData(
+      time: time ?? _state.time,
+      rate: rate ?? _state.rate,
+      category: category ?? _state.category,
+    );
     _state = state.copyWith(time: time, rate: rate, category: category);
     notifyListeners();
-  }
-
-  @override
-  void dispose() {
-    print('disposesd');
-    super.dispose();
   }
 }

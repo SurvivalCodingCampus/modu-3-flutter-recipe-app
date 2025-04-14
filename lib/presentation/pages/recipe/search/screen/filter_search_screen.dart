@@ -118,7 +118,6 @@ class FilterSearch extends StatelessWidget {
     'Fruit',
     'BreakFast',
     'Spanish',
-    'Chinese',
     'Lunch',
   ];
 }

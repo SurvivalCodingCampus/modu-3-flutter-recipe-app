@@ -5,11 +5,11 @@ import 'package:recipe_app/presentation/pages/recipe/search/screen/filter_search
 import 'package:recipe_app/presentation/pages/recipe/search/view_model/filter_view_model.dart';
 
 class FilterSearchButton extends StatelessWidget {
-  const FilterSearchButton({super.key});
+  final FilterViewModel filterViewModel;
+  const FilterSearchButton(this.filterViewModel, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = FilterViewModel();
     return InkWell(
       borderRadius: BorderRadius.circular(10),
       onTap: () {
@@ -19,7 +19,7 @@ class FilterSearchButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
           builder: (context) {
-            return FilterSearch(viewModel: viewModel);
+            return FilterSearch(viewModel: filterViewModel);
           },
         );
       },
