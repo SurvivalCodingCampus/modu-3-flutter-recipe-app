@@ -35,7 +35,6 @@ class _RecipeCardState extends State<RecipeCard> {
     return Stack(
       children: [
         Container(
-          height: 150,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -47,7 +46,6 @@ class _RecipeCardState extends State<RecipeCard> {
           ),
         ),
         Container(
-          height: 150,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: ColorStyles.black,
