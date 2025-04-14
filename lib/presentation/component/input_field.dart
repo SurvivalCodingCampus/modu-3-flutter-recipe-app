@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/app_image.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
@@ -28,7 +29,11 @@ class InputField extends StatefulWidget {
   static Widget searchIcon() {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 11),
-      child: Icon(Icons.search, color: ColorStyle.gray4, size: 20),
+      child: AppImage(
+        path: 'assets/images/icons/search_normal.png',
+        width: 20,
+        height: 20,
+      ),
     );
   }
 }
