@@ -88,13 +88,19 @@ class _RecipeCardState extends State<RecipeCard> {
           Positioned(
             left: 12,
             bottom: 15,
-            child: Text.rich(
-              TextSpan(
-                text: widget.recipe.title,
-                style: TextStyles2.menuIntroduceText,
+            child: SizedBox(
+              width: 200,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextSpan(
-                    text: 'By ${widget.recipe.chef}',
+                  Text(
+                    widget.recipe.title,
+                    style: TextStyles2.menuIntroduceText,
+                    maxLines: 2,
+                  ),
+                  SizedBox(height: 3),
+                  Text(
+                    'By ${widget.recipe.chef}',
                     style: TextStyles2.chefNameText,
                   ),
                 ],
