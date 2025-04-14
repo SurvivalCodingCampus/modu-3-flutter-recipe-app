@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+import 'package:recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
+import 'package:recipe_app/util/result.dart';
+import 'package:recipe_app/util/ui_state.dart';
+
+class SearchRecipesViewModel with ChangeNotifier {
+  final RecipeRepository _repository;
+  SearchRecipesState _state = const SearchRecipesState();
+
+  SearchRecipesState get state => _state;
+
+  SearchRecipesViewModel(this._repository) {
+    load();
+  }
+
+  Future<void> load() async {
+    _state = state.copyWith(recipes: const UiState.loading());
+    notifyListeners();
+
+    try {
+      final result = await _repository.getRecipes();
+
+      switch (result) {
+        case Success(data: final recipes):
+          _state = _state.copyWith(
+            recipes:
+                recipes.isEmpty
+                    ? const UiState.empty()
+                    : UiState.success(recipes),
+            filtered: recipes,
+          );
+          break;
+
+        case Error(failure: final failure):
+          _state = _state.copyWith(recipes: UiState.error(failure.message));
+          break;
+      }
+    } catch (e) {
+      _state = _state.copyWith(recipes: const UiState.error('예상치 못한 오류가 발생'));
+      debugPrint('load() failed: $e');
+    }
+
+    notifyListeners();
+  }
+
+  void updateQuery(String query) {
+    final current = _state.recipes;
+
+    if (current case UiSuccess(data: final recipes)) {
+      final filtered =
+          query.isEmpty
+              ? recipes
+              : recipes
+                  .where(
+                    (r) => r.name.toLowerCase().contains(query.toLowerCase()),
+                  )
+                  .toList();
+
+      _state = _state.copyWith(query: query, filtered: filtered);
+
+      notifyListeners();
+    }
+  }
+
+  void applyFilter(FilterSearchState filter) {
+    final current = _state.recipes;
+
+    if (current case UiSuccess(data: final allRecipes)) {
+      final isAllSelected = filter.categories.contains(FilterCategory.all);
+
+      final filtered =
+          allRecipes.where((recipe) {
+            final matchCategory =
+                filter.categories.isEmpty ||
+                isAllSelected ||
+                filter.categories.contains(FilterCategory.all) ||
+                filter.categories
+                    .map((e) => e.name.toLowerCase())
+                    .contains(recipe.category.toLowerCase());
+
+            /*
+            final matchRate =
+                filter.rate == null || recipe.rating >= filter.rate!; // rating 보다 높은 레시피 점색
+            */
+            final matchRate =
+                filter.rate == null ||
+                (recipe.rating >= filter.rate! &&
+                    recipe.rating < filter.rate! + 1); // rating 점수대 레시피 검색
+
+            return matchCategory && matchRate;
+          }).toList();
+
+      final cleanedFilter =
+          isAllSelected ? filter.copyWith(categories: []) : filter;
+
+      _state = _state.copyWith(
+        filtered: filtered,
+        filterSearchState: cleanedFilter,
+      );
+
+      notifyListeners();
+    }
+  }
+}
