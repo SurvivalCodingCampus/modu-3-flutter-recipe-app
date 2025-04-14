@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
+import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/domain/model/model.dart';
 import 'package:recipe_app/presentation/search/search_screen.dart';
+import 'package:recipe_app/presentation/search/search_view_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,16 +20,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       home: SearchScreen(
-        recipes: List.generate(
-          10,
-          (index) => Recipe(
-            id: '$index',
-            name: 'Traditional spare ribs baked',
-            imageUrl:
-                'https://cdn.pixabay.com/photo/2017/11/10/15/04/steak-2936531_1280.jpg',
-            chef: 'Chef John',
-            totalTimeMinutes: '20 min',
-            rating: 4.0,
+        viewModel: SearchViewModel(
+          repository: RecipeRepositoryImpl(
+            recipeDataSource: MockRecipeDataSourceImpl(),
           ),
         ),
       ),

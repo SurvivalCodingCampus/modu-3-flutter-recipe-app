@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:recipe_app/ui/ui.dart';
 
-class SearchTextField extends StatelessWidget {
+class SearchTextField extends StatefulWidget {
   final String placeholder;
   final Function(String value)? onValueChanged;
 
@@ -14,17 +14,37 @@ class SearchTextField extends StatelessWidget {
   });
 
   @override
+  State<SearchTextField> createState() => _SearchTextFieldState();
+}
+
+class _SearchTextFieldState extends State<SearchTextField> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       cursorColor: ColorStyles.gray1,
-      onChanged: onValueChanged,
+      onChanged: widget.onValueChanged,
+      onTap: () {
+        controller.clear();
+        if (widget.onValueChanged != null) {
+          widget.onValueChanged!('');
+        }
+      },
       decoration: InputDecoration(
         prefixIcon: Image.asset(
           'assets/icons/search.png',
           width: 18,
           height: 18,
         ),
-        hintText: placeholder,
+        hintText: widget.placeholder,
         hintStyle: TextStyles.smallTextRegular.copyWith(
           color: ColorStyles.gray4,
         ),
