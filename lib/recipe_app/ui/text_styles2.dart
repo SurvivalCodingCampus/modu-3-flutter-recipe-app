@@ -12,7 +12,7 @@ abstract class TextStyles2 {
   static TextStyle amountText = GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: ColorStyles2.amountColor,
+    color: ColorStyles2.gray3,
   );
   static TextStyle rateText = GoogleFonts.poppins(
     fontSize: 8,

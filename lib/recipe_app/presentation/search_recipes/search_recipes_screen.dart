@@ -14,20 +14,20 @@ class SearchRecipesScreen extends StatefulWidget {
 }
 
 class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
   late String keyword;
 
   @override
   void initState() {
     super.initState();
+    widget.searchRecipesViewModel.fetchRecipes();
     _searchController.addListener(() {
       final String keyword = _searchController.text;
       _isSearching = true;
       widget.searchRecipesViewModel.searchRecipes(keyword);
       _searchController.value = _searchController.value.copyWith(text: keyword);
     });
-    setState(() {});
   }
 
   @override
@@ -74,6 +74,14 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                             child: SizedBox(
                               height: 40,
                               child: TextField(
+                                onChanged: (keyword) {
+                                  setState(() {
+                                    _isSearching = true;
+                                    widget.searchRecipesViewModel.searchRecipes(
+                                      keyword,
+                                    );
+                                  });
+                                },
                                 controller: _searchController,
                                 textAlignVertical: TextAlignVertical.center,
                                 decoration: InputDecoration(
@@ -118,7 +126,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 ),
                               ),
                               child: Image.asset(
-                                '../assets/icons/filter.png',
+                                'assets/icons/filter.png',
                                 width: 20,
                                 height: 20,
                               ),
@@ -127,21 +135,36 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                         ],
                       ),
                       SizedBox(height: 15),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          _isSearching == false
-                              ? 'Recent Search'
-                              : 'Search Result',
-                          style: TextStyles2.normalText.copyWith(
-                            fontWeight: FontWeight.w400,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              _isSearching == false
+                                  ? 'Recent Search'
+                                  : 'Search Result',
+                              style: TextStyles2.normalText.copyWith(
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
                           ),
-                        ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              _isSearching == false
+                                  ? ''
+                                  : '${widget.searchRecipesViewModel.searchRecipesState.recipes.length} results',
+                              style: TextStyles2.smallerTextRegular.copyWith(
+                                color: ColorStyles2.gray3,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 15),
                       ListenableBuilder(
-                        listenable:
-                            widget.searchRecipesViewModel..fetchRecipes(),
+                        listenable: widget.searchRecipesViewModel,
                         builder: (context, child) {
                           final state =
                               widget.searchRecipesViewModel.searchRecipesState;
