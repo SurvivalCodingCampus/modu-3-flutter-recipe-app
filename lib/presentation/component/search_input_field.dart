@@ -23,38 +23,56 @@ class SearchInputField extends StatefulWidget {
 
 class _SearchInputFieldState extends State<SearchInputField> {
   bool get isFocused => widget.focusNode.hasFocus;
+
   bool get hasText => widget.controller.text.isNotEmpty;
   Color _textColor = ColorStyle.gray4;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.85, // 화면의 80%
+      //width: MediaQuery.of(context).size.width * 0.85, // 화면의 80%
+      //height: 60,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
+
+
             controller: widget.controller,
             focusNode: widget.focusNode,
             enableInteractiveSelection: false,
             onSubmitted: (value) {
               widget.onValueChange(value);
+              setState(() {
+                _textColor =
+                    value.isEmpty ? ColorStyle.gray4 : ColorStyle.black;
+              });
             },
             onTapOutside: (event) {
               widget.onValueChange(widget.controller.text);
             },
             onChanged: (value) {
               setState(() {
-                _textColor = value.isEmpty ? ColorStyle.gray4 : ColorStyle.black;
+                _textColor =
+                    value.isEmpty ? ColorStyle.gray4 : ColorStyle.black;
               });
             },
             decoration: InputDecoration(
               hintText: isFocused || hasText ? '' : 'Search recipe',
-              hintStyle: TextStyle(color: _textColor),
+              contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+              hintStyle: AppTextStyles.extraSmallRegular.copyWith(color: _textColor),
 
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: Padding(
+                padding: EdgeInsets.all(12),
+                child: Image.asset(
+                  'assets/icons/search-normal.png',
+                  width: 13,
+                  height: 13,
+                  fit: BoxFit.contain,
+                ),
+              ),
               prefixIconColor: ColorStyle.gray4,
-
+              //search-normal.png
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: ColorStyle.gray4, width: 1.5),
