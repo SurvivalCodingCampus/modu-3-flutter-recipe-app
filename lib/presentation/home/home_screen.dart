@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/ui/color_styles.dart';
 
 import '../../data/data_source/mock_recipe_data_source_impl.dart';
 import '../../data/repository/recipe_repository_impl.dart';
@@ -19,40 +20,52 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder:
                       (context) => SavedRecipesScreen(
-                        viewModel: SavedRecipesViewModel(
-                          recipeRepository: RecipeRepositoryImpl(
-                            recipeDataSource: MockRecipeDataSourceImpl(),
-                          ),
-                        ),
+                    viewModel: SavedRecipesViewModel(
+                      recipeRepository: RecipeRepositoryImpl(
+                        recipeDataSource: MockRecipeDataSourceImpl(),
                       ),
+                    ),
+                  ),
                 ),
               );
             },
-            child: Text('SavedRecipesScreen'),
+            child: Container(
+              width: double.infinity,
+              height: 100,
+              color: ColorStyles.primary80,
+              child: Center(child: Text('SavedRecipesScreen 가기')),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
+          SizedBox(height: 20,),
+          GestureDetector(
+            onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder:
                       (context) => SearchRecipesScreen(
-                        viewModel: SearchRecipesViewModel(
-                          recipeRepository: RecipeRepositoryImpl(
-                            recipeDataSource: MockRecipeDataSourceImpl(),
-                          ),
-                        )..fetchRecipes(),
+                    viewModel: SearchRecipesViewModel(
+                      recipeRepository: RecipeRepositoryImpl(
+                        recipeDataSource: MockRecipeDataSourceImpl(),
                       ),
+                    )..fetchRecipes(),
+                  ),
                 ),
               );
             },
-            child: Text('SearchRecipesScreen'),
+            child: Container(
+              width: double.infinity,
+              height: 100,
+              color: ColorStyles.primary80,
+              child: Center(child: Text('SearchRecipesScreen 가기')),
+            ),
           ),
         ],
       ),
