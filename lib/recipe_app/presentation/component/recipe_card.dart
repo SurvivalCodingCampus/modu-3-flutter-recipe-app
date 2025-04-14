@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/model/recipe.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+
+import '../../data/model/recipe.dart';
 
 class RecipeCard extends StatefulWidget {
   final Recipe recipe;

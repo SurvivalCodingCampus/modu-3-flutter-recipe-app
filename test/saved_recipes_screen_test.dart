@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/recipe_app/mock/mock_recipe_data_impl.dart';
+import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/recipe_app/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/recipe_app/data_source/mock/mock_recipe_data_impl.dart';
 import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
-import 'package:recipe_app/recipe_app/repository/recipe_repository.dart';
-import 'package:recipe_app/recipe_app/repository/recipe_repository_impl.dart';
 
 void main() {
   MockRecipeDataImpl mockRecipeDataImpl = MockRecipeDataImpl();
