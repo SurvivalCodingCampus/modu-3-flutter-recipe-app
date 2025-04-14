@@ -62,7 +62,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                         child: InputField(
                           labelTitle: '',
                           placeholderText: 'Search recipe',
-                          value: '',
+                          value: query,
                           onValueChange: widget.viewModel.updateQuery,
                           iconWidget: InputField.searchIcon(),
                           height: 40,
