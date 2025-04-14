@@ -84,6 +84,7 @@ class RecipeCard extends StatelessWidget {
               ),
               Expanded(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Flexible(
