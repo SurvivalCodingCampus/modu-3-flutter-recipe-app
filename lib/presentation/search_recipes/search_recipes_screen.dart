@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/buttons/box_icon_button.dart';
+import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/presentation/component/form/search_bar.dart';
 import 'package:recipe_app/presentation/component/search_recipe_card.dart';
+import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_sheet_state.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/ui.dart';
 
@@ -131,7 +133,23 @@ class SearchRecipesScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  BoxIconButton(onPressed: () {}, icon: Icons.settings),
+                  BoxIconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return FilterSearchBottomSheet(
+                            state: viewModel.state.bottomSheetFilter,
+                            onApply: (FilterSearchBottomSheetState state) {
+                              viewModel.setSearchFilter(state);
+                            },
+                          );
+                        },
+                      );
+                    },
+                    icon: Icons.tune,
+                  ),
                 ],
               ),
               ...children,
