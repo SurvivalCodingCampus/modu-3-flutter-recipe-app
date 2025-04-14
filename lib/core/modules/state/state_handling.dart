@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/core/enum/state_enum.dart';
 
 class StateHandling extends StatelessWidget {
-  final BaseState state;
+  final ViewState viewState;
   final Widget complete;
-  const StateHandling(this.state, {required this.complete, super.key});
+  const StateHandling(this.viewState, {required this.complete, super.key});
 
   @override
   Widget build(BuildContext context) {
-    switch (state) {
-      case BaseState.loading:
+    switch (viewState) {
+      case ViewState.loading:
         return const Center(child: CircularProgressIndicator());
-      case BaseState.error:
+      case ViewState.error:
         return const Center(child: Text('에러가 발생하였습니다.'));
-      case BaseState.moreLoading:
+      case ViewState.moreLoading:
         return const Center(child: CircularProgressIndicator());
-      case BaseState.complete:
+      case ViewState.complete:
         return complete;
     }
   }
