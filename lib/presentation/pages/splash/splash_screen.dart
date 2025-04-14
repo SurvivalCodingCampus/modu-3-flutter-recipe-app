@@ -4,7 +4,7 @@ import 'package:recipe_app/core/enum/buttom_enum.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
 import 'package:recipe_app/presentation/pages/base/base_screen.dart';
-import 'package:recipe_app/presentation/pages/home/home_screen.dart';
+import 'package:recipe_app/presentation/pages/recipe/home/home_screen.dart';
 import 'package:recipe_app/presentation/widgets/base/button/app_button.dart';
 
 class SplashScreen extends StatelessWidget {

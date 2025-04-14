@@ -77,7 +77,7 @@ class AppTextField extends StatelessWidget {
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
-        errorBorder: OutlineInputBorder(
+        errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red),
         ),
         contentPadding:
@@ -86,11 +86,15 @@ class AppTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: AppTextStyle.smallRegular,
         enabledBorder: OutlineInputBorder(
+          borderSide:
+              borderColor != null
+                  ? BorderSide(color: borderColor!)
+                  : const BorderSide(),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: AppColor.primary80),
+          borderSide: const BorderSide(color: AppColor.primary80),
         ),
         focusColor: Colors.black,
       ),

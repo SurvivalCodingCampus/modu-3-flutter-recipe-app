@@ -3,7 +3,7 @@ import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/feature/receipe/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/feature/receipe/domain/data_source/mock/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/presentation/pages/base/base_screen.dart';
-import 'package:recipe_app/presentation/pages/home/view_model/home_view_model.dart';
+import 'package:recipe_app/presentation/pages/recipe/home/home_view_model.dart';
 import 'package:recipe_app/presentation/widgets/recipe/recipe_card.dart';
 
 class HomeScreen extends StatelessWidget {
