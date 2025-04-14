@@ -2,18 +2,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/core/modules/exception/custom_exception.dart';
 import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
-import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository.dart';
-import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository_impl.dart';
-import 'package:recipe_app/feature/receipe/domain/data_source/home/mock/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/feature/receipe/domain/data_source/home/recipe_data_source.dart';
+import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository.dart';
+import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository_impl.dart';
+import 'package:recipe_app/feature/receipe/domain/data_source/search/mock/mock_search_recipe_data_source_impl.dart';
+import 'package:recipe_app/feature/receipe/domain/data_source/search/search_recipe_data_source.dart';
 import 'package:recipe_app/feature/receipe/domain/dto/recipe_dto.dart';
-import 'package:recipe_app/presentation/pages/recipe/home/home_view_model.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/view_model/search_view_model.dart';
 
 void main() {
   group('recipe test', () {
-    final RecipeDataSource dataSource = MockRecipeDataSourceImpl();
-    final RecipeRepository repository = RecipeRepositoryImpl(dataSource);
-    test('recipe mock data test', () async {
+    final SearchRecipeDataSource dataSource = MockSearchRecipeDataSourceImpl();
+    final SearchRecipeRepository repository = SearchRecipeRepositoryImpl(
+      dataSource,
+    );
+    test('search recipe mock data test', () async {
       final resp = await repository.getRecipes();
       switch (resp) {
         case Success<List<Recipe>>():
@@ -25,9 +27,19 @@ void main() {
       }
     });
 
-    test('recipe view model test', () async {
-      final HomeViewModel viewModel = HomeViewModel(repository)..fetchRecipes();
+    test('search recipe view model test', () async {
+      final SearchViewModel viewModel = SearchViewModel(repository)
+        ..fetchSearchData();
       expect(viewModel.state.data.isNotEmpty, equals(true));
+    });
+
+    test('search recipe view model functino test', () async {
+      final SearchViewModel viewModel = SearchViewModel(repository)
+        ..fetchSearchData();
+      final searchText = 'rice';
+
+      viewModel.searchData(searchText);
+      expect(viewModel.state.data.isNotEmpty, equals(mock));
     });
   });
 }
