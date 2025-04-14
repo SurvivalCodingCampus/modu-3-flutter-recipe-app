@@ -17,7 +17,7 @@ void main() {
           recipeName: 'test',
           recipeAuthor: 'Author',
           imagePath: testData["imagePath"],
-          recipeTime: 20,
+          recipeTime: '20min',
           recipeRate: 30,
           imageType: testData["imageType"],
         ),
