@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
 
-part 'filter_searrch_state.freezed.dart';
+part 'filter_search_state.freezed.dart';
 
 @freezed
 class FilterSearchState with _$FilterSearchState {

@@ -7,15 +7,15 @@ abstract class ButtonStyles2 {
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(10)),
-      side: BorderSide(color: ColorStyles2.rateButtonColor),
+      side: BorderSide(color: ColorStyles2.primary80),
     ),
   );
   static final ButtonStyle selectedButton = ElevatedButton.styleFrom(
-    backgroundColor: ColorStyles2.rateButtonColor,
+    backgroundColor: ColorStyles2.primary100,
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(10)),
-      side: BorderSide(color: ColorStyles2.rateButtonColor),
+      side: BorderSide(color: ColorStyles2.primary100),
     ),
   );
 

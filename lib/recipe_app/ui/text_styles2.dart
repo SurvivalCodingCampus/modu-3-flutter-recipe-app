@@ -36,7 +36,7 @@ abstract class TextStyles2 {
   static TextStyle starRateText = GoogleFonts.poppins(
     fontSize: 11,
     fontWeight: FontWeight.w500,
-    color: ColorStyles2.rateButtonColor,
+    color: ColorStyles2.primary80,
   );
   static TextStyle rateRecipeText = GoogleFonts.poppins(
     fontSize: 20,
@@ -57,5 +57,10 @@ abstract class TextStyles2 {
     fontSize: 11,
     fontWeight: FontWeight.w400,
     color: ColorStyles2.gray4,
+  );
+  static TextStyle smallerTextBold = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: Colors.black,
   );
 }

@@ -16,11 +16,17 @@ class _RatingButtonState extends State<RatingButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _ratingButtonWidget(5),
+        SizedBox(width: 5),
         _ratingButtonWidget(4),
+        SizedBox(width: 5),
         _ratingButtonWidget(3),
+        SizedBox(width: 5),
+        _ratingButtonWidget(2),
+        SizedBox(width: 5),
+        _ratingButtonWidget(1),
       ],
     );
   }
@@ -51,7 +57,7 @@ class _RatingButtonState extends State<RatingButton> {
           SizedBox(width: 6),
           Icon(
             Icons.star,
-            color: isSelected ? Colors.white : ColorStyles2.rateButtonColor,
+            color: isSelected ? Colors.white : ColorStyles2.primary80,
             size: 18,
           ),
         ],
