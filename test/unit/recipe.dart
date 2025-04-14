@@ -27,7 +27,7 @@ void main() {
 
     test('recipe mock data test', () async {
       final HomeViewModel viewModel = HomeViewModel(repository)..fetchRecipes();
-      expect(viewModel.recipes.isNotEmpty, equals(true));
+      expect(viewModel.state.data.isNotEmpty, equals(true));
     });
   });
 }
