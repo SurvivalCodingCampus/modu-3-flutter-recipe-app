@@ -29,7 +29,7 @@ class SavedRecipesScreen extends StatelessWidget {
         final state = viewModel.state;
 
         return Scaffold(
-          appBar: AppBar(title: const Text('Saved Recipes')),
+          appBar: AppBar(title: const Text('Saved recipes')),
           body: switch (state) {
             UiLoading() => const Center(child: CircularProgressIndicator()),
 
