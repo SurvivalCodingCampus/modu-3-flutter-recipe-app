@@ -6,6 +6,7 @@ class InputField extends StatefulWidget {
   final String labelTitle;
   final String placeholderText;
   final String value;
+  final Widget? iconWidget;
   final void Function(String)? onValueChange;
 
   const InputField({
@@ -14,6 +15,7 @@ class InputField extends StatefulWidget {
     required this.placeholderText,
     required this.value,
     this.onValueChange,
+    this.iconWidget,
   });
 
   @override
@@ -101,6 +103,7 @@ class _InputFieldState extends State<InputField> {
                   width: borderWidth,
                 ),
               ),
+              prefixIcon: widget.iconWidget,
             ),
           ),
         ),
