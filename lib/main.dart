@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/pages/recipe/home/home_screen.dart';
 import 'package:recipe_app/presentation/pages/recipe/search/search_screen.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: SearchScreen(),
+      home: HomeScreen(),
     );
   }
 }
