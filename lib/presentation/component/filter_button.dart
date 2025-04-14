@@ -5,9 +5,9 @@ import '../../ui/text_styles.dart';
 
 class FilterButton extends StatefulWidget {
   final List<String> text;
-  final VoidCallback? select;
+  final ValueChanged<List<String>>? onSelected;
 
-  const FilterButton({super.key, required this.text, this.select});
+  const FilterButton({super.key, required this.text, this.onSelected});
 
   @override
   State<FilterButton> createState() => _FilterButtonState();
@@ -26,7 +26,14 @@ class _FilterButtonState extends State<FilterButton> {
     setState(() {
       isSelectedList[index] = !isSelectedList[index];
     });
-    if (widget.select != null) widget.select!();
+
+    if (widget.onSelected != null) {
+      final selectedTexts = <String>[];
+      for (int i = 0; i < widget.text.length; i++) {
+        if (isSelectedList[i]) selectedTexts.add(widget.text[i]);
+      }
+      widget.onSelected!(selectedTexts);
+    }
   }
 
   @override

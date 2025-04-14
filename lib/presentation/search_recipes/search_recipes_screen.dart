@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/filter_small_button.dart';
-import 'package:recipe_app/presentation/component/rating_button.dart';
+import 'package:recipe_app/presentation/filter_screen/filter_screen_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
-import '../component/filter_button.dart';
-import '../component/pushed_button/small_tap_button.dart';
 import '../component/recipe_card.dart';
+import '../filter_screen/filter_screen.dart';
 
 class SearchRecipesScreen extends StatefulWidget {
+  final FilterScreenViewModel filterScreenViewModel;
   final SearchRecipesViewModel viewModel;
 
-  const SearchRecipesScreen({super.key, required this.viewModel});
+  const SearchRecipesScreen({
+    super.key,
+    required this.viewModel,
+    required this.filterScreenViewModel,
+  });
 
   @override
   State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
@@ -39,11 +43,13 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
           if (state.recipes.isEmpty) {
             return Center(child: Text('No recipes found.'));
           }
+
           return SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // 검색창 + 필터 버튼
                 Row(
                   children: [
                     Expanded(
@@ -86,149 +92,30 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       ),
                     ),
                     SizedBox(width: 12),
-                    GestureDetector(
+                    FilterSmallButton(
                       onTap: () {
-                        widget.viewModel.fetchSearchRecipes();
-                      },
-                      child: FilterSmallButton(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(50),
-                              ),
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(50),
                             ),
-                            builder: (context) {
-                              return Container(
-                                height: 450,
-                                width: double.infinity,
-                                padding: EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: ColorStyles.white,
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(50),
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                      child: Text(
-                                        'Filter Search',
-                                        style: TextStyles.smallBold.copyWith(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 16),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 10,
-                                            right: 30,
-                                            bottom: 10,
-                                          ),
-                                          child: Text(
-                                            'Time',
-                                            style: TextStyles.smallBold
-                                                .copyWith(fontSize: 14),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 10,
-                                            right: 10,
-                                          ),
-                                          child: FilterButton(
-                                            text: [
-                                              'All',
-                                              'Newest',
-                                              'Oldest',
-                                              'Popularity',
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 10,
-                                            right: 30,
-                                            bottom: 10,
-                                            top: 10,
-                                          ),
-                                          child: Text(
-                                            'Rate',
-                                            style: TextStyles.smallBold
-                                                .copyWith(fontSize: 14),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 10,
-                                            right: 10,
-                                          ),
-                                          child: RatingButton(rate: 5),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 10,
-                                            right: 30,
-                                            bottom: 10,
-                                            top: 10,
-                                          ),
-                                          child: Text(
-                                            'Category',
-                                            style: TextStyles.smallBold
-                                                .copyWith(fontSize: 14),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 10,
-                                            right: 10,
-                                          ),
-                                          child: FilterButton(
-                                            text: [
-                                              'All',
-                                              'Cereal',
-                                              'Vegetables',
-                                              'Dinner',
-                                              'Breakfast',
-                                              'Chinese',
-                                              'Local Dish',
-                                              'Fruit',
-                                              'Spanish',
-                                              'Lunch',
-                                              'Korean',
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Center(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          top: 30,
-                                          bottom: 10,
-                                        ),
-                                        child: SmallTapButton(text: 'Filter'),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
+                          ),
+                          builder: (context) {
+                            return FilterScreen(
+                              viewModel: widget.filterScreenViewModel,
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
+
                 SizedBox(height: 16),
+
+                // 제목과 결과 수
                 Row(
                   children: [
                     Text(
@@ -237,7 +124,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                           : 'Recent Search',
                       style: TextStyles.normalBold.copyWith(fontSize: 16),
                     ),
-                    SizedBox(width: 190),
+                    Spacer(),
                     Text(
                       widget.viewModel.state.keyword.isNotEmpty
                           ? '${state.filteredRecipes.length} results'
@@ -249,7 +136,10 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                     ),
                   ],
                 ),
+
                 SizedBox(height: 16),
+
+                // 레시피 카드 목록
                 GridView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
