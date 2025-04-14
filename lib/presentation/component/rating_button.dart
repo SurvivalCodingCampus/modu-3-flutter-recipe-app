@@ -21,10 +21,10 @@ class RatingButton extends StatelessWidget {
         height: 28,
         decoration: BoxDecoration(
           color: isSelected == true
-              ? ColorStyles.primary80
+              ? ColorStyles.primary100
               : ColorStyles.white,
           border: Border.all(
-            color: ColorStyles.primary80,
+            color: ColorStyles.primary100,
             width: 1.5,
           ),
           borderRadius: BorderRadius.circular(10)
@@ -38,13 +38,13 @@ class RatingButton extends StatelessWidget {
                 color:
                     isSelected == true
                         ? ColorStyles.white
-                        : ColorStyles.primary80,
+                        : ColorStyles.primary100,
               ),
             ),
             SizedBox(width: 5,),
             Icon(
               Icons.star,
-              color: isSelected == true ? ColorStyles.white : ColorStyles.primary80,
+              color: isSelected == true ? ColorStyles.white : ColorStyles.primary100,
               size: 18,
             ),
           ],
