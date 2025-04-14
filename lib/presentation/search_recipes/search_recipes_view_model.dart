@@ -81,6 +81,8 @@ class SearchRecipesViewModel with ChangeNotifier {
       rateFilter: rateFilter,
       categoryFilter: categoryFilter,
     );
+    notifyListeners();
+    searchRecipes();
   }
 
   void updateSearchString(String value) async {
