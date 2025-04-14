@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/modules/state/state_handling.dart';
 import 'package:recipe_app/core/style/app_color.dart';
-import 'package:recipe_app/feature/receipe/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository_impl.dart';
 import 'package:recipe_app/feature/receipe/domain/data_source/home/mock/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/presentation/pages/base/base_screen.dart';
 import 'package:recipe_app/presentation/pages/recipe/home/home_view_model.dart';
