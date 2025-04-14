@@ -46,3 +46,6 @@ app.*.map.json
 
 # Ignore screenshots
 /assets/images/*.png
+
+# Ignore Screen Record
+/assets/record/*.gif
