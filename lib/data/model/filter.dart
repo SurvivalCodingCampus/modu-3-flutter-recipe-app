@@ -9,9 +9,9 @@ part 'filter.g.dart';
 @freezed
 abstract class Filter with _$Filter {
   const factory Filter({
-    @Default(Time.all) final Time time,
-    @Default(Rate.star1) final Rate rate,
-    @JsonKey() @Default(Categories.all) final Categories category,
+    @Default([]) final List<Time> times,
+    @Default([]) final List<Rate?> rates,
+    @Default([]) final List<Categories> categories,
   }) = _Filter;
 
   factory Filter.fromJson(Map<String, dynamic> json) => _$FilterFromJson(json);
