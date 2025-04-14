@@ -57,7 +57,11 @@ class SearchRecipesViewModel with ChangeNotifier {
           }
           return false;
         }).toList();
-    _state = _state.copyWith(recipeList: filterdRecipes, isLoading: false);
+    _state = _state.copyWith(
+      recipeList: filterdRecipes,
+      isLoading: false,
+      isSearched: true,
+    );
     notifyListeners();
   }
 
