@@ -11,7 +11,7 @@ extension RecipeMapper on RecipeDto {
       id: (id ?? 0).toInt(),
       category: CategoryFilter.values.firstWhere(
         (e) => e.name == category,
-        orElse: () => CategoryFilter.Unknown,
+        orElse: () => CategoryFilter.All,
       ),
       name: name ?? '',
       time: time ?? '',
