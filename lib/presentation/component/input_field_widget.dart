@@ -35,6 +35,7 @@ class InputFieldWidget extends StatelessWidget {
           onChanged: (text) => onValueChange(text),
           decoration: InputDecoration(
             hintText: placeHolder,
+            hintStyle: TextStyles.smallRegular(color: ColorStyles.gray4),
             prefixIcon: icon,
             contentPadding: const EdgeInsets.symmetric(
                 vertical: 12, horizontal: 20),
