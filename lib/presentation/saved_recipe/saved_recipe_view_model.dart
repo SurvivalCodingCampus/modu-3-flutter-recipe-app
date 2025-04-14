@@ -3,10 +3,10 @@ import 'package:recipe_app/data/repository/recipe_repository.dart';
 
 import '../../data/model/recipes.dart';
 
-class RecipeViewModel with ChangeNotifier {
+class SavedRecipeViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
 
-  RecipeViewModel(this._recipeRepository);
+  SavedRecipeViewModel(this._recipeRepository);
 
   List<Recipes> _recipes = List.unmodifiable([]);
   bool _isLoading = false;

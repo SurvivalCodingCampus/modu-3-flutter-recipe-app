@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/data/data_source/recipe/recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
-import 'package:recipe_app/presentation/saved_recipe/recipe_view_model.dart';
+import 'package:recipe_app/presentation/saved_recipe/saved_recipe_view_model.dart';
 
 import '../../ui/text.dart';
 import '../saved_recipe/saved_recipe_screen.dart';
@@ -11,7 +11,7 @@ import '../saved_recipe/saved_recipe_screen.dart';
 void main() {
   final dt = RecipeDataSourceImpl();
   final rp = RecipeRepositoryImpl(dt);
-  final viewModel = RecipeViewModel(rp);
+  final viewModel = SavedRecipeViewModel(rp);
 
   runApp(
     MaterialApp(
@@ -25,7 +25,7 @@ void main() {
 
 
 class SplashScreen extends StatelessWidget {
-  final RecipeViewModel viewModel;
+  final SavedRecipeViewModel viewModel;
 
   const SplashScreen({super.key, required this.viewModel});
 
