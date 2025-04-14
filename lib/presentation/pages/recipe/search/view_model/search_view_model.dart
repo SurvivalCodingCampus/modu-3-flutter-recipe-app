@@ -16,11 +16,13 @@ class SearchViewModel with ChangeNotifier {
   void fetchSearchData() async {
     try {
       _state = state.copyWith(viewState: ViewState.loading);
+      notifyListeners();
       final response = await _searchRepository.getRecipes();
       switch (response) {
         case Success<List<Recipe>>():
           _state = state.copyWith(
             data: response.data,
+            originalData: response.data,
             viewState: ViewState.complete,
           );
         case Error<List<Recipe>>():

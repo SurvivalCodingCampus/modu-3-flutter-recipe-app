@@ -5,13 +5,26 @@ import 'package:recipe_app/core/style/app_textstyle.dart';
 import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository_impl.dart';
 import 'package:recipe_app/feature/receipe/domain/data_source/search/mock/mock_search_recipe_data_source_impl.dart';
 import 'package:recipe_app/presentation/pages/base/base_screen.dart';
-import 'package:recipe_app/presentation/pages/recipe/search/search_view_model.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/view_model/search_view_model.dart';
 import 'package:recipe_app/presentation/widgets/base/textfield/app_textfield.dart';
 import 'package:recipe_app/presentation/widgets/recipe/filter_search_button.dart';
 import 'package:recipe_app/presentation/widgets/recipe/recipe_card.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +40,11 @@ class SearchScreen extends StatelessWidget {
       child: ListenableBuilder(
         listenable: viewModel..fetchSearchData(),
         builder: (context, child) {
-          final viewState = viewModel.state.viewState;
-          final recipes = viewModel.state.data;
+          final state = viewModel.state;
+          final viewState = state.viewState;
+          final recipes = state.data;
+          final isFiltered = state.isFiltered;
+
           return StateHandling(
             viewState,
             complete: Padding(
@@ -45,6 +61,7 @@ class SearchScreen extends StatelessWidget {
                             Icons.search,
                             color: AppColor.grey4,
                           ),
+                          onChanged: (val) {},
                           borderColor: AppColor.grey4,
                           textColor: AppColor.grey4,
                           contentPadding: const EdgeInsets.all(8),
@@ -61,13 +78,17 @@ class SearchScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Recent Search', style: AppTextStyle.normalBold),
                         Text(
-                          '255 results',
-                          style: AppTextStyle.smallerRegular.copyWith(
-                            color: AppColor.grey3,
-                          ),
+                          isFiltered ? 'Search Result' : 'Recent Search',
+                          style: AppTextStyle.normalBold,
                         ),
+                        if (isFiltered)
+                          Text(
+                            '${recipes.length} results',
+                            style: AppTextStyle.smallerRegular.copyWith(
+                              color: AppColor.grey3,
+                            ),
+                          ),
                       ],
                     ),
                   ),
