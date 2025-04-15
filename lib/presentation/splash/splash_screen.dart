@@ -334,7 +334,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: MediumButton(
                 title: 'Start Cooking',
                 onTap: () {
-                  context.go(Routes.devHome);
+                  context.go(Routes.login);
                 },
               ),
             ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
 import 'package:recipe_app/presentation/component/custom_button.dart';
@@ -186,7 +188,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 25),
                 BigButton(
                   title: isSignUp ? 'Sign Up' : 'Sign In',
-                  onTap: () {},
+                  onTap: () {
+                    context.go(Routes.devHome);
+                  },
                 ),
 
                 const SizedBox(height: 32),

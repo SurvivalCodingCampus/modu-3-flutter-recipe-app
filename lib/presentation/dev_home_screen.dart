@@ -31,12 +31,6 @@ class DevHomeScreen extends StatelessWidget {
               title: '위젯 컴포넌트 프리뷰',
               onTap: () => context.push(Routes.devComponents),
             ),
-            const SizedBox(height: 16),
-            _buildMenuButton(
-              context,
-              title: '로그인 화면',
-              onTap: () => context.push(Routes.login),
-            ),
           ],
         ),
       ),
