@@ -65,7 +65,12 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 25),
-                BigButton(text: 'Sign In', onPressed: () {}),
+                BigButton(
+                  text: 'Sign In',
+                  onPressed: () {
+                    context.go(Routes.home);
+                  },
+                ),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
