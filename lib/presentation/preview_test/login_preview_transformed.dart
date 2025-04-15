@@ -10,6 +10,7 @@ void main() => runApp(const LoginApp());
 
 class LoginApp extends StatelessWidget {
   const LoginApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -21,12 +22,14 @@ class LoginApp extends StatelessWidget {
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
   bool isSignUp = false;
+  bool isSignUpDisplayed = false; // 화면에 보여지는 상태
   bool showName = false;
   bool showConfirm = false;
   bool showTerms = false;
@@ -38,18 +41,30 @@ class _LoginPageState extends State<LoginPage> {
         isSignUp = true;
         showLoginTitle = false;
       });
+
       await Future.delayed(const Duration(milliseconds: 100));
       setState(() => showName = true);
+
       await Future.delayed(const Duration(milliseconds: 100));
-      setState(() => showConfirm = true);
+      setState(() {
+        showConfirm = true;
+        isSignUpDisplayed = true; // ← 여기를 confirm과 함께 조기 적용
+      });
+
       await Future.delayed(const Duration(milliseconds: 100));
       setState(() => showTerms = true);
     } else {
-      setState(() => showTerms = false);
+      setState(() {
+        showTerms = false;
+        isSignUpDisplayed = false;
+      });
+
       await Future.delayed(const Duration(milliseconds: 100));
       setState(() => showConfirm = false);
+
       await Future.delayed(const Duration(milliseconds: 100));
       setState(() => showName = false);
+
       await Future.delayed(const Duration(milliseconds: 100));
       setState(() {
         isSignUp = false;
@@ -69,45 +84,37 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 60),
-              Stack(
-                children: [
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 300),
-                    opacity: showLoginTitle ? 1 : 0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Hello,', style: AppTextStyles.headerBold()),
-                        Text(
-                          'Welcome Back!',
-                          style: AppTextStyles.largeRegular(
-                            color: ColorStyle.labelColour,
-                          ),
-                        ),
-                      ],
+              AnimatedCrossFade(
+                duration: const Duration(milliseconds: 100),
+                crossFadeState:
+                    isSignUpDisplayed
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
+                firstChild: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Hello,', style: AppTextStyles.headerBold()),
+                    Text(
+                      'Welcome Back!',
+                      style: AppTextStyles.largeRegular(
+                        color: ColorStyle.labelColour,
+                      ),
                     ),
-                  ),
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 300),
-                    opacity: isSignUp ? 1 : 0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Create Account',
-                          style: AppTextStyles.largeBold(),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Let’s help you set up your account,\nit won’t take long.',
-                          style: AppTextStyles.smallRegular(
-                            color: ColorStyle.labelColour,
-                          ),
-                        ),
-                      ],
+                  ],
+                ),
+                secondChild: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Create Account', style: AppTextStyles.largeBold()),
+                    const SizedBox(height: 5),
+                    Text(
+                      'Let’s help you set up your account,\nit won’t take long.',
+                      style: AppTextStyles.smallRegular(
+                        color: ColorStyle.labelColour,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
 
               const SizedBox(height: 40),
@@ -134,16 +141,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               const SizedBox(height: 12),
-              if (!isSignUp)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'Forgot Password?',
-                    style: AppTextStyles.smallRegular(
-                      color: ColorStyle.secondary100,
-                    ),
-                  ),
-                ),
 
               if (showConfirm) ...[
                 const SizedBox(height: 20),
@@ -155,8 +152,20 @@ class _LoginPageState extends State<LoginPage> {
               ],
 
               const SizedBox(height: 16),
-              if (showTerms)
-                Row(
+              // if (showTerms)
+              AnimatedCrossFade(
+                duration: const Duration(milliseconds: 100),
+                crossFadeState:
+                    isSignUpDisplayed
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
+                firstChild: Text(
+                  'Forgot Password?',
+                  style: AppTextStyles.smallRegular(
+                    color: ColorStyle.secondary100,
+                  ),
+                ),
+                secondChild: Row(
                   children: [
                     Checkbox(
                       value: true,
@@ -171,6 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
+              ),
 
               const SizedBox(height: 32),
               BigButton(title: isSignUp ? 'Sign Up' : 'Sign In', onTap: () {}),
