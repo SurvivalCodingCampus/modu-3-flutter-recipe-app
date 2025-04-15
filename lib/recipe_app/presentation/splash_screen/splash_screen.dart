@@ -39,8 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 150,
-                    horizontal: 40,
+                    vertical: 100,
+                    horizontal: 30,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,11 +76,14 @@ class _SplashScreenState extends State<SplashScreen> {
                                 fontSize: 50,
                               ),
                             ),
-                            Text(
-                              'Simple way to find Tasty Recipe',
-                              style: TextStyles2.splashScreenText.copyWith(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Simple way to find Tasty Recipe',
+                                style: TextStyles2.splashScreenText.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                ),
                               ),
                             ),
                             SizedBox(height: 50),

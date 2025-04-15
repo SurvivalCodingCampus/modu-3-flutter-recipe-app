@@ -9,6 +9,11 @@ abstract class TextStyles2 {
     fontWeight: FontWeight.bold,
     color: ColorStyles2.titleBlackColor,
   );
+  static TextStyle normalTextBold = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
   static TextStyle amountText = GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w400,
@@ -58,6 +63,11 @@ abstract class TextStyles2 {
     fontWeight: FontWeight.w400,
     color: ColorStyles2.gray4,
   );
+  static TextStyle largeTextRegular = GoogleFonts.poppins(
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: ColorStyles2.titleBlackColor,
+  );
   static TextStyle smallerTextBold = GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w600,
@@ -67,5 +77,15 @@ abstract class TextStyles2 {
     fontSize: 11,
     fontWeight: FontWeight.w500,
     color: Colors.white,
+  );
+  static TextStyle headerTextBold = GoogleFonts.poppins(
+    fontSize: 30,
+    fontWeight: FontWeight.w600,
+    color: Colors.black,
+  );
+  static TextStyle smallTextRegular = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: ColorStyles2.titleBlackColor,
   );
 }
