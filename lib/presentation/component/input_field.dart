@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/image_component/app_image.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
@@ -6,6 +7,9 @@ class InputField extends StatefulWidget {
   final String labelTitle;
   final String placeholderText;
   final String value;
+  final Widget? iconWidget;
+  final double? height;
+  final double? inputHorizontalPadding;
   final void Function(String)? onValueChange;
 
   const InputField({
@@ -14,10 +18,17 @@ class InputField extends StatefulWidget {
     required this.placeholderText,
     required this.value,
     this.onValueChange,
+    this.iconWidget,
+    this.height = 55,
+    this.inputHorizontalPadding = 20,
   });
 
   @override
   State<InputField> createState() => _InputFieldState();
+
+  static Widget searchIcon() {
+    return const AppImage(path: 'assets/images/icons/search_normal.png');
+  }
 }
 
 class _InputFieldState extends State<InputField> {
@@ -50,23 +61,22 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     const double borderRadius = 10.0;
     const double borderWidth = 1.5;
-    const double fieldHeight = 55.0;
-    const double verticalPadding = 20.0;
-    const double horizontalPadding = 20.0;
     const double labelSpacing = 8.0;
 
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            widget.labelTitle,
-            style: AppTextStyles.smallRegular(color: ColorStyle.labelColour),
+        if (widget.labelTitle.isNotEmpty) ...[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              widget.labelTitle,
+              style: AppTextStyles.smallRegular(color: ColorStyle.labelColour),
+            ),
           ),
-        ),
-        const SizedBox(height: labelSpacing),
+          const SizedBox(height: labelSpacing),
+        ],
         SizedBox(
-          height: fieldHeight,
+          height: widget.height,
           child: TextField(
             controller: _controller,
             onChanged: widget.onValueChange,
@@ -76,9 +86,8 @@ class _InputFieldState extends State<InputField> {
               hintStyle: AppTextStyles.smallRegular(color: ColorStyle.gray4),
               filled: true,
               fillColor: ColorStyle.white,
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: verticalPadding,
-                horizontal: horizontalPadding,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: widget.inputHorizontalPadding ?? 0,
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
@@ -100,6 +109,21 @@ class _InputFieldState extends State<InputField> {
                   color: ColorStyle.gray4,
                   width: borderWidth,
                 ),
+              ),
+              prefixIcon:
+                  widget.iconWidget != null
+                      ? Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: widget.iconWidget,
+                        ),
+                      )
+                      : null,
+              prefixIconConstraints: const BoxConstraints(
+                minHeight: 20,
+                minWidth: 40,
               ),
             ),
           ),

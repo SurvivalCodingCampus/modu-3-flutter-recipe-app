@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/custom_button.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
-import 'package:recipe_app/presentation/component/social_login_section.dart';
+import 'package:recipe_app/presentation/component/login_component/social_login_section.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
