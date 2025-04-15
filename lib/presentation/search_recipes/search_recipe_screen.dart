@@ -73,7 +73,17 @@ class _SearchRecipeScreenState extends State<SearchRecipeScreen> {
                     height: 10,
                   ),
                   Expanded(
-                    child: GridView.builder(
+                    child : recipeList.isEmpty
+                      ? Center(
+                        child: Text(
+                          '검색 결과가 없습니다',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      )
+                      : GridView.builder(
                       itemCount: recipeList.length,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
@@ -85,10 +95,6 @@ class _SearchRecipeScreenState extends State<SearchRecipeScreen> {
                         final recipe = recipeList[index];
                         return SearchRecipeCard(recipe: recipe);
                       },
-                      // emptyBuilder: () => Center(
-                      //   child: Text('검색 결과가 없습니다.',
-                      //   style: Theme.of(context).textTheme.bodyLarge),
-                      // )
                     ),
                   ),
                 ],
