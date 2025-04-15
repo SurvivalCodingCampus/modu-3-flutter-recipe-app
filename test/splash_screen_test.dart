@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/recipe_app/data_source/mock/mock_recipe_data_impl.dart';
+import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/splash_screen/splash_screen.dart';
 
 void main() {
@@ -10,9 +11,20 @@ void main() {
   RecipeRepository repository = RecipeRepositoryImpl(
     recipeDataSource: mockRecipeDataImpl,
   );
+  FilterSearchViewModel filterSearchViewModel = FilterSearchViewModel(
+    repository,
+  );
+
   testWidgets('SplashScreen Check Test', (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(home: Scaffold(body: SplashScreen(repository: repository))),
+      MaterialApp(
+        home: Scaffold(
+          body: SplashScreen(
+            repository: repository,
+            filterSearchViewModel: filterSearchViewModel,
+          ),
+        ),
+      ),
     );
     //스플래시 화면이 표시되는지 확인
     expect(find.byType(SplashScreen), findsOneWidget);

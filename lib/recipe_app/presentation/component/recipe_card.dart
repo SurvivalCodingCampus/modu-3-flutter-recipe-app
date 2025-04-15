@@ -6,8 +6,13 @@ import '../../data/model/recipe.dart';
 
 class RecipeCard extends StatefulWidget {
   final Recipe recipe;
+  final bool showTimerAndBookmark;
 
-  const RecipeCard({super.key, required this.recipe});
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.showTimerAndBookmark,
+  });
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -51,7 +56,7 @@ class _RecipeCardState extends State<RecipeCard> {
             ),
           ),
           Positioned(
-            right: 12,
+            right: 6,
             top: 10,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 7),
@@ -59,7 +64,7 @@ class _RecipeCardState extends State<RecipeCard> {
                 width: 37,
                 height: 16,
                 decoration: BoxDecoration(
-                  color: ColorStyles2.starRateContainerColor,
+                  color: ColorStyles2.secondary20,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
@@ -67,11 +72,7 @@ class _RecipeCardState extends State<RecipeCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.star,
-                        color: ColorStyles2.starColor,
-                        size: 7.5,
-                      ),
+                      Icon(Icons.star, color: ColorStyles2.rating, size: 7.5),
                       SizedBox(width: 2),
                       Text(
                         widget.recipe.rate.toStringAsFixed(1),
@@ -88,64 +89,72 @@ class _RecipeCardState extends State<RecipeCard> {
           Positioned(
             left: 12,
             bottom: 15,
-            child: SizedBox(
-              width: 200,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.recipe.title,
-                    style: TextStyles2.menuIntroduceText,
-                    maxLines: 2,
-                  ),
-                  SizedBox(height: 3),
-                  Text(
-                    'By ${widget.recipe.chef}',
-                    style: TextStyles2.chefNameText,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            right: 12,
-            bottom: 10,
-            child: Row(
+            right: widget.showTimerAndBookmark ? 180 : 70,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.timer_outlined,
-                  color: ColorStyles2.chefName,
-                  size: 17,
+                Text(
+                  widget.recipe.title,
+                  style:
+                      widget.showTimerAndBookmark
+                          ? TextStyles2.menuIntroduceText
+                          : TextStyles2.menuIntroduceText.copyWith(
+                            fontSize: 11,
+                          ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(width: 3),
-                Text.rich(
-                  TextSpan(
-                    text: widget.recipe.minutes.toString(),
-                    style: TextStyles2.cookingTimeText,
-                    children: [
-                      TextSpan(
-                        text: ' min',
-                        style: TextStyles2.cookingTimeText,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(width: 8),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  width: 24,
-                  height: 24,
-                  child: Icon(
-                    _bookMark ? Icons.bookmark : Icons.bookmark_border,
-                    size: 16,
-                  ),
+                SizedBox(height: 3),
+                Text(
+                  'By ${widget.recipe.chef}',
+                  style:
+                      widget.showTimerAndBookmark
+                          ? TextStyles2.chefNameText
+                          : TextStyles2.chefNameText.copyWith(fontSize: 8),
                 ),
               ],
             ),
           ),
+          if (widget.showTimerAndBookmark)
+            Positioned(
+              right: 12,
+              bottom: 10,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.timer_outlined,
+                    color: ColorStyles2.chefName,
+                    size: 17,
+                  ),
+                  SizedBox(width: 3),
+                  Text.rich(
+                    TextSpan(
+                      text: widget.recipe.minutes.toString(),
+                      style: TextStyles2.cookingTimeText,
+                      children: [
+                        TextSpan(
+                          text: ' min',
+                          style: TextStyles2.cookingTimeText,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    width: 24,
+                    height: 24,
+                    child: Icon(
+                      _bookMark ? Icons.bookmark : Icons.bookmark_border,
+                      size: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );

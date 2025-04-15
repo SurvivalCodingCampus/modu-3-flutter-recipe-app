@@ -16,6 +16,12 @@ class SavedRecipesScreen extends StatelessWidget {
         title: Text('Saved recipes', style: TextStyles2.savedRecipesText),
         centerTitle: true,
         backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
@@ -30,7 +36,10 @@ class SavedRecipesScreen extends StatelessWidget {
             }
             return ListView.separated(
               itemBuilder: (context, index) {
-                return RecipeCard(recipe: savedRecipesViewModel.recipes[index]);
+                return RecipeCard(
+                  recipe: savedRecipesViewModel.recipes[index],
+                  showTimerAndBookmark: true,
+                );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 20),
               itemCount: savedRecipesViewModel.recipes.length,
