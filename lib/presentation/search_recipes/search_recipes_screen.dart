@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/filter_search.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
@@ -50,6 +51,18 @@ class SearchRecipesScreen extends StatelessWidget {
                     );
                   },
                   child: Text('show Dialog'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push('/');
+                  },
+                  child: Text('push'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.go('/');
+                  },
+                  child: Text('go'),
                 ),
               ],
             ),
