@@ -36,7 +36,7 @@ class _SelectButtonState extends State<SelectButton> {
       },
       child: Container(
         height: 28,
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: isSelected ? ColorStyles.primary100 : ColorStyles.white,
           border: Border.all(color: ColorStyles.primary100),
@@ -60,7 +60,7 @@ class _SelectButtonState extends State<SelectButton> {
                   color: isSelected ? ColorStyles.white : ColorStyles.primary80,
                   size: 18,
                 )
-                : SizedBox(width: 0),
+                : const SizedBox(width: 0),
           ],
         ),
       ),

@@ -2,33 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
-class RecipeCard extends StatefulWidget {
-  static const String _timerIcon = "assets/icons/timer.png";
-  static const String _bookmarkIcon = "assets/icons/bookmark.png";
-
+class SearchRecipeCard extends StatelessWidget {
   final String imagePath;
   final String author;
   final String title;
   final int rating;
-  final int cookTime;
-  final VoidCallback onBookmark;
 
-  const RecipeCard({
+  const SearchRecipeCard({
     super.key,
     required this.imagePath,
     required this.author,
     required this.title,
-    required this.cookTime,
     required this.rating,
-    required this.onBookmark,
   });
-
-  @override
-  State<RecipeCard> createState() => _RecipeCardState();
-}
-
-class _RecipeCardState extends State<RecipeCard> {
-  bool isBookmarked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +24,7 @@ class _RecipeCardState extends State<RecipeCard> {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(widget.imagePath),
+              image: NetworkImage(imagePath),
               fit: BoxFit.cover,
             ),
             color: Colors.white,
@@ -63,8 +49,6 @@ class _RecipeCardState extends State<RecipeCard> {
         _buildRating(),
         _buildTitle(),
         _buildAuthor(),
-        _buildCookTime(),
-        _buildBookMarkButton(),
       ],
     );
   }
@@ -84,7 +68,7 @@ class _RecipeCardState extends State<RecipeCard> {
           children: [
             const Icon(Icons.star, color: ColorStyles.rating, size: 16),
             Text(
-              '${widget.rating.toDouble()}',
+              '${rating.toDouble()}',
               style: TextStyles.smallTextRegular.copyWith(
                 color: ColorStyles.black,
               ),
@@ -101,7 +85,7 @@ class _RecipeCardState extends State<RecipeCard> {
       width: 170,
       bottom: 22,
       child: Text(
-        widget.title,
+        title,
         style: TextStyles.smallTextBold.copyWith(color: ColorStyles.white),
       ),
     );
@@ -112,58 +96,9 @@ class _RecipeCardState extends State<RecipeCard> {
       left: 10,
       bottom: 10,
       child: Text(
-        'By ${widget.author}',
+        'By $author',
         style: TextStyles.labelTextBold.copyWith(color: ColorStyles.white),
       ),
     );
   }
-
-  Widget _buildCookTime() {
-    return Positioned(
-      right: 44,
-      bottom: 10,
-      child: Row(
-        spacing: 5,
-        children: [
-          SizedBox(
-            width: 17,
-            height: 17,
-            child: Image.asset(RecipeCard._timerIcon, color: ColorStyles.gray4),
-          ),
-          Text(
-            '${widget.cookTime} min',
-            style: TextStyles.smallTextRegular.copyWith(
-              color: ColorStyles.gray4,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBookMarkButton() => Positioned(
-    right: 10,
-    bottom: 10,
-    child: GestureDetector(
-      key: const Key('bookmark_button'),
-      onTap: () {
-        setState(() {
-          isBookmarked = !isBookmarked;
-          widget.onBookmark();
-        });
-      },
-      child: Container(
-        width: 24,
-        height: 24,
-        decoration: BoxDecoration(
-          color: isBookmarked ? ColorStyles.primary80 : ColorStyles.white,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Image.asset(
-          RecipeCard._bookmarkIcon,
-          color: isBookmarked ? ColorStyles.white : ColorStyles.gray4,
-        ),
-      ),
-    ),
-  );
 }

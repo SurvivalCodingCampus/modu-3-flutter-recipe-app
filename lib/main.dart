@@ -4,8 +4,10 @@ import 'package:recipe_app/data/data_source/mock/mock_recipe_data_source.dart';
 import 'package:recipe_app/data/repository/interface/recipe_repository.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/components.dart';
-import 'package:recipe_app/presentation/recipe/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/recipe/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/ui/ui.dart';
 
@@ -14,6 +16,9 @@ final RecipeRepository recipeRepository = RecipeRepositoryImpl(
   recipeDataSource,
 );
 final SavedRecipesViewModel savedRecipesViewModel = SavedRecipesViewModel(
+  recipeRepository,
+);
+final SearchRecipesViewModel searchRecipesViewModel = SearchRecipesViewModel(
   recipeRepository,
 );
 
@@ -28,6 +33,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Recipe App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: ColorStyles.white,
         appBarTheme: const AppBarTheme(backgroundColor: ColorStyles.white),
@@ -174,6 +180,8 @@ class App extends StatelessWidget {
             ),
         '/recipe/saved':
             (context) => SavedRecipesScreen(viewModel: savedRecipesViewModel),
+        '/recipe/search':
+            (context) => SearchRecipesScreen(viewModel: searchRecipesViewModel),
       },
     );
   }
@@ -226,6 +234,12 @@ class HomeScreen extends StatelessWidget {
               text: 'Splash Screen',
               onPressed: () {
                 Navigator.of(context).pushNamed('/splash');
+              },
+            ),
+            MediumButton(
+              text: 'Search Recipes Screen',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/recipe/search');
               },
             ),
           ],
