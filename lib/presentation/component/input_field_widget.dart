@@ -7,11 +7,13 @@ class InputFieldWidget extends StatelessWidget {
   final String? label;
   final Icon? icon;
   final String placeHolder;
+  final double? verticalHeight;
 
   const InputFieldWidget({
     super.key,
     this.label,
     this.icon,
+    this.verticalHeight,
     required this.placeHolder,
     required this.onValueChange,
   });
@@ -37,8 +39,8 @@ class InputFieldWidget extends StatelessWidget {
             hintText: placeHolder,
             hintStyle: TextStyles.smallRegular(color: ColorStyles.gray4),
             prefixIcon: icon,
-            contentPadding: const EdgeInsets.symmetric(
-                vertical: 12, horizontal: 20),
+            contentPadding: EdgeInsets.symmetric(
+                vertical: verticalHeight ?? 12, horizontal: 20),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: ColorStyles.gray4, width: 1.5),
