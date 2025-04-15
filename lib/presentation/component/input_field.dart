@@ -2,24 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/ui/color_styles.dart';
 import 'package:recipe_app/presentation/ui/text_styles.dart';
 
-class InputField extends StatelessWidget {
+class InputField extends StatefulWidget {
   final void Function(String value) onValueChange;
 
-  final TextEditingController controller;
-  final FocusNode focusNode;
   final String titleLabel;
+  final String inputValue;
+  final FocusNode focusNode;
 
   const InputField({
     super.key,
     required this.titleLabel,
-    required this.controller,
+    required this.inputValue,
     required this.focusNode,
     required this.onValueChange,
   });
 
-  bool get isFocused => focusNode.hasFocus;
+  @override
+  State<InputField> createState() => _InputFieldState();
+}
 
-  bool get hasText => controller.text.isNotEmpty;
+class _InputFieldState extends State<InputField> {
+  bool get isFocused => widget.focusNode.hasFocus;
+  bool get hasText => widget.inputValue.trim().isNotEmpty;
+  Color _textColor = ColorStyle.gray4;
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +33,26 @@ class InputField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(titleLabel, style: AppTextStyles.smallRegular),
+          Text(widget.titleLabel, style: AppTextStyles.smallRegular),
           SizedBox(height: 8),
           TextField(
-            controller: controller,
-            focusNode: focusNode,
+            //controller: controller,
+            focusNode: widget.focusNode,
             enableInteractiveSelection: false,
             onSubmitted: (value) {
-              onValueChange(value);
+              widget.onValueChange(value);
             },
             onTapOutside: (event) {
-              onValueChange(controller.text);
+              //onValueChange(controller.text);
+            },
+            onChanged: (value) {
+              _textColor =
+              value.trim().isEmpty ? ColorStyle.gray4 : ColorStyle.black;
+              widget.onValueChange(value);
             },
             decoration: InputDecoration(
               hintText: isFocused || hasText ? '' : 'Placeholder',
-              hintStyle: AppTextStyles.smallRegular,
+              hintStyle: AppTextStyles.smallRegular.copyWith(color: _textColor),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: ColorStyle.gray4, width: 1.5),
