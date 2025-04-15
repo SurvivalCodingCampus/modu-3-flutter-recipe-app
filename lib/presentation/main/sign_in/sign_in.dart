@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/presentation/component/announce_line.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
+import 'package:recipe_app/presentation/component/social_icon.dart';
 import 'package:recipe_app/presentation/main/sign_in/sign_in_view_model.dart';
 import 'package:recipe_app/ui/color_styles.dart';
+
 import '../../../ui/text_styles.dart';
 import '../../component/big_button.dart';
 
 class SignIn extends StatelessWidget {
   final SignInViewModel viewModel;
+
   const SignIn({super.key, required this.viewModel});
 
   @override
@@ -16,24 +20,35 @@ class SignIn extends StatelessWidget {
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (BuildContext context, Widget? child) {
-          final state = viewModel.state;
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hello,',
-                style: TextStyles.headerBold.copyWith(fontSize: 30),
-              ),
-              Text(
-                'Welcome Back!',
-                style: TextStyles.largeRegular.copyWith(fontSize: 20),
+              Padding(
+                padding: const EdgeInsets.only(top: 130, left: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hello,',
+                      style: TextStyles.headerBold.copyWith(fontSize: 30),
+                    ),
+                    Text(
+                      'Welcome Back!',
+                      style: TextStyles.largeRegular.copyWith(fontSize: 20),
+                    ),
+                  ],
+                ),
               ),
 
-              InputField(
-                label: 'Email',
-                holder: 'Enter Email',
-                onChanged: (value) {
-                  viewModel.updateEmail(value);
-                },
+              Padding(
+                padding: const EdgeInsets.only(top: 57),
+                child: InputField(
+                  label: 'Email',
+                  holder: 'Enter Email',
+                  onChanged: (value) {
+                    viewModel.updateEmail(value);
+                  },
+                ),
               ),
               InputField(
                 label: 'Enter Password',
@@ -43,11 +58,14 @@ class SignIn extends StatelessWidget {
                 },
               ),
 
-              Text(
-                'Forgot Password?',
-                style: TextStyles.normalRegular.copyWith(
-                  color: ColorStyles.secondary100,
-                  fontSize: 11,
+              Padding(
+                padding: const EdgeInsets.only(left: 40, bottom: 25),
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyles.normalRegular.copyWith(
+                    color: ColorStyles.secondary100,
+                    fontSize: 11,
+                  ),
                 ),
               ),
 
@@ -56,54 +74,44 @@ class SignIn extends StatelessWidget {
                 onClick:
                     viewModel.state.isValid
                         ? () {
-                          print('로그인 시도');
                           context.go('/search-recipes');
                         }
                         : null,
                 isEnabled: viewModel.state.isValid,
               ),
-
-              Text(
-                '--------- Or Sign in With ---------',
-                style: TextStyles.smallerBold.copyWith(
-                  color: ColorStyles.gray4,
-                  fontSize: 11,
-                ),
-              ),
+              AnnounceLine('Or Sign in With'),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ImageIcon(
-                    AssetImage('assets/images/google.png'),
-                    color: ColorStyles.white,
-                    size: 44,
-                  ),
+                  SocialIcon(iconPath: 'assets/images/google.png'),
                   SizedBox(width: 10),
-                  ImageIcon(
-                    AssetImage('assets/images/facebook.png'),
-                    color: ColorStyles.white,
-                    size: 44,
-                  ),
+                  SocialIcon(iconPath: 'assets/images/facebook.png'),
                 ],
               ),
               GestureDetector(
                 onTap: () => context.go('/sign-up'),
-                child: Row(
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                      style: TextStyles.smallerBold.copyWith(
-                        color: ColorStyles.black,
-                        fontSize: 11,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 65),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account?",
+                        style: TextStyles.smallerBold.copyWith(
+                          color: ColorStyles.black,
+                          fontSize: 13,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Sign Up",
-                      style: TextStyles.smallerBold.copyWith(
-                        color: ColorStyles.secondary100,
-                        fontSize: 11,
+                      SizedBox(width: 5),
+                      Text(
+                        "Sign Up",
+                        style: TextStyles.smallerBold.copyWith(
+                          color: ColorStyles.secondary100,
+                          fontSize: 13,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

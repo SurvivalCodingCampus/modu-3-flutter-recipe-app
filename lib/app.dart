@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/accept_button.dart';
 import 'package:recipe_app/presentation/component/alert/rating_dialog.dart';
 import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/filter_small_button.dart';
@@ -56,6 +57,8 @@ class MyApp extends StatelessWidget {
                 RatingDialog(title: 'Rate recipe', actionName: 'Send'),
                 SizedBox(height: 10),
                 FilterSmallButton(),
+                SizedBox(height: 10),
+                AcceptButton(text: 'hello world'),
               ],
             ),
           ),
