@@ -6,7 +6,8 @@ import 'package:recipe_app/ui/text_styles.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  const RecipeCard({super.key, required this.recipe});
+  final bool isGrid;
+  const RecipeCard({super.key, required this.recipe, this.isGrid = false});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,10 @@ class RecipeCard extends StatelessWidget {
                 children: [
                   Icon(Icons.star, size: 14, color: Color(0xFFFFAD30)),
                   SizedBox(width: 4),
-                  Text('4.0', style: AppTextStyles.smallRegular()),
+                  Text(
+                    recipe.rating.toString(),
+                    style: AppTextStyles.smallRegular(),
+                  ),
                 ],
               ),
             ),
@@ -79,32 +83,38 @@ class RecipeCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Row(
-                  children: [
-                    const Icon(Icons.timer, color: ColorStyle.gray4, size: 17),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${recipe.time} min',
-                      style: AppTextStyles.smallRegular(
-                        color: ColorStyle.gray4,
-                      ),
+                isGrid
+                    ? const SizedBox.shrink()
+                    : Row(
+                      children: [
+                        const Icon(
+                          Icons.timer,
+                          color: ColorStyle.gray4,
+                          size: 17,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${recipe.time} min',
+                          style: AppTextStyles.smallRegular(
+                            color: ColorStyle.gray4,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: ColorStyle.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.bookmark_border,
+                            color: ColorStyle.primary80,
+                            size: 16,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 12),
-                    Container(
-                      width: 24,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        color: ColorStyle.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.bookmark_border,
-                        color: ColorStyle.primary80,
-                        size: 16,
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

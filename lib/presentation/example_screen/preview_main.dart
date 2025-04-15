@@ -8,6 +8,7 @@ import 'package:recipe_app/presentation/example_screen/ingredient_list_example_s
 import 'package:recipe_app/presentation/example_screen/input_field_example_screen.dart';
 import 'package:recipe_app/presentation/example_screen/rating_dialog_example_screen.dart';
 import 'package:recipe_app/presentation/example_screen/recipe_list_example_screen.dart';
+import 'package:recipe_app/presentation/example_screen/search_field_example_screen.dart';
 import 'package:recipe_app/presentation/example_screen/tabs_example_screen.dart';
 import 'package:recipe_app/presentation/example_screen/text_style_example_screen.dart';
 
@@ -150,24 +151,18 @@ class PreviewMain extends StatelessWidget {
                 );
               },
             ),
-            // ListTile(
-            //   title: Text('📍Saved recipe', style: AppTextStyles.largeBold()),
-            //   onTap: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder:
-            //             (context) => SavedRecipesScreen(
-            //               viewModel: SavedRecipesViewModel(
-            //                 recipeRepository: RecipeRepositoryImpl(
-            //                   dataSource: RecipeDataSourceImpl(),
-            //                 ),
-            //               ),
-            //             )..viewModel.fetchSavedRecipe(),
-            //       ),
-            //     );
-            //   },
-            // ),
+
+            ListTile(
+              title: Text('📍SearchFile', style: AppTextStyles.largeBold()),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchFieldExampleScreen(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

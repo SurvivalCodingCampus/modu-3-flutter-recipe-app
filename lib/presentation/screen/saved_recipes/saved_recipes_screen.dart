@@ -26,11 +26,11 @@ class SavedRecipesScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        padding: const EdgeInsets.symmetric(horizontal: 40.0),
         child: ListenableBuilder(
-          listenable: viewModel,
+          listenable: viewModel..fetchSavedRecipe(),
           builder: (context, child) {
-            if (viewModel.isLoading) {
+            if (viewModel.state.isLoading) {
               return ListView.builder(
                 itemCount: 5, // 임시로 5개 데이터
                 itemBuilder:
@@ -44,7 +44,7 @@ class SavedRecipesScreen extends StatelessWidget {
               );
             }
 
-            if (viewModel.savedRecipes.isEmpty) {
+            if (viewModel.state.savedRecipes.isEmpty) {
               return Center(
                 child: Text(
                   '저장된 레시피가 없습니다.',
@@ -54,9 +54,9 @@ class SavedRecipesScreen extends StatelessWidget {
             }
 
             return ListView.builder(
-              itemCount: viewModel.savedRecipes.length,
+              itemCount: viewModel.state.savedRecipes.length,
               itemBuilder: (context, index) {
-                final recipe = viewModel.savedRecipes[index];
+                final recipe = viewModel.state.savedRecipes[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: RecipeCard(recipe: recipe),

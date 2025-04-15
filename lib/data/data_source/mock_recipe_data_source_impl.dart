@@ -1,14 +1,4 @@
-import 'package:recipe_app/data/data_source/recipe_data_source.dart';
-import 'package:recipe_app/data/dto/recipe_dto.dart';
-
-class MockRecipeDataSourceImpl implements RecipeDataSource {
-  MockRecipeDataSourceImpl();
-  @override
-  Future<List<RecipeDto>> getRecipeDto() async {
-    final List<dynamic> json = mockData['recipes']!;
-    return json.map((e) => RecipeDto.fromJson(e)).toList();
-  }
-
+class MockData {
   final Map<String, List> mockData = {
     "recipes": [
       {

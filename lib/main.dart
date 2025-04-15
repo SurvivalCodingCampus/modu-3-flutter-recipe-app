@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/presentation/screen/splash/splash_screen.dart';
+import 'package:recipe_app/ui/color_styles.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        scaffoldBackgroundColor: ColorStyle.white,
       ),
       home: const SplashScreen(),
     );

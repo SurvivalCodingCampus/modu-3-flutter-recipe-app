@@ -1,6 +1,7 @@
 // [Recipe] 레시피 게시글의 기본 정보를 담고 있습니다.
 // ignore_for_file: annotate_overrides
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:recipe_app/data/model/filter/filter_enum.dart';
 import 'package:recipe_app/data/model/ingredient/ingredient.dart';
 import 'package:recipe_app/data/model/media/media.dart';
 import 'package:recipe_app/data/model/user/user.dart';
@@ -21,6 +22,7 @@ class Recipe with _$Recipe {
   final User? user;
   final Media? media;
   final DateTime createdAt;
+  final Category category;
   // final List<Category> categoryList;
   // final List<Review> reviews;
   // final List<Procedure> procedures;
@@ -34,6 +36,7 @@ class Recipe with _$Recipe {
     required this.time,
     required this.rating,
     required this.thumbNailUrl,
+    required this.category,
     this.user,
     this.media,
     // recipeId this.procedures,

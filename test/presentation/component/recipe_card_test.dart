@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:recipe_app/data/model/filter/filter_enum.dart';
 import 'package:recipe_app/data/model/ingredient/ingredient.dart';
 import 'package:recipe_app/data/model/media/media.dart';
 import 'package:recipe_app/data/model/recipe/recipe.dart';
@@ -23,6 +24,7 @@ void main() {
           email: 'user1@email.com',
           address: '',
         ),
+        category: Category.breakfast,
         media: Media(
           imageId: 'imageId',
           thumbNailUrl: 'assets/images/tomatos.png',

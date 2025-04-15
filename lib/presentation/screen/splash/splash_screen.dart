@@ -4,8 +4,9 @@ import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/buttons.dart';
 import 'package:recipe_app/presentation/example_screen/preview_main.dart';
-import 'package:recipe_app/presentation/screen/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/screen/saved_recipes/saved_recipes_view_model.dart';
+
+import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
@@ -174,16 +175,30 @@ class _SplashScreenState extends State<SplashScreen>
                           icon: Icons.arrow_forward,
                           size: ButtonSize.medium,
                           onPressed: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder:
+                            //         (context) => SavedRecipesScreen(
+                            //           viewModel: SavedRecipesViewModel(
+                            //             recipeRepository: RecipeRepositoryImpl(
+                            //               dataSource: RecipeDataSourceImpl(),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //   ),
+                            // );
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder:
-                                    (context) => SavedRecipesScreen(
-                                      viewModel: SavedRecipesViewModel(
-                                        recipeRepository: RecipeRepositoryImpl(
+                                    (context) => SearchRecipesScreen(
+                                      viewModel: SearchRecipesViewModel(
+                                        repository: RecipeRepositoryImpl(
                                           dataSource: RecipeDataSourceImpl(),
                                         ),
-                                      )..fetchSavedRecipe(),
+                                      ),
                                     ),
                               ),
                             );

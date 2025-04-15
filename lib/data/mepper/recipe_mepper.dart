@@ -1,5 +1,6 @@
 import 'package:recipe_app/data/dto/recipe_dto.dart';
 import 'package:recipe_app/data/mepper/ingredient_mepper.dart';
+import 'package:recipe_app/data/model/filter/filter_enum.dart';
 import 'package:recipe_app/data/model/recipe/recipe.dart';
 import 'package:recipe_app/data/model/ingredient/ingredient.dart';
 
@@ -21,6 +22,7 @@ extension RecipeMapper on RecipeDto {
           ) ??
           0,
       rating: rating ?? 0.0,
+      category: categorySwitch(category),
       userName: chef ?? '알 수 없음',
       createdAt: DateTime.now(),
       thumbNailUrl: image ?? '',

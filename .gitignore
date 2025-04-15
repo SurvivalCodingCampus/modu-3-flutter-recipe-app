@@ -46,3 +46,5 @@ app.*.map.json
 
 # Ignore entire iOS
 ios/
+.g
+.freezed

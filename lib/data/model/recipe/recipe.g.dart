@@ -18,6 +18,7 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) => Recipe(
   time: (json['time'] as num).toInt(),
   rating: (json['rating'] as num).toDouble(),
   thumbNailUrl: json['thumbNailUrl'] as String,
+  category: $enumDecode(_$CategoryEnumMap, json['category']),
   user:
       json['user'] == null
           ? null
@@ -39,4 +40,18 @@ Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
   'user': instance.user?.toJson(),
   'media': instance.media?.toJson(),
   'createdAt': instance.createdAt.toIso8601String(),
+  'category': _$CategoryEnumMap[instance.category]!,
+};
+
+const _$CategoryEnumMap = {
+  Category.all: 'all',
+  Category.cereal: 'cereal',
+  Category.vegetables: 'vegetables',
+  Category.dinner: 'dinner',
+  Category.chinese: 'chinese',
+  Category.localDish: 'localDish',
+  Category.fruit: 'fruit',
+  Category.breakfast: 'breakfast',
+  Category.spanish: 'spanish',
+  Category.lunch: 'lunch',
 };

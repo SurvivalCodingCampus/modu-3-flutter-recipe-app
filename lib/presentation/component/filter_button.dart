@@ -5,12 +5,14 @@ import 'package:recipe_app/ui/text_styles.dart';
 class FilterButton extends StatelessWidget {
   final String text;
   final bool isSelected;
+  final IconData? icon;
   final VoidCallback onChange;
 
   const FilterButton({
     super.key,
     required this.text,
     this.isSelected = false,
+    this.icon,
     required this.onChange,
   });
 
@@ -22,6 +24,7 @@ class FilterButton extends StatelessWidget {
     final Color backgroundColor = isSelected ? selectedColor : ColorStyle.white;
     final Color borderColor = isSelected ? selectedColor : unselectedColor;
     final Color textColor = isSelected ? ColorStyle.white : unselectedColor;
+    final Color iconColor = textColor;
 
     return GestureDetector(
       onTap: onChange,
@@ -34,7 +37,17 @@ class FilterButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: borderColor),
         ),
-        child: Text(text, style: AppTextStyles.smallRegular(color: textColor)),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(text, style: AppTextStyles.smallRegular(color: textColor)),
+
+            if (icon != null) ...[
+              const SizedBox(width: 6),
+              Icon(icon, size: 18, color: iconColor),
+            ],
+          ],
+        ),
       ),
     );
   }
