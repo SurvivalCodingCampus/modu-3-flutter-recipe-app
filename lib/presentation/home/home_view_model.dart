@@ -2,24 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/presentation/home/home_state.dart';
 
-class HomeViewModel with ChangeNotifier {
+class HomeViewModel extends ValueNotifier<HomeState> {
   final RecipeRepository _recipeRepository;
 
+  HomeState get state => value;
+
   // 상태
-  HomeState _state = const HomeState();
-
-  HomeState get state => _state;
-
-  HomeViewModel(this._recipeRepository);
+  HomeViewModel(this._recipeRepository) : super(HomeState());
 
   Future<void> fetchRecipes() async {
-    _state = state.copyWith(isLoading: true);
-    notifyListeners();
+    value = value.copyWith(isLoading: true);
 
-    _state = state.copyWith(
+    value = value.copyWith(
       recipes: await _recipeRepository.getRecipes(),
       isLoading: false,
     );
-    notifyListeners();
   }
 }
