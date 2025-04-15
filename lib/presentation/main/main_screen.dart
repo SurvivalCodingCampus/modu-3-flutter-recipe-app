@@ -13,6 +13,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: ColorStyles.white,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: ColorStyles.primary100,
         unselectedItemColor: ColorStyles.gray4,
