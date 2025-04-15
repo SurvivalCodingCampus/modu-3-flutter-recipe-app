@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
@@ -89,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             SizedBox(height: 50),
                             ElevatedButton(
                               onPressed: () {
-                                context.go('/sign-in-screen');
+                                context.go(Routes.signIn);
                               },
                               style: ButtonStyles2.splashScreenButton,
                               child: Row(

@@ -13,5 +13,6 @@ abstract class ColorStyles2 {
   static const secondary20 = Color(0xFFFFE1B3);
   static const rating = Color(0xFFFFAD30);
   static const secondary100 = Color(0xFFFF9C00);
+  static const secondary40 = Color(0xFFFFBB00);
   static const shadowColor = Color(0xFF696969);
 }

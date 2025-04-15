@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
@@ -78,7 +79,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     SizedBox(height: 25),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go(Routes.homeScreen);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorStyles2.primary100,
                         shape: RoundedRectangleBorder(
@@ -207,7 +210,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            context.go('/sign-up-screen');
+                            context.go(Routes.signUp);
                           },
                           child: Text(
                             'Sign up',
