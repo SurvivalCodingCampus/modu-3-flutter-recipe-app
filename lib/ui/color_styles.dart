@@ -10,7 +10,7 @@ abstract class ColorStyles {
   static const white = Color(0xFFFFFFFF);
 
   // Primary Colors
-  static const primary100 = Color(0xFF126575);
+  static const primary100 = Color(0xFF129575);
   static const primary80 = Color(0xFF71B1A1);
   static const primary60 = Color(0xFFAFD3CA);
   static const primary40 = Color(0xFFDBEBE7);

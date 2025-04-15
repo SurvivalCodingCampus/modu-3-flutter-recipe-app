@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/button_widget.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/home/home_screen.dart';
-import 'package:recipe_app/presentation/home/home_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
 void main() {

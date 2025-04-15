@@ -12,7 +12,6 @@ void main() {
           body: InputFieldWidget(
             label: 'label',
             placeHolder: 'placeHolder',
-            value: 'value',
             onValueChange: (text) {
               sampleText = text;
             },

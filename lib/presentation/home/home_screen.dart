@@ -1,61 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/home/home_view_model.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/ui/color_styles.dart';
+
+import '../../data/data_source/mock_recipe_data_source_impl.dart';
+import '../../data/repository/recipe_repository_impl.dart';
+import '../../ui/text_styles.dart';
+import '../saved_recipes/saved_recipes_screen.dart';
+import '../saved_recipes/saved_recipes_view_model.dart';
+import '../search_recipes/search_recipes_view_model.dart';
 
 class HomeScreen extends StatelessWidget {
-  final HomeViewModel viewModel;
-
-  const HomeScreen({super.key, required this.viewModel});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Saved recipes', style: TextStyles.mediumBold()),
+        title: Text('Home Screen', style: TextStyles.mediumBold()),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ListenableBuilder(
-            listenable: viewModel,
-            builder: (context, snapshot) {
-              if (viewModel.isLoading) {
-                return Center(child: CircularProgressIndicator());
-              }
-              return Column(
-                children:
-                    viewModel.recipes.isEmpty
-                        ? [
-                          const SizedBox(height: 40),
-                          const Text('저장된 레시피가 없습니다.'),
-                        ]
-                        : viewModel.recipes
-                            .map(
-                              (recipe) => Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: RecipeCard(
-                                  recipe: recipe,
-                                  isBookmarked: viewModel.user.bookmarks
-                                      .contains(recipe.id),
-                                  onBookmark: (int id) {
-                                    if (viewModel.user.bookmarks.contains(
-                                      recipe.id,
-                                    )) {
-                                      viewModel.deleteBookmarkToUserModel(id);
-                                    } else {
-                                      viewModel.saveBookmarkToUserModel(id);
-                                    }
-                                  },
-                                ),
-                              ),
-                            )
-                            .toList(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder:
+                      (context) => SavedRecipesScreen(
+                    viewModel: SavedRecipesViewModel(
+                      recipeRepository: RecipeRepositoryImpl(
+                        recipeDataSource: MockRecipeDataSourceImpl(),
+                      ),
+                    ),
+                  ),
+                ),
               );
             },
+            child: Container(
+              width: double.infinity,
+              height: 100,
+              color: ColorStyles.primary80,
+              child: Center(child: Text('SavedRecipesScreen 가기')),
+            ),
           ),
-        ),
+          SizedBox(height: 20,),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder:
+                      (context) => SearchRecipesScreen(
+                    viewModel: SearchRecipesViewModel(
+                      recipeRepository: RecipeRepositoryImpl(
+                        recipeDataSource: MockRecipeDataSourceImpl(),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              height: 100,
+              color: ColorStyles.primary80,
+              child: Center(child: Text('SearchRecipesScreen 가기')),
+            ),
+          ),
+        ],
       ),
     );
   }
