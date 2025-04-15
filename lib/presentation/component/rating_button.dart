@@ -3,25 +3,22 @@ import 'package:flutter/material.dart';
 
 import 'package:recipe_app/ui/ui.dart';
 
-class RatingButton extends StatefulWidget {
-  final double rating;
+class RatingButton extends StatelessWidget {
+  final int rating;
+  final bool isSelected;
+  final VoidCallback? onTap;
 
-  const RatingButton({super.key, required this.rating});
+  const RatingButton({
+    super.key,
+    required this.rating,
+    required this.isSelected,
+    this.onTap,
+  });
 
-  @override
-  State<RatingButton> createState() => _RatingButtonState();
-}
-
-class _RatingButtonState extends State<RatingButton> {
-  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          isSelected = !isSelected;
-        });
-      },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
@@ -36,7 +33,7 @@ class _RatingButtonState extends State<RatingButton> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '${widget.rating.toInt()}',
+              '$rating',
               style: TextStyles.smallerTextRegular.copyWith(
                 color: !isSelected ? ColorStyles.primary80 : ColorStyles.white,
               ),

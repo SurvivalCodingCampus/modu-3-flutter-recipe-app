@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/data_source/data_source.dart';
-import 'package:recipe_app/data/repository/repository.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
-import 'package:recipe_app/presentation/splash/splash_screen.dart';
+import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
+import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/domain/model/model.dart';
+import 'package:recipe_app/presentation/search/search_screen.dart';
+import 'package:recipe_app/presentation/search/search_view_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +18,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: const SplashScreen(),
+      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      home: SearchScreen(
+        viewModel: SearchViewModel(
+          repository: RecipeRepositoryImpl(
+            recipeDataSource: MockRecipeDataSourceImpl(),
+          ),
+        ),
+      ),
     );
   }
 }

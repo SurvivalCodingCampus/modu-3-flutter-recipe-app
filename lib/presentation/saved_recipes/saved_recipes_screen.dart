@@ -10,7 +10,6 @@ class SavedRecipesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorStyles.white,
       appBar: AppBar(
         backgroundColor: ColorStyles.white,
         surfaceTintColor: ColorStyles.white,

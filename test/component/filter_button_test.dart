@@ -6,7 +6,7 @@ import 'package:recipe_app/ui/ui.dart';
 void main() {
   testWidgets('Filter Button 테스트', (tester) async {
     final btnName = '필터 버튼';
-    final filterBtn = FilterButton(text: btnName);
+    final filterBtn = FilterButton(text: btnName, isSelected: false);
 
     // 위젯을 빌드합니다.
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: filterBtn)));

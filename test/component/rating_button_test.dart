@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 void main() {
   testWidgets('Rating Button 테스트', (tester) async {
-    final double rating = 5;
-    final ratingBtn = RatingButton(rating: rating);
+    final int rating = 5;
+    final ratingBtn = RatingButton(rating: rating, isSelected: false);
 
     // 위젯을 빌드합니다.
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: ratingBtn)));
