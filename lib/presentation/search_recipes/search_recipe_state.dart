@@ -15,5 +15,6 @@ abstract class SearchRecipeState with _$SearchRecipeState {
     required bool isLoading,
   }) = _SearchRecipeState;
 
-  factory SearchRecipeState.fromJson(Map<String, Object?> json) => _$SearchRecipeStateFromJson(json);
+  factory SearchRecipeState.fromJson(Map<String, Object?> json) =>
+      _$SearchRecipeStateFromJson(json);
 }

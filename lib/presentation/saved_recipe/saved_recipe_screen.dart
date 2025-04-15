@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/data_source/recipe/recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
@@ -11,14 +10,9 @@ void main() {
   final viewModel = SavedRecipeViewModel(rp);
 
   runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: SavedRecipeScreen(viewModel: viewModel),
-      ),
-    )
+    MaterialApp(home: Scaffold(body: SavedRecipeScreen(viewModel: viewModel))),
   );
 }
-
 
 class SavedRecipeScreen extends StatelessWidget {
   final SavedRecipeViewModel viewModel;
@@ -34,24 +28,23 @@ class SavedRecipeScreen extends StatelessWidget {
       builder: (context, child) {
         if (viewModel.isLoading) {
           return Scaffold(
-            appBar: AppBar(title: Text('Saved recipes'),centerTitle: true,),
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
+            appBar: AppBar(title: Text('Saved recipes'), centerTitle: true),
+            body: Center(child: CircularProgressIndicator()),
           );
         }
         return Scaffold(
-          appBar: AppBar(title: Text('Saved recipes'),centerTitle: true,),
+          appBar: AppBar(title: Text('Saved recipes'), centerTitle: true),
           body: Padding(
             padding: const EdgeInsets.all(10),
             child: ListView.separated(
               itemBuilder: (context, index) {
                 return RecipeCard(recipe: viewModel.recipes[index]);
               },
-              separatorBuilder: (context, index){
-                return SizedBox(height: 1,);
+              separatorBuilder: (context, index) {
+                return SizedBox(height: 1);
               },
-              itemCount: viewModel.recipes.length),
+              itemCount: viewModel.recipes.length,
+            ),
           ),
         );
       },
