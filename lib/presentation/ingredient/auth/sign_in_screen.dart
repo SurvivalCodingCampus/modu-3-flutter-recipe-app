@@ -13,117 +13,115 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorStyles.white,
-      body: ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: MediaQuery.sizeOf(context).height,
-        ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Hello,', style: TextStyles.headerBold()),
-                  Text('Welcome Back!', style: TextStyles.largeRegular()),
-                  SizedBox(height: 50),
-                  InputFieldWidget(
-                    label: 'Email',
-                    placeHolder: 'Enter Email',
-                    verticalHeight: 20,
-                    onValueChange: (String value) {},
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.sizeOf(context).height,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Hello,', style: TextStyles.headerBold()),
+                Text('Welcome Back!', style: TextStyles.largeRegular()),
+                SizedBox(height: 50),
+                InputFieldWidget(
+                  label: 'Email',
+                  placeHolder: 'Enter Email',
+                  verticalHeight: 20,
+                  onValueChange: (String value) {},
+                ),
+                SizedBox(height: 30),
+                InputFieldWidget(
+                  label: 'Enter Password',
+                  placeHolder: 'Enter Password',
+                  verticalHeight: 20,
+                  onValueChange: (String value) {},
+                ),
+                SizedBox(height: 20),
+                TextButton(
+                  child: Text(
+                    'Forgot Password?',
+                    style: TextStyles.smallRegular(
+                      color: ColorStyles.secondary100,
+                    ),
                   ),
-                  SizedBox(height: 30),
-                  InputFieldWidget(
-                    label: 'Enter Password',
-                    placeHolder: 'Enter Password',
-                    verticalHeight: 20,
-                    onValueChange: (String value) {},
-                  ),
-                  SizedBox(height: 20),
-                  TextButton(
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyles.smallRegular(
-                        color: ColorStyles.secondary100,
+                  onPressed: () {},
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ButtonWidget(
+                      buttonSize: ButtonSize.big,
+                      buttonText: 'Sign In',
+                      onClick: () {
+                        context.go(Routes.home);
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 50,
+                      child: Divider(color: ColorStyles.gray4, thickness: 1),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      'Or Sign in With',
+                      style: TextStyles.smallerRegular(
+                        color: ColorStyles.gray4,
                       ),
                     ),
-                    onPressed: () {},
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ButtonWidget(
-                        buttonSize: ButtonSize.big,
-                        buttonText: 'Sign In',
-                        onClick: () {
-                          context.go(Routes.home);
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 50,
-                        child: Divider(color: ColorStyles.gray4, thickness: 1),
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        'Or Sign in With',
-                        style: TextStyles.smallerRegular(
-                          color: ColorStyles.gray4,
+                    SizedBox(width: 10),
+                    SizedBox(
+                      width: 50,
+                      child: Divider(color: ColorStyles.gray4, thickness: 1),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SocialLoginButton(
+                      imagePath: 'assets/images/icons/google.png',
+                      onClick: () {},
+                    ),
+                    SizedBox(width: 20),
+                    SocialLoginButton(
+                      imagePath: 'assets/images/icons/facebook.png',
+                      onClick: () {},
+                    ),
+                  ],
+                ),
+                SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Don\'t have an account?',
+                      style: TextStyles.smallerBold(),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        context.go(Routes.signUp);
+                      },
+                      child: Text(
+                        'Sign up',
+                        style: TextStyles.smallerBold(
+                          color: ColorStyles.secondary100,
                         ),
                       ),
-                      SizedBox(width: 10),
-                      SizedBox(
-                        width: 50,
-                        child: Divider(color: ColorStyles.gray4, thickness: 1),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SocialLoginButton(
-                        imagePath: 'assets/images/icons/google.png',
-                        onClick: () {},
-                      ),
-                      SizedBox(width: 20),
-                      SocialLoginButton(
-                        imagePath: 'assets/images/icons/facebook.png',
-                        onClick: () {},
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account?',
-                        style: TextStyles.smallerBold(),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.go(Routes.signUp);
-                        },
-                        child: Text(
-                          'Sign up',
-                          style: TextStyles.smallerBold(
-                            color: ColorStyles.secondary100,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
