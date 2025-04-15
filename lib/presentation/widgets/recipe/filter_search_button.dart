@@ -14,7 +14,7 @@ class FilterSearchButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       onTap: () {
         viewModel.resetData();
-        showBottomSheet(
+        showModalBottomSheet(
           context: context,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
