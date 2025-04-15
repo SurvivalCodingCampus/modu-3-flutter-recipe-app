@@ -58,24 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
               BigButton(
                 name: "Sign In",
                 onClick: () {
-                  // context.go(Routes.home);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder:
-                          (context) => BottomNavigationBarScreen(
-                            child: HomeScreen(
-                              viewModel: SearchRecipesViewModel(
-                                recipeRepository: MockRecipeRepositoryImpl(
-                                  recipeDataSource: MockRecipeDataSource(
-                                    client: http.Client(),
-                                    url: 'testUrl',
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                    ),
-                  );
+                  context.go(Routes.home);
                 },
                 icon: Icons.arrow_forward,
                 color: ColorStyles.primary100,
