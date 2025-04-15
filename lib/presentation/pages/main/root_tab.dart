@@ -17,25 +17,27 @@ class _RootTabState extends State<RootTab> {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
+      isSafeArea: false,
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTap,
+        type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
+        unselectedItemColor: AppColor.grey4,
+        backgroundColor: AppColor.white,
+        selectedItemColor: AppColor.primary100,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined, color: AppColor.primary100),
+            icon: Icon(Icons.bookmark_outline),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_outline, color: AppColor.primary100),
+            icon: Icon(Icons.notifications_outlined),
+            label: '',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notifications_outlined,
-              color: AppColor.primary100,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline, color: AppColor.primary100),
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: ''),
         ],
       ),
       child: widget.child,
@@ -51,10 +53,10 @@ class _RootTabState extends State<RootTab> {
         context.replace(AppRoutes.savedRecipes);
         break;
       case 2:
-        context.replace(AppRoutes.savedRecipes);
+        context.replace(AppRoutes.notification);
         break;
       default:
-        context.replace(AppRoutes.savedRecipes);
+        context.replace(AppRoutes.profle);
         break;
     }
     setState(() {

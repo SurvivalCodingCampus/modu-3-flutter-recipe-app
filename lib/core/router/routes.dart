@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/pages/auth/sign_up_screen.dart';
 import 'package:recipe_app/presentation/pages/auth/sing_in_screen.dart';
+import 'package:recipe_app/presentation/pages/main/home/home_screen.dart';
 import 'package:recipe_app/presentation/pages/main/notification/notification_screen.dart';
 import 'package:recipe_app/presentation/pages/main/profile/profile_screen.dart';
 import 'package:recipe_app/presentation/pages/main/root_tab.dart';
@@ -54,7 +55,7 @@ final routes = [
       GoRoute(
         path: AppRoutes.home,
         builder: (context, state) {
-          return const SavedRecipesScreen();
+          return const HomeScreen();
         },
       ),
       GoRoute(
