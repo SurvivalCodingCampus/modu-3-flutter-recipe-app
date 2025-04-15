@@ -123,12 +123,17 @@ class SignInScreen extends StatelessWidget {
                       color: ColorStyle.black,
                     ),
                   ),
-                  Text(
-                    "Sign up",
-                    style: AppTextStyles.smallBold().copyWith(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 11,
-                      color: ColorStyle.secondary100,
+                  GestureDetector(
+                    onTap: (){
+                      context.go("/sign-up");
+                    },
+                    child: Text(
+                      "Sign up",
+                      style: AppTextStyles.smallBold().copyWith(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 11,
+                        color: ColorStyle.secondary100,
+                      ),
                     ),
                   ),
                 ],
