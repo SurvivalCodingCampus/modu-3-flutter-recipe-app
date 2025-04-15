@@ -4,4 +4,7 @@ abstract class Routes {
   static const signUp = '/sign-up';
 
   static const home = '/home';
+  static const save = '/save';
+  static const notification = '/notification';
+  static const my = '/my';
 }
