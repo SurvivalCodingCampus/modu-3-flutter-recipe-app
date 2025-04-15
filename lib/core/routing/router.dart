@@ -65,34 +65,6 @@ final router = GoRouter(
     GoRoute(path: Routes.signUp, builder: (context, state) => SignUpScreen()),
 
     GoRoute(
-      path: Routes.home,
-      builder:
-          (context, state) => HomeScreen(
-            viewModel: SearchRecipesViewModel(
-              recipeRepository: MockRecipeRepositoryImpl(
-                recipeDataSource: MockRecipeDataSource(
-                  client: http.Client(),
-                  url: 'testUrl',
-                ),
-              ),
-            ),
-          ),
-    ),
-    GoRoute(
-      path: Routes.savedRecipes,
-      builder:
-          (context, state) => SavedRecipesScreen(
-            viewModel: SavedRecipesViewModel(
-              recipeRepository: MockRecipeRepositoryImpl(
-                recipeDataSource: MockRecipeDataSource(
-                  client: http.Client(),
-                  url: 'url',
-                ),
-              ),
-            ),
-          ),
-    ),
-    GoRoute(
       path: Routes.search,
       builder:
           (context, state) => SearchRecipesScreen(
