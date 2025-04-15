@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/recipe_app/presentation/choice_screen/choice_screen.dart';
-import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
 class SplashScreen extends StatefulWidget {
-  final RecipeRepository repository;
-  final FilterSearchViewModel filterSearchViewModel;
-
-  const SplashScreen({
-    super.key,
-    required this.repository,
-    required this.filterSearchViewModel,
-  });
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -95,17 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             SizedBox(height: 50),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder:
-                                        (context) => ChoiceScreen(
-                                          repository: widget.repository,
-                                          filterSearchViewModel:
-                                              widget.filterSearchViewModel,
-                                        ),
-                                  ),
-                                );
+                                context.go('/sign-in-screen');
                               },
                               style: ButtonStyles2.splashScreenButton,
                               child: Row(

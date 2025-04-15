@@ -16,16 +16,7 @@ void main() {
   );
 
   testWidgets('SplashScreen Check Test', (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: SplashScreen(
-            repository: repository,
-            filterSearchViewModel: filterSearchViewModel,
-          ),
-        ),
-      ),
-    );
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: SplashScreen())));
     //스플래시 화면이 표시되는지 확인
     expect(find.byType(SplashScreen), findsOneWidget);
     // 버튼을 찾아 탭하기 (버튼의 Key나 텍스트, 또는 위젯 타입으로 찾을 수 있음)

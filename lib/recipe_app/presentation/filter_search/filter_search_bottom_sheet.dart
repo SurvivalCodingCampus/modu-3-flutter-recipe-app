@@ -34,78 +34,80 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
           topRight: Radius.circular(50),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('Filter Search', style: TextStyles2.smallerTextBold),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Time',
-                  style: TextStyles2.smallerTextBold,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 10),
-                TimeFilterButton(
-                  changedTimeFilter: (value) {
-                    setState(() {
-                      selectedTimeFilter = value;
-                    });
-                    print(selectedTimeFilter);
-                  },
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Rate',
-                  style: TextStyles2.smallerTextBold,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 10),
-                RatingButton(
-                  changedRatingFilter: (value) {
-                    setState(() {
-                      selectedRatingFilter = value;
-                    });
-                    print(selectedRatingFilter);
-                  },
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Category',
-                  style: TextStyles2.smallerTextBold,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 6),
-                CategoryFilterButton(
-                  changedCategoryFilter: (value) {
-                    setState(() {
-                      selectedCategoryFilter = value;
-                    });
-                    print(selectedCategoryFilter);
-                  },
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            SizedBox(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('Filter', style: TextStyles2.smallerTextSemiBold),
-                style: ButtonStyles2.filterButton,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Filter Search', style: TextStyles2.smallerTextBold),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Time',
+                    style: TextStyles2.smallerTextBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 5),
+                  TimeFilterButton(
+                    changedTimeFilter: (value) {
+                      setState(() {
+                        selectedTimeFilter = value;
+                      });
+                      print(selectedTimeFilter);
+                    },
+                  ),
+                ],
               ),
-            ),
-          ],
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Rate',
+                    style: TextStyles2.smallerTextBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 5),
+                  RatingButton(
+                    changedRatingFilter: (value) {
+                      setState(() {
+                        selectedRatingFilter = value;
+                      });
+                      print(selectedRatingFilter);
+                    },
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Category',
+                    style: TextStyles2.smallerTextBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 5),
+                  CategoryFilterButton(
+                    changedCategoryFilter: (value) {
+                      setState(() {
+                        selectedCategoryFilter = value;
+                      });
+                      print(selectedCategoryFilter);
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              SizedBox(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Filter', style: TextStyles2.smallerTextSemiBold),
+                  style: ButtonStyles2.filterButton,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
