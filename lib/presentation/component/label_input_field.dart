@@ -3,15 +3,15 @@ import 'package:recipe_app/ui/ui.dart';
 
 class LabelInputField extends StatelessWidget {
   final String label;
-  final String hintText;
+  final String placeholder;
   final String? value;
-  final Function(String) onValueChange;
+  final Function(String)? onValueChange;
   const LabelInputField({
     super.key,
     required this.label,
-    required this.hintText,
+    required this.placeholder,
     this.value,
-    required this.onValueChange,
+    this.onValueChange,
   });
 
   @override
@@ -33,13 +33,13 @@ class LabelInputField extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          width: 315,
+          width: double.infinity,
           height: 55,
           child: TextField(
             controller: controller,
             onChanged: onValueChange,
             decoration: InputDecoration(
-              hintText: hintText,
+              hintText: placeholder,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(color: ColorStyles.gray4),

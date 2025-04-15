@@ -12,7 +12,7 @@ void main() {
 
     final labelInputField = LabelInputField(
       label: label,
-      hintText: hintText,
+      placeholder: hintText,
       value: firstValue,
       onValueChange: (value) {
         changedValue = value;
