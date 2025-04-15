@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
-class RecipeCard extends StatelessWidget {
+class SearchRecipeCard extends StatelessWidget {
   final String recipeName;
   final String chefName;
   final String recipeImgUrl;
-  final int recipeTime;
   final double recipeRating;
 
-  const RecipeCard({
+  const SearchRecipeCard({
     super.key,
     required this.recipeName,
     required this.chefName,
     required this.recipeImgUrl,
-    required this.recipeTime,
     required this.recipeRating,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 315,
-      height: 150,
       decoration: BoxDecoration(
         color: const Color(0xFFD9D9D9),
         borderRadius: BorderRadius.circular(10),
@@ -44,7 +40,7 @@ class RecipeCard extends StatelessWidget {
             // 그라데이션 오버레이
             Container(
               width: double.infinity,
-              height: 400,
+              height: 180,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -66,13 +62,13 @@ class RecipeCard extends StatelessWidget {
                 height: 16,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFE1B3),
+                  color: const Color(0xFFFFE1B3),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   '⭐ $recipeRating',
                   style: const TextStyle(
-                    fontSize: 10, // 높이에 맞춰 폰트도 줄이기
+                    fontSize: 10,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -87,7 +83,7 @@ class RecipeCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 200, // 텍스트 영역의 너비 제한
+                    width: 130, // 텍스트 영역의 너비 제한
                     child: Text(
                       recipeName,
                       style: const TextStyle(
@@ -97,7 +93,7 @@ class RecipeCard extends StatelessWidget {
                         height: 1.2,
                       ),
                       softWrap: true,
-                      maxLines: 2, // 최대 2줄로 제한
+                      maxLines: 3, // 최대 3줄로 제한
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -108,43 +104,6 @@ class RecipeCard extends StatelessWidget {
                       color: ColorStyle.gray4,
                       fontSize: 8,
                       fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // ⏱ 시간 + 북마크 아이콘 (오른쪽 하단)
-            Positioned(
-              bottom: 12,
-              right: 12,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.timer_outlined, // 타이머 아이콘
-                    color: Colors.white,
-                    size: 14,
-                  ),
-                  Text(
-                    ' $recipeTime min',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-
-                  Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.bookmark_border,
-                      color: Color.fromARGB(255, 126, 174, 166),
-                      size: 12,
                     ),
                   ),
                 ],

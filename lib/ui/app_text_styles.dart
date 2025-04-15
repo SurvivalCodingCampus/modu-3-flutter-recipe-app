@@ -52,6 +52,13 @@ abstract class AppTextStyles {
     color: color,
   );
 
+  static TextStyle chefText({Color? color}) => GoogleFonts.poppins(
+    fontWeight: FontWeight.w400,
+    fontSize: 8,
+    height: 17 / 11,
+    color: color,
+  );
+
   // ─── Regular ─────────────────────────
   static TextStyle titleRegular({Color? color}) => GoogleFonts.poppins(
     fontWeight: FontWeight.w400,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/widgets/recipe_card.dart';
-import 'package:recipe_app/presentation/home/saved_recipes_view_model.dart';
-import 'package:recipe_app/ui/app_text_styles.dart'; // RecipeCard 위젯 경로를 실제 경로로 변경해주세요
+import 'package:recipe_app/presentation/component/pages/recipe/saved_recipes_view_model.dart';
+import 'package:recipe_app/ui/app_text_styles.dart';
 
-class RecipeScreen extends StatelessWidget {
+class RecipesScreen extends StatelessWidget {
   final SavedRecipesViewModel viewModel;
-  const RecipeScreen({super.key, required this.viewModel});
+  const RecipesScreen({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +20,30 @@ class RecipeScreen extends StatelessWidget {
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {
-          final recipes = viewModel.recipes;
-          if (recipes.isEmpty) {
+          final state = viewModel.state;
+
+          if (state.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          
+
+          final recipes = state.filteredRecipes;
+
+          if (recipes.isEmpty) {
+            return const Center(child: Text("저장된 레시피가 없습니다."));
+          }
+
           return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             itemCount: recipes.length,
             itemBuilder: (context, index) {
               final recipe = recipes[index];
-              
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: RecipeCard(
                   recipeName: recipe.name,
                   chefName: recipe.chef,
                   recipeImgUrl: recipe.image,
-                  recipeTime: int.tryParse(recipe.time.replaceAll(RegExp(r'[^0-9]'), '')) ?? 20, // "20 min" -> 20
+                  recipeTime: int.tryParse(recipe.time.replaceAll(RegExp(r'[^0-9]'), '')) ?? 20,
                   recipeRating: recipe.rating ?? 4.0,
                 ),
               );
