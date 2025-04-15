@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "What are you cooking today?",
                             style: TextStyles.smallerTextRegular.copyWith(
-                              color: ColorStyles.gray4,
+                              color: ColorStyles.gray3,
                             ),
                           ),
                         ],
