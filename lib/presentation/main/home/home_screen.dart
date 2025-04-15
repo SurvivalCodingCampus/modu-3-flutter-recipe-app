@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
-import 'package:recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
+import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
+import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_view_model.dart';
+import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_view_model.dart';
 
-import '../../data/data_source/mock_recipe_data_source_impl.dart';
-import '../../data/repository/recipe_repository_impl.dart';
-import '../../ui/text_styles.dart';
-import '../saved_recipes/saved_recipes_screen.dart';
-import '../saved_recipes/saved_recipes_view_model.dart';
-import '../search_recipes/search_recipes_view_model.dart';
+
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

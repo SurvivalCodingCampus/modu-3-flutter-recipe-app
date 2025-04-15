@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/model/user.dart';
@@ -6,8 +8,6 @@ import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/input_field_widget.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/presentation/component/tabs_widget.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-import 'package:recipe_app/ui/text_styles.dart';
 
 import 'button_widget.dart';
 import 'ingredient_item.dart';

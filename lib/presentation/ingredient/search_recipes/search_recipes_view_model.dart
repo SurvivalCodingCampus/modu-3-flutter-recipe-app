@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/enums/time_filter.dart';
+import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/data/type/category_filter.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
-
-import '../../data/model/recipe.dart';
-import '../../data/type/time_filter.dart';
+import 'package:recipe_app/core/enums/category_filter.dart';
+import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;

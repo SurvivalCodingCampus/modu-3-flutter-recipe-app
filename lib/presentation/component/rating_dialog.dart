@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-import 'package:recipe_app/ui/text_styles.dart';
-
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
 import 'button_widget.dart';
 
 class RatingDialog extends StatefulWidget {

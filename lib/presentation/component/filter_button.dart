@@ -1,10 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/type/category_filter.dart';
-
-import '../../ui/color_styles.dart';
-import '../../ui/text_styles.dart';
+import 'package:recipe_app/core/enums/category_filter.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
 
 class FilterButton extends StatelessWidget {
   final void Function() onClick;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-
-import '../../ui/text_styles.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
 
 class RatingButton extends StatelessWidget {
   final void Function() onClick;

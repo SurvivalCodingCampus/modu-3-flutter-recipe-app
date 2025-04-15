@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/type/category_filter.dart';
+import 'package:recipe_app/core/enums/category_filter.dart';
+import 'package:recipe_app/core/enums/time_filter.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/presentation/component/button_widget.dart';
 import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/filter_search_state.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-import 'package:recipe_app/ui/text_styles.dart';
-
-import '../../data/type/time_filter.dart';
 
 class FilterSearchBottomSheet extends StatefulWidget {
   final void Function(
     TimeFilter timeFilter,
     int rate,
     CategoryFilter categoryFilter,
-  )
-  onFilterChange;
+  ) onFilterChange;
+  // final FilterSearchState state
+  // fianl void Function(
+  //     FilterSearchState filterSearchState
+  //   )
   final TimeFilter timeFilter;
   final int rateFilter;
   final CategoryFilter categoryFilter;
@@ -26,7 +28,7 @@ class FilterSearchBottomSheet extends StatefulWidget {
     required this.timeFilter,
     required this.rateFilter,
     required this.categoryFilter,
-  });
+});
 
   @override
   State<FilterSearchBottomSheet> createState() =>
@@ -34,7 +36,7 @@ class FilterSearchBottomSheet extends StatefulWidget {
 }
 
 class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
-  late FilterSearchState _state;
+  FilterSearchState _state = FilterSearchState();
 
   @override
   void initState() {
@@ -74,7 +76,6 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   star: false,
                   isSelected: _state.timeSelectedIndex == index,
                   onClick: () {
-                    print(index);
                     setState(() {
                       _state.timeSelectedIndex = index;
                     });
@@ -94,7 +95,6 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   text: '$reverseIndex',
                   isSelected: _state.rateSelectedIndex == reverseIndex,
                   onClick: () {
-                    print(reverseIndex);
                     setState(() {
                       if (_state.rateSelectedIndex == reverseIndex) {
                         _state.rateSelectedIndex = 0;

@@ -1,7 +1,7 @@
+import 'package:recipe_app/core/enums/time_filter.dart';
 import 'package:recipe_app/data/model/recipe.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recipe_app/data/type/category_filter.dart';
-import 'package:recipe_app/data/type/time_filter.dart';
+import 'package:recipe_app/core/enums/category_filter.dart';
 
 part 'search_recipes_state.freezed.dart';
 
