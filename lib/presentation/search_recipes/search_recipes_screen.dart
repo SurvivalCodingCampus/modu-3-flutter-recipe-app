@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/button/enum/category.dart';
+import 'package:recipe_app/presentation/component/button/enum/category_type.dart';
 import 'package:recipe_app/presentation/component/button/enum/star.dart';
 import 'package:recipe_app/presentation/component/button/enum/time.dart';
 import 'package:recipe_app/presentation/component/button/filter_button.dart';
@@ -154,16 +154,22 @@ class FilterBottomSheet extends StatelessWidget {
               spacing: 10,
               children: [
                 Text('Time', style: TextFontStyle.smallBold()),
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
+                Row(
+                  spacing: 5,
                   children:
                       Time.values.map((time) {
-                        return FilterButton(
-                          text: time.name,
-                          isSelected: Time.all == time,
-                          onChanged: () {},
-                          starIcon: false,
+                        return ListenableBuilder(
+                          listenable: _viewModel,
+                          builder: (context, snapshot) {
+                            return FilterButton(
+                              text: time.name,
+                              isSelected: _viewModel.state.time == time,
+                              onChanged: () {
+                                _viewModel.updateSelectedTime(time);
+                              },
+                              starIcon: false,
+                            );
+                          },
                         );
                       }).toList(),
                 ),
@@ -183,11 +189,18 @@ class FilterBottomSheet extends StatelessWidget {
                   runSpacing: 10,
                   children:
                       Star.values.map((star) {
-                        return FilterButton(
-                          text: fromStar(star).toString(),
-                          isSelected: Star.one == star,
-                          onChanged: () {},
-                          starIcon: true,
+                        return ListenableBuilder(
+                          listenable: _viewModel,
+                          builder: (context, snapshot) {
+                            return FilterButton(
+                              text: fromStar(star).toString(),
+                              isSelected: _viewModel.state.star == star,
+                              onChanged: () {
+                                _viewModel.updateSelectedStar(star);
+                              },
+                              starIcon: true,
+                            );
+                          },
                         );
                       }).toList(),
                 ),
@@ -206,21 +219,45 @@ class FilterBottomSheet extends StatelessWidget {
                   spacing: 10,
                   runSpacing: 10,
                   children:
-                      Category.values.map((category) {
-                        return FilterButton(
-                          text: category.name,
-                          isSelected: Category.all == category,
-                          onChanged: () {},
-                          starIcon: category.name == 'dinner' ? true : false,
+                      CategoryType.values.map((category) {
+                        return ListenableBuilder(
+                          listenable: _viewModel,
+                          builder: (context, snapshot) {
+                            return FilterButton(
+                              text: category.name,
+                              isSelected:
+                                  _viewModel.state.categoryType == category,
+                              onChanged: () {
+                                _viewModel.updateSelectedCategory(category);
+                              },
+                              starIcon:
+                                  category.name == 'dinner' ? true : false,
+                            );
+                          },
                         );
                       }).toList(),
                 ),
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SmallButton(text: 'Filter', onTap: () {}),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 22),
+            child: ListenableBuilder(
+              listenable: _viewModel,
+              builder: (context, snapshot) {
+                return SmallButton(
+                  text: 'Filter',
+                  onTap: () {
+                    _viewModel.filterRecipes(
+                      _viewModel.state.categoryType,
+                      _viewModel.state.star,
+                      _viewModel.state.time,
+                    );
+                    Navigator.pop(context);
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
