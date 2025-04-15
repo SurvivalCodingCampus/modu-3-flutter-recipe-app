@@ -78,7 +78,6 @@ class SignIn extends StatelessWidget {
                   onClick:
                       viewModel.state.isValid
                           ? () {
-                            print('작동하고있나?');
                             context.go('/home');
                           }
                           : null,
