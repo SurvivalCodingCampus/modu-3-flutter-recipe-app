@@ -68,13 +68,20 @@ class _ButtonWidgetState extends State<ButtonWidget> {
           borderRadius: BorderRadius.circular(widget.buttonSize.border),
         ),
         child: Center(
-          child: Text(
-            widget.buttonText,
-            style: switch (widget.buttonSize) {
-              ButtonSize.big => TextStyles.normalBold(color: ColorStyles.white),
-              ButtonSize.medium => TextStyles.normalBold(color: ColorStyles.white),
-              ButtonSize.small => TextStyles.smallBold(color: ColorStyles.white),
-            },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.buttonText,
+                style: switch (widget.buttonSize) {
+                  ButtonSize.big => TextStyles.normalBold(color: ColorStyles.white),
+                  ButtonSize.medium => TextStyles.normalBold(color: ColorStyles.white),
+                  ButtonSize.small => TextStyles.smallBold(color: ColorStyles.white),
+                },
+              ),
+              SizedBox(width: 20,),
+              Icon(Icons.arrow_forward_outlined, color: ColorStyles.white, size: 20,)
+            ],
           ),
         ),
       ),
