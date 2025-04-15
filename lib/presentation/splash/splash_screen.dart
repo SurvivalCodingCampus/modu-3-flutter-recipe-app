@@ -3,7 +3,8 @@ import 'package:recipe_app/presentation/component/big_button.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+  final VoidCallback? onTapStart;
+  const SplashScreen({super.key, this.onTapStart});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class SplashScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 64),
-                        const BigButton(text: 'Start Cooking'),
+                        BigButton(text: 'Start Cooking', onTap: onTapStart),
                       ],
                     ),
                   ),
