@@ -22,7 +22,7 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +84,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 20,
+                        ),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
