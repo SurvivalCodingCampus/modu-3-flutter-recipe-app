@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/pushed_button/big_tap_button.dart';
 import 'package:recipe_app/presentation/first/splash_screen_view_model.dart';
 
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
-import '../saved_recipe/saved_recipe_screen.dart';
-import '../saved_recipe/saved_recipe_view_model.dart';
 
 class SplashScreen extends StatelessWidget {
   final SplashScreenViewModel viewModel;
-  final SavedRecipeViewModel viewModel2;
 
-  const SplashScreen({
-    super.key,
-    required this.viewModel,
-    required this.viewModel2,
-  });
+  const SplashScreen({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -78,21 +72,10 @@ class SplashScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 70),
-                    if (!viewModel2.isLoading)
-                      BigTapButton(
-                        text: 'Start Cooking',
-                        onClick: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) =>
-                                      SavedRecipeScreen(viewModel: viewModel2),
-                            ),
-                          );
-                        },
-                      ),
-                    if (viewModel2.isLoading) CircularProgressIndicator(),
+                    BigTapButton(
+                      text: 'Start Cooking',
+                      onClick: () => context.go('/sign-in'),
+                    ),
                   ],
                 ),
               ],

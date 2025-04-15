@@ -36,7 +36,7 @@ class BigButton extends StatelessWidget {
                 text,
                 style: TextStyles.normalBold.copyWith(color: ColorStyles.white),
               ),
-              SizedBox(width: 30),
+              SizedBox(width: 20),
               Icon(Icons.arrow_forward, color: ColorStyles.white),
             ],
           ),
