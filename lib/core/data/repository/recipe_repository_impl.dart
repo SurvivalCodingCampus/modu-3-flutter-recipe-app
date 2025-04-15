@@ -1,11 +1,14 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
-import 'package:recipe_app/data/data_source/recipe_data_source.dart';
-import 'package:recipe_app/data/dto/recipe_dto.dart';
-import 'package:recipe_app/data/mapper/recipe_mapper.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/util/failure.dart';
-import 'package:recipe_app/util/result.dart';
+
+// Project imports:
+import 'package:recipe_app/core/data/data_source/recipe_data_source.dart';
+import 'package:recipe_app/core/data/dto/recipe_dto.dart';
+import 'package:recipe_app/core/data/mapper/recipe_mapper.dart';
+import 'package:recipe_app/core/data/model/recipe.dart';
+import 'package:recipe_app/core/data/repository/recipe_repository.dart';
+import 'package:recipe_app/core/failure.dart';
+import 'package:recipe_app/core/result.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource? remoteDataSource;

@@ -1,9 +1,12 @@
-import 'package:flutter/cupertino.dart';
+// Flutter imports:
+
+// Project imports:
+import 'package:flutter/material.dart';
+import 'package:recipe_app/core/ui/text_style.dart';
 import 'package:recipe_app/presentation/component/custom_button.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_button.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/rating_button.dart';
-import 'package:recipe_app/ui/text_style.dart';
 
 class FilterSearchBottomSheet extends StatefulWidget {
   final FilterSearchState state;

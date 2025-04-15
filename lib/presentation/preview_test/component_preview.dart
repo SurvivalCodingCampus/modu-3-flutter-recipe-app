@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:recipe_app/presentation/component/custom_button.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_button.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/rating_button.dart';

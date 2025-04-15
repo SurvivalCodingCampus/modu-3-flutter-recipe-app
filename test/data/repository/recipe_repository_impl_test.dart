@@ -1,10 +1,14 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
-import 'package:recipe_app/util/result.dart';
 
-import '../../../lib/data/mocks/mock_recipe_data_source_impl.dart';
+// Package imports:
+import 'package:flutter_test/flutter_test.dart';
+
+// Project imports:
+import 'package:recipe_app/core/data/mocks/mock_recipe_data_source_impl.dart';
+import 'package:recipe_app/core/data/model/recipe.dart';
+import 'package:recipe_app/core/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/core/result.dart';
 
 void main() {
   group('RecipeRepositoryImpl', () {

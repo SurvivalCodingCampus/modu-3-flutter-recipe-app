@@ -1,8 +1,12 @@
+// Dart imports:
 import 'dart:convert';
 
+// Flutter imports:
 import 'package:flutter/services.dart';
-import 'package:recipe_app/data/data_source/recipe_data_source.dart';
-import 'package:recipe_app/data/dto/recipe_dto.dart';
+
+// Project imports:
+import 'package:recipe_app/core/data/data_source/recipe_data_source.dart';
+import 'package:recipe_app/core/data/dto/recipe_dto.dart';
 
 class MockRecipeDataSourceImpl implements RecipeDataSource {
   final String _path;

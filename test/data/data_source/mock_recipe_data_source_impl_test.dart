@@ -1,8 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/data/data_source/recipe_data_source.dart';
-import 'package:recipe_app/data/dto/recipe_dto.dart';
-import 'package:recipe_app/data/mocks/mock_recipe_data_source_impl.dart';
+
+// Project imports:
+import 'package:recipe_app/core/data/data_source/recipe_data_source.dart';
+import 'package:recipe_app/core/data/dto/recipe_dto.dart';
+import 'package:recipe_app/core/data/mocks/mock_recipe_data_source_impl.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

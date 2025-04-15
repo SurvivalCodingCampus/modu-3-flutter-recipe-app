@@ -1,9 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
+// Project imports:
+import 'package:recipe_app/core/data/repository/recipe_repository.dart';
+import 'package:recipe_app/core/result.dart';
+import 'package:recipe_app/core/ui/ui_state.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
-import 'package:recipe_app/util/result.dart';
-import 'package:recipe_app/util/ui_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
   final RecipeRepository _repository;

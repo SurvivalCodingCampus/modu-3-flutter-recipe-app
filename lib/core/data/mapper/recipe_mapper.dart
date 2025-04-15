@@ -1,9 +1,10 @@
-import 'package:recipe_app/data/dto/ingredient_dto.dart';
-import 'package:recipe_app/data/dto/recipe_dto.dart';
-import 'package:recipe_app/data/dto/recipe_ingredient_dto.dart';
-import 'package:recipe_app/data/model/ingredient.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/model/recipe_ingredient.dart';
+// Project imports:
+import 'package:recipe_app/core/data/dto/ingredient_dto.dart';
+import 'package:recipe_app/core/data/dto/recipe_dto.dart';
+import 'package:recipe_app/core/data/dto/recipe_ingredient_dto.dart';
+import 'package:recipe_app/core/data/model/ingredient.dart';
+import 'package:recipe_app/core/data/model/recipe.dart';
+import 'package:recipe_app/core/data/model/recipe_ingredient.dart';
 
 extension RecipeMapper on RecipeDto {
   Recipe toRecipe() {

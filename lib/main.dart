@@ -1,6 +1,8 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_style.dart';
+import 'package:recipe_app/core/ui/color_style.dart';
 
+// Project imports:
 import 'presentation/preview_test/dev_main_menu_screen.dart';
 
 void main() {

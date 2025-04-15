@@ -1,10 +1,9 @@
-// login_preview_restored_from_step4.dart
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/ui/color_style.dart';
+import 'package:recipe_app/core/ui/text_style.dart';
 import 'package:recipe_app/presentation/component/custom_button.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
 import 'package:recipe_app/presentation/component/login_component/social_login_section.dart';
-import 'package:recipe_app/ui/color_style.dart';
-import 'package:recipe_app/ui/text_style.dart';
 
 void main() => runApp(const LoginApp());
 

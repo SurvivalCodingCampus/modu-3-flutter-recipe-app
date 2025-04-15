@@ -1,7 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_style.dart';
-import 'package:recipe_app/ui/text_style.dart';
-import 'package:recipe_app/ui/ui_size.dart';
+import 'package:recipe_app/core/ui/color_style.dart';
+import 'package:recipe_app/core/ui/text_style.dart';
+import 'package:recipe_app/core/ui/ui_size.dart';
+
+// Project imports:
 
 enum CustomButtonSize { big, medium, small }
 
