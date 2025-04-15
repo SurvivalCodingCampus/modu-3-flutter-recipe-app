@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/button/medium_button.dart';
+import 'package:recipe_app/routes.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
 
@@ -59,7 +61,12 @@ class SplashScreen extends StatelessWidget {
             bottom: 84,
             left: 66,
             right: 66,
-            child: MediumButton(text: 'Start Cooking', onTap: () {}),
+            child: MediumButton(
+              text: 'Start Cooking',
+              onTap: () {
+                context.go(Routes.signIn);
+              },
+            ),
           ),
         ],
       ),
