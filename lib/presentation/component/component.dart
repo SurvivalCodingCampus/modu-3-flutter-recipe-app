@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/button.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/input_field.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/tabs.dart';
+import 'package:recipe_app/presentation/component/rating_button.dart';
+import 'package:recipe_app/presentation/component/rating_dialog.dart';
+import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/ui/color.dart';
 
-import '../../../2025-04-10/presentation/component/buttons.dart';
-import '../../../2025-04-10/presentation/component/filter_button.dart';
-import '../../../2025-04-10/presentation/component/ingredientItem.dart';
-import '../../../2025-04-10/presentation/component/rating_button.dart';
-import '../../../2025-04-10/presentation/component/rating_dialog.dart';
-import '../../../2025-04-10/presentation/component/recipe_card.dart';
+import 'buttons.dart';
+import 'filter_button.dart';
+import 'ingredientItem.dart';
+
 
 
 class Component extends StatefulWidget {
@@ -61,7 +62,7 @@ class _ComponentState extends State<Component> {
               const SizedBox(height: 10),
               Ingredientitem(),
               const SizedBox(height: 10),
-              RecipeCard(),
+              // RecipeCard(),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

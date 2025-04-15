@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/2025-04-10/presentation/component/buttons.dart';
+import 'package:recipe_app/presentation/component/buttons.dart';
 
 void main() {
   testWidgets('Buttons onTap', (WidgetTester tester) async {
