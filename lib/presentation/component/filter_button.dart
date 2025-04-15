@@ -24,6 +24,11 @@ class FilterButton extends StatefulWidget {
 class _FilterButtonState extends State<FilterButton> {
   bool isFocused = false;
 
+  String capitalize(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -48,7 +53,7 @@ class _FilterButtonState extends State<FilterButton> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              widget.value.name,
+              capitalize(widget.value.name),
               style: TextStyles.smallerTextRegular.copyWith(
                 color: isFocused ? ColorStyles.white : widget.color,
               ),

@@ -5,13 +5,14 @@ import 'package:recipe_app/ui/text_style.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  const RecipeCard({super.key, required this.recipe});
+  final bool isBig;
+  const RecipeCard({super.key, required this.recipe, required this.isBig});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 150,
+      height: isBig ? 150 : 177.5,
       // padding: EdgeInsets.all(10),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
@@ -26,7 +27,7 @@ class RecipeCard extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            height: 150,
+            height: isBig ? 150 : 177.5,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -40,7 +41,7 @@ class RecipeCard extends StatelessWidget {
             bottom: 10,
             child: SizedBox(
               height: 60,
-              width: 200,
+              width: isBig ? 200 : 140,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -49,6 +50,8 @@ class RecipeCard extends StatelessWidget {
                     style: TextStyles.smallTextBold.copyWith(
                       color: ColorStyles.white,
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     'By ${recipe.chef}',
@@ -60,32 +63,33 @@ class RecipeCard extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            bottom: 10,
-            right: 10,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 17,
-                  height: 17,
-                  child: Image.asset('assets/images/clock_icon.png'),
-                ),
-                SizedBox(width: 5),
-                Text(
-                  recipe.cookingTime,
-                  style: TextStyles.smallTextRegular.copyWith(
-                    color: ColorStyles.white,
+          if (isBig)
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 17,
+                    height: 17,
+                    child: Image.asset('assets/images/clock_icon.png'),
                   ),
-                ),
-                SizedBox(width: 10),
-                SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: Image.asset('assets/images/bookmark_icon.png'),
-                ),
-              ],
+                  SizedBox(width: 5),
+                  Text(
+                    recipe.cookingTime,
+                    style: TextStyles.smallTextRegular.copyWith(
+                      color: ColorStyles.white,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Image.asset('assets/images/bookmark_icon.png'),
+                  ),
+                ],
+              ),
             ),
-          ),
           Positioned(
             top: 10,
             right: 10,

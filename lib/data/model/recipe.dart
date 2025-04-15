@@ -22,8 +22,8 @@ abstract class Recipe with _$Recipe {
     @Default(Media()) final Media media,
     @Default([]) final List<String> recipeStep,
     @JsonKey(name: 'time') @Default('') final String cookingTime,
-    @Default(Categories.all) final Categories category,
     @Default(0) final double rating,
+    @Default(Categories.all) final Categories category,
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);

@@ -9,6 +9,8 @@ import 'package:recipe_app/presentation/component/input_field.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/test_screen/button_screen.dart';
 import 'package:recipe_app/test_screen/ingredient_screen.dart';
@@ -29,6 +31,7 @@ class ComponentTestScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(height: 36),
                   BigButton(
                     name: 'SavedRecipes',
                     color: ColorStyles.secondary100,
@@ -59,6 +62,29 @@ class ComponentTestScreen extends StatelessWidget {
                     onClick: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => SplashScreen()),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  BigButton(
+                    name: 'SearchRecipes',
+                    color: ColorStyles.secondary100,
+                    icon: Icons.arrow_forward,
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder:
+                              (context) => SearchRecipesScreen(
+                                viewModel: SearchRecipesViewModel(
+                                  recipeRepository: MockRecipeRepositoryImpl(
+                                    recipeDataSource: MockRecipeDataSource(
+                                      client: http.Client(),
+                                      url: 'testUrl',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                        ),
                       );
                     },
                   ),
@@ -114,7 +140,7 @@ class ComponentTestScreen extends StatelessWidget {
                   InputField(
                     label: 'Label',
                     placeHolder: 'PlaceHolder',
-                    value: 'value',
+                    controller: TextEditingController(),
                     onValueChange: (value) {
                       print('입력이 변경되었습니다.');
                     },
@@ -123,7 +149,7 @@ class ComponentTestScreen extends StatelessWidget {
                   InputField(
                     label: 'Label',
                     placeHolder: 'PlaceHolder',
-                    value: '',
+                    controller: TextEditingController(text: 'value'),
                     onValueChange: (value) {
                       print('입력이 변경되었습니다.');
                     },
