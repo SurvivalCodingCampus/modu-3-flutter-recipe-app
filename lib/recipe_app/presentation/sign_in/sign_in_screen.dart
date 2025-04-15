@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
@@ -200,28 +201,28 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 50),
-                      Container(
-                        alignment: Alignment.center,
-                        child: Row(
-                          children: [
-                            Text(
-                              'Don\'t have an account? ',
+                      SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Don\'t have an account? ',
+                            style: TextStyles2.smallerTextSemiBold.copyWith(
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              context.go('/sign-up-screen');
+                            },
+                            child: Text(
+                              'Sign up',
                               style: TextStyles2.smallerTextSemiBold.copyWith(
-                                color: Colors.black,
+                                color: ColorStyles2.secondary100,
                               ),
                             ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Sign up',
-                                style: TextStyles2.smallerTextSemiBold.copyWith(
-                                  color: ColorStyles2.secondary100,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
