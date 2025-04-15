@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/components.dart';
 import '../../ui/ui.dart';
 
@@ -70,7 +72,7 @@ class SplashScreen extends StatelessWidget {
                   BigButton(
                     text: 'Start Cooking',
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/');
+                      context.go(Routes.login);
                     },
                   ),
                   const SizedBox(height: 84),
