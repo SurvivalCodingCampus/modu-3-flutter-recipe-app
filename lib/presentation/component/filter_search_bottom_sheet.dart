@@ -9,26 +9,14 @@ import 'package:recipe_app/presentation/component/filter_search_state.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
 
 class FilterSearchBottomSheet extends StatefulWidget {
-  final void Function(
-    TimeFilter timeFilter,
-    int rate,
-    CategoryFilter categoryFilter,
-  ) onFilterChange;
-  // final FilterSearchState state
-  // fianl void Function(
-  //     FilterSearchState filterSearchState
-  //   )
-  final TimeFilter timeFilter;
-  final int rateFilter;
-  final CategoryFilter categoryFilter;
+  final FilterSearchState state;
+  final void Function(FilterSearchState filterSearchState) onFilterChange;
 
   const FilterSearchBottomSheet({
     super.key,
     required this.onFilterChange,
-    required this.timeFilter,
-    required this.rateFilter,
-    required this.categoryFilter,
-});
+    required this.state,
+  });
 
   @override
   State<FilterSearchBottomSheet> createState() =>
@@ -36,17 +24,17 @@ class FilterSearchBottomSheet extends StatefulWidget {
 }
 
 class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
-  FilterSearchState _state = FilterSearchState();
+  int _timeSelectedIndex = 0;
+  int _rateSelectedIndex = 0;
+  int _categorySelectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _state = FilterSearchState(
-      timeSelectedIndex: TimeFilter.values.indexOf(widget.timeFilter),
-      rateSelectedIndex: widget.rateFilter,
-      categorySelectedIndex: CategoryFilter.values.indexOf(
-        widget.categoryFilter,
-      ),
+    _timeSelectedIndex = TimeFilter.values.indexOf(widget.state.timeFilter);
+    _rateSelectedIndex = widget.state.rateFilter;
+    _categorySelectedIndex = CategoryFilter.values.indexOf(
+      widget.state.categoryFilter,
     );
   }
 
@@ -74,10 +62,10 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                 return FilterButton(
                   text: TimeFilter.values[index].name,
                   star: false,
-                  isSelected: _state.timeSelectedIndex == index,
+                  isSelected: _timeSelectedIndex == index,
                   onClick: () {
                     setState(() {
-                      _state.timeSelectedIndex = index;
+                      _timeSelectedIndex = index;
                     });
                   },
                 );
@@ -93,13 +81,13 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                 final reverseIndex = 5 - index;
                 return RatingButton(
                   text: '$reverseIndex',
-                  isSelected: _state.rateSelectedIndex == reverseIndex,
+                  isSelected: _rateSelectedIndex == reverseIndex,
                   onClick: () {
                     setState(() {
-                      if (_state.rateSelectedIndex == reverseIndex) {
-                        _state.rateSelectedIndex = 0;
+                      if (_rateSelectedIndex == reverseIndex) {
+                        _rateSelectedIndex = 0;
                       } else {
-                        _state.rateSelectedIndex = reverseIndex;
+                        _rateSelectedIndex = reverseIndex;
                       }
                     });
                   },
@@ -115,11 +103,11 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
               children: List.generate(10, (index) {
                 return FilterButton(
                   text: CategoryFilter.values[index].name,
-                  isSelected: _state.categorySelectedIndex == index,
+                  isSelected: _categorySelectedIndex == index,
                   star: index == 3 ? true : false,
                   onClick: () {
                     setState(() {
-                      _state.categorySelectedIndex = index;
+                      _categorySelectedIndex = index;
                     });
                   },
                 );
@@ -134,9 +122,11 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   buttonText: 'Filter',
                   onClick: () {
                     widget.onFilterChange(
-                      TimeFilter.values[_state.timeSelectedIndex],
-                      _state.rateSelectedIndex,
-                      CategoryFilter.values[_state.categorySelectedIndex],
+                      FilterSearchState(
+                        timeFilter: TimeFilter.values[_timeSelectedIndex],
+                        rateFilter: _rateSelectedIndex,
+                        categoryFilter: CategoryFilter.values[_categorySelectedIndex],
+                      )
                     );
                   },
                 ),

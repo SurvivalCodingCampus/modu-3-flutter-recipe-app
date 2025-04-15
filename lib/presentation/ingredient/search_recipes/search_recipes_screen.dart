@@ -4,6 +4,7 @@ import 'package:recipe_app/core/enums/time_filter.dart';
 import 'package:recipe_app/core/ui/color_styles.dart';
 import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet.dart';
+import 'package:recipe_app/presentation/component/filter_search_state.dart';
 import 'package:recipe_app/presentation/component/input_field_widget.dart';
 import 'package:recipe_app/presentation/component/recipe_card_search.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_view_model.dart';
@@ -67,11 +68,9 @@ class SearchRecipesScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(30.0),
                                 child: FilterSearchBottomSheet(
-                                  timeFilter: viewModel.state.timeFilter,
-                                  rateFilter: viewModel.state.rateFilter,
-                                  categoryFilter: viewModel.state.categoryFilter,
-                                  onFilterChange: (TimeFilter time, int rate, CategoryFilter category) {
-                                    viewModel.setFilter(time, rate, category);
+                                  state: viewModel.state.filterSearchState,
+                                  onFilterChange: (FilterSearchState filterSearchState) {
+                                    viewModel.setFilter(filterSearchState);
                                     Navigator.pop(context);
                                   },
                                 ),

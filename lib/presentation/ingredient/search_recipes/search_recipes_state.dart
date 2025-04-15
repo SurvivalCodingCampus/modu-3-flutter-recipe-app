@@ -2,6 +2,7 @@ import 'package:recipe_app/core/enums/time_filter.dart';
 import 'package:recipe_app/data/model/recipe.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/core/enums/category_filter.dart';
+import 'package:recipe_app/presentation/component/filter_search_state.dart';
 
 part 'search_recipes_state.freezed.dart';
 
@@ -15,9 +16,7 @@ class SearchRecipesState with _$SearchRecipesState {
   final List<Recipe> searchRecipes;
 
   // 필터 상태 저장
-  final TimeFilter timeFilter;
-  final int rateFilter;
-  final CategoryFilter categoryFilter;
+  final FilterSearchState filterSearchState;
 
   final bool isLoading;
   final String searchString;
@@ -27,8 +26,10 @@ class SearchRecipesState with _$SearchRecipesState {
     this.searchRecipes = const [],
     this.isLoading = false,
     this.searchString = '',
-    this.timeFilter = TimeFilter.All,
-    this.rateFilter = 0,
-    this.categoryFilter = CategoryFilter.All
+    this.filterSearchState = const FilterSearchState(
+      timeFilter: TimeFilter.All,
+      rateFilter: 0,
+      categoryFilter: CategoryFilter.All,
+    )
   });
 }
