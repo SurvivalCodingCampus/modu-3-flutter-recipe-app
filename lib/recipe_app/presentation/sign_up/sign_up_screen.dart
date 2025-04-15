@@ -254,7 +254,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      context.go('/sign-up-screen');
+                      context.go('/sign-in-screen');
                     },
                     child: Text(
                       'Sign In',
