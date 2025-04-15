@@ -2,8 +2,6 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'ingredients.dart';
-
 part 'procedure.freezed.dart';
 
 part 'procedure.g.dart';

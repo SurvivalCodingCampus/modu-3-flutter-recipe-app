@@ -25,9 +25,7 @@ void main() {
 class SearchRecipeScreen extends StatefulWidget {
   final SearchRecipeViewModel viewModel;
 
-  SearchRecipeScreen({super.key, required this.viewModel}) {
-    viewModel.fetchAll();
-  }
+  const SearchRecipeScreen({super.key, required this.viewModel});
 
   @override
   State<SearchRecipeScreen> createState() => _SearchRecipeScreenState();
@@ -35,7 +33,11 @@ class SearchRecipeScreen extends StatefulWidget {
 
 class _SearchRecipeScreenState extends State<SearchRecipeScreen> {
 
-
+  @override
+  void initState() {
+      super.initState();
+      widget.viewModel.fetchAll();
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,11 @@ class _SearchRecipeScreenState extends State<SearchRecipeScreen> {
                       itemBuilder: (context, index) {
                         final recipe = recipeList[index];
                         return SearchRecipeCard(recipe: recipe);
-                      }
+                      },
+                      // emptyBuilder: () => Center(
+                      //   child: Text('검색 결과가 없습니다.',
+                      //   style: Theme.of(context).textTheme.bodyLarge),
+                      // )
                     ),
                   ),
                 ],
