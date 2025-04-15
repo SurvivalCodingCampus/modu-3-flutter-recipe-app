@@ -1,8 +1,8 @@
 abstract class Routes {
   // 인증 경로
   static const String splash = '/splash';
-  static const String signIn = '/sign-in';
-  static const String signUp = '/sign-up';
+  static const String signIn = '/auth-in';
+  static const String signUp = '/auth-up';
 
   //메인 탭 경로
   static const String home = '/home';
