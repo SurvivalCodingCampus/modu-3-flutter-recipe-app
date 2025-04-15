@@ -31,20 +31,10 @@ class _SingInScreenState extends State<SingInScreen> {
             Text('Welcome Back!', style: AppTextStyle.largeRegular),
             const SizedBox(height: 50),
             Text('Email', style: AppTextStyle.smallRegular),
-            AppTextField(
-              controller: _email,
-              hintText: 'Enter email',
-              borderColor: AppColor.grey4,
-              textColor: AppColor.grey4,
-            ),
+            AppTextField(controller: _email, hintText: 'Enter email'),
             const SizedBox(height: 30),
             Text('Enter Password', style: AppTextStyle.smallRegular),
-            AppTextField(
-              controller: _password,
-              hintText: 'Enter Password',
-              borderColor: AppColor.grey4,
-              textColor: AppColor.grey4,
-            ),
+            AppTextField(controller: _password, hintText: 'Enter Password'),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: Text(

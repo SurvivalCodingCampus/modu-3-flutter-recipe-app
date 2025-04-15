@@ -38,35 +38,18 @@ class _SingUpScreenState extends State<SingUpScreen> {
               ),
               const SizedBox(height: 20),
               Text('Name', style: AppTextStyle.smallRegular),
-              AppTextField(
-                controller: _name,
-                hintText: 'Enter Name',
-                borderColor: AppColor.grey4,
-                textColor: AppColor.grey4,
-              ),
+              AppTextField(controller: _name, hintText: 'Enter Name'),
               const SizedBox(height: 20),
               Text('Email', style: AppTextStyle.smallRegular),
-              AppTextField(
-                controller: _email,
-                hintText: 'Enter email',
-                borderColor: AppColor.grey4,
-                textColor: AppColor.grey4,
-              ),
+              AppTextField(controller: _email, hintText: 'Enter email'),
               const SizedBox(height: 20),
               Text('Password', style: AppTextStyle.smallRegular),
-              AppTextField(
-                controller: _password,
-                hintText: 'Enter Password',
-                borderColor: AppColor.grey4,
-                textColor: AppColor.grey4,
-              ),
+              AppTextField(controller: _password, hintText: 'Enter Password'),
               const SizedBox(height: 20),
               Text('Confirm Password', style: AppTextStyle.smallRegular),
               AppTextField(
                 controller: _confirmPassword,
                 hintText: 'Retype Password',
-                borderColor: AppColor.grey4,
-                textColor: AppColor.grey4,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
