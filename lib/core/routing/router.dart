@@ -1,11 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
+import 'package:recipe_app/presentation/home/home_screen.dart';
 import 'package:recipe_app/presentation/sign-in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign-up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
 final router = GoRouter(
-  initialLocation: Routes.splash,
+  initialLocation: Routes.home,
   routes: [
     GoRoute(
       path: Routes.splash,
@@ -27,5 +28,6 @@ final router = GoRouter(
           (context, state) =>
               SignUpScreen(onTapSignIn: () => context.go(Routes.signIn)),
     ),
+    GoRoute(path: Routes.home, builder: (context, state) => const HomeScreen()),
   ],
 );
