@@ -22,4 +22,22 @@ class SearchRecipesViewModel with ChangeNotifier {
     );
     notifyListeners();
   }
+
+  Future<void> searchRecipes(String inputText) async {
+    if (inputText.isEmpty) {
+      _state = state.copyWith(recipes: await _recipeRepository.getRecipes());
+      notifyListeners();
+    }
+    final filtered =
+        _state.recipes
+            .where(
+              (element) =>
+                  element.title.toLowerCase().contains(inputText.toLowerCase()),
+            )
+            .toList();
+    _state = state.copyWith(recipes: filtered, text: inputText);
+    notifyListeners();
+  }
+
+  Future<void> filterRecipes() async {}
 }

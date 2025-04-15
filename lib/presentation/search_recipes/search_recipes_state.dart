@@ -8,6 +8,11 @@ part 'search_recipes_state.freezed.dart';
 class SearchRecipesState with _$SearchRecipesState {
   final List<Recipe> recipes;
   final bool isLoading;
+  final String text;
 
-  SearchRecipesState({this.recipes = const [], this.isLoading = false});
+  SearchRecipesState({
+    this.recipes = const [],
+    this.isLoading = false,
+    this.text = '',
+  });
 }

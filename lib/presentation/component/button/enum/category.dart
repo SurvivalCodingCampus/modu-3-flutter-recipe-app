@@ -12,14 +12,14 @@ enum Category {
 }
 
 Category categorySwitch(String? categroy) {
-  switch (categroy) {
-    case 'All':
+  switch (categroy?.toLowerCase()) {
+    case 'all':
       return Category.all;
-    case 'Cereal':
+    case 'cereal':
       return Category.cereal;
-    case 'Vegetables':
+    case 'vegetables':
       return Category.vegetables;
-    case 'Dinner':
+    case 'dinner':
       return Category.dinner;
     case 'chinese':
       return Category.chinese;
