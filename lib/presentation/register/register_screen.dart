@@ -16,8 +16,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool isChecked = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
