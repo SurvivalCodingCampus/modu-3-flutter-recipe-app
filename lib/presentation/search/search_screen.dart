@@ -7,10 +7,21 @@ import 'package:recipe_app/presentation/component/search_text_field.dart';
 import 'package:recipe_app/presentation/search/search_view_model.dart';
 import 'package:recipe_app/ui/ui.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   final SearchViewModel viewModel;
 
   const SearchScreen({super.key, required this.viewModel});
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.getRecentSearchRecipes();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +30,10 @@ class SearchScreen extends StatelessWidget {
         backgroundColor: ColorStyles.white,
         surfaceTintColor: ColorStyles.white,
         title: const Text('Search recipes', style: TextStyles.mediumTextBold),
+        centerTitle: true,
       ),
       body: ListenableBuilder(
-        listenable: viewModel..getRecentSearchRecipes(),
+        listenable: widget.viewModel,
         builder: (context, snapshot) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -35,7 +47,7 @@ class SearchScreen extends StatelessWidget {
                       child: SearchTextField(
                         placeholder: 'Search recipe',
                         onValueChanged: (value) {
-                          viewModel.getSearchedRecipes(value);
+                          widget.viewModel.getSearchedRecipes(value);
                         },
                       ),
                     ),
@@ -47,9 +59,9 @@ class SearchScreen extends StatelessWidget {
                           context: context,
                           builder: (context) {
                             return FilterDialog(
-                              filter: viewModel.state.filter,
+                              filter: widget.viewModel.state.filter,
                               onTapFilter: (filter) {
-                                viewModel.getFilteredRecipes(filter);
+                                widget.viewModel.getFilteredRecipes(filter);
                               },
                             );
                           },
@@ -62,12 +74,12 @@ class SearchScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      viewModel.state.title,
+                      widget.viewModel.state.title,
                       style: TextStyles.normalTextBold,
                     ),
                     const Spacer(),
                     Text(
-                      viewModel.state.resultsCount,
+                      widget.viewModel.state.resultsCount,
                       style: TextStyles.smallerTextRegular.copyWith(
                         color: ColorStyles.gray3,
                       ),
@@ -86,10 +98,10 @@ class SearchScreen extends StatelessWidget {
                         ),
                     itemBuilder: (context, index) {
                       return GridRecipeCard(
-                        recipe: viewModel.state.recipes[index],
+                        recipe: widget.viewModel.state.recipes[index],
                       );
                     },
-                    itemCount: viewModel.state.recipes.length,
+                    itemCount: widget.viewModel.state.recipes.length,
                   ),
                 ),
               ],
