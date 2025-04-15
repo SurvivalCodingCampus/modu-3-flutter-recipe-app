@@ -3,10 +3,13 @@ import 'dart:ui';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
 // Project imports:
 import 'package:recipe_app/presentation/component/custom_button.dart';
+
+import '../../core/routing/routes.dart';
 
 // ===== 애니메이션 타임라인 (시작 시점 기준) =====
 const kBackgroundStartTime = Duration(milliseconds: 0);
@@ -331,7 +334,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: MediumButton(
                 title: 'Start Cooking',
                 onTap: () {
-                  debugPrint('Start Cooking!!');
+                  context.go(Routes.devHome);
                 },
               ),
             ),

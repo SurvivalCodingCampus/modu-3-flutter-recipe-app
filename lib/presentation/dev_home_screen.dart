@@ -1,15 +1,9 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 
-// Project imports:
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
-import 'package:recipe_app/presentation/splash/splash_screen.dart';
-import 'component_preview.dart';
-import 'login_preview_transformed.dart';
-
-class MainMenuScreen extends StatelessWidget {
-  const MainMenuScreen({super.key});
+class DevHomeScreen extends StatelessWidget {
+  const DevHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,61 +16,26 @@ class MainMenuScreen extends StatelessWidget {
           children: [
             _buildMenuButton(
               context,
-              title: '스플래시 화면',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const SplashScreen()),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            _buildMenuButton(
-              context,
               title: '저장된 레시피 화면',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => SavedRecipesScreen.withMock(),
-                  ),
-                );
-              },
+              onTap: () => context.push(Routes.savedRecipes),
             ),
             const SizedBox(height: 16),
             _buildMenuButton(
               context,
               title: '레시피 검색 화면',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => SearchRecipesScreen.withMock(),
-                  ),
-                );
-              },
+              onTap: () => context.push(Routes.search),
             ),
             const SizedBox(height: 16),
             _buildMenuButton(
               context,
               title: '위젯 컴포넌트 프리뷰',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const WidgetPreviewApp()),
-                );
-              },
+              onTap: () => context.push(Routes.devComponents),
             ),
             const SizedBox(height: 16),
             _buildMenuButton(
               context,
               title: '로그인 화면',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const LoginPage()),
-                );
-              },
+              onTap: () => context.push(Routes.login),
             ),
           ],
         ),

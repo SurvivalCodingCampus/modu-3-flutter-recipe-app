@@ -21,20 +21,20 @@ class WidgetPreviewApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Widget Preview',
-      home: const PreviewHomePage(),
+      home: const DevComponents(),
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
     );
   }
 }
 
-class PreviewHomePage extends StatefulWidget {
-  const PreviewHomePage({super.key});
+class DevComponents extends StatefulWidget {
+  const DevComponents({super.key});
 
   @override
-  State<PreviewHomePage> createState() => _PreviewHomePageState();
+  State<DevComponents> createState() => _DevComponentsState();
 }
 
-class _PreviewHomePageState extends State<PreviewHomePage> {
+class _DevComponentsState extends State<DevComponents> {
   int selectedTimeIndex = 0;
   int selectedRate = 0;
   int selectedCategoryIndex = 0;
