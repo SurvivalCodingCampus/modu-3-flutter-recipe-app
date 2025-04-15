@@ -203,21 +203,24 @@ class _SignInScreenState extends State<SignInScreen> {
                       SizedBox(height: 50),
                       Container(
                         alignment: Alignment.center,
-                        child: Text.rich(
-                          TextSpan(
-                            text: 'Don\'t have an account? ',
-                            style: TextStyles2.smallerTextSemiBold.copyWith(
-                              color: Colors.black,
+                        child: Row(
+                          children: [
+                            Text(
+                              'Don\'t have an account? ',
+                              style: TextStyles2.smallerTextSemiBold.copyWith(
+                                color: Colors.black,
+                              ),
                             ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: 'Sign up',
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Sign up',
                                 style: TextStyles2.smallerTextSemiBold.copyWith(
                                   color: ColorStyles2.secondary100,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
