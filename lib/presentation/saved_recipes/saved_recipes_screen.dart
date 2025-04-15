@@ -18,7 +18,7 @@ class SavedRecipesScreen extends StatelessWidget {
         backgroundColor: ColorStyle.primary20,
         scrolledUnderElevation: 0,
         elevation: 0,
-        title: Text('Saved Recipes', style: TextFontStyle.mediumBold()),
+        title: Text('Saved recipes', style: TextFontStyle.mediumBold()),
         centerTitle: true,
       ),
       body: Column(
@@ -29,9 +29,9 @@ class SavedRecipesScreen extends StatelessWidget {
               listenable: _viewModel,
               builder: (context, snapshot) {
                 return ListView.builder(
-                  itemCount: _viewModel.recipes.length,
+                  itemCount: _viewModel.state.recipes.length,
                   itemBuilder: (context, index) {
-                    final recipe = _viewModel.recipes[index];
+                    final recipe = _viewModel.state.recipes[index];
                     return RecipeCard(recipe: recipe);
                   },
                 );
