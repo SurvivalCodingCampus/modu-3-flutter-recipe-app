@@ -34,6 +34,12 @@ class SearchRecipesScreen extends StatefulWidget {
 
 class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   @override
+  void initState() {
+    super.initState();
+    widget.viewModel.load();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: widget.viewModel,

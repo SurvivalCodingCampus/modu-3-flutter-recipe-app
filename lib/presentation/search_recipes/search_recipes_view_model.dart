@@ -11,9 +11,7 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   SearchRecipesState get state => _state;
 
-  SearchRecipesViewModel(this._repository) {
-    load();
-  }
+  SearchRecipesViewModel(this._repository);
 
   Future<void> load() async {
     _state = state.copyWith(recipes: const UiState.loading());
