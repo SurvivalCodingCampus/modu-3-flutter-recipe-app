@@ -1,14 +1,10 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 
-// Project imports:
-
 class SkeletonAnimationWidget extends StatefulWidget {
-  final double? width;
-  final double? height;
+  final Size size;
 
-  const SkeletonAnimationWidget({super.key, this.width, this.height});
+  const SkeletonAnimationWidget({super.key, required this.size});
 
   @override
   State<SkeletonAnimationWidget> createState() =>
@@ -43,38 +39,31 @@ class _SkeletonAnimationWidgetState extends State<SkeletonAnimationWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width,
-      height: widget.height,
-      decoration: const BoxDecoration(color: ColorStyle.primary60),
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (_, __) {
-          return ShaderMask(
-            shaderCallback: (bounds) {
-              return LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: const [
-                  ColorStyle.primary100,
-                  ColorStyle.primary60,
-                  ColorStyle.primary80,
-                ],
-                stops: [
-                  0.0,
-                  (_animation.value + 2) / 4, // 0.0 ~ 1.0 범위로 정규화
-                  1.0,
-                ],
-              ).createShader(bounds);
-            },
-            child: Container(
-              width: widget.width,
-              height: widget.height,
-              color: ColorStyle.primary60,
-            ),
-          );
-        },
-      ),
+    final size = widget.size;
+
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (_, __) {
+        return ShaderMask(
+          shaderCallback: (bounds) {
+            return LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: const [
+                ColorStyle.primary100,
+                ColorStyle.primary60,
+                ColorStyle.primary80,
+              ],
+              stops: [0.0, (_animation.value + 2) / 4, 1.0],
+            ).createShader(bounds);
+          },
+          child: Container(
+            width: size.width,
+            height: size.height,
+            color: ColorStyle.primary60,
+          ),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Project imports:
 import 'package:recipe_app/presentation/component/custom_button.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_button.dart';
@@ -273,44 +272,57 @@ class _PreviewHomePageState extends State<PreviewHomePage> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            RecipeCard(
-              title: 'Traditional spare ribs baked',
-              imagePath: 'assets/images/foods/food1.png',
-              cookTime: '20 min',
-              authorName: 'Chef John',
-              rating: 3.5,
-              isFavorite: true,
-              onTap: () {},
+
+            SizedBox(
+              height: 150,
+              child: RecipeCard(
+                title: 'Traditional spare ribs baked',
+                imagePath: 'assets/images/foods/food1.png',
+                cookTime: '20 min',
+                authorName: 'Chef John',
+                rating: 3.5,
+                isFavorite: true,
+                onTap: () {},
+              ),
             ),
             const SizedBox(height: 12),
-            RecipeCard(
-              title: 'spice roasted chicken with flavored rice',
-              imagePath: 'assets/images/foods/food2.png',
-              cookTime: '20 min',
-              authorName: 'Mark Kelvin',
-              rating: 4.0,
-              isFavorite: false,
-              onTap: () {},
+            SizedBox(
+              height: 150,
+              child: RecipeCard(
+                title: 'spice roasted chicken with flavored rice',
+                imagePath: 'assets/images/foods/food2.png',
+                cookTime: '20 min',
+                authorName: 'Mark Kelvin',
+                rating: 4.0,
+                isFavorite: false,
+                onTap: () {},
+              ),
             ),
             const SizedBox(height: 12),
-            RecipeCard(
-              title: 'Spicy fried rice mix chicken bali',
-              imagePath: 'assets/images/foods/food3.png',
-              cookTime: '30 min',
-              authorName: 'Spicy Nelly',
-              rating: 4.5,
-              isFavorite: true,
-              onTap: () {},
+            SizedBox(
+              height: 150,
+              child: RecipeCard(
+                title: 'Spicy fried rice mix chicken bali',
+                imagePath: 'assets/images/foods/food3.png',
+                cookTime: '30 min',
+                authorName: 'Spicy Nelly',
+                rating: 4.5,
+                isFavorite: true,
+                onTap: () {},
+              ),
             ),
             const SizedBox(height: 12),
-            RecipeCard(
-              title: 'Lamb chops with fruity couscous and mint',
-              imagePath: 'assets/images/foods/food4.png',
-              cookTime: '35 min',
-              authorName: '강지원',
-              rating: 5.0,
-              isFavorite: false,
-              onTap: () {},
+            SizedBox(
+              height: 150,
+              child: RecipeCard(
+                title: 'Lamb chops with fruity couscous and mint',
+                imagePath: 'assets/images/foods/food4.png',
+                cookTime: '35 min',
+                authorName: '강지원',
+                rating: 5.0,
+                isFavorite: false,
+                onTap: () {},
+              ),
             ),
             const Divider(),
 

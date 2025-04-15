@@ -48,13 +48,9 @@ class _RecipeCardState extends State<RecipeCard> {
             AppImage(
               path: widget.imagePath,
               fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
               borderRadius: BorderRadius.circular(10),
               overlayBuilder:
                   (context) => Container(
-                    width: double.infinity,
-                    height: double.infinity,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [ColorStyle.black, Colors.transparent],
@@ -64,10 +60,7 @@ class _RecipeCardState extends State<RecipeCard> {
                     ),
                   ),
               skeletonBuilder:
-                  (context, size) => SkeletonAnimationWidget(
-                    width: size.width,
-                    height: size.height,
-                  ),
+                  (context, size) => SkeletonAnimationWidget(size: size),
             ),
 
             // Title & AuthorName

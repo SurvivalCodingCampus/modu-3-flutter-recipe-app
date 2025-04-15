@@ -119,11 +119,13 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: const Center(
-                                  child: AppImage(
-                                    path:
-                                        'assets/images/icons/icon_setting.png',
+                                  child: SizedBox(
                                     width: 20,
                                     height: 20,
+                                    child: AppImage(
+                                      path:
+                                          'assets/images/icons/icon_setting.png',
+                                    ),
                                   ),
                                 ),
                               ),
