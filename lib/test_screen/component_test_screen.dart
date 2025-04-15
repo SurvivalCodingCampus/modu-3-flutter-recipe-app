@@ -140,6 +140,7 @@ class ComponentTestScreen extends StatelessWidget {
                   InputField(
                     label: 'Label',
                     placeHolder: 'PlaceHolder',
+                    isSearch: true,
                     controller: TextEditingController(),
                     onValueChange: (value) {
                       print('입력이 변경되었습니다.');
@@ -149,6 +150,7 @@ class ComponentTestScreen extends StatelessWidget {
                   InputField(
                     label: 'Label',
                     placeHolder: 'PlaceHolder',
+                    isSearch: false,
                     controller: TextEditingController(text: 'value'),
                     onValueChange: (value) {
                       print('입력이 변경되었습니다.');

@@ -5,6 +5,7 @@ import 'package:recipe_app/ui/text_style.dart';
 class InputField extends StatefulWidget {
   final String label;
   final String placeHolder;
+  final bool isSearch;
   final TextEditingController controller;
   final Function(String) onValueChange;
   const InputField({
@@ -13,6 +14,7 @@ class InputField extends StatefulWidget {
     required this.placeHolder,
     required this.onValueChange,
     required this.controller,
+    required this.isSearch,
   });
 
   @override
@@ -52,7 +54,10 @@ class _InputFieldState extends State<InputField> {
               widget.onValueChange(value);
             },
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search, color: ColorStyles.gray4),
+              prefixIcon:
+                  widget.isSearch
+                      ? Icon(Icons.search, color: ColorStyles.gray4)
+                      : null,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: ColorStyles.gray4, width: 1.5),
