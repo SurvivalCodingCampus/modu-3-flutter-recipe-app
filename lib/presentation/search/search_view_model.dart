@@ -53,13 +53,11 @@ class SearchViewModel with ChangeNotifier {
   }
 
   void getFilteredRecipes(Filter filter) async {
-    print(filter);
     final allRecipes =
         _previousSearchedRecipes.isNotEmpty
             ? _previousSearchedRecipes // 검색 결과가 있다면 그 결과만 필터링
             : await _repository.getRecipes(); // 아니면 전체 레시피
 
-    print('🐶 $allRecipes');
     final filteredData =
         allRecipes
             .where((e) {
@@ -76,11 +74,10 @@ class SearchViewModel with ChangeNotifier {
               return filter.category == e.category;
             })
             .toList();
-    print('🍎 $filteredData');
 
     _previousSearchedRecipes = filteredData;
 
-    _state = state.copyWith(recipes: filteredData);
+    _state = state.copyWith(recipes: filteredData, filter: filter);
     notifyListeners();
   }
 }
