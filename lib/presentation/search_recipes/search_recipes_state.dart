@@ -20,14 +20,12 @@ class SearchRecipesState with _$SearchRecipesState {
   final CategoryFilter categoryFilter;
 
   final bool isLoading;
-  final bool showFilterSearchBottomSheet;
   final String searchString;
 
   const SearchRecipesState({
     this.recipes = const [],
     this.searchRecipes = const [],
     this.isLoading = false,
-    this.showFilterSearchBottomSheet = false,
     this.searchString = '',
     this.timeFilter = TimeFilter.All,
     this.rateFilter = 0,

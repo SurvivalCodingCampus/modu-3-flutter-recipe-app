@@ -55,7 +55,29 @@ class SearchRecipesScreen extends StatelessWidget {
                       SizedBox(width: 20),
                       GestureDetector(
                         onTap: () {
-                          viewModel.toggleFilterSearchBottomSheet();
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (_) => Container(
+                              height: MediaQuery.sizeOf(context).height * 0.6,
+                              decoration: BoxDecoration(
+                                color: ColorStyles.white,
+                                borderRadius: BorderRadius.circular(20)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: FilterSearchBottomSheet(
+                                  timeFilter: viewModel.state.timeFilter,
+                                  rateFilter: viewModel.state.rateFilter,
+                                  categoryFilter: viewModel.state.categoryFilter,
+                                  onFilterChange: (TimeFilter time, int rate, CategoryFilter category) {
+                                    viewModel.setFilter(time, rate, category);
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
                         },
                         child: Container(
                           width: 50,
@@ -115,36 +137,6 @@ class SearchRecipesScreen extends StatelessWidget {
                 ],
               ),
             ),
-            bottomSheet:
-                viewModel.state.showFilterSearchBottomSheet
-                    ? Container(
-                      height: MediaQuery.of(context).size.height * 3 / 5,
-                      decoration: BoxDecoration(
-                        color: ColorStyles.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: FilterSearchBottomSheet(
-                          timeFilter: viewModel.state.timeFilter,
-                          rateFilter: viewModel.state.rateFilter,
-                          categoryFilter: viewModel.state.categoryFilter,
-                          onFilterChange:
-                              (
-                              TimeFilter timeFilter,
-                              int rateFilter,
-                              CategoryFilter categoryFilter,
-                              ) {
-                            viewModel.setFilter(timeFilter, rateFilter, categoryFilter);
-                            viewModel.toggleFilterSearchBottomSheet();
-                          },
-                        ),
-                      ),
-                    )
-                    : null,
           ),
         );
       },

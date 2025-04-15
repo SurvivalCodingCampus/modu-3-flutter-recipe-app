@@ -89,11 +89,4 @@ class SearchRecipesViewModel with ChangeNotifier {
     _state = state.copyWith(searchString: value);
     notifyListeners();
   }
-
-  void toggleFilterSearchBottomSheet() async {
-    _state = state.copyWith(
-      showFilterSearchBottomSheet: !state.showFilterSearchBottomSheet,
-    );
-    notifyListeners();
-  }
 }
