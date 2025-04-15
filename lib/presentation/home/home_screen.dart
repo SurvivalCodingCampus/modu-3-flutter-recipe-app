@@ -4,7 +4,8 @@ import 'package:recipe_app/presentation/component/search_text_field.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final VoidCallback onTapSearch;
+  const HomeScreen({super.key, required this.onTapSearch});
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +41,22 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 30),
-              const Row(
+              Row(
                 children: [
                   Expanded(
-                    child: SearchTextField(placeholder: 'Search recipe'),
+                    child: GestureDetector(
+                      onTap: onTapSearch,
+                      behavior: HitTestBehavior.opaque,
+                      child: const IgnorePointer(
+                        child: SearchTextField(
+                          placeholder: 'Search recipe',
+                          isReadOnly: true,
+                        ),
+                      ),
+                    ),
                   ),
-                  SizedBox(width: 20),
-                  FilterIconButton(),
+                  const SizedBox(width: 20),
+                  const FilterIconButton(),
                 ],
               ),
             ],

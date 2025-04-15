@@ -7,4 +7,6 @@ abstract class Routes {
   static const save = '/save';
   static const notification = '/notification';
   static const my = '/my';
+
+  static const search = '/search';
 }

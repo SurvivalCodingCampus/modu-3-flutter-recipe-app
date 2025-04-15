@@ -8,6 +8,8 @@ import 'package:recipe_app/presentation/my/my_screen.dart';
 import 'package:recipe_app/presentation/notification/notification_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/search/search_screen.dart';
+import 'package:recipe_app/presentation/search/search_view_model.dart';
 import 'package:recipe_app/presentation/sign-in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign-up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
@@ -35,7 +37,17 @@ final router = GoRouter(
           (context, state) =>
               SignUpScreen(onTapSignIn: () => context.go(Routes.signIn)),
     ),
-
+    GoRoute(
+      path: Routes.search,
+      builder:
+          (context, state) => SearchScreen(
+            viewModel: SearchViewModel(
+              repository: RecipeRepositoryImpl(
+                recipeDataSource: MockRecipeDataSourceImpl(),
+              ),
+            ),
+          ),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return MainScreen(
@@ -54,7 +66,10 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.home,
-              builder: (context, state) => const HomeScreen(),
+              builder:
+                  (context, state) => HomeScreen(
+                    onTapSearch: () => context.push(Routes.search),
+                  ),
             ),
           ],
         ),

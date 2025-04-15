@@ -5,11 +5,13 @@ import 'package:recipe_app/ui/ui.dart';
 
 class SearchTextField extends StatefulWidget {
   final String placeholder;
+  final bool? isReadOnly;
   final Function(String value)? onValueChanged;
 
   const SearchTextField({
     super.key,
     required this.placeholder,
+    this.isReadOnly,
     this.onValueChanged,
   });
 
@@ -30,6 +32,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+
       cursorColor: ColorStyles.gray1,
       onChanged: widget.onValueChanged,
       onTap: () {
@@ -38,6 +41,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
           widget.onValueChanged!('');
         }
       },
+      readOnly: widget.isReadOnly ?? false,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       decoration: InputDecoration(
         prefixIcon: Image.asset(
