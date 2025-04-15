@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/dev_components.dart';
 import 'package:recipe_app/presentation/dev_home_screen.dart';
 import 'package:recipe_app/presentation/login/login_screen.dart';
+import 'package:recipe_app/presentation/main_tab/main_tab_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
@@ -16,36 +18,84 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const SplashScreen(),
     ),
 
-    // 메인 화면
-
-    // 메인 화면 (개발용)
-    GoRoute(
-      path: Routes.devHome,
-      builder: (context, state) => const DevHomeScreen(),
-    ),
-
-    // 개발용 컴포넌트
-    GoRoute(
-      path: Routes.devComponents,
-      builder: (context, state) => const DevComponents(),
-    ),
-
     // 로그인 화면
     GoRoute(
       path: Routes.login,
       builder: (context, state) => const LoginScreen(),
     ),
 
-    // 저장된 레시피 화면
+    GoRoute(
+      path: Routes.devComponents,
+      builder: (context, state) => const DevComponents(),
+    ),
+
+    GoRoute(
+      path: Routes.search,
+      builder: (context, state) => SearchRecipesScreen.withMock(),
+    ),
+
     GoRoute(
       path: Routes.savedRecipes,
       builder: (context, state) => SavedRecipesScreen.withMock(),
     ),
 
-    // 레시피 검색 화면
-    GoRoute(
-      path: Routes.search,
-      builder: (context, state) => SearchRecipesScreen.withMock(),
+    // 로그인 이후의 메인 탭 구조
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, shell) {
+        return MainTabScreen(navigationShell: shell);
+      },
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.devHome,
+              builder: (context, state) => const DevHomeScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.mainBookmark,
+              builder:
+                  (context, state) =>
+                      const Scaffold(body: Center(child: Text('bookmark'))),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.mainCreate,
+              builder:
+                  (context, state) => const Scaffold(
+                    body: Center(child: Text('Create Placeholder')),
+                  ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.mainNotifications,
+              builder:
+                  (context, state) => const Scaffold(
+                    body: Center(child: Text('notifications')),
+                  ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.mainProfile,
+              builder:
+                  (context, state) =>
+                      const Scaffold(body: Center(child: Text('profile'))),
+            ),
+          ],
+        ),
+      ],
     ),
   ],
 );
