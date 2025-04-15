@@ -17,7 +17,7 @@ class SocialIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: ColorStyles.black.withOpacity(0.1),
+            color: ColorStyles.gray4.withAlpha(100),
             spreadRadius: 3,
             blurRadius: 5,
           ),

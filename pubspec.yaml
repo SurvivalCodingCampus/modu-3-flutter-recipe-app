@@ -73,6 +73,17 @@ flutter:
     - assets/images/google.png
     - assets/images/facebook.png
     - assets/images/google2.png
+    - assets/images/home.png
+    - assets/images/not.png
+    - assets/images/inactive.png
+    - assets/images/profile.png
+    - assets/images/slhome.png
+    - assets/images/slnot.png
+    - assets/images/slactive.png
+    - assets/images/slprofile.png
+    - assets/images/men.png
+
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

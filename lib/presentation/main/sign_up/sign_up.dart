@@ -66,7 +66,7 @@ class SignUp extends StatelessWidget {
             ),
             InputField(
               label: 'Confirm Password',
-              holder: 'Confirm Password',
+              holder: 'Retype Password',
               onChanged: (value) {
                 viewModel.confirmPassword(value);
               },
@@ -91,7 +91,7 @@ class SignUp extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SocialIcon(iconPath: 'assets/images/google.png'),
-                SizedBox(width: 10),
+                SizedBox(width: 30),
                 SocialIcon(iconPath: 'assets/images/facebook.png'),
               ],
             ),

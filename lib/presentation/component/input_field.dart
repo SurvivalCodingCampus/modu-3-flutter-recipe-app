@@ -8,6 +8,7 @@ class InputField extends StatelessWidget {
   final String label;
   final String holder;
   final String? value;
+  final TextEditingController? controller;
 
   const InputField({
     super.key,
@@ -15,11 +16,11 @@ class InputField extends StatelessWidget {
     required this.holder,
     this.value,
     this.onChanged,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController(text: value);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
