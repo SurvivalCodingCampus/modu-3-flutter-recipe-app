@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/router/app_router.dart';
+import 'package:recipe_app/router/router.dart';
 
 // import 'presentation/component/component.dart';
 
