@@ -41,16 +41,19 @@ class SavedRecipesScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               itemBuilder: (context, index) {
                 final recipe = recipes[index];
-                return RecipeCard(
-                  title: recipe.name,
-                  imagePath: recipe.image,
-                  cookTime: recipe.time,
-                  authorName: recipe.chef,
-                  rating: recipe.rating,
-                  isFavorite: true,
-                  onTap: () {
-                    debugPrint('지금은 없어~~');
-                  },
+                return SizedBox(
+                  height: 150,
+                  child: RecipeCard(
+                    title: recipe.name,
+                    imagePath: recipe.image,
+                    cookTime: recipe.time,
+                    authorName: recipe.chef,
+                    rating: recipe.rating,
+                    isFavorite: true,
+                    onTap: () {
+                      debugPrint('지금은 없어~~');
+                    },
+                  ),
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(height: 12),
