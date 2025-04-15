@@ -64,7 +64,7 @@ class SignInScreen extends StatelessWidget {
                 BigButton(
                   lable: 'Sign In',
                   onClick: () {
-                    context.push(Routes.savedRecipes);
+                    context.push(Routes.searchRecipes);
                   },
                 ),
 
