@@ -20,7 +20,7 @@ class RecipeCard extends StatelessWidget {
     required this.starCount,
     this.bookMarkStatus,
     this.duration,
-    required this.height,
+    this.height = 150,
     super.key,
   });
 
@@ -65,10 +65,7 @@ class RecipeCard extends StatelessWidget {
             children: [
               IntrinsicWidth(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: AppColor.secondary20,
@@ -84,6 +81,7 @@ class RecipeCard extends StatelessWidget {
               ),
               Expanded(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Flexible(

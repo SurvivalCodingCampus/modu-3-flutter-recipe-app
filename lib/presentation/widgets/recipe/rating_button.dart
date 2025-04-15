@@ -5,13 +5,20 @@ import 'package:recipe_app/core/style/app_textstyle.dart';
 class RatingButton extends StatelessWidget {
   final String text;
   final bool isSelected;
-  const RatingButton({required this.text, required this.isSelected, super.key});
+  final VoidCallback onTap;
+  const RatingButton({
+    required this.text,
+    required this.isSelected,
+    required this.onTap,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: _borderColor),
