@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
 
@@ -48,7 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 20),
               Text('Name', style: TextStyles2.smallTextRegular),
               TextField(
-                controller: _emailTextEditingController,
+                controller: _nameTextEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -65,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 20),
               Text('Email', style: TextStyles2.smallTextRegular),
               TextField(
-                controller: _nameTextEditingController,
+                controller: _emailTextEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -82,6 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 20),
               Text('Password', style: TextStyles2.smallTextRegular),
               TextField(
+                obscureText: true,
                 controller: _passwordTextEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -99,6 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 20),
               Text('Confirm Password', style: TextStyles2.smallTextRegular),
               TextField(
+                obscureText: true,
                 controller: _confirmPasswordTextEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -254,7 +257,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      context.go('/sign-in-screen');
+                      context.go(Routes.signIn);
                     },
                     child: Text(
                       'Sign In',

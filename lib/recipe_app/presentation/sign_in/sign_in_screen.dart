@@ -53,6 +53,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     SizedBox(height: 25),
                     Text('Enter Password', style: TextStyles2.smallTextRegular),
                     TextField(
+                      obscureText: true,
                       controller: _passwordTextEditingController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
