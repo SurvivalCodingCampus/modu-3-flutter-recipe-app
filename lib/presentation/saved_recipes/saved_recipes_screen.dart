@@ -21,17 +21,17 @@ class SavedRecipesScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: ListenableBuilder(
-          listenable: viewModel,
-        builder: (context, child) {
-          if (viewModel.isLoading) {
+          listenable: viewModel..fetchRecipes(),
+          builder: (context, child) {
+          if (viewModel.state.isLoading) {
             return CircularProgressIndicator();
           }
 
           return ListView.separated(
             padding: EdgeInsets.all(30),
-            itemCount: viewModel.recipes.length,
+            itemCount: viewModel.state.recipes.length,
             itemBuilder: (context, index) {
-              return RecipeCard(recipe: viewModel.recipes[index],
+              return RecipeCard(recipe: viewModel.state.recipes[index],
                   onBookmarkChanged: (isBookmarked) {
                     print('Bookmark changed: $isBookmarked');
                   }
