@@ -48,7 +48,7 @@ class _SingInScreenState extends State<SingInScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: Text(
-                'Enter Password',
+                'Forget Password?',
                 style: AppTextStyle.smallRegular.copyWith(
                   color: AppColor.secondary100,
                 ),
@@ -129,10 +129,15 @@ class _SingInScreenState extends State<SingInScreen> {
                   style: AppTextStyle.smallerRegular,
                 ),
                 const SizedBox(width: 4),
-                Text(
-                  'Sign up',
-                  style: AppTextStyle.smallerRegular.copyWith(
-                    color: AppColor.secondary100,
+                GestureDetector(
+                  onTap: () {
+                    context.replace(AppRoutes.signUp);
+                  },
+                  child: Text(
+                    'Sign up',
+                    style: AppTextStyle.smallerRegular.copyWith(
+                      color: AppColor.secondary100,
+                    ),
                   ),
                 ),
               ],

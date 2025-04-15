@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/presentation/pages/auth/sign_up_screen.dart';
 import 'package:recipe_app/presentation/pages/auth/sing_in_screen.dart';
 import 'package:recipe_app/presentation/pages/recipe/home/home_screen.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/screen/search_screen.dart';
 import 'package:recipe_app/presentation/pages/splash/splash_screen.dart';
 
 final router = GoRouter(initialLocation: AppRoutes.splash, routes: routes);
@@ -21,7 +23,7 @@ final routes = [
   GoRoute(
     path: AppRoutes.signUp,
     builder: (context, state) {
-      return const SplashScreen();
+      return const SingUpScreen();
     },
   ),
   GoRoute(
@@ -33,7 +35,7 @@ final routes = [
   GoRoute(
     path: AppRoutes.search,
     builder: (context, state) {
-      return const SplashScreen();
+      return const SearchScreen();
     },
   ),
 ];
