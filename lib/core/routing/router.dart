@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data_source/recipes/recipe_data_source.dart';
 import 'package:recipe_app/data_source/recipes/recipe_data_source_impl.dart';
+import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/page/home/home_screen.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_view_model.dart';
@@ -39,7 +40,7 @@ final GoRouter router = GoRouter(
     ),
     ShellRoute(
       builder: (context, state, child) {
-        return Scaffold(body: child);
+        return Scaffold(body: child, backgroundColor: ColorStyle.white,);
       },
       routes: [
         GoRoute(path: Routes.home, builder: (context, state) => HomeScreen()),
