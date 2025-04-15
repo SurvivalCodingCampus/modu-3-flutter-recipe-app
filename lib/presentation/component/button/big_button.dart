@@ -37,7 +37,6 @@ class _BigButtonState extends State<BigButton> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
         width: double.infinity,
-        margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           color:
               buttonType == ButtonType.standard

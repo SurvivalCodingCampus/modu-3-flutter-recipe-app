@@ -5,14 +5,14 @@ import 'package:recipe_app/presentation/component/button/medium_button.dart';
 import 'package:recipe_app/presentation/component/button/small_button.dart';
 import 'package:recipe_app/presentation/component/rating.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomeScreen> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeScreen> {
   List<String> stars = ['5', '4', '3', '2', '1'];
   List<String> filters = ['All', 'Newest', 'Oldest', 'Popularity'];
   List<String> categorys = [

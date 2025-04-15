@@ -11,7 +11,7 @@ class IngredientsDto {
       ingredientDto:
           json['ingredient'] != null
               ? IngredientDto.fromJson(json['ingredient'])
-              : null,
+              : IngredientDto(id: -1, imageUrl: '', name: ''),
       amount: json['amount'] as num?,
     );
   }
