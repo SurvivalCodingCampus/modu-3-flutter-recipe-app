@@ -6,13 +6,15 @@ import '../component/input_field.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final nameFocus = FocusNode();
     final emailFocus = FocusNode();
     final passwordFocus = FocusNode();
+    final confirmFocus = FocusNode();
 
     return Scaffold(
       body: SafeArea(
@@ -22,11 +24,23 @@ class SignInScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 60),
-                Text('Hello,', style: AppTextStyles.headerBold),
-                const SizedBox(height: 4),
-                Text('Welcome Back!', style: AppTextStyles.largeRegular),
-                const SizedBox(height: 50),
+                const SizedBox(height: 40),
+                Text('Create an account', style: AppTextStyles.largeBold),
+                const SizedBox(height: 8),
+                Text(
+                  "Let's help you set up your account,\nit won't take long.",
+                  style: AppTextStyles.smallRegular,
+                ),
+                const SizedBox(height: 40),
+
+                // 이름
+                InputField(
+                  titleLabel: 'Name',
+                  inputValue: '',
+                  focusNode: nameFocus,
+                  onValueChange: (value) {},
+                ),
+                const SizedBox(height: 20),
 
                 // 이메일
                 InputField(
@@ -35,42 +49,60 @@ class SignInScreen extends StatelessWidget {
                   focusNode: emailFocus,
                   onValueChange: (value) {},
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
 
-                // 패스워드
+                // 비밀번호
                 InputField(
-                  titleLabel: 'Enter Password',
+                  titleLabel: 'Password',
                   inputValue: '',
                   focusNode: passwordFocus,
                   onValueChange: (value) {},
                 ),
+                const SizedBox(height: 20),
 
-                const SizedBox(height: 8),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forgot Password?',
+                // 비밀번호 확인
+                InputField(
+                  titleLabel: 'Confirm Password',
+                  inputValue: '',
+                  focusNode: confirmFocus,
+                  onValueChange: (value) {},
+                ),
+                const SizedBox(height: 16),
+
+                // 약관 동의 체크 (기능 사용 안함)
+                Row(
+                  children: [
+                    Checkbox(
+                      value: false,
+                      onChanged: (value) {},
+                      side: const BorderSide(
+                        color: ColorStyle.secondary100,
+                        width: 1,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      'Accept terms & Condition',
                       style: AppTextStyles.smallRegular.copyWith(
                         color: ColorStyle.secondary100,
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 16),
 
-                // Sign In 버튼
+                // 회원가입 버튼
                 BigButton(
-                  lable: 'Sign In',
+                  lable: 'Sign Up',
                   onClick: () {
-                    context.push(Routes.savedRecipes);
+                    context.push(Routes.signIn);
                   },
                 ),
+                const SizedBox(height: 18),
 
-                const SizedBox(height: 24),
-
-                // 선
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -97,71 +129,64 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 16),
-                // 소셜 로그인 버튼
+
+                // SNS 로그인 버튼
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        // 버튼 클릭
-                      },
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorStyle.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        padding: EdgeInsets.zero, // 여백 제거 (선택)
-                        minimumSize: Size(44, 44), // 버튼 크기 (선택)
+                        padding: EdgeInsets.zero,
+                        minimumSize: Size(44, 44),
                       ),
                       child: Image.asset(
-                        'assets/icons/google.png', // 이미지 경로
+                        'assets/icons/google.png',
                         width: 24,
                         height: 24,
-                        fit: BoxFit.cover,
                       ),
                     ),
-
                     const SizedBox(width: 20),
                     ElevatedButton(
-                      onPressed: () {
-                        // 버튼 클릭
-                      },
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorStyle.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        padding: EdgeInsets.zero, // 여백 제거 (선택)
-                        minimumSize: Size(44, 44), // 버튼 크기 (선택)
+                        padding: EdgeInsets.zero,
+                        minimumSize: Size(44, 44),
                       ),
                       child: Image.asset(
-                        'assets/icons/facebook.png', // 이미지 경로
+                        'assets/icons/facebook.png',
                         width: 24,
                         height: 24,
-                        fit: BoxFit.cover,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 24),
 
-                // Sign up 링크
+                // 이미 회원이신가?
                 Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an account? ",
+                        "Already a member? ",
                         style: AppTextStyles.smallRegular,
                       ),
                       GestureDetector(
                         onTap: () {
-                          context.push(Routes.signUp);
+                          context.push(Routes.signIn);
                         },
                         child: Text(
-                          'Sign up',
+                          'Sign In',
                           style: AppTextStyles.smallRegular.copyWith(
                             color: ColorStyle.secondary100,
                           ),

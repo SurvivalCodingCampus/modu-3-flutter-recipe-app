@@ -43,7 +43,7 @@ class _InputFieldState extends State<InputField> {
               widget.onValueChange(value);
             },
             onTapOutside: (event) {
-              //onValueChange(controller.text);
+
             },
             onChanged: (value) {
               _textColor =

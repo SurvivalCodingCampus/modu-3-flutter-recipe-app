@@ -6,6 +6,7 @@ import '../../presentation/saved_recipes/saved_recipes_view_model.dart';
 import '../../presentation/search_recipes/search_recipes_screen.dart';
 import '../../presentation/search_recipes/search_recipes_view_model.dart';
 import '../../presentation/sign_in/sign_in_screen.dart';
+import '../../presentation/sign_up/sign_up_screen.dart';
 import '../../presentation/splash/splash_screen.dart';
 
 //GoRouter configuration
@@ -19,6 +20,10 @@ final router = GoRouter(
       GoRoute(
         path: Routes.signIn,
         builder: (context, state) => SignInScreen(),
+      ),
+      GoRoute(
+        path: Routes.signUp,
+        builder: (context, state) => SignUpScreen(),
       ),
       GoRoute(
         path: Routes.savedRecipes,
