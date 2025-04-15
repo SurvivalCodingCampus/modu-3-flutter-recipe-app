@@ -26,10 +26,8 @@ class _BottomNavigationBarScaffoldState
         context.go(Routes.home);
         break;
       case 1:
-        context.go(Routes.splash);
         break;
       default:
-        context.go('/');
         break;
     }
 
