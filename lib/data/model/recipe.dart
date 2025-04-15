@@ -6,7 +6,7 @@ part 'recipe.freezed.dart';
 class Recipe with _$Recipe {
   final String title;
   final String author;
-  final int cookTimes;
+  final String cookTimes;
   final String imageUrl;
   final double rateStar;
 

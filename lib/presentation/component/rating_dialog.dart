@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentaiton/ui/color_styles.dart';
-import 'package:recipe_app/presentaiton/ui/text_styles.dart';
 
 import '../../data/model/rating.dart';
+import '../ui/color_styles.dart';
+import '../ui/text_styles.dart';
 
 
 

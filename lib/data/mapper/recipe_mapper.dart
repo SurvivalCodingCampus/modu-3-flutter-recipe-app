@@ -4,11 +4,11 @@ import 'package:recipe_app/data/model/recipe.dart';
 extension RecipeMapper on RecipeDto {
   Recipe toRecipe() {
     return Recipe(
-      title: '',
-      author: name ?? '이름 없음',
-      cookTimes: 20,
-      imageUrl: image ?? '',
-      rateStar: 4.0,
+      title: name ?? '제목 없음',
+      author: chef ?? '이름 없음',
+      cookTimes: time ?? '시간 없음',
+      imageUrl: image ?? '이미지 없음',
+      rateStar: rating ?? 4.0,
     );
   }
 }

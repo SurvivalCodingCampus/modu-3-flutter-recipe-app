@@ -1,25 +1,51 @@
 import 'package:flutter/material.dart';
-
-import 'package:recipe_app/presentaiton/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentaiton/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/data/model/rating.dart';
+import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/presentation/component/filter_button.dart';
+import 'package:recipe_app/presentation/component/half_recipe_card.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 import 'data/repository/recipe_repository_impl.dart';
+import 'presentation/filter/filter_search_bottom_sheet.dart';
+import 'presentation/search_recipes/search_recipes_screen.dart';
+import 'presentation/search_recipes/search_recipes_view_model.dart';
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   MyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(body:),
+//     );
+//   }
+// }
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    SavedRecipesViewModel savedRecipesViewModel = SavedRecipesViewModel(RecipeRepositoryImpl());
+    final searchRecipesViewModel = SearchRecipesViewModel(
+      RecipeRepositoryImpl(),SearchRecipesState()
+    );
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
-          child: SavedRecipesScreen(savedRecipesViewModel: savedRecipesViewModel,),
+          child: SearchRecipesScreen(
+            searchRecipesViewModel: searchRecipesViewModel,
+          ),
         ),
       ),
     );
@@ -32,66 +58,15 @@ class MyApp extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
-//       home: SingleChildScrollView(
-//         child: Scaffold(
-//           body: SafeArea(
-//             child: Center(
-//               child: Column(
-//                 children: [
-//                   IngredientItem(
-//                     ingredient: Ingredient(name: 'Tomatos', weight: 500),
-//                   ),
-//                   SizedBox(height: 20),
-//                   RecipeCard(
-//                     recipe: Recipe(
-//                       title: '제목이용',
-//                       author: '작성자용',
-//                       cookTimes: 20,
-//                       imageUrl: 'https://static.wtable.co.kr/image/production/service/recipe/2536/2f7aaf74-330a-4af6-ae12-b90c9d819f6c.jpg?size=800x800',
-//                       rateStar: 4,
-//                     ),
-//                   ),
-//                   SizedBox(height: 20),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       FilterButton(buttons: Button(text: '5')),
-//                       SizedBox(width: 20),
-//                       RatingButton(buttons: Button(text: 'text')),
-//                     ],
-//                   ),
-//                   SizedBox(height: 20),
-//                   BigButtonsWidget(
-//                     onClick: () {},
-//                     buttons: Buttons(name: 'Button'),
-//                   ),
-//                   SizedBox(height: 20),
-//                   MediumButtonsWidget(
-//                     onClick: () {},
-//                     buttons: Buttons(name: 'Button'),
-//                   ),
-//                   SizedBox(height: 20),
-//                   SmallButtonsWidget(
-//                     onClick: () {},
-//                     buttons: Buttons(name: 'Button'),
-//                   ),
-//                   SizedBox(height: 20),
-//
-//                   RatingDialog(
-//                     rating: Rating(
-//                       title: 'Rate recipe',
-//                       actionName: 'send',
-//                       onChange: (value) {
-//                         print('$value');
-//                       },
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         body: SafeArea(
+//           child: FilterButton(buttons: Button(text: '1')),
 //         ),
 //       ),
 //     );
 //   }
 // }
+
+
+

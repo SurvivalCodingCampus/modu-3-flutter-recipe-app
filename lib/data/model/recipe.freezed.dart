@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Recipe {
 
- String get title; String get author; int get cookTimes; String get imageUrl; double get rateStar;
+ String get title; String get author; String get cookTimes; String get imageUrl; double get rateStar;
 /// Create a copy of Recipe
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,7 +46,7 @@ abstract mixin class $RecipeCopyWith<$Res>  {
   factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) _then) = _$RecipeCopyWithImpl;
 @useResult
 $Res call({
- String title, String author, int cookTimes, String imageUrl, double rateStar
+ String title, String author, String cookTimes, String imageUrl, double rateStar
 });
 
 
@@ -68,7 +68,7 @@ class _$RecipeCopyWithImpl<$Res>
 title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String,cookTimes: null == cookTimes ? _self.cookTimes : cookTimes // ignore: cast_nullable_to_non_nullable
-as int,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,rateStar: null == rateStar ? _self.rateStar : rateStar // ignore: cast_nullable_to_non_nullable
 as double,
   ));

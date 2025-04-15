@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentaiton/ui/color_styles.dart';
 
 import '../../data/model/recipe.dart';
+import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
-
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
 
-  RecipeCard({super.key, required this.recipe});
+  const RecipeCard({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
-    String linesText = '';
-
-    for (int i = 0; i < recipe.title.length; i += 22) {
-      int end = (i + 22 < recipe.title.length) ? i + 22 : recipe.title.length;
-      linesText += recipe.title.substring(i, end) + '\n';
-    }
 
     return Stack(
       children: [
@@ -57,7 +50,10 @@ class RecipeCard extends StatelessWidget {
                     children: [
                       Icon(Icons.star, size: 8, color: ColorStyles.secondary60),
                       SizedBox(width: 3),
-                      Text('${recipe.rateStar}', style: TextStyles.smallerTextRegular),
+                      Text(
+                        '${recipe.rateStar}',
+                        style: TextStyles.smallerTextRegular,
+                      ),
                     ],
                   ),
                 ),
@@ -77,11 +73,15 @@ class RecipeCard extends StatelessWidget {
                 bottom: 22,
                 child: Column(
                   children: [
-                    Text(
-                      linesText.trim(),
-                      style: TextStyles.smallTextBold.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
+                    SizedBox(
+                      width: 200,
+                      height: 42,
+                      child: Text(
+                        recipe.title,
+                        style: TextStyles.smallTextBold.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                     SizedBox(height: 12),
@@ -122,7 +122,7 @@ class RecipeCard extends StatelessWidget {
                 right: 44,
                 bottom: 13.5,
                 child: Text(
-                  '${recipe.cookTimes} min',
+                  recipe.cookTimes,
                   style: TextStyles.smallerTextRegular.copyWith(
                     color: ColorStyles.gray4,
                   ),
