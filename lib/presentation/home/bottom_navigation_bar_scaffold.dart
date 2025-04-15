@@ -19,16 +19,17 @@ class _BottomNaviBarState extends State<BottomNavigationBarScaffold> {
   int naviIndex = 0;
 
   void changeTab(int index) {
-    switch(index) {
-      case 0:
-        context.go(Routes.home);
-      case 1:
-        context.go(Routes.saved);
-      case 2:
-        context.go(Routes.search);
-      default:
-        break;
-    }
+    // switch(index) {
+    //   case 0:
+    //     context.go(Routes.home);
+    //   case 1:
+    //     context.go(Routes.saved);
+    //   case 2:
+    //     context.go(Routes.search);
+    //   default:
+    //     break;
+    // }
+    widget.navigationShell.goBranch(index);
     setState(() {
       naviIndex = index;
     });
