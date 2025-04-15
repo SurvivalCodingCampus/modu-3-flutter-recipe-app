@@ -19,6 +19,9 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
     if (currentIndex == index) {
       return;
     }
+    setState(() {
+      currentIndex = index;
+    });
     switch (index) {
       case 0:
         context.go(Routes.home);
@@ -30,9 +33,6 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         context.go(Routes.splash);
         break;
     }
-    setState(() {
-      currentIndex = index;
-    });
   }
 
   @override
