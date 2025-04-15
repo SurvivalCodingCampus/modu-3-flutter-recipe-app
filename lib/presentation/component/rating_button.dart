@@ -5,9 +5,9 @@ import '../../ui/text_styles.dart';
 
 class RatingButton extends StatefulWidget {
   final int rate;
-  final VoidCallback? select;
+  final ValueChanged<List<int>>? onSelected;
 
-  const RatingButton({super.key, required this.rate, this.select});
+  const RatingButton({super.key, required this.rate, this.onSelected});
 
   @override
   State<RatingButton> createState() => _RatingButtonState();
@@ -26,7 +26,14 @@ class _RatingButtonState extends State<RatingButton> {
     setState(() {
       isSelectedList[index] = !isSelectedList[index];
     });
-    if (widget.select != null) widget.select!();
+
+    if (widget.onSelected != null) {
+      final selectedRatings = <int>[];
+      for (int i = 0; i < widget.rate; i++) {
+        if (isSelectedList[i]) selectedRatings.add(i + 1);
+      }
+      widget.onSelected!(selectedRatings);
+    }
   }
 
   @override

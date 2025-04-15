@@ -29,7 +29,6 @@ class SmallButton extends StatelessWidget {
               style: TextStyles.smallerBold.copyWith(color: ColorStyles.white),
             ),
             SizedBox(width: 10),
-            Icon(Icons.arrow_forward, color: ColorStyles.white, size: 15),
           ],
         ),
       ),

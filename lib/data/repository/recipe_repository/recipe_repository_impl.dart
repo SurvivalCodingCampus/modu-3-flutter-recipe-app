@@ -18,4 +18,15 @@ class RecipeRepositoryImpl implements RecipeRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<List<Recipe>> searchRecipes(String keyword) async {
+    try {
+      return await dataSource.searchRecipes(keyword);
+    } catch (e, stackTrace) {
+      print('기능 오류: $e');
+      print(stackTrace);
+      rethrow;
+    }
+  }
 }

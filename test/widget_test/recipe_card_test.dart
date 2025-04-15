@@ -26,7 +26,11 @@ void main() {
             body: Center(
               child: SizedBox(
                 width: 400,
-                child: RecipeCard(recipe: testRecipe),
+                child: RecipeCard(
+                  recipe: testRecipe,
+                  showBookMarked: true,
+                  showTitle: true,
+                ),
               ),
             ),
           ),
