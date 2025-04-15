@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/enum/return_image_widget.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeSearchCard extends StatelessWidget {
   final String recipeName;
   final String recipeAuthor;
   final String imagePath;
-  final String recipeTime;
   final double recipeRate;
   final ImageType imageType;
 
-  const RecipeCard({
+  const RecipeSearchCard({
     super.key,
     required this.recipeName,
     required this.recipeAuthor,
     required this.imagePath,
-    required this.recipeTime,
     required this.recipeRate,
     required this.imageType,
   });
@@ -93,59 +90,24 @@ class RecipeCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                recipeName,
-                                softWrap: true,
-                                style: AppTextStyles.smallBold(
-                                  color: ColorStyle.white,
-                                ),
-                              ),
-                              Text(
-                                recipeAuthor,
-                                style: AppTextStyles.smallRegularLable(
-                                  color: ColorStyle.white,
-                                ),
-                              ),
-                            ],
+                        Text(
+                          recipeName,
+                          softWrap: true,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyles.smallBold(
+                            color: ColorStyle.white,
                           ),
                         ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.timer,
-                              color: ColorStyle.white,
-                              size: 17,
-                            ),
-                            Text(
-                              recipeTime,
-                              style: AppTextStyles.smallRegular(
-                                color: ColorStyle.white,
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 10),
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: ColorStyle.white,
-                              ),
-                              child: Icon(
-                                Icons.bookmark_outline,
-                                size: 10,
-                                color: ColorStyle.primary80,
-                              ),
-                            ),
-                          ],
+                        Text(
+                          recipeAuthor,
+                          style: AppTextStyles.smallRegularLable(
+                            color: ColorStyle.white,
+                          ),
                         ),
                       ],
                     ),

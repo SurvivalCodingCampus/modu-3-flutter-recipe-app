@@ -4,14 +4,14 @@ import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 
 class RatingButton extends StatefulWidget {
   final String text;
-  final IconData icon;
+  final void Function()? onTap;
   bool isSelected;
 
   RatingButton({
     super.key,
     required this.text,
     required this.isSelected,
-    required this.icon,
+    this.onTap,
   });
 
   @override
@@ -21,39 +21,20 @@ class RatingButton extends StatefulWidget {
 class _RatingButtonState extends State<RatingButton> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          widget.isSelected = !widget.isSelected;
-        });
-      },
+    return Material(
+      color: Colors.transparent,
       child: Ink(
-        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         decoration: BoxDecoration(
           color: widget.isSelected ? ColorStyle.primary100 : ColorStyle.white,
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: ColorStyle.primary100),
         ),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.text,
-                style: AppTextStyles.smallRegular(
-                  color:
-                      widget.isSelected
-                          ? ColorStyle.white
-                          : ColorStyle.primary100,
-                ),
-              ),
-              Icon(
-                widget.icon,
-                color:
-                    widget.isSelected
-                        ? ColorStyle.white
-                        : ColorStyle.primary100,
-              ),
-            ],
+        child: InkWell(
+          onTap: widget.onTap ?? () {},
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child: Text('${widget.text }★', style: AppTextStyles.smallRegular
+              (color: widget.isSelected ? ColorStyle.white : ColorStyle.primary100),),
           ),
         ),
       ),

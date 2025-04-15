@@ -4,9 +4,15 @@ import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 
 class FilterButton extends StatefulWidget {
   final String text;
+  final void Function()? onTap;
   bool isSelected;
 
-   FilterButton({super.key, required this.text, required this.isSelected});
+  FilterButton({
+    super.key,
+    required this.text,
+    required this.isSelected,
+    this.onTap,
+  });
 
   @override
   State<FilterButton> createState() => _FilterButtonState();
@@ -15,28 +21,19 @@ class FilterButton extends StatefulWidget {
 class _FilterButtonState extends State<FilterButton> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        setState(() {
-          widget.isSelected = !widget.isSelected;
-        });
-      },
+    return Material(
+      color: Colors.transparent,
       child: Ink(
-        padding: EdgeInsets.symmetric(
-          vertical: 5,
-          horizontal: 10
-        ),
         decoration: BoxDecoration(
           color: widget.isSelected ? ColorStyle.primary100 : ColorStyle.white,
-          borderRadius: BorderRadius.circular(10)
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: ColorStyle.primary100),
         ),
-        child: Center(
-          child: Text(
-            widget.text,
-            style: AppTextStyles.smallRegular(
-              color:
-                  widget.isSelected ? ColorStyle.white : ColorStyle.primary100,
-            ),
+        child: InkWell(
+          onTap: widget.onTap ?? () {},
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child: Text(widget.text, style: AppTextStyles.smallRegular(color: widget.isSelected ? ColorStyle.white : ColorStyle.primary100),),
           ),
         ),
       ),

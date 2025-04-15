@@ -9,7 +9,7 @@ class SplashViewModel with ChangeNotifier {
 
   bool _isTextVisible = false;
 
-  bool _isButtonVisible = false;
+  final bool _isButtonVisible = false;
 
   bool get isBackGroundVisible => _isBackGroundVisible;
 
