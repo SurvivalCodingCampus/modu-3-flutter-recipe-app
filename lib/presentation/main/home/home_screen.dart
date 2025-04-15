@@ -8,9 +8,6 @@ import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_view_model.dart';
 
-
-
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

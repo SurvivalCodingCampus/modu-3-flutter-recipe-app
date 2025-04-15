@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/core/ui/color_styles.dart';
 import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/presentation/component/button_widget.dart';
-import 'package:recipe_app/presentation/main/home/home_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -83,11 +84,7 @@ class SplashScreen extends StatelessWidget {
                         buttonSize: ButtonSize.medium,
                         buttonText: 'Start Cooking',
                         onClick: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
-                            ),
-                          );
+                          context.go(Routes.signIn);
                         },
                       ),
                     ],
