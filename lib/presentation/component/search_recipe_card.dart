@@ -18,7 +18,7 @@ class SearchRecipeCard extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            height: 200,
+            height: 150,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),

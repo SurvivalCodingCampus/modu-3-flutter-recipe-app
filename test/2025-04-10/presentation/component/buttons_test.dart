@@ -9,7 +9,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(home: Scaffold(body: Buttons(onClick: () {
         click = true;
-      }))),
+      }, buttonName: 'eeee',))),
     );
 
     final buttonFinder = find.text('Button');

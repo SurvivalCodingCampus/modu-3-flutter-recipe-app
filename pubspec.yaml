@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  go_router: ^14.8.1
   collection: ^1.19.1
   csv: ^5.0.0
   freezed_annotation: ^3.0.0

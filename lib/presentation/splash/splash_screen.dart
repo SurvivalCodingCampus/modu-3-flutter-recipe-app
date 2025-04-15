@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/data/data_source/recipe/recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
 import 'package:recipe_app/presentation/saved_recipe/saved_recipe_view_model.dart';
 
+import '../../router/routes.dart';
 import '../../ui/text.dart';
-import '../saved_recipe/saved_recipe_screen.dart';
 
 void main() {
   final dt = RecipeDataSourceImpl();
@@ -89,9 +90,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                   MediumButton(
                     onClick: () {
-                      Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => SavedRecipeScreen(viewModel: viewModel,))
-                      );
+                      context.go(Routes.signIn);
                     },
                   )
                 ],

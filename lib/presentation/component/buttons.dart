@@ -8,7 +8,7 @@ void main() {
   runApp(
     MaterialApp(
       home: Scaffold(
-        body: Buttons(onClick: () {  },),
+        body: Buttons(onClick: () {  },buttonName: 'exit',),
       ),
     )
   );
@@ -17,16 +17,16 @@ void main() {
 
 class Buttons extends StatefulWidget {
   final VoidCallback onClick;
+  final String buttonName;
 
-  const Buttons({super.key, required this.onClick});
+  const Buttons({super.key, required this.onClick, required this.buttonName});
 
   @override
   State<Buttons> createState() => _ButtonsState();
 }
 
 class _ButtonsState extends State<Buttons> {
-
-  bool clickedButton = false;
+  bool clickedButton = true;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,9 @@ class _ButtonsState extends State<Buttons> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
-
+          onTap: () {
+            widget.onClick();
+          },
           onTapUp: (_) {
             setState(() {
               clickedButton = true;
@@ -51,22 +53,34 @@ class _ButtonsState extends State<Buttons> {
               clickedButton = false;
             });
           },
-
           child: Container(
             width: double.infinity,
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             height: 60,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: clickedButton? ColorStyles.primary100 : ColorStyles.gray4,
+              color: clickedButton ? ColorStyles.primary100 : ColorStyles.primary60,
             ),
-            child: Center(
-              child: Text('Button',
-                style: TextStyles.normalTextBold.copyWith(
-                  color: ColorStyles.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                  child: Text(widget.buttonName,
+                    style: TextStyles.normalTextBold.copyWith(
+                      color: ColorStyles.white,
+                    ),
+                  ),
                 ),
-              ),
+                SizedBox(
+                  width: 30,
+                ),
+                Icon(Icons.arrow_forward,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ],
             ),
           ),
         ),
