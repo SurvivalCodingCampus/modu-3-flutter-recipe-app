@@ -26,7 +26,7 @@ class SavedRecipesScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: ListenableBuilder(
-          listenable: savedRecipesViewModel..loadRecipesData(),
+          listenable: savedRecipesViewModel,
           builder: (context, child) {
             if (savedRecipesViewModel.isLoading) {
               return const Center(child: CircularProgressIndicator());
