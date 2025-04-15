@@ -26,6 +26,7 @@ class _BottomNavigationBarScaffoldState
         context.go(Routes.home);
         break;
       case 1:
+        context.go(Routes.bookmarks);
         break;
       default:
         break;
