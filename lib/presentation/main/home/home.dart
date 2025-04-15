@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/bottom_navigation_bar.dart';
 import 'package:recipe_app/ui/color_styles.dart';
+
 import '../../../ui/text_styles.dart';
 import '../../component/filter_small_button.dart';
-import '../../component/tabs.dart';
 import 'home_view_model.dart';
 
 class Home extends StatefulWidget {
@@ -119,13 +118,13 @@ class _Home extends State<Home> {
                   ],
                 ),
               ),
-              Tabs(labels: widget.viewModel.state.categoryList),
-              Expanded(child: _screens[0]),
+              // TabBars(labels: widget.viewModel.state.categoryList),
+              Expanded(child: Center(child: Text('Home content'))),
             ],
           );
         },
       ),
-      bottomNavigationBar: MadeNVBar(index: _selectedIndex, onTap: _onTap),
+      // bottomNavigationBar: MadeNVBar(index: _selectedIndex, onTap: _onTap),
     );
   }
 }

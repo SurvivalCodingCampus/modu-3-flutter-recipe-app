@@ -4,9 +4,9 @@ import '../../../ui/color_styles.dart';
 
 class TabBars extends StatefulWidget {
   final List<String> labels;
-  final List<Widget> views;
+  final List<Widget>? views;
 
-  const TabBars({super.key, required this.labels, required this.views});
+  const TabBars({super.key, required this.labels, this.views});
 
   @override
   _TabBarsState createState() => _TabBarsState();
@@ -39,7 +39,13 @@ class _TabBarsState extends State<TabBars> with SingleTickerProviderStateMixin {
           unselectedLabelColor: Colors.grey,
         ),
         Expanded(
-          child: TabBarView(controller: tabController, children: widget.views),
+          child:
+              widget.views == null
+                  ? const SizedBox() // 또는 CircularProgressIndicator(), Text("아직 데이터 없음") 등
+                  : TabBarView(
+                    controller: tabController,
+                    children: widget.views!,
+                  ),
         ),
       ],
     );
