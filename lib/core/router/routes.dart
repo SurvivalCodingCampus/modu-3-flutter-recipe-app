@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/pages/auth/sign_up_screen.dart';
 import 'package:recipe_app/presentation/pages/auth/sing_in_screen.dart';
-import 'package:recipe_app/presentation/pages/recipe/home/home_screen.dart';
+import 'package:recipe_app/presentation/pages/recipe/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/pages/recipe/search/screen/search_screen.dart';
 import 'package:recipe_app/presentation/pages/splash/splash_screen.dart';
 
@@ -27,9 +27,9 @@ final routes = [
     },
   ),
   GoRoute(
-    path: AppRoutes.home,
+    path: AppRoutes.savedRecipes,
     builder: (context, state) {
-      return const HomeScreen();
+      return const SavedRecipesScreen();
     },
   ),
   GoRoute(
@@ -45,6 +45,7 @@ abstract class AppRoutes {
   static const String signIn = '/sign-in';
   static const String signUp = '/sign-up';
   static const String home = '/home';
+  static const String savedRecipes = '/saved-recipes';
 
   static const String search = '/search';
 }
