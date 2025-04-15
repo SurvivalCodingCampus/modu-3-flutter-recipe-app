@@ -111,6 +111,6 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   Future<void> updateKeyword(String keyword) async {
     _state = _state.copyWith(keyword: keyword);
-    fetchSearchRecipes();
+    await fetchSearchRecipes();
   }
 }
