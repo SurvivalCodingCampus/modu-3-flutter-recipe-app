@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: CustomInputField(labelString: '아이디', focusNode: focusNode),
+          body: CustomInputField(labelString: '아이디', focusNode: focusNode, hintString: '아이디 입력',),
         ),
       ),
     );
