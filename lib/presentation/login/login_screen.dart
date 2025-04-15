@@ -3,7 +3,8 @@ import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
 import 'package:recipe_app/presentation/component/custom_button.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
-import 'package:recipe_app/presentation/component/login_component/social_login_section.dart';
+import 'package:recipe_app/presentation/component/login_component/divider_with_text.dart';
+import 'package:recipe_app/presentation/component/login_component/social_login_button.dart';
 
 void main() => runApp(const LoginApp());
 
@@ -13,20 +14,20 @@ class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: LoginPage(),
+      home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   bool isSignUp = false;
   bool isSignUpDisplayed = false; // 화면에 보여지는 상태
   bool showName = false;
@@ -82,7 +83,6 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 60),
               AnimatedCrossFade(
                 duration: const Duration(milliseconds: 100),
                 crossFadeState:
@@ -116,15 +116,16 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 57),
 
               if (showName) ...[
                 const InputField(
                   labelTitle: 'Name',
                   placeholderText: 'Enter Name',
                   value: '',
+                  height: 55,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: isSignUpDisplayed ? 20 : 30),
               ],
 
               const InputField(
@@ -132,17 +133,15 @@ class _LoginPageState extends State<LoginPage> {
                 placeholderText: 'Enter Email',
                 value: '',
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: isSignUpDisplayed ? 20 : 30),
               const InputField(
                 labelTitle: 'Password',
                 placeholderText: 'Enter Password',
                 value: '',
               ),
 
-              const SizedBox(height: 12),
-
               if (showConfirm) ...[
-                const SizedBox(height: 20),
+                SizedBox(height: isSignUpDisplayed ? 20 : 30),
                 const InputField(
                   labelTitle: 'Confirm Password',
                   placeholderText: 'Retype Password',
@@ -150,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
               // if (showTerms)
               AnimatedCrossFade(
                 duration: const Duration(milliseconds: 100),
@@ -181,16 +180,33 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              const SizedBox(height: 32),
+              const SizedBox(height: 25),
               BigButton(title: isSignUp ? 'Sign Up' : 'Sign In', onTap: () {}),
 
               const SizedBox(height: 32),
-              SocialSignInSection(
-                onGoogleTap: () => debugPrint("Google tapped"),
-                onFacebookTap: () => debugPrint("Facebook tapped"),
+
+              Column(
+                children: [
+                  const DividerWithText(text: 'Or Sign in With'),
+                  SizedBox(height: isSignUpDisplayed ? 20 : 14),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SocialLoginButton(
+                        imagePath: 'assets/images/icons/icon_google.png',
+                        onTap: () {},
+                      ),
+                      const SizedBox(width: 24),
+                      SocialLoginButton(
+                        imagePath: 'assets/images/icons/icon_facebook.png',
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ],
               ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: isSignUpDisplayed ? 55 : 20),
               Center(
                 child: GestureDetector(
                   onTap: toggle,
