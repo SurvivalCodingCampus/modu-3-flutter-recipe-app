@@ -3,7 +3,7 @@ import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository.dart';
-import 'package:recipe_app/presentation/pages/recipe/saved_recipes/saved_recipes_state.dart';
+import 'package:recipe_app/presentation/pages/main/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;

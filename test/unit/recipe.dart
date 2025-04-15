@@ -7,7 +7,7 @@ import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repositor
 import 'package:recipe_app/feature/receipe/domain/data_source/home/mock/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/feature/receipe/domain/data_source/home/recipe_data_source.dart';
 import 'package:recipe_app/feature/receipe/domain/dto/recipe_dto.dart';
-import 'package:recipe_app/presentation/pages/recipe/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/pages/main/saved_recipes/saved_recipes_view_model.dart';
 
 void main() {
   group('recipe test', () {
@@ -26,7 +26,8 @@ void main() {
     });
 
     test('recipe view model test', () async {
-      final HomeViewModel viewModel = HomeViewModel(repository)..fetchRecipes();
+      final SavedRecipesViewModel viewModel = SavedRecipesViewModel(repository)
+        ..fetchRecipes();
       expect(viewModel.state.data.isNotEmpty, equals(true));
     });
   });

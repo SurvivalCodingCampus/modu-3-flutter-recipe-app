@@ -39,7 +39,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
               const SizedBox(height: 20),
               Text('Name', style: AppTextStyle.smallRegular),
               AppTextField(
-                controller: _email,
+                controller: _name,
                 hintText: 'Enter Name',
                 borderColor: AppColor.grey4,
                 textColor: AppColor.grey4,
