@@ -47,12 +47,13 @@ class _RecipeCardState extends State<RecipeCard> {
             AppImage(
               path: widget.imagePath,
               fit: BoxFit.cover,
-              height: 200,
               width: double.infinity,
+              height: double.infinity,
               borderRadius: BorderRadius.circular(10),
               overlayBuilder:
                   (context) => Container(
-                    height: 200,
+                    width: double.infinity,
+                    height: double.infinity,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [ColorStyle.black, Colors.transparent],
