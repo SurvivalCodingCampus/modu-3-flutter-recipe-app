@@ -116,7 +116,6 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
 
                 SizedBox(height: 16),
 
-                // 제목과 결과 수
                 Row(
                   children: [
                     Text(

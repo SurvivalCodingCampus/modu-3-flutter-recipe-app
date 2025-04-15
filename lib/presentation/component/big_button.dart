@@ -6,13 +6,19 @@ import '../../ui/text_styles.dart';
 class BigButton extends StatelessWidget {
   final String text;
   final VoidCallback? onClick;
+  final bool isEnabled;
 
-  const BigButton({super.key, required this.text, this.onClick});
+  const BigButton({
+    super.key,
+    required this.text,
+    this.onClick,
+    this.isEnabled = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onClick,
+      onTap: isEnabled ? onClick : null,
       child: Container(
         width: 315,
         height: 60,
