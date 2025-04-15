@@ -48,7 +48,6 @@ class _SearchInputFieldState extends State<SearchInputField> {
             },
             onChanged: (value) {
                widget.onValueChange(value);
-
                setState(() {
                 _textColor =
                     value.trim().isEmpty ? ColorStyle.gray4 : ColorStyle.black;

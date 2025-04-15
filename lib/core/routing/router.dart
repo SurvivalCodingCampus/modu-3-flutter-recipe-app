@@ -5,6 +5,7 @@ import '../../presentation/saved_recipes/saved_recipes_screen.dart';
 import '../../presentation/saved_recipes/saved_recipes_view_model.dart';
 import '../../presentation/search_recipes/search_recipes_screen.dart';
 import '../../presentation/search_recipes/search_recipes_view_model.dart';
+import '../../presentation/sign_in/sign_in_screen.dart';
 import '../../presentation/splash/splash_screen.dart';
 
 //GoRouter configuration
@@ -16,8 +17,8 @@ final router = GoRouter(
         builder: (context, state) => SplashScreen(),
       ),
       GoRoute(
-        path: Routes.splash,
-        builder: (context, state) => SplashScreen(),
+        path: Routes.signIn,
+        builder: (context, state) => SignInScreen(),
       ),
       GoRoute(
         path: Routes.savedRecipes,
