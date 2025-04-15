@@ -16,45 +16,43 @@ class SavedRecipesScreen extends StatelessWidget {
     return ListenableBuilder(
       listenable: model,
       builder: (context, snapshot) {
-        return Scaffold(
-          body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    'Saved recipes',
-                    style: AppTextStyles.mediumBold(color: ColorStyle.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 20),
-                  Expanded(
-                    child:
-                        model.isLoading
-                            ? Center(child: CircularProgressIndicator())
-                            : ListView.builder(
-                              itemCount: model.recipeList.length,
-                              itemBuilder: (context, index) {
-                                Recipe items = model.recipeList[index];
-                                return RecipeCard(
-                                  recipeName: items.name,
-                                  recipeAuthor: items.author,
-                                  imagePath: items.image,
-                                  recipeTime: items.time,
-                                  recipeRate: items.rating,
-                                  imageType: ImageType.network,
-                                );
-                              },
-                            ),
-                  ),
-                ],
-              ),
+        return SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Saved recipes',
+                  style: AppTextStyles.mediumBold(color: ColorStyle.black),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                Expanded(
+                  child:
+                      model.isLoading
+                          ? Center(child: CircularProgressIndicator())
+                          : ListView.builder(
+                            itemCount: model.recipeList.length,
+                            itemBuilder: (context, index) {
+                              Recipe items = model.recipeList[index];
+                              return RecipeCard(
+                                recipeName: items.name,
+                                recipeAuthor: items.author,
+                                imagePath: items.image,
+                                recipeTime: items.time,
+                                recipeRate: items.rating,
+                                imageType: ImageType.network,
+                              );
+                            },
+                          ),
+                ),
+              ],
             ),
           ),
         );
-      }
+      },
     );
   }
 }
