@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/divider_with_text.dart';
-import 'package:recipe_app/presentation/component/social_login_button.dart';
+import 'package:recipe_app/presentation/component/login_component/divider_with_text.dart';
+import 'package:recipe_app/presentation/component/login_component/social_login_button.dart';
 
 class SocialSignInSection extends StatelessWidget {
   final VoidCallback onGoogleTap;

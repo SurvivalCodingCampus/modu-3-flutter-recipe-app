@@ -5,7 +5,7 @@ import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/fil
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/presentation/component/recipe_component/recipe_card.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';

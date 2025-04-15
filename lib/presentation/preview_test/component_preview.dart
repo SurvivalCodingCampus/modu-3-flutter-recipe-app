@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/custom_button.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_button.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/rating_button.dart';
-import 'package:recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
 import 'package:recipe_app/presentation/component/rating_dialog_content.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/presentation/component/recipe_component/ingredient_item.dart';
+import 'package:recipe_app/presentation/component/recipe_component/recipe_card.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
 
 void main() {

@@ -4,7 +4,7 @@ import 'package:recipe_app/presentation/component/image_component/skelton_animti
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
-import '../../ui/ui_size.dart';
+import '../../../ui/ui_size.dart';
 
 class RecipeCard extends StatefulWidget {
   final String title;
