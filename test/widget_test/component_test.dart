@@ -68,7 +68,7 @@ void main() {
           body: InputField(
             label: 'Label',
             placeHolder: 'placeHolder',
-            value: '기본값',
+            controller: TextEditingController(),
             onValueChange: (value) => updatedValue = value,
           ),
         ),

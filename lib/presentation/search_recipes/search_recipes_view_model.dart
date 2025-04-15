@@ -32,7 +32,7 @@ class SearchRecipesViewModel with ChangeNotifier {
     final recipes = await _recipeRepository.getRecipes();
     final searchedRecipes =
         recipes.where((element) {
-          return element.title.contains(value);
+          return element.title.toLowerCase().contains(value.toLowerCase());
         }).toList();
     _state = _state.copyWith(
       isSearched: value == '' ? false : true,
