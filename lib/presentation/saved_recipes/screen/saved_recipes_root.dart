@@ -11,14 +11,14 @@ class SavedRecipeRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListenableBuilder(
       builder: (BuildContext context, Widget? child) {
-        if (viewModel.isLoading) {
+        if (viewModel.state.isLoading) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
 
         return SavedRecipeScreen(
-          recipes: viewModel.recipes,
+          recipes: viewModel.state.recipes,
           onBookmarkClick: () {},
         );
       },

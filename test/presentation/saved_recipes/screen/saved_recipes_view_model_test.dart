@@ -341,9 +341,9 @@ void main() {
     test('List 데이터를 가지고 있어야한다.', () async {
       await viewModel.findRecipes();
 
-      expect(viewModel.recipes.length, 10);
-      expect(viewModel.recipes.first.chef, 'Chef John');
-      expect(viewModel.recipes.last.chef, 'Paul Hollywood');
+      expect(viewModel.state.recipes.length, 10);
+      expect(viewModel.state.recipes.first.chef, 'Chef John');
+      expect(viewModel.state.recipes.last.chef, 'Paul Hollywood');
     });
     test('에러 발생 시 적절히 처리되어야 한다.', () async {
       // 에러를 발생시키는 모의 클라이언트 설정
@@ -359,8 +359,8 @@ void main() {
       // 뷰모델의 에러 처리 검증
       await viewModel.findRecipes();
 
-      expect(viewModel.error, isNotNull);
-      expect(viewModel.error, RecipeErrorEnum.networkerror);
+      expect(viewModel.state.error, isNotNull);
+      expect(viewModel.state.error, RecipeErrorEnum.networkerror);
     });
   });
 }

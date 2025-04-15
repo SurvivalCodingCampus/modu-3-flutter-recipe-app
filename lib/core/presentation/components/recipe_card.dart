@@ -56,7 +56,7 @@ class RecipeCard extends StatelessWidget {
                 color: ColorStyle.secondary20,
                 borderRadius: BorderRadius.circular(20),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               child: Row(
                 spacing: 3,
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/presentation/components/big_button.dart';
 import 'package:recipe_app/core/presentation/components/filter_button.dart';
+import 'package:recipe_app/core/presentation/components/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/core/presentation/components/ingredient_item.dart';
 import 'package:recipe_app/core/presentation/components/input_field.dart';
 import 'package:recipe_app/core/presentation/components/medium_button.dart';
@@ -8,9 +9,12 @@ import 'package:recipe_app/core/presentation/components/multi_tabs.dart';
 import 'package:recipe_app/core/presentation/components/rating_button.dart';
 import 'package:recipe_app/core/presentation/components/rating_dialog_drag.dart';
 import 'package:recipe_app/core/presentation/components/recipe_card.dart';
+import 'package:recipe_app/core/presentation/components/recipe_tile.dart';
+import 'package:recipe_app/core/presentation/components/search_input.dart';
 import 'package:recipe_app/core/presentation/components/small_button.dart';
 import 'package:recipe_app/data/enums/category.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/presentation/search_recipes/filter_state.dart';
 
 class ComponentTestScreen extends StatefulWidget {
   const ComponentTestScreen({super.key});
@@ -38,8 +42,9 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
             child: Column(
               spacing: 10,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -105,6 +110,31 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                     );
                   },
                   child: const Text('show alert'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      useSafeArea: true,
+                      builder: (BuildContext context) {
+                        return FilterSearchBottomSheet(
+                          state: FilterState(),
+                          onfilterClick: (filterState) {
+                            print(filterState);
+                          },
+                          onCancelClick: (filterState) {
+                            print('cancel');
+                          },
+                        );
+                      },
+                    );
+                  },
+                  child: const Text('show bottom sheet'),
+                ),
+                RecipeTile(recipe: recipe),
+                SearchInput(
+                  onValueChange: (value) {},
+                  controller: TextEditingController(),
                 ),
               ],
             ),

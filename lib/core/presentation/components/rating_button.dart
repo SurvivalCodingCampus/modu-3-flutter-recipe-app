@@ -10,32 +10,27 @@ class RatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 28,
-      decoration: BoxDecoration(
-        color: !isSelected ? ColorStyle.white : ColorStyle.primary100,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: !isSelected ? ColorStyle.primary100 : ColorStyle.white,
-        ),
-      ),
-      child: Row(
-        spacing: 5,
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Chip(
+      backgroundColor: isSelected ? ColorStyle.primary100 : ColorStyle.white,
+      side: const BorderSide(color: ColorStyle.primary100),
+      label: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             text,
-            style: AppTextStyles.smallBold.copyWith(
-              color: !isSelected ? ColorStyle.primary80 : ColorStyle.white,
+            style: AppTextStyles.smallRegular.copyWith(
+              color: isSelected ? ColorStyle.white : ColorStyle.primary80,
             ),
           ),
+          const SizedBox(width: 0.5),
           Icon(
             Icons.star,
-            color: !isSelected ? ColorStyle.primary80 : ColorStyle.white,
+            color: isSelected ? ColorStyle.white : ColorStyle.primary100,
             size: 18,
           ),
         ],
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     );
   }
 }

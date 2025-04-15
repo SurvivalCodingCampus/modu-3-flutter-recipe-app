@@ -6,31 +6,20 @@ class FilterButton extends StatelessWidget {
   final String text;
   final bool isSelected;
 
-  const FilterButton({super.key, required this.text, required this.isSelected});
+  const FilterButton({super.key, required this.text, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 28,
-      decoration: BoxDecoration(
-        color: !isSelected ? ColorStyle.white : ColorStyle.primary100,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: !isSelected ? ColorStyle.primary100 : ColorStyle.white,
+    return Chip(
+      backgroundColor: isSelected ? ColorStyle.primary100 : ColorStyle.white,
+      side: BorderSide(color: ColorStyle.primary100),
+      label: Text(
+        text,
+        style: AppTextStyles.smallRegular.copyWith(
+          color: isSelected ? ColorStyle.white : ColorStyle.primary80,
         ),
       ),
-      child: Row(
-        spacing: 5,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            text,
-            style: AppTextStyles.smallBold.copyWith(
-              color: !isSelected ? ColorStyle.primary80 : ColorStyle.white,
-            ),
-          ),
-        ],
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     );
   }
 }
