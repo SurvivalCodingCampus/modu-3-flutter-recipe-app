@@ -3,11 +3,17 @@ part 'filter_search_state.freezed.dart';
 
 @freezed
 class FilterSearchState with _$FilterSearchState {
+  @override
   final List<String> timeFilterList;
+  @override
   final List<String> rateFilterList;
+  @override
   final List<String> categoryFilterList;
+  @override
   final String selectTimeString;
+  @override
   final String selectRateString;
+  @override
   final String selectCategoryString;
 
   const FilterSearchState({

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/common/component/recipe_card.dart';
 import 'package:recipe_app/presentation/common/component/recipe_search_card.dart';
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
@@ -136,8 +135,8 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(50),
-                                    topRight: Radius.circular(50)
-                                  )
+                                    topRight: Radius.circular(50),
+                                  ),
                                 ),
                                 child: FilterSearchScreen(
                                   viewModel: FilterSearchViewModel(),

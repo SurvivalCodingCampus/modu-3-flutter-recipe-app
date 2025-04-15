@@ -4,8 +4,6 @@ import 'package:recipe_app/presentation/common/component/color_text_button.dart'
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 import 'package:recipe_app/presentation/page/page_wrapper/page_wapper.dart';
-import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
 
 class SplashLogoScreen extends StatefulWidget {

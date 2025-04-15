@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/page/splash/splash_logo_screen.dart';
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
 

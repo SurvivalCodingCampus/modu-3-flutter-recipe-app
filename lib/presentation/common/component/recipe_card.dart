@@ -127,7 +127,7 @@ class RecipeCard extends StatelessWidget {
                               size: 17,
                             ),
                             Text(
-                              '$recipeTime',
+                              recipeTime,
                               style: AppTextStyles.smallRegular(
                                 color: ColorStyle.white,
                               ),
