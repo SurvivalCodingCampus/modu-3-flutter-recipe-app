@@ -5,6 +5,7 @@ export 'buttons/select_button.dart';
 export 'buttons/chip_selector.dart';
 export 'buttons/multi_chip_selector.dart';
 export 'buttons/rounded_icon_button.dart';
+export 'buttons/tag_button.dart';
 export 'tabs/multi_tab.dart';
 export 'form/input_field.dart';
 export 'tabs/tabs.dart';
