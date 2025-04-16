@@ -5,6 +5,7 @@ import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 
 class RecipeCard extends StatelessWidget {
+  final void Function(int id) onClick;
   final void Function(int id) onBookmark;
   final Recipe recipe;
   final bool isBookmarked;
@@ -12,6 +13,7 @@ class RecipeCard extends StatelessWidget {
   const RecipeCard({
     super.key,
     required this.recipe,
+    required this.onClick,
     required this.onBookmark,
     required this.isBookmarked,
   });
@@ -43,13 +45,18 @@ class RecipeCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              gradient: LinearGradient(
-                colors: [Colors.black87, Colors.transparent],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
+          GestureDetector(
+            onTap: () {
+              onClick(recipe.id);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                gradient: LinearGradient(
+                  colors: [Colors.black87, Colors.transparent],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
               ),
             ),
           ),

@@ -18,6 +18,12 @@ class RecipeRepositoryImpl implements RecipeRepository {
     final List<RecipeDto> recipeDtos = await _recipeDataSource.getRecipeDtos();
     return recipeDtos.map((e) => e.toRecipe()).toList();
   }
+
+  @override
+  Future<Recipe> getRecipe(int recipeId) async {
+    final List<Recipe> recipeDtos = await getRecipes();
+    return recipeDtos.firstWhere((e) => e.id == recipeId);
+  }
 }
 
 // void main() async {
