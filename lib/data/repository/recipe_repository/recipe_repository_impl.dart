@@ -1,10 +1,13 @@
 import 'package:recipe_app/data/repository/recipe_repository/recipe_repository.dart';
 
 import '../../data_source/recipe/recipe_data_source.dart';
+import '../../model/procedure_model.dart';
+import '../../model/recipe_ingredient.dart';
 import '../../model/recipe_model.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource dataSource;
+  List<Recipe> _recipes = [];
 
   RecipeRepositoryImpl(this.dataSource);
 
@@ -12,9 +15,7 @@ class RecipeRepositoryImpl implements RecipeRepository {
   Future<List<Recipe>> getRecipes() async {
     try {
       return await dataSource.getRecipes();
-    } catch (e, stackTrace) {
-      print('기능 오류: $e');
-      print(stackTrace);
+    } catch (e) {
       rethrow;
     }
   }
@@ -23,10 +24,38 @@ class RecipeRepositoryImpl implements RecipeRepository {
   Future<List<Recipe>> searchRecipes(String keyword) async {
     try {
       return await dataSource.searchRecipes(keyword);
-    } catch (e, stackTrace) {
-      print('기능 오류: $e');
-      print(stackTrace);
+    } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<void> toggleBookMarkRecipe(Recipe recipe) async {
+    _recipes =
+        _recipes.map((r) {
+          return r == recipe
+              ? recipe.copyWith(isBookMarked: !recipe.isBookMarked)
+              : r;
+        }).toList();
+  }
+
+  @override
+  Future<Recipe> getRecipeById(String recipeId) async {
+    final all = await dataSource.getRecipes();
+    return all.firstWhere((recipe) => recipe.id == recipeId);
+  }
+
+  @override
+  Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
+    final recipes = await dataSource.getRecipes();
+    final recipe = recipes.firstWhere((recipe) => recipe.id == recipeId);
+    return recipe.procedures;
+  }
+
+  @override
+  Future<List<RecipeIngredient>> getIngredientsByRecipe(String recipeId) async {
+    final recipes = await dataSource.getRecipes();
+    final recipe = recipes.firstWhere((recipe) => recipe.id == recipeId);
+    return recipe.ingredients;
   }
 }

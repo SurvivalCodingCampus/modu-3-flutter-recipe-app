@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../ui/color_styles.dart';
+import 'nv_bar_painter.dart';
 
 class MadeNVBar extends StatelessWidget {
   final int index;
@@ -10,56 +11,75 @@ class MadeNVBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 120,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: ColorStyles.white,
-        boxShadow: [
-          BoxShadow(
-            color: ColorStyles.gray4.withAlpha(20),
-            // spreadRadius: 2,
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return SizedBox(
+      height: 100,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.bottomCenter,
         children: [
-          _navigationItem(
-            Image.asset(
-              index == 0
-                  ? 'assets/images/slhome.png'
-                  : 'assets/images/home.png',
-              color: index == 0 ? ColorStyles.primary60 : null,
+          Positioned.fill(child: CustomPaint(painter: NavBarPainter())),
+          Positioned(
+            top: -30,
+            child: GestureDetector(
+              onTap: () => onTap(2),
+              child: Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: ColorStyles.primary100,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Icon(Icons.add_outlined, color: ColorStyles.white),
+                ),
+              ),
             ),
-            0,
           ),
-          _navigationItem(
-            Image.asset(
-              index == 1
-                  ? 'assets/images/slactive.png'
-                  : 'assets/images/inactive.png',
-              color: index == 1 ? ColorStyles.primary60 : null,
-            ),
-            1,
-          ),
-          _navigationItem(
-            Image.asset(
-              index == 2 ? 'assets/images/slnot.png' : 'assets/images/not.png',
-              color: index == 2 ? ColorStyles.primary60 : null,
-            ),
+          Positioned.fill(
+            top: 15,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _navigationItem(
+                  Image.asset(
+                    index == 0
+                        ? 'assets/images/slhome.png'
+                        : 'assets/images/home.png',
+                    color: index == 0 ? ColorStyles.primary60 : null,
+                  ),
+                  0,
+                ),
+                _navigationItem(
+                  Image.asset(
+                    index == 1
+                        ? 'assets/images/slactive.png'
+                        : 'assets/images/inactive.png',
+                    color: index == 1 ? ColorStyles.primary60 : null,
+                  ),
+                  1,
+                ),
+                SizedBox(width: 30),
+                _navigationItem(
+                  Image.asset(
+                    index == 3
+                        ? 'assets/images/slnot.png'
+                        : 'assets/images/not.png',
+                    color: index == 3 ? ColorStyles.primary60 : null,
+                  ),
 
-            2,
-          ),
-          _navigationItem(
-            Image.asset(
-              index == 3
-                  ? 'assets/images/slprofile.png'
-                  : 'assets/images/profile.png',
-              color: index == 3 ? ColorStyles.primary60 : null,
+                  3,
+                ),
+                _navigationItem(
+                  Image.asset(
+                    index == 4
+                        ? 'assets/images/slprofile.png'
+                        : 'assets/images/profile.png',
+                    color: index == 4 ? ColorStyles.primary60 : null,
+                  ),
+                  4,
+                ),
+              ],
             ),
-            3,
           ),
         ],
       ),

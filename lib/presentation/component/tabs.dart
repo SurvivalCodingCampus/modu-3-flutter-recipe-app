@@ -18,50 +18,35 @@ class Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children:
-          List.generate(labels.length, (index) {
-            if (index == selectedIndex) {
-              return Expanded(
-                child: GestureDetector(
-                  onTap: () => onChanged(index),
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 33,
-                    decoration: BoxDecoration(
-                      color: ColorStyles.primary100,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      labels[index],
-                      style: TextStyles.smallerRegular.copyWith(
-                        color: ColorStyles.white,
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            } else {
-              return Expanded(
-                child: GestureDetector(
-                  onTap: () => onChanged(index),
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 33,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: ColorStyles.white),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      labels[index],
-                      style: TextStyles.smallerRegular.copyWith(
-                        color: ColorStyles.primary100,
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            }
-          }).toList(),
+      children: List.generate(labels.length, (index) {
+        return Expanded(
+          child: GestureDetector(
+            onTap: () => onChanged(index),
+            child: _buildTab(index),
+          ),
+        );
+      }),
+    );
+  }
+
+  Widget _buildTab(int index) {
+    final isSelected = index == selectedIndex;
+
+    return Container(
+      alignment: Alignment.center,
+      height: 33,
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      decoration: BoxDecoration(
+        color: isSelected ? ColorStyles.primary100 : Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: ColorStyles.primary100),
+      ),
+      child: Text(
+        labels[index],
+        style: TextStyles.smallerRegular.copyWith(
+          color: isSelected ? ColorStyles.white : ColorStyles.primary100,
+        ),
+      ),
     );
   }
 }
