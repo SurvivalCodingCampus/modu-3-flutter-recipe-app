@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/data/data_source/interface/ingredient_data_source.dart';
 import 'package:recipe_app/data/data_source/mock/mock_ingredient_data_source.dart';
-import 'package:recipe_app/data/model/ingredient.dart';
+import 'package:recipe_app/domain/model/ingredient.dart';
 
 void main() {
   final IngredientDataSource dataSource = MockIngredientDataSource();
