@@ -108,12 +108,14 @@ class _MediumButtonsWidgetState extends State<MediumButtonsWidget> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 widget.buttons.name,
                 style: TextStyles.normalTextBold.copyWith(color: Colors.white),
               ),
-              const Spacer(),
+              Spacer(),
               const Icon(Icons.arrow_forward, color: Colors.white, size: 20),
             ],
           ),

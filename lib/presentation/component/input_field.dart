@@ -3,38 +3,8 @@ import 'package:flutter/material.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String value = '';
-
-  void onValueChange(String inputValue){
-    setState(() {
-      value = inputValue;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(backgroundColor: Colors.white,
-          body: InputFieldWidget(label: 'Label', placeHolder: 'Placeholder',
-              value: value,
-              onValueChange: onValueChange)),
-    );
-  }
-}
-
-class InputFieldWidget extends StatelessWidget {
+class InputFieldWidget extends StatefulWidget {
   final String label;
   final String placeHolder;
   final String value;
@@ -48,6 +18,11 @@ class InputFieldWidget extends StatelessWidget {
   });
 
   @override
+  State<InputFieldWidget> createState() => _InputFieldWidgetState();
+}
+
+class _InputFieldWidgetState extends State<InputFieldWidget> {
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
@@ -55,7 +30,7 @@ class InputFieldWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            label,
+            widget.label,
             style: TextStyles.smallTextRegular.copyWith(
               fontWeight: FontWeight.w400,
             ),
@@ -65,13 +40,14 @@ class InputFieldWidget extends StatelessWidget {
             width: 315,
             height: 81,
             child: TextFormField(
-              initialValue: value,
-              onChanged: onValueChange,
+              initialValue: widget.value,
+              onChanged: widget.onValueChange,
               style: TextStyles.smallerTextRegular,
               decoration: InputDecoration(
-                hintText: placeHolder,
+                hintText: widget.placeHolder,
                 hintStyle: TextStyles.smallerTextRegular.copyWith(
-                    color: ColorStyles.gray4),
+                  color: ColorStyles.gray4,
+                ),
                 contentPadding: EdgeInsets.only(left: 20),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -79,7 +55,10 @@ class InputFieldWidget extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: ColorStyles.primary80, width: 1.5),
+                  borderSide: BorderSide(
+                    color: ColorStyles.primary80,
+                    width: 1.5,
+                  ),
                 ),
               ),
             ),

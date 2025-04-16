@@ -14,8 +14,6 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   SearchRecipesViewModel(this._recipeRepository,this._state);
 
-
-
   Future<void> fetchRecipes() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
