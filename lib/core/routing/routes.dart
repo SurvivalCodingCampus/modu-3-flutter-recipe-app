@@ -3,8 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/core/ui/color_styles.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
+import 'package:recipe_app/data/data_source/mock_user_data_source_impl.dart';
+import 'package:recipe_app/domain/repository/user_repository_impl.dart';
+import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/toggle_bookmark_use_case.dart';
 import 'package:recipe_app/presentation/ingredient/auth/sign_in_screen.dart';
 import 'package:recipe_app/presentation/ingredient/auth/sign_up_screen.dart';
+import 'package:recipe_app/presentation/ingredient/recipe_ingredient/recipe_ingredient_screen.dart';
+import 'package:recipe_app/presentation/ingredient/recipe_ingredient/recipe_ingredient_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/splash/splash_screen.dart';
@@ -17,6 +23,7 @@ import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_view_mo
 
 import '../../domain/repository/recipe_repository_impl.dart';
 
+final userDataSource = MockUserDataSourceImpl();
 final router = GoRouter(
   initialLocation: Routes.splash,
   routes: [
@@ -33,6 +40,20 @@ final router = GoRouter(
               ),
             ),
           ),
+    ),
+    GoRoute(
+      path: Routes.ingredient,
+      builder: (context, state) {
+        final recipeId = int.parse(state.pathParameters['recipeId'] ?? '-1');
+        return RecipeIngredientScreen(
+          viewModel: RecipeIngredientViewModel(
+            recipeRepository: RecipeRepositoryImpl(
+              recipeDataSource: MockRecipeDataSourceImpl(),
+            ),
+            recipeId: recipeId,
+          ),
+        );
+      },
     ),
 
     StatefulShellRoute.indexedStack(
@@ -57,6 +78,19 @@ final router = GoRouter(
                     viewModel: SavedRecipesViewModel(
                       recipeRepository: RecipeRepositoryImpl(
                         recipeDataSource: MockRecipeDataSourceImpl(),
+                      ),
+                      getSavedRecipesUseCase: GetSavedRecipesUseCase(
+                        userRepository: UserRepositoryImpl(
+                          userDataSource: userDataSource,
+                        ),
+                        recipeRepository: RecipeRepositoryImpl(
+                          recipeDataSource: MockRecipeDataSourceImpl(),
+                        ),
+                      ),
+                      toggleBookmarkUseCase: ToggleBookmarkUseCase(
+                        userRepository: UserRepositoryImpl(
+                          userDataSource: userDataSource,
+                        ),
                       ),
                     ),
                   ),
