@@ -52,7 +52,10 @@ GoRouter appRouter(AppDependencies dependencies) {
         path: Routes.ingredient,
         builder: (context, state) {
           final id = int.parse(state.pathParameters['id']!);
-          return IngredientScreen.withMock(id);
+          return IngredientScreen(
+            recipeId: id,
+            viewModel: dependencies.ingredientViewModel,
+          );
         },
       ),
 
