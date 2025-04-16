@@ -1,10 +1,10 @@
 import 'package:recipe_app/data/data_source/recipe_data_source.dart';
 import 'package:recipe_app/data/mapper/recipe_mapper.dart';
-import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 
-import '../data_source/mock_recipe_data_source_impl.dart';
-import '../dto/recipe_dto.dart';
+import '../../data/data_source/mock_recipe_data_source_impl.dart';
+import '../../data/dto/recipe_dto.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource _recipeDataSource;
@@ -20,11 +20,11 @@ class RecipeRepositoryImpl implements RecipeRepository {
   }
 }
 
-void main() async {
-  final RecipeDataSource recipeDataSource = MockRecipeDataSourceImpl();
-  final RecipeRepository recipeRepository = RecipeRepositoryImpl(recipeDataSource: recipeDataSource);
-
-  List<Recipe> recipes = await recipeRepository.getRecipes();
-
-  print(recipes.first);
-}
+// void main() async {
+//   final RecipeDataSource recipeDataSource = MockRecipeDataSourceImpl();
+//   final RecipeRepository recipeRepository = RecipeRepositoryImpl(recipeDataSource: recipeDataSource);
+//
+//   List<Recipe> recipes = await recipeRepository.getRecipes();
+//
+//   print(recipes.first);
+// }

@@ -15,7 +15,7 @@ import 'package:recipe_app/presentation/main/profile/profile_screen.dart';
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_view_model.dart';
 
-import '../../data/repository/recipe_repository_impl.dart';
+import '../../domain/repository/recipe_repository_impl.dart';
 
 final router = GoRouter(
   initialLocation: Routes.splash,

@@ -1,6 +1,6 @@
-import 'package:recipe_app/data/model/ingredient_with_amount.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/core/enums/category_filter.dart';
+import 'package:recipe_app/domain/model/ingredient_with_amount.dart';
 
 part 'recipe.freezed.dart';
 

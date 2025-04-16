@@ -1,8 +1,7 @@
 import 'package:recipe_app/data/dto/recipe_dto.dart';
-import 'package:recipe_app/data/model/ingredient.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/model/ingredient_with_amount.dart';
-
+import 'package:recipe_app/domain/model/ingredient.dart';
+import 'package:recipe_app/domain/model/ingredient_with_amount.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import '../../core/enums/category_filter.dart';
 
 extension RecipeMapper on RecipeDto {

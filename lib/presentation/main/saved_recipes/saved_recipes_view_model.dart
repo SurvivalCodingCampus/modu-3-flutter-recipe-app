@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/user.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/model/user.dart';
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_state.dart';
 
 

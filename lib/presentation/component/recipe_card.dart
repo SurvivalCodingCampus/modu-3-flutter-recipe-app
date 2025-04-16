@@ -2,8 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/ui/color_styles.dart';
 import 'package:recipe_app/core/ui/text_styles.dart';
-
-import '../../data/model/recipe.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 
 class RecipeCard extends StatelessWidget {
   final void Function(int id) onBookmark;

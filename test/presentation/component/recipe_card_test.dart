@@ -6,7 +6,7 @@ import 'package:recipe_app/data/data_source/recipe_data_source.dart';
 import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
 import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/domain/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/core/enums/category_filter.dart';
 import 'package:recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
