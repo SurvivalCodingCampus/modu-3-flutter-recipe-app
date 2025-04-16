@@ -31,229 +31,250 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isSignUp = false;
-  bool isSignUpDisplayed = false; // 화면에 보여지는 상태
-  bool showName = false;
-  bool showConfirm = false;
-  bool showTerms = false;
-  bool showLoginTitle = true;
+  bool isSignUpDisplayed = false;
 
-  void toggle() async {
-    if (!isSignUp) {
-      setState(() {
-        isSignUp = true;
-        showLoginTitle = false;
-      });
-
-      await Future.delayed(const Duration(milliseconds: 100));
-      setState(() => showName = true);
-
-      await Future.delayed(const Duration(milliseconds: 100));
-      setState(() {
-        showConfirm = true;
-        isSignUpDisplayed = true; // ← 여기를 confirm과 함께 조기 적용
-      });
-
-      await Future.delayed(const Duration(milliseconds: 100));
-      setState(() => showTerms = true);
-    } else {
-      setState(() {
-        showTerms = false;
-        isSignUpDisplayed = false;
-      });
-
-      await Future.delayed(const Duration(milliseconds: 100));
-      setState(() => showConfirm = false);
-
-      await Future.delayed(const Duration(milliseconds: 100));
-      setState(() => showName = false);
-
-      await Future.delayed(const Duration(milliseconds: 100));
-      setState(() {
-        isSignUp = false;
-        showLoginTitle = true;
-      });
-    }
+  void toggle() {
+    setState(() {
+      final next = !isSignUp;
+      isSignUp = next;
+      isSignUpDisplayed = next;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    const double signInHeight = (20 * 1 + 81 * 2);
+    const double signUpHeight = (20 * 3 + 81 * 4);
+
     return Scaffold(
       backgroundColor: const Color(0xFFF2F2F2),
-      body: Center(
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: AnimatedSize(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                AnimatedCrossFade(
-                  duration: const Duration(milliseconds: 100),
-                  crossFadeState:
-                      isSignUpDisplayed
-                          ? CrossFadeState.showSecond
-                          : CrossFadeState.showFirst,
-                  firstChild: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hello,', style: AppTextStyles.headerBold()),
-                      Text(
-                        'Welcome Back!',
-                        style: AppTextStyles.largeRegular(
-                          color: ColorStyle.labelColour,
-                        ),
-                      ),
-                    ],
-                  ),
-                  secondChild: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Create Account', style: AppTextStyles.largeBold()),
-                      const SizedBox(height: 5),
-                      Text(
-                        'Let’s help you set up your account,\nit won’t take long.',
-                        style: AppTextStyles.smallRegular(
-                          color: ColorStyle.labelColour,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 57),
-
-                if (showName) ...[
-                  const InputField(
-                    labelTitle: 'Name',
-                    placeholderText: 'Enter Name',
-                    value: '',
-                    height: 55,
-                  ),
-                  SizedBox(height: isSignUpDisplayed ? 20 : 30),
-                ],
-
-                const InputField(
-                  labelTitle: 'Email',
-                  placeholderText: 'Enter Email',
-                  value: '',
-                ),
-                SizedBox(height: isSignUpDisplayed ? 20 : 30),
-                const InputField(
-                  labelTitle: 'Password',
-                  placeholderText: 'Enter Password',
-                  value: '',
-                ),
-
-                if (showConfirm) ...[
-                  SizedBox(height: isSignUpDisplayed ? 20 : 30),
-                  const InputField(
-                    labelTitle: 'Confirm Password',
-                    placeholderText: 'Retype Password',
-                    value: '',
-                  ),
-                ],
-
-                const SizedBox(height: 20),
-                // if (showTerms)
-                AnimatedCrossFade(
-                  duration: const Duration(milliseconds: 100),
-                  crossFadeState:
-                      isSignUpDisplayed
-                          ? CrossFadeState.showSecond
-                          : CrossFadeState.showFirst,
-                  firstChild: Text(
-                    'Forgot Password?',
-                    style: AppTextStyles.smallRegular(
-                      color: ColorStyle.secondary100,
-                    ),
-                  ),
-                  secondChild: Row(
-                    children: [
-                      Checkbox(
-                        value: true,
-                        onChanged: (_) {},
-                        activeColor: ColorStyle.secondary100,
-                      ),
-                      Text(
-                        'Accept terms & Condition',
-                        style: AppTextStyles.smallRegular(
-                          color: ColorStyle.secondary100,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 25),
-                BigButton(
-                  title: isSignUp ? 'Sign Up' : 'Sign In',
-                  onTap: () {
-                    context.go(Routes.devHome);
-                  },
-                ),
-
-                const SizedBox(height: 32),
-
-                Column(
-                  children: [
-                    const DividerWithText(text: 'Or Sign in With'),
-                    SizedBox(height: isSignUpDisplayed ? 20 : 14),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+          padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            top: 40,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 40,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // 상단 텍스트 애니메이션
+                  AnimatedCrossFade(
+                    duration: const Duration(milliseconds: 100),
+                    crossFadeState:
+                        isSignUpDisplayed
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst,
+                    firstChild: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SocialLoginButton(
-                          imagePath: 'assets/images/icons/icon_google.png',
-                          onTap: () {},
-                        ),
-                        const SizedBox(width: 24),
-                        SocialLoginButton(
-                          imagePath: 'assets/images/icons/icon_facebook.png',
-                          onTap: () {},
+                        Text('Hello,', style: AppTextStyles.headerBold()),
+                        Text(
+                          'Welcome Back!',
+                          style: AppTextStyles.largeRegular(
+                            color: ColorStyle.labelColour,
+                          ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-
-                SizedBox(height: isSignUpDisplayed ? 55 : 20),
-                Center(
-                  child: GestureDetector(
-                    onTap: toggle,
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 100),
-                      transitionBuilder:
-                          (child, animation) =>
-                              FadeTransition(opacity: animation, child: child),
-                      child: Text.rich(
-                        key: ValueKey(isSignUpDisplayed), // ✅ 타이틀 애니메이션 기준에 맞춤
-                        TextSpan(
+                    secondChild: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Create Account',
+                          style: AppTextStyles.largeBold(),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'Let’s help you set up your account,\nit won’t take long.',
                           style: AppTextStyles.smallRegular(
-                            color: Colors.black,
+                            color: ColorStyle.labelColour,
                           ),
-                          children: [
-                            TextSpan(
-                              text:
-                                  isSignUpDisplayed
-                                      ? 'Already a member? '
-                                      : 'Don’t have an account? ',
-                            ),
-                            TextSpan(
-                              text: isSignUpDisplayed ? 'Sign In' : 'Sign up',
-                              style: AppTextStyles.smallBold(
-                                color: ColorStyle.secondary100,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 57),
+
+                  // 입력 필드 영역
+                  TweenAnimationBuilder<double>(
+                    duration: const Duration(milliseconds: 100),
+                    curve: Curves.easeInOut,
+                    tween: Tween<double>(
+                      begin: isSignUpDisplayed ? signInHeight : signUpHeight,
+                      end: isSignUpDisplayed ? signUpHeight : signInHeight,
+                    ),
+                    builder: (context, height, _) {
+                      return AnimatedSize(
+                        duration: const Duration(milliseconds: 100),
+                        curve: Curves.easeInOut,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(minHeight: height),
+                          child: Column(
+                            children: [
+                              AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 100),
+                                child:
+                                    isSignUpDisplayed
+                                        ? const Column(
+                                          key: ValueKey('signUp'),
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            InputField(
+                                              labelTitle: 'Name',
+                                              placeholderText: 'Enter Name',
+                                              value: '',
+                                            ),
+                                            SizedBox(height: 20),
+                                            InputField(
+                                              labelTitle: 'Email',
+                                              placeholderText: 'Enter Email',
+                                              value: '',
+                                            ),
+                                            SizedBox(height: 20),
+                                            InputField(
+                                              labelTitle: 'Password',
+                                              placeholderText: 'Enter Password',
+                                              value: '',
+                                            ),
+                                            SizedBox(height: 20),
+                                            InputField(
+                                              labelTitle: 'Confirm Password',
+                                              placeholderText:
+                                                  'Retype Password',
+                                              value: '',
+                                            ),
+                                          ],
+                                        )
+                                        : const Column(
+                                          key: ValueKey('signIn'),
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            InputField(
+                                              labelTitle: 'Email',
+                                              placeholderText: 'Enter Email',
+                                              value: '',
+                                            ),
+                                            SizedBox(height: 20),
+                                            InputField(
+                                              labelTitle: 'Password',
+                                              placeholderText: 'Enter Password',
+                                              value: '',
+                                            ),
+                                          ],
+                                        ),
                               ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
+                  const SizedBox(height: 20),
+                  AnimatedCrossFade(
+                    duration: const Duration(milliseconds: 100),
+                    crossFadeState:
+                        isSignUpDisplayed
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst,
+                    firstChild: Text(
+                      'Forgot Password?',
+                      style: AppTextStyles.smallRegular(
+                        color: ColorStyle.secondary100,
+                      ),
+                    ),
+                    secondChild: Row(
+                      children: [
+                        Checkbox(
+                          value: true,
+                          onChanged: (_) {},
+                          activeColor: ColorStyle.secondary100,
+                        ),
+                        Text(
+                          'Accept terms & Condition',
+                          style: AppTextStyles.smallRegular(
+                            color: ColorStyle.secondary100,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  BigButton(
+                    title: isSignUp ? 'Sign Up' : 'Sign In',
+                    onTap: () => context.go(Routes.devHome),
+                  ),
+                  const SizedBox(height: 32),
+                  Column(
+                    children: [
+                      const DividerWithText(text: 'Or Sign in With'),
+                      SizedBox(height: isSignUpDisplayed ? 20 : 14),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SocialLoginButton(
+                            imagePath: 'assets/images/icons/icon_google.png',
+                            onTap: () {},
+                          ),
+                          const SizedBox(width: 24),
+                          SocialLoginButton(
+                            imagePath: 'assets/images/icons/icon_facebook.png',
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: isSignUpDisplayed ? 55 : 20),
+                  Center(
+                    child: GestureDetector(
+                      onTap: toggle,
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 100),
+                        transitionBuilder:
+                            (child, animation) => FadeTransition(
+                              opacity: animation,
+                              child: child,
                             ),
-                          ],
+                        child: Text.rich(
+                          key: ValueKey(isSignUpDisplayed),
+                          TextSpan(
+                            style: AppTextStyles.smallRegular(
+                              color: Colors.black,
+                            ),
+                            children: [
+                              TextSpan(
+                                text:
+                                    isSignUpDisplayed
+                                        ? 'Already a member? '
+                                        : 'Don’t have an account? ',
+                              ),
+                              TextSpan(
+                                text: isSignUpDisplayed ? 'Sign In' : 'Sign up',
+                                style: AppTextStyles.smallBold(
+                                  color: ColorStyle.secondary100,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-
-                const SizedBox(height: 40),
-              ],
-            ),
+                  const SizedBox(height: 40),
+                ],
+              ),
+            ],
           ),
         ),
       ),

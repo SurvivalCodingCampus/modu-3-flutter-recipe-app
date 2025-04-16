@@ -63,16 +63,21 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     const double borderRadius = 10.0;
     const double borderWidth = 1.5;
-    const double labelSpacing = 8.0;
+    const double labelSpacing = 5.0;
 
     return Column(
       children: [
         if (widget.labelTitle.isNotEmpty) ...[
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              widget.labelTitle,
-              style: AppTextStyles.smallRegular(color: ColorStyle.labelColour),
+            child: SizedBox(
+              height: 21,
+              child: Text(
+                widget.labelTitle,
+                style: AppTextStyles.smallRegular(
+                  color: ColorStyle.labelColour,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: labelSpacing),
