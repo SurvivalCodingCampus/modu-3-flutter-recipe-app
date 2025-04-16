@@ -37,6 +37,12 @@ abstract class TextStyles {
     fontFamily: 'Poppins',
   );
 
+  static const TextStyle smallTextSemiBold = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Poppins',
+  );
+
   static const TextStyle titleTextRegular = TextStyle(
     fontSize: 50,
     fontWeight: FontWeight.w400,

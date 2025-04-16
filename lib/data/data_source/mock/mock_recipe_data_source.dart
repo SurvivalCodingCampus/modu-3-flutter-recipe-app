@@ -1,7 +1,7 @@
 import 'package:recipe_app/data/data_source/interface/recipe_data_source.dart';
 import 'package:recipe_app/data/dto/recipe_dto.dart';
 import 'package:recipe_app/data/mapper/recipe_mapper.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 
 class MockRecipeDataSource implements RecipeDataSource {
   @override

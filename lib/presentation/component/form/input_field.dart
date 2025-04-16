@@ -25,6 +25,7 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 5,
       children: [
         Text(
           label,
@@ -33,6 +34,10 @@ class InputField extends StatelessWidget {
         TextField(
           onChanged: onValueChange,
           decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 19,
+            ),
             border: _border(ColorStyles.gray4),
             focusColor: ColorStyles.primary80,
             focusedBorder: _border(ColorStyles.primary80),
