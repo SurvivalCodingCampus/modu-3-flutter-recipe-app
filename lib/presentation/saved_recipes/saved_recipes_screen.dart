@@ -16,7 +16,7 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
   @override
   void initState() {
     super.initState();
-    widget.viewModel.fetchAll();
+    widget.viewModel.getSavedRecipes();
   }
 
   @override
@@ -47,12 +47,15 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
         final Recipe recipe = widget.viewModel.state.recipes[index];
 
         return RecipeCard(
-          title: recipe.name,
+          title: recipe.id.toString(),
           cookTime: recipe.cookTime,
           imagePath: recipe.imageUrl,
           author: recipe.chef,
           rating: recipe.rating.toInt(),
-          onBookmark: () {},
+          bookmarked: recipe.bookmarked,
+          onBookmarkTap: () {
+            widget.viewModel.removeSavedRecipe(recipe.id);
+          },
         );
       },
     );
