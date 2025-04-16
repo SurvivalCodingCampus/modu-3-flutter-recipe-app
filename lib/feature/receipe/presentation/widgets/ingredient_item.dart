@@ -25,6 +25,7 @@ class IngredientItem extends StatelessWidget {
         children: [
           Container(
             height: 76,
+            width: 76,
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
