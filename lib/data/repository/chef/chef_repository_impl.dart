@@ -11,7 +11,7 @@ class ChefRepositoryImpl implements ChefRepository {
 
   @override
   Future<List<Chef>> getChefProfiles() async {
-    final chefProfile = _chefDataSource.getChefProfiles();
+    final chefProfile = await _chefDataSource.getChefProfiles();
     return chefProfile;
   }
 }

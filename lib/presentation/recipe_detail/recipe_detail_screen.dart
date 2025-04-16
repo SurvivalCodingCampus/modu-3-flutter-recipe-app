@@ -63,7 +63,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   height: 10,
                 ),
                 TabsWidget(
-                  labels: ['Ingrident', 'Procedure'],
+                  labels: ['Ingredient', 'Procedure'],
                   selectedindex: _currentIndex,
                   onValueChange: (index) {
                     setState(() {
@@ -114,6 +114,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                     )
                     : Expanded(
                       child: ListView.builder(
+                        itemCount: widget.viewModel.state.procedure.length,
                         itemBuilder: (context, index) {
                           final step = widget.viewModel.state.procedure[index];
                           return Container(
@@ -145,7 +146,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                             ),
                           );
                         }
-                                        ),
+                      ),
                     )
                 ),
               ],
