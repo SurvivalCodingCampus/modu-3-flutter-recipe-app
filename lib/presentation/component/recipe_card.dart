@@ -9,10 +9,10 @@ class RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: Stack(
         children: [
           imageUi(),
@@ -24,10 +24,16 @@ class RecipeCard extends StatelessWidget {
             child: Row(
               spacing: 5,
               children: [
-                const Icon(Icons.timer_outlined, color: ColorStyle.white),
+                const Icon(
+                  Icons.timer_outlined,
+                  color: ColorStyle.white,
+                  size: 20,
+                ),
                 Text(
                   '${recipe.time} min',
-                  style: TextFontStyle.smallRegular(color: ColorStyle.gray4),
+                  style: TextFontStyle.extraSmallRegular(
+                    color: ColorStyle.gray4,
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () {},
@@ -36,7 +42,10 @@ class RecipeCard extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(30, 30),
                   ),
-                  child: const Icon(Icons.save, color: ColorStyle.primary80),
+                  child: const Icon(
+                    Icons.bookmark_border_rounded,
+                    color: ColorStyle.primary80,
+                  ),
                 ),
               ],
             ),
@@ -48,12 +57,10 @@ class RecipeCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 150,
+                  width: 170,
                   child: Text(
                     recipe.title,
-                    style: TextFontStyle.smallBold(
-                      color: ColorStyle.white,
-                    ).copyWith(fontSize: 11),
+                    style: TextFontStyle.smallBold(color: ColorStyle.white),
                   ),
                 ),
                 Text(
@@ -72,7 +79,7 @@ class RecipeCard extends StatelessWidget {
 
   Container gradationUi() {
     return Container(
-      height: 200,
+      height: 160,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -85,7 +92,7 @@ class RecipeCard extends StatelessWidget {
 
   SizedBox imageUi() {
     return SizedBox(
-      height: 200,
+      height: 160,
       width: double.infinity,
       child: Image.network(recipe.pictures.imageUrl, fit: BoxFit.cover),
     );

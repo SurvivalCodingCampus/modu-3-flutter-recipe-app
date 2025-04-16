@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/routes.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
 
@@ -15,7 +17,7 @@ class SavedRecipesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorStyle.primary20,
+        backgroundColor: Colors.white10,
         scrolledUnderElevation: 0,
         elevation: 0,
         title: Text('Saved recipes', style: TextFontStyle.mediumBold()),
@@ -32,7 +34,10 @@ class SavedRecipesScreen extends StatelessWidget {
                   itemCount: _viewModel.state.recipes.length,
                   itemBuilder: (context, index) {
                     final recipe = _viewModel.state.recipes[index];
-                    return RecipeCard(recipe: recipe);
+                    return GestureDetector(
+                      onTap: () {},
+                      child: RecipeCard(recipe: recipe),
+                    );
                   },
                 );
               },

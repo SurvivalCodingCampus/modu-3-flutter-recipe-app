@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/data/data_source/recipe/recipe_data_source_impl.dart';
+import 'package:recipe_app/data/repository/recipe/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/main/home/home_screen.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_detail_view.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
@@ -26,12 +30,65 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const SignUpScreen(),
     ),
 
-    ShellRoute(
-      builder: (context, state, child) {
-        return MainScreen(child: child);
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return MainScreen(
+          bottomNavigationBar: NavigationBar(
+            onDestinationSelected: (int index) {
+              navigationShell.goBranch(index);
+            },
+            selectedIndex: navigationShell.currentIndex,
+            destinations: const [
+              NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+              NavigationDestination(icon: Icon(Icons.bookmark), label: 'Saved'),
+              NavigationDestination(
+                icon: Icon(Icons.notifications),
+                label: 'Notification',
+              ),
+              NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+            ],
+          ),
+          child: navigationShell,
+        );
       },
-      routes: [
-        GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.home,
+              builder: (context, state) => const HomeScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.saved,
+              builder:
+                  (context, state) => SavedRecipesScreen(
+                    savedRecipesViewModel: SavedRecipesViewModel(
+                      RecipeRepositoryImpl(RecipeDataSourceImpl()),
+                    ),
+                  ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.notification,
+              builder: (context, state) => const HomeScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.profile,
+              builder: (context, state) => const HomeScreen(),
+            ),
+          ],
+        ),
       ],
     ),
   ],
