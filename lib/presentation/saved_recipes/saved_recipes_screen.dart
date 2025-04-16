@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
@@ -47,12 +48,10 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
         final Recipe recipe = widget.viewModel.state.recipes[index];
 
         return RecipeCard(
-          title: recipe.id.toString(),
-          cookTime: recipe.cookTime,
-          imagePath: recipe.imageUrl,
-          author: recipe.chef,
-          rating: recipe.rating.toInt(),
-          bookmarked: recipe.bookmarked,
+          recipe: recipe,
+          onCardTap: () {
+            context.push('/ingredient/${recipe.id}');
+          },
           onBookmarkTap: () {
             widget.viewModel.removeSavedRecipe(recipe.id);
           },
