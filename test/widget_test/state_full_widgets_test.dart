@@ -56,6 +56,7 @@ void main() {
               recipe: recipe,
               isBig: true,
               isBookmarked: true,
+              isIngredient: false,
               bookMarkCallback: () {},
             ),
           ),
