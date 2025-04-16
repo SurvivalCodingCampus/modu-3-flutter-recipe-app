@@ -7,21 +7,28 @@ part of 'recipe.dart';
 // **************************************************************************
 
 _Recipe _$RecipeFromJson(Map<String, dynamic> json) => _Recipe(
+  category: json['category'] as String,
   id: (json['id'] as num).toInt(),
-  title: json['title'] as String,
+  name: json['name'] as String,
   chef: json['chef'] as String,
   rate: (json['rate'] as num).toDouble(),
-  minutes: (json['minutes'] as num).toInt(),
-  imagePath: json['imagePath'] as String,
+  time: (json['time'] as num).toInt(),
+  image: json['image'] as String,
+  ingredients:
+      (json['ingredients'] as List<dynamic>)
+          .map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
+          .toList(),
   bookMarked: json['bookMarked'] as bool,
 );
 
 Map<String, dynamic> _$RecipeToJson(_Recipe instance) => <String, dynamic>{
+  'category': instance.category,
   'id': instance.id,
-  'title': instance.title,
+  'name': instance.name,
   'chef': instance.chef,
   'rate': instance.rate,
-  'minutes': instance.minutes,
-  'imagePath': instance.imagePath,
+  'time': instance.time,
+  'image': instance.image,
+  'ingredients': instance.ingredients,
   'bookMarked': instance.bookMarked,
 };
