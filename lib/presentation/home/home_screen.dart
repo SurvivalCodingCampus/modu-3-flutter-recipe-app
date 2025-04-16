@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 300,
+                        width: 260,
                         child: InputField(
                           label: '',
                           placeHolder: 'Search recipe',
