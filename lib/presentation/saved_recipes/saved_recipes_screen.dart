@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes.dart';
 import 'package:recipe_app/ui/ui.dart';
@@ -43,11 +44,17 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
             return ListView.separated(
               itemBuilder: (context, index) {
                 final recipe = widget.viewModel.state.recipes[index];
-                return RecipeCard(
-                  recipe: recipe,
+                return GestureDetector(
                   onTap: () {
-                    widget.viewModel.toggleRecipe(int.parse(recipe.id));
+                    context.push('/recipe-ingredient/${recipe.id}');
                   },
+                  behavior: HitTestBehavior.opaque,
+                  child: RecipeCard(
+                    recipe: recipe,
+                    onTap: () {
+                      widget.viewModel.toggleRecipe(int.parse(recipe.id));
+                    },
+                  ),
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 20),
