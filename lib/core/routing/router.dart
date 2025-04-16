@@ -4,6 +4,7 @@ import 'package:recipe_app/core/di.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/bottom_navigation_bar_scaffold.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
+import 'package:recipe_app/presentation/ingredient/ingredient_screen.dart';
 import 'package:recipe_app/presentation/login/login_screen.dart';
 import 'package:recipe_app/presentation/register/register_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
@@ -28,6 +29,12 @@ final router = GoRouter(
     GoRoute(
       path: Routes.register,
       builder: (context, state) => const RegisterScreen(),
+    ),
+    GoRoute(
+      path: Routes.ingredient,
+      builder:
+          (context, state) =>
+              IngredientScreen(recipeId: state.pathParameters['id'] as int),
     ),
     StatefulShellRoute.indexedStack(
       builder:
