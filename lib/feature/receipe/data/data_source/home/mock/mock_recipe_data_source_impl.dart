@@ -15,7 +15,7 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
         "chef": "Chef John",
         "time": "20 min",
         "rating": 4.0,
-        "bookmarkStatus": true,
+        "bookmarkStatus": false,
         "ingredients": [
           {
             "ingredient": {
@@ -153,7 +153,7 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
         "chef": "Kim Dahee",
         "time": "30 min",
         "rating": 5.0,
-        "bookmarkStatus": true,
+        "bookmarkStatus": false,
         "ingredients": [],
       },
       {
@@ -165,7 +165,7 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
         "chef": "Alice Johnson",
         "time": "25 min",
         "rating": 4.5,
-        "bookmarkStatus": true,
+        "bookmarkStatus": false,
         "ingredients": [
           {
             "ingredient": {
@@ -227,7 +227,7 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
         "chef": "Mario Batali",
         "time": "15 min",
         "rating": 4.3,
-        "bookmarkStatus": true,
+        "bookmarkStatus": false,
         "ingredients": [
           {
             "ingredient": {
@@ -280,7 +280,7 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
         "chef": "Julia Child",
         "time": "40 min",
         "rating": 4.6,
-        "bookmarkStatus": true,
+        "bookmarkStatus": false,
         "ingredients": [
           {
             "ingredient": {

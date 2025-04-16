@@ -30,7 +30,7 @@ class RecipeCard extends StatelessWidget {
     title: recipe.name,
     owner: recipe.chef,
     starCount: recipe.rating,
-    bookMarkStatus: true,
+    bookMarkStatus: recipe.bookmarkStatus,
     duration: recipe.time,
     height: 150,
   );
