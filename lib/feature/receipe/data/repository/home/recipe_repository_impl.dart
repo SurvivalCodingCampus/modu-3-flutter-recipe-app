@@ -15,9 +15,14 @@ class RecipeRepositoryImpl implements RecipeRepository {
     try {
       final resp = await _dataSource.getRecipes();
       final recipes = resp.map((e) => e.toRecipe()).toList();
-      return Success(recipes);
+      return Result.success(recipes);
     } catch (e) {
-      return const Error(NetworkException());
+      return const Result.error(NetworkException());
     }
+  }
+
+  @override
+  Future<Result<bool>> bookmarkRecipe(int id) {
+    return Future.value(const Result.success(true));
   }
 }

@@ -12,6 +12,7 @@ extension RecipeMapper on RecipeDto {
       chef: chef ?? '',
       time: time ?? '',
       rating: rating ?? 0.0,
+      bookmarkStatus: bookmarkStatus ?? false,
       ingredients:
           ingredients?.map((e) => e.toIngredientAmount()).toList() ?? [],
     );

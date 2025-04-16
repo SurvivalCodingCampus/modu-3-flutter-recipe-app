@@ -14,6 +14,7 @@ abstract class RecipeDto with _$RecipeDto {
     String? chef,
     String? time,
     double? rating,
+    bool? bookmarkStatus,
     List<IngredientAmountDto>? ingredients,
   }) = _RecipeDto;
 

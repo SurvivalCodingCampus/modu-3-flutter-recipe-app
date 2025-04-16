@@ -9,6 +9,7 @@ class Recipe {
   final String chef;
   final String time;
   final double rating;
+  final bool bookmarkStatus;
   final List<IngredientAmount> ingredients;
   Recipe({
     required this.id,
@@ -18,12 +19,37 @@ class Recipe {
     required this.chef,
     required this.time,
     required this.rating,
+    required this.bookmarkStatus,
     required this.ingredients,
   });
 
+  Recipe copyWith({
+    int? id,
+    String? category,
+    String? name,
+    String? image,
+    String? chef,
+    String? time,
+    double? rating,
+    bool? bookmarkStatus,
+    List<IngredientAmount>? ingredients,
+  }) {
+    return Recipe(
+      id: id ?? this.id,
+      category: category ?? this.category,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      chef: chef ?? this.chef,
+      time: time ?? this.time,
+      rating: rating ?? this.rating,
+      bookmarkStatus: bookmarkStatus ?? this.bookmarkStatus,
+      ingredients: ingredients ?? this.ingredients,
+    );
+  }
+
   @override
   String toString() {
-    return 'Recipe(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, ingredients: $ingredients)';
+    return 'Recipe(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, bookmarkStatus: $bookmarkStatus, ingredients: $ingredients)';
   }
 
   @override
@@ -37,6 +63,7 @@ class Recipe {
         other.chef == chef &&
         other.time == time &&
         other.rating == rating &&
+        other.bookmarkStatus == bookmarkStatus &&
         listEquals(other.ingredients, ingredients);
   }
 
@@ -49,28 +76,7 @@ class Recipe {
         chef.hashCode ^
         time.hashCode ^
         rating.hashCode ^
+        bookmarkStatus.hashCode ^
         ingredients.hashCode;
-  }
-
-  Recipe copyWith({
-    int? id,
-    String? category,
-    String? name,
-    String? image,
-    String? chef,
-    String? time,
-    double? rating,
-    List<IngredientAmount>? ingredients,
-  }) {
-    return Recipe(
-      id: id ?? this.id,
-      category: category ?? this.category,
-      name: name ?? this.name,
-      image: image ?? this.image,
-      chef: chef ?? this.chef,
-      time: time ?? this.time,
-      rating: rating ?? this.rating,
-      ingredients: ingredients ?? this.ingredients,
-    );
   }
 }

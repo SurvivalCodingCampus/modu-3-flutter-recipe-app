@@ -4,5 +4,5 @@ import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 abstract interface class RecipeRepository {
   Future<Result<List<Recipe>>> getRecipes();
 
-  Future<Result<void>> bookmarkRecipe();
+  Future<Result<bool>> bookmarkRecipe(int id);
 }

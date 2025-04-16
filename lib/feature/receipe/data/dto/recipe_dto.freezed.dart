@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RecipeDto {
 
- int? get id; String? get category; String? get name; String? get image; String? get chef; String? get time; double? get rating; List<IngredientAmountDto>? get ingredients;
+ int? get id; String? get category; String? get name; String? get image; String? get chef; String? get time; double? get rating; bool? get bookmarkStatus; List<IngredientAmountDto>? get ingredients;
 /// Create a copy of RecipeDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $RecipeDtoCopyWith<RecipeDto> get copyWith => _$RecipeDtoCopyWithImpl<RecipeDto>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecipeDto&&(identical(other.id, id) || other.id == id)&&(identical(other.category, category) || other.category == category)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image)&&(identical(other.chef, chef) || other.chef == chef)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&const DeepCollectionEquality().equals(other.ingredients, ingredients));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecipeDto&&(identical(other.id, id) || other.id == id)&&(identical(other.category, category) || other.category == category)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image)&&(identical(other.chef, chef) || other.chef == chef)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.bookmarkStatus, bookmarkStatus) || other.bookmarkStatus == bookmarkStatus)&&const DeepCollectionEquality().equals(other.ingredients, ingredients));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,category,name,image,chef,time,rating,const DeepCollectionEquality().hash(ingredients));
+int get hashCode => Object.hash(runtimeType,id,category,name,image,chef,time,rating,bookmarkStatus,const DeepCollectionEquality().hash(ingredients));
 
 @override
 String toString() {
-  return 'RecipeDto(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, ingredients: $ingredients)';
+  return 'RecipeDto(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, bookmarkStatus: $bookmarkStatus, ingredients: $ingredients)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $RecipeDtoCopyWith<$Res>  {
   factory $RecipeDtoCopyWith(RecipeDto value, $Res Function(RecipeDto) _then) = _$RecipeDtoCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? category, String? name, String? image, String? chef, String? time, double? rating, List<IngredientAmountDto>? ingredients
+ int? id, String? category, String? name, String? image, String? chef, String? time, double? rating, bool? bookmarkStatus, List<IngredientAmountDto>? ingredients
 });
 
 
@@ -66,7 +66,7 @@ class _$RecipeDtoCopyWithImpl<$Res>
 
 /// Create a copy of RecipeDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? category = freezed,Object? name = freezed,Object? image = freezed,Object? chef = freezed,Object? time = freezed,Object? rating = freezed,Object? ingredients = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? category = freezed,Object? name = freezed,Object? image = freezed,Object? chef = freezed,Object? time = freezed,Object? rating = freezed,Object? bookmarkStatus = freezed,Object? ingredients = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
@@ -75,7 +75,8 @@ as String?,image: freezed == image ? _self.image : image // ignore: cast_nullabl
 as String?,chef: freezed == chef ? _self.chef : chef // ignore: cast_nullable_to_non_nullable
 as String?,time: freezed == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
 as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
-as double?,ingredients: freezed == ingredients ? _self.ingredients : ingredients // ignore: cast_nullable_to_non_nullable
+as double?,bookmarkStatus: freezed == bookmarkStatus ? _self.bookmarkStatus : bookmarkStatus // ignore: cast_nullable_to_non_nullable
+as bool?,ingredients: freezed == ingredients ? _self.ingredients : ingredients // ignore: cast_nullable_to_non_nullable
 as List<IngredientAmountDto>?,
   ));
 }
@@ -87,7 +88,7 @@ as List<IngredientAmountDto>?,
 @JsonSerializable()
 
 class _RecipeDto implements RecipeDto {
-  const _RecipeDto({this.id, this.category, this.name, this.image, this.chef, this.time, this.rating, final  List<IngredientAmountDto>? ingredients}): _ingredients = ingredients;
+  const _RecipeDto({this.id, this.category, this.name, this.image, this.chef, this.time, this.rating, this.bookmarkStatus, final  List<IngredientAmountDto>? ingredients}): _ingredients = ingredients;
   factory _RecipeDto.fromJson(Map<String, dynamic> json) => _$RecipeDtoFromJson(json);
 
 @override final  int? id;
@@ -97,6 +98,7 @@ class _RecipeDto implements RecipeDto {
 @override final  String? chef;
 @override final  String? time;
 @override final  double? rating;
+@override final  bool? bookmarkStatus;
  final  List<IngredientAmountDto>? _ingredients;
 @override List<IngredientAmountDto>? get ingredients {
   final value = _ingredients;
@@ -120,16 +122,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecipeDto&&(identical(other.id, id) || other.id == id)&&(identical(other.category, category) || other.category == category)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image)&&(identical(other.chef, chef) || other.chef == chef)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&const DeepCollectionEquality().equals(other._ingredients, _ingredients));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecipeDto&&(identical(other.id, id) || other.id == id)&&(identical(other.category, category) || other.category == category)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image)&&(identical(other.chef, chef) || other.chef == chef)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.bookmarkStatus, bookmarkStatus) || other.bookmarkStatus == bookmarkStatus)&&const DeepCollectionEquality().equals(other._ingredients, _ingredients));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,category,name,image,chef,time,rating,const DeepCollectionEquality().hash(_ingredients));
+int get hashCode => Object.hash(runtimeType,id,category,name,image,chef,time,rating,bookmarkStatus,const DeepCollectionEquality().hash(_ingredients));
 
 @override
 String toString() {
-  return 'RecipeDto(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, ingredients: $ingredients)';
+  return 'RecipeDto(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, bookmarkStatus: $bookmarkStatus, ingredients: $ingredients)';
 }
 
 
@@ -140,7 +142,7 @@ abstract mixin class _$RecipeDtoCopyWith<$Res> implements $RecipeDtoCopyWith<$Re
   factory _$RecipeDtoCopyWith(_RecipeDto value, $Res Function(_RecipeDto) _then) = __$RecipeDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? category, String? name, String? image, String? chef, String? time, double? rating, List<IngredientAmountDto>? ingredients
+ int? id, String? category, String? name, String? image, String? chef, String? time, double? rating, bool? bookmarkStatus, List<IngredientAmountDto>? ingredients
 });
 
 
@@ -157,7 +159,7 @@ class __$RecipeDtoCopyWithImpl<$Res>
 
 /// Create a copy of RecipeDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? category = freezed,Object? name = freezed,Object? image = freezed,Object? chef = freezed,Object? time = freezed,Object? rating = freezed,Object? ingredients = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? category = freezed,Object? name = freezed,Object? image = freezed,Object? chef = freezed,Object? time = freezed,Object? rating = freezed,Object? bookmarkStatus = freezed,Object? ingredients = freezed,}) {
   return _then(_RecipeDto(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
@@ -166,7 +168,8 @@ as String?,image: freezed == image ? _self.image : image // ignore: cast_nullabl
 as String?,chef: freezed == chef ? _self.chef : chef // ignore: cast_nullable_to_non_nullable
 as String?,time: freezed == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
 as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
-as double?,ingredients: freezed == ingredients ? _self._ingredients : ingredients // ignore: cast_nullable_to_non_nullable
+as double?,bookmarkStatus: freezed == bookmarkStatus ? _self.bookmarkStatus : bookmarkStatus // ignore: cast_nullable_to_non_nullable
+as bool?,ingredients: freezed == ingredients ? _self._ingredients : ingredients // ignore: cast_nullable_to_non_nullable
 as List<IngredientAmountDto>?,
   ));
 }
