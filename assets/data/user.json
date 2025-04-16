@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "account": "doggodking",
+  "password": "1234",
+  "username": "DOGGODKING",
+  "job": "백엔드 수육장인",
+  "profileImgUrl": "assets/images/profile/doggodking.png",
+  "profileDescription": "겉보기엔 개 같아도 맛은 킹갓제너럴충무공버터맛입니다.",
+  "address": "경기도 화성시 병점1로",
+  "recipes": [],
+  "bookmarkedRecipeIds": [2, 4, 6],
+  "followersCount": 232,
+  "followingsCount": 18
+}
