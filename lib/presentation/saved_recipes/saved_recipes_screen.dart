@@ -28,7 +28,14 @@ class SavedRecipesScreen extends StatelessWidget {
                     if (!viewModel.isLoading && viewModel.recipes.isEmpty)
                       const Center(child: Text("저장된 레시피가 없습니다.")),
                     for (final recipe in viewModel.recipes) ...[
-                      RecipeCard(recipe: recipe, isBig: true,),
+                      RecipeCard(
+                        recipe: recipe,
+                        isBig: true,
+                        isBookmarked: true,
+                        bookMarkCallback: () {
+                          
+                        },
+                      ),
                       SizedBox(height: 24),
                     ],
                   ],

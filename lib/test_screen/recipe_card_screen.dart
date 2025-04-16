@@ -36,9 +36,13 @@ class RecipeCardScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 24),
-                  RecipeCard(recipe: recipe1, isBig: true,),
+                  RecipeCard(recipe: recipe1, isBig: true, isBookmarked: true, bookMarkCallback: () {
+                    
+                  },),
                   SizedBox(height: 24),
-                  RecipeCard(recipe: recipe2, isBig: true,),
+                  RecipeCard(recipe: recipe2, isBig: true, isBookmarked: true, bookMarkCallback: () {
+                    
+                  },),
                   SizedBox(height: 24),
                 ],
               ),

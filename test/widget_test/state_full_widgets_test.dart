@@ -50,7 +50,16 @@ void main() {
 
       // 2. 위젯 빌드
       await widgetTester.pumpWidget(
-        MaterialApp(home: Scaffold(body: RecipeCard(recipe: recipe,isBig: true,))),
+        MaterialApp(
+          home: Scaffold(
+            body: RecipeCard(
+              recipe: recipe,
+              isBig: true,
+              isBookmarked: true,
+              bookMarkCallback: () {},
+            ),
+          ),
+        ),
       );
 
       // 3. 각 텍스트 요소가 표시되는지 확인

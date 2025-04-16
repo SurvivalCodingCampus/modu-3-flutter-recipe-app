@@ -12,18 +12,18 @@ part 'recipe.g.dart';
 @freezed
 abstract class Recipe with _$Recipe {
   const factory Recipe({
+    @Default(Categories.all) final Categories category,
     @JsonKey(name: 'id') @Default(0) final int recipeId,
     @JsonKey(name: 'name') @Default('') final String title,
-    @Default([Ingredients()]) final List<Ingredients> ingredients,
-    @Default(Review()) final Review review,
-    @Default('') final String chef,
-    @Default(null) final DateTime? createdAt,
     @JsonKey(name: 'image') @Default('') final String imageUrl,
-    @Default(Media()) final Media media,
-    @Default([]) final List<String> recipeStep,
+    @Default('') final String chef,
     @JsonKey(name: 'time') @Default('') final String cookingTime,
     @Default(0) final double rating,
-    @Default(Categories.all) final Categories category,
+    @Default([Ingredients()]) final List<Ingredients> ingredients,
+    @Default(Review()) final Review review,
+    @Default(null) final DateTime? createdAt,
+    @Default(Media()) final Media media,
+    @Default([]) final List<String> recipeStep,
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);

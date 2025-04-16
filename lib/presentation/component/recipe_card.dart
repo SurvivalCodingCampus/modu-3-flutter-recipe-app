@@ -6,7 +6,15 @@ import 'package:recipe_app/ui/text_style.dart';
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
   final bool isBig;
-  const RecipeCard({super.key, required this.recipe, required this.isBig});
+  final bool isBookmarked;
+  final VoidCallback bookMarkCallback;
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.isBig,
+    required this.isBookmarked,
+    required this.bookMarkCallback,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +90,24 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10),
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: Image.asset('assets/images/bookmark_icon.png'),
+                  GestureDetector(
+                    onTap: () {
+                      bookMarkCallback();
+                    },
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child:
+                          isBookmarked
+                              ? Icon(
+                                Icons.bookmark_added,
+                                color: ColorStyles.primary100,
+                              )
+                              : Icon(
+                                Icons.bookmark_border,
+                                color: ColorStyles.gray4,
+                              ),
+                    ),
                   ),
                 ],
               ),

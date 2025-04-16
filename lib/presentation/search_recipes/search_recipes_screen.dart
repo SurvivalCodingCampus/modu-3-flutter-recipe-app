@@ -35,7 +35,7 @@ class SearchRecipesScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 300,
+                          width: 260,
                           child: InputField(
                             label: '',
                             placeHolder: 'Search recipe',
@@ -97,7 +97,12 @@ class SearchRecipesScreen extends StatelessWidget {
                         if (recipes.isEmpty) {
                           return null;
                         }
-                        return RecipeCard(recipe: recipes[index], isBig: false);
+                        return RecipeCard(
+                          recipe: recipes[index],
+                          isBig: false,
+                          isBookmarked: true,
+                          bookMarkCallback: () {},
+                        );
                       },
                     ),
                   ],
