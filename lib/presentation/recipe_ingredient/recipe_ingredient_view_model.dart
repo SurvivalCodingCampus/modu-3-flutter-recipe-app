@@ -16,7 +16,7 @@ class RecipeIngredientViewModel with ChangeNotifier {
 
   RecipeIngredientState get state => _state;
 
-  void loadRecipeIngredient(String recipeId) async {
+  Future<void> loadRecipeIngredient(String recipeId) async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 

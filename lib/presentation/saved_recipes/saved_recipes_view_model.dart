@@ -16,7 +16,7 @@ class SavedRecipesViewModel with ChangeNotifier {
 
   SavedRecipesState get state => _state;
 
-  void fetchSavedRecipes() async {
+  Future<void> fetchSavedRecipes() async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
@@ -29,7 +29,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleRecipe(int id) async {
+  Future<void> toggleRecipe(int id) async {
     _state = state.copyWith(
       recipes: await _toggleBookmarkRecipeUseCase.execute(id),
     );
