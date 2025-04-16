@@ -23,21 +23,20 @@ class Recipe with _$Recipe {
 
   @override
   final double rating;
-  @override
-  final String time;
+
   @override
   final String category;
+  @override
   final bool isFavorite;
 
   const Recipe({
-    this.id = '0',
-    this.name = '',
-    this.imageUrl = '',
-    this.chef = '',
-    this.totalTimeMinutes = '',
-    this.rating = 0.0,
-    this.time = '',
-    this.category = '',
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+    required this.chef,
+    required this.totalTimeMinutes,
+    required this.rating,
+    required this.category,
     this.isFavorite = false,
   });
 

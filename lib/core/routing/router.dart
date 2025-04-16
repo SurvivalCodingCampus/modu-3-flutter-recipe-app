@@ -65,6 +65,7 @@ final router = GoRouter(
             chef: 'Kim Dahee',
             totalTimeMinutes: '30 min',
             rating: 5.0,
+            category: 'Chinese',
           ),
         );
       },

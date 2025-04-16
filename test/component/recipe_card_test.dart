@@ -20,6 +20,7 @@ void main() {
       chef: 'By Chef John',
       totalTimeMinutes: '20',
       rating: 4.0,
+      category: 'Chinese',
     );
 
     // 위젯을 빌드합니다.

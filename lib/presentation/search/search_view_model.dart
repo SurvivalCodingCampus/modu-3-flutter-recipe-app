@@ -64,7 +64,7 @@ class SearchViewModel with ChangeNotifier {
               if (filter.time == 'All') {
                 return true;
               }
-              return e.time == filter.time;
+              return e.totalTimeMinutes == filter.time;
             })
             .where((e) => e.rating >= filter.rate)
             .where((e) {
