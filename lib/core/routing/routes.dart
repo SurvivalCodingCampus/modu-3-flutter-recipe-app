@@ -14,7 +14,6 @@ abstract class Routes {
   static String ingredientPath(int id) => '/ingredient/$id';
 
   static const String mainHome = '/home';
-  static const String mainBookmark = '/bookmark';
   static const String mainCreate = '/create';
   static const String mainNotifications = '/notifications';
   static const String mainProfile = '/profile';

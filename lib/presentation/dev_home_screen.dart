@@ -14,11 +14,6 @@ class DevHomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildMenuButton(
-              context,
-              title: '저장된 레시피 화면',
-              onTap: () => context.push(Routes.savedRecipes),
-            ),
             const SizedBox(height: 16),
             _buildMenuButton(
               context,

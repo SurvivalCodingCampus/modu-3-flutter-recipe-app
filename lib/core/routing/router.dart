@@ -41,14 +41,6 @@ GoRouter appRouter(AppDependencies dependencies) {
       ),
 
       GoRoute(
-        path: Routes.savedRecipes,
-        builder:
-            (context, state) => SavedRecipesScreen(
-              viewModel: dependencies.savedRecipesViewModel,
-            ),
-      ),
-
-      GoRoute(
         path: Routes.ingredient,
         builder: (context, state) {
           final id = int.parse(state.pathParameters['id']!);
@@ -76,10 +68,11 @@ GoRouter appRouter(AppDependencies dependencies) {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Routes.mainBookmark,
+                path: Routes.savedRecipes,
                 builder:
-                    (context, state) =>
-                        const Scaffold(body: Center(child: Text('bookmark'))),
+                    (context, state) => SavedRecipesScreen(
+                      viewModel: dependencies.savedRecipesViewModel,
+                    ),
               ),
             ],
           ),
