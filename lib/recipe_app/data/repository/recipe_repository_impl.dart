@@ -38,4 +38,14 @@ class RecipeRepositoryImpl implements RecipeRepository {
 
     return filteredRecipesList;
   }
+
+  @override
+  Future<List<Recipe>> bookMarkedRecipes(bool bookMark) async {
+    //step1. 모든 레시피 데이터 불러옴
+    final recipeList = await _recipeDataSource.getRecipeData();
+    //step2. bookMarked가 true인 레시피를 리스트 형식으로 반환
+    final bookMarkedRecipesList =
+        recipeList.where((e) => e.bookMarked == true).toList();
+    return bookMarkedRecipesList;
+  }
 }

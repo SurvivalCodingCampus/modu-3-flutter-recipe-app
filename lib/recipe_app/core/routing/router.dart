@@ -64,8 +64,7 @@ final router = GoRouter(
           pageBuilder:
               (context, state) => NoTransitionPage(
                 child: SavedRecipesScreen(
-                  savedRecipesViewModel:
-                      _savedRecipesViewModel..loadRecipesData(),
+                  savedRecipesViewModel: _savedRecipesViewModel,
                 ),
               ),
         ),
