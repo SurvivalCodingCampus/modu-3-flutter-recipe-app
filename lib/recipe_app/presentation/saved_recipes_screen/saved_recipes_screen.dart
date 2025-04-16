@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/recipe_app/data_source/mock/mock_saved_recipe_data_impl.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
@@ -14,10 +15,17 @@ class SavedRecipesScreen extends StatefulWidget {
 }
 
 class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
+  final mockDataSource = MockSavedRecipeDataImpl();
+
   @override
   void initState() {
     super.initState();
-    widget.savedRecipesViewModel.loadRecipesData();
+    widget.savedRecipesViewModel.bookMarkedRecipesUseCase();
+  }
+
+  void _onToggleBookMark(int index) {
+    widget.savedRecipesViewModel.toggleBookMark(index);
+    setState(() {});
   }
 
   @override
@@ -44,6 +52,7 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
                 return RecipeCard(
                   recipe: widget.savedRecipesViewModel.recipes[index],
                   showTimerAndBookmark: true,
+                  onToggleBookMark: () => _onToggleBookMark(index),
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 20),

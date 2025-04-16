@@ -6,6 +6,4 @@ abstract class RecipeRepository {
   Future<List<Recipe>> searchRecipes(String keyword);
 
   Future<List<Recipe>> filterRecipes(String filter);
-
-  Future<List<Recipe>> bookMarkedRecipes(bool bookMark);
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/recipe_app/data_source/mock/mock_saved_recipe_data_impl.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles.dart';
@@ -9,11 +11,13 @@ import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel searchRecipesViewModel;
   final FilterSearchViewModel filterSearchViewModel;
+  final SavedRecipesViewModel savedRecipesViewModel;
 
   const SearchRecipesScreen({
     super.key,
     required this.searchRecipesViewModel,
     required this.filterSearchViewModel,
+    required this.savedRecipesViewModel,
   });
 
   @override
@@ -24,6 +28,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   final TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
   late String keyword;
+  final mockDataSource = MockSavedRecipeDataImpl();
 
   @override
   void initState() {
@@ -35,6 +40,12 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  void _onToggleBookMark(int index) {
+    setState(() {
+      widget.savedRecipesViewModel.toggleBookMark(index);
+    });
   }
 
   @override
@@ -198,6 +209,9 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                       (recipe) => RecipeCard(
                                         recipe: recipe,
                                         showTimerAndBookmark: false,
+                                        onToggleBookMark: () {
+                                          _onToggleBookMark(recipe.id);
+                                        },
                                       ),
                                     )
                                     .toList(),
