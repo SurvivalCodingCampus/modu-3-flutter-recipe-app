@@ -39,6 +39,7 @@ class SearchRecipesScreen extends StatelessWidget {
                           child: InputField(
                             label: '',
                             placeHolder: 'Search recipe',
+                            isSearch: true,
                             controller: TextEditingController(text: ''),
                             onValueChange: (String value) async {
                               await viewModel.fetchSearchedRecipes(value);

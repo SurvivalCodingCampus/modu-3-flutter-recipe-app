@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/test_screen/component_test_screen.dart';
+import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
 void main() async {
@@ -13,14 +13,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         scaffoldBackgroundColor: ColorStyles.white,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: ColorStyles.white,
+        ),
+        appBarTheme: AppBarTheme(color: ColorStyles.white),
         // textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: ComponentTestScreen(),
+      routerConfig: router,
     );
   }
 }
