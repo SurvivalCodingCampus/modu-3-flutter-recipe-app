@@ -85,7 +85,7 @@ class SplashScreen extends StatelessWidget {
                 // 버튼
                 MediumButton(lable: 'Start Cooking',
                   onClick: () {
-                    context.push(Routes.signIn);
+                    context.go(Routes.signIn);
                   },
                 ),
               ],
