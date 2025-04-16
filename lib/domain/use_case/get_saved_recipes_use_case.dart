@@ -1,12 +1,12 @@
 import 'package:recipe_app/domain/model/recipe.dart';
-import 'package:recipe_app/domain/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/repository/bookmark_repository.dart';
 
 class GetSavedRecipesUseCase {
-  final RecipeRepository _recipeRepository;
+  final BookmarkRepository _bookmarkRepository;
 
-  const GetSavedRecipesUseCase(this._recipeRepository);
+  const GetSavedRecipesUseCase(this._bookmarkRepository);
 
   Future<List<Recipe>> execute() async {
-    return _recipeRepository.findAll();
+    return _bookmarkRepository.findAll();
   }
 }
