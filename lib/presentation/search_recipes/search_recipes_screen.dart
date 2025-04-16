@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/recipe_thumbnail_card.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
@@ -11,7 +12,6 @@ class SearchRecipesScreen extends StatelessWidget {
 
   const SearchRecipesScreen({super.key, required this.viewModel});
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +19,18 @@ class SearchRecipesScreen extends StatelessWidget {
         leadingWidth: 50,
         leading: Align(
           alignment: Alignment.centerRight,
-          child: SizedBox(
-            width: 20,
-            height: 20,
-            child: Image.asset(
-              'assets/icons/arrow-left.png',
-              fit: BoxFit.contain,
+          child: GestureDetector(
+            onTap: () {
+              context.pop();  // 지원된 기능 말고, 뒤로 돌아가기 구현.
+            },
+            child: SizedBox(
+              width: 20,
+              height: 20,
+              child: Image.asset(
+                'assets/icons/arrow-left.png',
+                fit: BoxFit.contain,
+              ),
+
             ),
           ),
         ),
@@ -73,7 +79,7 @@ class SearchRecipesScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: ColorStyle.primary100,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             padding: EdgeInsets.zero, // 여백 제거 (선택)
                             minimumSize: Size(48, 48), // 버튼 크기 (선택)

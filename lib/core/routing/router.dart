@@ -1,11 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import '../../presentation/main/add_screen/add_screen.dart';
+import '../../data/repository/mock_recipe_repository_impl.dart';
+import '../../presentation/main/add/add_screen.dart';
 import '../../presentation/main/app_scaffold.dart';
-import '../../presentation/main/bookmark_screen/bookmark_screen.dart';
-import '../../presentation/main/home_screen/home_screen.dart';
-import '../../presentation/main/notification_screen/notification_screen.dart';
+import '../../presentation/main/bookmark/bookmark_screen.dart';
+import '../../presentation/main/home/home_screen.dart';
+import '../../presentation/main/notification/notification_screen.dart';
 import '../../presentation/main/profile_screen/profile_screen.dart';
+import '../../presentation/search_recipes/search_recipes_screen.dart';
+import '../../presentation/search_recipes/search_recipes_view_model.dart';
 import '../../presentation/sign_in/sign_in_screen.dart';
 import '../../presentation/sign_up/sign_up_screen.dart';
 import '../../presentation/splash/splash_screen.dart';
@@ -26,6 +29,10 @@ final router = GoRouter(
     GoRoute(
       path: Routes.signUp,
       builder: (context, state) => SignUpScreen(),
+    ),
+    GoRoute(
+      path: Routes.searchRecipes,
+      builder: (context, state) => SearchRecipesScreen(viewModel: SearchRecipesViewModel(MockRecipeRepositoryImpl())),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

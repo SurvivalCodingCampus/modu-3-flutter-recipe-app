@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/main/home/home_top.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
@@ -7,11 +8,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Home Screen',
-        style: AppTextStyles.normalBold.copyWith(color: ColorStyle.primary100),
-      ),
-    );
+    return HomeTop();
+
   }
 }
