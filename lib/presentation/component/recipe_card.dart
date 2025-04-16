@@ -7,13 +7,14 @@ class RecipeCard extends StatelessWidget {
   final Recipe recipe;
   final bool isBig;
   final bool isBookmarked;
+  final bool isIngredient;
   final VoidCallback bookMarkCallback;
   const RecipeCard({
     super.key,
     required this.recipe,
     required this.isBig,
     required this.isBookmarked,
-    required this.bookMarkCallback,
+    required this.bookMarkCallback, required this.isIngredient,
   });
 
   @override
@@ -44,6 +45,7 @@ class RecipeCard extends StatelessWidget {
               ),
             ),
           ),
+          if(!isIngredient)
           Positioned(
             left: 10,
             bottom: 10,
@@ -101,7 +103,7 @@ class RecipeCard extends StatelessWidget {
                           isBookmarked
                               ? Icon(
                                 Icons.bookmark_added,
-                                color: ColorStyles.primary100,
+                                color: ColorStyles.secondary100,
                               )
                               : Icon(
                                 Icons.bookmark_border,
