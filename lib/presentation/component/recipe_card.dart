@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/recipe_detail/recipe_detail_screen.dart';
 import 'package:recipe_app/presentation/saved_recipe/saved_recipe_view_model.dart';
 import 'package:recipe_app/ui/color.dart';
 import '../../../ui/text.dart';
@@ -9,9 +10,10 @@ import '../../data/model/recipes.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipes recipe;
-  final SavedRecipeViewModel viewModel;
+  final VoidCallback onBookmarkTap;
+  final VoidCallback onTapImage;
 
-  const RecipeCard({super.key, required this.recipe, required this.viewModel});
+  const RecipeCard({super.key, required this.recipe, required this.onBookmarkTap, required this.onTapImage, });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class RecipeCard extends StatelessWidget {
         child: Stack(
           children: [
             GestureDetector(
-              onTap: () {} ,
+              onTap: onTapImage,
               child: SizedBox.expand(
                   child: Image.network(recipe.image,
                   fit: BoxFit.cover,
@@ -59,9 +61,7 @@ class RecipeCard extends StatelessWidget {
                     ),
                     SizedBox(width: 6),
                     GestureDetector(
-                      onTap: () {
-                        viewModel.removeRecipeIds(recipe.id);
-                      },
+                      onTap: onBookmarkTap,
                       child: Image.asset(
                         'assets/images/bookmark.png',
                         width: 24,

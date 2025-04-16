@@ -17,7 +17,7 @@ class Ingredientitem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 30),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
           height: 72,
           decoration: BoxDecoration(
             color: ColorStyles.gray4,

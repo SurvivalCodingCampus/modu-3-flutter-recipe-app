@@ -2,16 +2,15 @@
 
 import 'package:flutter/material.dart';
 
-import '../../data/model/recipes.dart';
 import '../../ui/color.dart';
 import '../../ui/text.dart';
-import '../saved_recipe/saved_recipe_view_model.dart';
+import '../recipe_detail/recipe_detail_view_model.dart';
+
 
 class DetailRecipeCard extends StatelessWidget {
-  final Recipes recipe;
-  final SavedRecipeViewModel viewModel;
+  final RecipeDetailViewModel viewModel;
 
-  const DetailRecipeCard({super.key, required this.recipe, required this.viewModel});
+  const DetailRecipeCard({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class DetailRecipeCard extends StatelessWidget {
                 GestureDetector(
                   onTap: () {} ,
                   child: SizedBox.expand(
-                    child: Image.network(recipe.image,
+                    child: Image.network(viewModel.state.recipe.image,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -54,7 +53,7 @@ class DetailRecipeCard extends StatelessWidget {
                                 height: 16,
                               ),
                               SizedBox(width: 4),
-                              Text(recipe.time,
+                              Text(viewModel.state.recipe.time,
                                 style: TextStyle(fontSize: 10, color: Colors.white),
                               ),
                             ],
@@ -63,7 +62,6 @@ class DetailRecipeCard extends StatelessWidget {
                         SizedBox(width: 6),
                         GestureDetector(
                           onTap: () {
-                            viewModel.removeRecipeIds(recipe.id);
                           },
                           child: Image.asset(
                             'assets/images/bookmark.png',
@@ -90,7 +88,7 @@ class DetailRecipeCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.star, color: ColorStyles.rating, size: 10),
-                          Text(recipe.rating.toString(), style: TextStyle(fontSize: 10)),
+                          Text(viewModel.state.recipe.rating.toString(), style: TextStyle(fontSize: 10)),
                         ],
                       ),
                     ),
@@ -99,6 +97,9 @@ class DetailRecipeCard extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(
+            height: 5,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -106,15 +107,18 @@ class DetailRecipeCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Container(
                   width: 200,
-                  child: Text(recipe.name,
-                    style: TextStyles.smallerTextBold,
+                  child: Text(viewModel.state.recipe.name,
+                    style: TextStyles.smallerTextBold.copyWith(
+                      fontSize: 15,
+                    ),
+
                   ),
                 ),
               ),
               Text('13k Reviews',
                 style: TextStyle(
                   color: Colors.grey,
-                  fontSize: 14,
+                  fontSize: 15,
                 ),
               ),
             ],

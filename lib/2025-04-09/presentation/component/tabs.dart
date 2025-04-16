@@ -1,26 +1,6 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color.dart';
-
-
-
-// void main() {
-//   runApp(
-//     MaterialApp(
-//       home: Scaffold(
-//         body: TabsWidget(
-//           labels: ['1','2','3'],
-//           selectedindex: 0,
-//           onValueChange: (index) {
-//             print('index : $index');
-//           },
-//         ),
-//       ),
-//     ),
-//   );
-// }
-
 
 
 class TabsWidget extends StatelessWidget {
@@ -29,8 +9,6 @@ class TabsWidget extends StatelessWidget {
   final Function(int) onValueChange;
 
   const TabsWidget({super.key, required this.labels, required this.selectedindex, required this.onValueChange});
-
-
 
   @override
   Widget build(BuildContext context) {

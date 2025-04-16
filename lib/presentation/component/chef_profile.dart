@@ -22,10 +22,9 @@ class _ChefProfileState extends State<ChefProfile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(13),
       child: Container(
-        width: 50,
-        height: 315,
+        width: double.infinity,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -39,31 +38,37 @@ class _ChefProfileState extends State<ChefProfile> {
               ),
               child: Image.network(widget.chef.image),
             ),
+            SizedBox(
+              width: 5,
+            ),
             Container(
               width: 200,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(widget.chef.name,
                     style: TextStyles.smallerTextBold,
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.place,
-                        color: ColorStyles.primary40,
-                      ),
-                      Text(widget.chef.address,
-                        style: TextStyles.smallerTextRegular.copyWith(
-                          color: Colors.grey,
+                  Container(
+                    child: Row(
+                      children: [
+                        Icon(Icons.place,
+                          color: ColorStyles.primary40,
                         ),
-                      ),
-                    ],
+                        Text(widget.chef.address,
+                          style: TextStyles.smallerTextRegular.copyWith(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
             ),
-            SizedBox.expand(
-            ),
+            Spacer(),
             Container(
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: isClicked ? ColorStyles.gray1 : ColorStyles.primary100,
                 borderRadius: BorderRadius.circular(10),

@@ -9,6 +9,7 @@ import 'package:recipe_app/presentation/search_recipes/search_recipe_view_model.
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/router/routes.dart';
 
+import '../data/model/recipes.dart';
 import '../presentation/home/home_screen.dart';
 import '../presentation/home/main_screen.dart';
 import '../presentation/login/sign_up_screen.dart';
@@ -40,10 +41,11 @@ final router = GoRouter(
       path: Routes.signUp,
       builder: (context, state) => const SignUpScreen(),
     ),
-    GoRoute(
-      path: Routes.detail,
-      builder: (context, state) => const RecipeDetailScreen(),
-    ),
+    // GoRoute(
+    //   path: Routes.detail,
+    //   builder: (context, state) {
+    //   },
+    // ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>
         MainScreen(navigationShell: navigationShell),
