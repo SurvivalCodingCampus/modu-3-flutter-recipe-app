@@ -1,7 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/ui/color_style.dart';
+import 'package:recipe_app/core/ui/text_style.dart';
+// Project imports:
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
-import 'package:recipe_app/ui/color_style.dart';
-import 'package:recipe_app/ui/text_style.dart';
 
 class InputField extends StatefulWidget {
   final String labelTitle;
@@ -61,16 +63,21 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     const double borderRadius = 10.0;
     const double borderWidth = 1.5;
-    const double labelSpacing = 8.0;
+    const double labelSpacing = 5.0;
 
     return Column(
       children: [
         if (widget.labelTitle.isNotEmpty) ...[
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              widget.labelTitle,
-              style: AppTextStyles.smallRegular(color: ColorStyle.labelColour),
+            child: SizedBox(
+              height: 21,
+              child: Text(
+                widget.labelTitle,
+                style: AppTextStyles.smallRegular(
+                  color: ColorStyle.labelColour,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: labelSpacing),

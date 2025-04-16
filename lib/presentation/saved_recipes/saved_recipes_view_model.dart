@@ -1,8 +1,11 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/util/result.dart';
-import 'package:recipe_app/util/ui_state.dart';
+import 'package:recipe_app/core/error/result.dart';
+// Project imports:
+
+import 'package:recipe_app/core/ui/ui_state.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
   final RecipeRepository _repository;

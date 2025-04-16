@@ -1,7 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/ui/color_style.dart';
+import 'package:recipe_app/core/ui/text_style.dart';
+// Project imports:
 import 'package:recipe_app/presentation/component/custom_button.dart';
-import 'package:recipe_app/ui/color_style.dart';
-import 'package:recipe_app/ui/text_style.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

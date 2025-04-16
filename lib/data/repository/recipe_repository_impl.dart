@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:recipe_app/core/error/failure.dart';
+import 'package:recipe_app/core/error/result.dart';
 import 'package:recipe_app/data/data_source/recipe_data_source.dart';
 import 'package:recipe_app/data/dto/recipe_dto.dart';
 import 'package:recipe_app/data/mapper/recipe_mapper.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/util/failure.dart';
-import 'package:recipe_app/util/result.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource? remoteDataSource;

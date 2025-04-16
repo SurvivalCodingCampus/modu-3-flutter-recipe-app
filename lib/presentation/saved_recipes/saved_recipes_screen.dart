@@ -1,10 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+// Project imports:
+import 'package:recipe_app/core/ui/text_style.dart';
+import 'package:recipe_app/core/ui/ui_state.dart';
 import 'package:recipe_app/data/mocks/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/recipe_component/recipe_card.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
-import 'package:recipe_app/ui/text_style.dart';
-import 'package:recipe_app/util/ui_state.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
   final SavedRecipesViewModel viewModel;
@@ -41,16 +43,19 @@ class SavedRecipesScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               itemBuilder: (context, index) {
                 final recipe = recipes[index];
-                return RecipeCard(
-                  title: recipe.name,
-                  imagePath: recipe.image,
-                  cookTime: recipe.time,
-                  authorName: recipe.chef,
-                  rating: recipe.rating,
-                  isFavorite: true,
-                  onTap: () {
-                    debugPrint('지금은 없어~~');
-                  },
+                return SizedBox(
+                  height: 150,
+                  child: RecipeCard(
+                    title: recipe.name,
+                    imagePath: recipe.image,
+                    cookTime: recipe.time,
+                    authorName: recipe.chef,
+                    rating: recipe.rating,
+                    isFavorite: true,
+                    onTap: () {
+                      debugPrint('지금은 없어~~');
+                    },
+                  ),
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(height: 12),

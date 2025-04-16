@@ -1,6 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_style.dart';
-import 'package:recipe_app/ui/text_style.dart';
+import 'package:recipe_app/core/ui/color_style.dart';
+import 'package:recipe_app/core/ui/text_style.dart';
 
 class IngredientItem extends StatelessWidget {
   final String title;

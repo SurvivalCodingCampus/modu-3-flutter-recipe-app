@@ -1,10 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/ui/color_style.dart';
+import 'package:recipe_app/core/ui/text_style.dart';
+import 'package:recipe_app/core/ui/ui_size.dart';
+// Project imports:
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
 import 'package:recipe_app/presentation/component/image_component/skelton_animtion_widget.dart';
-import 'package:recipe_app/ui/color_style.dart';
-import 'package:recipe_app/ui/text_style.dart';
-
-import '../../../ui/ui_size.dart';
 
 class RecipeCard extends StatefulWidget {
   final String title;
@@ -47,13 +48,9 @@ class _RecipeCardState extends State<RecipeCard> {
             AppImage(
               path: widget.imagePath,
               fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
               borderRadius: BorderRadius.circular(10),
               overlayBuilder:
                   (context) => Container(
-                    width: double.infinity,
-                    height: double.infinity,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [ColorStyle.black, Colors.transparent],
@@ -63,10 +60,7 @@ class _RecipeCardState extends State<RecipeCard> {
                     ),
                   ),
               skeletonBuilder:
-                  (context, size) => SkeletonAnimationWidget(
-                    width: size.width,
-                    height: size.height,
-                  ),
+                  (context, size) => SkeletonAnimationWidget(size: size),
             ),
 
             // Title & AuthorName
