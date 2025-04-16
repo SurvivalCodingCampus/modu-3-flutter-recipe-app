@@ -44,7 +44,10 @@ final router = GoRouter(
               path: Routes.bookmarks,
               builder:
                   (context, state) => SavedRecipesScreen(
-                    viewModel: SavedRecipesViewModel(getSavedRecipesUseCase),
+                    viewModel: SavedRecipesViewModel(
+                      getSavedRecipesUseCase,
+                      removeSavedRecipesUseCase,
+                    ),
                   ),
             ),
           ],
