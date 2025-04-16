@@ -10,6 +10,8 @@ abstract class Routes {
   static const String savedRecipes = '/saved-recipes';
   static const String filter = '/filter';
   static const String search = '/search';
+  static const String ingredient = '/ingredient/:id';
+  static String ingredientPath(int id) => '/ingredient/$id';
 
   static const String mainHome = '/home';
   static const String mainBookmark = '/bookmark';
