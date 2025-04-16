@@ -17,44 +17,41 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(label, style: TextFontStyle.smallRegular()),
-          Container(
-            padding: const EdgeInsets.only(top: 5),
-            width: double.infinity,
-            child: TextField(
-              style: TextFontStyle.smallRegular(color: ColorStyle.black),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(20),
-                hintText: placeholder,
-                hintStyle: TextFontStyle.smallRegular(color: ColorStyle.gray4),
-                labelStyle: TextFontStyle.smallRegular(),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: ColorStyle.gray4,
-                    width: 1.5,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: ColorStyle.primary80,
-                    width: 1.5,
-                  ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: TextFontStyle.smallRegular()),
+        Container(
+          padding: const EdgeInsets.only(top: 5),
+          width: double.infinity,
+          child: TextField(
+            style: TextFontStyle.smallRegular(color: ColorStyle.black),
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(15),
+              hintText: placeholder,
+              hintStyle: TextFontStyle.smallRegular(color: ColorStyle.gray4),
+              labelStyle: TextFontStyle.smallRegular(),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: ColorStyle.gray4,
+                  width: 1.5,
                 ),
               ),
-              onChanged: (value) {
-                onValueChange(value);
-              },
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: ColorStyle.primary80,
+                  width: 1.5,
+                ),
+              ),
             ),
+            onChanged: (value) {
+              onValueChange(value);
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

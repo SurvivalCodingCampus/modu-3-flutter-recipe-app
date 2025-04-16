@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/data/model/ingredients.dart';
 import 'package:recipe_app/data/model/pictures.dart';
-import 'package:recipe_app/presentation/component/button/enum/category.dart';
+import 'package:recipe_app/presentation/component/button/enum/category_type.dart';
 
 part 'recipe.freezed.dart';
 
@@ -12,7 +12,7 @@ class Recipe with _$Recipe {
   final int id;
   final String title;
   final Pictures pictures;
-  final Category category;
+  final CategoryType category;
   final double rating;
   final int time;
   final String chef;
