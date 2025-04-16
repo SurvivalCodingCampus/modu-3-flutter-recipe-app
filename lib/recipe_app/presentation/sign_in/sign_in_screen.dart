@@ -17,6 +17,17 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
 
+  // 이메일 형식 검증 메서드
+  bool isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+  }
+
+  // 비밀번호 검증 메서드 (예: 최소 8자, 특수문자 포함)
+  bool isValidPassword(String password) {
+    return password.length >= 8 &&
+        RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,6 +59,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         hintText: 'Enter Email',
                         hintStyle: TextStyles2.smallerTextRegular,
+                        errorText:
+                            _emailTextEditingController.text.isNotEmpty &&
+                                    !isValidEmail(
+                                      _emailTextEditingController.text,
+                                    )
+                                ? '유효한 이메일 형식이 아닙니다'
+                                : null,
                       ),
                     ),
                     SizedBox(height: 25),
