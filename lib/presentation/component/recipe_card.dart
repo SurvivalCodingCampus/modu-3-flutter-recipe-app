@@ -5,8 +5,14 @@ import 'package:recipe_app/ui/ui.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
+  final bool? isDetail;
   final VoidCallback? onTap;
-  const RecipeCard({super.key, required this.recipe, this.onTap});
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    this.onTap,
+    this.isDetail = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,45 +42,46 @@ class RecipeCard extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
-              left: 10,
-              bottom: 10,
-              right: 10,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        final nameWidth = constraints.maxWidth * 0.635;
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: nameWidth,
-                              child: Text(
-                                recipe.name,
-                                style: TextStyles.smallTextBold.copyWith(
-                                  color: ColorStyles.white,
+            if (isDetail != null ? !isDetail! : true)
+              Positioned(
+                left: 10,
+                bottom: 10,
+                right: 10,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          final nameWidth = constraints.maxWidth * 0.635;
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: nameWidth,
+                                child: Text(
+                                  recipe.name,
+                                  style: TextStyles.smallTextBold.copyWith(
+                                    color: ColorStyles.white,
+                                  ),
+                                  maxLines: 2,
                                 ),
-                                maxLines: 2,
                               ),
-                            ),
-                            Text(
-                              recipe.chef,
-                              style: TextStyles.smallTextSmallLabel.copyWith(
-                                color: ColorStyles.gray4,
+                              Text(
+                                recipe.chef,
+                                style: TextStyles.smallTextSmallLabel.copyWith(
+                                  color: ColorStyles.gray4,
+                                ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
             Positioned(
               right: 10,
               bottom: 10,
@@ -83,7 +90,7 @@ class RecipeCard extends StatelessWidget {
                   Image.asset('assets/icons/timer.png', width: 17, height: 17),
                   const SizedBox(width: 5),
                   Text(
-                    '${recipe.totalTimeMinutes} min',
+                    recipe.totalTimeMinutes,
                     style: TextStyles.smallerTextRegular.copyWith(
                       color: ColorStyles.gray4,
                     ),

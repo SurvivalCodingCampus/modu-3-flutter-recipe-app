@@ -3,8 +3,10 @@ import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
 import 'package:recipe_app/data/repository/repository.dart';
+import 'package:recipe_app/domain/model/model.dart';
 import 'package:recipe_app/domain/use_case/use_case.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
+import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/my/my_screen.dart';
 import 'package:recipe_app/presentation/notification/notification_screen.dart';
@@ -17,7 +19,7 @@ import 'package:recipe_app/presentation/sign-up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
 final router = GoRouter(
-  initialLocation: Routes.splash,
+  initialLocation: Routes.recipeIngredient,
   routes: [
     GoRoute(
       path: Routes.splash,
@@ -49,6 +51,23 @@ final router = GoRouter(
               ),
             ),
           ),
+    ),
+    GoRoute(
+      path: Routes.recipeIngredient,
+      builder: (context, state) {
+        final id = state.pathParameters['recipeId'];
+        return const RecipeIngredientScreen(
+          recipe: Recipe(
+            id: '1',
+            name: 'Traditional spare ribs baked',
+            imageUrl:
+                'https://cdn.pixabay.com/photo/2017/07/27/16/48/toppokki-2545943_1280.jpg',
+            chef: 'Kim Dahee',
+            totalTimeMinutes: '30 min',
+            rating: 5.0,
+          ),
+        );
+      },
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

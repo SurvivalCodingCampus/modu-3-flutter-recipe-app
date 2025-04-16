@@ -9,4 +9,5 @@ abstract class Routes {
   static const my = '/my';
 
   static const search = '/search';
+  static const recipeIngredient = '/recipe-ingredient/:recipeId';
 }
