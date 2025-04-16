@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
@@ -6,63 +7,64 @@ class RecipeCard extends StatelessWidget {
   static const String _timerIcon = "assets/icons/timer.png";
   static const String _bookmarkIcon = "assets/icons/bookmark.png";
 
-  final String imagePath;
-  final String author;
-  final String title;
-  final int rating;
-  final int cookTime;
-  final bool bookmarked;
+  final Recipe recipe;
+  final VoidCallback? onCardTap;
   final VoidCallback onBookmarkTap;
+  final bool showTitle;
+  final bool showRating;
+  final bool showAuthor;
 
   const RecipeCard({
     super.key,
-    required this.imagePath,
-    required this.author,
-    required this.title,
-    required this.cookTime,
-    required this.rating,
-    required this.bookmarked,
+    required this.recipe,
+    this.onCardTap,
     required this.onBookmarkTap,
+    this.showTitle = true,
+    this.showRating = true,
+    this.showAuthor = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 150,
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(imagePath),
-              fit: BoxFit.cover,
-            ),
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        Container(
-          height: 150,
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: ColorStyles.black,
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                ColorStyles.black.withAlpha(10),
-                ColorStyles.black.withAlpha(255),
-              ],
+    return GestureDetector(
+      onTap: onCardTap,
+      child: Stack(
+        children: [
+          Container(
+            height: 150,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(recipe.imageUrl),
+                fit: BoxFit.cover,
+              ),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-        ),
-        _buildRating(),
-        _buildTitle(),
-        _buildAuthor(),
-        _buildCookTime(),
-        _buildBookMarkButton(),
-      ],
+          Container(
+            height: 150,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: ColorStyles.black,
+              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  ColorStyles.black.withAlpha(10),
+                  ColorStyles.black.withAlpha(255),
+                ],
+              ),
+            ),
+          ),
+          showRating ? _buildRating() : Container(),
+          showTitle ? _buildTitle() : Container(),
+          showAuthor ? _buildAuthor() : Container(),
+          _buildCookTime(),
+          _buildBookMarkButton(),
+        ],
+      ),
     );
   }
 
@@ -81,7 +83,7 @@ class RecipeCard extends StatelessWidget {
           children: [
             const Icon(Icons.star, color: ColorStyles.rating, size: 16),
             Text(
-              '${rating.toDouble()}',
+              '${recipe.rating.toDouble()}',
               style: TextStyles.smallTextRegular.copyWith(
                 color: ColorStyles.black,
               ),
@@ -98,7 +100,7 @@ class RecipeCard extends StatelessWidget {
       width: 170,
       bottom: 22,
       child: Text(
-        title,
+        recipe.name,
         style: TextStyles.smallTextBold.copyWith(color: ColorStyles.white),
       ),
     );
@@ -109,7 +111,7 @@ class RecipeCard extends StatelessWidget {
       left: 10,
       bottom: 10,
       child: Text(
-        'By $author',
+        'By ${recipe.chef}',
         style: TextStyles.labelTextBold.copyWith(color: ColorStyles.white),
       ),
     );
@@ -128,7 +130,7 @@ class RecipeCard extends StatelessWidget {
             child: Image.asset(_timerIcon, color: ColorStyles.gray4),
           ),
           Text(
-            '$cookTime min',
+            '${recipe.cookTime} min',
             style: TextStyles.smallTextRegular.copyWith(
               color: ColorStyles.gray4,
             ),
@@ -148,12 +150,12 @@ class RecipeCard extends StatelessWidget {
         width: 24,
         height: 24,
         decoration: BoxDecoration(
-          color: bookmarked ? ColorStyles.primary80 : ColorStyles.white,
+          color: recipe.bookmarked ? ColorStyles.primary80 : ColorStyles.white,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Image.asset(
           _bookmarkIcon,
-          color: bookmarked ? ColorStyles.white : ColorStyles.gray4,
+          color: recipe.bookmarked ? ColorStyles.white : ColorStyles.gray4,
         ),
       ),
     ),
