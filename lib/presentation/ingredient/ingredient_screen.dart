@@ -3,13 +3,12 @@ import 'package:recipe_app/core/error/ui_state.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
 import 'package:recipe_app/core/ui/ui_size.dart';
-import 'package:recipe_app/data/mocks/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/model/recipe_ingredient.dart';
-import 'package:recipe_app/domain/usecase/get_recipe_by_id_usecase.dart';
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
+import 'package:recipe_app/presentation/component/rating_dialog_content.dart';
 import 'package:recipe_app/presentation/component/recipe_component/ingredient_item.dart';
+import 'package:recipe_app/presentation/component/recipe_component/recipeStep.dart';
 import 'package:recipe_app/presentation/component/recipe_component/recipe_author.dart';
 import 'package:recipe_app/presentation/component/recipe_component/recipe_card.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
@@ -24,20 +23,6 @@ class IngredientScreen extends StatefulWidget {
     required this.recipeId,
     required this.viewModel,
   });
-
-  factory IngredientScreen.withMock(int recipeId) {
-    return IngredientScreen(
-      recipeId: recipeId,
-      viewModel: IngredientViewModel(
-        getRecipeById: GetRecipeByIdUseCase(
-          RecipeRepositoryImpl(
-            remoteDataSource: null,
-            localDataSource: MockRecipeDataSourceImpl(),
-          ),
-        ),
-      ),
-    );
-  }
 
   @override
   State<IngredientScreen> createState() => _IngredientScreenState();
@@ -87,6 +72,12 @@ class _IngredientScreenState extends State<IngredientScreen> {
                     ),
                     PopupMenuItem(
                       value: 'rate',
+                      onTap: () {
+                        Future.delayed(
+                          const Duration(milliseconds: 100),
+                          showRatingDialog,
+                        );
+                      },
                       child: Row(
                         children: [
                           const Icon(Icons.star, size: 20, color: color),
@@ -219,7 +210,9 @@ class _IngredientScreenState extends State<IngredientScreen> {
                     ),
                     const Spacer(),
                     Text(
-                      '${recipe.ingredients.length} Items',
+                      (selectedTabIndex == 0)
+                          ? '${recipe.ingredients.length} Items'
+                          : '${recipe.steps.length} Steps',
                       style: AppTextStyles.smallRegular(
                         color: ColorStyle.gray3,
                       ),
@@ -235,7 +228,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
         Expanded(
           child: switch (selectedTabIndex) {
             0 => _buildIngredientList(recipe.ingredients),
-            1 => const Center(child: Text('준비 중 입니다 😂')),
+            1 => _buildStepList(recipe.steps),
             _ => const SizedBox(),
           },
         ),
@@ -245,7 +238,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
 
   Widget _buildIngredientList(List<RecipeIngredient> ingredients) {
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
       itemCount: ingredients.length,
       itemBuilder: (_, index) {
         final item = ingredients[index];
@@ -256,6 +249,38 @@ class _IngredientScreenState extends State<IngredientScreen> {
         );
       },
       separatorBuilder: (_, __) => const SizedBox(height: 12),
+    );
+  }
+
+  Widget _buildStepList(List<String> steps) {
+    return ListView.separated(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+      itemCount: steps.length,
+      itemBuilder: (_, index) {
+        final item = steps[index];
+        return RecipeStep(description: item, index: index);
+      },
+      separatorBuilder: (_, __) => const SizedBox(height: 12),
+    );
+  }
+
+  void showRatingDialog() {
+    showDialog(
+      context: context,
+      builder:
+          (_) => AlertDialog(
+            content: RatingDialogContent(
+              title: 'Rate recipe',
+              submitTitle: 'Send',
+              onSubmitted: (rating) {
+                widget.viewModel.updateRating(
+                  widget.recipeId,
+                  rating.toDouble(),
+                );
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
     );
   }
 }
