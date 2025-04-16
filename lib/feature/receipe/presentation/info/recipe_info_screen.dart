@@ -70,7 +70,10 @@ class RecipeInfoScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.room_service_outlined),
+                      const Icon(
+                        Icons.room_service_outlined,
+                        color: AppColor.grey3,
+                      ),
                       Text(
                         '1 serve',
                         style: AppTextStyle.smallerRegular.copyWith(

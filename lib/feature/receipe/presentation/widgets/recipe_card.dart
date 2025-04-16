@@ -6,8 +6,8 @@ import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 class RecipeCard extends StatelessWidget {
   final int recipeId;
   final String imgUrl;
-  final String title;
-  final String owner;
+  final String? title;
+  final String? owner;
   final double starCount;
   final bool? bookMarkStatus;
   final String? duration;
@@ -17,8 +17,8 @@ class RecipeCard extends StatelessWidget {
   const RecipeCard({
     required this.recipeId,
     required this.imgUrl,
-    required this.title,
-    required this.owner,
+    this.title,
+    this.owner,
     required this.starCount,
     required this.bookmarkTap,
     this.cardTap,
@@ -37,6 +37,21 @@ class RecipeCard extends StatelessWidget {
     imgUrl: recipe.image,
     title: recipe.name,
     owner: recipe.chef,
+    starCount: recipe.rating,
+    bookMarkStatus: recipe.bookmarkStatus,
+    duration: recipe.time,
+    bookmarkTap: bookmarkTap,
+    cardTap: cardTap,
+    height: 150,
+  );
+
+  factory RecipeCard.toInfo({
+    required Recipe recipe,
+    required VoidCallback bookmarkTap,
+    VoidCallback? cardTap,
+  }) => RecipeCard(
+    recipeId: recipe.id,
+    imgUrl: recipe.image,
     starCount: recipe.rating,
     bookMarkStatus: recipe.bookmarkStatus,
     duration: recipe.time,
@@ -100,27 +115,28 @@ class RecipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Flexible(
-                        flex: 3,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              title,
-                              style: AppTextStyle.mediumBold.copyWith(
-                                color: AppColor.white,
+                      if (title != null && owner != null)
+                        Flexible(
+                          flex: 3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title!,
+                                style: AppTextStyle.mediumBold.copyWith(
+                                  color: AppColor.white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'By $owner',
-                              style: AppTextStyle.smallerRegular.copyWith(
-                                color: AppColor.grey4,
+                              Text(
+                                'By $owner',
+                                style: AppTextStyle.smallerRegular.copyWith(
+                                  color: AppColor.grey4,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
                       if (bookMarkStatus != null && duration != null)
                         Flexible(
                           flex: 2,
