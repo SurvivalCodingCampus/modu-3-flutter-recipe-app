@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/router_path.dart';
 import 'package:recipe_app/main.dart';
 import 'package:recipe_app/presentation/component/widgets/midium_button.dart';
 import 'package:recipe_app/ui/app_text_styles.dart';
@@ -142,13 +144,7 @@ class _SplashScreenState extends State<SplashScreen>
                   child: MidiumButton(
                     text: 'Start Cooking',
                     onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const MainScaffold(initialTabIndex: 0),
-                        ),
-                      );
+                      context.go(RouterPath.signIn);
                     },
                   ),
                 ),

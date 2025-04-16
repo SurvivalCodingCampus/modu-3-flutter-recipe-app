@@ -105,7 +105,15 @@ abstract class AppTextStyles {
   static TextStyle extraSmallRegular({Color? color}) => GoogleFonts.poppins(
     fontWeight: FontWeight.w400,
     fontSize: 11,
-    height: 27 / 11,
+    height: 16 / 11,
+    color: color,
+  );
+
+
+static TextStyle signsize({Color? color}) => GoogleFonts.poppins(
+    fontWeight: FontWeight.w500,
+    fontSize: 11,
+    height: 16 / 11,
     color: color,
   );
 }

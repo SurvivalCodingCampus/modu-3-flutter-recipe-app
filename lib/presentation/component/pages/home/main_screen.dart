@@ -1,41 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
+import 'package:recipe_app/presentation/component/pages/home/home_screen.dart';
+import 'package:recipe_app/presentation/component/pages/recipe/recipes_screen.dart';
+import 'package:recipe_app/presentation/component/pages/recipe/saved_recipes_view_model.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
-import 'package:recipe_app/presentation/component/pages/search/search_recipes_screen.dart';
+import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class MainScreen extends StatefulWidget {
+  final int initialTabIndex;
+  const MainScreen({super.key, this.initialTabIndex = 0});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  late int selectedIndex;
+  late final SavedRecipesViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.initialTabIndex;
+
+    viewModel = SavedRecipesViewModel(
+      RecipeRepositoryImpl(RecipeDataSourceImpl()),
+    );
+  }
+
+  void onTabTapped(int index) {
+    setState(() => selectedIndex = index);
+  }
 
   @override
   Widget build(BuildContext context) {
-    // repository 생성
-    final repository = RecipeRepositoryImpl(RecipeDataSourceImpl());
+    final pages = [
+      const HomeScreen(), // 홈
+      RecipesScreen(viewModel: viewModel),
+      const Placeholder(), // 즐겨찾기
+      const Placeholder(), // 설정
+    ];
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: ColorStyle.mainGreen,
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+      body: pages[selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: onTabTapped,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, color: ColorStyle.mainGreen),
+            label: '',
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => SearchRecipesScreen(repository: repository),
-              ),
-            );
-          },
-          child: const Text(
-            '레시피 검색하기',
-            style: TextStyle(color: Colors.white, fontSize: 18),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant_menu, color: ColorStyle.mainGreen),
+            label: '',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite, color: ColorStyle.mainGreen),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings, color: ColorStyle.mainGreen),
+            label: '',
+          ),
+        ],
       ),
     );
   }

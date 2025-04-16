@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 abstract class ColorStyle {
   // Neutral Colors
-  static const black = Color(0xFF000000);
+  static const black1 = Color(0xFF000000);
+  static const black2 = Color(0xFF121212);
   static const gray1 = Color(0xFF484848);
-  static const gray2 = Color(0xFF797979);
+  static const gray2 = Color(0xFF696969);
   static const gray3 = Color(0xFFA9A9A9);
   static const gray4 = Color(0xFFD9D9D9);
   static const white = Color(0xFFFFFFFF);
@@ -25,6 +26,8 @@ abstract class ColorStyle {
 
   // Rating Color
   static const rating = Color(0xFFFFAD30);
+
+  static const orange = Color(0xFFFF9C00);
 
   // Warning Colors
   static const warning = Color(0xFFE94459);

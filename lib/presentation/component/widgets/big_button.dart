@@ -1,45 +1,15 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-
-// class BigButton extends StatelessWidget {
-//   const BigButton({super.key});
-
-//   void _handleButtonClick() {
-//     print('Big 버튼 클릭됨!');
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: SizedBox(
-//         width: 315,
-//         height: 60,
-//         child: ElevatedButton(
-//           key: const Key('big_button'),
-//           onPressed: _handleButtonClick,
-//           style: ElevatedButton.styleFrom(
-//             backgroundColor: const Color(0xFF129575),
-//             foregroundColor: Colors.white,
-//             textStyle: GoogleFonts.poppins(
-//               fontSize: 16,
-//               fontWeight: FontWeight.w600,
-//             ),
-//             shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(10),
-//             ),
-//           ),
-//           child: const Text('Button     ⮕'),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BigButton extends StatefulWidget {
-  const BigButton({super.key});
+  final String text;
+  final VoidCallback? onPressed;
+
+  const BigButton({
+    required this.text,
+    required this.onPressed,
+    super.key,
+  });
 
   @override
   State<BigButton> createState() => _BigButtonState();
@@ -48,48 +18,57 @@ class BigButton extends StatefulWidget {
 class _BigButtonState extends State<BigButton> {
   bool isPressed = false;
 
-  void _handleButtonClick() {
-    print('Big 버튼 클릭됨!');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
       child: GestureDetector(
         onTapDown: (_) {
           setState(() {
-            isPressed = true; // TapDown 시 disable 상태처럼
+            isPressed = true;
           });
         },
         onTapUp: (_) {
           setState(() {
-            isPressed = false; // TapUp 시 기본 상태
+            isPressed = false;
           });
-          _handleButtonClick(); // 실제 클릭 처리
+          if (widget.onPressed != null) {
+            widget.onPressed!(); // 전달받은 함수 실행
+          }
         },
         onTapCancel: () {
           setState(() {
-            isPressed = false; // Tap 중 취소 시 기본 상태
+            isPressed = false;
           });
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
-          width: 315,
+          width: double.infinity,
           height: 60,
           decoration: BoxDecoration(
             color: isPressed
-                ? const Color(0xFF129575).withOpacity(0.4) // 눌렀을 때 흐려짐
+                ? const Color(0xFF129575).withOpacity(0.4)
                 : const Color(0xFF129575),
             borderRadius: BorderRadius.circular(10),
           ),
           alignment: Alignment.center,
-          child: Text(
-            'Button     ⮕',
-            style: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.text,
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(width: 32),
+              const Icon(
+                Icons.arrow_forward,
+                color: Colors.white,
+                size: 20,
+              ),
+            ],
           ),
         ),
       ),
