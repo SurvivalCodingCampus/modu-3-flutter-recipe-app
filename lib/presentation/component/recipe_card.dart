@@ -1,37 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/saved_recipe/saved_recipe_view_model.dart';
 import 'package:recipe_app/ui/color.dart';
 import '../../../ui/text.dart';
 import '../../data/model/ingredients.dart';
 import '../../data/model/recipes.dart';
 
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: RecipeCard(
-            recipe: Recipes(
-              id: 1,
-              name: 'Gopchang Jeongol',
-              image: 'https://cdn.pixabay.com/photo/2017/11/10/15/04/steak-2936531_1280.jpg',
-              chef: 'Bobae',
-              time: '20 min',
-              rating: 4.0,
-              ingredients: <Ingredients>[], category: '',
-            ),
-          ),
-        ),
-        backgroundColor: ColorStyles.gray1,
-      ),
-    ),
-  );
-}
 
 class RecipeCard extends StatelessWidget {
   final Recipes recipe;
+  final SavedRecipeViewModel viewModel;
 
-  const RecipeCard({super.key, required this.recipe});
+  const RecipeCard({super.key, required this.recipe, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +26,12 @@ class RecipeCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            SizedBox.expand(
-              // child: Image.asset(
-              //   'assets/images/gopchangjeongol.png',
-                child: Image.network(recipe.image,
-                fit: BoxFit.cover,
+            GestureDetector(
+              onTap: () {} ,
+              child: SizedBox.expand(
+                  child: Image.network(recipe.image,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Align(
@@ -77,10 +58,15 @@ class RecipeCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 6),
-                    Image.asset(
-                      'assets/images/bookmark.png',
-                      width: 24,
-                      height: 24,
+                    GestureDetector(
+                      onTap: () {
+                        viewModel.removeRecipeIds(recipe.id);
+                      },
+                      child: Image.asset(
+                        'assets/images/bookmark.png',
+                        width: 24,
+                        height: 24,
+                      ),
                     )
                   ],
                 ),
@@ -115,9 +101,12 @@ class RecipeCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      recipe.name,
-                      style: TextStyles.normalTextRegular.copyWith(color: Colors.white),
+                    Container(
+                      width: 220,
+                      child: Text(
+                        recipe.name,
+                        style: TextStyles.normalTextRegular.copyWith(color: Colors.white),
+                      ),
                     ),
                     Text(
                       'By ${recipe.chef}',
