@@ -4,12 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/error/ui_state.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
-import 'package:recipe_app/data/mocks/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/data/mocks/mock_user_data_source.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
-import 'package:recipe_app/data/repository/user_repository_impl.dart';
-import 'package:recipe_app/domain/usecase/get_bookmarked_recipes_usecase.dart';
-import 'package:recipe_app/domain/usecase/toggle_bookmark_usecase.dart';
 import 'package:recipe_app/presentation/component/recipe_component/recipe_card.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 
@@ -17,25 +11,6 @@ class SavedRecipesScreen extends StatefulWidget {
   final SavedRecipesViewModel viewModel;
 
   const SavedRecipesScreen({super.key, required this.viewModel});
-
-  factory SavedRecipesScreen.withMock() {
-    final recipeRepository = RecipeRepositoryImpl(
-      remoteDataSource: null,
-      localDataSource: MockRecipeDataSourceImpl(),
-    );
-
-    final userRepository = UserRepositoryImpl(dataSource: MockUserDataSource());
-
-    return SavedRecipesScreen(
-      viewModel: SavedRecipesViewModel(
-        getBookmarkedRecipes: GetBookmarkedRecipesUseCase(
-          userRepository: userRepository,
-          recipeRepository: recipeRepository,
-        ),
-        toggleBookmark: ToggleBookmarkUseCase(userRepository: userRepository),
-      ),
-    );
-  }
 
   @override
   State<SavedRecipesScreen> createState() => _SavedRecipesScreenState();
@@ -88,8 +63,9 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
                     authorName: recipe.chef,
                     rating: recipe.rating,
                     isFavorite: true,
-                    onTap: () {
-                      context.push(Routes.ingredientPath(recipe.id));
+                    onTap: () async {
+                      await context.push(Routes.ingredientPath(recipe.id));
+                      widget.viewModel.load();
                     },
                     onFavoriteTap: () {
                       widget.viewModel.toggleBookmark(recipe.id);
