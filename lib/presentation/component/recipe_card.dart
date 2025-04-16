@@ -101,17 +101,20 @@ class _RecipeCardState extends State<RecipeCard> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorStyles.white,
-                    ),
-                    child: Image.asset(
-                      'assets/icons/book_mark.png',
-                      width: 17,
-                      height: 17,
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorStyles.white,
+                      ),
+                      child: Image.asset(
+                        'assets/icons/book_mark.png',
+                        width: 17,
+                        height: 17,
+                      ),
                     ),
                   ),
                 ],
