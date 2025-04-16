@@ -22,83 +22,103 @@ class SignInScreen extends StatelessWidget {
             Text('Hello,', style: TextFontStyle.headerBold()),
             Text('Welcome Back!', style: TextFontStyle.largeRegular()),
             const SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: InputField(
-                label: 'Email',
-                placeholder: 'Enter Email',
-                onValueChange: (value) {},
-              ),
+            InputField(
+              label: 'Email',
+              placeholder: 'Enter Email',
+              onValueChange: (value) {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: InputField(
-                label: 'Enter Password',
-                placeholder: 'Enter Password',
-                onValueChange: (value) {},
-              ),
+            const SizedBox(height: 20),
+            InputField(
+              label: 'Enter Password',
+              placeholder: 'Enter Password',
+              onValueChange: (value) {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Forgot Password?',
-                  style: TextFontStyle.smallRegular(
-                    color: ColorStyle.secondary100,
-                  ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                'Forgot Password?',
+                style: TextFontStyle.extraSmallRegular(
+                  color: ColorStyle.secondary100,
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: BigButton(
-                text: 'Sign In',
-                onTap: () {
-                  context.go(Routes.home);
-                },
-              ),
+            BigButton(
+              text: 'Sign In',
+              onTap: () {
+                context.go(Routes.home);
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Center(
-                child: Text(
-                  'Or sign in With',
-                  style: TextFontStyle.smallRegular(color: ColorStyle.gray4),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+            const SizedBox(height: 10),
+            Center(
               child: Row(
-                spacing: 25,
+                spacing: 10,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: Image.network(
-                      'http://pngimg.com/uploads/google/google_PNG19635.png',
-                      fit: BoxFit.cover,
+                  const SizedBox(
+                    width: 50,
+                    child: Divider(thickness: 1, color: ColorStyle.gray4),
+                  ),
+                  Text(
+                    'Or sign in With',
+                    style: TextFontStyle.extraSmallRegular(
+                      color: ColorStyle.gray4,
                     ),
                   ),
-                  SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: Image.network(
-                      'https://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19754.png',
-                      fit: BoxFit.cover,
-                    ),
+                  const SizedBox(
+                    width: 50,
+                    child: Divider(thickness: 1, color: ColorStyle.gray4),
                   ),
                 ],
               ),
             ),
+            const SizedBox(height: 10),
+            Row(
+              spacing: 25,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorStyle.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: ColorStyle.shadow,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Image.asset('assets/images/google_icon.png'),
+                ),
+                Container(
+                  width: 40,
+                  height: 40,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorStyle.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: ColorStyle.shadow,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Image.asset('assets/images/facebook_icon.png'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Don`t have an account?',
-                  style: TextFontStyle.smallBold(),
+                  style: TextFontStyle.extraSmallRegular(),
                 ),
                 TextButton(
                   onPressed: () {
@@ -106,7 +126,7 @@ class SignInScreen extends StatelessWidget {
                   },
                   child: Text(
                     'Sign up',
-                    style: TextFontStyle.smallBold(
+                    style: TextFontStyle.extraSmallBold(
                       color: ColorStyle.secondary100,
                     ),
                   ),
