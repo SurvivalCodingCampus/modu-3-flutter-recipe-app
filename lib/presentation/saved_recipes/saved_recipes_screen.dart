@@ -37,15 +37,17 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
         child: ListenableBuilder(
           listenable: widget.viewModel,
           builder: (context, child) {
-            if (widget.viewModel.isLoading) {
+            if (widget.viewModel.state.isLoading) {
               return const Center(child: CircularProgressIndicator());
             }
             return ListView.separated(
               itemBuilder: (context, index) {
-                return RecipeCard(recipe: widget.viewModel.savedRecipes[index]);
+                return RecipeCard(
+                  recipe: widget.viewModel.state.recipes[index],
+                );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 20),
-              itemCount: widget.viewModel.savedRecipes.length,
+              itemCount: widget.viewModel.state.recipes.length,
             );
           },
         ),

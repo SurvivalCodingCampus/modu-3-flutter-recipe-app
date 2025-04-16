@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/model.dart';
 import 'package:recipe_app/domain/repository/repository.dart';
+import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
+  final GetSavedRecipesUseCase _getSavedRecipesUseCase;
 
-  SavedRecipesViewModel({required RecipeRepository recipeRepository})
-    : _recipeRepository = recipeRepository;
+  SavedRecipesViewModel({
+    required GetSavedRecipesUseCase getSavedRecipesUseCase,
+  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase;
 
-  List<Recipe> _savedRecipes = [];
+  SavedRecipesState _state = const SavedRecipesState();
 
-  List<Recipe> get savedRecipes => List.unmodifiable(_savedRecipes);
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  SavedRecipesState get state => _state;
 
   Future<void> fetchSavedRecipes() async {
-    _isLoading = true;
+    _state = state.copyWith(isLoading: true);
     notifyListeners();
 
     await Future.delayed(const Duration(seconds: 1));
-    _savedRecipes = await _recipeRepository.getRecipes();
-    _isLoading = false;
+
+    _state = state.copyWith(
+      recipes: await _getSavedRecipesUseCase.execute(),
+      isLoading: false,
+    );
     notifyListeners();
   }
 }
