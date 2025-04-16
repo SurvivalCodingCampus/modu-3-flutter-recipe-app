@@ -2,6 +2,11 @@ import 'package:recipe_app/recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/recipe_app/data_source/recipe_data_source.dart';
 
 class MockRecipeDataImpl implements RecipeDataSource {
+  @override
+  Future<List<Recipe>> getRecipeData() async {
+    return mockRecipes;
+  }
+
   List<Recipe> mockRecipes = [
     Recipe(
       id: 1,
@@ -94,9 +99,4 @@ class MockRecipeDataImpl implements RecipeDataSource {
       bookMarked: false,
     ),
   ];
-
-  @override
-  Future<List<Recipe>> getRecipeData() async {
-    return mockRecipes;
-  }
 }
