@@ -9,7 +9,6 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
     : _recipeDataSource = recipeDataSource;
   @override
   Future<List<Recipe>> getRecipes() async {
-    await Future.delayed(Duration(seconds: 1));
     final List<Map<String, dynamic>> jsonList =
         await _recipeDataSource.getRecipeMaps();
     final recipeList = jsonList.map((e) => Recipe.fromJson(e)).toList();
