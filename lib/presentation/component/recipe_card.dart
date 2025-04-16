@@ -5,7 +5,8 @@ import 'package:recipe_app/ui/ui.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  const RecipeCard({super.key, required this.recipe});
+  final VoidCallback? onTap;
+  const RecipeCard({super.key, required this.recipe, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -88,17 +89,20 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorStyles.white,
-                    ),
-                    child: Image.asset(
-                      'assets/icons/book_mark.png',
-                      width: 17,
-                      height: 17,
+                  GestureDetector(
+                    onTap: onTap,
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorStyles.white,
+                      ),
+                      child: Image.asset(
+                        'assets/icons/book_mark.png',
+                        width: 17,
+                        height: 17,
+                      ),
                     ),
                   ),
                 ],

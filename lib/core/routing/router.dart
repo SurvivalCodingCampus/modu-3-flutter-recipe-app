@@ -3,7 +3,7 @@ import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
 import 'package:recipe_app/data/repository/repository.dart';
-import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/use_case.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/my/my_screen.dart';
@@ -83,6 +83,12 @@ final router = GoRouter(
                   (context, state) => SavedRecipesScreen(
                     viewModel: SavedRecipesViewModel(
                       getSavedRecipesUseCase: GetSavedRecipesUseCase(
+                        recipeRepository: RecipeRepositoryImpl(
+                          recipeDataSource: MockRecipeDataSourceImpl(),
+                        ),
+                        bookmarkRepository: BookmarkRepositoryImpl(),
+                      ),
+                      toggleBookmarkRecipeUseCase: ToggleBookmarkRecipeUseCase(
                         recipeRepository: RecipeRepositoryImpl(
                           recipeDataSource: MockRecipeDataSourceImpl(),
                         ),

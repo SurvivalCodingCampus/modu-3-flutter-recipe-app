@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/domain/model/model.dart';
-import 'package:recipe_app/domain/repository/repository.dart';
-import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/use_case.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
   final GetSavedRecipesUseCase _getSavedRecipesUseCase;
-
-  SavedRecipesViewModel({
-    required GetSavedRecipesUseCase getSavedRecipesUseCase,
-  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase;
+  final ToggleBookmarkRecipeUseCase _toggleBookmarkRecipeUseCase;
 
   SavedRecipesState _state = const SavedRecipesState();
 
+  SavedRecipesViewModel({
+    required GetSavedRecipesUseCase getSavedRecipesUseCase,
+    required ToggleBookmarkRecipeUseCase toggleBookmarkRecipeUseCase,
+  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase,
+       _toggleBookmarkRecipeUseCase = toggleBookmarkRecipeUseCase;
+
   SavedRecipesState get state => _state;
 
-  Future<void> fetchSavedRecipes() async {
+  void fetchSavedRecipes() async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
@@ -24,6 +25,13 @@ class SavedRecipesViewModel with ChangeNotifier {
     _state = state.copyWith(
       recipes: await _getSavedRecipesUseCase.execute(),
       isLoading: false,
+    );
+    notifyListeners();
+  }
+
+  void toggleRecipe(int id) async {
+    _state = state.copyWith(
+      recipes: await _toggleBookmarkRecipeUseCase.execute(id),
     );
     notifyListeners();
   }

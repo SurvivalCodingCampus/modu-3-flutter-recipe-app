@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/data/data_source/data_source.dart';
 import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
 import 'package:recipe_app/data/repository/repository.dart';
-import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/use_case.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes.dart';
 
 void main() {
@@ -15,11 +15,17 @@ void main() {
           ),
           bookmarkRepository: BookmarkRepositoryImpl(),
         ),
+        toggleBookmarkRecipeUseCase: ToggleBookmarkRecipeUseCase(
+          recipeRepository: RecipeRepositoryImpl(
+            recipeDataSource: MockRecipeDataSourceImpl(),
+          ),
+          bookmarkRepository: BookmarkRepositoryImpl(),
+        ),
       );
 
       expect(viewModel.state.recipes, isEmpty);
 
-      await viewModel.fetchSavedRecipes();
+      viewModel.fetchSavedRecipes();
 
       expect(viewModel.state.recipes.length, greaterThan(0));
       expect(viewModel.state.recipes.first.name, isNotNull);

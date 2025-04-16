@@ -42,8 +42,12 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
             }
             return ListView.separated(
               itemBuilder: (context, index) {
+                final recipe = widget.viewModel.state.recipes[index];
                 return RecipeCard(
-                  recipe: widget.viewModel.state.recipes[index],
+                  recipe: recipe,
+                  onTap: () {
+                    widget.viewModel.toggleRecipe(int.parse(recipe.id));
+                  },
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 20),
