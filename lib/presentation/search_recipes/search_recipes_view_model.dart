@@ -1,9 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 // Project imports:
-import 'package:recipe_app/core/data/repository/recipe_repository.dart';
-import 'package:recipe_app/core/result.dart';
+import 'package:recipe_app/core/error/result.dart';
 import 'package:recipe_app/core/ui/ui_state.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 

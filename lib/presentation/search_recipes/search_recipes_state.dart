@@ -1,8 +1,8 @@
 // Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
 // Project imports:
-import 'package:recipe_app/core/data/model/recipe.dart';
 import 'package:recipe_app/core/ui/ui_state.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
 
 part 'search_recipes_state.freezed.dart';

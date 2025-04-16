@@ -1,11 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 // Project imports:
-import 'package:recipe_app/core/data/mocks/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/core/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
 import 'package:recipe_app/core/ui/ui_state.dart';
+import 'package:recipe_app/data/mocks/mock_recipe_data_source_impl.dart';
+import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
