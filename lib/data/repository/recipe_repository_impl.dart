@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:recipe_app/data/data_source/interface/recipe_data_source.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
@@ -13,7 +14,8 @@ class RecipeRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<Recipe?> findById(int id) {
-    throw UnimplementedError();
+  Future<Recipe?> findById(int id) async {
+    List<Recipe> recipes = await findAll();
+    return recipes.firstWhereOrNull((recipe) => recipe.id == id);
   }
 }
