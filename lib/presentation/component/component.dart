@@ -35,7 +35,7 @@ class _ComponentState extends State<Component> {
             children: [
               ButtonsWidget(onClick: () {}),
               const SizedBox(height: 10),
-              Buttons(onClick: () {},),
+              Buttons(onClick: () {},buttonName: '',),
               const SizedBox(height: 10),
               InputWidget(
                 onValueChange: (value) {

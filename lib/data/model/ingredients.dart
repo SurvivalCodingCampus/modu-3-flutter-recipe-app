@@ -13,7 +13,7 @@ abstract class Ingredients with _$Ingredients {
     required Ingredient ingredient,
     required int amount,
 
-  }) = _Igredients;
+  }) = _Ingredients;
   
   factory Ingredients.fromJson(Map<String, Object?> json) => _$IngredientsFromJson(json);
 }
