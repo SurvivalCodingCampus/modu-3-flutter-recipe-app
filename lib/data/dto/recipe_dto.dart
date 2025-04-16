@@ -19,12 +19,15 @@ class RecipeDTO {
   @JsonKey(name: 'ingredients')
   List<Map<String, dynamic>>? ingredients;
 
+  bool? bookmarked;
+
   RecipeDTO({
     this.id,
     this.category,
     this.name,
     this.imageUrl,
     this.chef,
+    this.bookmarked,
     this.rating,
     this.cookTime,
     this.ingredients,

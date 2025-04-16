@@ -17,5 +17,6 @@ abstract class Recipe with _$Recipe {
     required double rating,
     required int cookTime,
     required List<Ingredient> ingredients,
+    required bool bookmarked,
   }) = _Recipe;
 }
