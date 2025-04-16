@@ -50,6 +50,7 @@ final routes = [
 
   GoRoute(
     path: AppRoutes.info,
+    name: 'info',
     builder: (context, state) {
       final id = state.pathParameters['id'];
       if (id == null) {
@@ -111,7 +112,7 @@ abstract class AppRoutes {
   static const String savedRecipes = '/saved-recipes';
   static const String notification = '/notification';
   static const String profle = '/profile';
-  static const String info = '/info';
+  static const String info = '/info/:id';
 
   static const String error = 'error';
 

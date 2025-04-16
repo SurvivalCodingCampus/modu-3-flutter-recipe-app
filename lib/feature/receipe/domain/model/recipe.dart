@@ -12,7 +12,7 @@ class Recipe {
   final bool bookmarkStatus;
   final List<IngredientAmount> ingredients;
 
-  Recipe({
+  const Recipe({
     required this.id,
     required this.category,
     required this.name,

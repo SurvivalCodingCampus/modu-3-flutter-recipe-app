@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onChanged: (val) {},
                   ),
                 ),
+                const SizedBox(width: 10),
                 FilterSearchButton(() {}),
               ],
             ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/modules/state/state_handling.dart';
-import 'package:recipe_app/core/router/routes.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository_impl.dart';
 import 'package:recipe_app/feature/receipe/data/data_source/home/mock/mock_recipe_data_source_impl.dart';
@@ -48,7 +47,11 @@ class SavedRecipesScreen extends StatelessWidget {
                   return RecipeCard.fromModel(
                     recipe: recipe,
                     bookmarkTap: () => _viewModel.bookmarkRecipe(id),
-                    cardTap: () => context.pushNamed('${AppRoutes.info}/:$id'),
+                    cardTap:
+                        () => context.pushNamed(
+                          'info',
+                          pathParameters: {'id': '$id'},
+                        ),
                   );
                 },
                 separatorBuilder: (context, index) {
