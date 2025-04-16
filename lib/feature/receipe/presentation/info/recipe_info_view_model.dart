@@ -13,7 +13,7 @@ class RecipeInfoViewModel with ChangeNotifier {
   RecipeInfoState _state = RecipeInfoState();
   RecipeInfoState get state => _state;
 
-  void getRecipeInfo(int id) async {
+  Future<void> getRecipeInfo(int id) async {
     final result = await _getRecipeInfoUseCase.execute(id);
     switch (result) {
       case Success<Recipe>():
