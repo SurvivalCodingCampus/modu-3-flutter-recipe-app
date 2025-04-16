@@ -101,6 +101,7 @@ class SearchRecipesScreen extends StatelessWidget {
                           recipe: recipes[index],
                           isBig: false,
                           isBookmarked: true,
+                          isIngredient: false,
                           bookMarkCallback: () {},
                         );
                       },
