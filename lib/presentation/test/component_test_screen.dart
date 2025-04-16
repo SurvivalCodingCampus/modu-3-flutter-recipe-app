@@ -133,6 +133,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                 ),
                 RecipeTile(recipe: recipe),
                 SearchInput(
+                  isMain: false,
                   onValueChange: (value) {},
                   controller: TextEditingController(),
                 ),

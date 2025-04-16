@@ -5,12 +5,16 @@ import '../../../ui/color_styles.dart';
 
 class SearchInput extends StatelessWidget {
   final void Function(String changed) onValueChange;
-  final TextEditingController controller;
+  final TextEditingController? controller;
+  final bool isMain;
+  final void Function()? onTap;
 
   const SearchInput({
     super.key,
     required this.onValueChange,
-    required this.controller,
+    this.controller,
+    required this.isMain,
+    this.onTap,
   });
 
   @override
@@ -19,9 +23,14 @@ class SearchInput extends StatelessWidget {
       height: 50,
       child: TextField(
         controller: controller,
-        onChanged: (value) {
-          onValueChange(value);
-        },
+        onChanged:
+            !isMain
+                ? (value) {
+                  onValueChange(value);
+                }
+                : null,
+        onTap: isMain ? onTap : null,
+        readOnly: isMain,
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search, color: ColorStyle.gray4),
           hintText: 'Search recipe',

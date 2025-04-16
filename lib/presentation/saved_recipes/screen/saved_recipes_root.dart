@@ -22,7 +22,7 @@ class SavedRecipeRoot extends StatelessWidget {
           onBookmarkClick: () {},
         );
       },
-      listenable: viewModel..findRecipes(),
+      listenable: viewModel,
     );
   }
 }

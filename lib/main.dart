@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/ui/color_styles.dart';
-
-import 'utils/constant/default_route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,13 +8,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
-      routes: DefaultRoute.routes,
-      initialRoute: DefaultRoute.splash,
+      routerConfig: router,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: ColorStyle.primary60),
       ),

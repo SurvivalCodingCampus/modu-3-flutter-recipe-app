@@ -50,7 +50,7 @@ class _SearchRecipeRootState extends State<SearchRecipeRoot> {
           state: widget.viewModel.state,
         );
       },
-      listenable: widget.viewModel..findRecipes(),
+      listenable: widget.viewModel,
     );
   }
 }

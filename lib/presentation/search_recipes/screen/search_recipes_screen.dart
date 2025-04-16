@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/presentation/components/recipe_tile.dart';
-import 'package:recipe_app/core/presentation/components/search_input.dart';
+import 'package:recipe_app/core/presentation/components/search_zone.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
-import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
 class SearchRecipesSreen extends StatelessWidget {
@@ -32,7 +31,7 @@ class SearchRecipesSreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 20,
           children: [
-            _SearchZone(
+            SearchZone(
               onChange: onChange,
               controller: controller,
               onSettingsClick: onSettingsClick,
@@ -77,42 +76,6 @@ class SearchRecipesSreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _SearchZone extends StatelessWidget {
-  final void Function(String value) onChange;
-  final TextEditingController controller;
-  final VoidCallback onSettingsClick;
-
-  const _SearchZone({
-    required this.onChange,
-    required this.controller,
-    required this.onSettingsClick,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: SearchInput(onValueChange: onChange, controller: controller),
-        ),
-        const SizedBox(width: 20),
-        GestureDetector(
-          onTap: onSettingsClick,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Container(
-              width: 50,
-              height: 50,
-              color: ColorStyle.primary100,
-              child: const Icon(Icons.tune, color: ColorStyle.white),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

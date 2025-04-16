@@ -43,8 +43,7 @@ class _BigButtonState extends State<BigButton> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 114,
+            FittedBox(
               child: Text(
                 widget.text,
                 style: AppTextStyles.normalBold.copyWith(
@@ -53,7 +52,11 @@ class _BigButtonState extends State<BigButton> {
               ),
             ),
             const SizedBox(width: 11),
-            Icon(Icons.arrow_forward, weight: 20, color: ColorStyle.white),
+            const Icon(
+              Icons.arrow_forward,
+              weight: 20,
+              color: ColorStyle.white,
+            ),
           ],
         ),
       ),
