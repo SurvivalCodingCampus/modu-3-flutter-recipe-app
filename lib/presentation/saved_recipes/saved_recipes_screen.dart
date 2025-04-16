@@ -31,9 +31,9 @@ class SavedRecipesScreen extends StatelessWidget {
                       RecipeCard(
                         recipe: recipe,
                         isBig: true,
-                        isBookmarked: true,
-                        bookMarkCallback: () {
-                          
+                        isBookmarked: viewModel.bookMarkList.contains(recipe.recipeId) ? true : false,
+                        bookMarkCallback: () async {
+                          await viewModel.bookmarkRecipe(recipe.recipeId);
                         },
                       ),
                       SizedBox(height: 24),
