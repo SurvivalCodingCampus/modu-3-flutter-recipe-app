@@ -30,6 +30,11 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Search recipes'), centerTitle: true),
@@ -108,7 +113,19 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                               searchRecipesViewModel: widget.viewModel,
                             );
                           },
-                        );
+                        ).then((_) {
+                          // filter 적용 검색 결과 반영
+                          widget.viewModel.updateFilters(
+                            time:
+                                widget.filterScreenViewModel.state.selectedTime,
+                            rate: widget.filterScreenViewModel.state.rate,
+                            category:
+                                widget
+                                    .filterScreenViewModel
+                                    .state
+                                    .selectedCategory,
+                          );
+                        });
                       },
                     ),
                   ],
@@ -116,7 +133,6 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
 
                 SizedBox(height: 16),
 
-                // 제목과 결과 수
                 Row(
                   children: [
                     Text(
