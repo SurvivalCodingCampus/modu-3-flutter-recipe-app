@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/model/recipe/recipe.dart';
 
