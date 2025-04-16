@@ -45,7 +45,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                   const SizedBox(height: 10),
                   LabelInputField(
                     label: 'label',
-                    hintText: 'hintText',
+                    placeholder: 'hintText',
                     onValueChange: (String value) {
                       print(value);
                     },
