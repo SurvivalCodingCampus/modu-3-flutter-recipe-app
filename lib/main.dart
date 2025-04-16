@@ -19,12 +19,12 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       title: 'Premium Recipe',
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         primarySwatch: Colors.teal,
-        scaffoldBackgroundColor: Colors.white,
-        // 앱 전체에서 divider 색상을 투명하게 설정
-        dividerColor: Colors.transparent,
-
+        scaffoldBackgroundColor: Colors.white, // 기본이 white 이긴함
+        // 앱 전체에서 divider 색상을 투명하게 설정 for 네비게이션바
+        //dividerColor: Colors.transparent,
       ),
     );
   }
