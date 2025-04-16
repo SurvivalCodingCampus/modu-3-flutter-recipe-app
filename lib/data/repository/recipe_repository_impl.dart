@@ -18,4 +18,12 @@ class RecipeRepositoryImpl implements RecipeRepository {
     List<Recipe> recipes = await findAll();
     return recipes.firstWhereOrNull((recipe) => recipe.id == id);
   }
+
+  @override
+  Future<List<Recipe>> findAllByFilter(
+    bool Function(Recipe predicate) predicate,
+  ) async {
+    final List<Recipe> recipes = await _dataSource.fetch();
+    return recipes.where(predicate).toList();
+  }
 }
