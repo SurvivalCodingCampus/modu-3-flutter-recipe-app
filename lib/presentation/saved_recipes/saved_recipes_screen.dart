@@ -3,6 +3,7 @@ import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.d
 
 import '../../data/model/recipe.dart' show Recipe;
 import '../component/recipe_card.dart';
+import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
@@ -13,6 +14,7 @@ class SavedRecipesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorStyle.white,
       appBar: AppBar(
         title: Text('Saved recipes', style: AppTextStyles.mediumBold),
         centerTitle: true,

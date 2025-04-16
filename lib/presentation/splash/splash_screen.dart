@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../core/routing/routes.dart';
 import '../component/medium_Button.dart';
 import '../component/rating_dialog.dart';
 import '../ui/color_styles.dart';
@@ -83,9 +85,7 @@ class SplashScreen extends StatelessWidget {
                 // 버튼
                 MediumButton(lable: 'Start Cooking',
                   onClick: () {
-                  //테스트로 넣어봄
-                    _showRatingDialog(context);
-                    print('Start Cooking');
+                    context.push(Routes.signIn);
                   },
                 ),
               ],
@@ -96,6 +96,7 @@ class SplashScreen extends StatelessWidget {
     );
   }
 
+/*  //호출시 _showRatingDialog(context);
   Future<void> _showRatingDialog(BuildContext context) async {
     await showDialog(
       context: context,
@@ -115,5 +116,5 @@ class SplashScreen extends StatelessWidget {
         );
       },
     );
-  }
+  } */
 }
