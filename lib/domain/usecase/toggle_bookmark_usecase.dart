@@ -4,12 +4,12 @@ import 'package:recipe_app/domain/model/user.dart';
 import 'package:recipe_app/domain/repository/user_repository.dart';
 
 class ToggleBookmarkUseCase {
-  final UserRepository userRepository;
+  final UserRepository _userRepository;
 
-  const ToggleBookmarkUseCase({required this.userRepository});
+  const ToggleBookmarkUseCase(this._userRepository);
 
   Future<UiState<void>> call(int recipeId) async {
-    final userResult = await userRepository.getCurrentUser();
+    final userResult = await _userRepository.getCurrentUser();
 
     if (userResult case Error(:final failure)) {
       return UiState.error(failure.message);
@@ -29,7 +29,7 @@ class ToggleBookmarkUseCase {
       bookmarkedRecipeIds: updatedBookmarkedIds,
     );
 
-    final saveResult = await userRepository.saveUser(updatedUser);
+    final saveResult = await _userRepository.saveUser(updatedUser);
 
     return switch (saveResult) {
       Success() => const UiState.success(null),
