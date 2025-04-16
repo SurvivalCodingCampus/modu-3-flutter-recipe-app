@@ -10,6 +10,8 @@ import 'package:recipe_app/data/repository/mock_user_repository_impl.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/bottom_navigation_bar/bottom_navigation_bar_screen.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
+import 'package:recipe_app/presentation/ingredient/ingredient_screen.dart';
+import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
@@ -26,6 +28,32 @@ final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: "/",
   routes: [
+    GoRoute(
+      path: Routes.ingredient,
+      builder: (context, state) {
+        final recipeId = int.parse(state.pathParameters["recipeId"]!);
+        final viewModel = IngredientViewModel(
+          getSavedRecipesUseCase: GetSavedRecipesUseCase(
+            userRepository: MockUserRepositoryImpl(
+              userDataSource: MockUserDataSource(),
+            ),
+            bookmarkRepository: BookmarkRepositoryImpl(
+              userDataSource: MockUserDataSource(),
+            ),
+            recipeRepository: MockRecipeRepositoryImpl(
+              recipeDataSource: MockRecipeDataSource(
+                client: http.Client(),
+                url: 'url',
+              ),
+            ),
+          ),
+        );
+
+        viewModel.loadRecipe(recipeId);
+        viewModel.getUserModel(4);
+        return IngredientScreen(viewModel: viewModel);
+      },
+    ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder:
