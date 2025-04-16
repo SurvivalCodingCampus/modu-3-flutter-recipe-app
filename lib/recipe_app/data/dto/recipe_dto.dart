@@ -11,6 +11,7 @@ class RecipeDto {
   final String? chef;
   final num? time;
   final num? rating;
+  final bool? bookMarked;
   final List<Map<String, dynamic>>? ingredients;
 
   RecipeDto(
@@ -22,6 +23,7 @@ class RecipeDto {
     this.time,
     this.rating,
     this.ingredients,
+    this.bookMarked,
   );
 
   factory RecipeDto.fromJson(Map<String, dynamic> json) =>
