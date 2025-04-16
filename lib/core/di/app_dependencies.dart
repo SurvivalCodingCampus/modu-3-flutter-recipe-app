@@ -8,6 +8,7 @@ import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/domain/repository/user_repository.dart';
 import 'package:recipe_app/domain/usecase/get_bookmarked_recipes_usecase.dart';
 import 'package:recipe_app/domain/usecase/get_recipe_by_id_usecase.dart';
+import 'package:recipe_app/domain/usecase/set_recipe_rating_usecase.dart';
 import 'package:recipe_app/domain/usecase/toggle_bookmark_usecase.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
@@ -23,6 +24,7 @@ class AppDependencies {
   late final GetRecipeByIdUseCase getRecipeByIdUseCase;
   late final GetBookmarkedRecipesUseCase getBookmarkedRecipesUseCase;
   late final ToggleBookmarkUseCase toggleBookmarkUseCase;
+  late final SetRecipeRatingUseCase setRecipeRatingUseCase;
 
   late final SavedRecipesViewModel savedRecipesViewModel;
   late final SearchRecipesViewModel searchRecipesViewModel;
@@ -43,9 +45,8 @@ class AppDependencies {
       userRepository: userRepository,
       recipeRepository: recipeRepository,
     );
-    toggleBookmarkUseCase = ToggleBookmarkUseCase(
-      userRepository: userRepository,
-    );
+    toggleBookmarkUseCase = ToggleBookmarkUseCase(userRepository);
+    setRecipeRatingUseCase = SetRecipeRatingUseCase(recipeRepository);
 
     savedRecipesViewModel = SavedRecipesViewModel(
       getBookmarkedRecipes: getBookmarkedRecipesUseCase,
@@ -56,6 +57,7 @@ class AppDependencies {
 
     ingredientViewModel = IngredientViewModel(
       getRecipeById: getRecipeByIdUseCase,
+      setRecipeRating: setRecipeRatingUseCase,
     );
   }
 }
