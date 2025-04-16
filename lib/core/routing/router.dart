@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import '../../presentation/main/add_screen/add_screen.dart';
 import '../../presentation/main/app_scaffold.dart';
-import '../../presentation/main/bookmark_screen/bookmark.dart';
+import '../../presentation/main/bookmark_screen/bookmark_screen.dart';
 import '../../presentation/main/home_screen/home_screen.dart';
 import '../../presentation/main/notification_screen/notification_screen.dart';
 import '../../presentation/main/profile_screen/profile_screen.dart';
