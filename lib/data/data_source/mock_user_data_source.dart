@@ -10,7 +10,7 @@ class MockUserDataSource implements UserDataSource {
 
   @override
   Future<Map<String, dynamic>> getUserData(int userId) async {
-    print('데이터소스 진입');
+    // print('데이터소스 진입');
     final Map<String, dynamic> jsonMap = jsonDecode(
       await File('/Users/eastar/Documents/github/modu-3-flutter-recipe-app/assets/json/mock_users.json').readAsString(),
     );
@@ -22,7 +22,7 @@ class MockUserDataSource implements UserDataSource {
       // print(userId);
       return element["id"] == userId;
     });
-    print("데이터소스의 getUserData 결과 : $userData");
+    // print("데이터소스의 getUserData 결과 : $userData");
     return userData;
   }
 
@@ -38,8 +38,8 @@ class MockUserDataSource implements UserDataSource {
     final userList = userDatas.where((e) => e["id"] != userData["id"]).toList();
     userList.add(userData);
     userDatas = userList;
-    print("유저 총 수 : ${userDatas.length}");
-    print("수정한 데이터 : ${userDatas.where((element) => element["id"] == 4)}");
+    // print("유저 총 수 : ${userDatas.length}");
+    // print("수정한 데이터 : ${userDatas.where((element) => element["id"] == 4)}");
 
     final setData = {"profiles": userDatas};
     await File(
