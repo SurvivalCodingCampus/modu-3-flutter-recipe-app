@@ -17,6 +17,7 @@ extension RecipeMapper on RecipeDto {
       rating: (rating ?? 0).toDouble(),
       ingredients:
           ingredients?.map((e) => e.toRecipeIngredient()).toList() ?? [],
+      steps: steps ?? [],
     );
   }
 }
@@ -32,6 +33,7 @@ extension RecipeDtoMapper on Recipe {
       time: time,
       rating: rating,
       ingredients: ingredients.map((e) => e.toDto()).toList(),
+      steps: steps,
     );
   }
 }

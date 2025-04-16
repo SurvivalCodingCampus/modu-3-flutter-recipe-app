@@ -57,10 +57,35 @@ class RecipeRepositoryImpl implements RecipeRepository {
     try {
       final dto = await localDataSource.fetchRecipeById(id);
       if (dto != null) return Result.success(dto.toRecipe());
-      return Result.error(Failure('레시피를 찾을 수 없습니다.'));
+      return const Result.error(Failure('레시피를 찾을 수 없습니다.'));
     } catch (e2) {
       debugPrint('⚠️ localDataSource 실패 → error fallback $e2');
       return Result.error(Failure('레시피 데이터를 불러오는 데 실패했습니다.', cause: e2));
+    }
+  }
+
+  @override
+  Future<Result<void>> setRecipeRating(int recipeId, double rating) async {
+    if (remoteDataSource != null) {
+      try {
+        await remoteDataSource!.updateRecipeRating(
+          recipeId: recipeId,
+          rating: rating,
+        );
+        return const Result.success(null);
+      } catch (e, _) {
+        debugPrint('⚠️ remoteDataSource 실패 → local fallback');
+      }
+    }
+    try {
+      await localDataSource.updateRecipeRating(
+        recipeId: recipeId,
+        rating: rating,
+      );
+      return const Result.success(null);
+    } catch (e2) {
+      debugPrint('⚠️ localDataSource setRecipeRating 실패 $e2');
+      return Result.error(Failure('레시피 평점을 저장하는 데 실패했습니다.', cause: e2));
     }
   }
 }
