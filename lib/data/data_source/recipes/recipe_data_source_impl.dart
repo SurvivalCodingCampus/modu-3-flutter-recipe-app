@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:recipe_app/data_source/recipes/recipe_data_source.dart';
+import 'package:recipe_app/data/data_source/recipes/recipe_data_source.dart';
 
 class RecipeDataSourceImpl implements RecipeDataSource {
   @override

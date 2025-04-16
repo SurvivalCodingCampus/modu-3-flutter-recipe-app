@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/data_source/recipes/recipe_data_source.dart';
-import 'package:recipe_app/data_source/recipes/recipe_data_source_impl.dart';
+import 'package:recipe_app/data/data_source/recipes/recipe_data_source.dart';
+import 'package:recipe_app/data/data_source/recipes/recipe_data_source_impl.dart';
+import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/common/component/nav_bar_component.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/page/home/home_screen.dart';
@@ -14,7 +15,7 @@ import 'package:recipe_app/presentation/page/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/page/sign_up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/page/splash/splash_screen.dart';
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
-import 'package:recipe_app/repository/recipes/recipe_repository_impl.dart';
+import 'package:recipe_app/data/repository/recipes/recipe_repository_impl.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: Routes.splash,
@@ -40,7 +41,6 @@ final GoRouter router = GoRouter(
           ),
     ),
     ShellRoute(
-
       builder: (context, state, child) {
         return Scaffold(
           body: Column(
@@ -53,13 +53,26 @@ final GoRouter router = GoRouter(
         );
       },
       routes: [
-        GoRoute(path: Routes.home, pageBuilder: (context, state) => NoTransitionPage(child: HomeScreen())),
+        GoRoute(
+          path: Routes.home,
+          pageBuilder:
+              (context, state) => NoTransitionPage(child: HomeScreen()),
+        ),
 
         GoRoute(
           path: Routes.savedRecipes,
           pageBuilder:
-              (context, state) =>
-                  NoTransitionPage(child: SavedRecipesScreen(model: SavedRecipesViewModel()..fetchData())),
+              (context, state) => NoTransitionPage(
+                child: SavedRecipesScreen(
+                  viewModel: SavedRecipesViewModel(
+                    getSavedRecipesUseCase: GetSavedRecipesUseCase(
+                      recipeRepository: RecipeRepositoryImpl(
+                        dataSource: RecipeDataSourceImpl(),
+                      ),
+                    ),
+                  )..fetchData(),
+                ),
+              ),
         ),
       ],
     ),
