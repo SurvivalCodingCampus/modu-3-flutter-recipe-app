@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/presentation/splash_screen/splash_screen.dart';
+import 'package:recipe_app/recipe_app/core/routing/router.dart';
 
 import 'recipe_app/data/repository/recipe_repository.dart';
 import 'recipe_app/data/repository/recipe_repository_impl.dart';
@@ -31,12 +31,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(
-        repository: repository,
-        filterSearchViewModel: filterSearchViewModel,
-      ),
+      routerConfig: router,
     );
   }
 }

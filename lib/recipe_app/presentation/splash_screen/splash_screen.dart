@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/recipe_app/presentation/choice_screen/choice_screen.dart';
-import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
-import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/recipe_app/core/routing/routes.dart';
+import 'package:recipe_app/recipe_app/ui/button_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class SplashScreen extends StatefulWidget {
-  final RecipeRepository repository;
-  final FilterSearchViewModel filterSearchViewModel;
-
-  const SplashScreen({
-    super.key,
-    required this.repository,
-    required this.filterSearchViewModel,
-  });
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -48,8 +40,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 150,
-                    horizontal: 40,
+                    vertical: 100,
+                    horizontal: 30,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             SizedBox(height: 10),
                             Text(
                               '100K+ Preminum Recipe',
-                              style: TextStyles2.splashScreenText,
+                              style: TextStyles.splashScreenText,
                             ),
                           ],
                         ),
@@ -75,46 +67,40 @@ class _SplashScreenState extends State<SplashScreen> {
                           children: [
                             Text(
                               'Get',
-                              style: TextStyles2.splashScreenText.copyWith(
+                              style: TextStyles.splashScreenText.copyWith(
                                 fontSize: 50,
                               ),
                             ),
                             Text(
                               'Cooking',
-                              style: TextStyles2.splashScreenText.copyWith(
+                              style: TextStyles.splashScreenText.copyWith(
                                 fontSize: 50,
                               ),
                             ),
-                            Text(
-                              'Simple way to find Tasty Recipe',
-                              style: TextStyles2.splashScreenText.copyWith(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Simple way to find Tasty Recipe',
+                                style: TextStyles.splashScreenText.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                ),
                               ),
                             ),
                             SizedBox(height: 50),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder:
-                                        (context) => ChoiceScreen(
-                                          repository: widget.repository,
-                                          filterSearchViewModel:
-                                              widget.filterSearchViewModel,
-                                        ),
-                                  ),
-                                );
+                                context.go(Routes.signIn);
                               },
-                              style: ButtonStyles2.splashScreenButton,
+                              style: ButtonStyles.splashScreenButton,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     'Start Cooking',
-                                    style: TextStyles2.splashScreenText
-                                        .copyWith(fontSize: 16),
+                                    style: TextStyles.splashScreenText.copyWith(
+                                      fontSize: 16,
+                                    ),
                                   ),
                                   Icon(
                                     Icons.arrow_forward_outlined,

@@ -12,7 +12,7 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   SearchRecipesState get searchRecipesState => _searchRecipesState;
 
-  //view에서 모든 레시피 가져오는 메서드
+  //view에서 모든 레시피 가져오는 메서드, 따로 usecase처리 필요 없음
   Future<void> fetchRecipes() async {
     _searchRecipesState = searchRecipesState.copyWith(isRecipesLoading: true);
     notifyListeners();

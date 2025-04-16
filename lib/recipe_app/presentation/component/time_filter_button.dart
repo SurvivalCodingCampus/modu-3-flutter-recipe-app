@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/button_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class TimeFilterButton extends StatefulWidget {
   final ValueChanged<String?> changedTimeFilter;
@@ -41,14 +41,14 @@ class _TimeFilterButtonState extends State<TimeFilterButton> {
         },
         style:
             isSelected
-                ? ButtonStyles2.selectedButton
-                : ButtonStyles2.unSelectedButton,
+                ? ButtonStyles.selectedButton
+                : ButtonStyles.unSelectedButton,
         child: Text(
           text,
           style:
               isSelected
-                  ? TextStyles2.starRateText.copyWith(color: Colors.white)
-                  : TextStyles2.starRateText,
+                  ? TextStyles.starRateText.copyWith(color: Colors.white)
+                  : TextStyles.starRateText,
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/button_styles.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class RatingButton extends StatefulWidget {
   final ValueChanged<int?> changedRatingFilter;
@@ -43,8 +43,8 @@ class _RatingButtonState extends State<RatingButton> {
         },
         style:
             isSelected
-                ? ButtonStyles2.selectedButton
-                : ButtonStyles2.unSelectedButton,
+                ? ButtonStyles.selectedButton
+                : ButtonStyles.unSelectedButton,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -53,13 +53,13 @@ class _RatingButtonState extends State<RatingButton> {
               rate.toString(),
               style:
                   isSelected
-                      ? TextStyles2.starRateText.copyWith(color: Colors.white)
-                      : TextStyles2.starRateText,
+                      ? TextStyles.starRateText.copyWith(color: Colors.white)
+                      : TextStyles.starRateText,
             ),
             SizedBox(width: 6),
             Icon(
               Icons.star,
-              color: isSelected ? Colors.white : ColorStyles2.primary80,
+              color: isSelected ? Colors.white : ColorStyles.primary80,
               size: 18,
             ),
           ],

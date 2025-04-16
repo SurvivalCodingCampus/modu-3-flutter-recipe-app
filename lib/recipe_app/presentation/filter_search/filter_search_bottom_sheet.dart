@@ -3,8 +3,8 @@ import 'package:recipe_app/recipe_app/presentation/component/category_filter_but
 import 'package:recipe_app/recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/recipe_app/presentation/component/time_filter_button.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
-import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/button_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class FilterSearchBottomSheet extends StatefulWidget {
   final FilterSearchViewModel filterSearchViewModel;
@@ -34,78 +34,80 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
           topRight: Radius.circular(50),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('Filter Search', style: TextStyles2.smallerTextBold),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Time',
-                  style: TextStyles2.smallerTextBold,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 10),
-                TimeFilterButton(
-                  changedTimeFilter: (value) {
-                    setState(() {
-                      selectedTimeFilter = value;
-                    });
-                    print(selectedTimeFilter);
-                  },
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Rate',
-                  style: TextStyles2.smallerTextBold,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 10),
-                RatingButton(
-                  changedRatingFilter: (value) {
-                    setState(() {
-                      selectedRatingFilter = value;
-                    });
-                    print(selectedRatingFilter);
-                  },
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Category',
-                  style: TextStyles2.smallerTextBold,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 6),
-                CategoryFilterButton(
-                  changedCategoryFilter: (value) {
-                    setState(() {
-                      selectedCategoryFilter = value;
-                    });
-                    print(selectedCategoryFilter);
-                  },
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            SizedBox(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('Filter', style: TextStyles2.smallerTextSemiBold),
-                style: ButtonStyles2.filterButton,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Filter Search', style: TextStyles.smallerTextBold),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Time',
+                    style: TextStyles.smallerTextBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 5),
+                  TimeFilterButton(
+                    changedTimeFilter: (value) {
+                      setState(() {
+                        selectedTimeFilter = value;
+                      });
+                      print(selectedTimeFilter);
+                    },
+                  ),
+                ],
               ),
-            ),
-          ],
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Rate',
+                    style: TextStyles.smallerTextBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 5),
+                  RatingButton(
+                    changedRatingFilter: (value) {
+                      setState(() {
+                        selectedRatingFilter = value;
+                      });
+                      print(selectedRatingFilter);
+                    },
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Category',
+                    style: TextStyles.smallerTextBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 5),
+                  CategoryFilterButton(
+                    changedCategoryFilter: (value) {
+                      setState(() {
+                        selectedCategoryFilter = value;
+                      });
+                      print(selectedCategoryFilter);
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              SizedBox(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Filter', style: TextStyles.smallerTextSemiBold),
+                  style: ButtonStyles.filterButton,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

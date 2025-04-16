@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 import 'saved_recipes_view_model.dart';
 
@@ -13,15 +13,9 @@ class SavedRecipesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Saved recipes', style: TextStyles2.savedRecipesText),
+        title: Text('Saved recipes', style: TextStyles.savedRecipesText),
         centerTitle: true,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),

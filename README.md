@@ -42,3 +42,19 @@ Flutter로 만드는 레시피 앱
 | Search recipes 기본화면                                                                           | keyword 입력시                                                                               | 해당 레시피 없을 경우                                                                                  |
 |-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
 | ![nokeyword](https://github.com/user-attachments/assets/27ea2603-6a40-4d5e-a14f-e321b7c8968d) | ![japan](https://github.com/user-attachments/assets/88f1c162-bc0c-4116-b353-4b36642e103b) | ![noresults](https://github.com/user-attachments/assets/73bb74bc-4b98-43c2-a491-4e47b4f7b538) |
+
+### 5단계 - GoRouter와 ShellRouter를 활용해 화면 이동
+
+- SignIn, SignUp 페이지 UI제작
+- SignIn 버튼 클릭시 MainScreen으로 이동
+- MainScreen은 BottomNavigationBar와 각 탭에 해당되는 스크린들을 ShellRouter로 불러옴
+
+### 결과 화면
+
+| SignIn                                                                                     | SignUp                                                                                     |
+|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| ![signin](https://github.com/user-attachments/assets/df375f70-06a7-439a-9ad5-3ca65999aa30) | ![signup](https://github.com/user-attachments/assets/59de10da-d301-4d2e-b653-0d372fa8b7f5) |
+
+| MainHome                                                                                     | SavedRecipes                                                                                |
+|----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+ ![mainhome](https://github.com/user-attachments/assets/220c8f3f-8664-4f23-ae08-5241903d84f5) | ![savedre](https://github.com/user-attachments/assets/0e81ccf3-3069-4ada-be4f-b2f86982f9fc) |

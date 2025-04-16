@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 import '../../data/model/recipe.dart';
 
@@ -64,7 +64,7 @@ class _RecipeCardState extends State<RecipeCard> {
                 width: 37,
                 height: 16,
                 decoration: BoxDecoration(
-                  color: ColorStyles2.secondary20,
+                  color: ColorStyles.secondary20,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
@@ -72,11 +72,11 @@ class _RecipeCardState extends State<RecipeCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(Icons.star, color: ColorStyles2.rating, size: 7.5),
+                      Icon(Icons.star, color: ColorStyles.rating, size: 7.5),
                       SizedBox(width: 2),
                       Text(
                         widget.recipe.rate.toStringAsFixed(1),
-                        style: TextStyles2.rateText.copyWith(
+                        style: TextStyles.rateText.copyWith(
                           color: Colors.black,
                         ),
                       ),
@@ -97,10 +97,8 @@ class _RecipeCardState extends State<RecipeCard> {
                   widget.recipe.title,
                   style:
                       widget.showTimerAndBookmark
-                          ? TextStyles2.menuIntroduceText
-                          : TextStyles2.menuIntroduceText.copyWith(
-                            fontSize: 11,
-                          ),
+                          ? TextStyles.menuIntroduceText
+                          : TextStyles.menuIntroduceText.copyWith(fontSize: 11),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -109,8 +107,8 @@ class _RecipeCardState extends State<RecipeCard> {
                   'By ${widget.recipe.chef}',
                   style:
                       widget.showTimerAndBookmark
-                          ? TextStyles2.chefNameText
-                          : TextStyles2.chefNameText.copyWith(fontSize: 8),
+                          ? TextStyles.chefNameText
+                          : TextStyles.chefNameText.copyWith(fontSize: 8),
                 ),
               ],
             ),
@@ -123,18 +121,18 @@ class _RecipeCardState extends State<RecipeCard> {
                 children: [
                   Icon(
                     Icons.timer_outlined,
-                    color: ColorStyles2.chefName,
+                    color: ColorStyles.chefName,
                     size: 17,
                   ),
                   SizedBox(width: 3),
                   Text.rich(
                     TextSpan(
                       text: widget.recipe.minutes.toString(),
-                      style: TextStyles2.cookingTimeText,
+                      style: TextStyles.cookingTimeText,
                       children: [
                         TextSpan(
                           text: ' min',
-                          style: TextStyles2.cookingTimeText,
+                          style: TextStyles.cookingTimeText,
                         ),
                       ],
                     ),
