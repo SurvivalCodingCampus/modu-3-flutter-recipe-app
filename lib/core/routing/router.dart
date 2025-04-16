@@ -33,8 +33,10 @@ final router = GoRouter(
     GoRoute(
       path: Routes.ingredient,
       builder:
-          (context, state) =>
-              IngredientScreen(recipeId: state.pathParameters['id'] as int),
+          (context, state) => IngredientScreen(
+            viewModel: ingredientScreenViewModel,
+            recipeId: int.parse(state.pathParameters['id']!),
+          ),
     ),
     StatefulShellRoute.indexedStack(
       builder:
