@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/data/data_source/mock_recipe_data_source.dart';
+import 'package:recipe_app/data/data_source/mock_user_data_source.dart';
+import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
 import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
+import 'package:recipe_app/data/repository/mock_user_repository_impl.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/component/big_button.dart';
 
@@ -45,6 +48,14 @@ class ComponentTestScreen extends StatelessWidget {
                                 viewModel: SavedRecipesViewModel(
                                   getSavedRecipesUseCase:
                                       GetSavedRecipesUseCase(
+                                        userRepository: MockUserRepositoryImpl(
+                                          userDataSource: MockUserDataSource(),
+                                        ),
+                                        bookmarkRepository:
+                                            BookmarkRepositoryImpl(
+                                              userDataSource:
+                                                  MockUserDataSource(),
+                                            ),
                                         recipeRepository:
                                             MockRecipeRepositoryImpl(
                                               recipeDataSource:
