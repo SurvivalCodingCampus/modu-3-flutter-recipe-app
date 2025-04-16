@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/buttons.dart';
@@ -27,7 +29,6 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _logoScale;
 
   bool _goPreviewMain = false;
-  final bool _goSavedRecipes = false;
 
   @override
   void initState() {
@@ -175,44 +176,13 @@ class _SplashScreenState extends State<SplashScreen>
                           icon: Icons.arrow_forward,
                           size: ButtonSize.medium,
                           onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder:
-                            //         (context) => SavedRecipesScreen(
-                            //           viewModel: SavedRecipesViewModel(
-                            //             recipeRepository: RecipeRepositoryImpl(
-                            //               dataSource: RecipeDataSourceImpl(),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //   ),
-                            // );
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => SearchRecipesScreen(
-                                      viewModel: SearchRecipesViewModel(
-                                        repository: RecipeRepositoryImpl(
-                                          dataSource: RecipeDataSourceImpl(),
-                                        ),
-                                      ),
-                                    ),
-                              ),
-                            );
+                            context.replace(Routes.signIn);
                           },
                         ),
                         const SizedBox(height: 12),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PreviewMain(),
-                              ),
-                            );
+                            context.push(Routes.example);
                           },
                           onTapDown: (_) {
                             setState(() {

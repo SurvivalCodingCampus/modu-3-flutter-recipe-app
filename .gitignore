@@ -46,5 +46,6 @@ app.*.map.json
 
 # Ignore entire iOS
 ios/
-.g
-.freezed
+# freezed, JsonSerializable
+*.freezed.dart
+*.g.dart

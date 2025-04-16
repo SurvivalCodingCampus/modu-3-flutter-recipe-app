@@ -8,6 +8,7 @@ class InputField extends StatelessWidget {
   final String value;
   final void Function(String changed) onValueChange;
   final bool isDisabled;
+  final bool isPassword;
 
   const InputField({
     super.key,
@@ -16,6 +17,7 @@ class InputField extends StatelessWidget {
     required this.value,
     required this.onValueChange,
     this.isDisabled = false,
+    this.isPassword = false,
   });
 
   @override
@@ -26,41 +28,39 @@ class InputField extends StatelessWidget {
       TextPosition(offset: controller.text.length),
     );
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(label, style: AppTextStyles.smallRegular()),
-          const SizedBox(height: 4),
-          TextField(
-            controller: controller,
-            onChanged: isDisabled ? null : onValueChange,
-            enabled: !isDisabled,
-            style: AppTextStyles.smallRegular(
-              color: isDisabled ? ColorStyle.gray2 : ColorStyle.black,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: AppTextStyles.smallRegular()),
+        const SizedBox(height: 4),
+        TextField(
+          controller: controller,
+          onChanged: isDisabled ? null : onValueChange,
+          enabled: !isDisabled,
+          obscureText: isPassword,
+          style: AppTextStyles.smallRegular(
+            color: isDisabled ? ColorStyle.gray2 : ColorStyle.black,
+          ),
+          decoration: InputDecoration(
+            hintText: placeHolder,
+            hintStyle: AppTextStyles.smallRegular(color: ColorStyle.gray2),
+            filled: isDisabled,
+            fillColor: isDisabled ? ColorStyle.gray4 : null,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: ColorStyle.gray4),
             ),
-            decoration: InputDecoration(
-              hintText: placeHolder,
-              hintStyle: AppTextStyles.smallRegular(color: ColorStyle.gray2),
-              filled: isDisabled,
-              fillColor: isDisabled ? ColorStyle.gray4 : null,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: ColorStyle.gray4),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: ColorStyle.primary80),
-              ),
-              disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: ColorStyle.gray4),
-              ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: ColorStyle.primary80),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: ColorStyle.gray4),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
