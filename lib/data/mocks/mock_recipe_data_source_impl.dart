@@ -35,6 +35,36 @@ class MockRecipeDataSourceImpl implements RecipeDataSource {
     return list.firstWhereOrNull((r) => r.id == id);
   }
 
+  @override
+  Future<void> updateRecipeRating({
+    required int recipeId,
+    required double rating,
+  }) async {
+    try {
+      final loaded = await JsonStorage.load(JsonStorageKey.recipes);
+      final json = loaded ?? await _loadFromAssets();
+
+      if (json == null || json['recipes'] is! List) {
+        throw MockRecipeDataSourceException('recipes.json 형식 오류 또는 데이터 없음');
+      }
+
+      final List recipes = List.from(json['recipes']);
+      final index = recipes.indexWhere((e) => e['id'] == recipeId);
+      if (index == -1) {
+        throw MockRecipeDataSourceException('해당 ID의 레시피를 찾을 수 없습니다: $recipeId');
+      }
+
+      final updated = Map<String, dynamic>.from(recipes[index]);
+      updated['rating'] = rating;
+      recipes[index] = updated;
+
+      final updatedJson = {'recipes': recipes};
+      await JsonStorage.save(JsonStorageKey.recipes, updatedJson);
+    } catch (e) {
+      throw MockRecipeDataSourceException('레시피 평점 업데이트 실패', cause: e);
+    }
+  }
+
   Future<Map<String, dynamic>?> _loadFromAssets() async {
     final assetStr = await rootBundle.loadString(assetPath);
     final decoded = jsonDecode(assetStr);
