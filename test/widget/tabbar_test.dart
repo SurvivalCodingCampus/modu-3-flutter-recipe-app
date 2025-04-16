@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/widgets/base/tab/app_tabbar.dart';
+import 'package:recipe_app/core/presentation/widgets/tab/app_tabbar.dart';
 
 void main() {
   testWidgets('tabbar widget test', (tester) async {

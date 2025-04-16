@@ -7,7 +7,7 @@ import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_
 import 'package:recipe_app/feature/receipe/domain/data_source/search/mock/mock_search_recipe_data_source_impl.dart';
 import 'package:recipe_app/feature/receipe/domain/data_source/search/search_recipe_data_source.dart';
 import 'package:recipe_app/feature/receipe/domain/dto/recipe_dto.dart';
-import 'package:recipe_app/presentation/pages/recipe/search/view_model/search_view_model.dart';
+import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_view_model.dart';
 
 void main() {
   group('recipe test', () {

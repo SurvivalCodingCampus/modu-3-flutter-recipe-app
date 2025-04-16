@@ -1,14 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:recipe_app/presentation/pages/auth/sign_up_screen.dart';
-import 'package:recipe_app/presentation/pages/auth/sing_in_screen.dart';
-import 'package:recipe_app/presentation/pages/main/home/home_screen.dart';
-import 'package:recipe_app/presentation/pages/main/notification/notification_screen.dart';
-import 'package:recipe_app/presentation/pages/main/profile/profile_screen.dart';
-import 'package:recipe_app/presentation/pages/main/root_tab.dart';
-import 'package:recipe_app/presentation/pages/main/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/pages/recipe/search/screen/search_screen.dart';
-import 'package:recipe_app/presentation/pages/splash/splash_screen.dart';
+import 'package:recipe_app/core/presentation/pages/root_tab.dart';
+import 'package:recipe_app/feature/auth/presentation/pages/sign_up_screen.dart';
+import 'package:recipe_app/feature/auth/presentation/pages/sing_in_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/home/home_screen.dart';
+import 'package:recipe_app/feature/notification/presentation/pages/notification_screen.dart';
+import 'package:recipe_app/feature/profile/presentation/pages/profile_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_screen.dart';
+import 'package:recipe_app/core/presentation/pages/splash_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
