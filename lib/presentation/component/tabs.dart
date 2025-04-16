@@ -28,7 +28,9 @@ class Tabs extends StatelessWidget {
                 onValueChange(i);
               },
               child: Container(
-                width: MediaQuery.of(context).size.width / (labels.length + 1),
+                width:
+                    (MediaQuery.of(context).size.width - 10) /
+                    (labels.length + 1),
                 height: 33,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),

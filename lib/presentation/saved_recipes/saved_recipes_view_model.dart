@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
+  final GetSavedRecipesUseCase _getSavedRecipesUseCase;
 
-  SavedRecipesViewModel({required RecipeRepository recipeRepository})
-    : _recipeRepository = recipeRepository {
+  SavedRecipesViewModel({
+    required GetSavedRecipesUseCase getSavedRecipesUseCase,
+  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase {
     fetchRecipes();
   }
 
@@ -20,7 +21,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    _recipes = await _recipeRepository.getRecipes();
+    _recipes = await _getSavedRecipesUseCase.getSavedRecipes();
     _isLoading = false;
     notifyListeners();
   }

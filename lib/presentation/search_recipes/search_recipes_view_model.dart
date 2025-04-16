@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/filter.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/model/filter.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/data/util/rate_enum.dart';
 import 'package:recipe_app/data/util/time_enum.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';

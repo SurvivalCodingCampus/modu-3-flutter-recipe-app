@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recipe_app/data/model/filter.dart';
+import 'package:recipe_app/domain/model/filter.dart';
 
 
 part 'filter_search_state.freezed.dart';

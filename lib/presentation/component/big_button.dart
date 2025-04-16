@@ -48,7 +48,7 @@ class _BigButtonState extends State<BigButton> {
         duration: animaitionDuration,
         width: double.infinity,
         height: 60,
-        padding: EdgeInsets.symmetric(vertical: 18, horizontal: 85),
+        padding: EdgeInsets.symmetric(vertical: 18, horizontal: 60),
         decoration: BoxDecoration(
           color: isTapDown ? ColorStyles.gray4 : widget.color,
           borderRadius: BorderRadius.circular(10),

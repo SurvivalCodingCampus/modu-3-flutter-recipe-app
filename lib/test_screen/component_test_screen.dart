@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/data/data_source/mock_recipe_data_source.dart';
 import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
+import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/component/big_button.dart';
 
 import 'package:recipe_app/presentation/component/input_field.dart';
@@ -42,12 +43,17 @@ class ComponentTestScreen extends StatelessWidget {
                           builder:
                               (context) => SavedRecipesScreen(
                                 viewModel: SavedRecipesViewModel(
-                                  recipeRepository: MockRecipeRepositoryImpl(
-                                    recipeDataSource: MockRecipeDataSource(
-                                      client: http.Client(),
-                                      url: 'testUrl',
-                                    ),
-                                  ),
+                                  getSavedRecipesUseCase:
+                                      GetSavedRecipesUseCase(
+                                        recipeRepository:
+                                            MockRecipeRepositoryImpl(
+                                              recipeDataSource:
+                                                  MockRecipeDataSource(
+                                                    client: http.Client(),
+                                                    url: 'testUrl',
+                                                  ),
+                                            ),
+                                      ),
                                 ),
                               ),
                         ),

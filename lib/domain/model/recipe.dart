@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:recipe_app/data/model/ingredients.dart';
-import 'package:recipe_app/data/model/media.dart';
-import 'package:recipe_app/data/model/review.dart';
+import 'package:recipe_app/domain/model/ingredients.dart';
+import 'package:recipe_app/domain/model/media.dart';
+import 'package:recipe_app/domain/model/review.dart';
 
 import 'package:recipe_app/data/util/category_enum.dart';
 

@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source.dart';
 import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
+import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/bottom_navigation_bar/bottom_navigation_bar_screen.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
@@ -46,10 +47,12 @@ final router = GoRouter(
           builder:
               (context, state) => SavedRecipesScreen(
                 viewModel: SavedRecipesViewModel(
-                  recipeRepository: MockRecipeRepositoryImpl(
-                    recipeDataSource: MockRecipeDataSource(
-                      client: http.Client(),
-                      url: 'url',
+                  getSavedRecipesUseCase: GetSavedRecipesUseCase(
+                    recipeRepository: MockRecipeRepositoryImpl(
+                      recipeDataSource: MockRecipeDataSource(
+                        client: http.Client(),
+                        url: 'url',
+                      ),
                     ),
                   ),
                 ),
