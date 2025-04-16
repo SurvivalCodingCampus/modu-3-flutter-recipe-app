@@ -26,7 +26,7 @@ class RecipeCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             image: DecorationImage(
-              image: AssetImage(recipe.imagePath),
+              image: NetworkImage(recipe.image),
               fit: BoxFit.fill,
             ),
           ),
@@ -79,7 +79,7 @@ class RecipeCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                recipe.title,
+                recipe.name,
                 style:
                     showTimerAndBookmark
                         ? TextStyles.menuIntroduceText
@@ -98,7 +98,7 @@ class RecipeCard extends StatelessWidget {
             ],
           ),
         ),
-        if (showTimerAndBookmark)
+        if (showTimerAndBookmark == true)
           Positioned(
             right: 12,
             bottom: 10,
@@ -112,7 +112,7 @@ class RecipeCard extends StatelessWidget {
                 SizedBox(width: 3),
                 Text.rich(
                   TextSpan(
-                    text: recipe.minutes.toString(),
+                    text: recipe.time.toString(),
                     style: TextStyles.cookingTimeText,
                     children: [
                       TextSpan(text: ' min', style: TextStyles.cookingTimeText),

@@ -4,10 +4,11 @@ import 'package:recipe_app/recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/recipe_app/data_source/mock/mock_recipe_data_impl.dart';
-import 'package:recipe_app/recipe_app/data_source/mock/mock_saved_recipe_data_impl.dart';
 import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository.dart';
 import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository_impl.dart';
+import 'package:recipe_app/recipe_app/domain/use_case/add_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/recipe_app/domain/use_case/remove_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/ingredient_screen/ingredient_screen.dart';
@@ -26,16 +27,21 @@ MockRecipeDataImpl mockRecipeDataImpl = MockRecipeDataImpl();
 RecipeRepository repository = RecipeRepositoryImpl(
   recipeDataSource: mockRecipeDataImpl,
 );
-MockSavedRecipeDataImpl mockSavedRecipeDataImpl = MockSavedRecipeDataImpl();
 BookMarkRepository bookMarkRepository = BookMarkRepositoryImpl(
-  recipeDataSource: mockSavedRecipeDataImpl,
+  recipeDataSource: mockRecipeDataImpl,
 );
-final GetSavedRecipesUseCase _bookMarkedRecipesUseCase = GetSavedRecipesUseCase(
+AddBookmarkUseCase addBookmarkUseCase = AddBookmarkUseCase(bookMarkRepository);
+RemoveBookmarkUseCase removeBookmarkUseCase = RemoveBookmarkUseCase(
+  bookMarkRepository: bookMarkRepository,
+);
+GetSavedRecipesUseCase getSavedRecipesUseCase = GetSavedRecipesUseCase(
   bookMarkRepository: bookMarkRepository,
 );
 SavedRecipesViewModel _savedRecipesViewModel = SavedRecipesViewModel(
   repository,
-  _bookMarkedRecipesUseCase,
+  getSavedRecipesUseCase,
+  removeBookmarkUseCase,
+  addBookmarkUseCase,
 );
 FilterSearchViewModel _filterSearchViewModel = FilterSearchViewModel(
   repository,

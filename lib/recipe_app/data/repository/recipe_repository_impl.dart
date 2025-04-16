@@ -23,7 +23,7 @@ class RecipeRepositoryImpl implements RecipeRepository {
         recipeList
             .where(
               (e) =>
-                  e.title.toLowerCase().contains(keyword.toLowerCase()) ||
+                  e.name.toLowerCase().contains(keyword.toLowerCase()) ||
                   e.chef.toLowerCase().contains(keyword.toLowerCase()),
             )
             .toList();

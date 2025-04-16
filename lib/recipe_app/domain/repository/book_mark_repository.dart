@@ -1,7 +1,10 @@
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
 
 abstract class BookMarkRepository {
-  Future<List<Recipe>> bookMarkedRecipes();
+  //북마크 된 레시피 가져 오는 메서드
+  Future<List<Recipe>> getBookMarkedRecipes();
 
-  void toggleBookMark(int id);
+  Future<void> removeBookMark(int id);
+
+  Future<void> addBookMark(Recipe recipe);
 }
