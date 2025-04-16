@@ -79,6 +79,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                       totalTimeMinutes: '20',
                       rating: 4.0,
                       category: 'Chinese',
+                      ingredients: [],
                     ),
                   ),
                   const SizedBox(height: 10),

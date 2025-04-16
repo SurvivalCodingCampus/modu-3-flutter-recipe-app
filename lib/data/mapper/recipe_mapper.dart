@@ -1,4 +1,5 @@
 import 'package:recipe_app/data/dto/dto.dart';
+import 'package:recipe_app/data/mapper/ingredient_mapper.dart';
 import 'package:recipe_app/domain/model/model.dart';
 
 extension RecipeMapper on RecipeDto {
@@ -11,6 +12,10 @@ extension RecipeMapper on RecipeDto {
       totalTimeMinutes: time ?? '',
       rating: rating != null ? rating!.toDouble() : 0.0,
       category: category ?? '',
+      ingredients:
+          ingredients != null
+              ? ingredients!.map((e) => e.toIngredient()).toList()
+              : [],
     );
   }
 }

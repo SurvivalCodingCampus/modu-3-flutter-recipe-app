@@ -66,6 +66,7 @@ final router = GoRouter(
             totalTimeMinutes: '30 min',
             rating: 5.0,
             category: 'Chinese',
+            ingredients: [],
           ),
         );
       },
