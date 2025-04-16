@@ -58,7 +58,7 @@ class MockSavedRecipeDataImpl implements RecipeDataSource {
       bookMarked: false,
     ),
     Recipe(
-      id: 7,
+      id: 6,
       imagePath: 'assets/images/jjigae.png',
       title: 'Traditional Korean Stew Food',
       chef: 'Chef Kim',
@@ -67,7 +67,7 @@ class MockSavedRecipeDataImpl implements RecipeDataSource {
       bookMarked: false,
     ),
     Recipe(
-      id: 8,
+      id: 7,
       imagePath: 'assets/images/sushi.png',
       title: 'Traditional Japan Food Food',
       chef: 'Master Nagano',
@@ -76,7 +76,7 @@ class MockSavedRecipeDataImpl implements RecipeDataSource {
       bookMarked: false,
     ),
     Recipe(
-      id: 9,
+      id: 8,
       imagePath: 'assets/images/chicken.png',
       title: 'Korean Style Chicken Food',
       chef: 'Cooking Mama',
@@ -85,7 +85,7 @@ class MockSavedRecipeDataImpl implements RecipeDataSource {
       bookMarked: false,
     ),
     Recipe(
-      id: 10,
+      id: 9,
       imagePath: 'assets/images/paella.png',
       title: 'Traditional Korean Rice Food',
       chef: 'Chef John',

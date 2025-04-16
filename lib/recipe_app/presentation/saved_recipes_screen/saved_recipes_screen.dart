@@ -25,7 +25,6 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
 
   void _onToggleBookMark(int index) {
     widget.savedRecipesViewModel.toggleBookMark(index);
-    setState(() {});
   }
 
   @override

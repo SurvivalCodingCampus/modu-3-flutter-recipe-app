@@ -38,7 +38,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleBookMark(int id) {
+  void toggleBookMark(int id) async {
     final index = recipes.indexWhere(((recipe) => recipe.id == id));
     if (index != -1) {
       recipes[index] = recipes[index].copyWith(
