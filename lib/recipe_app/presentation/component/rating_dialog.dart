@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class RatingDialog extends StatefulWidget {
   void Function(int) onChange;
@@ -27,7 +27,7 @@ class _RatingDialogState extends State<RatingDialog> {
           builder:
               (BuildContext context) => AlertDialog(
                 title: Center(
-                  child: Text('Rate recipe', style: TextStyles2.rateRecipeText),
+                  child: Text('Rate recipe', style: TextStyles.rateRecipeText),
                 ),
                 //AlertDialog에서도 상태변화가 생기려면 StatefulBuilder 사용해주기
                 content: StatefulBuilder(
@@ -51,7 +51,7 @@ class _RatingDialogState extends State<RatingDialog> {
                                   index + 1 <= _stars
                                       ? Icons.star
                                       : Icons.star_border,
-                                  color: ColorStyles2.rating,
+                                  color: ColorStyles.rating,
                                 ),
                               ),
                             ),
@@ -69,8 +69,8 @@ class _RatingDialogState extends State<RatingDialog> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
                                     _stars == 0
-                                        ? ColorStyles2.containerColor
-                                        : ColorStyles2.rating,
+                                        ? ColorStyles.containerColor
+                                        : ColorStyles.rating,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 50.0,
                                   vertical: 20.0,
@@ -81,7 +81,7 @@ class _RatingDialogState extends State<RatingDialog> {
                               ),
                               child: Text(
                                 'Send',
-                                style: TextStyles2.rateText.copyWith(
+                                style: TextStyles.rateText.copyWith(
                                   color: Colors.white,
                                   fontSize: 18,
                                 ),

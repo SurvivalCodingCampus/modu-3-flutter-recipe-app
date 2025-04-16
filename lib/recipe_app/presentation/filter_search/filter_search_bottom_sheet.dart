@@ -3,8 +3,8 @@ import 'package:recipe_app/recipe_app/presentation/component/category_filter_but
 import 'package:recipe_app/recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/recipe_app/presentation/component/time_filter_button.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
-import 'package:recipe_app/recipe_app/ui/button_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/button_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class FilterSearchBottomSheet extends StatefulWidget {
   final FilterSearchViewModel filterSearchViewModel;
@@ -40,13 +40,13 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('Filter Search', style: TextStyles2.smallerTextBold),
+              Text('Filter Search', style: TextStyles.smallerTextBold),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Time',
-                    style: TextStyles2.smallerTextBold,
+                    style: TextStyles.smallerTextBold,
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(height: 5),
@@ -65,7 +65,7 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                 children: [
                   Text(
                     'Rate',
-                    style: TextStyles2.smallerTextBold,
+                    style: TextStyles.smallerTextBold,
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(height: 5),
@@ -84,7 +84,7 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                 children: [
                   Text(
                     'Category',
-                    style: TextStyles2.smallerTextBold,
+                    style: TextStyles.smallerTextBold,
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(height: 5),
@@ -102,8 +102,8 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
               SizedBox(
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text('Filter', style: TextStyles2.smallerTextSemiBold),
-                  style: ButtonStyles2.filterButton,
+                  child: Text('Filter', style: TextStyles.smallerTextSemiBold),
+                  style: ButtonStyles.filterButton,
                 ),
               ),
             ],

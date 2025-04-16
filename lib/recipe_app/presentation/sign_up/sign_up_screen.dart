@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -32,88 +32,88 @@ class _SignUpScreenState extends State<SignUpScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Create an account', style: TextStyles2.largeTextBold),
+              Text('Create an account', style: TextStyles.largeTextBold),
               SizedBox(height: 5),
               Text(
                 'Let\'s help you set up your account,',
-                style: TextStyles2.smallerTextRegular.copyWith(
-                  color: ColorStyles2.titleBlackColor,
+                style: TextStyles.smallerTextRegular.copyWith(
+                  color: ColorStyles.titleBlackColor,
                 ),
               ),
               Text(
                 'it won\'t take long.',
-                style: TextStyles2.smallerTextRegular.copyWith(
-                  color: ColorStyles2.titleBlackColor,
+                style: TextStyles.smallerTextRegular.copyWith(
+                  color: ColorStyles.titleBlackColor,
                 ),
               ),
               SizedBox(height: 20),
-              Text('Name', style: TextStyles2.smallTextRegular),
+              Text('Name', style: TextStyles.smallTextRegular),
               TextField(
                 controller: _nameTextEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: ColorStyles2.gray4),
+                    borderSide: BorderSide(color: ColorStyles.gray4),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: ColorStyles2.gray4),
+                    borderSide: BorderSide(color: ColorStyles.gray4),
                   ),
                   hintText: 'Enter Name',
-                  hintStyle: TextStyles2.smallerTextRegular,
+                  hintStyle: TextStyles.smallerTextRegular,
                 ),
               ),
               SizedBox(height: 20),
-              Text('Email', style: TextStyles2.smallTextRegular),
+              Text('Email', style: TextStyles.smallTextRegular),
               TextField(
                 controller: _emailTextEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: ColorStyles2.gray4),
+                    borderSide: BorderSide(color: ColorStyles.gray4),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: ColorStyles2.gray4),
+                    borderSide: BorderSide(color: ColorStyles.gray4),
                   ),
                   hintText: 'Enter Email',
-                  hintStyle: TextStyles2.smallerTextRegular,
+                  hintStyle: TextStyles.smallerTextRegular,
                 ),
               ),
               SizedBox(height: 20),
-              Text('Password', style: TextStyles2.smallTextRegular),
+              Text('Password', style: TextStyles.smallTextRegular),
               TextField(
                 obscureText: true,
                 controller: _passwordTextEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: ColorStyles2.gray4),
+                    borderSide: BorderSide(color: ColorStyles.gray4),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: ColorStyles2.gray4),
+                    borderSide: BorderSide(color: ColorStyles.gray4),
                   ),
                   hintText: 'Enter Password',
-                  hintStyle: TextStyles2.smallerTextRegular,
+                  hintStyle: TextStyles.smallerTextRegular,
                 ),
               ),
               SizedBox(height: 20),
-              Text('Confirm Password', style: TextStyles2.smallTextRegular),
+              Text('Confirm Password', style: TextStyles.smallTextRegular),
               TextField(
                 obscureText: true,
                 controller: _confirmPasswordTextEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: ColorStyles2.gray4),
+                    borderSide: BorderSide(color: ColorStyles.gray4),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: ColorStyles2.gray4),
+                    borderSide: BorderSide(color: ColorStyles.gray4),
                   ),
                   hintText: 'Retype Password',
-                  hintStyle: TextStyles2.smallerTextRegular,
+                  hintStyle: TextStyles.smallerTextRegular,
                 ),
               ),
               SizedBox(height: 20),
@@ -129,12 +129,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    side: BorderSide(color: ColorStyles2.secondary100),
+                    side: BorderSide(color: ColorStyles.secondary100),
                   ),
                   Text(
                     'Accept terms & Condition',
-                    style: TextStyles2.smallerTextRegular.copyWith(
-                      color: ColorStyles2.secondary100,
+                    style: TextStyles.smallerTextRegular.copyWith(
+                      color: ColorStyles.secondary100,
                     ),
                   ),
                 ],
@@ -143,7 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorStyles2.primary100,
+                  backgroundColor: ColorStyles.primary100,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -157,7 +157,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Sign Up', style: TextStyles2.normalTextBold),
+                      Text('Sign Up', style: TextStyles.normalTextBold),
                       Icon(Icons.arrow_forward, color: Colors.white, size: 16),
                     ],
                   ),
@@ -169,20 +169,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   SizedBox(
                     width: 50,
-                    child: Divider(color: ColorStyles2.gray4, thickness: 1),
+                    child: Divider(color: ColorStyles.gray4, thickness: 1),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       'Or Sign in With',
-                      style: TextStyles2.smallerTextSemiBold.copyWith(
-                        color: ColorStyles2.gray4,
+                      style: TextStyles.smallerTextSemiBold.copyWith(
+                        color: ColorStyles.gray4,
                       ),
                     ),
                   ),
                   SizedBox(
                     width: 50,
-                    child: Divider(color: ColorStyles2.gray4, thickness: 1),
+                    child: Divider(color: ColorStyles.gray4, thickness: 1),
                   ),
                 ],
               ),
@@ -198,9 +198,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: ColorStyles2.shadowColor.withValues(
-                            alpha: 0.1,
-                          ),
+                          color: ColorStyles.shadowColor.withValues(alpha: 0.1),
                           spreadRadius: 3,
                           blurRadius: 5,
                           offset: Offset(0, 3),
@@ -225,9 +223,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: ColorStyles2.shadowColor.withValues(
-                            alpha: 0.1,
-                          ),
+                          color: ColorStyles.shadowColor.withValues(alpha: 0.1),
                           spreadRadius: 3,
                           blurRadius: 5,
                           offset: Offset(0, 3),
@@ -251,7 +247,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   Text(
                     'Already a member?',
-                    style: TextStyles2.smallerTextSemiBold.copyWith(
+                    style: TextStyles.smallerTextSemiBold.copyWith(
                       color: Colors.black,
                     ),
                   ),
@@ -261,8 +257,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                     child: Text(
                       'Sign In',
-                      style: TextStyles2.smallerTextSemiBold.copyWith(
-                        color: ColorStyles2.secondary100,
+                      style: TextStyles.smallerTextSemiBold.copyWith(
+                        color: ColorStyles.secondary100,
                       ),
                     ),
                   ),

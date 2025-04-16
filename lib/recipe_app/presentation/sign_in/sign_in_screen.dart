@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -39,26 +39,26 @@ class _SignInScreenState extends State<SignInScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Hello,', style: TextStyles2.headerTextBold),
-                Text('Welcome Back!', style: TextStyles2.largeTextRegular),
+                Text('Hello,', style: TextStyles.headerTextBold),
+                Text('Welcome Back!', style: TextStyles.largeTextRegular),
                 SizedBox(height: 50),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Email', style: TextStyles2.smallTextRegular),
+                    Text('Email', style: TextStyles.smallTextRegular),
                     TextField(
                       controller: _emailTextEditingController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(color: ColorStyles2.gray4),
+                          borderSide: BorderSide(color: ColorStyles.gray4),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(color: ColorStyles2.gray4),
+                          borderSide: BorderSide(color: ColorStyles.gray4),
                         ),
                         hintText: 'Enter Email',
-                        hintStyle: TextStyles2.smallerTextRegular,
+                        hintStyle: TextStyles.smallerTextRegular,
                         errorText:
                             _emailTextEditingController.text.isNotEmpty &&
                                     !isValidEmail(
@@ -69,21 +69,21 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     SizedBox(height: 25),
-                    Text('Enter Password', style: TextStyles2.smallTextRegular),
+                    Text('Enter Password', style: TextStyles.smallTextRegular),
                     TextField(
                       obscureText: true,
                       controller: _passwordTextEditingController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(color: ColorStyles2.gray4),
+                          borderSide: BorderSide(color: ColorStyles.gray4),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(color: ColorStyles2.gray4),
+                          borderSide: BorderSide(color: ColorStyles.gray4),
                         ),
                         hintText: 'Enter Password',
-                        hintStyle: TextStyles2.smallerTextRegular,
+                        hintStyle: TextStyles.smallerTextRegular,
                       ),
                     ),
                     SizedBox(height: 25),
@@ -91,8 +91,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
                         'Forgot Password?',
-                        style: TextStyles2.smallerTextRegular.copyWith(
-                          color: ColorStyles2.secondary100,
+                        style: TextStyles.smallerTextRegular.copyWith(
+                          color: ColorStyles.secondary100,
                         ),
                       ),
                     ),
@@ -102,7 +102,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         context.go(Routes.homeScreen);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorStyles2.primary100,
+                        backgroundColor: ColorStyles.primary100,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -119,7 +119,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text('Sign In', style: TextStyles2.normalTextBold),
+                            Text('Sign In', style: TextStyles.normalTextBold),
                             Icon(
                               Icons.arrow_forward,
                               color: Colors.white,
@@ -136,7 +136,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         SizedBox(
                           width: 50,
                           child: Divider(
-                            color: ColorStyles2.gray4,
+                            color: ColorStyles.gray4,
                             thickness: 1,
                           ),
                         ),
@@ -144,15 +144,15 @@ class _SignInScreenState extends State<SignInScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
                             'Or Sign in With',
-                            style: TextStyles2.smallerTextSemiBold.copyWith(
-                              color: ColorStyles2.gray4,
+                            style: TextStyles.smallerTextSemiBold.copyWith(
+                              color: ColorStyles.gray4,
                             ),
                           ),
                         ),
                         SizedBox(
                           width: 50,
                           child: Divider(
-                            color: ColorStyles2.gray4,
+                            color: ColorStyles.gray4,
                             thickness: 1,
                           ),
                         ),
@@ -170,7 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: ColorStyles2.shadowColor.withValues(
+                                color: ColorStyles.shadowColor.withValues(
                                   alpha: 0.1,
                                 ),
                                 spreadRadius: 3,
@@ -197,7 +197,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: ColorStyles2.shadowColor.withValues(
+                                color: ColorStyles.shadowColor.withValues(
                                   alpha: 0.1,
                                 ),
                                 spreadRadius: 3,
@@ -223,7 +223,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         Text(
                           'Don\'t have an account?',
-                          style: TextStyles2.smallerTextSemiBold.copyWith(
+                          style: TextStyles.smallerTextSemiBold.copyWith(
                             color: Colors.black,
                           ),
                         ),
@@ -233,8 +233,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           },
                           child: Text(
                             'Sign up',
-                            style: TextStyles2.smallerTextSemiBold.copyWith(
-                              color: ColorStyles2.secondary100,
+                            style: TextStyles.smallerTextSemiBold.copyWith(
+                              color: ColorStyles.secondary100,
                             ),
                           ),
                         ),

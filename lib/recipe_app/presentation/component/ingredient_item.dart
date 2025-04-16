@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class IngredientItem extends StatelessWidget {
   final String imagePath;
@@ -20,7 +20,7 @@ class IngredientItem extends StatelessWidget {
       width: double.infinity,
       height: 76,
       decoration: BoxDecoration(
-        color: ColorStyles2.containerColor,
+        color: ColorStyles.containerColor,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       child: Padding(
@@ -42,11 +42,11 @@ class IngredientItem extends StatelessWidget {
                     child: Image.asset(imagePath),
                   ),
                   SizedBox(width: 12),
-                  Text(ingredient, style: TextStyles2.normalText),
+                  Text(ingredient, style: TextStyles.normalText),
                 ],
               ),
             ),
-            Text(amount, style: TextStyles2.amountText),
+            Text(amount, style: TextStyles.amountText),
           ],
         ),
       ),

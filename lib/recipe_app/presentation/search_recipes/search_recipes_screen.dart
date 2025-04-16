@@ -3,8 +3,8 @@ import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel searchRecipesViewModel;
@@ -44,7 +44,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
         title: Text(
           'Search recipes',
           textAlign: TextAlign.start,
-          style: TextStyles2.normalText.copyWith(
+          style: TextStyles.normalText.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
@@ -91,7 +91,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                       Radius.circular(10),
                                     ),
                                     borderSide: BorderSide(
-                                      color: ColorStyles2.gray4,
+                                      color: ColorStyles.gray4,
                                     ),
                                   ),
                                   enabledBorder: OutlineInputBorder(
@@ -99,13 +99,13 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                       Radius.circular(10),
                                     ),
                                     borderSide: BorderSide(
-                                      color: ColorStyles2.gray4,
+                                      color: ColorStyles.gray4,
                                     ),
                                   ),
                                   prefixIcon: Icon(Icons.search, size: 18),
-                                  prefixIconColor: ColorStyles2.gray4,
+                                  prefixIconColor: ColorStyles.gray4,
                                   hintText: 'Search recipe',
-                                  hintStyle: TextStyles2.smallerTextRegular,
+                                  hintStyle: TextStyles.smallerTextRegular,
                                 ),
                               ),
                             ),
@@ -127,7 +127,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 );
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: ColorStyles2.primary100,
+                                backgroundColor: ColorStyles.primary100,
                                 padding: EdgeInsets.all(5),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -152,7 +152,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                               _isSearching == false
                                   ? 'Recent Search'
                                   : 'Search Result',
-                              style: TextStyles2.normalText.copyWith(
+                              style: TextStyles.normalText.copyWith(
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -163,8 +163,8 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                               _isSearching == false
                                   ? ''
                                   : '${widget.searchRecipesViewModel.searchRecipesState.recipes.length} results',
-                              style: TextStyles2.smallerTextRegular.copyWith(
-                                color: ColorStyles2.gray3,
+                              style: TextStyles.smallerTextRegular.copyWith(
+                                color: ColorStyles.gray3,
                               ),
                             ),
                           ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
-import 'package:recipe_app/recipe_app/ui/text_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class HomeScreen extends StatelessWidget {
   final FilterSearchViewModel filterSearchViewModel;
@@ -26,10 +26,10 @@ class HomeScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Hello Jega', style: TextStyles2.largeTextBold),
+                        Text('Hello Jega', style: TextStyles.largeTextBold),
                         Text(
                           'What are you cooking today?',
-                          style: TextStyles2.smallerTextRegular,
+                          style: TextStyles.smallerTextRegular,
                         ),
                       ],
                     ),
@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: ColorStyles2.secondary40,
+                        color: ColorStyles.secondary40,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Image.asset('assets/icons/character.png'),
@@ -55,16 +55,16 @@ class HomeScreen extends StatelessWidget {
                           contentPadding: EdgeInsets.all(3),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(color: ColorStyles2.gray4),
+                            borderSide: BorderSide(color: ColorStyles.gray4),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(color: ColorStyles2.gray4),
+                            borderSide: BorderSide(color: ColorStyles.gray4),
                           ),
                           prefixIcon: Icon(Icons.search, size: 18),
-                          prefixIconColor: ColorStyles2.gray4,
+                          prefixIconColor: ColorStyles.gray4,
                           hintText: 'Search recipe',
-                          hintStyle: TextStyles2.smallerTextRegular,
+                          hintStyle: TextStyles.smallerTextRegular,
                         ),
                       ),
                     ),
@@ -84,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorStyles2.primary100,
+                          backgroundColor: ColorStyles.primary100,
                           padding: EdgeInsets.all(5),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),

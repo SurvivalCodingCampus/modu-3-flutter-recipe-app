@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/recipe_app/ui/color_styles2.dart';
+import 'package:recipe_app/recipe_app/ui/color_styles.dart';
 
 class BottomNavigationBarScaffold extends StatefulWidget {
   final Widget child;
@@ -46,7 +46,8 @@ class _BottomNavigationBarScaffoldState
         backgroundColor: Colors.white,
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: ColorStyles2.splashButtonColor,
+        selectedItemColor: ColorStyles.splashButtonColor,
+        unselectedItemColor: ColorStyles.gray3,
 
         items: const [
           //label 속성 생략 불가능
