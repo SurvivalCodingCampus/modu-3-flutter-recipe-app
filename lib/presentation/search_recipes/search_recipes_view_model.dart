@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/repository/interface/recipe_repository.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
 import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_sheet_state.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _repository;
+  final SearchRecipesUseCase _searchRecipesUseCase;
+  final GetSavedRecipesUseCase _getSavedRecipesUseCase;
 
   SearchRecipesState _state = const SearchRecipesState();
 
-  SearchRecipesViewModel(this._repository);
+  SearchRecipesViewModel(
+    this._searchRecipesUseCase,
+    this._getSavedRecipesUseCase,
+  );
 
   SearchRecipesState get state => _state;
 
   Future<void> fetchAll() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
-    List<Recipe> recipes = await _repository.findAll();
+    List<Recipe> recipes = await _getSavedRecipesUseCase.execute();
     _state = _state.copyWith(recipes: recipes, isLoading: false);
     notifyListeners();
   }
@@ -27,21 +32,14 @@ class SearchRecipesViewModel with ChangeNotifier {
   }
 
   Future<void> searchRecipes(String query) async {
-    _state = _state.copyWith(isLoading: true);
+    _state = _state.copyWith(query: query, isLoading: true);
     notifyListeners();
 
-    _state = _state.copyWith(
-      query: query,
-      recipes: await _repository.findAll(),
-    );
+    final List<Recipe> recipes = await _searchRecipesUseCase.execute(query);
 
     _state = _state.copyWith(
       recipes:
-          state.recipes
-              .where(
-                (recipe) =>
-                    recipe.name.toLowerCase().contains(query.toLowerCase()),
-              )
+          recipes
               .where(
                 (recipe) =>
                     recipe.rating ==
