@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
 
 enum ButtonSize {
   big(width: 315, height: 60, border: 10),
@@ -68,13 +68,20 @@ class _ButtonWidgetState extends State<ButtonWidget> {
           borderRadius: BorderRadius.circular(widget.buttonSize.border),
         ),
         child: Center(
-          child: Text(
-            widget.buttonText,
-            style: switch (widget.buttonSize) {
-              ButtonSize.big => TextStyles.normalBold(color: ColorStyles.white),
-              ButtonSize.medium => TextStyles.normalBold(color: ColorStyles.white),
-              ButtonSize.small => TextStyles.smallBold(color: ColorStyles.white),
-            },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.buttonText,
+                style: switch (widget.buttonSize) {
+                  ButtonSize.big => TextStyles.normalBold(color: ColorStyles.white),
+                  ButtonSize.medium => TextStyles.normalBold(color: ColorStyles.white),
+                  ButtonSize.small => TextStyles.smallBold(color: ColorStyles.white),
+                },
+              ),
+              SizedBox(width: 20,),
+              Icon(Icons.arrow_forward_outlined, color: ColorStyles.white, size: 20,)
+            ],
           ),
         ),
       ),

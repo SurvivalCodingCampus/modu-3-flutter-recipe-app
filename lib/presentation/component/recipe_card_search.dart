@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/model/recipe.dart';
-import '../../ui/color_styles.dart';
-import '../../ui/text_styles.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
+import 'package:recipe_app/data/model/recipe.dart';
 
 class RecipeCardSearch extends StatelessWidget {
   final void Function() onClick;

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/enums/category_filter.dart';
+import 'package:recipe_app/core/enums/time_filter.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
+import 'package:recipe_app/presentation/component/filter_search_bottom_sheet.dart';
+import 'package:recipe_app/presentation/component/filter_search_state.dart';
+import 'package:recipe_app/presentation/component/input_field_widget.dart';
 import 'package:recipe_app/presentation/component/recipe_card_search.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
-import 'package:recipe_app/ui/color_styles.dart';
+import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_view_model.dart';
 
-import '../../data/type/category_filter.dart';
-import '../../data/type/time_filter.dart';
-import '../../ui/text_styles.dart';
-import '../component/filter_search_bottom_sheet.dart';
-import '../component/input_field_widget.dart';
 
 class SearchRecipesScreen extends StatelessWidget {
   final SearchRecipesViewModel viewModel;
@@ -55,7 +56,27 @@ class SearchRecipesScreen extends StatelessWidget {
                       SizedBox(width: 20),
                       GestureDetector(
                         onTap: () {
-                          viewModel.toggleFilterSearchBottomSheet();
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (_) => Container(
+                              height: MediaQuery.sizeOf(context).height * 0.6,
+                              decoration: BoxDecoration(
+                                color: ColorStyles.white,
+                                borderRadius: BorderRadius.circular(20)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: FilterSearchBottomSheet(
+                                  state: viewModel.state.filterSearchState,
+                                  onFilterChange: (FilterSearchState filterSearchState) {
+                                    viewModel.setFilter(filterSearchState);
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
                         },
                         child: Container(
                           width: 50,
@@ -115,36 +136,6 @@ class SearchRecipesScreen extends StatelessWidget {
                 ],
               ),
             ),
-            bottomSheet:
-                viewModel.state.showFilterSearchBottomSheet
-                    ? Container(
-                      height: MediaQuery.of(context).size.height * 3 / 5,
-                      decoration: BoxDecoration(
-                        color: ColorStyles.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: FilterSearchBottomSheet(
-                          timeFilter: viewModel.state.timeFilter,
-                          rateFilter: viewModel.state.rateFilter,
-                          categoryFilter: viewModel.state.categoryFilter,
-                          onFilterChange:
-                              (
-                              TimeFilter timeFilter,
-                              int rateFilter,
-                              CategoryFilter categoryFilter,
-                              ) {
-                            viewModel.setFilter(timeFilter, rateFilter, categoryFilter);
-                            viewModel.toggleFilterSearchBottomSheet();
-                          },
-                        ),
-                      ),
-                    )
-                    : null,
           ),
         );
       },

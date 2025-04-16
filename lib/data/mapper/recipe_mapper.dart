@@ -3,7 +3,7 @@ import 'package:recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/model/ingredient_with_amount.dart';
 
-import '../type/category_filter.dart';
+import '../../core/enums/category_filter.dart';
 
 extension RecipeMapper on RecipeDto {
   Recipe toRecipe() {

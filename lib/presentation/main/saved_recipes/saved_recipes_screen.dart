@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/ui/color_styles.dart';
+import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_view_model.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
   final SavedRecipesViewModel viewModel;
@@ -14,7 +15,9 @@ class SavedRecipesScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Saved recipes', style: TextStyles.mediumBold()),
         centerTitle: true,
+        backgroundColor: ColorStyles.white,
       ),
+      backgroundColor: ColorStyles.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

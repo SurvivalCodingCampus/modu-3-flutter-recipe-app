@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/enums/time_filter.dart';
+import 'package:recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/data/type/category_filter.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
-
-import '../../data/model/recipe.dart';
-import '../../data/type/time_filter.dart';
+import 'package:recipe_app/core/enums/category_filter.dart';
+import 'package:recipe_app/presentation/component/filter_search_state.dart';
+import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
@@ -31,23 +31,23 @@ class SearchRecipesViewModel with ChangeNotifier {
         state.recipes
             // 카테고리 필터링
             .where((recipe) {
-              if(state.categoryFilter == CategoryFilter.All) {
+              if(state.filterSearchState.categoryFilter == CategoryFilter.All) {
                 return true;
               }
-              return recipe.category == state.categoryFilter;
+              return recipe.category == state.filterSearchState.categoryFilter;
             })
 
             // Rate 별점 필터링
             .where((recipe) {
-              if(state.rateFilter == 5) {
+              if(state.filterSearchState.rateFilter == 5) {
                 return recipe.rating >= 5.0;
-              } else if (state.rateFilter == 4) {
+              } else if (state.filterSearchState.rateFilter == 4) {
                 return 4.0 <= recipe.rating && recipe.rating < 5.0;
-              } else if (state.rateFilter == 3) {
+              } else if (state.filterSearchState.rateFilter == 3) {
                 return 3.0 <= recipe.rating && recipe.rating < 4.0;
-              } else if (state.rateFilter == 2) {
+              } else if (state.filterSearchState.rateFilter == 2) {
                 return 2.0 <= recipe.rating && recipe.rating < 3.0;
-              } else if (state.rateFilter == 1) {
+              } else if (state.filterSearchState.rateFilter == 1) {
                 return 1.0 <= recipe.rating && recipe.rating < 2.0;
               }
               return true;
@@ -72,14 +72,10 @@ class SearchRecipesViewModel with ChangeNotifier {
   }
 
   void setFilter(
-    TimeFilter timeFilter,
-    int rateFilter,
-    CategoryFilter categoryFilter,
+    FilterSearchState filterSearchState
   ) async {
     _state = state.copyWith(
-      timeFilter: timeFilter,
-      rateFilter: rateFilter,
-      categoryFilter: categoryFilter,
+      filterSearchState: filterSearchState
     );
     notifyListeners();
     searchRecipes();
@@ -87,13 +83,6 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   void updateSearchString(String value) async {
     _state = state.copyWith(searchString: value);
-    notifyListeners();
-  }
-
-  void toggleFilterSearchBottomSheet() async {
-    _state = state.copyWith(
-      showFilterSearchBottomSheet: !state.showFilterSearchBottomSheet,
-    );
     notifyListeners();
   }
 }
