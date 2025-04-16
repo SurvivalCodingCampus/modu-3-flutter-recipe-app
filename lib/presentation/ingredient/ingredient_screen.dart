@@ -175,7 +175,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
               // 작성자 정보
               RecipeAuthor(
                 authorName: recipe.chef,
-                path: 'images/profile/sample_profile.png',
+                path: 'assets/images/profile/sample_profile.png',
                 location: '집 이겠지',
                 onFollowTap: () {},
               ),
@@ -199,7 +199,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
                     const SizedBox(
                       width: 17,
                       height: 17,
-                      child: AppImage(path: 'images/icons/dish.png'),
+                      child: AppImage(path: 'assets/images/icons/dish.png'),
                     ),
                     const SizedBox(width: 5),
                     Text(
