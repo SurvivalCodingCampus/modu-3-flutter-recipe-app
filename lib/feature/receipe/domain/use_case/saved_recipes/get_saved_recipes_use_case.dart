@@ -7,7 +7,7 @@ class GetSavedRecipesUseCase {
 
   GetSavedRecipesUseCase(this._recipeRepository);
 
-  Future<Result<List<Recipe>>> getSavedRecipe() {
+  Future<Result<List<Recipe>>> excute() {
     final result = _recipeRepository.getRecipes();
     return result;
   }

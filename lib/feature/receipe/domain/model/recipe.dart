@@ -11,6 +11,7 @@ class Recipe {
   final double rating;
   final bool bookmarkStatus;
   final List<IngredientAmount> ingredients;
+
   Recipe({
     required this.id,
     required this.category,

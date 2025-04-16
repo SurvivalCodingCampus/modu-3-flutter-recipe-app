@@ -6,7 +6,7 @@ class BookmarkRecipesUseCase {
 
   BookmarkRecipesUseCase(this._recipeRepository);
 
-  Future<Result<bool>> bookmarkRecipe(int id) async {
+  Future<Result<bool>> excute(int id) async {
     return _recipeRepository.bookmarkRecipe(id);
   }
 }

@@ -22,7 +22,12 @@ class RecipeRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<Result<bool>> bookmarkRecipe(int id) {
-    return Future.value(const Result.success(true));
+  Future<Result<bool>> bookmarkRecipe(int id) async {
+    final resp =
+        (await _dataSource.getRecipes())
+            .where((e) => e.id == id)
+            .first
+            .bookmarkStatus;
+    return Future.value(Result.success(!resp!));
   }
 }

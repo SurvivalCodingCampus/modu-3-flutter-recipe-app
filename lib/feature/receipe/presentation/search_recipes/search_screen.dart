@@ -127,6 +127,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           title: recipe.name,
                           owner: recipe.chef,
                           starCount: recipe.rating,
+                          bookmarkTap: () {},
                         );
                       },
                     ),

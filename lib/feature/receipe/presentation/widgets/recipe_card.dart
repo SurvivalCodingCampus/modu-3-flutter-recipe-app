@@ -12,19 +12,24 @@ class RecipeCard extends StatelessWidget {
   final bool? bookMarkStatus;
   final String? duration;
   final double height;
+  final VoidCallback bookmarkTap;
   const RecipeCard({
     required this.recipeId,
     required this.imgUrl,
     required this.title,
     required this.owner,
     required this.starCount,
+    required this.bookmarkTap,
     this.bookMarkStatus,
     this.duration,
     this.height = 150,
     super.key,
   });
 
-  factory RecipeCard.fromModel(Recipe recipe) => RecipeCard(
+  factory RecipeCard.fromModel({
+    required Recipe recipe,
+    required VoidCallback bookmarkTap,
+  }) => RecipeCard(
     recipeId: recipe.id,
     imgUrl: recipe.image,
     title: recipe.name,
@@ -32,6 +37,7 @@ class RecipeCard extends StatelessWidget {
     starCount: recipe.rating,
     bookMarkStatus: recipe.bookmarkStatus,
     duration: recipe.time,
+    bookmarkTap: bookmarkTap,
     height: 150,
   );
 
@@ -123,15 +129,20 @@ class RecipeCard extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: const BoxDecoration(
-                                color: AppColor.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.bookmark_outline,
-                                color: AppColor.primary80,
+                            InkWell(
+                              onTap: bookmarkTap,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: const BoxDecoration(
+                                  color: AppColor.white,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  bookMarkStatus!
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_outline,
+                                  color: AppColor.primary80,
+                                ),
                               ),
                             ),
                           ],

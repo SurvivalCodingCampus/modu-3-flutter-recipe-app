@@ -22,7 +22,7 @@ class SavedRecipesViewModel with ChangeNotifier {
   void fetchRecipes() async {
     _state = state.copyWith(viewState: ViewState.loading);
     notifyListeners();
-    final resp = await _getSavedRecipesUseCase.getSavedRecipe();
+    final resp = await _getSavedRecipesUseCase.excute();
     switch (resp) {
       case Success<List<Recipe>>():
         _state = state.copyWith(data: resp.data, viewState: ViewState.complete);
@@ -33,18 +33,11 @@ class SavedRecipesViewModel with ChangeNotifier {
   }
 
   void bookmarkRecipe(int id) async {
-    final result = await _bookmarkRecipesUseCase.bookmarkRecipe(id);
+    print('id: $id');
+    final result = await _bookmarkRecipesUseCase.excute(id);
     switch (result) {
       case Success<bool>():
-        final newData =
-            state.data
-                .map(
-                  (e) =>
-                      e.id == id
-                          ? e.copyWith(bookmarkStatus: !e.bookmarkStatus)
-                          : e,
-                )
-                .toList();
+        final newData = state.data.where((e) => e.id != id).toList();
         _state = state.copyWith(data: newData, viewState: ViewState.complete);
       case Error<bool>():
         _state = state.copyWith(viewState: ViewState.error);

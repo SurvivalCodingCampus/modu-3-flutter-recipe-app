@@ -42,7 +42,10 @@ class SavedRecipesScreen extends StatelessWidget {
                 itemCount: recipes.length,
                 itemBuilder: (context, index) {
                   final recipe = recipes[index];
-                  return RecipeCard.fromModel(recipe);
+                  return RecipeCard.fromModel(
+                    recipe: recipe,
+                    bookmarkTap: () => _viewModel.bookmarkRecipe(recipe.id),
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return const SizedBox(height: 20);
