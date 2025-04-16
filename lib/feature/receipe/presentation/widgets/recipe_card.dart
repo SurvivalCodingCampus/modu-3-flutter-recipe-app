@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
-import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
+import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 
 class RecipeCard extends StatelessWidget {
   final int recipeId;

@@ -3,7 +3,7 @@ import 'package:recipe_app/core/modules/state/state_handling.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
 import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository_impl.dart';
-import 'package:recipe_app/feature/receipe/domain/data_source/search/mock/mock_search_recipe_data_source_impl.dart';
+import 'package:recipe_app/feature/receipe/data/data_source/search/mock/mock_search_recipe_data_source_impl.dart';
 import 'package:recipe_app/core/presentation/pages/base_screen.dart';
 import 'package:recipe_app/feature/receipe/presentation/filter_modal/filter_search_screen.dart';
 import 'package:recipe_app/feature/receipe/presentation/filter_modal/filter_search_view_model.dart';
@@ -11,6 +11,10 @@ import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_vi
 import 'package:recipe_app/core/presentation/widgets/textfield/app_textfield.dart';
 import 'package:recipe_app/feature/receipe/presentation/widgets/filter_search_button.dart';
 import 'package:recipe_app/feature/receipe/presentation/widgets/recipe_card.dart';
+
+final _viewModel = SearchViewModel(
+  SearchRecipeRepositoryImpl(MockSearchRecipeDataSourceImpl()),
+);
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -30,10 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = SearchViewModel(
-      SearchRecipeRepositoryImpl(MockSearchRecipeDataSourceImpl()),
-    );
-    final filterSearchViewModel = FilterSearchViewModel(viewModel);
+    final filterSearchViewModel = FilterSearchViewModel(_viewModel);
     return BaseScreen(
       appBar: AppBar(
         leading: const Icon(Icons.arrow_back_ios),
@@ -41,10 +42,10 @@ class _SearchScreenState extends State<SearchScreen> {
         title: const Text('Search recipes'),
       ),
       child: ListenableBuilder(
-        listenable: viewModel..fetchSearchData(),
+        listenable: _viewModel..fetchSearchData(),
         builder: (context, child) {
-          final state = viewModel.state;
-          final isChangeUI = viewModel.isChangeUI;
+          final state = _viewModel.state;
+          final isChangeUI = _viewModel.isChangeUI;
           final viewState = state.viewState;
           final recipes = state.data;
 
@@ -65,7 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             color: AppColor.grey4,
                           ),
                           onChanged: (val) {
-                            viewModel.searchData(val);
+                            _viewModel.searchData(val);
                           },
                           borderColor: AppColor.grey4,
                           textColor: AppColor.grey4,

@@ -1,5 +1,5 @@
-import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
-import 'package:recipe_app/feature/receipe/domain/dto/recipe_dto.dart';
+import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
+import 'package:recipe_app/feature/receipe/data/dto/recipe_dto.dart';
 import 'ingredient_mapper.dart'; // IngredientDto가 있다면 여기서 toIngredient() 구현
 
 extension RecipeMapper on RecipeDto {

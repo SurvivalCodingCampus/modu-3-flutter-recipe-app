@@ -1,6 +1,6 @@
 import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/core/modules/state/base_state.dart';
-import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
+import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 
 class SearchState extends ListBaseState<Recipe> {
   final bool isFiltered;

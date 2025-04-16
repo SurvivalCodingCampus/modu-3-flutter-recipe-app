@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:recipe_app/feature/receipe/data/model/ingredient/ingredient_amount.dart';
+import 'package:recipe_app/feature/receipe/domain/model/ingredient/ingredient_amount.dart';
 
 class Recipe {
   final int id;

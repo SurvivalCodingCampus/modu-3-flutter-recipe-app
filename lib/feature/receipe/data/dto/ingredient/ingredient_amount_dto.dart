@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recipe_app/feature/receipe/domain/dto/ingredient/ingredient_dto.dart';
+import 'package:recipe_app/feature/receipe/data/dto/ingredient/ingredient_dto.dart';
 
 part 'ingredient_amount_dto.freezed.dart';
 part 'ingredient_amount_dto.g.dart';

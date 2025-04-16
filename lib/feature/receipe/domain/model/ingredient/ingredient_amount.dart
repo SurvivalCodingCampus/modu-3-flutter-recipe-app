@@ -1,4 +1,4 @@
-import 'package:recipe_app/feature/receipe/data/model/ingredient/ingredient.dart';
+import 'package:recipe_app/feature/receipe/domain/model/ingredient/ingredient.dart';
 
 class IngredientAmount {
   final Ingredient ingredient;

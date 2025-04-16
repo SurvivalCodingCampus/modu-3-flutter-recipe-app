@@ -1,12 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/core/modules/exception/custom_exception.dart';
-import 'package:recipe_app/feature/receipe/data/model/recipe.dart';
-import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository.dart';
 import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository_impl.dart';
-import 'package:recipe_app/feature/receipe/domain/data_source/home/mock/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/feature/receipe/domain/data_source/home/recipe_data_source.dart';
-import 'package:recipe_app/feature/receipe/domain/dto/recipe_dto.dart';
+import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
+import 'package:recipe_app/feature/receipe/domain/repository/home/recipe_repository.dart';
+import 'package:recipe_app/feature/receipe/data/data_source/home/mock/mock_recipe_data_source_impl.dart';
+import 'package:recipe_app/feature/receipe/data/data_source/home/recipe_data_source.dart';
+import 'package:recipe_app/feature/receipe/data/dto/recipe_dto.dart';
+import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_view_model.dart';
 
 void main() {
@@ -26,8 +27,9 @@ void main() {
     });
 
     test('recipe view model test', () async {
-      final SavedRecipesViewModel viewModel = SavedRecipesViewModel(repository)
-        ..fetchRecipes();
+      final SavedRecipesViewModel viewModel = SavedRecipesViewModel(
+        GetSavedRecipesUseCase(repository),
+      )..fetchRecipes();
       expect(viewModel.state.data.isNotEmpty, equals(true));
     });
   });
