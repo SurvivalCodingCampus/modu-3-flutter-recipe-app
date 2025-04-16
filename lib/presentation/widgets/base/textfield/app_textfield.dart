@@ -87,12 +87,14 @@ class AppTextField extends StatelessWidget {
             contentPadding ??
             const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
         hintText: hintText,
-        hintStyle: AppTextStyle.smallRegular.copyWith(color: textColor),
+        hintStyle: AppTextStyle.smallRegular.copyWith(
+          color: textColor ?? AppColor.grey4,
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide:
               borderColor != null
                   ? BorderSide(color: borderColor!)
-                  : const BorderSide(),
+                  : const BorderSide(color: AppColor.grey4),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         focusedBorder: OutlineInputBorder(

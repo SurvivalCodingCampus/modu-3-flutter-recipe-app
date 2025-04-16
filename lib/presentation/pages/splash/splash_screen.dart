@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/constants/image/app_image.dart';
 import 'package:recipe_app/core/enum/buttom_enum.dart';
+import 'package:recipe_app/core/router/routes.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
 import 'package:recipe_app/presentation/pages/base/base_screen.dart';
-import 'package:recipe_app/presentation/pages/recipe/home/home_screen.dart';
 import 'package:recipe_app/presentation/widgets/base/button/app_button.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -47,10 +48,7 @@ class SplashScreen extends StatelessWidget {
               AppButton(
                 text: 'Start Cooking',
                 onClick: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
+                  context.replace(AppRoutes.signIn);
                 },
                 type: ButtonType.medium,
               ),

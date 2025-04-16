@@ -5,6 +5,7 @@ import 'package:recipe_app/core/style/app_textstyle.dart';
 import 'package:recipe_app/feature/receipe/data/repository/search/search_recipe_repository_impl.dart';
 import 'package:recipe_app/feature/receipe/domain/data_source/search/mock/mock_search_recipe_data_source_impl.dart';
 import 'package:recipe_app/presentation/pages/base/base_screen.dart';
+import 'package:recipe_app/presentation/pages/recipe/search/screen/filter_search_screen.dart';
 import 'package:recipe_app/presentation/pages/recipe/search/view_model/filter_search_view_model.dart';
 import 'package:recipe_app/presentation/pages/recipe/search/view_model/search_view_model.dart';
 import 'package:recipe_app/presentation/widgets/base/textfield/app_textfield.dart';
@@ -74,7 +75,18 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      FilterSearchButton(filterSearchViewModel),
+                      FilterSearchButton(() {
+                        filterSearchViewModel.resetData();
+                        showModalBottomSheet(
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          builder: (context) {
+                            return FilterSearch(filterSearchViewModel);
+                          },
+                        );
+                      }),
                     ],
                   ),
                   Padding(
