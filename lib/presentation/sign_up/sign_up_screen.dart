@@ -15,162 +15,200 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String name = '';
   String email = '';
   String password = '';
+  String confirm = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 50),
-              SizedBox(
-                width: 84,
-                height: 45,
-                child: Text(
-                  'Hello',
-                  style: TextStyles.headerTextBold.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 155,
-                height: 30,
-                child: Text(
-                  'Welcome Back!',
-                  style: TextStyles.largeTextRegular.copyWith(
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-              SizedBox(height: 57),
-              InputFieldWidget(
-                label: 'Email',
-                placeHolder: 'Enter Email',
-                value: email,
-                onValueChange: (value) {
-                  setState(() {
-                    email = value;
-                  });
-                },
-              ),
-              // SizedBox(height: 30),
-              InputFieldWidget(
-                label: 'Enter Password',
-                placeHolder: 'Enter Password',
-                value: password,
-                onValueChange: (value) {
-                  setState(() {
-                    password = value;
-                  });
-                },
-              ),
-              // SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10),
+                SizedBox(
+                  width: 191,
+                  height: 30,
                   child: Text(
-                    'Forget Password?',
-                    style: TextStyles.smallerTextRegular.copyWith(
-                      color: ColorStyles.secondary100,
+                    'Create an account',
+                    style: TextStyles.largeTextBold.copyWith(
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 25),
-              BigButtonsWidget(
-                onClick: () {
-                  context.go('${Routes.signUp}/${Routes.home}');
-                },
-                buttons: Buttons(name: 'Sign In'),
-              ),
-              SizedBox(height: 20),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                height: 17,
-                child: SizedBox(
+                SizedBox(
                   width: 195,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 50,
-                        height: 1,
-                        color: ColorStyles.gray4,
-                      ),
-                      Text(
-                        'Or Sign in With',
-                        style: TextStyles.smallerTextRegular.copyWith(
+                  height: 34,
+                  child: Text(
+                    'Let’s help you set up your account, it won’t take long.!',
+                    style: TextStyles.smallerTextRegular.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                InputFieldWidget(
+                  label: 'Name',
+                  placeHolder: 'Enter Name',
+                  value: name,
+                  onValueChange: (value) {
+                    setState(() {
+                      name = value;
+                    });
+                  },
+                ),
+                InputFieldWidget(
+                  label: 'Email',
+                  placeHolder: 'Enter Email',
+                  value: email,
+                  onValueChange: (value) {
+                    setState(() {
+                      email = value;
+                    });
+                  },
+                ),
+                InputFieldWidget(
+                  label: 'Password',
+                  placeHolder: 'Enter Password',
+                  value: password,
+                  onValueChange: (value) {
+                    setState(() {
+                      password = value;
+                    });
+                  },
+                ),
+                InputFieldWidget(
+                  label: 'Confirm Password',
+                  placeHolder: 'Retype Password',
+                  value: confirm,
+                  onValueChange: (value) {
+                    setState(() {
+                      confirm = value;
+                    });
+                  },
+                ),
+                // SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 17,
+                          height: 17,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: ColorStyles.secondary100,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        Text(
+                          ' Accept terms & Condition',
+                          style: TextStyles.smallerTextRegular.copyWith(
+                            color: ColorStyles.secondary100,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 25),
+                BigButtonsWidget(
+                  onClick: () {
+                    context.go(Routes.home);
+                  },
+                  buttons: Buttons(name: 'Sign Up'),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  height: 17,
+                  child: SizedBox(
+                    width: 195,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 1,
                           color: ColorStyles.gray4,
                         ),
-                      ),
-                      Container(
-                        width: 50,
-                        height: 1,
-                        color: ColorStyles.gray4,
-                      ),
-                    ],
+                        Text(
+                          'Or Sign in With',
+                          style: TextStyles.smallerTextRegular.copyWith(
+                            color: ColorStyles.gray4,
+                          ),
+                        ),
+                        Container(
+                          width: 50,
+                          height: 1,
+                          color: ColorStyles.gray4,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/icons/google.png'),
-                        fit: BoxFit.cover,
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/icons/google.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 25),
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/icons/facebook.png'),
-                        fit: BoxFit.cover,
+                    SizedBox(width: 25),
+                    Container(
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/icons/facebook.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 55),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Don’t have an account?',
-                    style: TextStyles.smallerTextBold,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      context.go(Routes.signIn);
-                    },
-                    child: Text(
-                      ' Sign up',
-                      style: TextStyles.smallerTextBold.copyWith(
-                        color: ColorStyles.secondary100,
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already a member?',
+                      style: TextStyles.smallerTextBold,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        context.go(Routes.signIn);
+                      },
+                      child: Text(
+                        ' Sign In',
+                        style: TextStyles.smallerTextBold.copyWith(
+                          color: ColorStyles.secondary100,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

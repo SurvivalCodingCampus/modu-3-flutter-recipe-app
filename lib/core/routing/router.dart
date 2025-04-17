@@ -12,28 +12,22 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/home',
+  initialLocation: '/',
   routes: [
+    GoRoute(path: '/', builder: (context, state) => SplashScreen()),
     GoRoute(
-      path: '/',
-      builder: (context, state) => SplashScreen(),
-      routes: [
-        GoRoute(
-          path: Routes.signUp,
-          builder: (context, state) {
-            return SignUpScreen();
-          },
-          routes: [
-            GoRoute(
-              path: Routes.home,
-              builder: (context, state) {
-                return HomeScreen();
-              },
-            ),
-          ],
-        ),
-      ],
+      path: Routes.signIn,
+      builder: (context, state) {
+        return SignInScreen();
+      },
     ),
+    GoRoute(
+      path: Routes.signUp,
+      builder: (context, state) {
+        return SignUpScreen();
+      },
+    ),
+
     StatefulShellRoute.indexedStack(
       parentNavigatorKey: _rootNavigatorKey,
       builder: (context, state, navigationShell) {
@@ -43,7 +37,7 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: '/home',
+              path: Routes.home,
               builder: (context, state) {
                 return HomeScreen();
               },

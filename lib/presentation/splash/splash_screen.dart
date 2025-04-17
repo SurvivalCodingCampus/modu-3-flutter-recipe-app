@@ -72,7 +72,7 @@ class SplashScreen extends StatelessWidget {
                 SizedBox(height: 64),
                 MediumButtonsWidget(
                   onClick: () {
-                    context.go(Routes.signUp);
+                    context.go(Routes.signIn);
                   },
                   buttons: Buttons(name: 'Start cooking'),
                 ),

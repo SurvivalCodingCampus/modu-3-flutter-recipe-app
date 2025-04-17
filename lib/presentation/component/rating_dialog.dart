@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/model/rating.dart';
+import '../../domain/model/rating.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
 
