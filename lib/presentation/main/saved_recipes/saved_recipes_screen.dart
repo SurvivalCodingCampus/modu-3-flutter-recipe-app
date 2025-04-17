@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/core/ui/color_styles.dart';
 import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
@@ -22,7 +24,7 @@ class SavedRecipesScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ListenableBuilder(
-            listenable: viewModel..fetchRecipes(),
+            listenable: viewModel..fetchSavedRecipes(),
             builder: (context, snapshot) {
               if (viewModel.state.isLoading) {
                 return Center(child: CircularProgressIndicator());
@@ -40,8 +42,10 @@ class SavedRecipesScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(10.0),
                                 child: RecipeCard(
                                   recipe: recipe,
-                                  isBookmarked: viewModel.user.bookmarks
-                                      .contains(recipe.id),
+                                  isBookmarked: true,
+                                  onClick: (int id) {
+                                    context.push(Routes.ingredient.replaceAll(':recipeId', id.toString()));
+                                  },
                                   onBookmark: (int id) {
                                     viewModel.toggleBookmark(id);
                                   },

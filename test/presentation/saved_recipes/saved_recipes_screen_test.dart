@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/domain/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
