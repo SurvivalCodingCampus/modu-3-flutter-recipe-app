@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/widgets/base/button/app_button.dart';
+import 'package:recipe_app/core/presentation/widgets/button/app_button.dart';
 
 void main() {
   testWidgets('button widget test', (tester) async {

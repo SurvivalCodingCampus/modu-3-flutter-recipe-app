@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/style/app_color.dart';
-import 'package:recipe_app/presentation/widgets/base/dialog/app_dialog.dart';
+import 'package:recipe_app/core/presentation/widgets/dialog/app_dialog.dart';
 
 class AppShowDialog {
   static void ratingDialog(BuildContext context) {
