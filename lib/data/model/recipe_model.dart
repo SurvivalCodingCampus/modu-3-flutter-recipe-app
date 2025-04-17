@@ -11,6 +11,7 @@ class Recipe {
   final double rating;
   final List<RecipeIngredient> ingredients;
   final List<Procedure> procedures;
+  final bool isBookMarked;
 
   const Recipe({
     required this.category,
@@ -22,6 +23,7 @@ class Recipe {
     required this.rating,
     required this.ingredients,
     required this.procedures,
+    this.isBookMarked = true,
   });
 
   @override
@@ -61,6 +63,7 @@ class Recipe {
     double? rating,
     List<RecipeIngredient>? ingredients,
     List<Procedure>? procedures,
+    bool? isBookMarked,
   }) {
     return Recipe(
       category: category ?? this.category,
@@ -72,6 +75,7 @@ class Recipe {
       rating: rating ?? this.rating,
       ingredients: ingredients ?? this.ingredients,
       procedures: procedures ?? this.procedures,
+      isBookMarked: isBookMarked ?? this.isBookMarked,
     );
   }
 

@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/repository/recipe_repository/recipe_repository.dart';
+import 'package:recipe_app/presentation/saved_recipe/saved_recipe_state.dart';
 
 import '../../data/model/recipe_model.dart';
+import '../../domain/use_case/get_saved_recipes_use_case.dart';
+import '../../domain/use_case/toggle_book_mark_use_case.dart';
 
 class SavedRecipeViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
+  final GetSavedRecipesUseCase _getSavedRecipesUseCase;
+  final ToggleBookMarkUseCase _toggledBookMarkUseCase;
 
-  SavedRecipeViewModel(this._recipeRepository);
+  SavedRecipeState _state = SavedRecipeState();
 
-  List<Recipe> _savedRecipes = [];
+  SavedRecipeState get state => _state;
 
-  List<Recipe> get savedRecipes => List.unmodifiable(_savedRecipes);
-  bool _isLoading = false;
-
-  bool get isLoading => _isLoading;
-  String? _errorMessage;
-
-  String? get errorMessage => _errorMessage;
+  SavedRecipeViewModel(
+    this._getSavedRecipesUseCase,
+    this._toggledBookMarkUseCase,
+  );
 
   Future<void> fetchSavedRecipes() async {
-    try {
-      _isLoading = true;
-      notifyListeners();
-      _savedRecipes = await _recipeRepository.getRecipes();
-      _isLoading = false;
-      notifyListeners();
-    } catch (e) {
-      _isLoading = false;
-      print('Error fetching saved recipes: $e');
-      _errorMessage = e.toString();
-      notifyListeners();
-    }
+    _state = _state.copyWith(isLoading: true);
+    notifyListeners();
+
+    final recipes = await _getSavedRecipesUseCase.markRecipes();
+    _state = _state.copyWith(savedRecipes: recipes, isLoading: false);
+    notifyListeners();
+  }
+
+  Future<void> toggleBookMark(Recipe recipe) async {
+    await _toggledBookMarkUseCase.toggleBookmark(recipe);
+    await fetchSavedRecipes();
   }
 }
