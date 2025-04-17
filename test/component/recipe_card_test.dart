@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_app/domain/model/model.dart';
-import 'package:recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 
 void main() {
@@ -20,6 +19,8 @@ void main() {
       chef: 'By Chef John',
       totalTimeMinutes: '20',
       rating: 4.0,
+      category: 'Chinese',
+      ingredients: [],
     );
 
     // 위젯을 빌드합니다.

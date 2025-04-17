@@ -7,8 +7,9 @@ class IngredientDto {
   final num? id;
   final String? name;
   final String? image;
+  final num? amount;
 
-  const IngredientDto({this.id, this.name, this.image});
+  const IngredientDto({this.id, this.name, this.image, this.amount});
 
   factory IngredientDto.fromJson(Map<String, dynamic> json) =>
       _$IngredientDtoFromJson(json);

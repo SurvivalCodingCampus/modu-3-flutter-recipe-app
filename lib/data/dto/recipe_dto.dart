@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:recipe_app/data/dto/dto.dart';
+import 'package:recipe_app/domain/model/ingredient.dart';
 
 part 'recipe_dto.g.dart';
 
@@ -12,7 +13,7 @@ class RecipeDto {
   final String? chef;
   final String? time;
   final num? rating;
-  final List<RecipeIngredientDto>? ingredients;
+  final List<IngredientDto>? ingredients;
 
   const RecipeDto({
     this.category,

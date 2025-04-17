@@ -1,26 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/domain/model/model.dart';
-import 'package:recipe_app/domain/repository/repository.dart';
+import 'package:recipe_app/domain/use_case/use_case.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
+  final GetSavedRecipesUseCase _getSavedRecipesUseCase;
+  final ToggleBookmarkRecipeUseCase _toggleBookmarkRecipeUseCase;
 
-  SavedRecipesViewModel({required RecipeRepository recipeRepository})
-    : _recipeRepository = recipeRepository;
+  SavedRecipesState _state = const SavedRecipesState();
 
-  List<Recipe> _savedRecipes = [];
+  SavedRecipesViewModel({
+    required GetSavedRecipesUseCase getSavedRecipesUseCase,
+    required ToggleBookmarkRecipeUseCase toggleBookmarkRecipeUseCase,
+  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase,
+       _toggleBookmarkRecipeUseCase = toggleBookmarkRecipeUseCase;
 
-  List<Recipe> get savedRecipes => List.unmodifiable(_savedRecipes);
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  SavedRecipesState get state => _state;
 
   Future<void> fetchSavedRecipes() async {
-    _isLoading = true;
+    _state = state.copyWith(isLoading: true);
     notifyListeners();
 
     await Future.delayed(const Duration(seconds: 1));
-    _savedRecipes = await _recipeRepository.getRecipes();
-    _isLoading = false;
+
+    _state = state.copyWith(
+      recipes: await _getSavedRecipesUseCase.execute(),
+      isLoading: false,
+    );
+    notifyListeners();
+  }
+
+  Future<void> toggleRecipe(int id) async {
+    _state = state.copyWith(
+      recipes: await _toggleBookmarkRecipeUseCase.execute(id),
+    );
     notifyListeners();
   }
 }
