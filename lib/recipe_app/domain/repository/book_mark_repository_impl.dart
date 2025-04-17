@@ -17,8 +17,8 @@ class BookMarkRepositoryImpl implements BookMarkRepository {
 
   @override
   Future<void> initializeBookmarks() async {
-    final allRecipes = await _recipeDataSource.getRecipeData(); // await 필수!
-    bookMarks = allRecipes.where((recipe) => recipe.bookMarked).toList();
+    final List<Recipe> recipes = await _recipeDataSource.getRecipeData();
+    bookMarks = recipes.where((recipe) => recipe.bookMarked).toList();
     _initialized = true;
   }
 
@@ -37,6 +37,9 @@ class BookMarkRepositoryImpl implements BookMarkRepository {
 
   @override
   Future<List<Recipe>> getBookMarkedRecipes() async {
+    if (!_initialized) {
+      await initializeBookmarks();
+    }
     return bookMarks;
   }
 }

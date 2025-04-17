@@ -41,7 +41,7 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
         child: ListenableBuilder(
           listenable: widget.savedRecipesViewModel,
           builder: (context, child) {
-            if (widget.savedRecipesViewModel.isLoading) {
+            if (widget.savedRecipesViewModel.state.isRecipesLoading) {
               return const Center(child: CircularProgressIndicator());
             }
             if (widget.savedRecipesViewModel.recipes.isEmpty) {
@@ -50,7 +50,7 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
             return ListView.separated(
               itemBuilder: (context, index) {
                 final Recipe recipe =
-                widget.savedRecipesViewModel.recipes[index];
+                    widget.savedRecipesViewModel.recipes[index];
                 return RecipeCard(
                   recipe: recipe,
                   showTimerAndBookmark: true,

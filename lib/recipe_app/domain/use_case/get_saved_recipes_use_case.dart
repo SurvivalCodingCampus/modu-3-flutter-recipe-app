@@ -8,7 +8,6 @@ class GetSavedRecipesUseCase {
     : _bookMarkRepository = bookMarkRepository;
 
   Future<List<Recipe>> execute() async {
-    await _bookMarkRepository.initializeBookmarks();
     return await _bookMarkRepository.getBookMarkedRecipes();
   }
 }

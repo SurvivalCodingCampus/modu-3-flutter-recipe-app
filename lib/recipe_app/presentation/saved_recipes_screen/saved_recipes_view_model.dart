@@ -1,19 +1,17 @@
 import 'package:flutter/foundation.dart';
-import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/add_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/remove_bookmark_use_case.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_state.dart';
 
 import '../../data/model/recipe.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
   final GetSavedRecipesUseCase _getSavedRecipesUseCase;
   final RemoveBookmarkUseCase _removeBookmarkUseCase;
   final AddBookmarkUseCase _addBookmarkUseCase;
 
   SavedRecipesViewModel(
-    this._recipeRepository,
     this._getSavedRecipesUseCase,
     this._removeBookmarkUseCase,
     this._addBookmarkUseCase,
@@ -25,26 +23,16 @@ class SavedRecipesViewModel with ChangeNotifier {
   //List내용 임의로 변형시키지 못함
   //List<Recipe> get recipes => List.unmodifiable(_recipes);
 
-  bool _isLoading = false;
+  SavedRecipesState _state = const SavedRecipesState();
 
-  bool get isLoading => _isLoading;
+  SavedRecipesState get state => _state;
 
-  Future<void> loadRecipesData() async {
-    _isLoading = true;
-    notifyListeners();
-
-    _recipes = await _recipeRepository.fetchRecipes();
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  //savedrecipes 출력
   Future<List<Recipe>> getSavedRecipesUseCase() async {
-    _isLoading = true;
+    _state = _state.copyWith(isRecipesLoading: true);
     notifyListeners();
 
     _recipes = await _getSavedRecipesUseCase.execute();
-    _isLoading = false;
+    _state = _state.copyWith(isRecipesLoading: false);
     notifyListeners();
     return _recipes.toList();
   }

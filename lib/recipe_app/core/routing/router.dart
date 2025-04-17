@@ -38,7 +38,6 @@ GetSavedRecipesUseCase getSavedRecipesUseCase = GetSavedRecipesUseCase(
   bookMarkRepository: bookMarkRepository,
 );
 SavedRecipesViewModel _savedRecipesViewModel = SavedRecipesViewModel(
-  repository,
   getSavedRecipesUseCase,
   removeBookmarkUseCase,
   addBookmarkUseCase,
