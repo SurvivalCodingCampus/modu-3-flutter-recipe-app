@@ -17,9 +17,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
-      title: 'Flutter Demo',
+      title: 'Premium Recipe',
+      debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyanAccent),
+        primarySwatch: Colors.teal,
+        scaffoldBackgroundColor: Colors.white, // 기본이 white 이긴함
+        // 앱 전체에서 divider 색상을 투명하게 설정 for 네비게이션바
+        //dividerColor: Colors.transparent,
       ),
     );
   }
