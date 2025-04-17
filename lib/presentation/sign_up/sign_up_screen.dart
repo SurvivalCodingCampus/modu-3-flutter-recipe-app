@@ -13,116 +13,163 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
         margin: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.only(top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Create an account,', style: TextFontStyle.normalBold()),
+            const SizedBox(height: 5),
             SizedBox(
               width: 200,
               child: Text(
                 'Let`s help you set up your account, it won`t take long.',
-                style: TextFontStyle.extraSmallRegular(),
+                style: TextFontStyle.extraSmallRegular().copyWith(height: 1.5),
               ),
             ),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: InputField(
-                label: 'Name',
-                placeholder: 'Enter Name',
-                onValueChange: (value) {},
-              ),
+            const SizedBox(height: 10),
+            InputField(
+              label: 'Name',
+              placeholder: 'Enter Name',
+              onValueChange: (value) {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: InputField(
-                label: 'Email',
-                placeholder: 'Enter Email',
-                onValueChange: (value) {},
-              ),
+            const SizedBox(height: 5),
+            InputField(
+              label: 'Email',
+              placeholder: 'Enter Email',
+              onValueChange: (value) {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: InputField(
-                label: 'Enter Password',
-                placeholder: 'Enter Password',
-                onValueChange: (value) {},
-              ),
+            const SizedBox(height: 5),
+            InputField(
+              label: 'Enter Password',
+              placeholder: 'Enter Password',
+              onValueChange: (value) {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: InputField(
-                label: 'Confirm Password',
-                placeholder: 'Retype Password',
-                onValueChange: (value) {},
-              ),
+            const SizedBox(height: 5),
+            InputField(
+              label: 'Confirm Password',
+              placeholder: 'Retype Password',
+              onValueChange: (value) {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.leading,
-                onChanged: (value) {},
-                value: false,
-                title: Text(
-                  'Accept terms & Condition',
-                  style: TextFontStyle.smallRegular(
-                    color: ColorStyle.secondary100,
+            const SizedBox(height: 10),
+            Row(
+              spacing: 5,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 17,
+                    height: 17,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: ColorStyle.secondary100,
+                        width: 1,
+                      ),
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.check,
+                        color: ColorStyle.secondary100,
+                        size: 13,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                const Expanded(
+                  child: Text(
+                    'Accept terms & Condition',
+                    style: TextStyle(
+                      color: ColorStyle.secondary100,
+                      fontSize: 11,
+                    ),
+                    softWrap: true,
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: BigButton(text: 'Sign Up', onTap: () {}),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: Center(
-                child: Text(
+            const SizedBox(height: 10),
+            BigButton(text: 'Sign Up', onTap: () {}),
+            const SizedBox(height: 10),
+            Row(
+              spacing: 10,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  width: 50,
+                  child: Divider(thickness: 1, color: ColorStyle.gray4),
+                ),
+                Text(
                   'Or sign in With',
-                  style: TextFontStyle.smallRegular(color: ColorStyle.gray4),
+                  style: TextFontStyle.extraSmallRegular(
+                    color: ColorStyle.gray4,
+                  ),
                 ),
-              ),
+                const SizedBox(
+                  width: 50,
+                  child: Divider(thickness: 1, color: ColorStyle.gray4),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: Row(
-                spacing: 25,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: Image.network(
-                      'http://pngimg.com/uploads/google/google_PNG19635.png',
-                      fit: BoxFit.cover,
-                    ),
+            const SizedBox(height: 10),
+            Row(
+              spacing: 25,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorStyle.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: ColorStyle.shadow,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: Image.network(
-                      'https://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19754.png',
-                      fit: BoxFit.cover,
-                    ),
+                  child: Image.asset('assets/images/google_icon.png'),
+                ),
+                Container(
+                  width: 40,
+                  height: 40,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorStyle.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: ColorStyle.shadow,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                  child: Image.asset('assets/images/facebook_icon.png'),
+                ),
+              ],
             ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Already a member?', style: TextFontStyle.smallBold()),
+                Text(
+                  'Already a member?',
+                  style: TextFontStyle.extraSmallRegular(),
+                ),
                 TextButton(
                   onPressed: () {
                     context.go(Routes.signIn);
                   },
                   child: Text(
                     'Sign in',
-                    style: TextFontStyle.smallBold(
+                    style: TextFontStyle.extraSmallBold(
                       color: ColorStyle.secondary100,
                     ),
                   ),

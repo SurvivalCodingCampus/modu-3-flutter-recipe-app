@@ -1,11 +1,14 @@
-import 'package:recipe_app/dto/ingredients_dto.dart';
-import 'package:recipe_app/dto/pictures_dto.dart';
-import 'package:recipe_app/dto/recipe_dto.dart';
-import 'package:recipe_app/mapper/ingredients_mapper.dart';
-import 'package:recipe_app/mapper/picture_mapper.dart';
-import 'package:recipe_app/data/model/ingredients.dart';
-import 'package:recipe_app/data/model/pictures.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/data/dto/ingredients_dto.dart';
+import 'package:recipe_app/data/dto/pictures_dto.dart';
+import 'package:recipe_app/data/dto/recipe_dto.dart';
+
+import 'package:recipe_app/data/mapper/ingredients_mapper.dart';
+import 'package:recipe_app/data/mapper/picture_mapper.dart';
+
+import 'package:recipe_app/domain/model/ingredients.dart';
+import 'package:recipe_app/domain/model/pictures.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
+
 import 'package:recipe_app/presentation/component/button/enum/category_type.dart';
 
 extension RecipeMapper on RecipeDto {
@@ -19,6 +22,7 @@ extension RecipeMapper on RecipeDto {
       chef: chef ?? '',
       ingredients: fromIngredients(ingredients!),
       category: categorySwitch(category ?? ''),
+      step: [],
     );
   }
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:recipe_app/data/data_source/recipe/recipe_data_source.dart';
-import 'package:recipe_app/dto/recipe_dto.dart';
+import 'package:recipe_app/data/dto/recipe_dto.dart';
 
 class RecipeDataSourceImpl implements RecipeDataSource {
   @override

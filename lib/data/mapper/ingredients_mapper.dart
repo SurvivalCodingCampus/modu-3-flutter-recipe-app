@@ -1,7 +1,7 @@
-import 'package:recipe_app/dto/ingredients_dto.dart';
+import 'package:recipe_app/data/dto/ingredients_dto.dart';
 
-import 'package:recipe_app/data/model/ingredients.dart';
-import 'package:recipe_app/mapper/ingredient_mapper.dart';
+import 'package:recipe_app/domain/model/ingredients.dart';
+import 'package:recipe_app/data/mapper/ingredient_mapper.dart';
 
 extension IngredientsMapper on IngredientsDto {
   Ingredients toIngredients() {

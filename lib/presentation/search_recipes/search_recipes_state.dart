@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/presentation/component/button/enum/category_type.dart';
 import 'package:recipe_app/presentation/component/button/enum/star.dart';
 import 'package:recipe_app/presentation/component/button/enum/time.dart';

@@ -32,4 +32,7 @@ abstract class ColorStyle {
 
   // Success Color
   static const success = Color(0xFF31B057);
+
+  // Shadow Color
+  static const shadow = Color(0xFFEBEAEA);
 }

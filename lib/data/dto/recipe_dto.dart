@@ -1,5 +1,6 @@
-import 'package:recipe_app/dto/ingredients_dto.dart';
-import 'package:recipe_app/dto/pictures_dto.dart';
+import 'package:recipe_app/data/dto/ingredients_dto.dart';
+import 'package:recipe_app/data/dto/pictures_dto.dart';
+import 'package:recipe_app/data/dto/step_dto.dart';
 
 class RecipeDto {
   final String? category;
@@ -10,6 +11,7 @@ class RecipeDto {
   final int? time;
   final num? rating;
   final List<IngredientsDto>? ingredients;
+  final List<StepDto>? steps;
 
   RecipeDto({
     this.category,
@@ -20,6 +22,7 @@ class RecipeDto {
     this.time,
     this.rating,
     this.ingredients,
+    this.steps,
   });
 
   factory RecipeDto.fromJson(Map<String, dynamic> json) {
@@ -37,6 +40,10 @@ class RecipeDto {
       ingredients:
           (json['ingredients'] as List<dynamic>?)
               ?.map((e) => IngredientsDto.fromJson(e))
+              .toList(),
+      steps:
+          (json['steps'] as List<dynamic>?)
+              ?.map((e) => StepDto.fromJson(e))
               .toList(),
     );
   }

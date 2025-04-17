@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  const RecipeCard({super.key, required this.recipe});
+  final bool isBookmarked;
+  final VoidCallback onBookmarkToggle;
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.isBookmarked,
+    required this.onBookmarkToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: Stack(
         children: [
           imageUi(),
@@ -24,19 +31,30 @@ class RecipeCard extends StatelessWidget {
             child: Row(
               spacing: 5,
               children: [
-                const Icon(Icons.timer_outlined, color: ColorStyle.white),
+                const Icon(
+                  Icons.timer_outlined,
+                  color: ColorStyle.white,
+                  size: 20,
+                ),
                 Text(
                   '${recipe.time} min',
-                  style: TextFontStyle.smallRegular(color: ColorStyle.gray4),
+                  style: TextFontStyle.extraSmallRegular(
+                    color: ColorStyle.gray4,
+                  ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: onBookmarkToggle,
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(30, 30),
                   ),
-                  child: const Icon(Icons.save, color: ColorStyle.primary80),
+                  child: Icon(
+                    isBookmarked
+                        ? Icons.bookmark
+                        : Icons.bookmark_border_rounded,
+                    color: ColorStyle.primary80,
+                  ),
                 ),
               ],
             ),
@@ -48,12 +66,10 @@ class RecipeCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 150,
+                  width: 170,
                   child: Text(
                     recipe.title,
-                    style: TextFontStyle.smallBold(
-                      color: ColorStyle.white,
-                    ).copyWith(fontSize: 11),
+                    style: TextFontStyle.smallBold(color: ColorStyle.white),
                   ),
                 ),
                 Text(
@@ -72,7 +88,7 @@ class RecipeCard extends StatelessWidget {
 
   Container gradationUi() {
     return Container(
-      height: 200,
+      height: 160,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -85,7 +101,7 @@ class RecipeCard extends StatelessWidget {
 
   SizedBox imageUi() {
     return SizedBox(
-      height: 200,
+      height: 160,
       width: double.infinity,
       child: Image.network(recipe.pictures.imageUrl, fit: BoxFit.cover),
     );
