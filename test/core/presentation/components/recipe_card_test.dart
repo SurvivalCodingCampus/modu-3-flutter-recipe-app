@@ -7,12 +7,14 @@ import 'package:recipe_app/domain/model/recipe.dart';
 void main() {
   group('레시피 카드 테스트 : ', () {
     const Recipe recipe = Recipe(
+      id: 1,
       foodName: 'Traditional spare ribs baked',
       chef: 'Chef John',
       time: '20 min',
       rate: 4.0,
       image: 'assets/images/food.png',
       ingredients: [],
+      procedures: [],
       category: Category.unknown,
     );
 
@@ -20,7 +22,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: RecipeCard(recipe: recipe, onBookmarkClick: () {}),
+            body: RecipeCard(recipe: recipe, onBookmarkClick: (value) {}),
           ),
         ),
       );

@@ -28,6 +28,7 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
   bool isRatingSelected = false;
   bool isFilterSelected = false;
   final Recipe recipe = const Recipe(
+    id: 1,
     foodName: 'Traditional spare ribs baked',
     chef: 'Chef John',
     time: '20 min',
@@ -74,7 +75,11 @@ class _ComponentTestScreenState extends State<ComponentTestScreen> {
                   imageName: 'assets/images/tomato.png',
                   amount: '500g',
                 ),
-                RecipeCard(recipe: recipe, onBookmarkClick: () {}),
+                RecipeCard(
+                  recipe: recipe,
+                  onBookmarkClick: (value) {},
+                  onCardClick: (value) {},
+                ),
                 GestureDetector(
                   onTap: () {
                     setState(() {

@@ -29,19 +29,22 @@ class MultiTabs extends StatelessWidget {
                 },
                 child: AnimatedContainer(
                   height: 33,
-                  duration: Duration(milliseconds: 700),
+                  duration: const Duration(milliseconds: 700),
                   decoration: BoxDecoration(
                     color:
                         labelIndex == selectedIndex
                             ? ColorStyle.primary100
-                            : ColorStyle.gray3,
+                            : ColorStyle.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
                     child: Text(
                       label,
                       style: AppTextStyles.smallBold.copyWith(
-                        color: ColorStyle.white,
+                        color:
+                            labelIndex != selectedIndex
+                                ? ColorStyle.primary100
+                                : ColorStyle.white,
                       ),
                     ),
                   ),

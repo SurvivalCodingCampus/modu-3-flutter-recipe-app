@@ -5,12 +5,14 @@ import 'package:recipe_app/ui/text_styles.dart';
 
 class SavedRecipeScreen extends StatelessWidget {
   final List<Recipe> recipes;
-  final VoidCallback onBookmarkClick;
+  final void Function(int value) onBookmarkClick;
+  final void Function(int value) onCardClick;
 
   const SavedRecipeScreen({
     super.key,
     required this.recipes,
     required this.onBookmarkClick,
+    required this.onCardClick,
   });
 
   @override
@@ -25,6 +27,7 @@ class SavedRecipeScreen extends StatelessWidget {
         child: ListView.builder(
           itemBuilder: (BuildContext context, int index) {
             return RecipeCard(
+              onCardClick: onCardClick,
               onBookmarkClick: onBookmarkClick,
               recipe: recipes[index],
             );

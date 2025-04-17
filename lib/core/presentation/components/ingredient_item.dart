@@ -27,12 +27,13 @@ class IngredientItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
+            width: 52,
             height: 52,
             decoration: BoxDecoration(
               color: ColorStyle.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Image.asset(imageName),
+            child: Image.network(imageName),
           ),
           const SizedBox(width: 16),
           Expanded(

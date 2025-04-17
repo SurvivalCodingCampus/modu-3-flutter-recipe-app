@@ -4,8 +4,13 @@ import 'package:recipe_app/presentation/saved_recipes/screen/saved_recipes_scree
 
 class SavedRecipeRoot extends StatelessWidget {
   final SavedRecipesViewModel viewModel;
+  final void Function(int value) onCardClick;
 
-  const SavedRecipeRoot({super.key, required this.viewModel});
+  const SavedRecipeRoot({
+    super.key,
+    required this.viewModel,
+    required this.onCardClick,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,10 @@ class SavedRecipeRoot extends StatelessWidget {
 
         return SavedRecipeScreen(
           recipes: viewModel.state.recipes,
-          onBookmarkClick: () {},
+          onBookmarkClick: (value) {
+            viewModel.removeBookmark(value);
+          },
+          onCardClick: onCardClick,
         );
       },
       listenable: viewModel,

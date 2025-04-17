@@ -22,4 +22,15 @@ class RecipeRepositoryImpl implements RecipeRepository {
       return const Result.error(RecipeErrorEnum.networkerror);
     }
   }
+
+  @override
+  Future<Result<Recipe, RecipeErrorEnum>> findRecipeById(int id) async {
+    try {
+      final RecipeDto dto = await _dataSource.findData(id);
+
+      return Result.success(dto.toRecipe());
+    } on RecipeErrorEnum {
+      return const Result.error(RecipeErrorEnum.networkerror);
+    }
+  }
 }

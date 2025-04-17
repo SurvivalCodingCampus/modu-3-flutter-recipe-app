@@ -8,6 +8,7 @@ part 'recipe.freezed.dart';
 @freezed
 abstract class Recipe with _$Recipe {
   const factory Recipe({
+    required int id,
     required String foodName,
     required Category category,
     required String chef,

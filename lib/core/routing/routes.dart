@@ -6,4 +6,5 @@ abstract class Routes {
   static const String home = '/home';
   static const String savedRecipes = '/saved-recipes';
   static const String searchRecipes = '/search-recipes';
+  static const String ingredientRecipes = '/ingredient';
 }

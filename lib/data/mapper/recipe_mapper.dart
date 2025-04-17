@@ -6,6 +6,7 @@ import 'package:recipe_app/domain/model/recipe.dart';
 extension RecipeMapper on RecipeDto {
   Recipe toRecipe() {
     return Recipe(
+      id: id ?? -1,
       category: category ?? Category.unknown,
       chef: chef ?? '정보 없음',
       foodName: name ?? '정보 없음',
