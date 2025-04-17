@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/model/recipe/recipe.dart';
+import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/presentation/common/component/recipe_card.dart';
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
@@ -7,14 +7,14 @@ import 'package:recipe_app/presentation/common/ui/text_styles.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_view_model.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
-  final SavedRecipesViewModel model;
+  final SavedRecipesViewModel viewModel;
 
-  const SavedRecipesScreen({super.key, required this.model});
+  const SavedRecipesScreen({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: model,
+      listenable: viewModel,
       builder: (context, snapshot) {
         return SafeArea(
           child: Padding(
@@ -31,12 +31,12 @@ class SavedRecipesScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 Expanded(
                   child:
-                      model.isLoading
+                      viewModel.state.isLoading
                           ? Center(child: CircularProgressIndicator())
                           : ListView.builder(
-                            itemCount: model.recipeList.length,
+                            itemCount: viewModel.state.recipeList.length,
                             itemBuilder: (context, index) {
-                              Recipe items = model.recipeList[index];
+                              Recipe items = viewModel.state.recipeList[index];
                               return RecipeCard(
                                 recipeName: items.name,
                                 recipeAuthor: items.author,

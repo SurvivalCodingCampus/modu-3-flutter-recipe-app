@@ -1,8 +1,8 @@
-import 'package:recipe_app/data_source/recipes/recipe_data_source.dart';
-import 'package:recipe_app/dto/recipes/recipes_dto.dart';
-import 'package:recipe_app/mapper/recipes/recipes_mapper.dart';
-import 'package:recipe_app/model/recipe/recipe.dart';
-import 'package:recipe_app/repository/recipes/recipe_repository.dart';
+import 'package:recipe_app/data/data_source/recipes/recipe_data_source.dart';
+import 'package:recipe_app/data/dto/recipes/recipes_dto.dart';
+import 'package:recipe_app/data/mapper/recipes/recipes_mapper.dart';
+import 'package:recipe_app/domain/model/recipe/recipe.dart';
+import 'package:recipe_app/domain/repository/recipe/recipe_repository.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource dataSource;

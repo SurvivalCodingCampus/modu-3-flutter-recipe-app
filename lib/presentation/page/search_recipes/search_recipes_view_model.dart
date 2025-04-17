@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/page/search_recipes/search_recipes_state.dart';
-import 'package:recipe_app/repository/recipes/recipe_repository.dart';
+import 'package:recipe_app/domain/repository/recipe/recipe_repository.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
@@ -30,7 +30,9 @@ class SearchRecipesViewModel with ChangeNotifier {
     _state = _state.copyWith(
       searchKeyWord: keyWord,
       filterRecipes:
-          _state.recipes.where((items) => items.name.contains(keyWord)).toList(),
+          _state.recipes
+              .where((items) => items.name.contains(keyWord))
+              .toList(),
       isSearchLoading: false,
     );
     notifyListeners();
