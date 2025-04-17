@@ -1,4 +1,4 @@
-import 'package:recipe_app/dto/ingredient_dto.dart';
+import 'package:recipe_app/data/dto/ingredient_dto.dart';
 
 class IngredientsDto {
   final IngredientDto? ingredientDto;

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recipe_app/data/model/ingredients.dart';
-import 'package:recipe_app/data/model/pictures.dart';
+import 'package:recipe_app/domain/model/ingredients.dart';
+import 'package:recipe_app/domain/model/pictures.dart';
+import 'package:recipe_app/domain/model/step.dart';
 import 'package:recipe_app/presentation/component/button/enum/category_type.dart';
 
 part 'recipe.freezed.dart';
@@ -17,6 +18,7 @@ class Recipe with _$Recipe {
   final int time;
   final String chef;
   final List<Ingredients> ingredients;
+  final List<Step> step;
 
   Recipe({
     required this.id,
@@ -27,5 +29,6 @@ class Recipe with _$Recipe {
     required this.chef,
     required this.ingredients,
     required this.category,
+    required this.step,
   });
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:recipe_app/data/repository/recipe/recipe_repository.dart';
+import 'package:recipe_app/domain/repository/recipe/recipe_repository.dart';
 import 'package:recipe_app/presentation/component/button/enum/category_type.dart';
 import 'package:recipe_app/presentation/component/button/enum/star.dart';
 import 'package:recipe_app/presentation/component/button/enum/time.dart';

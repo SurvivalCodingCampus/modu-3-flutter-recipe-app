@@ -1,81 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/button/big_button.dart';
-import 'package:recipe_app/presentation/component/button/enum/button_type.dart';
-import 'package:recipe_app/presentation/component/button/medium_button.dart';
-import 'package:recipe_app/presentation/component/button/small_button.dart';
-import 'package:recipe_app/presentation/component/rating.dart';
+import 'package:recipe_app/presentation/component/search_input_field.dart';
+import 'package:recipe_app/ui/color_style.dart';
+import 'package:recipe_app/ui/text_font_style.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeScreen> {
-  List<String> stars = ['5', '4', '3', '2', '1'];
-  List<String> filters = ['All', 'Newest', 'Oldest', 'Popularity'];
-  List<String> categorys = [
-    'All',
-    'Cereal',
-    'Vegetables',
-    'Dinner',
-    'Chinese',
-    'Local Dish',
-    'Fruit',
-    'BreakFast',
-    'Spanish',
-    'Lunch',
-  ];
-  Set<String> seleted = {};
-  ButtonType currentType = ButtonType.standard;
-  int starIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        spacing: 20,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          BigButton(
-            text: 'Button',
-            onTap: () {
-              print('버튼');
-            },
-          ),
-          MediumButton(
-            text: 'Button',
-            onTap: () {
-              print('버튼');
-            },
-          ),
-          SmallButton(
-            text: 'Button',
-            onTap: () {
-              print('버튼');
-            },
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => Rating(
-                        title: 'Rate Recipe',
-                        actionName: 'Send',
-                        onChange: (index) {
-                          print(index);
-                        },
+      body: Container(
+        margin: const EdgeInsets.only(right: 30, left: 30, top: 40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Hello', style: TextFontStyle.largeBold()),
+                    Text(
+                      'What are you cooking today?',
+                      style: TextFontStyle.extraSmallRegular(
+                        color: ColorStyle.gray3,
                       ),
+                    ),
+                  ],
                 ),
-              );
-            },
-            child: const Icon(Icons.ac_unit_sharp),
-          ),
-        ],
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: ColorStyle.secondary40,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.person),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              spacing: 20,
+              children: [
+                SearchInputField(
+                  placeholder: 'Search recipe',
+                  onValueChange: (value) {},
+                ),
+                Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorStyle.primary100,
+                  ),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.tune_rounded),
+                    color: ColorStyle.white,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

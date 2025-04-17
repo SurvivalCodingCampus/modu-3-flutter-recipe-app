@@ -1,5 +1,5 @@
-import 'package:recipe_app/dto/pictures_dto.dart';
-import 'package:recipe_app/data/model/pictures.dart';
+import 'package:recipe_app/data/dto/pictures_dto.dart';
+import 'package:recipe_app/domain/model/pictures.dart';
 
 extension PictureMapper on PicturesDto {
   Pictures toPictures() {

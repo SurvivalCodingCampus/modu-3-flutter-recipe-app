@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recipe_app/data/model/ingredient.dart';
+import 'package:recipe_app/domain/model/ingredient.dart';
 
 part 'ingredients.freezed.dart';
 

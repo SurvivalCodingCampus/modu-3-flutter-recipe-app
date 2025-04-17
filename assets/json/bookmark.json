@@ -1,0 +1,19 @@
+[
+    {
+        "userId": 1,
+        "bookmarkedRecipeIds": [1, 2]
+    },
+    {
+        "userId": 2,
+        "bookmarkedRecipeIds": [1, 3, 4]
+    },
+    {
+        "userId": 3,
+        "bookmarkedRecipeIds": [4]
+    },
+    {
+        "userId": 4,
+        "bookmarkedRecipeIds": [2,3]
+    }
+    
+]
