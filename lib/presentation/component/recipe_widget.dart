@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/model/recipe.dart';
+import '../../domain/model/recipe.dart';
 
 class RecipeWidget extends StatefulWidget {
   final void Function(String name)? onTapName;

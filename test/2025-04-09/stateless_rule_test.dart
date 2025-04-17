@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/presentation/component/recipe_widget.dart';
 
 void main() {
   testWidgets('RecipeWidget test', (WidgetTester tester) async {
-    final recipe = Recipe(name: '떡볶이', imageUrl: 'http://www.naver.com');
+    final recipe = Recipe(name: '떡볶이', imageUrl: 'http://www.naver.com', userId: '1');
 
     var tapCount = 0;
 

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../data/model/recipe.dart';
-import '../../data/model/user.dart';
+import '../../domain/model/recipe.dart';
+import '../../domain/model/user.dart';
 
 part 'home_state.freezed.dart';
 

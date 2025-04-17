@@ -1,5 +1,5 @@
-import 'package:recipe_app/data/model/user.dart';
-import 'package:recipe_app/data/repository/user_repository.dart';
+import 'package:recipe_app/domain/model/user.dart';
+import 'package:recipe_app/domain/repository/user_repository.dart';
 
 class MockUserRepositoryImpl implements UserRepository {
   @override
