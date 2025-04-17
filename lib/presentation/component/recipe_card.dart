@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
   final bool isBig;
-  const RecipeCard({super.key, required this.recipe, required this.isBig});
+  final bool isBookmarked;
+  final bool isIngredient;
+  final VoidCallback bookMarkCallback;
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.isBig,
+    required this.isBookmarked,
+    required this.bookMarkCallback, required this.isIngredient,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +45,7 @@ class RecipeCard extends StatelessWidget {
               ),
             ),
           ),
+          if(!isIngredient)
           Positioned(
             left: 10,
             bottom: 10,
@@ -82,10 +92,24 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10),
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: Image.asset('assets/images/bookmark_icon.png'),
+                  GestureDetector(
+                    onTap: () {
+                      bookMarkCallback();
+                    },
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child:
+                          isBookmarked
+                              ? Icon(
+                                Icons.bookmark_added,
+                                color: ColorStyles.secondary100,
+                              )
+                              : Icon(
+                                Icons.bookmark_border,
+                                color: ColorStyles.gray4,
+                              ),
+                    ),
                   ),
                 ],
               ),

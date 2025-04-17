@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/ingredients.dart';
+import 'package:recipe_app/domain/model/ingredients.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
@@ -20,10 +20,14 @@ class IngredientItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(
+          Container(
             width: 52,
             height: 52,
-            child: Image.asset(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+            child: Image.network(
               ingredients.ingredient.image,
               errorBuilder: (context, error, stackTrace) {
                 return const Icon(Icons.image_not_supported);

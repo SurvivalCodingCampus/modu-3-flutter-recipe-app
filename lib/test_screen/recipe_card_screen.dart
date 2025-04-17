@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/media.dart';
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/model/user.dart';
+import 'package:recipe_app/domain/model/media.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/domain/model/user.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 
 class RecipeCardScreen extends StatelessWidget {
@@ -36,9 +36,13 @@ class RecipeCardScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 24),
-                  RecipeCard(recipe: recipe1, isBig: true,),
+                  RecipeCard(recipe: recipe1, isBig: true, isBookmarked: true, isIngredient: false,bookMarkCallback: () {
+                    
+                  },),
                   SizedBox(height: 24),
-                  RecipeCard(recipe: recipe2, isBig: true,),
+                  RecipeCard(recipe: recipe2, isBig: true, isBookmarked: true, isIngredient: false,bookMarkCallback: () {
+                    
+                  },),
                   SizedBox(height: 24),
                 ],
               ),

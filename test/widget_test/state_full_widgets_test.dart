@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/data/model/ingredient.dart';
-import 'package:recipe_app/data/model/ingredients.dart';
-import 'package:recipe_app/data/model/media.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/domain/model/ingredient.dart';
+import 'package:recipe_app/domain/model/ingredients.dart';
+import 'package:recipe_app/domain/model/media.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/data/util/time_enum.dart';
 import 'package:recipe_app/presentation/component/filter_button.dart';
 import 'package:recipe_app/presentation/component/ingredient_item.dart';
@@ -50,7 +50,17 @@ void main() {
 
       // 2. 위젯 빌드
       await widgetTester.pumpWidget(
-        MaterialApp(home: Scaffold(body: RecipeCard(recipe: recipe,isBig: true,))),
+        MaterialApp(
+          home: Scaffold(
+            body: RecipeCard(
+              recipe: recipe,
+              isBig: true,
+              isBookmarked: true,
+              isIngredient: false,
+              bookMarkCallback: () {},
+            ),
+          ),
+        ),
       );
 
       // 3. 각 텍스트 요소가 표시되는지 확인
