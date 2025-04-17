@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/data/data_source/bookmark/bookmark_data_source_impl.dart';
 import 'package:recipe_app/data/data_source/recipe/recipe_data_source_impl.dart';
+import 'package:recipe_app/data/data_source/steps/steps_data_source_impl.dart';
+import 'package:recipe_app/data/repository/bookmark/bookmark_repository_impl.dart';
 import 'package:recipe_app/data/repository/recipe/recipe_repository_impl.dart';
+import 'package:recipe_app/domain/use_case/saved_recipe/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/main/home/home_screen.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_detail_view.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/sign_in/sign_in_screen.dart';
@@ -67,7 +70,19 @@ final GoRouter router = GoRouter(
               builder:
                   (context, state) => SavedRecipesScreen(
                     savedRecipesViewModel: SavedRecipesViewModel(
-                      RecipeRepositoryImpl(RecipeDataSourceImpl()),
+                      GetSavedRecipesUseCase(
+                        bookmarkRepository: BookmarkRepositoryImpl(
+                          BookmarkDataSourceImpl(),
+                        ),
+                        recipeRepository: RecipeRepositoryImpl(
+                          RecipeDataSourceImpl(),
+                          StepsDataSourceImpl(),
+                        ),
+                      ),
+                      RecipeRepositoryImpl(
+                        RecipeDataSourceImpl(),
+                        StepsDataSourceImpl(),
+                      ),
                     ),
                   ),
             ),

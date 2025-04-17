@@ -1,0 +1,35 @@
+[
+     {
+        "userId": 1,
+        "email": "siuj0810@gmail.com",
+        "name": "siyujun",
+        "password": "12346",
+        "address": "daegu",
+        "job": "singer"
+    },
+    {
+        "userId": 2,
+        "email": "suj200@naver.com",
+        "name": "kimseojin",
+        "password": "466568",
+        "address": "seoul",
+        "job": "pianist"
+    },
+    {
+        "userId": 3,
+        "email": "popo071@naver.com",
+        "name": "ohsuhyun",
+        "password": "454454",
+        "address": "busan",
+        "job": "hair stylist"
+    },
+    {
+        "userId": 4,
+        "email": "kim@naver.com",
+        "name": "kimjinsu",
+        "password": "113133",
+        "address": "jeju",
+        "job": "chef"
+    }
+
+]

@@ -34,9 +34,22 @@ class SavedRecipesScreen extends StatelessWidget {
                   itemCount: _viewModel.state.recipes.length,
                   itemBuilder: (context, index) {
                     final recipe = _viewModel.state.recipes[index];
+                    final isBookmarked = _viewModel.bookmarkedRecipes.contains(
+                      recipe.id,
+                    );
                     return GestureDetector(
                       onTap: () {},
-                      child: RecipeCard(recipe: recipe),
+                      child: RecipeCard(
+                        recipe: recipe,
+                        isBookmarked: isBookmarked,
+                        onBookmarkToggle: () {
+                          if (isBookmarked) {
+                            _viewModel.removeBookmark(recipe.id);
+                          } else {
+                            _viewModel.addBookmark(recipe.id);
+                          }
+                        },
+                      ),
                     );
                   },
                 );

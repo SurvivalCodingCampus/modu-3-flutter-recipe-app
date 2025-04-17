@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  const RecipeCard({super.key, required this.recipe});
+  final bool isBookmarked;
+  final VoidCallback onBookmarkToggle;
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.isBookmarked,
+    required this.onBookmarkToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +43,16 @@ class RecipeCard extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: onBookmarkToggle,
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(30, 30),
                   ),
-                  child: const Icon(
-                    Icons.bookmark_border_rounded,
+                  child: Icon(
+                    isBookmarked
+                        ? Icons.bookmark
+                        : Icons.bookmark_border_rounded,
                     color: ColorStyle.primary80,
                   ),
                 ),
