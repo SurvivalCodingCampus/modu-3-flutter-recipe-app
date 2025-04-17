@@ -1,3 +1,5 @@
+import 'package:recipe_app/recipe_app/data/dto/recipe_dto.dart';
+import 'package:recipe_app/recipe_app/data/mapper/recipe_mapper.dart';
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/recipe_app/data_source/recipe_data_source.dart';
 
@@ -7,7 +9,11 @@ class MockRecipeDataImpl implements RecipeDataSource {
     Map<String, dynamic> json = mockRecipes;
     List<dynamic> jsonList = json['recipes'];
 
-    return List<Recipe>.from(jsonList);
+    return jsonList
+        .cast<Map<String, dynamic>>()
+        .map((e) => RecipeDto.fromJson(e))
+        .map((e) => e.toRecipe())
+        .toList();
   }
 }
 
@@ -20,9 +26,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2017/11/10/15/04/steak-2936531_1280.jpg",
       "chef": "Chef John",
-      "time": "20 min",
+      "time": 20,
+      "bookmarked": true,
       "rating": 4.0,
-      "bookMarked": true,
       "ingredients": [
         {
           "ingredient": {
@@ -69,9 +75,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2018/12/04/16/49/tandoori-3856045_1280.jpg",
       "chef": "Mark Kelvin",
-      "time": "20 min",
+      "time": 20,
+      "bookmarked": false,
       "rating": 4.0,
-      "bookMarked": true,
       "ingredients": [
         {
           "ingredient": {
@@ -118,9 +124,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2019/09/07/19/02/spanish-paella-4459519_1280.jpg",
       "chef": "Spicy Nelly",
-      "time": "20 min",
+      "time": 20,
+      "bookmarked": true,
       "rating": 4.0,
-      "bookMarked": true,
       "ingredients": [
         {
           "ingredient": {
@@ -158,9 +164,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2017/07/27/16/48/toppokki-2545943_1280.jpg",
       "chef": "Kim Dahee",
-      "time": "30 min",
+      "time": 30,
+      "bookmarked": true,
       "rating": 5.0,
-      "bookMarked": true,
       "ingredients": [],
     },
     {
@@ -170,9 +176,8 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg",
       "chef": "Alice Johnson",
-      "time": "25 min",
+      "time": 25,
       "rating": 4.5,
-      "bookMarked": false,
       "ingredients": [
         {
           "ingredient": {
@@ -201,8 +206,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2019/10/22/10/11/beef-wellington-4568239_1280.jpg",
       "chef": "Gordon Ramsay",
-      "time": "45 min",
+      "time": 45,
       "rating": 5.0,
+      "bookmarked": true,
       "ingredients": [
         {
           "ingredient": {
@@ -231,8 +237,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2019/05/15/18/56/pizza-4205701_1280.jpg",
       "chef": "Mario Batali",
-      "time": "15 min",
+      "time": 15,
       "rating": 4.3,
+      "bookmarked": false,
       "ingredients": [
         {
           "ingredient": {
@@ -252,8 +259,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2017/10/15/11/41/sushi-2853382_1280.jpg",
       "chef": "Jiro Ono",
-      "time": "60 min",
+      "time": 60,
       "rating": 4.8,
+      "bookmarked": false,
       "ingredients": [
         {
           "ingredient": {
@@ -282,8 +290,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2016/03/03/16/19/food-1234483_1280.jpg",
       "chef": "Julia Child",
-      "time": "40 min",
+      "time": 40,
       "rating": 4.6,
+      "bookmarked": false,
       "ingredients": [
         {
           "ingredient": {
@@ -303,8 +312,9 @@ final mockRecipes = {
       "image":
           "https://cdn.pixabay.com/photo/2016/11/22/18/52/cake-1850011_1280.jpg",
       "chef": "Paul Hollywood",
-      "time": "30 min",
+      "time": 30,
       "rating": 4.9,
+      "bookmarked": true,
       "ingredients": [
         {
           "ingredient": {

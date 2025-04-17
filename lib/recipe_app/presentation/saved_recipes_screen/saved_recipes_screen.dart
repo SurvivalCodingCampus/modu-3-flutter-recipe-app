@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/recipe_app/core/routing/router.dart';
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
+import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository_impl.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
@@ -15,10 +17,15 @@ class SavedRecipesScreen extends StatefulWidget {
 }
 
 class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
+  final bookMarkRepository = BookMarkRepositoryImpl(
+    recipeDataSource: mockRecipeDataImpl,
+  );
+
   @override
   void initState() {
     super.initState();
     widget.savedRecipesViewModel.getSavedRecipesUseCase();
+    bookMarkRepository.initializeBookmarks();
   }
 
   @override
@@ -43,7 +50,7 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
             return ListView.separated(
               itemBuilder: (context, index) {
                 final Recipe recipe =
-                    widget.savedRecipesViewModel.recipes[index];
+                widget.savedRecipesViewModel.recipes[index];
                 return RecipeCard(
                   recipe: recipe,
                   showTimerAndBookmark: true,

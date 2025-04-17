@@ -11,9 +11,22 @@ class BookMarkRepositoryImpl implements BookMarkRepository {
 
   //빈 북마크된 레시피들을 모아두는 리스트 생성
   List<Recipe> bookMarks = [];
+  bool _initialized = false;
+
+  bool get initialized => _initialized;
+
+  @override
+  Future<void> initializeBookmarks() async {
+    final allRecipes = await _recipeDataSource.getRecipeData(); // await 필수!
+    bookMarks = allRecipes.where((recipe) => recipe.bookMarked).toList();
+    _initialized = true;
+  }
 
   @override
   Future<void> addBookMark(Recipe recipe) async {
+    if (initialized == false) {
+      await initializeBookmarks();
+    }
     bookMarks.add(recipe);
   }
 

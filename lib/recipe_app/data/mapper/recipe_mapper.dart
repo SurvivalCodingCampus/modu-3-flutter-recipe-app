@@ -1,5 +1,6 @@
+import 'package:recipe_app/recipe_app/data/dto/ingredient_dto.dart';
 import 'package:recipe_app/recipe_app/data/dto/recipe_dto.dart';
-import 'package:recipe_app/recipe_app/data/model/ingredient.dart';
+import 'package:recipe_app/recipe_app/data/mapper/ingredient_mapper.dart';
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
 
 extension RecipeMapper on RecipeDto {
@@ -13,9 +14,13 @@ extension RecipeMapper on RecipeDto {
       time: time?.toInt() ?? 0,
       image: image ?? '',
       ingredients:
-          (ingredients ?? [])
-              .map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
-              .toList(),
+          ingredients == null
+              ? []
+              : ingredients!
+                  .cast<Map<String, dynamic>>()
+                  .map((e) => IngredientDto.fromJson(e['ingredient']))
+                  .map((e) => e.toIngredient())
+                  .toList(),
       bookMarked: bookMarked ?? false,
     );
   }

@@ -204,7 +204,15 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                         recipe: recipe,
                                         showTimerAndBookmark: false,
                                         onToggleBookMark: () {
-                                          (recipe.id);
+                                          if (recipe.bookMarked) {
+                                            widget.savedRecipesViewModel
+                                                .removeBookmarkUseCase(
+                                                  recipe.id,
+                                                );
+                                          } else {
+                                            widget.savedRecipesViewModel
+                                                .addBookmarkUseCase(recipe);
+                                          }
                                         },
                                       ),
                                     )
