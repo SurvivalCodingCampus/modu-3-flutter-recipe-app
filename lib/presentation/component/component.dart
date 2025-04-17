@@ -4,12 +4,10 @@ import 'package:recipe_app/2025-04-09/presentation/component/input_field.dart';
 import 'package:recipe_app/2025-04-09/presentation/component/tabs.dart';
 import 'package:recipe_app/presentation/component/rating_button.dart';
 import 'package:recipe_app/presentation/component/rating_dialog.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/ui/color.dart';
 
 import 'buttons.dart';
 import 'filter_button.dart';
-import 'ingredientItem.dart';
 
 
 
@@ -60,7 +58,7 @@ class _ComponentState extends State<Component> {
                 },
               ),
               const SizedBox(height: 10),
-              Ingredientitem(),
+              // Ingredientitem(),
               const SizedBox(height: 10),
               // RecipeCard(),
               const SizedBox(height: 10),

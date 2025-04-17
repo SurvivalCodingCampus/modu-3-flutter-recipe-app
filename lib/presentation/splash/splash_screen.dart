@@ -9,20 +9,6 @@ import 'package:recipe_app/presentation/saved_recipe/saved_recipe_view_model.dar
 import '../../router/routes.dart';
 import '../../ui/text.dart';
 
-void main() {
-  final dt = RecipeDataSourceImpl();
-  final rp = RecipeRepositoryImpl(dt);
-  final viewModel = SavedRecipeViewModel(rp);
-
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: SplashScreen(viewModel: viewModel,),
-      ),
-    )
-  );
-}
-
 
 
 class SplashScreen extends StatelessWidget {

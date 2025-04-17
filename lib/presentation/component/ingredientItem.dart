@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: Ingredientitem(),
-      ),
-    )
-  );
-}
+import '../../data/model/ingredients.dart';
+
+
 
 class Ingredientitem extends StatelessWidget {
-  const Ingredientitem({super.key});
+  final Ingredients ingredients;
+
+  const Ingredientitem({super.key, required this.ingredients});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +17,7 @@ class Ingredientitem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 30),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
           height: 72,
           decoration: BoxDecoration(
             color: ColorStyles.gray4,
@@ -34,7 +30,7 @@ class Ingredientitem extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                child: Image.asset('assets/images/tomato.png',
+                child: Image.network(ingredients.ingredient.image,
                   width: 52,
                   height: 52,
                 ),
@@ -44,7 +40,7 @@ class Ingredientitem extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Text('Tomatos',
+                child: Text(ingredients.ingredient.name,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w400,
@@ -56,7 +52,7 @@ class Ingredientitem extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text('500g',
+                child: Text(ingredients.amount.toString(),
                   style: TextStyle(
                     color: Colors.black38,
                     fontSize: 15,
