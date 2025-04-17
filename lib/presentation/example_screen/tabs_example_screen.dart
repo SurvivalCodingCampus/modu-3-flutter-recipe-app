@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/tabs.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/component/tabs.dart';
+import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class TabsExampleScreen extends StatefulWidget {
   const TabsExampleScreen({super.key});

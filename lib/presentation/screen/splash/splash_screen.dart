@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
-import 'package:recipe_app/presentation/component/buttons.dart';
+import 'package:recipe_app/core/component/buttons.dart';
 import 'package:recipe_app/presentation/example_screen/preview_main.dart';
 
 import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_view_model.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/ui_styles/color_styles.dart';
+import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

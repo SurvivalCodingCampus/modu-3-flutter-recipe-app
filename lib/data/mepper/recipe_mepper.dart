@@ -1,8 +1,8 @@
 import 'package:recipe_app/data/dto/recipe_dto.dart';
 import 'package:recipe_app/data/mepper/ingredient_mepper.dart';
-import 'package:recipe_app/data/model/filter/filter_enum.dart';
-import 'package:recipe_app/data/model/recipe/recipe.dart';
-import 'package:recipe_app/data/model/ingredient/ingredient.dart';
+import 'package:recipe_app/domain/model/filter/filter_enum.dart';
+import 'package:recipe_app/domain/model/recipe/recipe.dart';
+import 'package:recipe_app/domain/model/ingredient/ingredient.dart';
 
 extension RecipeMapper on RecipeDto {
   Recipe toRecipe() {

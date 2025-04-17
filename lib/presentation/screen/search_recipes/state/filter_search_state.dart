@@ -1,7 +1,7 @@
 // [Filter]검색 필터에 필요한 정보를 담고 있습니다..
 // ignore_for_file: annotate_overrides
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recipe_app/data/model/filter/filter_enum.dart';
+import 'package:recipe_app/domain/model/filter/filter_enum.dart';
 
 part 'filter_search_state.freezed.dart';
 part 'filter_search_state.g.dart';

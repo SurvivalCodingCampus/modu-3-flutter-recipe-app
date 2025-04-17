@@ -2,8 +2,8 @@ import 'package:recipe_app/data/dto/recipe_dto.dart';
 
 abstract interface class RecipeDataSource {
   // 레시피 목록 가져오기
-  Future<List<RecipeDto>> getRecipeDto();
+  Future<List<RecipeDto>> getRecipeDtos();
 
-  // 검색어로 레시피 목록 가져오기
-  Future<List<RecipeDto>> getSearchRecipeDto(String keyword);
+  // 레시피 단일 가져오기
+  Future<RecipeDto> getRecipeDto(int recipeId);
 }

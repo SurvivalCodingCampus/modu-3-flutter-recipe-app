@@ -1,42 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:recipe_app/core/routing/routes.dart';
+import 'package:recipe_app/core/ui_styles/color_styles.dart';
 
-import 'package:recipe_app/ui/color_styles.dart';
+class MainNavigationBar extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
 
-class MainNavigationBar extends StatefulWidget {
-  final Widget child;
-  const MainNavigationBar({super.key, required this.child});
+  const MainNavigationBar({super.key, required this.navigationShell});
 
-  @override
-  State<MainNavigationBar> createState() => _MainNavigationBarState();
-}
-
-class _MainNavigationBarState extends State<MainNavigationBar> {
-  int currentIndex = 0;
-  final List<String> _routes = [
-    Routes.home,
-    Routes.savedRecipe,
-    Routes.notification,
-    Routes.profile,
-  ];
+  void _onTap(int index) {
+    navigationShell.goBranch(index);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
+      body: navigationShell, // 선택된 탭의 내용
       bottomNavigationBar: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.bottomCenter,
         children: [
           CustomCurvedNavigationBar(
-            currentIndex: currentIndex,
-            onTap: (index) {
-              setState(() {
-                currentIndex = index;
-              });
-              context.go(_routes[index]);
-            },
+            currentIndex: navigationShell.currentIndex,
+            onTap: _onTap,
           ),
           Positioned(
             top: -20,

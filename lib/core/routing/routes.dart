@@ -14,4 +14,7 @@ abstract class Routes {
 
   // 미리보기화면
   static const String example = '/example';
+
+  // 레시피상세화면
+  static const String recipeDetail = '/recipe-detail/:recipeId';
 }

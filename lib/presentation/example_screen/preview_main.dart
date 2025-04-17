@@ -12,8 +12,8 @@ import 'package:recipe_app/presentation/example_screen/search_field_example_scre
 import 'package:recipe_app/presentation/example_screen/tabs_example_screen.dart';
 import 'package:recipe_app/presentation/example_screen/text_style_example_screen.dart';
 
-import 'package:recipe_app/ui/color_styles.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/ui_styles/color_styles.dart';
+import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class PreviewMain extends StatelessWidget {
   const PreviewMain({super.key});

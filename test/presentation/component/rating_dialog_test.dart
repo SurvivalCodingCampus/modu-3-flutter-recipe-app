@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/component/rating_dialog.dart';
+import 'package:recipe_app/core/component/rating_dialog.dart';
 
 void main() {
   group('RatingDialog widget test', () {

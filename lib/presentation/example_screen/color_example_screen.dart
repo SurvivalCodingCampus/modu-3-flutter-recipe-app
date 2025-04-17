@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/ui_styles/color_styles.dart';
+import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class ColorExampleScreen extends StatelessWidget {
   const ColorExampleScreen({super.key});

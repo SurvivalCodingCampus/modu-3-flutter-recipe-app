@@ -1,0 +1,48 @@
+[
+    {
+        "userId": 1,
+        "bookmarkedRecipes": [
+            {
+                "recipeId": 1
+            },
+            {
+                "recipeId": 2
+            },
+            {
+                "recipeId": 3
+            },
+            {
+                "recipeId": 4
+            },
+            {
+                "recipeId": 5
+            },
+            {
+                "recipeId": 6
+            }
+        ]
+    },
+    {
+        "userId": 2,
+        "bookmarkedRecipes": [
+            {
+                "recipeId": 1
+            },
+            {
+                "recipeId": 2
+            },
+            {
+                "recipeId": 3
+            },
+            {
+                "recipeId": 4
+            },
+            {
+                "recipeId": 5
+            },
+            {
+                "recipeId": 6
+            }
+        ]
+    }
+]

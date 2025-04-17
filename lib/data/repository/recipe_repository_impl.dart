@@ -1,8 +1,7 @@
 import 'package:recipe_app/data/data_source/recipe_data_source.dart';
 import 'package:recipe_app/data/mepper/recipe_mepper.dart';
-import 'package:recipe_app/data/model/recipe/recipe.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/presentation/screen/search_recipes/state/filter_search_state.dart';
+import 'package:recipe_app/domain/model/recipe/recipe.dart';
+import 'package:recipe_app/domain/roepositpry/recipe_repository.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource _dataSource;
@@ -11,7 +10,12 @@ class RecipeRepositoryImpl implements RecipeRepository {
 
   @override
   Future<List<Recipe>> getRecipes() async {
-    final recipeDto = await _dataSource.getRecipeDto();
+    final recipeDto = await _dataSource.getRecipeDtos();
     return recipeDto.map((e) => e.toRecipe()).toList();
+  }
+
+  @override
+  Future<Recipe> getRecipe(int recipeId) {
+    return _dataSource.getRecipeDto(recipeId).then((value) => value.toRecipe());
   }
 }

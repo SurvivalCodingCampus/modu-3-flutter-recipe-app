@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/model/filter/filter_enum.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/component/search_field.dart';
-import 'package:recipe_app/presentation/component/skeleton_effect.dart';
+import 'package:recipe_app/domain/model/filter/filter_enum.dart';
+import 'package:recipe_app/core/component/recipe_card.dart';
+import 'package:recipe_app/core/component/search_field.dart';
+import 'package:recipe_app/core/component/skeleton_effect.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_view_model.dart';
-import 'package:recipe_app/ui/color_styles.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/ui_styles/color_styles.dart';
+import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
@@ -169,7 +169,8 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
 
                     itemBuilder: (context, index) {
                       final recipe = recipes[index];
-                      return RecipeCard(recipe: recipe, isGrid: true);
+                      return null;
+                      // return RecipeCard();
                     },
                   );
                 },

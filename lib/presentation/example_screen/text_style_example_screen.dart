@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class TextStyleExampleScreen extends StatelessWidget {
   const TextStyleExampleScreen({super.key});

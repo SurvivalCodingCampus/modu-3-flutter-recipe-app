@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/rating_dialog.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/component/rating_dialog.dart';
+import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class RatingDialogExampleScreen extends StatelessWidget {
   const RatingDialogExampleScreen({super.key});

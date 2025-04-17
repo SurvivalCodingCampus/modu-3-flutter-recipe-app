@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/search_field.dart';
+import 'package:recipe_app/core/component/search_field.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/filter_search_bottom_sheet.dart';
-import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class SearchFieldExampleScreen extends StatelessWidget {
   const SearchFieldExampleScreen({super.key});
