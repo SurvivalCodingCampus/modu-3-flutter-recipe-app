@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/data/repository/mock_user_repository_impl.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 
@@ -10,7 +11,7 @@ import '../../presentation/search_recipes/search_recipes_view_model.dart';
 
 // GoRouter configuration
 final router = GoRouter(
-  initialLocation: '/saved-recipes',
+  initialLocation: '/',
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
@@ -43,7 +44,10 @@ final router = GoRouter(
               path: '/',
               builder:
                   (context, state) => HomeScreen(
-                    viewModel: HomeViewModel(MockRecipeRepositoryImpl()),
+                    viewModel: HomeViewModel(
+                      MockRecipeRepositoryImpl(),
+                      MockUserRepositoryImpl(),
+                    ),
                   ),
             ),
           ],

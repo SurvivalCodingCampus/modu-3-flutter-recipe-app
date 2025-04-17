@@ -31,10 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return Column(
-            children:
-                state.recipes
-                    .map((recipe) => RecipeWidget(recipe: recipe))
-                    .toList(),
+            children: [
+              if (state.user != null)
+                Text(state.user!.name, style: TextStyle(fontSize: 40)),
+              ...state.recipes.map((recipe) => RecipeWidget(recipe: recipe)),
+            ],
           );
         },
       ),
