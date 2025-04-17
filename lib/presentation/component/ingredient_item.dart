@@ -1,18 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:recipe_app/domain/model/ingredient.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
 class IngredientItem extends StatelessWidget {
-  final String name;
-  final String weight;
-  final String imagePath;
+  final Ingredient ingredient;
 
-  const IngredientItem({
-    super.key,
-    required this.name,
-    required this.weight,
-    required this.imagePath,
-  });
+  final List<String> weights = ['500g', '300g'];
+
+  IngredientItem({super.key, required this.ingredient});
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +34,18 @@ class IngredientItem extends StatelessWidget {
               ),
               width: 52,
               height: 52,
-              child: Image.asset(imagePath),
+              child: Image.network(ingredient.imageUrl),
             ),
             const SizedBox(width: 16),
             Text(
-              name,
+              ingredient.name,
               style: TextStyles.normalTextBold.copyWith(
                 color: ColorStyles.label,
               ),
             ),
             const Spacer(),
             Text(
-              weight,
+              weights[Random().nextInt(weights.length)],
               style: TextStyles.smallTextRegular.copyWith(
                 color: ColorStyles.gray3,
               ),

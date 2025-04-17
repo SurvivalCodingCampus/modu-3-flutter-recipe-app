@@ -30,6 +30,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2017/11/10/15/04/steak-2936531_1280.jpg",
       "chef": "Chef John",
       "time": "20 min",
+      "bookmarked": true,
       "rating": 4.0,
       "ingredients": [
         {
@@ -78,6 +79,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2018/12/04/16/49/tandoori-3856045_1280.jpg",
       "chef": "Mark Kelvin",
       "time": "20 min",
+      "bookmarked": false,
       "rating": 4.0,
       "ingredients": [
         {
@@ -126,6 +128,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2019/09/07/19/02/spanish-paella-4459519_1280.jpg",
       "chef": "Spicy Nelly",
       "time": "20 min",
+      "bookmarked": true,
       "rating": 4.0,
       "ingredients": [
         {
@@ -165,6 +168,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2017/07/27/16/48/toppokki-2545943_1280.jpg",
       "chef": "Kim Dahee",
       "time": "30 min",
+      "bookmarked": true,
       "rating": 5.0,
       "ingredients": [],
     },
@@ -207,6 +211,7 @@ final mockData = {
       "chef": "Gordon Ramsay",
       "time": "45 min",
       "rating": 5.0,
+      "bookmarked": true,
       "ingredients": [
         {
           "ingredient": {
@@ -237,6 +242,7 @@ final mockData = {
       "chef": "Mario Batali",
       "time": "15 min",
       "rating": 4.3,
+      "bookmarked": false,
       "ingredients": [
         {
           "ingredient": {
@@ -258,6 +264,7 @@ final mockData = {
       "chef": "Jiro Ono",
       "time": "60 min",
       "rating": 4.8,
+      "bookmarked": false,
       "ingredients": [
         {
           "ingredient": {
@@ -288,6 +295,7 @@ final mockData = {
       "chef": "Julia Child",
       "time": "40 min",
       "rating": 4.6,
+      "bookmarked": false,
       "ingredients": [
         {
           "ingredient": {
@@ -309,6 +317,7 @@ final mockData = {
       "chef": "Paul Hollywood",
       "time": "30 min",
       "rating": 4.9,
+      "bookmarked": true,
       "ingredients": [
         {
           "ingredient": {

@@ -18,6 +18,7 @@ extension RecipeMapper on RecipeDTO {
               .map((e) => e.toModel())
               .toList(),
       chef: chef ?? 'N/A',
+      bookmarked: bookmarked ?? false,
       category:
           category != null ? Category.fromString(category!) : Category.none,
       rating: rating ?? 0.0,

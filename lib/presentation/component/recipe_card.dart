@@ -1,73 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
-class RecipeCard extends StatefulWidget {
+class RecipeCard extends StatelessWidget {
   static const String _timerIcon = "assets/icons/timer.png";
   static const String _bookmarkIcon = "assets/icons/bookmark.png";
 
-  final String imagePath;
-  final String author;
-  final String title;
-  final int rating;
-  final int cookTime;
-  final VoidCallback onBookmark;
+  final Recipe recipe;
+  final VoidCallback? onCardTap;
+  final VoidCallback onBookmarkTap;
+  final bool showTitle;
+  final bool showRating;
+  final bool showAuthor;
 
   const RecipeCard({
     super.key,
-    required this.imagePath,
-    required this.author,
-    required this.title,
-    required this.cookTime,
-    required this.rating,
-    required this.onBookmark,
+    required this.recipe,
+    this.onCardTap,
+    required this.onBookmarkTap,
+    this.showTitle = true,
+    this.showRating = true,
+    this.showAuthor = true,
   });
 
   @override
-  State<RecipeCard> createState() => _RecipeCardState();
-}
-
-class _RecipeCardState extends State<RecipeCard> {
-  bool isBookmarked = false;
-
-  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 150,
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(widget.imagePath),
-              fit: BoxFit.cover,
-            ),
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        Container(
-          height: 150,
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: ColorStyles.black,
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                ColorStyles.black.withAlpha(10),
-                ColorStyles.black.withAlpha(255),
-              ],
+    return GestureDetector(
+      onTap: onCardTap,
+      child: Stack(
+        children: [
+          Container(
+            height: 150,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(recipe.imageUrl),
+                fit: BoxFit.cover,
+              ),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-        ),
-        _buildRating(),
-        _buildTitle(),
-        _buildAuthor(),
-        _buildCookTime(),
-        _buildBookMarkButton(),
-      ],
+          Container(
+            height: 150,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: ColorStyles.black,
+              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  ColorStyles.black.withAlpha(10),
+                  ColorStyles.black.withAlpha(255),
+                ],
+              ),
+            ),
+          ),
+          showRating ? _buildRating() : Container(),
+          showTitle ? _buildTitle() : Container(),
+          showAuthor ? _buildAuthor() : Container(),
+          _buildCookTime(),
+          _buildBookMarkButton(),
+        ],
+      ),
     );
   }
 
@@ -86,7 +83,7 @@ class _RecipeCardState extends State<RecipeCard> {
           children: [
             const Icon(Icons.star, color: ColorStyles.rating, size: 16),
             Text(
-              '${widget.rating.toDouble()}',
+              '${recipe.rating.toDouble()}',
               style: TextStyles.smallTextRegular.copyWith(
                 color: ColorStyles.black,
               ),
@@ -103,7 +100,7 @@ class _RecipeCardState extends State<RecipeCard> {
       width: 170,
       bottom: 22,
       child: Text(
-        widget.title,
+        recipe.name,
         style: TextStyles.smallTextBold.copyWith(color: ColorStyles.white),
       ),
     );
@@ -114,7 +111,7 @@ class _RecipeCardState extends State<RecipeCard> {
       left: 10,
       bottom: 10,
       child: Text(
-        'By ${widget.author}',
+        'By ${recipe.chef}',
         style: TextStyles.labelTextBold.copyWith(color: ColorStyles.white),
       ),
     );
@@ -130,10 +127,10 @@ class _RecipeCardState extends State<RecipeCard> {
           SizedBox(
             width: 17,
             height: 17,
-            child: Image.asset(RecipeCard._timerIcon, color: ColorStyles.gray4),
+            child: Image.asset(_timerIcon, color: ColorStyles.gray4),
           ),
           Text(
-            '${widget.cookTime} min',
+            '${recipe.cookTime} min',
             style: TextStyles.smallTextRegular.copyWith(
               color: ColorStyles.gray4,
             ),
@@ -147,23 +144,18 @@ class _RecipeCardState extends State<RecipeCard> {
     right: 10,
     bottom: 10,
     child: GestureDetector(
+      onTap: onBookmarkTap,
       key: const Key('bookmark_button'),
-      onTap: () {
-        setState(() {
-          isBookmarked = !isBookmarked;
-          widget.onBookmark();
-        });
-      },
       child: Container(
         width: 24,
         height: 24,
         decoration: BoxDecoration(
-          color: isBookmarked ? ColorStyles.primary80 : ColorStyles.white,
+          color: recipe.bookmarked ? ColorStyles.primary80 : ColorStyles.white,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Image.asset(
-          RecipeCard._bookmarkIcon,
-          color: isBookmarked ? ColorStyles.white : ColorStyles.gray4,
+          _bookmarkIcon,
+          color: recipe.bookmarked ? ColorStyles.white : ColorStyles.gray4,
         ),
       ),
     ),
