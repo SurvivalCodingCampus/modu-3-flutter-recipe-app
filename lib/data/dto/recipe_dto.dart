@@ -16,6 +16,7 @@ class RecipeDto {
   final String? time;
   final num? rating;
   final List<RecipeIngredientDto>? ingredients;
+  final List<String>? steps;
 
   RecipeDto({
     this.id,
@@ -26,6 +27,7 @@ class RecipeDto {
     this.time,
     this.rating,
     this.ingredients,
+    this.steps,
   });
 
   factory RecipeDto.fromJson(Map<String, dynamic> json) =>

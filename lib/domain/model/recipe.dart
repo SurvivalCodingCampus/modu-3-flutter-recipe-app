@@ -17,6 +17,7 @@ class Recipe with _$Recipe {
     required this.time,
     required this.rating,
     required this.ingredients,
+    required this.steps,
   });
 
   final int id;
@@ -27,4 +28,5 @@ class Recipe with _$Recipe {
   final String time;
   final double rating;
   final List<RecipeIngredient> ingredients;
+  final List<String> steps;
 }

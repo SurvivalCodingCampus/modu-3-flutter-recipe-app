@@ -41,6 +41,14 @@
           },
           "amount": 100
         }
+      ],
+      "steps": [
+        "Add seasonings and mix thoroughly.",
+        "Cook the traditional until well done.",
+        "Preheat oven or pan if needed.",
+        "Prepare all ingredients.",
+        "Let it rest before serving.",
+        "Serve and enjoy."
       ]
     },
     {
@@ -84,6 +92,14 @@
           },
           "amount": 500
         }
+      ],
+      "steps": [
+        "Preheat oven or pan if needed.",
+        "Serve and enjoy.",
+        "Let it rest before serving.",
+        "Cook the spice until well done.",
+        "Prepare all ingredients.",
+        "Add seasonings and mix thoroughly."
       ]
     },
     {
@@ -119,6 +135,13 @@
           },
           "amount": 100
         }
+      ],
+      "steps": [
+        "Let it rest before serving.",
+        "Preheat oven or pan if needed.",
+        "Cook the spicy until well done.",
+        "Serve and enjoy.",
+        "Add seasonings and mix thoroughly."
       ]
     },
     {
@@ -129,7 +152,14 @@
       "chef": "Kim Dahee",
       "time": "30 min",
       "rating": 5.0,
-      "ingredients": []
+      "ingredients": [],
+      "steps": [
+        "Cook the ttekbokki until well done.",
+        "Prepare all ingredients.",
+        "Add seasonings and mix thoroughly.",
+        "Preheat oven or pan if needed.",
+        "Serve and enjoy."
+      ]
     },
     {
       "id": 5,
@@ -156,6 +186,14 @@
           },
           "amount": 5
         }
+      ],
+      "steps": [
+        "Prepare all ingredients.",
+        "Add seasonings and mix thoroughly.",
+        "Preheat oven or pan if needed.",
+        "Serve and enjoy.",
+        "Cook the grilled until well done.",
+        "Let it rest before serving."
       ]
     },
     {
@@ -183,6 +221,12 @@
           },
           "amount": 100
         }
+      ],
+      "steps": [
+        "Preheat oven or pan if needed.",
+        "Add seasonings and mix thoroughly.",
+        "Prepare all ingredients.",
+        "Serve and enjoy."
       ]
     },
     {
@@ -202,6 +246,12 @@
           },
           "amount": 200
         }
+      ],
+      "steps": [
+        "Cook the classic until well done.",
+        "Let it rest before serving.",
+        "Add seasonings and mix thoroughly.",
+        "Prepare all ingredients."
       ]
     },
     {
@@ -229,6 +279,12 @@
           },
           "amount": 100
         }
+      ],
+      "steps": [
+        "Preheat oven or pan if needed.",
+        "Prepare all ingredients.",
+        "Serve and enjoy.",
+        "Add seasonings and mix thoroughly."
       ]
     },
     {
@@ -248,6 +304,11 @@
           },
           "amount": 300
         }
+      ],
+      "steps": [
+        "Add seasonings and mix thoroughly.",
+        "Let it rest before serving.",
+        "Prepare all ingredients."
       ]
     },
     {
@@ -267,6 +328,11 @@
           },
           "amount": 100
         }
+      ],
+      "steps": [
+        "Preheat oven or pan if needed.",
+        "Let it rest before serving.",
+        "Prepare all ingredients."
       ]
     }
   ]

@@ -17,6 +17,23 @@ extension RecipeMapper on RecipeDto {
       rating: (rating ?? 0).toDouble(),
       ingredients:
           ingredients?.map((e) => e.toRecipeIngredient()).toList() ?? [],
+      steps: steps ?? [],
+    );
+  }
+}
+
+extension RecipeDtoMapper on Recipe {
+  RecipeDto toDto() {
+    return RecipeDto(
+      id: id,
+      category: category,
+      name: name,
+      image: image,
+      chef: chef,
+      time: time,
+      rating: rating,
+      ingredients: ingredients.map((e) => e.toDto()).toList(),
+      steps: steps,
     );
   }
 }
@@ -30,6 +47,12 @@ extension RecipeIngredientMapper on RecipeIngredientDto {
   }
 }
 
+extension RecipeIngredientDtoMapper on RecipeIngredient {
+  RecipeIngredientDto toDto() {
+    return RecipeIngredientDto(ingredient: ingredient.toDto(), amount: amount);
+  }
+}
+
 extension IngredientMapper on IngredientDto {
   Ingredient toIngredient() {
     return Ingredient(
@@ -37,5 +60,11 @@ extension IngredientMapper on IngredientDto {
       name: name ?? '',
       image: image ?? '',
     );
+  }
+}
+
+extension IngredientDtoMapper on Ingredient {
+  IngredientDto toDto() {
+    return IngredientDto(id: id, name: name, image: image);
   }
 }

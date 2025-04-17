@@ -15,9 +15,12 @@ class RecipeCard extends StatefulWidget {
   final double rating;
   final bool isFavorite;
   final VoidCallback? onTap;
+  final VoidCallback? onFavoriteTap;
 
   final bool showCookTime;
   final bool showFavorite;
+  final bool showTitle;
+  final bool showAuthorName;
 
   const RecipeCard({
     required this.title,
@@ -28,7 +31,10 @@ class RecipeCard extends StatefulWidget {
     required this.isFavorite,
     this.showCookTime = true,
     this.showFavorite = true,
+    this.showTitle = true,
+    this.showAuthorName = true,
     this.onTap,
+    this.onFavoriteTap,
     super.key,
   });
 
@@ -72,31 +78,36 @@ class _RecipeCardState extends State<RecipeCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Title
-                  SizedBox(
-                    width:
-                        (widget.showCookTime && widget.showFavorite)
-                            ? responsiveWidth(context, ratio: 0.6)
-                            : double.infinity,
-                    child: Text(
-                      widget.title,
-                      style: AppTextStyles.smallBold(color: ColorStyle.white),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                  if (widget.showTitle)
+                    SizedBox(
+                      width:
+                          (widget.showCookTime && widget.showFavorite)
+                              ? responsiveWidth(context, ratio: 0.6)
+                              : double.infinity,
+                      child: Text(
+                        widget.title,
+                        style: AppTextStyles.smallBold(color: ColorStyle.white),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
                   const SizedBox(height: 4),
+
                   // Author name
-                  SizedBox(
-                    width:
-                        (widget.showCookTime && widget.showFavorite)
-                            ? responsiveWidth(context, ratio: 0.6)
-                            : double.infinity,
-                    child: Text(
-                      'By ${widget.authorName}',
-                      style: AppTextStyles.smallLabel(color: ColorStyle.white),
-                      maxLines: 1,
+                  if (widget.showAuthorName)
+                    SizedBox(
+                      width:
+                          (widget.showCookTime && widget.showFavorite)
+                              ? responsiveWidth(context, ratio: 0.6)
+                              : double.infinity,
+                      child: Text(
+                        'By ${widget.authorName}',
+                        style: AppTextStyles.smallLabel(
+                          color: ColorStyle.white,
+                        ),
+                        maxLines: 1,
+                      ),
                     ),
-                  ),
                   const SizedBox(height: 8),
                 ],
               ),
@@ -125,21 +136,24 @@ class _RecipeCardState extends State<RecipeCard> {
                     ],
                     const SizedBox(width: 10),
                     if (widget.showFavorite) ...[
-                      Container(
-                        height: 24,
-                        width: 24,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorStyle.white,
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.bookmark_border,
-                            size: 16,
-                            color:
-                                widget.isFavorite
-                                    ? ColorStyle.primary100
-                                    : ColorStyle.gray4,
+                      GestureDetector(
+                        onTap: widget.onFavoriteTap,
+                        child: Container(
+                          height: 24,
+                          width: 24,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorStyle.white,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.bookmark_border,
+                              size: 16,
+                              color:
+                                  widget.isFavorite
+                                      ? ColorStyle.primary100
+                                      : ColorStyle.gray4,
+                            ),
                           ),
                         ),
                       ),
