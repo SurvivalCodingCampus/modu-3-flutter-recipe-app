@@ -66,12 +66,10 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.search,
+              path: Routes.saved,
               builder:
-                  (context, state) => SearchRecipeScreen(
-                viewModel: SearchRecipeViewModel(
-                  RecipeRepositoryImpl(RecipeDataSourceImpl()),
-                ),
+                  (context, state) => SavedRecipeScreen(
+                viewModel: SavedRecipeViewModel(GetSavedRecipeUseCase(BookmarkRepositoryImpl(RecipeDataSourceImpl())))
               ),
             ),
           ],
@@ -79,10 +77,12 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.saved,
+              path: Routes.search,
               builder:
-                  (context, state) => SavedRecipeScreen(
-                viewModel: SavedRecipeViewModel(GetSavedRecipeUseCase(BookmarkRepositoryImpl(RecipeDataSourceImpl())))
+                  (context, state) => SearchRecipeScreen(
+                viewModel: SearchRecipeViewModel(
+                  RecipeRepositoryImpl(RecipeDataSourceImpl()),
+                ),
               ),
             ),
           ],
