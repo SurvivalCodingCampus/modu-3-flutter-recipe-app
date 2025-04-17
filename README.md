@@ -57,4 +57,4 @@ Flutter로 만드는 레시피 앱
 
 | MainHome                                                                                     | SavedRecipes                                                                                |
 |----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
- ![mainhome](https://github.com/user-attachments/assets/220c8f3f-8664-4f23-ae08-5241903d84f5) | ![savedre](https://github.com/user-attachments/assets/0e81ccf3-3069-4ada-be4f-b2f86982f9fc) |
+| ![mainhome](https://github.com/user-attachments/assets/220c8f3f-8664-4f23-ae08-5241903d84f5) | ![savedre](https://github.com/user-attachments/assets/0e81ccf3-3069-4ada-be4f-b2f86982f9fc) |

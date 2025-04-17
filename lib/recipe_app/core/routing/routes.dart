@@ -9,4 +9,5 @@ abstract class Routes {
   static const String searchRecipes = '/search-recipes';
   static const String notificationScreen = '/notification-screen';
   static const String myPageScreen = '/my-page-screen';
+  static const String ingredientScreen = '/ingredient-screen';
 }
