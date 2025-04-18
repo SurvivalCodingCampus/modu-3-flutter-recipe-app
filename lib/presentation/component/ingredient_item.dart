@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/core/ui/color_styles.dart';
 import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/domain/model/ingredient.dart';
+import 'package:recipe_app/domain/model/ingredient_with_amount.dart';
 
 class IngredientItem extends StatelessWidget {
-  final Ingredient ingredient;
+  final IngredientWithAmount ingredientWithAmount;
 
-  const IngredientItem({super.key, required this.ingredient});
+  const IngredientItem({super.key, required this.ingredientWithAmount});
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +29,23 @@ class IngredientItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: ColorStyles.white,
                   borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(image: NetworkImage(ingredient.image))
+                  image: DecorationImage(image: NetworkImage(ingredientWithAmount.ingredient.image))
                 ),
               ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    ingredient.name,
+                    ingredientWithAmount.ingredient.name,
                     style: TextStyles.normalBold(color: ColorStyles.labelColor),
                     textAlign: TextAlign.left,
                   ),
                 ),
               ),
-              // Text(
-              //   ingredient.,
-              //   style: TextStyles.smallRegular(color: ColorStyles.gray3),
-              // ),
+              Text(
+                '${ingredientWithAmount.amount}g',
+                style: TextStyles.smallRegular(color: ColorStyles.gray3),
+              ),
             ],
           ),
         ),

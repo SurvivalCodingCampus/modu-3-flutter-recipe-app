@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/domain/model/user.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/toggle_bookmark_use_case.dart';
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
   final GetSavedRecipesUseCase _getSavedRecipesUseCase;
   final ToggleBookmarkUseCase _toggleBookmarkUseCase;
 
@@ -29,11 +28,9 @@ class SavedRecipesViewModel with ChangeNotifier {
   // // ======================== 임시 나중에 처리할 것 ===============================
 
   SavedRecipesViewModel({
-    required RecipeRepository recipeRepository,
     required GetSavedRecipesUseCase getSavedRecipesUseCase,
     required ToggleBookmarkUseCase toggleBookmarkUseCase,
-  }) : _recipeRepository = recipeRepository,
-       _getSavedRecipesUseCase = getSavedRecipesUseCase,
+  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase,
        _toggleBookmarkUseCase = toggleBookmarkUseCase {
     _state = state.copyWith(isLoading: true);
   }
@@ -48,6 +45,5 @@ class SavedRecipesViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: true);
     await _toggleBookmarkUseCase.execute(id);
     fetchSavedRecipes();
-    notifyListeners();
   }
 }

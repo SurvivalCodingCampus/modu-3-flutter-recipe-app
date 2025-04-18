@@ -9,6 +9,7 @@ class RecipeCard extends StatelessWidget {
   final void Function(int id) onBookmark;
   final Recipe recipe;
   final bool isBookmarked;
+  final bool showTitle;
 
   const RecipeCard({
     super.key,
@@ -16,6 +17,7 @@ class RecipeCard extends StatelessWidget {
     required this.onClick,
     required this.onBookmark,
     required this.isBookmarked,
+    required this.showTitle,
   });
 
   @override
@@ -90,7 +92,8 @@ class RecipeCard extends StatelessWidget {
             children: [
               Expanded(
                 flex: 3,
-                child: Padding(
+                child: showTitle ?
+                Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -108,7 +111,8 @@ class RecipeCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
+                )
+                    : Container()
               ),
               Expanded(
                 flex: 2,

@@ -22,12 +22,14 @@ class ButtonWidget extends StatefulWidget {
   final VoidCallback onClick;
   final ButtonSize buttonSize;
   final String buttonText;
+  final bool showIcon;
 
   const ButtonWidget({
     super.key,
     required this.buttonSize,
     required this.buttonText,
     required this.onClick,
+    this.showIcon = true,
   });
 
   @override
@@ -79,8 +81,14 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                   ButtonSize.small => TextStyles.smallBold(color: ColorStyles.white),
                 },
               ),
-              SizedBox(width: 20,),
-              Icon(Icons.arrow_forward_outlined, color: ColorStyles.white, size: 20,)
+              widget.showIcon == true
+                  ? Row(
+                    children: [
+                      SizedBox(width: 20,),
+                      Icon(Icons.arrow_forward_outlined, color: ColorStyles.white, size: 20,)
+                    ],
+                  )
+                  : SizedBox.shrink()
             ],
           ),
         ),
