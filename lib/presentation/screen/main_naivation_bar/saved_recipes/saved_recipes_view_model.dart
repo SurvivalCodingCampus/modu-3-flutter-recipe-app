@@ -6,13 +6,13 @@ import 'package:recipe_app/domain/use_case/get_recipes_by_ids_user_case.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/saved_recipes/state/saved_recipe_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
-  final GetLoginUserInfo _getLoginUserInfo; // 로그인 회원
+  final GetLoginUserInfoUseCase _getLoginUserInfo; // 로그인 회원
   final GetBookMarkedRecipesIdUseCase
   _getBookMarkedRecipesIdUseCase; // 북마크 아이디목록 가져오기
   final GetRecipesByIdsUserCase _getRecipesByIdsUserCase; // 북마크된 레시피 가져오기
 
   SavedRecipesViewModel({
-    required GetLoginUserInfo getLoginUserInfo,
+    required GetLoginUserInfoUseCase getLoginUserInfo,
     required GetBookMarkedRecipesIdUseCase getBookMarkedRecipesIdUseCase,
     required GetRecipesByIdsUserCase getRecipesByIdsUserCase,
   }) : _getLoginUserInfo = getLoginUserInfo,
