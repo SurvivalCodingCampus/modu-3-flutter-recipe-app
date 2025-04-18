@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source.dart';
 import 'package:recipe_app/data/data_source/mock_user_data_source.dart';
@@ -32,22 +33,7 @@ final router = GoRouter(
       path: Routes.ingredient,
       builder: (context, state) {
         final recipeId = int.parse(state.pathParameters["recipeId"]!);
-        final viewModel = IngredientViewModel(
-          getSavedRecipesUseCase: GetSavedRecipesUseCase(
-            userRepository: MockUserRepositoryImpl(
-              userDataSource: MockUserDataSource(),
-            ),
-            bookmarkRepository: BookmarkRepositoryImpl(
-              userDataSource: MockUserDataSource(),
-            ),
-            recipeRepository: MockRecipeRepositoryImpl(
-              recipeDataSource: MockRecipeDataSource(
-                client: http.Client(),
-                url: 'url',
-              ),
-            ),
-          ),
-        );
+        final IngredientViewModel viewModel = getIt();
 
         viewModel.loadRecipe(recipeId);
         viewModel.getUserModel(4);
@@ -63,36 +49,14 @@ final router = GoRouter(
           path: Routes.home,
           builder:
               (context, state) => HomeScreen(
-                viewModel: SearchRecipesViewModel(
-                  recipeRepository: MockRecipeRepositoryImpl(
-                    recipeDataSource: MockRecipeDataSource(
-                      client: http.Client(),
-                      url: 'testUrl',
-                    ),
-                  ),
-                ),
+                viewModel: getIt(),
               ),
         ),
         GoRoute(
           path: Routes.savedRecipes,
           builder:
               (context, state) => SavedRecipesScreen(
-                viewModel: SavedRecipesViewModel(
-                  getSavedRecipesUseCase: GetSavedRecipesUseCase(
-                    userRepository: MockUserRepositoryImpl(
-                      userDataSource: MockUserDataSource(),
-                    ),
-                    bookmarkRepository: BookmarkRepositoryImpl(
-                      userDataSource: MockUserDataSource(),
-                    ),
-                    recipeRepository: MockRecipeRepositoryImpl(
-                      recipeDataSource: MockRecipeDataSource(
-                        client: http.Client(),
-                        url: 'url',
-                      ),
-                    ),
-                  ),
-                ),
+                viewModel: getIt(),
               ),
         ),
       ],
@@ -108,14 +72,7 @@ final router = GoRouter(
       path: Routes.search,
       builder:
           (context, state) => SearchRecipesScreen(
-            viewModel: SearchRecipesViewModel(
-              recipeRepository: MockRecipeRepositoryImpl(
-                recipeDataSource: MockRecipeDataSource(
-                  client: http.Client(),
-                  url: 'testUrl',
-                ),
-              ),
-            ),
+            viewModel: getIt(),
           ),
     ),
   ],
