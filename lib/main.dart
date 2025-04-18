@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/di/di_set.dart';
 import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 
 void main() {
+  di();
   runApp(const MyApp());
 }
 

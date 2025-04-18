@@ -1,11 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/di/di_set.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/data/data_source/procedure_data_source_impl.dart';
-import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
-import 'package:recipe_app/data/repository/procedure_repository_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
-import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/screen/ingreident_root.dart';
@@ -60,9 +55,7 @@ final router = GoRouter(
     GoRoute(
       path: Routes.searchRecipes,
       builder: (context, state) {
-        final viewModel = SearchRecipesViewModel(
-          RecipeRepositoryImpl(RecipeDataSourceImpl()),
-        );
+        final SearchRecipesViewModel viewModel = getIt();
 
         viewModel.findRecipes();
 
@@ -74,10 +67,7 @@ final router = GoRouter(
       path: '${Routes.ingredientRecipes}/:id',
       builder: (context, state) {
         final int id = int.parse(state.pathParameters['id']!);
-        final IngredientViewModel viewModel = IngredientViewModel(
-          RecipeRepositoryImpl(RecipeDataSourceImpl()),
-          ProcedureRepositoryImpl(ProcedureDataSourceImpl()),
-        );
+        final IngredientViewModel viewModel = getIt();
 
         viewModel.findRecipeById(id);
 
@@ -117,12 +107,7 @@ final router = GoRouter(
             GoRoute(
               path: Routes.savedRecipes,
               builder: (context, state) {
-                final viewModel = SavedRecipesViewModel(
-                  GetSavedRecipesUseCase(
-                    BookmarkRepositoryImpl(),
-                    RecipeRepositoryImpl(RecipeDataSourceImpl()),
-                  ),
-                );
+                final SavedRecipesViewModel viewModel = getIt();
 
                 viewModel.findRecipes();
 
