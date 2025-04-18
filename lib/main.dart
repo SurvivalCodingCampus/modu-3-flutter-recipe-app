@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/routing/router.dart';
-import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
-import 'package:recipe_app/presentation/home/home_screen.dart';
-import 'package:recipe_app/presentation/home/home_view_model.dart';
+
+import 'core/di/di_setup.dart';
 
 void main() {
+  diSetup();
+
   runApp(const MyApp());
 }
 
