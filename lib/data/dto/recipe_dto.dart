@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:recipe_app/data/dto/dto.dart';
-import 'package:recipe_app/domain/model/ingredient.dart';
 
 part 'recipe_dto.g.dart';
 

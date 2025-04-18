@@ -4,27 +4,27 @@ import 'package:recipe_app/domain/repository/repository.dart';
 import 'package:recipe_app/presentation/search/search_state.dart';
 
 class SearchViewModel with ChangeNotifier {
-  final RecipeRepository _repository;
+  final RecipeRepository _recipeRepository;
   SearchState _state = const SearchState();
 
   List<Recipe> _previousSearchedRecipes = [];
 
-  SearchState get state => _state;
+  SearchViewModel({required RecipeRepository recipeRepository})
+    : _recipeRepository = recipeRepository;
 
-  SearchViewModel({required RecipeRepository repository})
-    : _repository = repository;
+  SearchState get state => _state;
 
   Future<void> getRecentSearchRecipes() async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    final recipes = await _repository.getRecipes();
+    final recipes = await _recipeRepository.getRecipes();
     _state = state.copyWith(recipes: recipes);
     notifyListeners();
   }
 
   void getSearchedRecipes(String text) async {
-    final allRecipes = await _repository.getRecipes();
+    final allRecipes = await _recipeRepository.getRecipes();
     if (text.isEmpty) {
       _state = state.copyWith(
         recipes: _previousSearchedRecipes,
@@ -56,7 +56,7 @@ class SearchViewModel with ChangeNotifier {
     final allRecipes =
         _previousSearchedRecipes.isNotEmpty
             ? _previousSearchedRecipes // 검색 결과가 있다면 그 결과만 필터링
-            : await _repository.getRecipes(); // 아니면 전체 레시피
+            : await _recipeRepository.getRecipes(); // 아니면 전체 레시피
 
     final filteredData =
         allRecipes
