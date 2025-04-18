@@ -4,23 +4,32 @@ import 'package:recipe_app/core/presentation/pages/base_screen.dart';
 import 'package:recipe_app/core/presentation/widgets/tab/app_tabbar.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
-import 'package:recipe_app/feature/receipe/data/data_source/info/mock/mock_recipe_info_data_source_impl.dart';
-import 'package:recipe_app/feature/receipe/data/repository/info/recipe_info_repository_impl.dart';
-import 'package:recipe_app/feature/receipe/domain/use_case/info/get_recipe_info_use_case.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_view_model.dart';
 import 'package:recipe_app/feature/receipe/presentation/widgets/follow_button.dart';
 import 'package:recipe_app/feature/receipe/presentation/widgets/ingredient_item.dart';
 import 'package:recipe_app/feature/receipe/presentation/widgets/recipe_card.dart';
 
-final _viewModel = RecipeInfoViewModel(
-  GetRecipeInfoUseCase(
-    RecipeInfoRepositoryImpl(MockRecipeInfoDataSourceImpl()),
-  ),
-);
-
-class RecipeInfoScreen extends StatelessWidget {
+class RecipeInfoScreen extends StatefulWidget {
   final int id;
-  const RecipeInfoScreen({required this.id, super.key});
+  final RecipeInfoViewModel viewModel;
+  const RecipeInfoScreen({
+    required this.id,
+    required this.viewModel,
+    super.key,
+  });
+
+  @override
+  State<RecipeInfoScreen> createState() => _RecipeInfoScreenState();
+
+  static const List<String> _tabs = ['Ingredient', 'Procedure'];
+}
+
+class _RecipeInfoScreenState extends State<RecipeInfoScreen> {
+  @override
+  void initState() {
+    widget.viewModel.getRecipeInfo(widget.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +41,14 @@ class RecipeInfoScreen extends StatelessWidget {
           actions: const [Icon(Icons.more_horiz), SizedBox(width: 20)],
         ),
         child: ListenableBuilder(
-          listenable: _viewModel..getRecipeInfo(id),
+          listenable: widget.viewModel..getRecipeInfo(widget.id),
           builder: (context, child) {
-            final recipe = _viewModel.state.recipe;
+            final recipe = widget.viewModel.state.recipe;
             if (recipe == null) {
-              return const Text('data');
+              return const Center(child: CircularProgressIndicator());
             }
             return StateHandling(
-              _viewModel.state.state,
+              widget.viewModel.state.state,
               complete: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Column(
@@ -115,7 +124,10 @@ class RecipeInfoScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: AppTabBar(tabs: _tabs, onValueChange: (val) {}),
+                      child: AppTabBar(
+                        tabs: RecipeInfoScreen._tabs,
+                        onValueChange: (val) {},
+                      ),
                     ),
                     const SizedBox(height: 22),
                     Row(
@@ -169,6 +181,4 @@ class RecipeInfoScreen extends StatelessWidget {
       ),
     );
   }
-
-  static const List<String> _tabs = ['Ingredient', 'Procedure'];
 }

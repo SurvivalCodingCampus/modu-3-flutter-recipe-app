@@ -2,25 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/modules/state/state_handling.dart';
 import 'package:recipe_app/core/style/app_color.dart';
-import 'package:recipe_app/feature/receipe/data/repository/home/recipe_repository_impl.dart';
-import 'package:recipe_app/feature/receipe/data/data_source/home/mock/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/core/presentation/pages/base_screen.dart';
-import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/bookmark_recipes_use_case.dart';
-import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/feature/receipe/presentation/widgets/recipe_card.dart';
 
-final _viewModel = SavedRecipesViewModel(
-  getSavedRecipesUseCase: GetSavedRecipesUseCase(
-    RecipeRepositoryImpl(MockRecipeDataSourceImpl()),
-  ),
-  bookmarkRecipesUseCase: BookmarkRecipesUseCase(
-    RecipeRepositoryImpl(MockRecipeDataSourceImpl()),
-  ),
-);
-
 class SavedRecipesScreen extends StatelessWidget {
-  const SavedRecipesScreen({super.key});
+  final SavedRecipesViewModel viewModel;
+  const SavedRecipesScreen(this.viewModel, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +18,10 @@ class SavedRecipesScreen extends StatelessWidget {
         backgroundColor: AppColor.white,
       ),
       child: ListenableBuilder(
-        listenable: _viewModel..fetchRecipes(),
+        listenable: viewModel..fetchRecipes(),
         builder: (context, child) {
-          final viewState = _viewModel.state.viewState;
-          final recipes = _viewModel.state.data;
+          final viewState = viewModel.state.viewState;
+          final recipes = viewModel.state.data;
 
           return StateHandling(
             viewState,
@@ -46,7 +34,7 @@ class SavedRecipesScreen extends StatelessWidget {
                   final id = recipe.id;
                   return RecipeCard.fromModel(
                     recipe: recipe,
-                    bookmarkTap: () => _viewModel.bookmarkRecipe(id),
+                    bookmarkTap: () => viewModel.bookmarkRecipe(id),
                     cardTap:
                         () => context.pushNamed(
                           'info',
