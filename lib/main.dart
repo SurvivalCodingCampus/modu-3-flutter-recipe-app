@@ -4,7 +4,6 @@ import 'package:recipe_app/presentation/ingredient/splash/splash_screen.dart';
 import 'core/routing/routes.dart';
 
 void main() {
-
   diSetup();
   runApp(const MyApp());
 }
