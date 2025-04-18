@@ -22,9 +22,9 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   SearchRecipesViewModel({
     required GetSavedRecipesUseCase getSavedRecipesUseCase,
-    Debouncer? debouncer,
+    required Debouncer debouncer,
   }) : _getSavedRecipesUseCase = getSavedRecipesUseCase,
-       _debouncer = debouncer ?? Debouncer(delay: const Duration(milliseconds: 500));
+       _debouncer = debouncer;
 
   Future<void> fetchSearchRecipes() async {
     _searchRecipesMainState = searchRecipesMainState.copyWith(isLoading: true, errorMessage: null);

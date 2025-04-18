@@ -1,15 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/book_mark_repository_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
-import 'package:recipe_app/domain/use_case/get_recipe_info_use_case.dart';
-import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
-import 'package:recipe_app/domain/use_case/toggle_favorite_use_case.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_scene.dart';
-import 'package:recipe_app/presentation/ingredient/ingredient_state.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/not_found_screen.dart';
@@ -41,18 +34,9 @@ class AppRouter {
         path: Routes.ingredient,
         builder: (context, state) {
           try {
-            final id =
-                state.pathParameters[RoutesParameters
-                    .ingredientRecipeIdParameter]!;
+            final id = state.pathParameters[RoutesParameters.ingredientRecipeIdParameter]!;
             return IngredientScreen(
-              viewModel: IngredientViewModel(
-                state: IngredientState(id: id),
-                getRecipeInfoUseCase: GetRecipeInfoUseCase(
-                  recipeRepository: RecipeRepositoryImpl(
-                    recipeDataSource: RecipeDataSourceImpl(),
-                  ),
-                ),
-              ),
+              viewModel: getIt<IngredientViewModel>(param1: id),
             );
           } catch (e) {
             // 404
@@ -80,18 +64,7 @@ class AppRouter {
                 path: Routes.favorites,
                 builder:
                     (context, state) => SavedRecipesScreen(
-                      savedRecipesViewModel: SavedRecipesViewModel(
-                        getSavedRecipesUseCase: GetSavedRecipesUseCase(
-                          recipeRepository: RecipeRepositoryImpl(
-                            recipeDataSource: RecipeDataSourceImpl(),
-                          ),
-                        ),
-                        toggleFavoriteUseCase: ToggleFavoriteUseCase(
-                          bookmarkRepository: BookmarkRepositoryImpl(
-                            recipeDataSource: RecipeDataSourceImpl(),
-                          ),
-                        ),
-                      ),
+                      savedRecipesViewModel: getIt<SavedRecipesViewModel>(),
                     ),
               ),
             ],
