@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/presentation/page/splash/splash_screen.dart';
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
 
 void main() {
+  DiSetup().diSetUp();
   runApp(MyApp());
 }
 
