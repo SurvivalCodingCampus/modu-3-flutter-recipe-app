@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/core/enums/category_filter.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/presentation/component/filter_search_state.dart';

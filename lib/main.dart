@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/presentation/ingredient/splash/splash_screen.dart';
 import 'core/routing/routes.dart';
 
 void main() {
+
+  diSetup();
   runApp(const MyApp());
 }
 

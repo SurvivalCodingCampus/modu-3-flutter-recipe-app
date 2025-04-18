@@ -41,6 +41,7 @@ class SavedRecipesScreen extends StatelessWidget {
                               (recipe) => Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: RecipeCard(
+                                  showTitle: true,
                                   recipe: recipe,
                                   isBookmarked: true,
                                   onClick: (int id) {
