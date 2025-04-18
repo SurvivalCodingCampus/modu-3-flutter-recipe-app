@@ -34,7 +34,7 @@ final router = GoRouter(
       path: Routes.ingredient,
       builder:
           (context, state) => IngredientScreen(
-            viewModel: ingredientScreenViewModel,
+            viewModel: getIt(),
             recipeId: int.parse(state.pathParameters['id']!),
           ),
     ),
@@ -53,10 +53,7 @@ final router = GoRouter(
               path: Routes.bookmarks,
               builder:
                   (context, state) => SavedRecipesScreen(
-                    viewModel: SavedRecipesViewModel(
-                      getSavedRecipesUseCase,
-                      removeSavedRecipesUseCase,
-                    ),
+                    viewModel: SavedRecipesViewModel(getIt(), getIt()),
                   ),
             ),
           ],
