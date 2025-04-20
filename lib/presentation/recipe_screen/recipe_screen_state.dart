@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/data/model/procedure_model.dart';
-
 import '../../data/model/recipe_ingredient.dart';
 import '../../data/model/recipe_model.dart';
 

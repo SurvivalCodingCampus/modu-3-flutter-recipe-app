@@ -7,6 +7,7 @@ import '../../model/recipe_ingredient.dart';
 
 class MockRecipeRepositoryImpl implements RecipeRepository {
   final List<Recipe> _recipes = [];
+
   MockRecipeRepositoryImpl() {
     _recipes.addAll([
       Recipe(
@@ -68,6 +69,7 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
       ),
     ]);
   }
+
   @override
   Future<List<Recipe>> getRecipes() async {
     await Future.delayed(Duration(seconds: 1));
@@ -93,5 +95,17 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
   Future<Recipe> getRecipeById(String recipeId) async {
     await Future.delayed(Duration(seconds: 1));
     return _recipes.firstWhere((recipe) => recipe.id.toString() == recipeId);
+  }
+
+  @override
+  Future<List<RecipeIngredient>> getIngredientsByRecipe(String recipeId) {
+    // TODO: implement getIngredientsByRecipe
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Procedure>> getProceduresByRecipe(String recipeId) {
+    // TODO: implement getProceduresByRecipe
+    throw UnimplementedError();
   }
 }

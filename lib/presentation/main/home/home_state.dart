@@ -10,13 +10,13 @@ class HomeState with _$HomeState {
   final List<Recipe> filteredRecipes;
   final List<String> categoryList;
   final bool isLoading;
-  final String keyword;
+  final String selectedCategory;
 
   const HomeState({
     this.filteredRecipes = const [],
     this.recipes = const [],
     this.isLoading = false,
-    this.keyword = '',
+    this.selectedCategory = 'All',
     this.categoryList = const [
       'All',
       'Cereal',
