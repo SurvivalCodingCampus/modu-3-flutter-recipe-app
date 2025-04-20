@@ -7,6 +7,7 @@ import '../../data/repository/recipe_repository/recipe_repository_impl.dart';
 import '../../domain/use_case/get_ingredient_by_use_case.dart';
 import '../../domain/use_case/get_procedure_by_use_case.dart';
 import '../../domain/use_case/get_recipe_by_use_case.dart';
+import '../../domain/use_case/get_recipe_use_case.dart';
 import '../../domain/use_case/get_saved_recipes_use_case.dart';
 import '../../domain/use_case/toggle_book_mark_use_case.dart';
 import '../../presentation/main/home/home_view_model.dart';
@@ -24,6 +25,7 @@ void diSetup() {
 
   // useCase
   getIt.registerSingleton<GetRecipeByUseCase>(GetRecipeByUseCase(getIt()));
+  getIt.registerSingleton<GetRecipeUseCase>(GetRecipeUseCase(getIt()));
   getIt.registerSingleton<GetIngredientByUseCase>(
     GetIngredientByUseCase(getIt()),
   );

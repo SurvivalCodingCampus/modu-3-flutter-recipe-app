@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/presentation/component/new_recipe_card.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 
 import '../../../ui/text_styles.dart';
@@ -26,6 +27,9 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final recipes = widget.viewModel.state.recipes;
+    final filteredRecipes = widget.viewModel.state.filteredRecipes;
+
     return Scaffold(
       body: ListenableBuilder(
         listenable: widget.viewModel,
@@ -75,7 +79,7 @@ class _Home extends State<Home> {
                 children: [
                   Expanded(
                     child: ConstrainedBox(
-                      constraints: BoxConstraints(maxHeight: 45),
+                      constraints: const BoxConstraints(maxHeight: 45),
                       child: TextField(
                         style: TextStyles.smallerRegular.copyWith(fontSize: 11),
                         textAlign: TextAlign.left,
@@ -99,7 +103,7 @@ class _Home extends State<Home> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: ColorStyles.gray4),
                           ),
-                          contentPadding: EdgeInsets.all(10),
+                          contentPadding: const EdgeInsets.all(10),
                         ),
                       ),
                     ),
@@ -119,14 +123,14 @@ class _Home extends State<Home> {
               ),
 
               const SizedBox(height: 30),
+
               SizedBox(
                 height: 220,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: widget.viewModel.state.filteredRecipes.length,
+                  itemCount: filteredRecipes.length,
                   itemBuilder: (context, index) {
-                    final recipe =
-                        widget.viewModel.state.filteredRecipes[index];
+                    final recipe = filteredRecipes[index];
                     return RecommendCard(
                       category: recipe.category,
                       imageUrl: recipe.imageUrl,
@@ -143,6 +147,34 @@ class _Home extends State<Home> {
               ),
 
               const SizedBox(height: 30),
+
+              Text(
+                'New Recipes',
+                style: TextStyles.largeBold.copyWith(fontSize: 18),
+              ),
+
+              const SizedBox(height: 16),
+
+              SizedBox(
+                height: 90,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: recipes.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 12),
+                  itemBuilder: (context, index) {
+                    final recipe = recipes[index];
+                    return NewRecipeCard(
+                      imageUrl: recipe.imageUrl,
+                      title: recipe.name,
+                      chefName: recipe.chef,
+                      time: '${recipe.time} mins',
+                      rating: recipe.rating,
+                    );
+                  },
+                ),
+              ),
+
+              const SizedBox(height: 40),
             ],
           );
         },

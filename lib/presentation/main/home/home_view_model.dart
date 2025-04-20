@@ -53,4 +53,19 @@ class HomeViewModel with ChangeNotifier {
         )
         .toList();
   }
+
+  Future<void> getAllRecipes() async {
+    _state = _state.copyWith(isLoading: true);
+    notifyListeners();
+
+    try {
+      final recipes = await getRecipeUseCase.execute();
+      _allRecipes = recipes;
+
+      _state = _state.copyWith(isLoading: false, recipes: recipes);
+    } catch (e) {
+      _state = _state.copyWith(isLoading: false);
+    }
+    notifyListeners();
+  }
 }
