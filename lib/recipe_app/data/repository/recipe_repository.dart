@@ -7,3 +7,6 @@ abstract class RecipeRepository {
 
   Future<List<Recipe>> filterRecipes(String filter);
 }
+
+//구현체 data , domain 인터페이스
+//result 패턴 usecase에도 해도되고 repository에 해도됨
