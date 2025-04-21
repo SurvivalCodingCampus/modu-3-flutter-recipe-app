@@ -17,8 +17,5 @@ class ToggleBookmarkUseCase {
     } else {
       user.bookmarks.add(id);
     }
-
-    // 북마크가 수정된 user 업로드
-    await _userRepository.updateUser(user);
   }
 }
