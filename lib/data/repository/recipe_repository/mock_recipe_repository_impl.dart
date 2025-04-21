@@ -98,14 +98,16 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<List<RecipeIngredient>> getIngredientsByRecipe(String recipeId) {
-    // TODO: implement getIngredientsByRecipe
-    throw UnimplementedError();
+  Future<List<RecipeIngredient>> getIngredientsByRecipe(String recipeId) async {
+    await Future.delayed(Duration(seconds: 1));
+    final recipe = await getRecipeById(recipeId);
+    return recipe.ingredients;
   }
 
   @override
-  Future<List<Procedure>> getProceduresByRecipe(String recipeId) {
-    // TODO: implement getProceduresByRecipe
-    throw UnimplementedError();
+  Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
+    await Future.delayed(Duration(seconds: 1));
+    final recipe = await getRecipeById(recipeId);
+    return recipe.procedures;
   }
 }
