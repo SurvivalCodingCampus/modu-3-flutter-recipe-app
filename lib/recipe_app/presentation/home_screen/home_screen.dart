@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles.dart';
+
+import '../../core/routing/routes.dart';
 
 class HomeScreen extends StatelessWidget {
   final FilterSearchViewModel filterSearchViewModel;
@@ -51,6 +54,9 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       child: TextField(
                         textAlignVertical: TextAlignVertical.center,
+                        onTap: () {
+                          context.push(Routes.searchRecipes);
+                        },
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(3),
                           border: OutlineInputBorder(

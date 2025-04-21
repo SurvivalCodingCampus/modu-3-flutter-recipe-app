@@ -10,6 +10,7 @@ import 'package:recipe_app/recipe_app/domain/use_case/get_saved_recipes_use_case
 import 'package:recipe_app/recipe_app/domain/use_case/remove_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
+import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/splash_screen/splash_screen_view_model.dart';
 
 final getIt = GetIt.instance;
@@ -38,6 +39,9 @@ void diSetUp() {
   );
   getIt.registerFactory<FilterSearchViewModel>(
     () => FilterSearchViewModel(getIt()),
+  );
+  getIt.registerFactory<SearchRecipesViewModel>(
+    () => SearchRecipesViewModel(getIt()),
   );
   getIt.registerFactory<SplashScreenViewModel>(() => SplashScreenViewModel());
 }
