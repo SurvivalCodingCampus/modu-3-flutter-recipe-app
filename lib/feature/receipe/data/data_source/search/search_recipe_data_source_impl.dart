@@ -13,4 +13,10 @@ class RecipeDataSourceImpl implements SearchRecipeDataSource {
     // TODO: implement getRecentSearchText
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> saveRecentSearchText(String text) {
+    // TODO: implement saveRecentSearchText
+    throw UnimplementedError();
+  }
 }

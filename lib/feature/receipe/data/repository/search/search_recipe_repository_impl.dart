@@ -30,4 +30,13 @@ class SearchRecipeRepositoryImpl implements SearchRecipeRepository {
       return const Error(NetworkException());
     }
   }
+
+  @override
+  Future<Result<void>> saveRecentSearchText(String text) async {
+    try {
+      return Result.success(await _dataSource.saveRecentSearchText(text));
+    } catch (e) {
+      return const Result.error(NetworkException());
+    }
+  }
 }
