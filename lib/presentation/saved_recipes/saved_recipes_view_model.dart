@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/core/error/ui_state.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
-import 'package:recipe_app/domain/usecase/get_bookmarked_recipes_usecase.dart';
-import 'package:recipe_app/domain/usecase/toggle_bookmark_usecase.dart';
+import 'package:recipe_app/domain/usecase/get_bookmarked_recipes_use_case.dart';
+import 'package:recipe_app/domain/usecase/toggle_bookmark_use_case.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {

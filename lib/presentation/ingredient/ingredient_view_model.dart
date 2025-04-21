@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/error/ui_state.dart';
-import 'package:recipe_app/domain/usecase/get_recipe_by_id_usecase.dart';
-import 'package:recipe_app/domain/usecase/set_recipe_rating_usecase.dart';
+import 'package:recipe_app/domain/usecase/get_recipe_by_id_use_case.dart';
+import 'package:recipe_app/domain/usecase/set_recipe_rating_use_case.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_state.dart';
 
 class IngredientViewModel with ChangeNotifier {
