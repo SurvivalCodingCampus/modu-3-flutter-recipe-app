@@ -15,6 +15,7 @@ import 'package:recipe_app/domain/repository/recipe/recipe_repository.dart';
 import 'package:recipe_app/domain/repository/step/step_repository.dart';
 import 'package:recipe_app/domain/use_case/saved_recipe/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -34,6 +35,7 @@ void diSetup() {
 
   // ViewModel
   getIt.registerFactory(() => SavedRecipesViewModel(getIt(), getIt()));
+  getIt.registerFactory(() => SearchRecipesViewModel(getIt()));
 
   // UseCase
   getIt.registerSingleton(

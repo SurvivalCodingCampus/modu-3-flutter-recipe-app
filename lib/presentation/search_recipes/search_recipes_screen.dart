@@ -40,11 +40,18 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
             Row(
               spacing: 20,
               children: [
-                SearchInputField(
-                  placeholder: 'Search recipes',
-                  onValueChange: (value) {
-                    widget._viewModel.searchRecipes(value);
-                  },
+                Hero(
+                  tag: 'Search',
+                  child: Material(
+                    child: SearchInputField(
+                      isRead: false,
+                      placeholder: 'Search recipes',
+                      onValueChange: (value) {
+                        widget._viewModel.searchRecipes(value);
+                      },
+                      onTap: () {},
+                    ),
+                  ),
                 ),
                 Container(
                   height: 40,

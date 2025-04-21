@@ -4,17 +4,13 @@ import 'package:recipe_app/domain/use_case/saved_recipe/get_saved_recipes_use_ca
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
-  final GetSavedRecipesUseCase _case;
+  final GetSavedRecipesUseCase _getSavedRecipesUseCase;
   final RecipeRepository _recipeRepository;
-  final Set<int> _bookmarkedRecipes = {};
-  Set<int> get bookmarkedRecipes => _bookmarkedRecipes;
 
   SavedRecipesState _state = SavedRecipesState();
   SavedRecipesState get state => _state;
 
-  SavedRecipesViewModel(this._case, this._recipeRepository) {
-    loadRecipes(1);
-  }
+  SavedRecipesViewModel(this._getSavedRecipesUseCase, this._recipeRepository);
 
   Future<void> fetchRecipes() async {
     _state = state.copyWith(isLoading: true);
@@ -32,34 +28,38 @@ class SavedRecipesViewModel with ChangeNotifier {
     notifyListeners();
 
     try {
-      final savedRecipes = await _case.excute(userId);
+      final savedRecipes = await _getSavedRecipesUseCase.excute(userId);
 
-      _state = state.copyWith(recipes: savedRecipes, isLoading: false);
+      _state = state.copyWith(
+        recipes: savedRecipes,
+        isLoading: false,
+        bookmarkedRecipes: savedRecipes.map((e) => e.id).toSet(),
+      );
     } catch (e) {
       _state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
     notifyListeners();
   }
 
-  Future<void> loadRecipes(int userId) async {
-    if (_bookmarkedRecipes.isEmpty) {
-      await fetchRecipes();
+  void toggleBookmark(int recipeId) {
+    final updatedBookmarks = Set<int>.from(_state.bookmarkedRecipes);
+
+    if (updatedBookmarks.contains(recipeId)) {
+      updatedBookmarks.remove(recipeId);
+      notifyListeners();
     } else {
-      await fetchSavedRecipes(userId);
+      updatedBookmarks.add(recipeId);
+      notifyListeners();
     }
-  }
 
-  void addBookmark(int recipeId) {
-    if (_bookmarkedRecipes.contains(recipeId)) return;
+    _state = state.copyWith(
+      bookmarkedRecipes: updatedBookmarks,
+      recipes:
+          _state.recipes
+              .where((element) => updatedBookmarks.contains(element.id))
+              .toList(),
+    );
 
-    _bookmarkedRecipes.add(recipeId);
-    notifyListeners();
-  }
-
-  void removeBookmark(int recipeId) {
-    if (!_bookmarkedRecipes.contains(recipeId)) return;
-
-    _bookmarkedRecipes.remove(recipeId);
     notifyListeners();
   }
 }
