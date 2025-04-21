@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- int get count; List<Map<String, dynamic>> get searchData;
+ List<Map<String, dynamic>> get searchData;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.count, count) || other.count == count)&&const DeepCollectionEquality().equals(other.searchData, searchData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&const DeepCollectionEquality().equals(other.searchData, searchData));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,count,const DeepCollectionEquality().hash(searchData));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(searchData));
 
 @override
 String toString() {
-  return 'HomeState(count: $count, searchData: $searchData)';
+  return 'HomeState(searchData: $searchData)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- List<Map<String, dynamic>> searchData, int count
+ List<Map<String, dynamic>> searchData
 });
 
 
@@ -63,11 +63,10 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? searchData = null,Object? count = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? searchData = null,}) {
   return _then(HomeState(
 searchData: null == searchData ? _self.searchData : searchData // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>,count: null == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
-as int,
+as List<Map<String, dynamic>>,
   ));
 }
 

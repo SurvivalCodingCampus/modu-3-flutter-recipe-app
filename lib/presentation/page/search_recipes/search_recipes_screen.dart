@@ -30,7 +30,6 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   void initState() {
     super.initState();
     _controller.addListener(_onTextChanged);
-    print("searchResult ${widget.searchResult}");
     widget.viewModel.getRecipes(beforeSearchList: widget.searchResult);
   }
 
@@ -71,7 +70,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                           alignment: Alignment.centerLeft,
                           child: IconButton(
                             onPressed: () {
-                              context.pop();
+                              context.pop(widget.viewModel.state.filterRecipes);
                             },
                             icon: Icon(Icons.arrow_back_outlined),
                           ),

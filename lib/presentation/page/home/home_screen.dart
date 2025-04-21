@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/presentation/common/component/nav_bar_component.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
@@ -65,15 +66,27 @@ class HomeScreen extends StatelessWidget {
                           child: TextField(
                             autofocus: false,
                             onTap: () {
-                              print("viewModel.state.searchData ${viewModel.state.searchData}");
-                              context.push("/search", extra: viewModel.state.searchData).then((value) {
-                                if(value != null) {
-                                  final result = (value as List).cast<Map<String, dynamic>>();
-                                  print("result $result");
-                                  viewModel.getSearchData(searchData: result);
-                                }
-                              });
-
+                              print(
+                                "viewModel.state.searchData ${viewModel.state.searchData}",
+                              );
+                              context
+                                  .push(
+                                    "/search",
+                                    extra: viewModel.state.searchData,
+                                  )
+                                  .then((value) {
+                                    if (value != null) {
+                                      final result =
+                                          (value as List).cast<Recipe>();
+                                      print("result $result");
+                                      viewModel.getSearchData(
+                                        searchData:
+                                            result
+                                                .map((items) => items.toJson())
+                                                .toList(),
+                                      );
+                                    }
+                                  });
                             },
 
                             decoration: InputDecoration(

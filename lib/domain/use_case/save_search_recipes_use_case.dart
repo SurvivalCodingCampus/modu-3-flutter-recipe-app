@@ -31,6 +31,6 @@ class SaveSearchRecipesUseCase {
     final List<Recipe> searchRecipesList =
         allRecipesList.where((items) => items.name.contains(text)).toList();
 
-    return searchRecipesList;
+    return text.isNotEmpty ?  searchRecipesList : allRecipesList;
   }
 }

@@ -45,7 +45,7 @@ class SearchRecipesViewModel with ChangeNotifier {
   }
 
   void searchRecipes({required String keyWord}) async {
-    _state = _state.copyWith(isSearchLoading: true);
+    _state = _state.copyWith(isSearchLoading: true, searchKeyWord: keyWord);
     notifyListeners();
 
     _state = _state.copyWith(
@@ -60,13 +60,13 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   void filterSearchRecipes({
     required Map<String, dynamic> filterMap,
-    String? keyWord,
   }) async {
     List<Recipe> targetList;
 
-    print('filterMap $filterMap');
 
-    if (keyWord != null) {
+    String keyWord = _state.searchKeyWord;
+
+    if (keyWord != '') {
       targetList = await _saveSearchRecipesUseCase.searchFilterRecipesList(
         text: keyWord,
       );
@@ -74,17 +74,21 @@ class SearchRecipesViewModel with ChangeNotifier {
       targetList = await _recipeRepository.getAllRecipeList();
     }
 
-    // if (filterMap["selectTimeString"] != '') {
+    // if (filterMap["selectTimeString"] == '' &&
+    //     filterMap["selectCategoryString"] == '' &&
+    //     filterMap["selectRateString"] == '') {
     //   targetList ==
-    //       targetList
-    //           .where((items) => items.time == filterMap["selectTimeString"])
-    //           .toList();
+    //       await _saveSearchRecipesUseCase.searchFilterRecipesList(text: '');
     // }
 
     if (filterMap["selectRateString"] != '') {
       targetList =
           targetList
-              .where((items) => items.rating.toInt().toString() == filterMap["selectRateString"])
+              .where(
+                (items) =>
+                    items.rating.toInt().toString() ==
+                    filterMap["selectRateString"],
+              )
               .toList();
     }
 
