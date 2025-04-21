@@ -24,7 +24,7 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _state = widget.state;
+    _state = widget.state.copyWith();
   }
 
   @override
@@ -83,7 +83,9 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                       Icons.star,
                     ],
                     onSelected: (index) {
-                      _state = _state.copyWith(rateIndex: index);
+                      setState(() {
+                        _state = _state.copyWith(rateIndex: index);
+                      });
                     },
                   ),
                 ],
@@ -103,42 +105,43 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                     options: FilterSearchBottomSheetState.categories,
                     icons: const [null, null, null, Icons.star],
                     onSelected: (indicies) {
-                      _state = _state.copyWith(categoryIndicies: indicies);
+                      setState(() {
+                        _state = _state.copyWith(categoryIndicies: indicies);
+                      });
                     },
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 100, right: 100),
-                child: GestureDetector(
-                  onTap: () {
-                    widget.onApply(_state);
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    spacing: 10,
-                    children: [
-                      Container(
-                        height: 37,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: ColorStyles.primary100,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Filter',
-                            style: TextStyles.smallTextBold.copyWith(
-                              color: ColorStyles.white,
-                            ),
+              GestureDetector(
+                onTap: () {
+                  widget.onApply(_state);
+                  Navigator.pop(context);
+                },
+                child: Row(
+                  spacing: 10,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 174,
+                      height: 37,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: ColorStyles.primary100,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Filter',
+                          style: TextStyles.smallTextBold.copyWith(
+                            color: ColorStyles.white,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
