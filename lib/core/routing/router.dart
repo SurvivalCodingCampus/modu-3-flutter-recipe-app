@@ -42,33 +42,46 @@ final GoRouter router = GoRouter(
         );
       },
     ),
-    ShellRoute(
-      builder: (context, state, child) {
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+
         return Scaffold(
-          body: Column(
+          resizeToAvoidBottomInset: true,
+          backgroundColor: ColorStyle.white,
+          body: Stack(
             children: [
-              Expanded(child: child),
-              NavBarComponent(nowPageState: GoRouterState.of(context).fullPath),
+              Positioned.fill(child: navigationShell),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0 - MediaQuery.of(context).viewInsets.bottom,
+                // bottom: 0,
+                child: NavBarComponent(
+                  nowPageState: GoRouterState.of(context).fullPath,
+                ),
+              ),
             ],
           ),
-          backgroundColor: ColorStyle.white,
         );
       },
-      routes: [
-        GoRoute(
-          path: Routes.home,
-          pageBuilder:
-              (context, state) => NoTransitionPage(
-                child: HomeScreen(viewModel: HomeViewModel()),
-              ),
-        ),
-
-        GoRoute(
-          path: Routes.savedRecipes,
-          pageBuilder:
-              (context, state) => NoTransitionPage(
-                child: SavedRecipesScreen(viewModel: getIt()),
-              ),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.home,
+              pageBuilder:
+                  (context, state) => NoTransitionPage(
+                    child: HomeScreen(viewModel: HomeViewModel()),
+                  ),
+            ),
+            GoRoute(
+              path: Routes.savedRecipes,
+              pageBuilder:
+                  (context, state) => NoTransitionPage(
+                    child: SavedRecipesScreen(viewModel: getIt()),
+                  ),
+            ),
+          ],
         ),
       ],
     ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/page/home/home_state.dart';
 
-HomeState _state = HomeState();
-
 class HomeViewModel with ChangeNotifier {
+  HomeState _state = HomeState();
   HomeState get state => _state;
 
   void getSearchData({required List<Map<String, dynamic>> searchData}) {
