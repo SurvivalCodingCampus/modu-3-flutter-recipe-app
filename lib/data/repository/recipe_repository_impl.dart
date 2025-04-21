@@ -12,14 +12,13 @@ class RecipeRepositoryImpl implements RecipeRepository {
 
   @override
   Future<Result<List<Recipe>, RecipeError>> findAll() async {
-    final result = await _dataSource.fetch();
+    final List<Recipe> result = await _dataSource.fetch();
 
-    switch (result) {
-      case Success(:final data):
-        return Success(data);
-      case Failure(:final error):
-        return Failure(error);
+    if (result.isEmpty) {
+      return const Failure(RecipeError.notFound);
     }
+
+    return Success(result);
   }
 
   @override
@@ -42,13 +41,12 @@ class RecipeRepositoryImpl implements RecipeRepository {
   Future<Result<List<Recipe>, RecipeError>> findAllByFilter(
     bool Function(Recipe) predicate,
   ) async {
-    final result = await _dataSource.fetch();
+    final List<Recipe> result = await _dataSource.fetch();
 
-    switch (result) {
-      case Success(:final data):
-        return Success(data.where(predicate).toList());
-      case Failure(:final error):
-        return Failure(error);
+    if (result.isEmpty) {
+      return const Failure(RecipeError.notFound);
     }
+
+    return Success(result.where(predicate).toList());
   }
 }

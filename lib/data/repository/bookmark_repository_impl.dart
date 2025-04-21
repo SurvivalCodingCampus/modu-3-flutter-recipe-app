@@ -16,14 +16,10 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
 
   @override
   Future<void> init() async {
-    final Result<List<Recipe>, RecipeError> recipes = await _dataSource.fetch();
+    final List<Recipe> recipes = await _dataSource.fetch();
 
-    switch (recipes) {
-      case Success(:final List<Recipe> data):
-        _bookmarks = data.where((recipe) => recipe.bookmarked).toList();
-        break;
-      case Failure(error: final RecipeError error):
-        throw error;
+    if (recipes.isEmpty) {
+      _bookmarks = recipes.where((recipe) => recipe.bookmarked).toList();
     }
 
     _initialized = true;
