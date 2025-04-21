@@ -1,9 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
-import 'package:recipe_app/core/network/network_status_checker_impl.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/presentation/splash/splash_view_model.dart';
-import '../../data/repository/mock_recipe_repository_impl.dart';
 import '../../presentation/main/add/add_screen.dart';
 import '../../presentation/main/app_scaffold.dart';
 import '../../presentation/main/bookmark/bookmark_screen.dart';
@@ -12,7 +9,6 @@ import '../../presentation/main/notification/notification_screen.dart';
 import '../../presentation/main/profile_screen/profile_screen.dart';
 import '../../presentation/saved_recipes/saved_recipes_screen.dart';
 import '../../presentation/search_recipes/search_recipes_screen.dart';
-import '../../presentation/search_recipes/search_recipes_view_model.dart';
 import '../../presentation/sign_in/sign_in_screen.dart';
 import '../../presentation/sign_up/sign_up_screen.dart';
 import '../../presentation/splash/splash_screen.dart';
@@ -24,7 +20,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: Routes.splash,
-      builder: (context, state) => SplashScreen(viewModel: SplashViewModel(networkStatusChecker: MockNetwrokStatusCheckerImpl())),
+      builder: (context, state) => SplashScreen(viewModel: getIt()),
       routes: [
         GoRoute(
           path: Routes.signIn_,

@@ -7,7 +7,6 @@ import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 
 import '../../core/routing/routes.dart';
 import '../component/medium_Button.dart';
-import '../component/rating_dialog.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
 
@@ -34,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
           case AirplaneModeError():
             setState(() {
               // TODO: 버튼 비활성화 구현
-
             });
             ScaffoldMessenger.of(
               context,

@@ -1,5 +1,5 @@
-import 'package:recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/data/repository/recipe_ropository.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/domain/repository/recipe_ropository.dart';
 
 class MockRecipeRepositoryImpl implements RecipeRepository {
   
