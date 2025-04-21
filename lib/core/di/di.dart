@@ -9,6 +9,7 @@ import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/recipe_detail/recipe_detail_state.dart';
 import 'package:recipe_app/presentation/recipe_detail/recipe_detail_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipe/get_saved_recipe_use_case.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipe_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 
 import '../../data/data_source/chef/chef_data_source.dart';
@@ -45,7 +46,7 @@ void diSetup() {
 
   getIt.registerFactory(() => SavedRecipeViewModel(getIt()));
   getIt.registerFactory(() => SplashViewModel());
-
+  getIt.registerFactory(() => SearchRecipeViewModel(getIt()));
   getIt.registerFactoryParam<RecipeDetailViewModel, RecipeDetailState, void>((state, _) =>
       RecipeDetailViewModel(
           chefRepository: getIt(),

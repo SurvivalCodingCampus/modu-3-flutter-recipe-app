@@ -5,8 +5,9 @@ import '../../ui/text.dart';
 
 class MediumButton extends StatelessWidget {
   final VoidCallback onClick;
+  final String name;
 
-  const MediumButton({super.key, required this.onClick});
+  const MediumButton({super.key, required this.onClick, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class MediumButton extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                'Start Cooking',
+                name,
                 style: TextStyles.normalTextRegular.copyWith(
                   color: Colors.white,
                 ),
