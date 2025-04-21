@@ -5,20 +5,20 @@ import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart
 import '../../data/model/recipe.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
+  final RecipeRepository recipeRepository;
 
   //상태
   SearchRecipesState _state = const SearchRecipesState();
 
   SearchRecipesState get state => _state;
 
-  SearchRecipesViewModel(this._recipeRepository);
+  SearchRecipesViewModel({required this.recipeRepository});
 
   void fetchRecipes() async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    List<Recipe> recipes = await _recipeRepository.getRecipes();
+    List<Recipe> recipes = await recipeRepository.getRecipes();
     _state = state.copyWith(
       recipes: recipes,
       filteredRecipes: recipes,

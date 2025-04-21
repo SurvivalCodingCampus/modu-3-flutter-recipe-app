@@ -18,7 +18,8 @@ class AppScaffold extends StatelessWidget {
           bottom: false //하단 세이프 영역을 무시하여 콘텐츠가 네비게이션 바 뒤까지 확장되어 보이도록 함
       ),
 
-      extendBody: true,
+      extendBody: true, //하단 영역을 끝까지 확장
+
       floatingActionButton: FloatingActionButton(
         onPressed: () => shell.goBranch(NavigationItemType.values.indexOf(NavigationItemType.add)),
         backgroundColor: Colors.blue,
