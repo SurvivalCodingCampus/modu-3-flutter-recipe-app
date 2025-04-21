@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository_impl.dart';
@@ -21,7 +22,10 @@ void main() {
     final router = GoRouter(
       initialLocation: '/',
       routes: [
-        GoRoute(path: '/', builder: (context, state) => SplashScreen()),
+        GoRoute(
+          path: '/',
+          builder: (context, state) => SplashScreen(viewModel: getIt()),
+        ),
         GoRoute(
           path: Routes.signIn,
           builder: (context, state) => const Scaffold(body: SignInScreen()),

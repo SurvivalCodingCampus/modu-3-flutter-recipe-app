@@ -21,7 +21,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: Routes.splash,
-      builder: (context, state) => const SplashScreen(),
+      builder: (context, state) => SplashScreen(viewModel: getIt()),
     ),
     GoRoute(
       path: Routes.signIn,
