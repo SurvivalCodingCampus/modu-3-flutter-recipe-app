@@ -32,7 +32,6 @@ class _SearchScreenState extends State<SearchScreen> {
     final filterSearchViewModel = FilterSearchViewModel(widget.viewModel);
     return BaseScreen(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back_ios),
         backgroundColor: AppColor.white,
         title: const Text('Search recipes'),
       ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/router/routes.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
 import 'package:recipe_app/core/presentation/pages/base_screen.dart';
@@ -50,17 +52,23 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: 30),
-            Row(
-              children: [
-                Expanded(
-                  child: SearchTextfield(
-                    controller: _search,
-                    onChanged: (val) {},
+            GestureDetector(
+              onTap: () {
+                context.push(AppRoutes.search);
+              },
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SearchTextfield(
+                      controller: _search,
+                      onChanged: (val) {},
+                      enabled: false,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                FilterSearchButton(() {}),
-              ],
+                  const SizedBox(width: 10),
+                  FilterSearchButton(() {}),
+                ],
+              ),
             ),
           ],
         ),
