@@ -23,7 +23,7 @@ class MockRecipeDataSource implements RecipeDataSource {
 
       return Result.success(recipes);
     } catch (e) {
-      return const Result.error(RecipeError.networkError);
+      return const Result.failure(RecipeError.networkError);
     }
   }
 }
