@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/di.dart';
 import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 void main() {
   runApp(const App());
+  diSetUp();
 }
 
 class App extends StatelessWidget {
