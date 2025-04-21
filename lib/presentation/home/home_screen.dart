@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/data/dto/dto.dart';
 import 'package:recipe_app/presentation/component/filter_icon_button.dart';
 import 'package:recipe_app/presentation/component/search_text_field.dart';
 import 'package:recipe_app/ui/ui.dart';
@@ -49,9 +48,12 @@ class HomeScreen extends StatelessWidget {
                       onTap: onTapSearch,
                       behavior: HitTestBehavior.opaque,
                       child: const IgnorePointer(
-                        child: SearchTextField(
-                          placeholder: 'Search recipe',
-                          isReadOnly: true,
+                        child: SizedBox(
+                          height: 40,
+                          child: SearchTextField(
+                            placeholder: 'Search recipe',
+                            isReadOnly: true,
+                          ),
                         ),
                       ),
                     ),
@@ -60,6 +62,7 @@ class HomeScreen extends StatelessWidget {
                   const FilterIconButton(),
                 ],
               ),
+              const SizedBox(width: 15),
             ],
           ),
         ),
