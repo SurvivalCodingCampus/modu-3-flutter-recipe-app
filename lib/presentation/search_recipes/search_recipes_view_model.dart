@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/result.dart';
+import 'package:recipe_app/domain/error/recipe_error.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
@@ -21,8 +23,18 @@ class SearchRecipesViewModel with ChangeNotifier {
   Future<void> fetchAll() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
-    List<Recipe> recipes = await _getSavedRecipesUseCase.execute();
-    _state = _state.copyWith(recipes: recipes, isLoading: false);
+    Future<Result<List<Recipe>, RecipeError>> result =
+        await _getSavedRecipesUseCase.execute();
+
+    switch (result) {
+      case Success(:final List<Recipe> data):
+        _state = _state.copyWith(recipes: data, isLoading: false);
+        break;
+      case Failure(:final RecipeError error):
+        _state = _state.copyWith(error: error, isLoading: false);
+        break;
+    }
+
     notifyListeners();
   }
 
@@ -35,22 +47,30 @@ class SearchRecipesViewModel with ChangeNotifier {
     _state = _state.copyWith(query: query, isLoading: true);
     notifyListeners();
 
-    final List<Recipe> recipes = await _searchRecipesUseCase.execute(query);
+    final Result<List<Recipe>, RecipeError> result = await _searchRecipesUseCase
+        .execute(query);
 
-    _state = _state.copyWith(
-      recipes:
-          recipes
-              .where(
-                (recipe) =>
-                    recipe.rating ==
-                    FilterSearchBottomSheetState.rates[state
-                        .bottomSheetFilter
-                        .rateIndex],
-              )
-              .toList(),
-    );
+    switch (result) {
+      case Success(:final List<Recipe> data):
+        _state = _state.copyWith(
+          recipes:
+              data
+                  .where(
+                    (recipe) =>
+                        recipe.rating ==
+                        FilterSearchBottomSheetState.rates[state
+                            .bottomSheetFilter
+                            .rateIndex],
+                  )
+                  .toList(),
+          isLoading: false,
+        );
+        break;
+      case Failure(:final RecipeError error):
+        _state = _state.copyWith(error: error, isLoading: false);
+        break;
+    }
 
-    _state = _state.copyWith(isLoading: false);
     notifyListeners();
   }
 }
