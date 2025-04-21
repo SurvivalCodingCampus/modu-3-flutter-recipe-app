@@ -35,6 +35,7 @@ class FilterScreen extends StatelessWidget {
               _SectionTitle('Time'),
               _FilterWrap(
                 items: viewModel.state.timeList,
+                selectedItem: viewModel.state.selectedTime,
                 onSelected: (v) => viewModel.updateTime(v.first),
               ),
 
@@ -42,6 +43,7 @@ class FilterScreen extends StatelessWidget {
               _SectionTitle('Rate'),
               RatingButton(
                 rate: 5,
+                selectedItem: viewModel.state.rate,
                 onSelected: (v) => viewModel.updateRate(v.first),
               ),
 
@@ -49,6 +51,7 @@ class FilterScreen extends StatelessWidget {
               _SectionTitle('Category'),
               _FilterWrap(
                 items: viewModel.state.categoryList,
+                selectedItem: viewModel.state.selectedCategory,
                 onSelected: (v) => viewModel.updateCategory(v.first),
               ),
 
@@ -80,6 +83,7 @@ class FilterScreen extends StatelessWidget {
 
 class _SectionTitle extends StatelessWidget {
   final String text;
+
   const _SectionTitle(this.text);
 
   @override
@@ -91,9 +95,14 @@ class _SectionTitle extends StatelessWidget {
 
 class _FilterWrap extends StatelessWidget {
   final List<String> items;
+  final String? selectedItem;
   final Function(List<String>) onSelected;
 
-  const _FilterWrap({required this.items, required this.onSelected});
+  const _FilterWrap({
+    required this.items,
+    required this.onSelected,
+    this.selectedItem,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +113,11 @@ class _FilterWrap extends StatelessWidget {
         children:
             items
                 .map(
-                  (item) => FilterButton(text: [item], onSelected: onSelected),
+                  (item) => FilterButton(
+                    text: [item],
+                    isSelected: item == selectedItem,
+                    onSelected: onSelected,
+                  ),
                 )
                 .toList(),
       ),
@@ -116,5 +129,6 @@ class FilterResult {
   final String? category;
   final int? rate;
   final String? time;
+
   FilterResult({this.category, this.rate, this.time});
 }
