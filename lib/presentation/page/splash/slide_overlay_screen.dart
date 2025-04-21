@@ -36,6 +36,8 @@ class _SlideOverlayScreenState extends State<SlideOverlayScreen>
     if (widget.show) {
       _controller.forward();
     }
+
+
   }
 
   @override
