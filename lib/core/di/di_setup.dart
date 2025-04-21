@@ -15,6 +15,7 @@ import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/filter_search_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -57,4 +58,5 @@ void diSetup() {
   getIt.registerFactory(
     () => IngredientViewModel(getSavedRecipesUseCase: getIt()),
   );
+  getIt.registerFactory(() => SplashViewModel(),);
 }
