@@ -15,8 +15,4 @@ class MockUserRepositoryImpl implements UserRepository {
   Future<User> getUser() async {
     return _user;
   }
-
-  @override
-  Future<void> updateUser(User updatedUser) async {
-  }
 }
