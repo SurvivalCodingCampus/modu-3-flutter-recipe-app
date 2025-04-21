@@ -8,8 +8,9 @@ class FilterCategoryUseCase {
     required FilterCategoryRepository filterCategoryRepository,
   }) : _filterCategoryRepository = filterCategoryRepository;
 
-  Future<List<Recipe>> execute(int rate, String category) async {
+  Future<List<Recipe>> execute(String time, int rate, String category) async {
     return await _filterCategoryRepository.filterRecipesByCategory(
+      time,
       rate,
       category,
     );

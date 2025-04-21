@@ -10,8 +10,9 @@ class FilterCategoryRepositoryImpl implements FilterCategoryRepository {
 
   @override
   Future<List<Recipe>> filterRecipesByCategory(
-    int rate,
-    String category,
+    String? time,
+    int? rate,
+    String? category,
   ) async {
     final recipeList = await _recipeDataSource.getRecipeData();
     final recipesByCategory =
@@ -19,7 +20,7 @@ class FilterCategoryRepositoryImpl implements FilterCategoryRepository {
             .where(
               (e) =>
                   e.rate.toInt() == rate &&
-                  e.category.toLowerCase() == category.toLowerCase(),
+                  e.category.toLowerCase() == category!.toLowerCase(),
             )
             .toList();
     return recipesByCategory;

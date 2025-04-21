@@ -46,12 +46,16 @@ class FilterSearchViewModel with ChangeNotifier {
   }
 
   //view에서 검색어가 포함된 레시피 가져오는 메서드
-  Future<void> filterRecipesByCategory(int rate, String category) async {
+  Future<void> filterRecipesByCategory(
+    String time,
+    int rate,
+    String category,
+  ) async {
     try {
       _filterSearchState = filterSearchState.copyWith(isRecipesLoading: true);
       notifyListeners();
 
-      final filtered = await _useCase.execute(rate, category);
+      final filtered = await _useCase.execute(time, rate, category);
       _filteredRecipes = filtered;
       _filterSearchState = _filterSearchState.copyWith(
         filteredRecipes: filtered,

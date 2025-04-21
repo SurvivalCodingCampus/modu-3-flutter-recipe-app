@@ -13,7 +13,7 @@ class RatingButton extends StatefulWidget {
 }
 
 class _RatingButtonState extends State<RatingButton> {
-  int? selectedRate;
+  int selectedRate = 1;
 
   @override
   Widget build(BuildContext context) {

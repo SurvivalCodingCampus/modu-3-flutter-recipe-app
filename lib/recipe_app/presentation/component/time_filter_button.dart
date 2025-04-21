@@ -12,7 +12,7 @@ class TimeFilterButton extends StatefulWidget {
 }
 
 class _TimeFilterButtonState extends State<TimeFilterButton> {
-  String? selectedFilter;
+  String selectedFilter = 'All';
 
   @override
   Widget build(BuildContext context) {
