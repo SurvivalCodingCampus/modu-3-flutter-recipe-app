@@ -38,9 +38,6 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
             child: ListenableBuilder(
               listenable: widget.viewModel,
               builder: (context, child) {
-                print(
-                  "serached recipes : ${widget.viewModel.state.recipeList}\n",
-                );
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

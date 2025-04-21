@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/di/di_setup.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/filter_list.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
 import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/presentation/search_recipes/filter_search_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
@@ -78,15 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       FilterList(
                         ontap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return FilterSearchBottomSheet(
-                                viewModel: FilterSearchViewModel(),
-                                searchViewModel: widget.viewModel,
-                              );
-                            },
-                          );
+                          context.push(Routes.search);
                         },
                       ),
                     ],
