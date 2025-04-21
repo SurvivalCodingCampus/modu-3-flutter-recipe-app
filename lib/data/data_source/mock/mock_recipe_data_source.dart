@@ -182,7 +182,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg",
       "chef": "Alice Johnson",
       "time": "25 min",
-      "rating": 4.5,
+      "rating": 4.0,
       "ingredients": [
         {
           "ingredient": {
@@ -243,7 +243,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2019/05/15/18/56/pizza-4205701_1280.jpg",
       "chef": "Mario Batali",
       "time": "15 min",
-      "rating": 4.3,
+      "rating": 4.0,
       "bookmarked": false,
       "ingredients": [
         {
@@ -265,7 +265,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2017/10/15/11/41/sushi-2853382_1280.jpg",
       "chef": "Jiro Ono",
       "time": "60 min",
-      "rating": 4.8,
+      "rating": 4.0,
       "bookmarked": false,
       "ingredients": [
         {
@@ -296,7 +296,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2016/03/03/16/19/food-1234483_1280.jpg",
       "chef": "Julia Child",
       "time": "40 min",
-      "rating": 4.6,
+      "rating": 4.0,
       "bookmarked": false,
       "ingredients": [
         {
@@ -318,7 +318,7 @@ final mockData = {
           "https://cdn.pixabay.com/photo/2016/11/22/18/52/cake-1850011_1280.jpg",
       "chef": "Paul Hollywood",
       "time": "30 min",
-      "rating": 4.9,
+      "rating": 5.0,
       "bookmarked": true,
       "ingredients": [
         {

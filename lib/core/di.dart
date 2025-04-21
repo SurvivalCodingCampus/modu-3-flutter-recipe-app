@@ -29,7 +29,7 @@ void diSetUp() {
     () => SavedRecipesViewModel(getIt(), getIt()),
   );
   getIt.registerFactory<SearchRecipesViewModel>(
-    () => SearchRecipesViewModel(getIt(), getIt()),
+    () => SearchRecipesViewModel(getIt()),
   );
 
   getIt.registerSingleton<SearchRecipesUseCase>(SearchRecipesUseCase(getIt()));

@@ -5,12 +5,38 @@ import 'package:recipe_app/domain/repository/recipe_repository.dart';
 
 class SearchRecipesUseCase {
   final RecipeRepository _recipeRepository;
+  List<Recipe> _recentRecipes = [];
 
   SearchRecipesUseCase(this._recipeRepository);
 
-  Future<Result<List<Recipe>, RecipeError>> execute(String query) async {
-    return await _recipeRepository.findAllByFilter(
-      (e) => e.name.toLowerCase().contains(query.toLowerCase()),
-    );
+  List<Recipe> get recentRecipes => _recentRecipes;
+
+  Future<Result<List<Recipe>, RecipeError>> execute(
+    String query,
+    int rating,
+  ) async {
+    Result<List<Recipe>, RecipeError> recipes = await _recipeRepository
+        .findAllByFilter(
+          (e) =>
+              e.name.toLowerCase().contains(query.toLowerCase()) &&
+              e.rating >= rating,
+        );
+
+    switch (recipes) {
+      case Success(:final List<Recipe> data):
+        final merged = [..._recentRecipes, ...data];
+
+        final deduplicated =
+            {for (var recipe in merged) recipe.id: recipe}.values.toList();
+
+        _recentRecipes =
+            deduplicated.length > 8
+                ? deduplicated.sublist(deduplicated.length - 8)
+                : deduplicated;
+
+        return recipes;
+      case Failure(:final error):
+        return Failure(error);
+    }
   }
 }
