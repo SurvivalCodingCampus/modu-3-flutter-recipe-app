@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
@@ -8,6 +10,7 @@ class SearchField extends StatelessWidget {
   final String value;
   final void Function(String changed) onValueChange;
   final VoidCallback onFilterPressed;
+  final bool isGoSearchScreen;
 
   const SearchField({
     super.key,
@@ -15,6 +18,7 @@ class SearchField extends StatelessWidget {
     required this.value,
     required this.onValueChange,
     required this.onFilterPressed,
+    this.isGoSearchScreen = false,
   });
 
   @override
@@ -65,7 +69,10 @@ class SearchField extends StatelessWidget {
         ),
         const SizedBox(width: 10), // 검색창과 필터 버튼 사이 간격 추가
         GestureDetector(
-          onTap: onFilterPressed,
+          onTap:
+              isGoSearchScreen
+                  ? () => context.push(Routes.search)
+                  : onFilterPressed,
           child: Container(
             height: 40,
             width: 40,

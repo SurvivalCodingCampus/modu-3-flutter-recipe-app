@@ -57,6 +57,7 @@ class HomeScreen extends StatelessWidget {
                   value: '',
                   onValueChange: (value) {},
                   onFilterPressed: () {},
+                  isGoSearchScreen: true,
                 ),
               ],
             ),

@@ -1,7 +1,7 @@
 import 'package:recipe_app/data/data_source/procedure_data_source.dart';
 import 'package:recipe_app/data/mepper/prcedures_mepper.dart';
 import 'package:recipe_app/domain/model/procedure/procedure.dart';
-import 'package:recipe_app/domain/roepositpry/procedure_repository.dart';
+import 'package:recipe_app/domain/repository/procedure_repository.dart';
 
 class ProcedureRepositoryImpl implements ProcedureRepository {
   final ProcedureDataSource _dataSource;

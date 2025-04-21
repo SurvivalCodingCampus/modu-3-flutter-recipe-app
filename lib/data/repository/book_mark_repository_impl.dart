@@ -1,11 +1,11 @@
-import 'package:recipe_app/data/data_source/book_mark_data_soure_ipl.dart';
+import 'package:recipe_app/data/data_source/book_mark_data_source_impl.dart';
 import 'package:recipe_app/data/mepper/book_mark_mepper.dart';
 import 'package:recipe_app/domain/model/book_mark/book_mark.dart';
-import 'package:recipe_app/domain/roepositpry/book_mark_repository.dart';
+import 'package:recipe_app/domain/repository/book_mark_repository.dart';
 
 class BookMarkRepositoryImpl implements BookMarkRepository {
-  final BookMarkDataSoureIpl _dataSource;
-  BookMarkRepositoryImpl({required BookMarkDataSoureIpl dataSource})
+  final BookMarkDataSourceImpl _dataSource;
+  BookMarkRepositoryImpl({required BookMarkDataSourceImpl dataSource})
     : _dataSource = dataSource;
 
   @override

@@ -55,6 +55,12 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
         surfaceTintColor: ColorStyle.white,
         backgroundColor: ColorStyle.white,
         automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop(); // 뒤로가기 동작
+          },
+        ),
         title: Text(
           'Search recipe',
           style: AppTextStyles.mediumBold(color: ColorStyle.label),
@@ -169,8 +175,11 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
 
                     itemBuilder: (context, index) {
                       final recipe = recipes[index];
-                      return null;
-                      // return RecipeCard();
+                      return RecipeCard(
+                        recipe: recipe,
+                        isNotIconArea: true,
+                        onBookMarkTap: () {},
+                      );
                     },
                   );
                 },

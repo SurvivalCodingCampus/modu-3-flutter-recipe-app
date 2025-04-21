@@ -1,12 +1,13 @@
 import 'package:recipe_app/domain/model/user/user.dart';
-import 'package:recipe_app/domain/roepositpry/user_repository.dart';
+import 'package:recipe_app/domain/repository/user_repository.dart';
 
 class GetUserInfoUseCase {
-  final UserRepository userRepository;
+  final UserRepository _repository;
 
-  GetUserInfoUseCase({required this.userRepository});
+  GetUserInfoUseCase({required UserRepository repository})
+    : _repository = repository;
 
   Future<User> execute(String userName) async {
-    return await userRepository.getUser(userName);
+    return await _repository.getUser(userName);
   }
 }

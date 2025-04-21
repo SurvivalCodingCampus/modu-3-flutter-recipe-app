@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/filter/filter_enum.dart';
 import 'package:recipe_app/domain/model/recipe/recipe.dart';
-import 'package:recipe_app/domain/roepositpry/recipe_repository.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/state/search_recipe_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {

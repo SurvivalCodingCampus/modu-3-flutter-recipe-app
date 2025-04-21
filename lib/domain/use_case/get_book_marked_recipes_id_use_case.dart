@@ -1,12 +1,12 @@
-import 'package:recipe_app/domain/roepositpry/book_mark_repository.dart';
+import 'package:recipe_app/domain/repository/book_mark_repository.dart';
 
 class GetBookMarkedRecipesIdUseCase {
-  final BookMarkRepository _bookMarkRepository;
+  final BookMarkRepository _repository;
 
-  GetBookMarkedRecipesIdUseCase(this._bookMarkRepository);
-
+  GetBookMarkedRecipesIdUseCase({required BookMarkRepository repository})
+    : _repository = repository;
   Future<List<int>> execute(int userId) async {
-    final bookMark = await _bookMarkRepository.getSavedRecipe(userId);
+    final bookMark = await _repository.getSavedRecipe(userId);
     return bookMark.bookMarkedRecipesId;
   }
 }

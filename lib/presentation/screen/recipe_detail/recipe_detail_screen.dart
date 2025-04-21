@@ -41,7 +41,12 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           final procedure = widget.viewModel.state.procedure;
 
           if (isLoading || recipe == null) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(
+                color: ColorStyle.gray4,
+                strokeWidth: 3,
+              ),
+            );
           }
 
           return SafeArea(

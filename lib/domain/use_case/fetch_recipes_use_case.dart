@@ -1,5 +1,5 @@
 import 'package:recipe_app/domain/model/recipe/recipe.dart';
-import 'package:recipe_app/domain/roepositpry/recipe_repository.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
 
 class FetchRecipesUseCase {
   final RecipeRepository _repository;

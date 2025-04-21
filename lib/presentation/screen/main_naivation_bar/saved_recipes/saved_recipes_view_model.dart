@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/domain/use_case/get_book_marked_recipes_id_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_login_user_info_use_case.dart';
-import 'package:recipe_app/domain/use_case/get_recipes_by_ids_user_case.dart';
+import 'package:recipe_app/domain/use_case/get_recipes_by_ids_use_case.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/saved_recipes/state/saved_recipe_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
-  final GetLoginUserInfo _getLoginUserInfo; // 로그인 회원
+  final GetLoginUserInfoUseCase _getLoginUserInfo; // 로그인 회원
   final GetBookMarkedRecipesIdUseCase
   _getBookMarkedRecipesIdUseCase; // 북마크 아이디목록 가져오기
-  final GetRecipesByIdsUserCase _getRecipesByIdsUserCase; // 북마크된 레시피 가져오기
+  final GetRecipesByIdsUseCase _getRecipesByIdsUseCase; // 북마크된 레시피 가져오기
 
   SavedRecipesViewModel({
-    required GetLoginUserInfo getLoginUserInfo,
+    required GetLoginUserInfoUseCase getLoginUserInfo,
     required GetBookMarkedRecipesIdUseCase getBookMarkedRecipesIdUseCase,
-    required GetRecipesByIdsUserCase getRecipesByIdsUserCase,
+    required GetRecipesByIdsUseCase getRecipesByIdsUseCase,
   }) : _getLoginUserInfo = getLoginUserInfo,
        _getBookMarkedRecipesIdUseCase = getBookMarkedRecipesIdUseCase,
-       _getRecipesByIdsUserCase = getRecipesByIdsUserCase;
+       _getRecipesByIdsUseCase = getRecipesByIdsUseCase;
 
   SavedRecipeState _state = SavedRecipeState();
   SavedRecipeState get state => _state;
@@ -38,7 +38,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     }
 
     // Recipe 내용 조회
-    final recipes = await _getRecipesByIdsUserCase.execute(bookmarkedIds);
+    final recipes = await _getRecipesByIdsUseCase.execute(bookmarkedIds);
 
     _state = state.copyWith(
       isLoading: false,
