@@ -4,11 +4,13 @@ import 'package:recipe_app/ui/color_styles.dart';
 class SearchInput extends StatelessWidget {
   final String hintText;
   final Function(String query) onSubmitted;
+  final VoidCallback onTap;
 
   const SearchInput({
     super.key,
     required this.hintText,
     required this.onSubmitted,
+    required this.onTap,
   });
 
   @override
@@ -17,6 +19,7 @@ class SearchInput extends StatelessWidget {
       height: 40,
       child: TextField(
         onSubmitted: onSubmitted,
+        onTap: onTap,
         decoration: InputDecoration(
           hintText: hintText,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
