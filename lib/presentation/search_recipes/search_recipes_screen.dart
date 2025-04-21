@@ -9,9 +9,21 @@ import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
-class SearchRecipesScreen extends StatelessWidget {
+class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
   const SearchRecipesScreen({super.key, required this.viewModel});
+
+  @override
+  State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
+}
+
+class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.fetchAllRecipes();
+    widget.viewModel.whenOpenScreen();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +36,11 @@ class SearchRecipesScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: ListenableBuilder(
-              listenable: viewModel,
+              listenable: widget.viewModel,
               builder: (context, child) {
+                print(
+                  "serached recipes : ${widget.viewModel.state.recipeList}\n",
+                );
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -42,7 +57,9 @@ class SearchRecipesScreen extends StatelessWidget {
                             isSearch: true,
                             controller: TextEditingController(text: ''),
                             onValueChange: (String value) async {
-                              await viewModel.fetchSearchedRecipes(value);
+                              await widget.viewModel.fetchSearchedRecipes(
+                                value,
+                              );
                             },
                           ),
                         ),
@@ -53,7 +70,7 @@ class SearchRecipesScreen extends StatelessWidget {
                               builder: (context) {
                                 return FilterSearchBottomSheet(
                                   viewModel: FilterSearchViewModel(),
-                                  searchViewModel: viewModel,
+                                  searchViewModel: widget.viewModel,
                                 );
                               },
                             );
@@ -66,14 +83,14 @@ class SearchRecipesScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          viewModel.state.isSearched
+                          widget.viewModel.state.isSearched
                               ? "Search Result"
                               : "Recent Search",
                           style: TextStyles.normalTextBold,
                         ),
                         Text(
-                          viewModel.state.isSearched
-                              ? "${viewModel.state.recipeList.length} results"
+                          widget.viewModel.state.isSearched
+                              ? "${widget.viewModel.state.recipeList.length} results"
                               : "",
                           style: TextStyles.smallTextRegular.copyWith(
                             color: ColorStyles.gray3,
@@ -91,9 +108,10 @@ class SearchRecipesScreen extends StatelessWidget {
                         mainAxisSpacing: 15,
                         crossAxisSpacing: 15,
                       ),
-                      itemCount: viewModel.state.recipeList.length,
+                      itemCount: widget.viewModel.state.recipeList.length,
                       itemBuilder: (context, index) {
-                        List<Recipe> recipes = viewModel.state.recipeList;
+                        List<Recipe> recipes =
+                            widget.viewModel.state.recipeList;
                         if (recipes.isEmpty) {
                           return null;
                         }
