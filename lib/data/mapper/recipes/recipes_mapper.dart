@@ -11,4 +11,14 @@ extension RecipesMapper on Recipes {
       image: image ?? '',
     );
   }
+
+  // Map<String,dynamic> fromRecipe({required Recipe recipe}) {
+  //   return  {
+  //     'name' : recipe.name,
+  //     'author' : recipe.author,
+  //     'time' : recipe.time,
+  //     'rating' : recipe.rating,
+  //     'image' : recipe.image,
+  //   };
+  // }
 }

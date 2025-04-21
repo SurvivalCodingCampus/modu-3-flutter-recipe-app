@@ -8,6 +8,7 @@ import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/common/component/nav_bar_component.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/page/home/home_screen.dart';
+import 'package:recipe_app/presentation/page/home/home_view_model.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/page/search_recipes/search_recipes_screen.dart';
@@ -32,10 +33,14 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.signUp, builder: (context, state) => SignUpScreen()),
     GoRoute(
       path: Routes.search,
-      builder:
-          (context, state) => SearchRecipesScreen(
-            viewModel: DiSetup().getIt(),
-          ),
+      builder: (context, state) {
+        final data = (state.extra as List).cast<Map<String, dynamic>>();
+
+        return SearchRecipesScreen(
+          viewModel: getIt(),
+          searchResult: data ?? [],
+        );
+      },
     ),
     ShellRoute(
       builder: (context, state, child) {
@@ -53,16 +58,16 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: Routes.home,
           pageBuilder:
-              (context, state) => NoTransitionPage(child: HomeScreen()),
+              (context, state) => NoTransitionPage(
+                child: HomeScreen(viewModel: HomeViewModel()),
+              ),
         ),
 
         GoRoute(
           path: Routes.savedRecipes,
           pageBuilder:
               (context, state) => NoTransitionPage(
-                child: SavedRecipesScreen(
-                  viewModel: DiSetup().getIt(),
-                ),
+                child: SavedRecipesScreen(viewModel: getIt()),
               ),
         ),
       ],

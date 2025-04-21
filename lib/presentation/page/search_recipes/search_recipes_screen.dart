@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/common/component/recipe_search_card.dart';
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
@@ -11,7 +12,12 @@ import 'package:recipe_app/presentation/page/search_recipes/search_recipes_view_
 
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
-  const SearchRecipesScreen({super.key, required this.viewModel});
+  final List<Map<String, dynamic>> searchResult;
+  const SearchRecipesScreen({
+    super.key,
+    required this.viewModel,
+    required this.searchResult,
+  });
   @override
   State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
 }
@@ -24,6 +30,8 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   void initState() {
     super.initState();
     _controller.addListener(_onTextChanged);
+    print("searchResult ${widget.searchResult}");
+    widget.viewModel.getRecipes(beforeSearchList: widget.searchResult);
   }
 
   void _onTextChanged() async {
@@ -61,7 +69,15 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Icon(Icons.arrow_back_outlined),
+                          child: IconButton(
+                            onPressed: () {
+                              final result = widget.viewModel.saveWriteFile(
+                                text: _controller.text,
+                              );
+                              context.pop(result);
+                            },
+                            icon: Icon(Icons.arrow_back_outlined),
+                          ),
                         ),
                         Align(
                           alignment: Alignment.center,

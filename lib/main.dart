@@ -6,7 +6,7 @@ import 'package:recipe_app/presentation/page/splash/splash_screen.dart';
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
 
 void main() {
-  DiSetup().diSetUp();
+  diSetUp();
   runApp(MyApp());
 }
 

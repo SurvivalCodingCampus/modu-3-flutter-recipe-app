@@ -12,6 +12,7 @@ part of 'recipe.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
 mixin _$Recipe {
 
@@ -22,6 +23,8 @@ mixin _$Recipe {
 @pragma('vm:prefer-inline')
 $RecipeCopyWith<Recipe> get copyWith => _$RecipeCopyWithImpl<Recipe>(this as Recipe, _$identity);
 
+  /// Serializes this Recipe to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
@@ -29,7 +32,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Recipe&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.image, image) || other.image == image));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,name,author,time,rating,image);
 
@@ -78,11 +81,11 @@ as String,
 
 
 /// @nodoc
-
+@JsonSerializable()
 
 class _Recipe implements Recipe {
    _Recipe({required this.name, required this.author, required this.time, required this.rating, required this.image});
-  
+  factory _Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 
 @override final  String name;
 @override final  String author;
@@ -96,14 +99,17 @@ class _Recipe implements Recipe {
 @pragma('vm:prefer-inline')
 _$RecipeCopyWith<_Recipe> get copyWith => __$RecipeCopyWithImpl<_Recipe>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$RecipeToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Recipe&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.image, image) || other.image == image));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,name,author,time,rating,image);
 
