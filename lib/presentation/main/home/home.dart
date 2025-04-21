@@ -171,6 +171,8 @@ class _Home extends State<Home> {
                 height: 90,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: recipes.length,
                   separatorBuilder: (_, __) => const SizedBox(width: 12),
                   itemBuilder: (context, index) {

@@ -13,55 +13,46 @@ class HomeViewModel with ChangeNotifier {
 
   HomeState get state => _state;
 
-  List<Recipe> _allRecipes = [];
-
   Future<void> fetchRecipes() async {
-    _state = _state.copyWith(isLoading: true);
-    notifyListeners();
-
-    final recipes = await getRecipeUseCase.execute();
-    _allRecipes = recipes;
-
-    final filtered = _filterByCategory(_state.selectedCategory);
-    _state = _state.copyWith(
-      isLoading: false,
-      recipes: _allRecipes,
-      filteredRecipes: filtered,
-    );
-    notifyListeners();
-  }
-
-  void updateCategory(String category) {
-    _state = _state.copyWith(selectedCategory: category);
-    final filtered = _filterByCategory(category);
-    _state = _state.copyWith(filteredRecipes: filtered);
-    notifyListeners();
-  }
-
-  List<Recipe> _filterByCategory(String category) {
-    final normalizedCategory = category.trim().toLowerCase();
-    if (normalizedCategory == 'All') return _allRecipes;
-
-    return _allRecipes
-        .where(
-          (recipe) =>
-              recipe.category.trim().toLowerCase() == normalizedCategory,
-        )
-        .toList();
-  }
-
-  Future<void> getAllRecipes() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
     try {
       final recipes = await getRecipeUseCase.execute();
-      _allRecipes = recipes;
 
-      _state = _state.copyWith(isLoading: false, recipes: recipes);
+      final filtered = _filterByCategory(recipes, _state.selectedCategory);
+
+      _state = _state.copyWith(
+        isLoading: false,
+        recipes: recipes,
+        filteredRecipes: filtered,
+      );
     } catch (e) {
       _state = _state.copyWith(isLoading: false);
     }
+
     notifyListeners();
+  }
+
+  void updateCategory(String category) {
+    _state = _state.copyWith(selectedCategory: category);
+
+    final filtered = _filterByCategory(_state.recipes, category);
+    _state = _state.copyWith(filteredRecipes: filtered);
+    notifyListeners();
+  }
+
+  List<Recipe> _filterByCategory(List<Recipe> all, String category) {
+    final normalizedCategory = category.trim().toLowerCase();
+    if (normalizedCategory == 'all' || normalizedCategory.isEmpty) {
+      return all;
+    }
+
+    return all
+        .where(
+          (recipe) =>
+              recipe.category.trim().toLowerCase() == normalizedCategory,
+        )
+        .toList();
   }
 }
