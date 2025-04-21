@@ -19,7 +19,7 @@ class SplashViewModel with ChangeNotifier {
 
     if (!isAirplaneModeOn) {
       _eventController.add(
-        const SplashEvent.NetworkError('에어플레인 모드가 켜져있습니다.'),
+        const SplashEvent.airplaneModeError('에어플레인 모드가 켜져있습니다.'),
       );
     }
   }

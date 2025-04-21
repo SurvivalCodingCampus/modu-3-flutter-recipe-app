@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
+import 'package:recipe_app/core/network/network_status_checker_impl.dart';
 import 'package:recipe_app/core/routing/routes.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 import '../../data/repository/mock_recipe_repository_impl.dart';
 import '../../presentation/main/add/add_screen.dart';
 import '../../presentation/main/app_scaffold.dart';
@@ -22,7 +24,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: Routes.splash,
-      builder: (context, state) => SplashScreen(),
+      builder: (context, state) => SplashScreen(viewModel: SplashViewModel(networkStatusChecker: MockNetwrokStatusCheckerImpl())),
       routes: [
         GoRoute(
           path: Routes.signIn_,
