@@ -7,11 +7,17 @@ import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 import '../component/recipe_card.dart';
 import '../filter_screen/filter_screen.dart';
+import '../filter_screen/filter_screen_view_model.dart';
 
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
+  final FilterScreenViewModel filterScreenViewModel;
 
-  const SearchRecipesScreen({super.key, required this.viewModel});
+  const SearchRecipesScreen({
+    super.key,
+    required this.viewModel,
+    required this.filterScreenViewModel,
+  });
 
   @override
   State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
@@ -110,7 +116,10 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                               top: Radius.circular(50),
                             ),
                           ),
-                          builder: (context) => const FilterScreen(),
+                          builder:
+                              (context) => FilterScreen(
+                                viewModel: widget.filterScreenViewModel,
+                              ),
                         );
 
                         if (result != null) {
@@ -150,7 +159,6 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
 
                 const SizedBox(height: 16),
 
-                // 🍱 레시피 카드 목록
                 GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

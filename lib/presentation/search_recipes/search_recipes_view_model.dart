@@ -32,7 +32,6 @@ class SearchRecipesViewModel with ChangeNotifier {
     final cached = _useCase.lastCachedResults;
 
     if (cached == null) {
-      // 👉 캐시가 없으면 전체 fetch 실행
       await fetchInitialRecipes();
       return;
     }

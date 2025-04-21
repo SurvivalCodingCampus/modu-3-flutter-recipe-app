@@ -24,7 +24,10 @@ class MyRecipeApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: SearchRecipesScreen(viewModel: viewModel),
+      home: SearchRecipesScreen(
+        viewModel: viewModel,
+        filterScreenViewModel: getIt(),
+      ),
     );
   }
 }

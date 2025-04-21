@@ -8,12 +8,11 @@ import '../component/small_button.dart';
 import 'filter_screen_view_model.dart';
 
 class FilterScreen extends StatelessWidget {
-  const FilterScreen({super.key});
+  final FilterScreenViewModel viewModel;
+  const FilterScreen({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = FilterScreenViewModel();
-
     return ListenableBuilder(
       listenable: viewModel,
       builder: (context, child) {

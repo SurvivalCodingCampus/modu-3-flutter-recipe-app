@@ -43,7 +43,10 @@ final router = GoRouter(
     GoRoute(
       path: Routes.searchRecipes,
       builder: (context, state) {
-        return SearchRecipesScreen(viewModel: getIt());
+        return SearchRecipesScreen(
+          viewModel: getIt(),
+          filterScreenViewModel: getIt(),
+        );
       },
     ),
 
