@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:recipe_app/data/data_source/bookmark/bookmark_data_source_impl.dart';
-import 'package:recipe_app/data/data_source/recipe/recipe_data_source_impl.dart';
-import 'package:recipe_app/data/data_source/steps/steps_data_source_impl.dart';
-import 'package:recipe_app/data/repository/bookmark/bookmark_repository_impl.dart';
-import 'package:recipe_app/data/repository/recipe/recipe_repository_impl.dart';
-import 'package:recipe_app/domain/use_case/saved_recipe/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/presentation/main/home/home_screen.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
-import 'package:recipe_app/routes.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: Routes.splash,
@@ -68,23 +62,8 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: Routes.saved,
               builder:
-                  (context, state) => SavedRecipesScreen(
-                    savedRecipesViewModel: SavedRecipesViewModel(
-                      GetSavedRecipesUseCase(
-                        bookmarkRepository: BookmarkRepositoryImpl(
-                          BookmarkDataSourceImpl(),
-                        ),
-                        recipeRepository: RecipeRepositoryImpl(
-                          RecipeDataSourceImpl(),
-                          StepsDataSourceImpl(),
-                        ),
-                      ),
-                      RecipeRepositoryImpl(
-                        RecipeDataSourceImpl(),
-                        StepsDataSourceImpl(),
-                      ),
-                    ),
-                  ),
+                  (context, state) =>
+                      SavedRecipesScreen(savedRecipesViewModel: getIt()),
             ),
           ],
         ),
