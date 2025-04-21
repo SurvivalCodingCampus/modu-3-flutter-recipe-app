@@ -1,5 +1,5 @@
 import 'package:recipe_app/data/dto/recipe_dto.dart';
-import 'package:recipe_app/data/model/recipe_model.dart';
+import 'package:recipe_app/domain/entity/recipe_model.dart';
 
 extension RecipeDtoMapper on RecipeDto {
   Recipe toRecipe() {

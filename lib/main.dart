@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/routing/router_path.dart';
+import 'package:recipe_app/app/routing/router_path.dart';
+import 'package:recipe_app/app/di/di.dart';
 
 void main() {
+  setupDependencies();
   runApp(const MyApp());
 }
 
