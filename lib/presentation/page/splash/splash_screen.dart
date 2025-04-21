@@ -12,20 +12,22 @@ class SplashScreen extends StatelessWidget {
     return ListenableBuilder(
       listenable: splashViewModel,
       builder: (context, child) {
+        final state = splashViewModel.state;
+
         return Scaffold(
           body: Stack(
             fit: StackFit.expand,
             children: [
               AnimatedOpacity(
-                opacity: splashViewModel.isBackGroundVisible ? 1.0 : 0.0,
-                duration: Duration(seconds: 2),
+                opacity: state.isBackGroundVisible ? 1.0 : 0.0,
+                duration: const Duration(seconds: 2),
                 child: Image.asset(
                   'assets/image/splash_background.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
               SlideOverlayScreen(
-                show: splashViewModel.isOverlayVisible,
+                show: state.isOverlayVisible,
                 model: splashViewModel,
               ),
             ],

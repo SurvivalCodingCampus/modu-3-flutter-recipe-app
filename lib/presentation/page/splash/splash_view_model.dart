@@ -1,29 +1,15 @@
 import 'package:flutter/material.dart';
+import 'splash_state.dart';
 
 class SplashViewModel with ChangeNotifier {
-  bool _isBackGroundVisible = false;
+  SplashState _state = const SplashState();
 
-  bool _isOverlayVisible = false;
-
-  bool _isLogoVisible = false;
-
-  bool _isTextVisible = false;
-
-  final bool _isButtonVisible = false;
-
-  bool get isBackGroundVisible => _isBackGroundVisible;
-
-  bool get isOverlayVisible => _isOverlayVisible;
-
-  bool get isLogoVisible => _isLogoVisible;
-
-  bool get isTextVisible => _isTextVisible;
-
-  bool get isButtonVisible => _isButtonVisible;
+  SplashState get state => _state;
 
   void stateChange() {
     Future.delayed(Duration(seconds: 1), () async {
-      _isBackGroundVisible = true;
+      _state = _state.copyWith(isBackGroundVisible: true);
+      notifyListeners();
     }).then((_) async {
       await overlayChange().then((_) async {
         await logoChange().then((_) async {
@@ -35,21 +21,21 @@ class SplashViewModel with ChangeNotifier {
 
   Future overlayChange() async {
     await Future.delayed(Duration(seconds: 3), () {
-      _isOverlayVisible = true;
+      _state = _state.copyWith(isOverlayVisible: true);
       notifyListeners();
     });
   }
 
   Future logoChange() async {
     await Future.delayed(Duration(seconds: 3), () async {
-      _isLogoVisible = true;
+      _state = _state.copyWith(isLogoVisible: true);
       notifyListeners();
     });
   }
 
   Future logoTextChange() async {
     await Future.delayed(Duration(seconds: 3), () async {
-      _isTextVisible = true;
+      _state = _state.copyWith(isTextVisible: true);
       notifyListeners();
     });
   }

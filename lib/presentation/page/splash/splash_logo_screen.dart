@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/common/component/color_text_button.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
-
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
 
 class SplashLogoScreen extends StatefulWidget {
@@ -40,13 +39,13 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
     ).animate(CurvedAnimation(parent: _textController, curve: Curves.easeOut));
 
     _textSlide = Tween<Offset>(
-      begin: Offset(0, 0.2),
+      begin: const Offset(0, 0.2),
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _textController, curve: Curves.easeOut));
 
     _logoController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
     );
 
     _logoScale = Tween<double>(begin: 0.8, end: 1.0).animate(
@@ -61,15 +60,18 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
     return ListenableBuilder(
       listenable: widget.model,
       builder: (context, snapshot) {
-        if (widget.model.isOverlayVisible) {
-          if (widget.model.isLogoVisible) {
+        final state = widget.model.state;
+
+        if (state.isOverlayVisible) {
+          if (state.isLogoVisible) {
             _logoController.forward().then((_) {
-              if (widget.model.isTextVisible) {
+              if (state.isTextVisible) {
                 _textController.forward();
               }
             });
           }
         }
+
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,14 +84,11 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
                 child: SizedBox(
                   width: 79,
                   height: 79,
-                  child: Image.asset(
-                    "assets/image/splash_logo"
-                    ".png",
-                  ),
+                  child: Image.asset("assets/image/splash_logo.png"),
                 ),
               ),
             ),
-            SizedBox(height: 14),
+            const SizedBox(height: 14),
             FadeTransition(
               opacity: _textOpacity,
               child: SlideTransition(
@@ -100,7 +99,7 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
                 ),
               ),
             ),
-            Expanded(child: SizedBox()),
+            const Expanded(child: SizedBox()),
             FadeTransition(
               opacity: _textOpacity,
               child: SlideTransition(
@@ -112,7 +111,7 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             FadeTransition(
               opacity: _textOpacity,
               child: SlideTransition(
@@ -124,7 +123,7 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
                 ),
               ),
             ),
-            SizedBox(height: 64),
+            const SizedBox(height: 64),
             FadeTransition(
               opacity: _textOpacity,
               child: SlideTransition(
@@ -145,7 +144,7 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
                 ),
               ),
             ),
-            SizedBox(height: 84),
+            const SizedBox(height: 84),
           ],
         );
       },
