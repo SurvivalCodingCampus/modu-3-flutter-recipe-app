@@ -33,6 +33,7 @@ class SavedRecipesViewModel with ChangeNotifier {
   }) : _getSavedRecipesUseCase = getSavedRecipesUseCase,
        _toggleBookmarkUseCase = toggleBookmarkUseCase {
     _state = state.copyWith(isLoading: true);
+    fetchSavedRecipes();
   }
 
   void fetchSavedRecipes() async {
