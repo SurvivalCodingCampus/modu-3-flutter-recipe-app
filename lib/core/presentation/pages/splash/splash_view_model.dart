@@ -8,5 +8,12 @@ class SplashViewModel with ChangeNotifier {
 
   Stream<SplashEvent> get eventStream => _eventController.stream;
 
-  SplashViewModel();
+  SplashViewModel() {
+    error();
+  }
+
+  void error() async {
+    await Future.delayed(const Duration(seconds: 2));
+    _eventController.add(const SplashEvent.dialog('네트워크 오류입니다.'));
+  }
 }
