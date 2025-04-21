@@ -8,7 +8,7 @@ abstract class Routes {
   static const String notification = '/notification';
   static const String profile = '/profile';
 
-  static const String searchRecipes = '/search-recipes';
+  static const String searchRecipes = '/search';
   static const String filterScreen = '/filter-screen';
   static const String recipeScreen = '/recipe/:id';
 }

@@ -80,30 +80,42 @@ class _Home extends State<Home> {
                   Expanded(
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxHeight: 45),
-                      child: TextField(
-                        style: TextStyles.smallerRegular.copyWith(fontSize: 11),
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          hintText: 'Search recipe',
-                          hintStyle: TextStyles.smallerRegular.copyWith(
-                            color: ColorStyles.gray4,
-                            fontSize: 11,
-                          ),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: ColorStyles.gray4,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorStyles.gray4,
-                              width: 1.3,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.push('/search');
+                        },
+                        child: AbsorbPointer(
+                          child: TextField(
+                            readOnly: true,
+                            style: TextStyles.smallerRegular.copyWith(
+                              fontSize: 11,
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            textAlign: TextAlign.left,
+                            decoration: InputDecoration(
+                              hintText: 'Search recipe',
+                              hintStyle: TextStyles.smallerRegular.copyWith(
+                                color: ColorStyles.gray4,
+                                fontSize: 11,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: ColorStyles.gray4,
+                              ),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorStyles.gray4,
+                                  width: 1.3,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorStyles.gray4,
+                                ),
+                              ),
+                              contentPadding: const EdgeInsets.all(10),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: ColorStyles.gray4),
-                          ),
-                          contentPadding: const EdgeInsets.all(10),
                         ),
                       ),
                     ),

@@ -11,7 +11,7 @@ class FilterScreenState with _$FilterScreenState {
   final String selectedRate;
 
   const FilterScreenState({
-    this.timeList = const ['All', 'Newest', 'Oldest', 'Popularity'],
+    this.timeList = const ['All', '10', '15', '20', '30', '40'],
     this.categoryList = const [
       'All',
       'Cereal',
