@@ -1,29 +1,44 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-// Project imports:
-import 'package:recipe_app/core/error/result.dart';
 import 'package:recipe_app/core/error/ui_state.dart';
-import 'package:recipe_app/domain/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/model/search_data.dart';
+import 'package:recipe_app/domain/usecase/get_recipes_use_case.dart';
+import 'package:recipe_app/domain/usecase/get_search_data_use_case.dart';
+import 'package:recipe_app/domain/usecase/update_search_data_use_case.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _repository;
+  // final RecipeRepository _repository;
+  final GetRecipesUseCase _getRecipesUseCase;
+  final UpdateSearchDataUseCase _updateSearchDataUseCase;
+  final GetSearchDataUseCase _getSearchDataUseCase;
+
   SearchRecipesState _state = const SearchRecipesState();
 
   SearchRecipesState get state => _state;
 
-  SearchRecipesViewModel(this._repository);
+  SearchRecipesViewModel({
+    required GetRecipesUseCase getRecipesUseCase,
+    required UpdateSearchDataUseCase updateSearchDataUseCase,
+    required GetSearchDataUseCase getSearchDataUseCase,
+  }) : _getRecipesUseCase = getRecipesUseCase,
+       _updateSearchDataUseCase = updateSearchDataUseCase,
+       _getSearchDataUseCase = getSearchDataUseCase;
 
   Future<void> load() async {
     _state = state.copyWith(recipes: const UiState.loading());
     notifyListeners();
 
     try {
-      final result = await _repository.getRecipes();
+      final result = await _getRecipesUseCase.execute();
 
       switch (result) {
-        case Success(data: final recipes):
+        case UiEmpty():
+          break;
+        case UiSuccess(data: final recipes):
+          final searchData = await _getSearchDataUseCase.execute();
+
           _state = _state.copyWith(
             recipes:
                 recipes.isEmpty
@@ -31,10 +46,14 @@ class SearchRecipesViewModel with ChangeNotifier {
                     : UiState.success(recipes),
             filtered: recipes,
           );
-          break;
 
-        case Error(failure: final failure):
-          _state = _state.copyWith(recipes: UiState.error(failure.message));
+          if (searchData case UiSuccess(:final data)) {
+            _loadSearchData(data);
+          }
+
+        case UiError(message: final message):
+          _state = _state.copyWith(recipes: UiState.error(message));
+        case UiLoading():
           break;
       }
     } catch (e) {
@@ -43,6 +62,24 @@ class SearchRecipesViewModel with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  void _loadSearchData(SearchData data) {
+    final List<FilterCategory> searchDataCategories = [];
+
+    if (data.categories != null) {
+      for (final str in data.categories as List<String>) {
+        searchDataCategories.add(str.toFilterCategory());
+      }
+    }
+
+    _applyFilterAndQuery(
+      query: data.query ?? '',
+      filter: FilterSearchState(
+        rate: data.rate,
+        categories: searchDataCategories,
+      ),
+    );
   }
 
   void _applyFilterAndQuery({
@@ -93,62 +130,19 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   void updateQuery(String query) {
     _applyFilterAndQuery(query: query, filter: _state.filterSearchState);
-    // final current = _state.recipes;
-    //
-    // if (current case UiSuccess()) {
-    //   final filtered =
-    //       query.isEmpty
-    //           ? _state.filtered
-    //           : _state.filtered
-    //               .where(
-    //                 (r) => r.name.toLowerCase().contains(query.toLowerCase()),
-    //               )
-    //               .toList();
-    //
-    //   _state = _state.copyWith(query: query, filtered: filtered);
-    //
-    //   notifyListeners();
-    // }
   }
 
   void applyFilter(FilterSearchState filter) {
     _applyFilterAndQuery(query: _state.query, filter: filter);
-    // final current = _state.recipes;
-    //
-    // if (current case UiSuccess()) {
-    //   final isAllSelected = filter.categories.contains(FilterCategory.all);
-    //
-    //   final filtered =
-    //       _state.filtered.where((recipe) {
-    //         final matchCategory =
-    //             filter.categories.isEmpty ||
-    //             isAllSelected ||
-    //             filter.categories.contains(FilterCategory.all) ||
-    //             filter.categories
-    //                 .map((e) => e.name.toLowerCase())
-    //                 .contains(recipe.category.toLowerCase());
-    //
-    //         /*
-    //         final matchRate =
-    //             filter.rate == null || recipe.rating >= filter.rate!; // rating 보다 높은 레시피 점색
-    //         */
-    //         final matchRate =
-    //             filter.rate == null ||
-    //             (recipe.rating >= filter.rate! &&
-    //                 recipe.rating < filter.rate! + 1); // rating 점수대 레시피 검색
-    //
-    //         return matchCategory && matchRate;
-    //       }).toList();
-    //
-    //   final cleanedFilter =
-    //       isAllSelected ? filter.copyWith(categories: []) : filter;
-    //
-    //   _state = _state.copyWith(
-    //     filtered: filtered,
-    //     filterSearchState: cleanedFilter,
-    //   );
-    //
-    //   notifyListeners();
-    // }
+  }
+
+  @override
+  void dispose() {
+    _updateSearchDataUseCase.execute(
+      query: _state.query,
+      rate: _state.filterSearchState.rate,
+      categories: _state.filterSearchState.categories,
+    );
+    super.dispose();
   }
 }
