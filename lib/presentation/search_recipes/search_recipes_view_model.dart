@@ -9,7 +9,7 @@ import 'filter_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
   final RecipeRepository _repository;
-  SearchRecipesState _state = SearchRecipesState();
+  SearchRecipesState _state = const SearchRecipesState();
 
   SearchRecipesState get state => _state;
 
