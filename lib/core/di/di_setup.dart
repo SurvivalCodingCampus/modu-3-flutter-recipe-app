@@ -52,11 +52,9 @@ void diSetup() {
     () => SavedRecipesViewModel(getSavedRecipesUseCase: getIt()),
   );
   getIt.registerFactory(() => FilterSearchViewModel());
-  getIt.registerFactory(
-    () => SearchRecipesViewModel(recipeRepository: getIt()),
-  );
+  getIt.registerSingleton(SearchRecipesViewModel(recipeRepository: getIt()));
   getIt.registerFactory(
     () => IngredientViewModel(getSavedRecipesUseCase: getIt()),
   );
-  getIt.registerFactory(() => SplashViewModel(),);
+  getIt.registerFactory(() => SplashViewModel());
 }
