@@ -32,7 +32,7 @@ class SearchRecipeRepositoryImpl implements SearchRecipeRepository {
   }
 
   @override
-  Future<Result<void>> saveRecentSearchText(String text) async {
+  Future<Result<List<String>>> saveRecentSearchText(String text) async {
     try {
       return Result.success(await _dataSource.saveRecentSearchText(text));
     } catch (e) {

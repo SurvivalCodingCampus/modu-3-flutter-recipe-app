@@ -5,5 +5,5 @@ abstract interface class SearchRecipeDataSource {
 
   Future<List<String>> getRecentSearchText();
 
-  Future<void> saveRecentSearchText(String text);
+  Future<List<String>> saveRecentSearchText(String text);
 }

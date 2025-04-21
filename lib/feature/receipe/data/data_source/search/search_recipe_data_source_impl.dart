@@ -15,7 +15,7 @@ class RecipeDataSourceImpl implements SearchRecipeDataSource {
   }
 
   @override
-  Future<void> saveRecentSearchText(String text) {
+  Future<List<String>> saveRecentSearchText(String text) {
     // TODO: implement saveRecentSearchText
     throw UnimplementedError();
   }

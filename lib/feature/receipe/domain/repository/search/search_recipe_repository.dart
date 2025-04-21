@@ -6,5 +6,5 @@ abstract interface class SearchRecipeRepository {
 
   Future<Result<List<String>>> getRecentSearchText();
 
-  Future<Result<void>> saveRecentSearchText(String text);
+  Future<Result<List<String>>> saveRecentSearchText(String text);
 }

@@ -315,7 +315,8 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
   }
 
   @override
-  Future<void> saveRecentSearchText(String text) async {
+  Future<List<String>> saveRecentSearchText(String text) async {
     searchText.add(text);
+    return searchText;
   }
 }

@@ -6,7 +6,7 @@ class SaveRecentSearchTextUseCase {
 
   SaveRecentSearchTextUseCase(this._searchRecipeRepository);
 
-  Future<Result<void>> execute(String text) async {
+  Future<Result<List<String>>> execute(String text) async {
     return await _searchRecipeRepository.saveRecentSearchText(text);
   }
 }

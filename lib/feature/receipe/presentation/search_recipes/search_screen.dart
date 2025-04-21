@@ -91,18 +91,30 @@ class _SearchScreenState extends State<SearchScreen> {
                       }),
                     ],
                   ),
-                  ...widget.viewModel.state.recentSearchText.map(
-                    (e) => Container(
-                      margin: const EdgeInsets.symmetric(vertical: 12),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 4,
-                        horizontal: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(e, style: AppTextStyle.smallRegular),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children:
+                          widget.viewModel.state.recentSearchText
+                              .map(
+                                (e) => Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 4,
+                                    horizontal: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    e,
+                                    style: AppTextStyle.smallRegular,
+                                  ),
+                                ),
+                              )
+                              .toList(),
                     ),
                   ),
                   Padding(
