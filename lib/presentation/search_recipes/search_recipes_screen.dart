@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/filter_search.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_event.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
 import '../component/filter_search_state.dart';
@@ -11,23 +14,61 @@ void main() {
   );
 }
 
-class SearchRecipesScreen extends StatelessWidget {
+class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
 
   const SearchRecipesScreen({super.key, required this.viewModel});
+
+  @override
+  State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
+}
+
+class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
+  StreamSubscription? _subscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _subscription = widget.viewModel.eventStream.listen((event) {
+      if (mounted) {
+        switch (event) {
+          case ShowDialog():
+            showDialog(
+              context: context,
+              builder: (_) {
+                return AlertDialog(content: Text(event.message));
+              },
+            );
+          case networkError():
+            final snackBar = SnackBar(content: Text(event.message));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          case ShowSnackbar():
+            context.go('/');
+          case timeoutError():
+            print(event.message);
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Search recipes')),
       body: ListenableBuilder(
-        listenable: viewModel,
+        listenable: widget.viewModel,
         builder: (context, snapshot) {
           return Center(
             child: Column(
               children: [
                 Text(
-                  '${viewModel.state.filterSearchState.value}',
+                  '${widget.viewModel.state.filterSearchState.value}',
                   style: TextStyle(fontSize: 40),
                 ),
                 ElevatedButton(
@@ -43,9 +84,9 @@ class SearchRecipesScreen extends StatelessWidget {
                       builder: (BuildContext context) {
                         return FilterSearch(
                           onValueChange: (FilterSearchState state) {
-                            viewModel.setValue(state);
+                            widget.viewModel.setValue(state);
                           },
-                          state: viewModel.state.filterSearchState,
+                          state: widget.viewModel.state.filterSearchState,
                         );
                       },
                     );
@@ -63,6 +104,30 @@ class SearchRecipesScreen extends StatelessWidget {
                     context.go('/');
                   },
                   child: Text('go'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    widget.viewModel.onError2();
+                  },
+                  child: Text('1회성 UI 이벤트 1'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    widget.viewModel.onNetworkError();
+                  },
+                  child: Text('1회성 UI 이벤트 2'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    widget.viewModel.onError3();
+                  },
+                  child: Text('1회성 UI 이벤트 3'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    widget.viewModel.onError4();
+                  },
+                  child: Text('1회성 UI 이벤트 4'),
                 ),
               ],
             ),
