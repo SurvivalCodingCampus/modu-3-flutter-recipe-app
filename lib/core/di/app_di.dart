@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:recipe_app/core/presentation/pages/splash/splash_view_model.dart';
 import 'package:recipe_app/feature/receipe/data/data_source/home/mock/mock_recipe_data_source_impl.dart';
 import 'package:recipe_app/feature/receipe/data/data_source/home/recipe_data_source.dart';
 import 'package:recipe_app/feature/receipe/data/data_source/info/mock/mock_recipe_info_data_source_impl.dart';
@@ -51,4 +52,5 @@ void diSetup() {
   );
   getIt.registerFactory(() => RecipeInfoViewModel(getIt()));
   getIt.registerFactory(() => SearchViewModel(getIt()));
+  getIt.registerFactory(() => SplashViewModel());
 }
