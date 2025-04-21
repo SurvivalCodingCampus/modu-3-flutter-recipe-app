@@ -1,83 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/domain/repository/recent_search_repository.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/core/enums/category_filter.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
 import 'package:recipe_app/presentation/component/filter_search_state.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
+  final RecentSearchRepository _recentSearchRepository;
+  final SearchRecipesUseCase _searchRecipesUseCase;
 
   // 상태
   SearchRecipesState _state = const SearchRecipesState();
 
   SearchRecipesState get state => _state;
 
-  SearchRecipesViewModel({required RecipeRepository recipeRepository})
-    : _recipeRepository = recipeRepository {
+  SearchRecipesViewModel({
+    required RecipeRepository recipeRepository,
+    required RecentSearchRepository recentSearchRepository,
+    required SearchRecipesUseCase searchRecipesUseCase,
+  }) : _recipeRepository = recipeRepository,
+       _recentSearchRepository = recentSearchRepository,
+       _searchRecipesUseCase = searchRecipesUseCase {
     _state = state.copyWith(isLoading: true);
   }
 
   void fetchRecipes() async {
     final List<Recipe> recipes = await _recipeRepository.getRecipes();
-    _state = state.copyWith(searchRecipes: recipes, recipes: recipes);
+    final List<Recipe> recentSearch =
+        await _recentSearchRepository.getRecentSearch();
+
+    if (recentSearch.isEmpty) {
+      _state = state.copyWith(searchRecipes: recipes, recipes: recipes);
+    } else {
+      _state = state.copyWith(searchRecipes: recentSearch, recipes: recipes);
+    }
+
     _state = state.copyWith(isLoading: false);
     notifyListeners();
   }
 
   void searchRecipes() async {
-    final List<Recipe> filteredRecipes =
-        state.recipes
-            // 카테고리 필터링
-            .where((recipe) {
-              if(state.filterSearchState.categoryFilter == CategoryFilter.All) {
-                return true;
-              }
-              return recipe.category == state.filterSearchState.categoryFilter;
-            })
+    final List<Recipe> searchRecipes = await _searchRecipesUseCase.execute(
+      state.recipes,
+      state.searchString,
+      state.filterSearchState,
+    );
 
-            // Rate 별점 필터링
-            .where((recipe) {
-              if(state.filterSearchState.rateFilter == 5) {
-                return recipe.rating >= 5.0;
-              } else if (state.filterSearchState.rateFilter == 4) {
-                return 4.0 <= recipe.rating && recipe.rating < 5.0;
-              } else if (state.filterSearchState.rateFilter == 3) {
-                return 3.0 <= recipe.rating && recipe.rating < 4.0;
-              } else if (state.filterSearchState.rateFilter == 2) {
-                return 2.0 <= recipe.rating && recipe.rating < 3.0;
-              } else if (state.filterSearchState.rateFilter == 1) {
-                return 1.0 <= recipe.rating && recipe.rating < 2.0;
-              }
-              return true;
-            })
-            /*
-            .where((recipe) {
-              return TimeFilter
-            })
-            */
-            .toList();
-    final List<Recipe> searchRecipes =
-        filteredRecipes
-            .where(
-              (recipe) =>
-                  recipe.name.toLowerCase().contains(state.searchString.toLowerCase()) ||
-                  recipe.chef.toLowerCase().contains(state.searchString.toLowerCase()),
-            )
-            .toList();
     _state = state.copyWith(searchRecipes: searchRecipes);
     _state = state.copyWith(isLoading: false);
     notifyListeners();
   }
 
-  void setFilter(
-    FilterSearchState filterSearchState
-  ) async {
-    _state = state.copyWith(
-      filterSearchState: filterSearchState
-    );
-    notifyListeners();
+  void setFilter(FilterSearchState filterSearchState) async {
+    _state = state.copyWith(filterSearchState: filterSearchState);
     searchRecipes();
+    notifyListeners();
   }
 
   void updateSearchString(String value) async {
