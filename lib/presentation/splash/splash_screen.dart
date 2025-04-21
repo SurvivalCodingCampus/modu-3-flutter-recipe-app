@@ -1,20 +1,54 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:recipe_app/data/data_source/recipe/recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
-import 'package:recipe_app/presentation/saved_recipe/saved_recipe_view_model.dart';
+import 'package:recipe_app/presentation/splash/splash_event.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 
 import '../../router/routes.dart';
 import '../../ui/text.dart';
 
 
 
-class SplashScreen extends StatelessWidget {
-  final SavedRecipeViewModel viewModel;
+class SplashScreen extends StatefulWidget {
+  final SplashViewModel viewModel;
 
   const SplashScreen({super.key, required this.viewModel});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  StreamSubscription? _subscription;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _subscription = widget.viewModel.eventStream.listen((event) {
+      if (mounted) {
+        switch (event) {
+          case networkSuccess():
+            context.go(Routes.signIn);
+          case networkError():
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(event.e))
+            );
+        }
+      }
+    });
+    widget.viewModel.checkNetwork();
+  }
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    _subscription?.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +109,13 @@ class SplashScreen extends StatelessWidget {
                     height: 100,
                   ),
                   MediumButton(
-                    onClick: () {
-                      context.go(Routes.signIn);
+                    onClick: () async {
+                      final conneted = await widget.viewModel.checkNetwork();
+                      if (conneted) {
+                        widget.viewModel.onSuccess();
+                      }
+                      // widget.viewModel.onSuccess();
+                      // context.go(Routes.signIn);
                     },
                   )
                 ],

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/di/di.dart';
 import 'package:recipe_app/router/router.dart';
 
 // import 'presentation/component/component.dart';
 
 
 void main() {
+  diSetup();
   runApp(const MyApp());
 }
 

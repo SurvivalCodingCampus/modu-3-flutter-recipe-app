@@ -7,6 +7,7 @@ import 'package:recipe_app/presentation/login/sign_in_screen.dart';
 import 'package:recipe_app/presentation/saved_recipe/get_saved_recipe_use_case.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipe_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 import 'package:recipe_app/router/routes.dart';
 
 import '../core/di/di.dart';
@@ -29,7 +30,7 @@ final router = GoRouter(
       path: Routes.splash,
       builder:
         (context, state) => SplashScreen(
-          viewModel: getIt<SavedRecipeViewModel>(),
+          viewModel: getIt<SplashViewModel>(),
         ),
     ),
     GoRoute(
