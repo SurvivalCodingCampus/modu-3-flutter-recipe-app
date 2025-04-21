@@ -32,7 +32,7 @@ class RecipeCardTestScreen extends StatefulWidget {
 
 class _RecipeCardTestScreenState extends State<RecipeCardTestScreen> {
   late final GetRecipeUseCase _useCase;
-  Recipe? _recipe;
+  late final Recipe _recipe;
 
   @override
   void initState() {
@@ -56,20 +56,13 @@ class _RecipeCardTestScreenState extends State<RecipeCardTestScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('NewRecipeCard 테스트')),
       body: Center(
-        child:
-            _recipe == null
-                ? const CircularProgressIndicator()
-                : RecommendCard(
-                  category: _recipe!.category,
-                  imageUrl: _recipe!.imageUrl,
-                  name: _recipe!.name,
-                  rating: _recipe!.rating,
-                  time: _recipe!.time,
-                  isBookMarked: _recipe!.isBookMarked,
-                  onTap: () {
-                    print('카드 클릭됨!');
-                  },
-                ),
+        child: RecommendCard(
+          recipe: _recipe,
+          isBookMarked: _recipe!.isBookMarked,
+          onTap: () {
+            print('카드 클릭됨!');
+          },
+        ),
       ),
     );
   }

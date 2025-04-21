@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../../core/state/fetch_state.dart';
 
@@ -23,9 +25,13 @@ class SplashScreenViewModel with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    await Future.delayed(const Duration(seconds: 1));
-    onNetworkError();
+    try {
+      final response = await http.get(Uri.parse('https://www.google.com'));
+    } on SocketException {
+      onNetworkError();
+    }
 
+    await Future.delayed(const Duration(seconds: 1));
     _isLoading = false;
     notifyListeners();
   }
