@@ -1,5 +1,5 @@
-import 'package:recipe_app/data/repository/recipe_repository.dart';
-import 'package:recipe_app/data/repository/user_repository.dart';
+import 'package:recipe_app/domain/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/repository/user_repository.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/model/user.dart';
 
@@ -14,7 +14,7 @@ class GetSavedRecipesUseCase {
         _recipeRepository = recipeRepository;
 
   Future<List<Recipe>> execute() async {
-    final User user = await _userRepository.getUserById();
+    final User user = await _userRepository.getUser();
     final List<Recipe> recipes = await _recipeRepository.getRecipes();
     return recipes.where((e) => user.bookmarks.contains(e.id)).toList();
   }

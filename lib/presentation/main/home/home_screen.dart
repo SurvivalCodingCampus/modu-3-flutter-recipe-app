@@ -4,7 +4,7 @@ import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/core/ui/color_styles.dart';
 import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source_impl.dart';
-import 'package:recipe_app/domain/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/component/input_field_widget.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_view_model.dart';

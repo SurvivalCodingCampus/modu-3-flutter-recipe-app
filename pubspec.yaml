@@ -42,6 +42,7 @@ dependencies:
   cached_network_image: ^3.4.1
   network_image_mock: ^2.1.1
   go_router: ^14.8.1
+  get_it: ^8.0.3
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +75,6 @@ flutter:
     - assets/images/splash_images/
     - assets/images/face.png
     - assets/mock_data/
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -18,6 +18,7 @@ class TabsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: ColorStyles.white),
+      height: 40,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(labels.length, (index) {
@@ -26,26 +27,23 @@ class TabsWidget extends StatelessWidget {
               onTap: () {
                 onValueChange(index);
               },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: AnimatedContainer(
-                  duration: Duration(milliseconds: 200),
-                  decoration: BoxDecoration(
-                    color:
-                        index == selectedIndex
-                            ? ColorStyles.primary100
-                            : ColorStyles.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      labels[index],
-                      style: TextStyles.smallBold(
-                        color:
-                            index == selectedIndex
-                                ? ColorStyles.white
-                                : ColorStyles.primary80,
-                      ),
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color:
+                      index == selectedIndex
+                          ? ColorStyles.primary100
+                          : ColorStyles.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    labels[index],
+                    style: TextStyles.smallBold(
+                      color:
+                          index == selectedIndex
+                              ? ColorStyles.white
+                              : ColorStyles.primary80,
                     ),
                   ),
                 ),
