@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //DI 설정
+  diSetup();
   runApp(const MyApp());
 }
 
