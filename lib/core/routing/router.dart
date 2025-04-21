@@ -18,8 +18,10 @@ final router = GoRouter(
     GoRoute(
       path: Routes.splash,
       builder:
-          (context, state) =>
-              SplashScreen(onTapStart: () => context.go(Routes.signIn)),
+          (context, state) => SplashScreen(
+            viewModel: getIt(),
+            onTapStart: () => context.go(Routes.signIn),
+          ),
     ),
     GoRoute(
       path: Routes.signIn,
