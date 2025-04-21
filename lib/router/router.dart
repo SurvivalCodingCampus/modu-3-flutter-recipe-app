@@ -9,6 +9,7 @@ import 'package:recipe_app/presentation/search_recipes/search_recipe_view_model.
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/router/routes.dart';
 
+import '../core/di/di.dart';
 import '../data/model/recipes.dart';
 import '../presentation/home/home_screen.dart';
 import '../presentation/home/main_screen.dart';
@@ -28,9 +29,7 @@ final router = GoRouter(
       path: Routes.splash,
       builder:
         (context, state) => SplashScreen(
-          viewModel: SavedRecipeViewModel(
-            GetSavedRecipeUseCase(BookmarkRepositoryImpl(RecipeDataSourceImpl())),
-          ),
+          viewModel: getIt<SavedRecipeViewModel>(),
         ),
     ),
     GoRoute(
@@ -56,9 +55,7 @@ final router = GoRouter(
               path: Routes.home,
               builder:
                   (context, state) => HomeScreen(
-                viewModel: SearchRecipeViewModel(
-                  RecipeRepositoryImpl(RecipeDataSourceImpl()),
-                ),
+                viewModel: getIt<SearchRecipeViewModel>(),
               ),
             ),
           ],
@@ -69,7 +66,7 @@ final router = GoRouter(
               path: Routes.saved,
               builder:
                   (context, state) => SavedRecipeScreen(
-                viewModel: SavedRecipeViewModel(GetSavedRecipeUseCase(BookmarkRepositoryImpl(RecipeDataSourceImpl())))
+                viewModel: getIt<SavedRecipeViewModel>(),
               ),
             ),
           ],
@@ -80,9 +77,7 @@ final router = GoRouter(
               path: Routes.search,
               builder:
                   (context, state) => SearchRecipeScreen(
-                viewModel: SearchRecipeViewModel(
-                  RecipeRepositoryImpl(RecipeDataSourceImpl()),
-                ),
+                viewModel: getIt<SearchRecipeViewModel>(),
               ),
             ),
           ],
