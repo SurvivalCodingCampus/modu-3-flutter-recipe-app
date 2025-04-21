@@ -1,24 +1,19 @@
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/data/data_source/data_source.dart';
-import 'package:recipe_app/data/repository/repository.dart';
-import 'package:recipe_app/domain/use_case/use_case.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
 import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/my/my_screen.dart';
 import 'package:recipe_app/presentation/notification/notification_screen.dart';
-import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search/search_screen.dart';
-import 'package:recipe_app/presentation/search/search_view_model.dart';
 import 'package:recipe_app/presentation/sign-in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign-up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
 final router = GoRouter(
-  initialLocation: Routes.save,
+  initialLocation: Routes.splash,
   routes: [
     GoRoute(
       path: Routes.splash,
@@ -42,30 +37,13 @@ final router = GoRouter(
     ),
     GoRoute(
       path: Routes.search,
-      builder:
-          (context, state) => SearchScreen(
-            viewModel: SearchViewModel(
-              repository: RecipeRepositoryImpl(
-                recipeDataSource: MockRecipeDataSourceImpl(),
-              ),
-            ),
-          ),
+      builder: (context, state) => SearchScreen(viewModel: getIt()),
     ),
     GoRoute(
       path: Routes.recipeIngredient,
       builder: (context, state) {
         final id = state.pathParameters['recipeId'];
-        return RecipeIngredientScreen(
-          recipeId: id!,
-          viewModel: RecipeIngredientViewModel(
-            recipeRepository: RecipeRepositoryImpl(
-              recipeDataSource: MockRecipeDataSourceImpl(),
-            ),
-            procedureRepository: ProcedureRepositoryImpl(
-              procedureDataSource: MockProcedureDataSourceImpl(),
-            ),
-          ),
-        );
+        return RecipeIngredientScreen(recipeId: id!, viewModel: getIt());
       },
     ),
     StatefulShellRoute.indexedStack(
@@ -98,22 +76,7 @@ final router = GoRouter(
             GoRoute(
               path: Routes.save,
               builder:
-                  (context, state) => SavedRecipesScreen(
-                    viewModel: SavedRecipesViewModel(
-                      getSavedRecipesUseCase: GetSavedRecipesUseCase(
-                        recipeRepository: RecipeRepositoryImpl(
-                          recipeDataSource: MockRecipeDataSourceImpl(),
-                        ),
-                        bookmarkRepository: BookmarkRepositoryImpl(),
-                      ),
-                      toggleBookmarkRecipeUseCase: ToggleBookmarkRecipeUseCase(
-                        recipeRepository: RecipeRepositoryImpl(
-                          recipeDataSource: MockRecipeDataSourceImpl(),
-                        ),
-                        bookmarkRepository: BookmarkRepositoryImpl(),
-                      ),
-                    ),
-                  ),
+                  (context, state) => SavedRecipesScreen(viewModel: getIt()),
             ),
           ],
         ),
