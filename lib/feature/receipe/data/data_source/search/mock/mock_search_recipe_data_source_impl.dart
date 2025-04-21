@@ -310,6 +310,6 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
 
   @override
   Future<List<String>> getRecentSearchText() async {
-    return [];
+    return ['Spice'];
   }
 }

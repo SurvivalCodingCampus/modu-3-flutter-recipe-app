@@ -7,6 +7,8 @@ import 'package:recipe_app/feature/receipe/domain/repository/search/search_recip
 import 'package:recipe_app/feature/receipe/data/data_source/search/mock/mock_search_recipe_data_source_impl.dart';
 import 'package:recipe_app/feature/receipe/data/data_source/search/search_recipe_data_source.dart';
 import 'package:recipe_app/feature/receipe/data/dto/recipe_dto.dart';
+import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_recent_search_text_use_case.dart';
+import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_view_model.dart';
 
 void main() {
@@ -15,6 +17,8 @@ void main() {
     final SearchRecipeRepository repository = SearchRecipeRepositoryImpl(
       dataSource,
     );
+    final usecase1 = GetSavedRecipesUseCase(repository);
+    final usecase2 = GetRecentSearchTextUseCase(repository);
     test('search recipe mock data test', () async {
       final resp = await repository.getRecipes();
       switch (resp) {
@@ -28,14 +32,19 @@ void main() {
     });
 
     test('search recipe view model test', () async {
-      final SearchViewModel viewModel = SearchViewModel(repository)
-        ..fetchSearchData();
+      final SearchViewModel viewModel = SearchViewModel(
+        getSavedRecipesUseCase: usecase1,
+        getRecentSearchTextUseCase: usecase2,
+      );
+      viewModel.fetchSearchData();
       expect(viewModel.state.data.isNotEmpty, equals(true));
     });
 
     test('search recipe view model functino test', () async {
-      final SearchViewModel viewModel = SearchViewModel(repository)
-        ..fetchSearchData();
+      final SearchViewModel viewModel = SearchViewModel(
+        getSavedRecipesUseCase: usecase1,
+        getRecentSearchTextUseCase: usecase2,
+      );
       final searchText = 'rice';
 
       viewModel.searchData(searchText);

@@ -22,6 +22,13 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _controller = TextEditingController();
 
   @override
+  void initState() {
+    widget.viewModel.fetchSearchData();
+    widget.viewModel.getRecentSearchText();
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -36,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
         title: const Text('Search recipes'),
       ),
       child: ListenableBuilder(
-        listenable: widget.viewModel..fetchSearchData(),
+        listenable: widget.viewModel,
         builder: (context, child) {
           final state = widget.viewModel.state;
           final isChangeUI = widget.viewModel.isChangeUI;
@@ -84,8 +91,22 @@ class _SearchScreenState extends State<SearchScreen> {
                       }),
                     ],
                   ),
+                  ...widget.viewModel.state.recentSearchText.map(
+                    (e) => Container(
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 4,
+                        horizontal: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(e, style: AppTextStyle.smallRegular),
+                    ),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
