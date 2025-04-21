@@ -8,7 +8,6 @@ import 'package:recipe_app/presentation/ingredient/ingredient_screen.dart';
 import 'package:recipe_app/presentation/login/login_screen.dart';
 import 'package:recipe_app/presentation/register/register_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -52,9 +51,7 @@ final router = GoRouter(
             GoRoute(
               path: Routes.bookmarks,
               builder:
-                  (context, state) => SavedRecipesScreen(
-                    viewModel: SavedRecipesViewModel(getIt(), getIt()),
-                  ),
+                  (context, state) => SavedRecipesScreen(viewModel: getIt()),
             ),
           ],
         ),

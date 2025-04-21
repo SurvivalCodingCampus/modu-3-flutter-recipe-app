@@ -18,9 +18,7 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
   Future<void> init() async {
     final List<Recipe> recipes = await _dataSource.fetch();
 
-    if (recipes.isEmpty) {
-      _bookmarks = recipes.where((recipe) => recipe.bookmarked).toList();
-    }
+    _bookmarks = recipes.where((recipe) => recipe.bookmarked).toList();
 
     _initialized = true;
   }

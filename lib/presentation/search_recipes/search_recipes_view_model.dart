@@ -23,7 +23,7 @@ class SearchRecipesViewModel with ChangeNotifier {
   Future<void> fetchAll() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
-    Future<Result<List<Recipe>, RecipeError>> result =
+    Result<List<Recipe>, RecipeError> result =
         await _getSavedRecipesUseCase.execute();
 
     switch (result) {
