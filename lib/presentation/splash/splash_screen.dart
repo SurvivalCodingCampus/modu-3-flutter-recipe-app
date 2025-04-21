@@ -1,13 +1,16 @@
 // Dart imports:
+import 'dart:async';
 import 'dart:ui';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/error/network_api_event.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
 // Project imports:
 import 'package:recipe_app/presentation/component/custom_button.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 
 import '../../core/routing/routes.dart';
 
@@ -30,7 +33,9 @@ const kSubTextDuration = Duration(milliseconds: 600);
 const kButtonDuration = Duration(milliseconds: 800);
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final SplashViewModel viewModel;
+
+  const SplashScreen({super.key, required this.viewModel});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -38,6 +43,10 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
+  StreamSubscription<NetworkApiEvent>? _subscription;
+
+  SplashViewModel get viewModel => widget.viewModel;
+
   // 배경 애니메이션
   late final AnimationController _gradientController;
   late final Animation<double> _gradientOpacity;
@@ -75,6 +84,21 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+    viewModel.load();
+    _subscription = viewModel.eventStream.listen((event) {
+      switch (event) {
+        case ShowErrorMessage():
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(event.message),
+                duration: const Duration(seconds: 2),
+                behavior: SnackBarBehavior.floating, // 선택: 위로 띄워서 표시
+              ),
+            );
+          }
+      }
+    });
     initAnimation();
   }
 
@@ -99,6 +123,7 @@ class _SplashScreenState extends State<SplashScreen>
     }
     _subTextController.dispose();
     _buttonController.dispose();
+    _subscription?.cancel();
     super.dispose();
   }
 
