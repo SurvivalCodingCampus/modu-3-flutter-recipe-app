@@ -20,7 +20,7 @@ class FilterSearchBottomSheet extends StatefulWidget {
 }
 
 class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
-  String? selectedTimeFilter;
+  String selectedTimeFilter = 'All';
   String? selectedCategoryFilter;
   int? selectedRatingFilter;
   late int selectedIndexButton;
@@ -51,10 +51,9 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(height: 5),
-
                   TimeFilterButton(
                     changedTimeFilter: (value) {
-                      selectedTimeFilter = value = 'All';
+                      selectedTimeFilter;
                       setState(() {});
                     },
                   ),

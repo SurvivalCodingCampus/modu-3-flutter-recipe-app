@@ -34,9 +34,8 @@ class _TimeFilterButtonState extends State<TimeFilterButton> {
       height: 30,
       child: ElevatedButton(
         onPressed: () {
-          setState(() {
-            selectedFilter = text;
-          });
+          selectedFilter = text;
+          setState(() {});
           widget.changedTimeFilter(selectedFilter);
         },
         style:
