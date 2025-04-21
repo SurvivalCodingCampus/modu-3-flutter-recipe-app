@@ -1,22 +1,30 @@
+import 'package:recipe_app/core/result.dart';
 import 'package:recipe_app/data/data_source/interface/recipe_data_source.dart';
 import 'package:recipe_app/data/dto/recipe_dto.dart';
 import 'package:recipe_app/data/mapper/recipe_mapper.dart';
+import 'package:recipe_app/domain/error/recipe_error.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 
 class MockRecipeDataSource implements RecipeDataSource {
   @override
-  Future<List<Recipe>> fetch() async {
-    Map<String, dynamic> json = mockData;
+  Future<Result<List<Recipe>, RecipeError>> fetch() async {
+    try {
+      Map<String, dynamic> json = mockData;
+      List<dynamic> recipesJson = json['recipes'];
 
-    List<dynamic> recipes = json['recipes'];
+      await Future.delayed(const Duration(seconds: 1));
 
-    await Future.delayed(const Duration(seconds: 1));
+      final List<Recipe> recipes =
+          recipesJson
+              .cast<Map<String, dynamic>>()
+              .map((e) => RecipeDTO.fromJson(e))
+              .map((e) => e.toModel())
+              .toList();
 
-    return recipes
-        .cast<Map<String, dynamic>>()
-        .map((e) => RecipeDTO.fromJson(e))
-        .map((e) => e.toModel())
-        .toList();
+      return Result.success(recipes);
+    } catch (e) {
+      return const Result.error(RecipeError.networkError);
+    }
   }
 }
 
