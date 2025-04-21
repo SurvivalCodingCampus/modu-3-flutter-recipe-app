@@ -101,9 +101,15 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
               SizedBox(height: 10),
               SizedBox(
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Filter', style: TextStyles.smallerTextSemiBold),
+                  onPressed: () {
+                    widget.filterSearchViewModel.filterRecipesByCategory(
+                      selectedRatingFilter!,
+                      selectedCategoryFilter!,
+                    );
+                    Navigator.pop(context, true);
+                  },
                   style: ButtonStyles.filterButton,
+                  child: Text('Filter', style: TextStyles.smallerTextSemiBold),
                 ),
               ),
             ],

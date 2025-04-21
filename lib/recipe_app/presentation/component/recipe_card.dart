@@ -62,7 +62,7 @@ class RecipeCard extends StatelessWidget {
                     Icon(Icons.star, color: ColorStyles.rating, size: 7.5),
                     SizedBox(width: 2),
                     Text(
-                      recipe.rate.toStringAsFixed(1),
+                      recipe.rate.round().toStringAsFixed(1),
                       style: TextStyles.rateText.copyWith(color: Colors.black),
                     ),
                   ],

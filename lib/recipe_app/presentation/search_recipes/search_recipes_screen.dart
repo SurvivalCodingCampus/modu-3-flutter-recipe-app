@@ -27,7 +27,7 @@ class SearchRecipesScreen extends StatefulWidget {
 class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   final TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
-  late String keyword;
+  String keyword = '';
   final mockDataSource = MockRecipeDataImpl();
 
   @override
@@ -79,13 +79,13 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                             child: SizedBox(
                               height: 40,
                               child: TextField(
-                                onChanged: (keyword) {
+                                onChanged: (text) async {
                                   setState(() {
-                                    _isSearching = true;
-                                    widget.searchRecipesViewModel.searchRecipes(
-                                      keyword,
-                                    );
+                                    _isSearching = text.isNotEmpty;
+                                    keyword = text;
                                   });
+                                  await widget.searchRecipesViewModel
+                                      .searchRecipes(keyword);
                                 },
                                 controller: _searchController,
                                 textAlignVertical: TextAlignVertical.center,
@@ -120,8 +120,8 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                             width: 40,
                             height: 40,
                             child: ElevatedButton(
-                              onPressed: () {
-                                showModalBottomSheet(
+                              onPressed: () async {
+                                await showModalBottomSheet<bool>(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return FilterSearchBottomSheet(
@@ -129,7 +129,14 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                           widget.filterSearchViewModel,
                                     );
                                   },
-                                );
+                                ).then((value) {
+                                  setState(() {
+                                    widget
+                                        .filterSearchViewModel
+                                        .filterSearchState
+                                        .filteredRecipes;
+                                  });
+                                });
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: ColorStyles.primary100,
@@ -177,19 +184,35 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       ),
                       SizedBox(height: 15),
                       ListenableBuilder(
-                        listenable: widget.searchRecipesViewModel,
+                        listenable: Listenable.merge([
+                          widget.searchRecipesViewModel,
+                          widget.filterSearchViewModel,
+                        ]),
                         builder: (context, child) {
-                          final state =
-                              widget.searchRecipesViewModel.searchRecipesState;
-                          if (state.isRecipesLoading == true) {
-                            return CircularProgressIndicator();
+                          final allRecipes =
+                              widget
+                                  .searchRecipesViewModel
+                                  .searchRecipesState
+                                  .recipes;
+                          final filteredByCategory =
+                              widget
+                                  .filterSearchViewModel
+                                  .filterSearchState
+                                  .filteredRecipes;
+                          List<dynamic> displayedRecipes;
+
+                          if (keyword.isNotEmpty) {
+                            displayedRecipes = allRecipes;
+                          } else if (filteredByCategory.isNotEmpty) {
+                            displayedRecipes = filteredByCategory;
+                          } else {
+                            displayedRecipes = allRecipes;
                           }
-                          if (state.recipes.isEmpty) {
-                            return Center(child: Text('레시피가 없습니다'));
-                          }
+
                           final size = MediaQuery.of(context).size;
                           final aspectRatio =
                               size.width > size.height ? 3 / 1 : 3 / 2;
+
                           return GridView.count(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
@@ -198,21 +221,13 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                             mainAxisSpacing: 10,
                             childAspectRatio: aspectRatio,
                             children:
-                                state.recipes
+                                displayedRecipes
                                     .map(
                                       (recipe) => RecipeCard(
                                         recipe: recipe,
                                         showTimerAndBookmark: false,
                                         onToggleBookMark: () {
-                                          if (recipe.bookMarked) {
-                                            widget.savedRecipesViewModel
-                                                .removeBookmarkUseCase(
-                                                  recipe.id,
-                                                );
-                                          } else {
-                                            widget.savedRecipesViewModel
-                                                .addBookmarkUseCase(recipe);
-                                          }
+                                          false;
                                         },
                                       ),
                                     )

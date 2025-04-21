@@ -19,7 +19,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  StreamSubscription? _subscription;
+  StreamSubscription<SplashScreenEvent>? _subscription;
 
   @override
   void initState() {

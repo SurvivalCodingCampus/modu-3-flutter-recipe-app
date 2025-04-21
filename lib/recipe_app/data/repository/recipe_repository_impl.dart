@@ -29,14 +29,4 @@ class RecipeRepositoryImpl implements RecipeRepository {
             .toList();
     return searchRecipesList;
   }
-
-  @override
-  Future<List<Recipe>> filterRecipes(String filter) async {
-    final recipeList = await _recipeDataSource.getRecipeData();
-    final filterInt = int.tryParse(filter);
-    final filteredRecipesList =
-        recipeList.where((e) => e.rate.toInt() == filterInt).toList();
-
-    return filteredRecipesList;
-  }
 }

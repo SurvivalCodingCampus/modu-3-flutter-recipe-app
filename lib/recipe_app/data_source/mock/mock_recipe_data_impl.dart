@@ -158,7 +158,7 @@ final mockRecipes = {
       ],
     },
     {
-      "category": "Japanese",
+      "category": "Korean",
       "id": 4,
       "name": "Ttekbokki",
       "image":
