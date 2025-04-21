@@ -7,4 +7,10 @@ class RecipeDataSourceImpl implements SearchRecipeDataSource {
     // TODO: implement getRecipes
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<String>> getRecentSearchText() {
+    // TODO: implement getRecentSearchText
+    throw UnimplementedError();
+  }
 }

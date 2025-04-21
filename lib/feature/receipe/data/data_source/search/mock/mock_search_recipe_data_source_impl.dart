@@ -307,4 +307,9 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
       },
     ].map((e) => RecipeDto.fromJson(e)).toList();
   }
+
+  @override
+  Future<List<String>> getRecentSearchText() async {
+    return [];
+  }
 }
