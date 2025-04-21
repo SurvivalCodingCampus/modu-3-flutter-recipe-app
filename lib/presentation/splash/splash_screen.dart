@@ -3,11 +3,38 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/medium_button.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  final SplashViewModel viewModel;
+  const SplashScreen({super.key, required this.viewModel});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.stream.listen(
+      (event) {
+        print("정상");
+      },
+      onError: (error) {
+        final snackBar = SnackBar(
+          showCloseIcon: true,
+          duration: Duration(seconds: 3),
+          content: Text(error.toString()),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      },
+    );
+
+    widget.viewModel.networkError();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +51,18 @@ class SplashScreen extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'https://s3-alpha-sig.figma.com/img/abb8/bc9a/d3d82b4122f5602afeadd620a4c53d15?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=fjLE9WV-6wvM~rNvMZw5QN4JJaCjfeOx1BftSZQwQjEVGgjVL-D48lDmwlzXGybHC7QzAGIN2B0~ymjKx61FVHZbeEC-q4Fsyg4Ttl8g9ksZzdcZTjX-PixP0TqFJ47C~0HzJ6CLyg7aTyVhhzYqRCdcjyu99NqfNyQ02b9gMDk3NVLMpKxWNbwiKjAMqy-eokb0-NHIVhNdrfNGAj6xiNj7LJyoyNdgE~0K87zq4x16f4wwTQXCm5enX8Pf8ouLiWAq0LEL0ZG9~EbR~OXhMoDYaFfCoqj7A-DairRzHc4zbX7qjIy4yYHxrbY0RN544SMBIUv21wXp4lnjqR1W~w__',
-                  ),
+                  image: AssetImage('assets/images/splash_screen.png'),
+                  // NetworkImage(
+                  //   'https://s3-alpha-sig.figma.com/img/abb8/bc9a/d3d82b4122f5602afeadd620a4c53d15?Expires=1746403200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=othyBsis8k-HqoNlINYZ6q0TGjAl1w~8iveAM4B6zRDUG3305bDKsS-w1Sfo5wXP7qDs45G7u8YgbReOtazkDWAO-bqu1Rp2wAFI~cSMyIJDmLjhyCKIM9TCBr~achW3O0cA9BKnCIrBmLJH~r3-de9HQkuwPjNL6GQZCQJlaOHRWlKAAxQwWKdz~W~0tLnZFQ9h93fZiV6nWsVS1fzFvwmIXcs6RAIDsEX8PVVEIKFTFW-6V30Q647cN42Tb43yUi~si3F2Kco~ietzUmQvPbzdFQp7UiD67Ucw8d75AHzDt9Os8zmE9YESJzCgE9t1~UKUx4g5muml6RGVcBy0tw__',
+                  // ),
+                  onError: (exception, stackTrace) {
+                    final snackBar = SnackBar(
+                      showCloseIcon: true,
+                      duration: Duration(seconds: 3),
+                      content: Text(exception.toString() ?? ''),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
                   fit: BoxFit.cover,
                 ),
               ),
@@ -47,8 +83,8 @@ class SplashScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 104),
-                  Image.network(
-                    'https://s3-alpha-sig.figma.com/img/ff39/4279/da6962f85f63700597b722a6b0937b90?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=S1~7rHGgP8H3EZkfOFmZ3pDk14NVvnfogSZmqxjB7J9SjOtqElr4vlaEXH3PlxWLG8KWwbkjRm~czqFCWTnMA~8-WmDIbQvsYUCG7DPECBNJiOK72Y9Fp0ykPDsneBTE-MwkpipPX12XjhX9~NFcqBOTu37UIKjRsOn4p413UMzveShz-lSsEwp5Fp5SZOsBoz7A2QKvospJF9coS75U5Ttx8bgqDgj-FvZ3ndUJbVGKgycIV8HJK2-f3TMdCb9Va9Vx8VQf4Z5ZklzI28rUaJyShHn0H1wGFjWJVR7pystoPSj7eRcX6700bUsT~QBxbiKCPdspLMbb4zqZ~eacmw__',
+                  Image.asset(
+                    'assets/images/splash_icon.png',
                     width: 79,
                     height: 79,
                   ),
