@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/button/medium_button.dart';
-import 'package:recipe_app/routes.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
 
