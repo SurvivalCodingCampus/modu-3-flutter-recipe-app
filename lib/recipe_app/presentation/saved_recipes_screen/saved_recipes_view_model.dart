@@ -20,9 +20,6 @@ class SavedRecipesViewModel with ChangeNotifier {
   List<Recipe> get recipes => _recipes;
   List<Recipe> _recipes = [];
 
-  //List내용 임의로 변형시키지 못함
-  //List<Recipe> get recipes => List.unmodifiable(_recipes);
-
   SavedRecipesState _state = const SavedRecipesState();
 
   SavedRecipesState get state => _state;
