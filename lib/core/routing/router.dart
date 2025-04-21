@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/recipes/recipe_data_source.dart';
 import 'package:recipe_app/data/data_source/recipes/recipe_data_source_impl.dart';
@@ -33,11 +34,7 @@ final GoRouter router = GoRouter(
       path: Routes.search,
       builder:
           (context, state) => SearchRecipesScreen(
-            viewModel: SearchRecipesViewModel(
-              recipeRepository: RecipeRepositoryImpl(
-                dataSource: RecipeDataSourceImpl(),
-              ),
-            ),
+            viewModel: DiSetup().getIt(),
           ),
     ),
     ShellRoute(
@@ -64,13 +61,7 @@ final GoRouter router = GoRouter(
           pageBuilder:
               (context, state) => NoTransitionPage(
                 child: SavedRecipesScreen(
-                  viewModel: SavedRecipesViewModel(
-                    getSavedRecipesUseCase: GetSavedRecipesUseCase(
-                      recipeRepository: RecipeRepositoryImpl(
-                        dataSource: RecipeDataSourceImpl(),
-                      ),
-                    ),
-                  )..fetchData(),
+                  viewModel: DiSetup().getIt(),
                 ),
               ),
         ),
