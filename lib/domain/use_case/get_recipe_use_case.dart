@@ -8,6 +8,6 @@ class GetRecipeUseCase {
 
   Future<List<Recipe>> execute() async {
     final recipe = await repository.getRecipes();
-    return recipe.toList();
+    return recipe;
   }
 }

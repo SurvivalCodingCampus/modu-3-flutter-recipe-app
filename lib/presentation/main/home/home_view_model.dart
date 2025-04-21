@@ -17,20 +17,8 @@ class HomeViewModel with ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    try {
-      final recipes = await getRecipeUseCase.execute();
-
-      final filtered = _filterByCategory(recipes, _state.selectedCategory);
-
-      _state = _state.copyWith(
-        isLoading: false,
-        recipes: recipes,
-        filteredRecipes: filtered,
-      );
-    } catch (e) {
-      _state = _state.copyWith(isLoading: false);
-    }
-
+    final recipes = await getRecipeUseCase.execute();
+    _state = _state.copyWith(recipes: recipes, isLoading: false);
     notifyListeners();
   }
 

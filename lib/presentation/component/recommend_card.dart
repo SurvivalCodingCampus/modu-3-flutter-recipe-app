@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../../data/model/recipe_model.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
 class RecommendCard extends StatelessWidget {
-  final String category;
-  final String imageUrl;
-  final String name;
-  final double rating;
-  final String time;
+  final Recipe recipe;
   final bool isBookMarked;
   final VoidCallback onTap;
 
   const RecommendCard({
     super.key,
-    required this.category,
-    required this.imageUrl,
-    required this.name,
-    required this.rating,
-    required this.time,
     required this.isBookMarked,
     required this.onTap,
+    required this.recipe,
   });
 
   @override
@@ -58,7 +51,7 @@ class RecommendCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 22),
                     child: Text(
-                      name,
+                      recipe.name,
                       style: TextStyles.normalBold.copyWith(fontSize: 12),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -77,7 +70,7 @@ class RecommendCard extends StatelessWidget {
                       const Icon(Icons.schedule, size: 12, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
-                        time,
+                        recipe.time,
                         style: TextStyles.mediumBold.copyWith(fontSize: 10),
                       ),
                       const Spacer(),
@@ -105,7 +98,7 @@ class RecommendCard extends StatelessWidget {
               left: 24,
               child: ClipOval(
                 child: Image.network(
-                  imageUrl,
+                  recipe.imageUrl,
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,
@@ -133,7 +126,7 @@ class RecommendCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 2),
                     Text(
-                      rating.toStringAsFixed(1),
+                      recipe.rating.toStringAsFixed(1),
                       style: const TextStyle(fontSize: 11),
                     ),
                   ],

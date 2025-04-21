@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../data/model/recipe_model.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
 class NewRecipeCard extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String chefName;
-  final String time;
-  final double rating;
+  final Recipe recipe;
 
-  const NewRecipeCard({
-    super.key,
-    required this.imageUrl,
-    required this.title,
-    required this.chefName,
-    required this.time,
-    required this.rating,
-  });
+  const NewRecipeCard({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +48,7 @@ class NewRecipeCard extends StatelessWidget {
                       SizedBox(
                         width: 251 * 2 / 3,
                         child: Text(
-                          title,
+                          recipe.name,
                           style: TextStyles.normalBold.copyWith(fontSize: 13),
                           textAlign: TextAlign.left,
                           maxLines: 1,
@@ -75,7 +65,7 @@ class NewRecipeCard extends StatelessWidget {
                             Icons.star,
                             size: 14,
                             color:
-                                index < rating.round()
+                                index < recipe.rating.round()
                                     ? Colors.orange
                                     : Colors.grey[300],
                           ),
@@ -85,7 +75,7 @@ class NewRecipeCard extends StatelessWidget {
 
                       // 셰프
                       Text(
-                        'By $chefName',
+                        'By ${recipe.chef}',
                         style: TextStyles.smallerRegular.copyWith(
                           fontSize: 11,
                           color: ColorStyles.gray4,
@@ -106,7 +96,7 @@ class NewRecipeCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          time,
+                          recipe.time,
                           style: TextStyles.smallerRegular.copyWith(
                             fontSize: 10,
                           ),
@@ -125,7 +115,7 @@ class NewRecipeCard extends StatelessWidget {
             right: 10,
             child: ClipOval(
               child: Image.network(
-                imageUrl,
+                recipe.imageUrl,
                 width: 70,
                 height: 70,
                 fit: BoxFit.cover,
