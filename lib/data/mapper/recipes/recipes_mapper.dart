@@ -9,6 +9,7 @@ extension RecipesMapper on Recipes {
       time: time ?? '',
       rating: rating ?? 0.0,
       image: image ?? '',
+      category: category ?? '',
     );
   }
 

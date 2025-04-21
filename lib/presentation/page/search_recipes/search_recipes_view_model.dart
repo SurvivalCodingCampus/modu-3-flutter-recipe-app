@@ -22,9 +22,10 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   SearchRecipesState get state => _state;
 
-  void getRecipes({required List<Map<String,dynamic>> beforeSearchList}) async {
+  void getRecipes({
+    required List<Map<String, dynamic>> beforeSearchList,
+  }) async {
     _state = _state.copyWith(isSearchLoading: true);
-    print("beforeSearchList $beforeSearchList");
     notifyListeners();
 
     if (beforeSearchList.isEmpty) {
@@ -32,9 +33,10 @@ class SearchRecipesViewModel with ChangeNotifier {
         recipes: await _recipeRepository.getAllRecipeList(),
         isSearchLoading: false,
       );
-    }else{
+    } else {
       _state = _state.copyWith(
-        recipes: beforeSearchList.map((items) => Recipe.fromJson(items)).toList(),
+        recipes:
+            beforeSearchList.map((items) => Recipe.fromJson(items)).toList(),
         isSearchLoading: false,
       );
     }
@@ -56,14 +58,48 @@ class SearchRecipesViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<Map<String, dynamic>>> saveWriteFile({required String text}) async {
-    final filterRecipesList = await _saveSearchRecipesUseCase
-        .searchFilterRecipesList(text: text);
+  void filterSearchRecipes({
+    required Map<String, dynamic> filterMap,
+    String? keyWord,
+  }) async {
+    List<Recipe> targetList;
 
-    final List<Map<String, dynamic>> filterMapList =
-        filterRecipesList.map((items) => items.toJson()).toList();
+    print('filterMap $filterMap');
 
-    return filterMapList;
+    if (keyWord != null) {
+      targetList = await _saveSearchRecipesUseCase.searchFilterRecipesList(
+        text: keyWord,
+      );
+    } else {
+      targetList = await _recipeRepository.getAllRecipeList();
+    }
 
+    // if (filterMap["selectTimeString"] != '') {
+    //   targetList ==
+    //       targetList
+    //           .where((items) => items.time == filterMap["selectTimeString"])
+    //           .toList();
+    // }
+
+    if (filterMap["selectRateString"] != '') {
+      targetList =
+          targetList
+              .where((items) => items.rating.toInt().toString() == filterMap["selectRateString"])
+              .toList();
+    }
+
+    if (filterMap["selectCategoryString"] != 'All') {
+      targetList =
+          targetList
+              .where(
+                (items) => items.category == filterMap["selectCategoryString"],
+              )
+              .toList();
+    }
+
+    print('targetList $targetList');
+
+    _state = _state.copyWith(filterRecipes: targetList);
+    notifyListeners();
   }
 }

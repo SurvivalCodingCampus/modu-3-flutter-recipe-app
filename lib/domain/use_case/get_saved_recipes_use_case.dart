@@ -2,7 +2,7 @@ import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/domain/repository/recipe/recipe_repository.dart';
 
 class GetSavedRecipesUseCase {
- final RecipeRepository _recipeRepository;
+  final RecipeRepository _recipeRepository;
 
   GetSavedRecipesUseCase({required RecipeRepository recipeRepository})
     : _recipeRepository = recipeRepository;
@@ -17,6 +17,7 @@ class GetSavedRecipesUseCase {
             time: items.time,
             rating: items.rating,
             image: items.image,
+            category: items.category,
           ),
         )
         .toList();

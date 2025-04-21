@@ -12,6 +12,7 @@ _Recipe _$RecipeFromJson(Map<String, dynamic> json) => _Recipe(
   time: json['time'] as String,
   rating: (json['rating'] as num).toDouble(),
   image: json['image'] as String,
+  category: json['category'] as String,
 );
 
 Map<String, dynamic> _$RecipeToJson(_Recipe instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$RecipeToJson(_Recipe instance) => <String, dynamic>{
   'time': instance.time,
   'rating': instance.rating,
   'image': instance.image,
+  'category': instance.category,
 };

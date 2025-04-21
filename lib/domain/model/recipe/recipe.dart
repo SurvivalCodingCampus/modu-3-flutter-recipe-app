@@ -12,6 +12,7 @@ abstract class Recipe with _$Recipe {
     required String time,
     required double rating,
     required String image,
+    required String category,
   }) = _Recipe;
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 

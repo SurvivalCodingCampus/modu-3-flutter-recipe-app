@@ -114,7 +114,12 @@ class FilterSearchScreen extends StatelessWidget {
                     textColor: ColorStyle.white,
                     buttonRadius: 10,
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context, {
+                        'selectTimeString': viewModel.state.selectTimeString,
+                        'selectRateString': viewModel.state.selectRateString,
+                        'selectCategoryString':
+                            viewModel.state.selectCategoryString,
+                      });
                     },
                   ),
                 ),

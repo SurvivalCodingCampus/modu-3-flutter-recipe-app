@@ -71,10 +71,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                           alignment: Alignment.centerLeft,
                           child: IconButton(
                             onPressed: () {
-                              final result = widget.viewModel.saveWriteFile(
-                                text: _controller.text,
-                              );
-                              context.pop(result);
+                              context.pop();
                             },
                             icon: Icon(Icons.arrow_back_outlined),
                           ),
@@ -156,10 +153,12 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 ),
                                 child: FilterSearchScreen(
                                   viewModel: FilterSearchViewModel(),
-                                ),
+                                )
                               );
                             },
-                          );
+                          ).then((value) {
+                            widget.viewModel.filterSearchRecipes(filterMap: value);
+                          });
                         },
                         borderRadius: BorderRadius.circular(10),
                         child: Ink(
@@ -194,7 +193,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       mainAxisSpacing: 15,
                       crossAxisSpacing: 15,
                       children:
-                          widget.viewModel.state.searchKeyWord.isEmpty
+                          widget.viewModel.state.filterRecipes.isEmpty
                               ? widget.viewModel.state.recipes.map((items) {
                                 return RecipeSearchCard(
                                   recipeName: items.name,

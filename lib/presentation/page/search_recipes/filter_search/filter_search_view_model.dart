@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/page/search_recipes/filter_search/filter_search_state.dart';
 
+
+FilterSearchState _state = FilterSearchState();
 class FilterSearchViewModel with ChangeNotifier {
-  FilterSearchState _state = FilterSearchState();
+
 
   FilterSearchState get state => _state;
 
