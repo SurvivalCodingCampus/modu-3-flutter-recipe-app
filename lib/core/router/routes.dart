@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/di/app_di.dart';
 import 'package:recipe_app/core/presentation/pages/error_screen.dart';
 import 'package:recipe_app/core/presentation/pages/root_tab.dart';
 import 'package:recipe_app/feature/auth/presentation/pages/sign_up_screen.dart';
@@ -8,9 +9,12 @@ import 'package:recipe_app/feature/receipe/presentation/home/home_screen.dart';
 import 'package:recipe_app/feature/notification/presentation/pages/notification_screen.dart';
 import 'package:recipe_app/feature/profile/presentation/pages/profile_screen.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_view_model.dart';
 import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_screen.dart';
 import 'package:recipe_app/core/presentation/pages/splash_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_view_model.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -44,7 +48,8 @@ final routes = [
   GoRoute(
     path: AppRoutes.search,
     builder: (context, state) {
-      return const SearchScreen();
+      final SearchViewModel viewModel = getIt();
+      return SearchScreen(viewModel);
     },
   ),
 
@@ -52,11 +57,9 @@ final routes = [
     path: AppRoutes.info,
     name: 'info',
     builder: (context, state) {
-      final id = state.pathParameters['id'];
-      if (id == null) {
-        return const ErrorScreen();
-      }
-      return RecipeInfoScreen(id: int.parse(id));
+      final id = state.pathParameters['id']!;
+      final RecipeInfoViewModel viewModel = getIt();
+      return RecipeInfoScreen(id: int.parse(id), viewModel: viewModel);
     },
   ),
 
@@ -75,7 +78,8 @@ final routes = [
       GoRoute(
         path: AppRoutes.savedRecipes,
         builder: (context, state) {
-          return const SavedRecipesScreen();
+          final SavedRecipesViewModel viewModel = getIt();
+          return SavedRecipesScreen(viewModel);
         },
       ),
 
