@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/main/sign_in/sign_in_state.dart';
 import 'package:recipe_app/presentation/main/sign_in/sign_in_view_model.dart';
 
+import 'core/di/get_it.dart';
 import 'core/routing/router.dart';
 
 void main() {
+  diSetup();
   runApp(MyRecipeApp());
 }
 
