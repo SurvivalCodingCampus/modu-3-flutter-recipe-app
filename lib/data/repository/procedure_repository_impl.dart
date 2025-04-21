@@ -1,4 +1,4 @@
-import 'package:recipe_app/data/data_source/data_source.dart';
+import 'package:recipe_app/data/remote_data_source/remote_data_source.dart';
 import 'package:recipe_app/data/mapper/procedure_mapper.dart';
 import 'package:recipe_app/domain/model/procedure.dart';
 import 'package:recipe_app/domain/repository/repository.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/data/data_source/data_source.dart';
+import 'package:recipe_app/data/remote_data_source/remote_data_source.dart';
 import 'package:recipe_app/data/repository/repository.dart';
 import 'package:recipe_app/domain/model/model.dart';
 import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_view_model.dart';
