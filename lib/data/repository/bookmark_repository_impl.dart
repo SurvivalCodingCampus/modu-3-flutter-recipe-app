@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
+import 'package:recipe_app/core/result.dart';
 import 'package:recipe_app/data/data_source/interface/recipe_data_source.dart';
+import 'package:recipe_app/domain/error/recipe_error.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/repository/bookmark_repository.dart';
 
@@ -14,9 +16,15 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
 
   @override
   Future<void> init() async {
-    final List<Recipe> recipes = await _dataSource.fetch();
+    final Result<List<Recipe>, RecipeError> recipes = await _dataSource.fetch();
 
-    _bookmarks = recipes.where((recipe) => recipe.bookmarked).toList();
+    switch (recipes) {
+      case Success(:final List<Recipe> data):
+        _bookmarks = data.where((recipe) => recipe.bookmarked).toList();
+        break;
+      case Failure(error: final RecipeError error):
+        throw error;
+    }
 
     _initialized = true;
   }
@@ -44,16 +52,16 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
   }
 
   @override
-  Future<List<Recipe>> findAll() async {
+  Future<Result<List<Recipe>, RecipeError>> findAll() async {
     if (initialized == false) {
       await init();
     }
 
-    return _bookmarks;
+    return Result.success(_bookmarks);
   }
 
   @override
-  Future<List<Recipe>> findAllByFilter(
+  Future<Result<List<Recipe>, RecipeError>> findAllByFilter(
     bool Function(Recipe predicate) predicate,
   ) {
     // TODO: implement findAllByFilter
@@ -61,7 +69,7 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
   }
 
   @override
-  Future<Recipe?> findById(int id) {
+  Future<Result<Recipe, RecipeError>> findById(int id) {
     // TODO: implement findById
     throw UnimplementedError();
   }
