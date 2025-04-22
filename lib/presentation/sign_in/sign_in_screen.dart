@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:recipe_app/domain/model/user.dart';
 import 'package:recipe_app/presentation/component/button/big_button.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
 

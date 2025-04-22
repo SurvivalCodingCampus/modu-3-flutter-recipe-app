@@ -13,4 +13,16 @@ class StepsDataSourceImpl implements StepsDataSource {
 
     return steps.map((e) => StepDto.fromJson(e)).toList();
   }
+
+  @override
+  Future<List<StepDto>> getStepsbyId(int recipeId) async {
+    final jsonString = await rootBundle.loadString('assets/json/steps.json');
+    final jsonMap = jsonDecode(jsonString) as Map<String, dynamic>;
+    final List<dynamic> steps = jsonMap['steps'];
+
+    return steps
+        .where((element) => element['recipeId'] == recipeId)
+        .map((e) => StepDto.fromJson(e))
+        .toList();
+  }
 }

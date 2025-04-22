@@ -22,6 +22,7 @@ class GetSavedRecipesUseCase {
         recipes
             .where((recipe) => bookmarkedRecipeIds.contains(recipe.id))
             .toList();
+
     return savedRecipes;
   }
 }
