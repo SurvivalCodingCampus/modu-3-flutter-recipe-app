@@ -3,12 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/dev_components.dart';
-import 'package:recipe_app/presentation/ingredient/ingredient_screen.dart';
 import 'package:recipe_app/presentation/login/login_screen.dart';
 import 'package:recipe_app/presentation/main_tab/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/main_tab/home/home_view_model.dart';
 import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_screen_root.dart';
 import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_view_model.dart';
+import 'package:recipe_app/presentation/recipe_detail/recipe_detail_screen_root.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
@@ -37,7 +37,7 @@ final appRouter = GoRouter(
       path: Routes.ingredient,
       builder: (context, state) {
         final id = int.parse(state.pathParameters['id']!);
-        return IngredientScreen(recipeId: id, viewModel: getIt());
+        return RecipeDetailScreenRoot(recipeId: id, viewModel: getIt());
       },
     ),
 

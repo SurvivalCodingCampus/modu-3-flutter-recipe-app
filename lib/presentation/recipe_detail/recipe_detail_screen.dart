@@ -12,117 +12,106 @@ import 'package:recipe_app/presentation/component/recipe_component/recipeStep.da
 import 'package:recipe_app/presentation/component/recipe_component/recipe_author.dart';
 import 'package:recipe_app/presentation/component/recipe_component/recipe_card.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
-import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
+import 'package:recipe_app/presentation/recipe_detail/recipe_detail_action.dart';
+import 'package:recipe_app/presentation/recipe_detail/recipe_detail_state.dart';
 
-class IngredientScreen extends StatefulWidget {
+class RecipeDetailScreen extends StatelessWidget {
+  final RecipeDetailState state;
   final int recipeId;
-  final IngredientViewModel viewModel;
+  final void Function(RecipeDetailAction action) onAction;
 
-  const IngredientScreen({
+  const RecipeDetailScreen({
     super.key,
+    required this.state,
     required this.recipeId,
-    required this.viewModel,
+    required this.onAction,
   });
 
   @override
-  State<IngredientScreen> createState() => _IngredientScreenState();
-}
-
-class _IngredientScreenState extends State<IngredientScreen> {
-  int selectedTabIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.viewModel.load(widget.recipeId);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: widget.viewModel,
-      builder: (context, _) {
-        final state = widget.viewModel.state;
-        const color = ColorStyle.labelColour;
-        final TextStyle style = AppTextStyles.smallRegular(
-          color: ColorStyle.labelColour,
-        );
+    const color = ColorStyle.labelColour;
+    final style = AppTextStyles.smallRegular(color: color);
 
-        return Scaffold(
-          appBar: AppBar(
-            actions: [
-              PopupMenuButton<String>(
-                icon: const Icon(Icons.more_vert),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            color: ColorStyle.white,
+            onSelected: (value) {},
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  value: 'share',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.share, size: 20, color: color),
+                      const SizedBox(width: 16),
+                      Text('share', style: style),
+                    ],
+                  ),
                 ),
-                color: ColorStyle.white,
-                onSelected: (value) {},
-                itemBuilder: (context) {
-                  return [
-                    PopupMenuItem(
-                      value: 'share',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.share, size: 20, color: color),
-                          const SizedBox(width: 16),
-                          Text('share', style: style),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'rate',
-                      onTap: () {
-                        Future.delayed(
-                          const Duration(milliseconds: 100),
-                          showRatingDialog,
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(Icons.star, size: 20, color: color),
-                          const SizedBox(width: 16),
-                          Text('Rate Recipe', style: style),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'review',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.chat_bubble, size: 20, color: color),
-                          const SizedBox(width: 16),
-                          Text('Review', style: style),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'unsave',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.bookmark, size: 20, color: color),
-                          const SizedBox(width: 16),
-                          Text('Unsave', style: style),
-                        ],
-                      ),
-                    ),
-                  ];
-                },
+                PopupMenuItem(
+                  value: 'rate',
+                  onTap: () => showRatingDialog(context),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.star, size: 20, color: color),
+                      const SizedBox(width: 16),
+                      Text('Rate Recipe', style: style),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'review',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.chat_bubble, size: 20, color: color),
+                      const SizedBox(width: 16),
+                      Text('Review', style: style),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'unsave',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.bookmark, size: 20, color: color),
+                      const SizedBox(width: 16),
+                      Text('Unsave', style: style),
+                    ],
+                  ),
+                ),
+              ];
+            },
+          ),
+        ],
+      ),
+      body: switch (state.recipe) {
+        UiLoading() => const Center(child: CircularProgressIndicator()),
+        UiError(message: final msg) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('에러 발생: $msg'),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => onAction(const RecipeDetailAction.onRetry()),
+                child: const Text('다시 시도'),
               ),
             ],
           ),
-          body: switch (state.recipe) {
-            UiLoading() => const Center(child: CircularProgressIndicator()),
-            UiError(message: final msg) => Center(child: Text('에러 발생: $msg')),
-            UiSuccess(data: final recipe) => _buildLoadedUI(recipe),
-            _ => const SizedBox(),
-          },
-        );
+        ),
+        UiSuccess(data: final recipe) => _buildLoadedUI(context, recipe),
+        _ => const SizedBox(),
       },
     );
   }
 
-  Widget _buildLoadedUI(Recipe recipe) {
+  Widget _buildLoadedUI(BuildContext context, Recipe recipe) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -185,10 +174,9 @@ class _IngredientScreenState extends State<IngredientScreen> {
               // 탭
               Tabs(
                 tabTitles: const ['Ingredients', 'Procedure'],
-                selectedIndex: selectedTabIndex,
-                onTabSelected: (index) {
-                  setState(() => selectedTabIndex = index);
-                },
+                selectedIndex: state.selectedTabIndex,
+                onTabSelected:
+                    (index) => onAction(RecipeDetailAction.onSelectTab(index)),
               ),
               const SizedBox(height: 35),
 
@@ -210,7 +198,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
                     ),
                     const Spacer(),
                     Text(
-                      (selectedTabIndex == 0)
+                      (state.selectedTabIndex == 0)
                           ? '${recipe.ingredients.length} Items'
                           : '${recipe.steps.length} Steps',
                       style: AppTextStyles.smallRegular(
@@ -226,7 +214,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
 
         // 콘텐츠
         Expanded(
-          child: switch (selectedTabIndex) {
+          child: switch (state.selectedTabIndex) {
             0 => _buildIngredientList(recipe.ingredients),
             1 => _buildStepList(recipe.steps),
             _ => const SizedBox(),
@@ -264,7 +252,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
     );
   }
 
-  void showRatingDialog() {
+  void showRatingDialog(BuildContext context) {
     showDialog(
       context: context,
       builder:
@@ -273,10 +261,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
               title: 'Rate recipe',
               submitTitle: 'Send',
               onSubmitted: (rating) {
-                widget.viewModel.updateRating(
-                  widget.recipeId,
-                  rating.toDouble(),
-                );
+                onAction(RecipeDetailAction.onRate(rating));
                 Navigator.of(context).pop();
               },
             ),
