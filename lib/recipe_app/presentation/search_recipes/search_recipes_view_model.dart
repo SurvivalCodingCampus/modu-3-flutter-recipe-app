@@ -20,6 +20,8 @@ class SearchRecipesViewModel with ChangeNotifier {
       recipes: await recipeRepository.fetchRecipes(),
       isRecipesLoading: false,
     );
+    print('${_searchRecipesState.recipes.length} 기본 레시피 갯수');
+
     notifyListeners();
   }
 

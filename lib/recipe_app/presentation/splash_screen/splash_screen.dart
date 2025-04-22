@@ -1,17 +1,46 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/core/routing/routes.dart';
+import 'package:recipe_app/recipe_app/presentation/splash_screen/splash_screen_view_model.dart';
 import 'package:recipe_app/recipe_app/ui/button_styles.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
+import 'splash_screen_event.dart';
+
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final SplashScreenViewModel viewModel;
+
+  const SplashScreen({super.key, required this.viewModel});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  StreamSubscription<SplashScreenEvent>? _subscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _subscription = widget.viewModel.eventStream.listen((event) {
+      if (mounted) {
+        switch (event) {
+          case networkError():
+            final snackBar = SnackBar(content: Text(event.message));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,6 +119,8 @@ class _SplashScreenState extends State<SplashScreen> {
                             SizedBox(height: 50),
                             ElevatedButton(
                               onPressed: () {
+                                //바로 오류 출력
+                                // widget.viewModel.onNetworkError();
                                 context.go(Routes.signIn);
                               },
                               style: ButtonStyles.splashScreenButton,

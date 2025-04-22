@@ -12,7 +12,7 @@ class CategoryFilterButton extends StatefulWidget {
 }
 
 class _CategoryFilterButtonState extends State<CategoryFilterButton> {
-  String? selectedFilter;
+  String selectedFilter = 'All';
 
   @override
   Widget build(BuildContext context) {

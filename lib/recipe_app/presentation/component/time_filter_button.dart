@@ -12,7 +12,7 @@ class TimeFilterButton extends StatefulWidget {
 }
 
 class _TimeFilterButtonState extends State<TimeFilterButton> {
-  String? selectedFilter;
+  String selectedFilter = 'All';
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,8 @@ class _TimeFilterButtonState extends State<TimeFilterButton> {
       height: 30,
       child: ElevatedButton(
         onPressed: () {
-          setState(() {
-            selectedFilter = text;
-          });
+          selectedFilter = text;
+          setState(() {});
           widget.changedTimeFilter(selectedFilter);
         },
         style:

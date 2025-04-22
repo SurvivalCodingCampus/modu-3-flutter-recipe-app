@@ -20,9 +20,10 @@ class FilterSearchBottomSheet extends StatefulWidget {
 }
 
 class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
-  String? selectedTimeFilter;
+  String selectedTimeFilter = 'All';
   String? selectedCategoryFilter;
   int? selectedRatingFilter;
+  late int selectedIndexButton;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +53,8 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                   SizedBox(height: 5),
                   TimeFilterButton(
                     changedTimeFilter: (value) {
-                      setState(() {
-                        selectedTimeFilter = value;
-                      });
-                      print(selectedTimeFilter);
+                      selectedTimeFilter;
+                      setState(() {});
                     },
                   ),
                 ],
@@ -69,14 +68,20 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(height: 5),
-                  RatingButton(
-                    changedRatingFilter: (value) {
-                      setState(() {
-                        selectedRatingFilter = value;
-                      });
-                      print(selectedRatingFilter);
-                    },
-                  ),
+                  selectedRatingFilter == 1
+                      ? RatingButton(
+                        changedRatingFilter: (value) {
+                          selectedRatingFilter = value = 1;
+                        },
+                      )
+                      : RatingButton(
+                        changedRatingFilter: (value) {
+                          setState(() {
+                            selectedRatingFilter = value;
+                          });
+                          print(selectedRatingFilter);
+                        },
+                      ),
                 ],
               ),
               Column(
@@ -88,22 +93,34 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(height: 5),
-                  CategoryFilterButton(
-                    changedCategoryFilter: (value) {
-                      setState(() {
-                        selectedCategoryFilter = value;
-                      });
-                      print(selectedCategoryFilter);
-                    },
-                  ),
+                  selectedCategoryFilter == ''
+                      ? CategoryFilterButton(
+                        changedCategoryFilter: (value) {
+                          selectedCategoryFilter = value = 'All';
+                        },
+                      )
+                      : CategoryFilterButton(
+                        changedCategoryFilter: (value) {
+                          setState(() {
+                            selectedCategoryFilter = value;
+                          });
+                        },
+                      ),
                 ],
               ),
               SizedBox(height: 10),
               SizedBox(
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Filter', style: TextStyles.smallerTextSemiBold),
+                  onPressed: () {
+                    widget.filterSearchViewModel.filterRecipesByCategory(
+                      selectedTimeFilter!,
+                      selectedRatingFilter!,
+                      selectedCategoryFilter!,
+                    );
+                    Navigator.pop(context, true);
+                  },
                   style: ButtonStyles.filterButton,
+                  child: Text('Filter', style: TextStyles.smallerTextSemiBold),
                 ),
               ),
             ],

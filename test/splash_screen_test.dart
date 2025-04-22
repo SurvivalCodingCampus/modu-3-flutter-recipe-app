@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository_impl.dart';
@@ -10,18 +11,23 @@ import 'package:recipe_app/recipe_app/presentation/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/splash_screen/splash_screen.dart';
 
 void main() {
+  diSetUp();
   MockRecipeDataImpl mockRecipeDataImpl = MockRecipeDataImpl();
   RecipeRepository repository = RecipeRepositoryImpl(
     recipeDataSource: mockRecipeDataImpl,
   );
   FilterSearchViewModel filterSearchViewModel = FilterSearchViewModel(
-    repository,
+    recipeRepository: getIt(),
+    useCase: getIt(),
   );
   testWidgets('SplashScreen GoRouter Test', (WidgetTester tester) async {
     final router = GoRouter(
       initialLocation: '/',
       routes: [
-        GoRoute(path: '/', builder: (context, state) => SplashScreen()),
+        GoRoute(
+          path: '/',
+          builder: (context, state) => SplashScreen(viewModel: getIt()),
+        ),
         GoRoute(
           path: Routes.signIn,
           builder: (context, state) => const Scaffold(body: SignInScreen()),
