@@ -1,68 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes.dart';
-import 'package:recipe_app/ui/ui.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_action.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
-class SavedRecipesScreen extends StatefulWidget {
-  final SavedRecipesViewModel viewModel;
-  const SavedRecipesScreen({super.key, required this.viewModel});
+import '../component/recipe_card.dart';
 
-  @override
-  State<SavedRecipesScreen> createState() => _SavedRecipesScreenState();
-}
-
-class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
-  @override
-  void initState() {
-    super.initState();
-    widget.viewModel.fetchSavedRecipes();
-  }
+class SavedRecipesScreen extends StatelessWidget {
+  final SavedRecipesState state;
+  final void Function(SavedRecipesAction action) onAction;
+  const SavedRecipesScreen({
+    super.key,
+    required this.state,
+    required this.onAction,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorStyles.white,
-        surfaceTintColor: ColorStyles.white,
-        title: Text(
-          'Saved Recipes',
-          style: TextStyles.mediumTextBold.copyWith(
-            color: ColorStyles.labelColor,
+    return ListView.separated(
+      itemBuilder: (context, index) {
+        final recipe = state.recipes[index];
+        return GestureDetector(
+          onTap:
+              () =>
+                  onAction(SavedRecipesAction.onTapCard(int.parse(recipe.id))),
+          behavior: HitTestBehavior.opaque,
+          child: RecipeCard(
+            recipe: recipe,
+            onTap:
+                () => onAction(
+                  SavedRecipesAction.onTapSave(int.parse(recipe.id)),
+                ),
           ),
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: ListenableBuilder(
-          listenable: widget.viewModel,
-          builder: (context, child) {
-            if (widget.viewModel.state.isLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return ListView.separated(
-              itemBuilder: (context, index) {
-                final recipe = widget.viewModel.state.recipes[index];
-                return GestureDetector(
-                  onTap: () {
-                    context.push('/recipe-ingredient/${recipe.id}');
-                  },
-                  behavior: HitTestBehavior.opaque,
-                  child: RecipeCard(
-                    recipe: recipe,
-                    onTap: () {
-                      widget.viewModel.toggleRecipe(int.parse(recipe.id));
-                    },
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 20),
-              itemCount: widget.viewModel.state.recipes.length,
-            );
-          },
-        ),
-      ),
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(height: 20),
+      itemCount: state.recipes.length,
     );
   }
 }
