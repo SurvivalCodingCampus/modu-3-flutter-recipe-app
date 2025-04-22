@@ -4,6 +4,7 @@ import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/bookmark_recipes_use_case.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_action.dart';
 import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
@@ -19,7 +20,16 @@ class SavedRecipesViewModel with ChangeNotifier {
   SavedRecipesState _state = const SavedRecipesState();
   SavedRecipesState get state => _state;
 
-  void fetchRecipes() async {
+  void onAction(SavedRecipesAction action) {
+    switch (action) {
+      case FetchRecipes():
+        _fetchRecipes();
+      case BookmarkRecipe():
+        _bookmarkRecipe(action.id);
+    }
+  }
+
+  void _fetchRecipes() async {
     _state = state.copyWith(viewState: ViewState.loading);
     notifyListeners();
     final resp = await _getSavedRecipesUseCase.excute();
@@ -32,8 +42,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void bookmarkRecipe(int id) async {
-    print('id: $id');
+  void _bookmarkRecipe(int id) async {
     final result = await _bookmarkRecipesUseCase.excute(id);
     switch (result) {
       case Success<bool>():
