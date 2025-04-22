@@ -21,21 +21,21 @@ void setupDependencies() {
   getIt.registerLazySingleton<RecipeDataSource>(() => RecipeDataSourceImpl()); // 🔥 수정 포인트
 
   // ✅ Repository
-  getIt.registerLazySingleton<RecipeRepository>(
-      () => RecipeRepositoryImpl(getIt()));
-  getIt.registerLazySingleton<BookmarkRepository>(
-      () => BookmarkRepositoryImpl());
+    getIt.registerLazySingleton<RecipeRepository>(
+        () => RecipeRepositoryImpl(getIt()));
+    getIt.registerLazySingleton<BookmarkRepository>(
+        () => BookmarkRepositoryImpl());
 
   // ✅ UseCase
-  getIt.registerLazySingleton<GetSavedRecipesUseCase>(
-      () => GetSavedRecipesUseCaseImpl(getIt()));
-  getIt.registerLazySingleton<UnbookmarkRecipeUseCase>(
-      () => UnbookmarkRecipeUseCaseImpl(getIt()));
+    getIt.registerLazySingleton<GetSavedRecipesUseCase>(
+        () => GetSavedRecipesUseCaseImpl(getIt()));
+    getIt.registerLazySingleton<UnbookmarkRecipeUseCase>(
+        () => UnbookmarkRecipeUseCaseImpl(getIt()));
 
   // ✅ ViewModel
-  getIt.registerFactory(() => SavedRecipesViewModel(
+    getIt.registerFactory(() => SavedRecipesViewModel(
         getIt<GetSavedRecipesUseCase>(),
         getIt<UnbookmarkRecipeUseCase>(),
         getIt<BookmarkRepository>(),
-      ));
+        ));
 }

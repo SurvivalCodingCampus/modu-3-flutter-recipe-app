@@ -9,14 +9,25 @@ class FilterSearchState {
 
   // 카테고리 필터 상태
   final List<String> categoryOptions = [
-    'All', 'Cereal', 'Vegetables', 'Dinner', 
-    'Chinese', 'Local Dish', 'Fruit', 'Breakfast',
-    'Spanish', 'Chinese', 'Lunch'
+    'All',
+    'Cereal',
+    'Vegetables',
+    'Dinner',
+    'Chinese',
+    'Local Dish',
+    'Fruit',
+    'Breakfast',
+    'Spanish',
+    'Chinese',
+    'Lunch',
   ];
   final List<bool> selectedCategories;
 
-  FilterSearchState() 
-    : selectedCategories = List.generate(11, (_) => false); // 카테고리 옵션 개수에 맞게 초기화
+  FilterSearchState()
+    : selectedCategories = List.generate(
+        11,
+        (_) => false,
+      ); // 카테고리 옵션 개수에 맞게 초기화
 
   // 시간 필터 토글
   void toggleTimeFilter(int index) {
@@ -42,20 +53,20 @@ class FilterSearchState {
     }
   }
 
-  // 현재 선택된 필터 값을 맵으로 반환
+  // FilterSearchState의 getSelectedFilters() 메서드를 확인
   Map<String, dynamic> getSelectedFilters() {
     final Map<String, dynamic> filters = {};
-    
+
     // 시간 필터
     if (selectedTimeIndex != null) {
       filters['time'] = timeOptions[selectedTimeIndex!];
     }
-    
-    // 평점 필터
+
+    // 별점 필터
     if (selectedRatingIndex != null) {
       filters['rating'] = ratingOptions[selectedRatingIndex!];
     }
-    
+
     // 카테고리 필터
     final List<String> selectedCategoryValues = [];
     for (int i = 0; i < selectedCategories.length; i++) {
@@ -63,11 +74,11 @@ class FilterSearchState {
         selectedCategoryValues.add(categoryOptions[i]);
       }
     }
-    
+
     if (selectedCategoryValues.isNotEmpty) {
       filters['categories'] = selectedCategoryValues;
     }
-    
+
     return filters;
   }
 }

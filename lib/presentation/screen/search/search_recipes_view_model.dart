@@ -13,9 +13,15 @@ class SearchRecipesViewModel extends ChangeNotifier {
     _fetchRecipes();
   }
 
+  void updateQuery(String query) {
+    _state = _state.copyWith(searchQuery: query);
+    _applyFiltersAndSearch();
+    notifyListeners();
+  }
+
   void applyFilters(Map<String, dynamic> filters) {
     _state = _state.copyWith(appliedFilters: Map.from(filters));
-    _applySearch(); // 기존 검색 로직과 같이 사용
+    _applyFiltersAndSearch();
     notifyListeners();
   }
 
@@ -35,29 +41,53 @@ class SearchRecipesViewModel extends ChangeNotifier {
     }
   }
 
-  void updateQuery(String query) {
-    _state = _state.copyWith(searchQuery: query);
-    _applySearch();
-  }
-
-  void _applySearch() {
+  void _applyFiltersAndSearch() {
     final query = _state.searchQuery.toLowerCase();
+    final filters = _state.appliedFilters;
 
-    final filtered =
+    final List<Recipe> filtered =
         _state.allRecipes.where((recipe) {
-          final name = recipe.name.toLowerCase();
-          final chef = recipe.chef.toLowerCase();
-          final ingredients = recipe.ingredients
-              .map((e) => e.ingredient.name.toLowerCase())
-              // ← 여기에 `.name` 필수
-              .join(' ');
+          // 1. 검색어 필터링
+          if (query.isNotEmpty) {
+            final name = recipe.name.toLowerCase();
+            final chef = recipe.chef.toLowerCase();
+            final ingredients = recipe.ingredients
+                .map((e) => e.ingredient.name.toLowerCase())
+                .join(' ');
 
-          return name.contains(query) ||
-              chef.contains(query) ||
-              ingredients.contains(query);
+            final matchesQuery =
+                name.contains(query) ||
+                chef.contains(query) ||
+                ingredients.contains(query);
+
+            if (!matchesQuery) {
+              return false;
+            }
+          }
+
+          // 2. 별점 필터링
+          if (filters.containsKey('rating')) {
+            final minimumRating = filters['rating'] as int;
+            if (recipe.rating < minimumRating) {
+              return false;
+            }
+          }
+
+          // 3. 카테고리 필터링
+          if (filters.containsKey('categories') &&
+              filters['categories'] is List<String> &&
+              (filters['categories'] as List<String>).isNotEmpty) {
+            final categories = filters['categories'] as List<String>;
+
+            if (!categories.contains('All') &&
+                !categories.contains(recipe.category)) {
+              return false;
+            }
+          }
+
+          return true;
         }).toList();
 
     _state = _state.copyWith(filteredRecipes: filtered);
-    notifyListeners();
   }
 }

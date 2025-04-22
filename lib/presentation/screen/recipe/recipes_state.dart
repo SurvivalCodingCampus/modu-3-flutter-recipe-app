@@ -10,5 +10,6 @@ class RecipesState with _$RecipesState {
     @Default([]) List<RecipeUiModel> filteredRecipes,
     @Default(false) bool isLoading,
     @Default('') String searchQuery,
+    @Default(false) bool isEmpty, // 추가된 필드
   }) = _RecipesState;
 }

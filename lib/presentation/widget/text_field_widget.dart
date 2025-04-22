@@ -5,12 +5,14 @@ class TextFieldWidget extends StatelessWidget {
   final String hintText;
   final Widget? prefixIcon;
   final ValueChanged<String>? onChanged; 
+  final bool enabled;
 
   const TextFieldWidget({
     required this.hintText,
     this.prefixIcon,
-    super.key, 
-    this.onChanged,
+    this.onChanged, 
+    this.enabled = true,
+    super.key,
   });
 
   @override
@@ -18,6 +20,7 @@ class TextFieldWidget extends StatelessWidget {
     return SizedBox(
       height: 40,
       child: TextField(
+        enabled: enabled,
         decoration: InputDecoration(
           hintText: hintText,
           prefixIcon: prefixIcon,

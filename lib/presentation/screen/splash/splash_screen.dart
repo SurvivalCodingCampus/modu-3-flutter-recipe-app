@@ -1,7 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/app/routing/router_path.dart';
 import 'package:recipe_app/main.dart';
+import 'package:recipe_app/presentation/event/ui_event.dart';
+import 'package:recipe_app/presentation/screen/splash/splash_view_model.dart';
 import 'package:recipe_app/presentation/widget/midium_button.dart';
 import 'package:recipe_app/app/ui/app_text_styles.dart';
 
@@ -16,6 +19,8 @@ class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
+  late final SplashViewModel _viewModel;
+  late final StreamSubscription _subscription;
 
   late Animation<Offset> _slideAnimation;
   late Animation<double> _fadeAnimation;
@@ -23,6 +28,17 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+
+    _viewModel = SplashViewModel();
+    _viewModel.checkNetwork();
+
+    _subscription = _viewModel.eventStream.listen((event) {
+      if (event is ShowSnackBar) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(event.message)));
+      }
+    });
 
     _fadeController = AnimationController(
       vsync: this,
@@ -34,21 +50,15 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 1000),
     );
 
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _slideController,
-      curve: Curves.easeOut,
-    ));
-
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeIn,
-    ));
+    ).animate(CurvedAnimation(parent: _fadeController, curve: Curves.easeIn));
+
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.3),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOut));
 
     _fadeController.forward();
     Future.delayed(const Duration(milliseconds: 300), () {
@@ -60,6 +70,8 @@ class _SplashScreenState extends State<SplashScreen>
   void dispose() {
     _fadeController.dispose();
     _slideController.dispose();
+    _subscription.cancel();
+    _viewModel.dispose(); 
     super.dispose();
   }
 

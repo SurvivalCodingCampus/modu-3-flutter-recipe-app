@@ -39,7 +39,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
         setState(() {
           currentFilters = selectedFilters;
         });
-        // 여기서 선택된 필터로 검색 결과 업데이트 로직 추가
+        print("적용된 필터: $selectedFilters"); // 디버깅용
         viewModel.applyFilters(selectedFilters);
       },
     );
@@ -68,7 +68,8 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: TextFieldWidget(
+                      child: // after
+                          TextFieldWidget(
                         hintText: 'Search recipe',
                         prefixIcon: const Icon(
                           Icons.search,

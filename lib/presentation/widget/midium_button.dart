@@ -39,32 +39,36 @@ class _MidiumButtonState extends State<MidiumButton> {
             isPressed = false;
           });
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 100),
-          width: 243,
-          height: 54,
-          decoration: BoxDecoration(
-            color:
-                isPressed
-                    ? const Color(0xFF129575).withOpacity(0.4)
-                    : const Color(0xFF129575),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.text,
-                style: AppTextStyles.normalBold(color: ColorStyle.white),
-              ),
-              SizedBox(width: 8),
-              const Icon(
-                Icons.arrow_forward,
-                color: ColorStyle.white,
-                size: 20,
-              ),
-            ],
+        child: Material(
+          // ✅ 여기가 핵심
+          color: Colors.transparent, // 배경은 투명하게 유지
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 100),
+            width: 243,
+            height: 54,
+            decoration: BoxDecoration(
+              color:
+                  isPressed
+                      ? const Color(0xFF129575).withOpacity(0.4)
+                      : const Color(0xFF129575),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  widget.text,
+                  style: AppTextStyles.normalBold(color: ColorStyle.white),
+                ),
+                const SizedBox(width: 8),
+                const Icon(
+                  Icons.arrow_forward,
+                  color: ColorStyle.white,
+                  size: 20,
+                ),
+              ],
+            ),
           ),
         ),
       ),

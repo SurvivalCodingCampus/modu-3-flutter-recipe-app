@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/widget/text_field_widget.dart';
 import 'package:recipe_app/app/ui/app_text_styles.dart';
 import 'package:recipe_app/app/ui/color_style.dart';
@@ -60,11 +61,19 @@ class HomeScreen extends StatelessWidget {
 
           Row(
             children: [
-              // Expanded로 검색창이 가능한 영역 다 차지하게
               Expanded(
-                child: TextFieldWidget(
-                  hintText: 'Search recipe',
-                  prefixIcon: const Icon(Icons.search, color: ColorStyle.gray2),
+                child: GestureDetector(
+                  onTap: () {
+                    context.push('/search');
+                  },
+                  child: TextFieldWidget(
+                    hintText: 'Search recipe',
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: ColorStyle.gray2,
+                    ),
+                    enabled: false,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),

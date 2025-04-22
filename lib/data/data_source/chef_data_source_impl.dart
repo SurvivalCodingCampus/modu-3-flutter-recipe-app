@@ -19,7 +19,7 @@ class ChefDataSourceImpl implements ChefDataSource {
     
     try {
       // chef.json 파일에서 데이터 로드
-      final String jsonString = await rootBundle.loadString('assets/chef.json');
+      final String jsonString = await rootBundle.loadString('assets/json/chef.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
       
       List<dynamic> chefsJson = jsonData['profiles'];
