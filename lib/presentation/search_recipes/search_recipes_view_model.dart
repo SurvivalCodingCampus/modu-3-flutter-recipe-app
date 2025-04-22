@@ -11,14 +11,22 @@ class SearchRecipesViewModel with ChangeNotifier {
   SearchRecipesState _state = SearchRecipesState();
 
   SearchRecipesViewModel({required RecipeRepository recipeRepository})
-    : _recipeRepository = recipeRepository {
-    fetchAllRecipes();
-  }
+    : _recipeRepository = recipeRepository;
 
   SearchRecipesState get state => _state;
 
+  void whenOpenScreen() {
+    _state = _state.copyWith(isLoading: false, isSearched: false);
+    notifyListeners();
+  }
+
   void fetchAllRecipes() async {
     _state = _state.copyWith(isLoading: true);
+    if (_state.recipeList.isNotEmpty) {
+      _state = _state.copyWith(isLoading: false);
+      notifyListeners();
+      return;
+    }
     notifyListeners();
 
     final recipes = await _recipeRepository.getRecipes();

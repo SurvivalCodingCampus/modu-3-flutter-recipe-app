@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source.dart';
 import 'package:recipe_app/data/data_source/mock_user_data_source.dart';
 import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
@@ -17,6 +18,7 @@ import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dar
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/test_screen/button_screen.dart';
+import 'package:recipe_app/test_screen/excel_screen.dart';
 import 'package:recipe_app/test_screen/ingredient_screen.dart';
 import 'package:recipe_app/test_screen/rating_screen.dart';
 import 'package:recipe_app/test_screen/recipe_card_screen.dart';
@@ -44,29 +46,8 @@ class ComponentTestScreen extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder:
-                              (context) => SavedRecipesScreen(
-                                viewModel: SavedRecipesViewModel(
-                                  getSavedRecipesUseCase:
-                                      GetSavedRecipesUseCase(
-                                        userRepository: MockUserRepositoryImpl(
-                                          userDataSource: MockUserDataSource(),
-                                        ),
-                                        bookmarkRepository:
-                                            BookmarkRepositoryImpl(
-                                              userDataSource:
-                                                  MockUserDataSource(),
-                                            ),
-                                        recipeRepository:
-                                            MockRecipeRepositoryImpl(
-                                              recipeDataSource:
-                                                  MockRecipeDataSource(
-                                                    client: http.Client(),
-                                                    url: 'testUrl',
-                                                  ),
-                                            ),
-                                      ),
-                                ),
-                              ),
+                              (context) =>
+                                  SavedRecipesScreen(viewModel: getIt()),
                         ),
                       );
                     },
@@ -78,7 +59,10 @@ class ComponentTestScreen extends StatelessWidget {
                     icon: Icons.arrow_forward,
                     onClick: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SplashScreen()),
+                        MaterialPageRoute(
+                          builder:
+                              (context) => SplashScreen(viewModel: getIt()),
+                        ),
                       );
                     },
                   ),
@@ -91,16 +75,8 @@ class ComponentTestScreen extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder:
-                              (context) => SearchRecipesScreen(
-                                viewModel: SearchRecipesViewModel(
-                                  recipeRepository: MockRecipeRepositoryImpl(
-                                    recipeDataSource: MockRecipeDataSource(
-                                      client: http.Client(),
-                                      url: 'testUrl',
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              (context) =>
+                                  SearchRecipesScreen(viewModel: getIt()),
                         ),
                       );
                     },
@@ -150,6 +126,17 @@ class ComponentTestScreen extends StatelessWidget {
                     onClick: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => RatingScreen()),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 36),
+                  BigButton(
+                    name: 'excel 테스트',
+                    color: ColorStyles.warning1,
+                    icon: Icons.arrow_forward,
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ExcelScreen()),
                       );
                     },
                   ),

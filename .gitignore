@@ -47,3 +47,6 @@ app.*.map.json
 # Freezed / JSON Serializable generated files
 *.freezed.dart
 *.g.dart
+
+# excel
+*.xlsx
