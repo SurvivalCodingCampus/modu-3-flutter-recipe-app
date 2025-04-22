@@ -48,7 +48,6 @@ class _RecipeIngredientScreenRootState
           }
 
           return RecipeIngredientScreen(
-            selectedIndex: widget.viewModel.state.selectedTabIndex,
             state: widget.viewModel.state,
             onAction: (action) {
               switch (action) {

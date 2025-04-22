@@ -10,12 +10,11 @@ import '../component/small_button.dart';
 import '../component/tabs.dart';
 
 class RecipeIngredientScreen extends StatelessWidget {
-  final int selectedIndex;
   final RecipeIngredientState state;
   final void Function(RecipeIngredientAction action) onAction;
   const RecipeIngredientScreen({
     super.key,
-    required this.selectedIndex,
+
     required this.state,
     required this.onAction,
   });
@@ -107,7 +106,7 @@ class RecipeIngredientScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           child: Tabs(
                             labels: const ['Ingredient', 'Procedure'],
-                            selectedIndex: selectedIndex,
+                            selectedIndex: state.selectedTabIndex,
                             onTap:
                                 (index) => onAction(
                                   RecipeIngredientAction.onTapTabItem(index),
@@ -131,7 +130,7 @@ class RecipeIngredientScreen extends StatelessWidget {
                             ),
                             const Spacer(),
                             Text(
-                              selectedIndex == 0
+                              state.selectedTabIndex == 0
                                   ? '${recipe.ingredients.length} Items'
                                   : '${procedures.length} Steps',
                               style: TextStyles.smallerTextRegular.copyWith(
@@ -144,7 +143,7 @@ class RecipeIngredientScreen extends StatelessWidget {
                         Expanded(
                           child: ListView.separated(
                             itemBuilder: (context, index) {
-                              return selectedIndex == 0
+                              return state.selectedTabIndex == 0
                                   ? IngredientItem(
                                     ingredient: Ingredient(
                                       id: index.toString(),
@@ -184,7 +183,7 @@ class RecipeIngredientScreen extends StatelessWidget {
                               return const SizedBox(height: 10);
                             },
                             itemCount:
-                                selectedIndex == 0
+                                state.selectedTabIndex == 0
                                     ? recipe.ingredients.length
                                     : procedures.length,
                           ),
