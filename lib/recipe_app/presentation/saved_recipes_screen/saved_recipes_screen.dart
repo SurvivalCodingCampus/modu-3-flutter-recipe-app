@@ -2,28 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository_impl.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_action.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_state.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 import '../../core/di/di_setup.dart';
-import 'saved_recipes_view_model.dart';
 
 class SavedRecipesScreen extends StatefulWidget {
-  final SavedRecipesViewModel savedRecipesViewModel;
+  final SavedRecipesState state;
+  final void Function(SavedRecipesAction action) onAction;
 
-  const SavedRecipesScreen({super.key, required this.savedRecipesViewModel});
+  const SavedRecipesScreen({
+    super.key,
+    required this.state,
+    required this.onAction,
+  });
 
   @override
   State<SavedRecipesScreen> createState() => _SavedRecipesScreenState();
 }
 
 class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
+  final viewModel = SavedRecipesViewModel(getIt(), getIt(), getIt());
   final bookMarkRepository = BookMarkRepositoryImpl(recipeDataSource: getIt());
 
   @override
   void initState() {
     super.initState();
-    widget.savedRecipesViewModel.getSavedRecipesUseCase();
-    bookMarkRepository.initializeBookmarks();
+    viewModel.getSavedRecipes().then((_) {
+      setState(() {});
+    });
   }
 
   @override
@@ -34,36 +43,27 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-        child: ListenableBuilder(
-          listenable: widget.savedRecipesViewModel,
-          builder: (context, child) {
-            if (widget.savedRecipesViewModel.state.isRecipesLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (widget.savedRecipesViewModel.recipes.isEmpty) {
-              return const Center(child: Text('저장된 레시피가 없습니다.'));
-            }
-            return ListView.separated(
-              itemBuilder: (context, index) {
-                final Recipe recipe =
-                    widget.savedRecipesViewModel.recipes[index];
-                return RecipeCard(
-                  recipe: recipe,
-                  showTimerAndBookmark: true,
-                  onToggleBookMark: () {
-                    widget.savedRecipesViewModel.removeBookmarkUseCase(
-                      recipe.id,
-                    );
-                  },
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 20),
-              itemCount: widget.savedRecipesViewModel.recipes.length,
-            );
-          },
-        ),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+      child: ListView.separated(
+        itemBuilder: (context, index) {
+          final Recipe recipe = viewModel.recipes[index];
+          return RecipeCard(
+            recipe: recipe,
+            showTimerAndBookmark: true,
+            onToggleBookMark: () {
+              widget.onAction(SavedRecipesAction.removeBookMark(recipe.id));
+              //viewModel.removeBookmarkUseCase(recipe.id);
+            },
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(height: 20),
+        itemCount: viewModel.recipes.length,
       ),
     );
   }

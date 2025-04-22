@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/add_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/remove_bookmark_use_case.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_screen_event.dart';
 import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_state.dart';
 
 import '../../data/model/recipe.dart';
@@ -24,22 +27,27 @@ class SavedRecipesViewModel with ChangeNotifier {
 
   SavedRecipesState get state => _state;
 
-  Future<List<Recipe>> getSavedRecipesUseCase() async {
+  final _eventController = StreamController<SavedRecipesScreenEvent>();
+
+  Stream<SavedRecipesScreenEvent> get eventStream => _eventController.stream;
+
+  Future<List<Recipe>> getSavedRecipes() async {
     _state = _state.copyWith(isRecipesLoading: true);
     notifyListeners();
 
     _recipes = await _getSavedRecipesUseCase.execute();
     _state = _state.copyWith(isRecipesLoading: false);
+    print(_recipes);
     notifyListeners();
     return _recipes.toList();
   }
 
-  void removeBookmarkUseCase(int id) {
+  void removeBookmark(int id) async {
     _removeBookmarkUseCase.execute(id);
     notifyListeners();
   }
 
-  void addBookmarkUseCase(Recipe recipe) {
+  void addBookmark(Recipe recipe) {
     _addBookmarkUseCase.execute(recipe);
     _recipes.add(recipe.copyWith(bookMarked: true));
   }

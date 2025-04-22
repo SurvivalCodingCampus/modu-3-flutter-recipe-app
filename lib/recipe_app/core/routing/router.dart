@@ -6,7 +6,7 @@ import 'package:recipe_app/recipe_app/presentation/ingredient_screen/ingredient_
 import 'package:recipe_app/recipe_app/presentation/main_screen/bottom_navigation_bar_scaffold.dart';
 import 'package:recipe_app/recipe_app/presentation/my_page/my_page_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/notification/notification_screen.dart';
-import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_screen.dart';
+import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_screen_root.dart';
 import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/sign_up/sign_up_screen.dart';
@@ -65,7 +65,7 @@ final router = GoRouter(
           path: Routes.savedRecipes,
           pageBuilder:
               (context, state) => NoTransitionPage(
-                child: SavedRecipesScreen(savedRecipesViewModel: getIt()),
+                child: SavedRecipesScreenRoot(viewModel: getIt()),
               ),
         ),
         GoRoute(
