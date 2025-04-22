@@ -6,6 +6,7 @@ import 'package:recipe_app/data/repository/search_recipe_repository_impl.dart';
 import 'package:recipe_app/domain/repository/repository.dart';
 import 'package:recipe_app/domain/use_case/search_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/use_case.dart';
+import 'package:recipe_app/presentation/home/home_view_model.dart';
 import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes.dart';
 import 'package:recipe_app/presentation/search/search.dart';
@@ -79,6 +80,14 @@ void diSetUp() {
 
   getIt.registerFactory<SplashViewModel>(
     () => SplashViewModel(networkRepository: getIt()),
+  );
+
+  getIt.registerFactory<HomeViewModel>(
+    () => HomeViewModel(
+      recipeRepository: getIt(),
+      toggleBookmarkRecipeUseCase: getIt(),
+      bookmarkRepository: getIt(),
+    ),
   );
 }
 
