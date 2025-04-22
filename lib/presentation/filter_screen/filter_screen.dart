@@ -9,6 +9,7 @@ import 'filter_screen_view_model.dart';
 
 class FilterScreen extends StatelessWidget {
   final FilterScreenViewModel viewModel;
+
   const FilterScreen({super.key, required this.viewModel});
 
   @override

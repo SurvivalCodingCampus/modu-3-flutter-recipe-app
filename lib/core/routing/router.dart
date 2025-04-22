@@ -12,7 +12,7 @@ import '../../presentation/main/sign_up/sign_up.dart';
 import '../../presentation/main/sign_up/sign_up_view_model.dart';
 import '../../presentation/recipe_screen/recipe_screen.dart';
 import '../../presentation/recipe_screen/recipe_screen_view_model.dart';
-import '../../presentation/saved_recipe/saved_recipe_screen.dart';
+import '../../presentation/saved_recipe/saved_recipe_screen_root.dart';
 import '../di/get_it.dart';
 
 final router = GoRouter(
@@ -63,7 +63,7 @@ final router = GoRouter(
         GoRoute(
           path: Routes.savedRecipes,
           builder: (context, state) {
-            return SavedRecipeScreen(viewModel: getIt());
+            return SavedRecipeScreenRoot(viewModel: getIt());
           },
         ),
         // GoRoute(
