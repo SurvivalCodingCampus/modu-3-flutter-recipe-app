@@ -21,8 +21,12 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   @override
   void initState() {
     super.initState();
-    widget.viewModel.fetchAllRecipes();
-    widget.viewModel.whenOpenScreen();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (mounted) {
+        widget.viewModel.fetchAllRecipes();
+        widget.viewModel.whenOpenScreen();
+      }
+    });
   }
 
   @override
@@ -58,6 +62,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 value,
                               );
                             },
+                            onTap: () {},
                           ),
                         ),
                         FilterList(

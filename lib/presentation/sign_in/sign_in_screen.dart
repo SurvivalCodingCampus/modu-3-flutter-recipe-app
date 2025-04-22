@@ -38,6 +38,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 isSearch: false,
                 onValueChange: (String value) {},
                 controller: TextEditingController(),
+                onTap: () {
+                  
+                },
               ),
               SizedBox(height: 30),
               InputField(
@@ -45,6 +48,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 placeHolder: 'Enter Password',
                 isSearch: false,
                 onValueChange: (String value) {},
+                onTap: () {
+                  
+                },
                 controller: TextEditingController(),
               ),
               SizedBox(height: 20),

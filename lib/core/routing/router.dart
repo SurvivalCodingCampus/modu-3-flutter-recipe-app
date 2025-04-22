@@ -14,6 +14,7 @@ import 'package:recipe_app/presentation/home/home_screen.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_screen.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
@@ -47,33 +48,28 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: Routes.home,
-          builder:
-              (context, state) => HomeScreen(
-                viewModel: getIt(),
-              ),
+          builder: (context, state) => HomeScreen(viewModel: getIt()),
         ),
         GoRoute(
           path: Routes.savedRecipes,
           builder:
-              (context, state) => SavedRecipesScreen(
-                viewModel: getIt(),
-              ),
+              (context, state) => SavedRecipesScreenRoot(viewModel: getIt()),
         ),
       ],
     ),
 
     GoRoute(path: "/", builder: (context, state) => ComponentTestScreen()),
 
-    GoRoute(path: Routes.splash, builder: (context, state) => SplashScreen(viewModel: getIt(),)),
+    GoRoute(
+      path: Routes.splash,
+      builder: (context, state) => SplashScreen(viewModel: getIt()),
+    ),
     GoRoute(path: Routes.signIn, builder: (context, state) => SignInScreen()),
     GoRoute(path: Routes.signUp, builder: (context, state) => SignUpScreen()),
 
     GoRoute(
       path: Routes.search,
-      builder:
-          (context, state) => SearchRecipesScreen(
-            viewModel: getIt(),
-          ),
+      builder: (context, state) => SearchRecipesScreen(viewModel: getIt()),
     ),
   ],
 );

@@ -13,6 +13,7 @@ import 'package:recipe_app/presentation/component/input_field.dart';
 
 import 'package:recipe_app/presentation/component/tabs.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
@@ -47,7 +48,7 @@ class ComponentTestScreen extends StatelessWidget {
                         MaterialPageRoute(
                           builder:
                               (context) =>
-                                  SavedRecipesScreen(viewModel: getIt()),
+                                  SavedRecipesScreenRoot(viewModel: getIt()),
                         ),
                       );
                     },
@@ -149,6 +150,7 @@ class ComponentTestScreen extends StatelessWidget {
                     onValueChange: (value) {
                       print('입력이 변경되었습니다.');
                     },
+                    onTap: () {},
                   ),
                   SizedBox(height: 12),
                   InputField(
@@ -159,6 +161,7 @@ class ComponentTestScreen extends StatelessWidget {
                     onValueChange: (value) {
                       print('입력이 변경되었습니다.');
                     },
+                    onTap: () {},
                   ),
                   SizedBox(height: 12),
                   Tabs(

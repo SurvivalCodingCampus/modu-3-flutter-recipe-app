@@ -8,13 +8,14 @@ class InputField extends StatefulWidget {
   final bool isSearch;
   final TextEditingController controller;
   final Function(String) onValueChange;
+  final VoidCallback onTap;
   const InputField({
     super.key,
     required this.label,
     required this.placeHolder,
     required this.onValueChange,
     required this.controller,
-    required this.isSearch,
+    required this.isSearch, required this.onTap,
   });
 
   @override
@@ -49,8 +50,10 @@ class _InputFieldState extends State<InputField> {
           width: double.infinity,
           child: TextFormField(
             controller: _textEditingController,
+            onTap: () {
+              widget.onTap();
+            },
             onChanged: (value) {
-              print(value);
               widget.onValueChange(value);
             },
             decoration: InputDecoration(
