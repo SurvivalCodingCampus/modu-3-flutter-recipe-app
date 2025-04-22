@@ -22,6 +22,13 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _controller = TextEditingController();
 
   @override
+  void initState() {
+    widget.viewModel.fetchSearchData();
+    widget.viewModel.getRecentSearchText();
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -32,12 +39,11 @@ class _SearchScreenState extends State<SearchScreen> {
     final filterSearchViewModel = FilterSearchViewModel(widget.viewModel);
     return BaseScreen(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back_ios),
         backgroundColor: AppColor.white,
         title: const Text('Search recipes'),
       ),
       child: ListenableBuilder(
-        listenable: widget.viewModel..fetchSearchData(),
+        listenable: widget.viewModel,
         builder: (context, child) {
           final state = widget.viewModel.state;
           final isChangeUI = widget.viewModel.isChangeUI;
@@ -86,7 +92,33 @@ class _SearchScreenState extends State<SearchScreen> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children:
+                          widget.viewModel.state.recentSearchText
+                              .map(
+                                (e) => Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 4,
+                                    horizontal: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    e,
+                                    style: AppTextStyle.smallRegular,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

@@ -1,15 +1,54 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/constants/image/app_image.dart';
 import 'package:recipe_app/core/enum/buttom_enum.dart';
+import 'package:recipe_app/core/presentation/pages/splash/splash_event.dart';
+import 'package:recipe_app/core/presentation/pages/splash/splash_view_model.dart';
 import 'package:recipe_app/core/router/routes.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
 import 'package:recipe_app/core/presentation/pages/base_screen.dart';
 import 'package:recipe_app/core/presentation/widgets/button/app_button.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  final SplashViewModel viewModel;
+  const SplashScreen(this.viewModel, {super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  StreamSubscription? _subscription;
+
+  @override
+  void initState() {
+    _subscription = widget.viewModel.eventStream.listen((event) {
+      if (mounted) {
+        switch (event) {
+          case ShowDialog():
+            showDialog(
+              context: context,
+              builder: (_) {
+                return AlertDialog(content: Text(event.message));
+              },
+            );
+          case ShowSnackbar():
+            final snackBar = SnackBar(content: Text(event.message));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

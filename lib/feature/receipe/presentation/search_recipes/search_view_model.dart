@@ -2,13 +2,23 @@ import 'package:flutter/foundation.dart';
 import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
-import 'package:recipe_app/feature/receipe/domain/repository/search/search_recipe_repository.dart';
+import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_recent_search_text_use_case.dart';
+import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/save_recent_search_text_use_case.dart';
 import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_state.dart';
 
 class SearchViewModel with ChangeNotifier {
-  final SearchRecipeRepository _searchRepository;
+  final GetSavedRecipesUseCase _getSavedRecipesUseCase;
+  final GetRecentSearchTextUseCase _getRecentSearchTextUseCase;
+  final SaveRecentSearchTextUseCase _saveRecentSearchTextUseCase;
 
-  SearchViewModel(this._searchRepository);
+  SearchViewModel({
+    required GetSavedRecipesUseCase getSavedRecipesUseCase,
+    required GetRecentSearchTextUseCase getRecentSearchTextUseCase,
+    required SaveRecentSearchTextUseCase saveRecentSearchTextUseCase,
+  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase,
+       _getRecentSearchTextUseCase = getRecentSearchTextUseCase,
+       _saveRecentSearchTextUseCase = saveRecentSearchTextUseCase;
 
   SearchState _state = const SearchState();
   SearchState get state => _state;
@@ -20,7 +30,7 @@ class SearchViewModel with ChangeNotifier {
     try {
       _state = state.copyWith(viewState: ViewState.loading);
       notifyListeners();
-      final response = await _searchRepository.getRecipes();
+      final response = await _getSavedRecipesUseCase.excute();
       switch (response) {
         case Success<List<Recipe>>():
           _state = state.copyWith(
@@ -81,6 +91,35 @@ class SearchViewModel with ChangeNotifier {
         data: baseData.where((e) => e.name.contains(text)).toList(),
         viewState: ViewState.complete,
       );
+      saveSearchText(text);
+    }
+    notifyListeners();
+  }
+
+  void getRecentSearchText() async {
+    final result = await _getRecentSearchTextUseCase.execute();
+    switch (result) {
+      case Success<List<String>>():
+        _state = state.copyWith(
+          recentSearchText: result.data,
+          viewState: ViewState.complete,
+        );
+      case Error<List<String>>():
+        _state = state.copyWith(viewState: ViewState.error);
+    }
+    notifyListeners();
+  }
+
+  void saveSearchText(String text) async {
+    final result = await _saveRecentSearchTextUseCase.execute(text);
+    switch (result) {
+      case Success<List<String>>():
+        _state = state.copyWith(
+          viewState: ViewState.complete,
+          recentSearchText: result.data,
+        );
+      case Error<List<String>>():
+        _state = state.copyWith(viewState: ViewState.error);
     }
     notifyListeners();
   }

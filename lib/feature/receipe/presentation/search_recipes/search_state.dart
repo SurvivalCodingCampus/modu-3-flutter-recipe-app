@@ -9,11 +9,13 @@ class SearchState extends ListBaseState<Recipe> {
   // 필터링된 데이터
   final List<Recipe> filteredData;
   final String searchText;
+  final List<String> recentSearchText;
   const SearchState({
     this.isFiltered = false,
     this.searchText = '',
     this.originalData = const [],
     this.filteredData = const [],
+    this.recentSearchText = const [],
     // 뷰에 보여지는 데이터
     super.data,
     super.viewState,
@@ -26,6 +28,7 @@ class SearchState extends ListBaseState<Recipe> {
     ViewState? viewState,
     bool? isFiltered,
     String? searchText,
+    List<String>? recentSearchText,
   }) {
     return SearchState(
       data: data ?? this.data,
@@ -34,6 +37,7 @@ class SearchState extends ListBaseState<Recipe> {
       viewState: viewState ?? this.viewState,
       isFiltered: isFiltered ?? this.isFiltered,
       searchText: searchText ?? this.searchText,
+      recentSearchText: recentSearchText ?? this.recentSearchText,
     );
   }
 }

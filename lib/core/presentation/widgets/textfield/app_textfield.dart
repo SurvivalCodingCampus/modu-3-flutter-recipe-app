@@ -75,6 +75,10 @@ class AppTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
         disabledBorder: OutlineInputBorder(
+          borderSide:
+              borderColor != null
+                  ? BorderSide(color: borderColor!)
+                  : const BorderSide(color: AppColor.grey4),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         focusedErrorBorder: OutlineInputBorder(

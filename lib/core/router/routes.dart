@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/app_di.dart';
 import 'package:recipe_app/core/presentation/pages/error_screen.dart';
 import 'package:recipe_app/core/presentation/pages/root_tab.dart';
+import 'package:recipe_app/core/presentation/pages/splash/splash_view_model.dart';
 import 'package:recipe_app/feature/auth/presentation/pages/sign_up_screen.dart';
 import 'package:recipe_app/feature/auth/presentation/pages/sing_in_screen.dart';
 import 'package:recipe_app/feature/receipe/presentation/home/home_screen.dart';
@@ -13,7 +14,7 @@ import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_view_mo
 import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_screen.dart';
-import 'package:recipe_app/core/presentation/pages/splash_screen.dart';
+import 'package:recipe_app/core/presentation/pages/splash/splash_screen.dart';
 import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_view_model.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -29,7 +30,8 @@ final routes = [
   GoRoute(
     path: AppRoutes.splash,
     builder: (context, state) {
-      return const SplashScreen();
+      final SplashViewModel viewModel = getIt();
+      return SplashScreen(viewModel);
     },
   ),
   GoRoute(

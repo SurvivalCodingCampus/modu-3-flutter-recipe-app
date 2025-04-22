@@ -20,4 +20,23 @@ class SearchRecipeRepositoryImpl implements SearchRecipeRepository {
       return const Error(NetworkException());
     }
   }
+
+  @override
+  Future<Result<List<String>>> getRecentSearchText() async {
+    try {
+      final text = await _dataSource.getRecentSearchText();
+      return Success(text);
+    } catch (e) {
+      return const Error(NetworkException());
+    }
+  }
+
+  @override
+  Future<Result<List<String>>> saveRecentSearchText(String text) async {
+    try {
+      return Result.success(await _dataSource.saveRecentSearchText(text));
+    } catch (e) {
+      return const Result.error(NetworkException());
+    }
+  }
 }

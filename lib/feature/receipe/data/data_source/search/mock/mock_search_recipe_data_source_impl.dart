@@ -2,6 +2,7 @@ import 'package:recipe_app/feature/receipe/data/data_source/search/search_recipe
 import 'package:recipe_app/feature/receipe/data/dto/recipe_dto.dart';
 
 class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
+  List<String> searchText = ['Spice'];
   @override
   Future<List<RecipeDto>> getRecipes() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -306,5 +307,16 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         ],
       },
     ].map((e) => RecipeDto.fromJson(e)).toList();
+  }
+
+  @override
+  Future<List<String>> getRecentSearchText() async {
+    return searchText;
+  }
+
+  @override
+  Future<List<String>> saveRecentSearchText(String text) async {
+    searchText.add(text);
+    return searchText;
   }
 }
