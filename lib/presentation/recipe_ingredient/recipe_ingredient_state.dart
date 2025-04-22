@@ -11,10 +11,12 @@ class RecipeIngredientState with _$RecipeIngredientState {
   final List<Procedure> procedures;
   @override
   final bool isLoading;
+  final int selectedTabIndex;
 
   const RecipeIngredientState({
     this.recipe,
     this.procedures = const [],
     this.isLoading = false,
+    this.selectedTabIndex = 0,
   });
 }

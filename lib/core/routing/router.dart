@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
-import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen.dart';
+import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen_root.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/my/my_screen.dart';
 import 'package:recipe_app/presentation/notification/notification_screen.dart';
@@ -41,7 +41,7 @@ final router = GoRouter(
       path: Routes.recipeIngredient,
       builder: (context, state) {
         final id = state.pathParameters['recipeId'];
-        return RecipeIngredientScreen(recipeId: id!, viewModel: getIt());
+        return RecipeIngredientScreenRoot(recipeId: id!, viewModel: getIt());
       },
     ),
     StatefulShellRoute.indexedStack(
