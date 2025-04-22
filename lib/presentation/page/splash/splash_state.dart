@@ -11,5 +11,6 @@ abstract class SplashState with _$SplashState {
     @Default(false) bool isLogoVisible,
     @Default(false) bool isTextVisible,
     @Default(false) bool isButtonVisible,
+    @Default(false) bool isInternetAvailable,
   }) = _SplashState;
 }

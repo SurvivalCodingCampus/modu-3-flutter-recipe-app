@@ -7,24 +7,22 @@ import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/page/search_recipes/search_recipes_view_model.dart';
 
-class DiSetup {
-  final getIt = GetIt.instance;
+final getIt = GetIt.instance;
 
-  void diSetUp() {
-    getIt.registerSingleton<RecipeDataSource>(RecipeDataSourceImpl());
+void diSetUp() {
+  getIt.registerSingleton<RecipeDataSource>(RecipeDataSourceImpl());
 
-    getIt.registerSingleton<RecipeRepository>(
-      RecipeRepositoryImpl(dataSource: getIt()),
-    );
+  getIt.registerSingleton<RecipeRepository>(
+    RecipeRepositoryImpl(dataSource: getIt()),
+  );
 
-    getIt.registerSingleton(GetSavedRecipesUseCase(recipeRepository: getIt()));
+  getIt.registerSingleton(GetSavedRecipesUseCase(recipeRepository: getIt()));
 
-    getIt.registerFactory<SavedRecipesViewModel>(
-      () => SavedRecipesViewModel(getSavedRecipesUseCase: getIt()),
-    );
+  getIt.registerFactory<SavedRecipesViewModel>(
+    () => SavedRecipesViewModel(getSavedRecipesUseCase: getIt()),
+  );
 
-    getIt.registerFactory<SearchRecipesViewModel>(
-      () => SearchRecipesViewModel(recipeRepository: getIt()),
-    );
-  }
+  getIt.registerFactory<SearchRecipesViewModel>(
+    () => SearchRecipesViewModel(recipeRepository: getIt()),
+  );
 }

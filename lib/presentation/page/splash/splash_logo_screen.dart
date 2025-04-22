@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/common/component/color_text_button.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/common/ui/text_styles.dart';
+import 'package:recipe_app/presentation/page/splash/splash_event.dart';
 import 'package:recipe_app/presentation/page/splash/splash_view_model.dart';
 
 class SplashLogoScreen extends StatefulWidget {
@@ -23,6 +26,9 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
   late AnimationController _textController;
   late Animation<double> _textOpacity;
   late Animation<Offset> _textSlide;
+
+  StreamSubscription<SplashEvent>? _subscription;
+
 
   @override
   void initState() {
@@ -53,6 +59,7 @@ class _SplashLogoScreenState extends State<SplashLogoScreen>
     );
 
     _logoFade = Tween<double>(begin: 0.0, end: 1.0).animate(_logoController);
+
   }
 
   @override

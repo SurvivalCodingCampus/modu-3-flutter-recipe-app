@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/presentation/common/component/recipe_search_card.dart';
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
@@ -11,7 +13,12 @@ import 'package:recipe_app/presentation/page/search_recipes/search_recipes_view_
 
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
-  const SearchRecipesScreen({super.key, required this.viewModel});
+  final List<Recipe> searchResult;
+  const SearchRecipesScreen({
+    super.key,
+    required this.viewModel,
+    required this.searchResult,
+  });
   @override
   State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
 }
@@ -24,6 +31,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   void initState() {
     super.initState();
     _controller.addListener(_onTextChanged);
+    widget.viewModel.getRecipes(beforeSearchList: widget.searchResult);
   }
 
   void _onTextChanged() async {
@@ -61,7 +69,12 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Icon(Icons.arrow_back_outlined),
+                          child: IconButton(
+                            onPressed: () {
+                              context.pop(widget.viewModel.state.filterRecipes);
+                            },
+                            icon: Icon(Icons.arrow_back_outlined),
+                          ),
                         ),
                         Align(
                           alignment: Alignment.center,
@@ -140,10 +153,12 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 ),
                                 child: FilterSearchScreen(
                                   viewModel: FilterSearchViewModel(),
-                                ),
+                                )
                               );
                             },
-                          );
+                          ).then((value) {
+                            widget.viewModel.filterSearchRecipes(filterMap: value);
+                          });
                         },
                         borderRadius: BorderRadius.circular(10),
                         child: Ink(
@@ -178,7 +193,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       mainAxisSpacing: 15,
                       crossAxisSpacing: 15,
                       children:
-                          widget.viewModel.state.searchKeyWord.isEmpty
+                          widget.viewModel.state.filterRecipes.isEmpty
                               ? widget.viewModel.state.recipes.map((items) {
                                 return RecipeSearchCard(
                                   recipeName: items.name,

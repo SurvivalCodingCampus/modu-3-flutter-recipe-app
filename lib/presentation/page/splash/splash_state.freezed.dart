@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SplashState {
 
- bool get isBackGroundVisible; bool get isOverlayVisible; bool get isLogoVisible; bool get isTextVisible; bool get isButtonVisible;
+ bool get isBackGroundVisible; bool get isOverlayVisible; bool get isLogoVisible; bool get isTextVisible; bool get isButtonVisible; bool get isInternetAvailable;
 /// Create a copy of SplashState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $SplashStateCopyWith<SplashState> get copyWith => _$SplashStateCopyWithImpl<Spla
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SplashState&&(identical(other.isBackGroundVisible, isBackGroundVisible) || other.isBackGroundVisible == isBackGroundVisible)&&(identical(other.isOverlayVisible, isOverlayVisible) || other.isOverlayVisible == isOverlayVisible)&&(identical(other.isLogoVisible, isLogoVisible) || other.isLogoVisible == isLogoVisible)&&(identical(other.isTextVisible, isTextVisible) || other.isTextVisible == isTextVisible)&&(identical(other.isButtonVisible, isButtonVisible) || other.isButtonVisible == isButtonVisible));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SplashState&&(identical(other.isBackGroundVisible, isBackGroundVisible) || other.isBackGroundVisible == isBackGroundVisible)&&(identical(other.isOverlayVisible, isOverlayVisible) || other.isOverlayVisible == isOverlayVisible)&&(identical(other.isLogoVisible, isLogoVisible) || other.isLogoVisible == isLogoVisible)&&(identical(other.isTextVisible, isTextVisible) || other.isTextVisible == isTextVisible)&&(identical(other.isButtonVisible, isButtonVisible) || other.isButtonVisible == isButtonVisible)&&(identical(other.isInternetAvailable, isInternetAvailable) || other.isInternetAvailable == isInternetAvailable));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isBackGroundVisible,isOverlayVisible,isLogoVisible,isTextVisible,isButtonVisible);
+int get hashCode => Object.hash(runtimeType,isBackGroundVisible,isOverlayVisible,isLogoVisible,isTextVisible,isButtonVisible,isInternetAvailable);
 
 @override
 String toString() {
-  return 'SplashState(isBackGroundVisible: $isBackGroundVisible, isOverlayVisible: $isOverlayVisible, isLogoVisible: $isLogoVisible, isTextVisible: $isTextVisible, isButtonVisible: $isButtonVisible)';
+  return 'SplashState(isBackGroundVisible: $isBackGroundVisible, isOverlayVisible: $isOverlayVisible, isLogoVisible: $isLogoVisible, isTextVisible: $isTextVisible, isButtonVisible: $isButtonVisible, isInternetAvailable: $isInternetAvailable)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $SplashStateCopyWith<$Res>  {
   factory $SplashStateCopyWith(SplashState value, $Res Function(SplashState) _then) = _$SplashStateCopyWithImpl;
 @useResult
 $Res call({
- bool isBackGroundVisible, bool isOverlayVisible, bool isLogoVisible, bool isTextVisible, bool isButtonVisible
+ bool isBackGroundVisible, bool isOverlayVisible, bool isLogoVisible, bool isTextVisible, bool isButtonVisible, bool isInternetAvailable
 });
 
 
@@ -63,13 +63,14 @@ class _$SplashStateCopyWithImpl<$Res>
 
 /// Create a copy of SplashState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isBackGroundVisible = null,Object? isOverlayVisible = null,Object? isLogoVisible = null,Object? isTextVisible = null,Object? isButtonVisible = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isBackGroundVisible = null,Object? isOverlayVisible = null,Object? isLogoVisible = null,Object? isTextVisible = null,Object? isButtonVisible = null,Object? isInternetAvailable = null,}) {
   return _then(_self.copyWith(
 isBackGroundVisible: null == isBackGroundVisible ? _self.isBackGroundVisible : isBackGroundVisible // ignore: cast_nullable_to_non_nullable
 as bool,isOverlayVisible: null == isOverlayVisible ? _self.isOverlayVisible : isOverlayVisible // ignore: cast_nullable_to_non_nullable
 as bool,isLogoVisible: null == isLogoVisible ? _self.isLogoVisible : isLogoVisible // ignore: cast_nullable_to_non_nullable
 as bool,isTextVisible: null == isTextVisible ? _self.isTextVisible : isTextVisible // ignore: cast_nullable_to_non_nullable
 as bool,isButtonVisible: null == isButtonVisible ? _self.isButtonVisible : isButtonVisible // ignore: cast_nullable_to_non_nullable
+as bool,isInternetAvailable: null == isInternetAvailable ? _self.isInternetAvailable : isInternetAvailable // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -81,7 +82,7 @@ as bool,
 
 
 class _SplashState implements SplashState {
-  const _SplashState({this.isBackGroundVisible = false, this.isOverlayVisible = false, this.isLogoVisible = false, this.isTextVisible = false, this.isButtonVisible = false});
+  const _SplashState({this.isBackGroundVisible = false, this.isOverlayVisible = false, this.isLogoVisible = false, this.isTextVisible = false, this.isButtonVisible = false, this.isInternetAvailable = false});
   
 
 @override@JsonKey() final  bool isBackGroundVisible;
@@ -89,6 +90,7 @@ class _SplashState implements SplashState {
 @override@JsonKey() final  bool isLogoVisible;
 @override@JsonKey() final  bool isTextVisible;
 @override@JsonKey() final  bool isButtonVisible;
+@override@JsonKey() final  bool isInternetAvailable;
 
 /// Create a copy of SplashState
 /// with the given fields replaced by the non-null parameter values.
@@ -100,16 +102,16 @@ _$SplashStateCopyWith<_SplashState> get copyWith => __$SplashStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SplashState&&(identical(other.isBackGroundVisible, isBackGroundVisible) || other.isBackGroundVisible == isBackGroundVisible)&&(identical(other.isOverlayVisible, isOverlayVisible) || other.isOverlayVisible == isOverlayVisible)&&(identical(other.isLogoVisible, isLogoVisible) || other.isLogoVisible == isLogoVisible)&&(identical(other.isTextVisible, isTextVisible) || other.isTextVisible == isTextVisible)&&(identical(other.isButtonVisible, isButtonVisible) || other.isButtonVisible == isButtonVisible));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SplashState&&(identical(other.isBackGroundVisible, isBackGroundVisible) || other.isBackGroundVisible == isBackGroundVisible)&&(identical(other.isOverlayVisible, isOverlayVisible) || other.isOverlayVisible == isOverlayVisible)&&(identical(other.isLogoVisible, isLogoVisible) || other.isLogoVisible == isLogoVisible)&&(identical(other.isTextVisible, isTextVisible) || other.isTextVisible == isTextVisible)&&(identical(other.isButtonVisible, isButtonVisible) || other.isButtonVisible == isButtonVisible)&&(identical(other.isInternetAvailable, isInternetAvailable) || other.isInternetAvailable == isInternetAvailable));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isBackGroundVisible,isOverlayVisible,isLogoVisible,isTextVisible,isButtonVisible);
+int get hashCode => Object.hash(runtimeType,isBackGroundVisible,isOverlayVisible,isLogoVisible,isTextVisible,isButtonVisible,isInternetAvailable);
 
 @override
 String toString() {
-  return 'SplashState(isBackGroundVisible: $isBackGroundVisible, isOverlayVisible: $isOverlayVisible, isLogoVisible: $isLogoVisible, isTextVisible: $isTextVisible, isButtonVisible: $isButtonVisible)';
+  return 'SplashState(isBackGroundVisible: $isBackGroundVisible, isOverlayVisible: $isOverlayVisible, isLogoVisible: $isLogoVisible, isTextVisible: $isTextVisible, isButtonVisible: $isButtonVisible, isInternetAvailable: $isInternetAvailable)';
 }
 
 
@@ -120,7 +122,7 @@ abstract mixin class _$SplashStateCopyWith<$Res> implements $SplashStateCopyWith
   factory _$SplashStateCopyWith(_SplashState value, $Res Function(_SplashState) _then) = __$SplashStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isBackGroundVisible, bool isOverlayVisible, bool isLogoVisible, bool isTextVisible, bool isButtonVisible
+ bool isBackGroundVisible, bool isOverlayVisible, bool isLogoVisible, bool isTextVisible, bool isButtonVisible, bool isInternetAvailable
 });
 
 
@@ -137,13 +139,14 @@ class __$SplashStateCopyWithImpl<$Res>
 
 /// Create a copy of SplashState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isBackGroundVisible = null,Object? isOverlayVisible = null,Object? isLogoVisible = null,Object? isTextVisible = null,Object? isButtonVisible = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isBackGroundVisible = null,Object? isOverlayVisible = null,Object? isLogoVisible = null,Object? isTextVisible = null,Object? isButtonVisible = null,Object? isInternetAvailable = null,}) {
   return _then(_SplashState(
 isBackGroundVisible: null == isBackGroundVisible ? _self.isBackGroundVisible : isBackGroundVisible // ignore: cast_nullable_to_non_nullable
 as bool,isOverlayVisible: null == isOverlayVisible ? _self.isOverlayVisible : isOverlayVisible // ignore: cast_nullable_to_non_nullable
 as bool,isLogoVisible: null == isLogoVisible ? _self.isLogoVisible : isLogoVisible // ignore: cast_nullable_to_non_nullable
 as bool,isTextVisible: null == isTextVisible ? _self.isTextVisible : isTextVisible // ignore: cast_nullable_to_non_nullable
 as bool,isButtonVisible: null == isButtonVisible ? _self.isButtonVisible : isButtonVisible // ignore: cast_nullable_to_non_nullable
+as bool,isInternetAvailable: null == isInternetAvailable ? _self.isInternetAvailable : isInternetAvailable // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

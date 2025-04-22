@@ -9,6 +9,17 @@ extension RecipesMapper on Recipes {
       time: time ?? '',
       rating: rating ?? 0.0,
       image: image ?? '',
+      category: category ?? '',
     );
   }
+
+  // Map<String,dynamic> fromRecipe({required Recipe recipe}) {
+  //   return  {
+  //     'name' : recipe.name,
+  //     'author' : recipe.author,
+  //     'time' : recipe.time,
+  //     'rating' : recipe.rating,
+  //     'image' : recipe.image,
+  //   };
+  // }
 }

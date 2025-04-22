@@ -43,7 +43,11 @@ class FilterSearchScreen extends StatelessWidget {
                         return FilterButton(
                           text: item,
                           onTap: () {
-                            viewModel.timeStringSet(timeString: item);
+                            if (viewModel.state.selectTimeString != item) {
+                              viewModel.timeStringSet(timeString: item);
+                            } else {
+                              viewModel.timeStringSet(timeString: '');
+                            }
                           },
                           isSelected: item == viewModel.state.selectTimeString,
                         );
@@ -63,7 +67,11 @@ class FilterSearchScreen extends StatelessWidget {
                         return RatingButton(
                           text: item,
                           onTap: () {
-                            viewModel.rateStringSet(rateString: item);
+                            if (viewModel.state.selectRateString != item) {
+                              viewModel.rateStringSet(rateString: item);
+                            } else {
+                              viewModel.rateStringSet(rateString: '');
+                            }
                           },
                           isSelected: item == viewModel.state.selectRateString,
                         );
@@ -85,9 +93,15 @@ class FilterSearchScreen extends StatelessWidget {
                             ? RatingButton(
                               text: item,
                               onTap: () {
-                                viewModel.categoryStringSet(
-                                  categoryString: item,
-                                );
+                                if (viewModel.state.selectCategoryString != item) {
+                                  viewModel.categoryStringSet(
+                                    categoryString: item,
+                                  );
+                                }else{
+                                  viewModel.categoryStringSet(
+                                    categoryString: '',
+                                  );
+                                }
                               },
                               isSelected:
                                   item == viewModel.state.selectCategoryString,
@@ -114,7 +128,12 @@ class FilterSearchScreen extends StatelessWidget {
                     textColor: ColorStyle.white,
                     buttonRadius: 10,
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context, {
+                        'selectTimeString': viewModel.state.selectTimeString,
+                        'selectRateString': viewModel.state.selectRateString,
+                        'selectCategoryString':
+                            viewModel.state.selectCategoryString,
+                      });
                     },
                   ),
                 ),

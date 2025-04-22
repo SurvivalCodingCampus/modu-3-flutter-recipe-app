@@ -12,30 +12,33 @@ part of 'recipe.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
 mixin _$Recipe {
 
- String get name; String get author; String get time; double get rating; String get image;
+ String get name; String get author; String get time; double get rating; String get image; String get category;
 /// Create a copy of Recipe
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $RecipeCopyWith<Recipe> get copyWith => _$RecipeCopyWithImpl<Recipe>(this as Recipe, _$identity);
 
+  /// Serializes this Recipe to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Recipe&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Recipe&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.image, image) || other.image == image)&&(identical(other.category, category) || other.category == category));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,author,time,rating,image);
+int get hashCode => Object.hash(runtimeType,name,author,time,rating,image,category);
 
 @override
 String toString() {
-  return 'Recipe(name: $name, author: $author, time: $time, rating: $rating, image: $image)';
+  return 'Recipe(name: $name, author: $author, time: $time, rating: $rating, image: $image, category: $category)';
 }
 
 
@@ -46,7 +49,7 @@ abstract mixin class $RecipeCopyWith<$Res>  {
   factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) _then) = _$RecipeCopyWithImpl;
 @useResult
 $Res call({
- String name, String author, String time, double rating, String image
+ String name, String author, String time, double rating, String image, String category
 });
 
 
@@ -63,13 +66,14 @@ class _$RecipeCopyWithImpl<$Res>
 
 /// Create a copy of Recipe
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? author = null,Object? time = null,Object? rating = null,Object? image = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? author = null,Object? time = null,Object? rating = null,Object? image = null,Object? category = null,}) {
   return _then(_self.copyWith(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String,time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
 as String,rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
 as double,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -78,17 +82,18 @@ as String,
 
 
 /// @nodoc
-
+@JsonSerializable()
 
 class _Recipe implements Recipe {
-   _Recipe({required this.name, required this.author, required this.time, required this.rating, required this.image});
-  
+   _Recipe({required this.name, required this.author, required this.time, required this.rating, required this.image, required this.category});
+  factory _Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 
 @override final  String name;
 @override final  String author;
 @override final  String time;
 @override final  double rating;
 @override final  String image;
+@override final  String category;
 
 /// Create a copy of Recipe
 /// with the given fields replaced by the non-null parameter values.
@@ -96,20 +101,23 @@ class _Recipe implements Recipe {
 @pragma('vm:prefer-inline')
 _$RecipeCopyWith<_Recipe> get copyWith => __$RecipeCopyWithImpl<_Recipe>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$RecipeToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Recipe&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Recipe&&(identical(other.name, name) || other.name == name)&&(identical(other.author, author) || other.author == author)&&(identical(other.time, time) || other.time == time)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.image, image) || other.image == image)&&(identical(other.category, category) || other.category == category));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,author,time,rating,image);
+int get hashCode => Object.hash(runtimeType,name,author,time,rating,image,category);
 
 @override
 String toString() {
-  return 'Recipe(name: $name, author: $author, time: $time, rating: $rating, image: $image)';
+  return 'Recipe(name: $name, author: $author, time: $time, rating: $rating, image: $image, category: $category)';
 }
 
 
@@ -120,7 +128,7 @@ abstract mixin class _$RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
   factory _$RecipeCopyWith(_Recipe value, $Res Function(_Recipe) _then) = __$RecipeCopyWithImpl;
 @override @useResult
 $Res call({
- String name, String author, String time, double rating, String image
+ String name, String author, String time, double rating, String image, String category
 });
 
 
@@ -137,13 +145,14 @@ class __$RecipeCopyWithImpl<$Res>
 
 /// Create a copy of Recipe
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? author = null,Object? time = null,Object? rating = null,Object? image = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? author = null,Object? time = null,Object? rating = null,Object? image = null,Object? category = null,}) {
   return _then(_Recipe(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String,time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
 as String,rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
 as double,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
