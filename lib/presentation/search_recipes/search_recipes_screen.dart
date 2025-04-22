@@ -7,17 +7,41 @@ import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_shee
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/ui.dart';
 
-class SearchRecipesScreen extends StatelessWidget {
+class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
 
   const SearchRecipesScreen({super.key, required this.viewModel});
 
   @override
+  State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
+}
+
+class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
+  late FilterSearchBottomSheetState bottomSheetState;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.fetchAll();
+    bottomSheetState = widget.viewModel.state.bottomSheetFilter.copyWith(
+      rateIndex: 1,
+      categoryIndicies: [0],
+      timeIndex: 0,
+    );
+  }
+
+  @override
+  void dispose() {
+    widget.viewModel.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: viewModel..fetchAll(),
+      listenable: widget.viewModel,
       builder: (context, child) {
-        if (viewModel.state.isLoading) {
+        if (widget.viewModel.state.isLoading) {
           return buildScaffold(
             context,
             children: [
@@ -27,7 +51,7 @@ class SearchRecipesScreen extends StatelessWidget {
           );
         }
 
-        if (viewModel.state.query == '') {
+        if (widget.viewModel.state.query == '') {
           return buildScaffold(
             context,
             children: [
@@ -38,7 +62,7 @@ class SearchRecipesScreen extends StatelessWidget {
                 ],
               ),
               GridView.builder(
-                itemCount: viewModel.state.recipes.length,
+                itemCount: widget.viewModel.state.recipes.length,
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -46,7 +70,7 @@ class SearchRecipesScreen extends StatelessWidget {
                   crossAxisSpacing: 15,
                 ),
                 itemBuilder: (context, index) {
-                  final recipe = viewModel.state.recipes[index];
+                  final recipe = widget.viewModel.state.recipes[index];
                   return SearchRecipeCard(
                     author: recipe.chef,
                     title: recipe.name,
@@ -65,9 +89,9 @@ class SearchRecipesScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Recent Search', style: TextStyles.normalTextBold),
+                const Text('Search Result', style: TextStyles.normalTextBold),
                 Text(
-                  '${viewModel.state.recipes.length} results',
+                  '${widget.viewModel.state.recipes.length} results',
                   style: TextStyles.smallTextRegular.copyWith(
                     color: ColorStyles.gray3,
                   ),
@@ -75,7 +99,7 @@ class SearchRecipesScreen extends StatelessWidget {
               ],
             ),
             GridView.builder(
-              itemCount: viewModel.state.recipes.length,
+              itemCount: widget.viewModel.state.recipes.length,
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -83,7 +107,7 @@ class SearchRecipesScreen extends StatelessWidget {
                 crossAxisSpacing: 15,
               ),
               itemBuilder: (context, index) {
-                final recipe = viewModel.state.recipes[index];
+                final recipe = widget.viewModel.state.recipes[index];
                 return SearchRecipeCard(
                   author: recipe.chef,
                   title: recipe.name,
@@ -128,8 +152,9 @@ class SearchRecipesScreen extends StatelessWidget {
                   Expanded(
                     child: SearchInput(
                       hintText: 'Search recipe',
+                      onTap: () {},
                       onSubmitted: (String query) {
-                        viewModel.searchRecipes(query.trim());
+                        widget.viewModel.searchRecipes(query.trim());
                       },
                     ),
                   ),
@@ -140,9 +165,12 @@ class SearchRecipesScreen extends StatelessWidget {
                         isScrollControlled: true,
                         builder: (context) {
                           return FilterSearchBottomSheet(
-                            state: viewModel.state.bottomSheetFilter,
+                            state: bottomSheetState,
                             onApply: (FilterSearchBottomSheetState state) {
-                              viewModel.setSearchFilter(state);
+                              setState(() {
+                                bottomSheetState = state;
+                                widget.viewModel.setSearchFilter(state);
+                              });
                             },
                           );
                         },

@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:recipe_app/core/result.dart';
+import 'package:recipe_app/domain/error/recipe_error.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/use_case/get_recipe_use_case.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_screen_state.dart';
@@ -19,12 +21,17 @@ class IngredientScreenViewModel with ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    final Recipe? recipe = await getRecipeUseCase.execute(recipeId);
+    final Result<Recipe, RecipeError> result = await getRecipeUseCase.execute(
+      recipeId,
+    );
 
-    if (recipe != null) {
-      _state = _state.copyWith(recipe: recipe, isLoading: false);
-    } else {
-      _state = _state.copyWith(error: '잘못된 접근입니다.', isLoading: false);
+    switch (result) {
+      case Success(:final data):
+        _state = _state.copyWith(recipe: data, isLoading: false);
+        break;
+      case Failure(error: final error):
+        _state = _state.copyWith(error: error.name, isLoading: false);
+        break;
     }
 
     notifyListeners();

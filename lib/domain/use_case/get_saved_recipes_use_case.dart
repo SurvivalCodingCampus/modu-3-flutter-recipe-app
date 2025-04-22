@@ -1,3 +1,5 @@
+import 'package:recipe_app/core/result.dart';
+import 'package:recipe_app/domain/error/recipe_error.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/repository/bookmark_repository.dart';
 
@@ -6,7 +8,7 @@ class GetSavedRecipesUseCase {
 
   const GetSavedRecipesUseCase(this._bookmarkRepository);
 
-  Future<List<Recipe>> execute() async {
+  Future<Result<List<Recipe>, RecipeError>> execute() async {
     return _bookmarkRepository.findAll();
   }
 }

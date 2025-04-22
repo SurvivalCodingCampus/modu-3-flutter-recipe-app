@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/buttons/box_icon_button.dart';
 import 'package:recipe_app/presentation/component/form/search_bar.dart';
 import 'package:recipe_app/ui/color_styles.dart';
@@ -56,6 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: SearchInput(
+                  onTap: () {
+                    context.push(Routes.search);
+                  },
                   hintText: 'Search recipes',
                   onSubmitted: (value) {},
                 ),

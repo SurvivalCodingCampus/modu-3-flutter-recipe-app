@@ -4,8 +4,8 @@ import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/ui/ui.dart';
 
 void main() {
-  runApp(const App());
   diSetUp();
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
