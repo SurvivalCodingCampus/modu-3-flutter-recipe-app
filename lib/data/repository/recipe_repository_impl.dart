@@ -107,6 +107,9 @@ class RecipeRepositoryImpl implements RecipeRepository {
   Future<Result<List<Recipe>>> getRecipesByCategory(String category) async {
     try {
       final data = await localDataSource.fetchRecipes();
+      if (category == 'All') {
+        return Result.success(data.map((e) => e.toRecipe()).toList());
+      }
 
       final filtered =
           data

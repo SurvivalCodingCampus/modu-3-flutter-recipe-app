@@ -39,17 +39,18 @@ class HomeViewModel with ChangeNotifier {
     final categoryResult = await _getCategories.execute();
 
     if (categoryResult case UiSuccess(:final data)) {
-      final category = data.firstOrNull;
+      final updatedCategories = ['All', ...data];
+
       _state = _state.copyWith(
         isLoading: false,
-        categories: data,
+        categories: updatedCategories,
         selectedCategoryIndex: 0,
         recipes: const UiState.loading(),
       );
       notifyListeners();
-      if (category != null) {
-        await _loadRecipes(category);
-      }
+
+      final category = updatedCategories[0];
+      await _loadRecipes(category);
     } else if (categoryResult case UiError(:final message)) {
       debugPrint('카테고리 로딩 실패: $message');
     }

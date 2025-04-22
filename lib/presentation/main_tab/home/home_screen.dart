@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/error/ui_state.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
+import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_button.dart';
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
+import 'package:recipe_app/presentation/component/recipe_dish_card.dart';
 
 import 'home_action.dart';
 import 'home_state.dart';
@@ -33,6 +36,8 @@ class HomeScreen extends StatelessWidget {
           selectedIndex: state.selectedCategoryIndex,
           onTap: (index) => onAction(HomeAction.selectCategory(index)),
         ),
+        const SizedBox(height: 20),
+        _buildRecipeSection(state.recipes),
       ],
     );
   }
@@ -44,7 +49,6 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            // ✅ 텍스트가 길어져도 오른쪽 밀리지 않게
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -82,10 +86,9 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Row(
         children: [
-          // 🔍 인풋 필드 (검색창처럼 보여주기만)
           Expanded(
             child: SizedBox(
-              height: 40, // ✅ 검색화면과 높이 동일
+              height: 40,
               child: InputField(
                 labelTitle: '',
                 placeholderText: 'Search recipe',
@@ -96,14 +99,13 @@ class HomeScreen extends StatelessWidget {
                 onValueChange: null,
                 onTap: () {
                   FocusScope.of(context).unfocus();
-                  context.push(Routes.search); // ✅ 검색 화면 이동
+                  context.push(Routes.search);
                 },
                 readOnly: true,
               ),
             ),
           ),
           const SizedBox(width: 20),
-          // ⚙️ 필터 버튼
           GestureDetector(
             onTap: () {
               context.push(Routes.search);
@@ -151,5 +153,31 @@ class HomeScreen extends StatelessWidget {
             ),
       ),
     );
+  }
+
+  _buildRecipeSection(UiState<List<Recipe>> recipes) {
+    return switch (recipes) {
+      UiLoading() => const Center(child: CircularProgressIndicator()),
+      UiError(:final message) => Center(child: Text('에러: $message')),
+      UiEmpty() => const Center(child: Text('레시피가 없습니다. 😂')),
+      UiSuccess(:final data) => SizedBox(
+        height: 231, // 카드 높이 그대로 유지
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            final recipe = data[index];
+            return Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: SizedBox(
+                width: 150, // 카드 너비 고정
+                child: RecipeDishCard(recipe: recipe, onTapFavorite: () {}),
+              ),
+            );
+          },
+        ),
+      ),
+    };
   }
 }

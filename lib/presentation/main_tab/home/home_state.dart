@@ -9,7 +9,7 @@ class HomeState with _$HomeState {
   const HomeState({
     this.isLoading = false,
     this.recipes = const UiState.loading(),
-    this.categories = const [],
+    this.categories = const ['All'],
     this.selectedCategoryIndex = 0,
   });
 
