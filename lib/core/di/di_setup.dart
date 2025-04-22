@@ -99,6 +99,9 @@ void networkErrorDiSetup() {
     ProcedureRepositoryImpl(procedureDataSource: getIt()),
   );
   getIt.registerSingleton<NetworkRepository>(FailNetworkRepositoryImpl());
+  getIt.registerSingleton<SearchRecipeRepository>(
+    SearchRecipeRepositoryImpl(localSearchResultDataSource: getIt()),
+  );
 
   // UseCase
   getIt.registerSingleton<GetSavedRecipesUseCase>(

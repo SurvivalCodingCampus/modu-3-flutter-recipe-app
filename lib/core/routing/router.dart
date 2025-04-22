@@ -10,18 +10,14 @@ import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart'
 import 'package:recipe_app/presentation/search/search_screen.dart';
 import 'package:recipe_app/presentation/sign-in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign-up/sign_up_screen.dart';
-import 'package:recipe_app/presentation/splash/splash_screen.dart';
+import 'package:recipe_app/presentation/splash/splash_screen_root.dart';
 
 final router = GoRouter(
   initialLocation: Routes.splash,
   routes: [
     GoRoute(
       path: Routes.splash,
-      builder:
-          (context, state) => SplashScreen(
-            viewModel: getIt(),
-            onTapStart: () => context.go(Routes.signIn),
-          ),
+      builder: (context, state) => SplashScreenRoot(viewModel: getIt()),
     ),
     GoRoute(
       path: Routes.signIn,
