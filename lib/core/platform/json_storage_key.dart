@@ -1,4 +1,4 @@
-enum JsonStorageKey { user, recipes }
+enum JsonStorageKey { user, recipes, search_data }
 
 extension JsonStorageKeyExt on JsonStorageKey {
   String get fileName => '${name}.json'; // 예: user.json, recipes.json

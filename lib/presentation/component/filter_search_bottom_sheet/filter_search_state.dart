@@ -99,3 +99,14 @@ extension FilterCategoryLabel on FilterCategory {
     }
   }
 }
+
+extension FilterCategoryParser on String {
+  FilterCategory toFilterCategory() {
+    final lowerInput = toLowerCase().trim();
+
+    return FilterCategory.values.firstWhere(
+      (category) => category.label.toLowerCase() == lowerInput,
+      orElse: () => FilterCategory.all,
+    );
+  }
+}

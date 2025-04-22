@@ -17,7 +17,7 @@ final appRouter = GoRouter(
     // 스플래시 화면
     GoRoute(
       path: Routes.splash,
-      builder: (context, state) => const SplashScreen(),
+      builder: (context, state) => SplashScreen(viewModel: getIt()),
     ),
 
     // 로그인 화면
@@ -31,6 +31,18 @@ final appRouter = GoRouter(
       builder: (context, state) => const DevComponents(),
     ),
 
+    // StatefulShellRoute.indexedStack(
+    //   builder: (context, state, StatefulNavigationShell shell) {
+    //     return shell;
+    //   },
+    //   branches: [
+    //     StatefulShellBranch(
+    //       routes: [
+    //
+    //       ],
+    //     ),
+    //   ],
+    // ),
     GoRoute(
       path: Routes.search,
       builder: (context, state) => SearchRecipesScreen(viewModel: getIt()),
@@ -58,6 +70,7 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+
         StatefulShellBranch(
           routes: [
             GoRoute(
