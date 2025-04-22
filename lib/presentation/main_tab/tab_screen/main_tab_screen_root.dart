@@ -9,8 +9,8 @@ class MainTabScreenRoot extends StatefulWidget {
 
   const MainTabScreenRoot({
     super.key,
-    required this.viewModel,
     required this.navigationShell,
+    required this.viewModel,
   });
 
   @override
@@ -26,15 +26,9 @@ class _MainTabScreenRootState extends State<MainTabScreenRoot> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: widget.viewModel,
-      builder: (context, _) {
-        return MainTabScreen(
-          state: widget.viewModel.state,
-          onAction: widget.viewModel.onAction,
-          navigationShell: widget.navigationShell,
-        );
-      },
+    return MainTabScreen(
+      navigationShell: widget.navigationShell,
+      onAction: widget.viewModel.onAction,
     );
   }
 }

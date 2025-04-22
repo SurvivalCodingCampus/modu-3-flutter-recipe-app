@@ -3,16 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
 import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_action.dart';
-import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_state.dart';
 
 class MainTabScreen extends StatelessWidget {
-  final MainTabState state;
   final void Function(MainTabAction action) onAction;
   final StatefulNavigationShell navigationShell;
 
   const MainTabScreen({
     super.key,
-    required this.state,
     required this.onAction,
     required this.navigationShell,
   });
@@ -22,7 +19,7 @@ class MainTabScreen extends StatelessWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: _MainBottomNavBar(
-        currentIndex: state.currentIndex,
+        currentIndex: navigationShell.currentIndex,
         onTap: (index) {
           onAction(MainTabAction.onTapTab(index));
           navigationShell.goBranch(index);
@@ -66,6 +63,7 @@ class _MainBottomNavBar extends StatelessWidget {
 
   Widget _buildIcon(int index, String name) {
     final isSelected = currentIndex == index;
+    print('currentIndex($currentIndex) isSelected: $isSelected');
     final imageName = isSelected ? '${name}_active' : name;
     final path = 'assets/images/icons/$imageName.png';
 
