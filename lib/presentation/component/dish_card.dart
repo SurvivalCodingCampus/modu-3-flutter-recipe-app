@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import '../../data/model/recipe_model.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
+import '../main/home/home_action.dart';
 
-class RecommendCard extends StatelessWidget {
+class DishCard extends StatelessWidget {
   final Recipe recipe;
   final bool isBookMarked;
+  final void Function(HomeAction action) onAction;
   final VoidCallback onTap;
 
-  const RecommendCard({
+  const DishCard({
     super.key,
     required this.isBookMarked,
     required this.onTap,
     required this.recipe,
+    required this.onAction,
   });
 
   @override
@@ -59,7 +62,7 @@ class RecommendCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 19),
-
+                  Spacer(),
                   Text(
                     'Time',
                     style: TextStyle(fontSize: 9, color: ColorStyles.gray2),
@@ -74,17 +77,22 @@ class RecommendCard extends StatelessWidget {
                         style: TextStyles.mediumBold.copyWith(fontSize: 10),
                       ),
                       const Spacer(),
-                      Container(
-                        width: 24,
-                        height: 24,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          isBookMarked ? Icons.bookmark : Icons.bookmark_border,
-                          color: ColorStyles.primary100,
-                          size: 14,
+                      GestureDetector(
+                        onTap: () => onAction(HomeAction.onTapFavorite(recipe)),
+                        child: Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            isBookMarked
+                                ? Icons.bookmark
+                                : Icons.bookmark_border,
+                            color: ColorStyles.primary100,
+                            size: 14,
+                          ),
                         ),
                       ),
                     ],

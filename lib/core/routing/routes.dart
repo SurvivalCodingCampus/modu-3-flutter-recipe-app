@@ -10,5 +10,5 @@ abstract class Routes {
 
   static const String searchRecipes = '/search';
   static const String filterScreen = '/filter-screen';
-  static const String recipeScreen = '/recipe/:id';
+  static const String recipeScreen = '/recipe';
 }
