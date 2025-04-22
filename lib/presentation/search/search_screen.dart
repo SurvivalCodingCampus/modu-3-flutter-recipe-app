@@ -43,11 +43,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 const SizedBox(height: 17),
                 Row(
                   children: [
-                    Flexible(
+                    Expanded(
                       child: SearchTextField(
                         placeholder: 'Search recipe',
                         onValueChanged: (value) {
-                          widget.viewModel.getSearchedRecipes(value);
+                          if (value.isNotEmpty) {
+                            widget.viewModel.searchRecipes(value);
+                          }
                         },
                       ),
                     ),
@@ -61,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             return FilterDialog(
                               filter: widget.viewModel.state.filter,
                               onTapFilter: (filter) {
-                                widget.viewModel.getFilteredRecipes(filter);
+                                widget.viewModel.onChangeFilter(filter);
                               },
                             );
                           },

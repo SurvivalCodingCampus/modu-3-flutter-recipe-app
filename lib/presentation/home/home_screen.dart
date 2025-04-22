@@ -48,9 +48,12 @@ class HomeScreen extends StatelessWidget {
                       onTap: onTapSearch,
                       behavior: HitTestBehavior.opaque,
                       child: const IgnorePointer(
-                        child: SearchTextField(
-                          placeholder: 'Search recipe',
-                          isReadOnly: true,
+                        child: SizedBox(
+                          height: 40,
+                          child: SearchTextField(
+                            placeholder: 'Search recipe',
+                            isReadOnly: true,
+                          ),
                         ),
                       ),
                     ),
@@ -59,6 +62,7 @@ class HomeScreen extends StatelessWidget {
                   const FilterIconButton(),
                 ],
               ),
+              const SizedBox(width: 15),
             ],
           ),
         ),

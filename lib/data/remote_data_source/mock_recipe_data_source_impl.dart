@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:recipe_app/data/data_source/recipe_data_source.dart';
+import 'package:recipe_app/data/remote_data_source/recipe_data_source.dart';
 import 'package:recipe_app/data/dto/recipe_dto.dart';
 
 class MockRecipeDataSourceImpl implements RecipeDataSource {

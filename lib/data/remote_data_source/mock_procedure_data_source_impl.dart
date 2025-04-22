@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:recipe_app/data/data_source/data_source.dart';
+import 'package:recipe_app/data/remote_data_source/remote_data_source.dart';
 import 'package:recipe_app/data/dto/procedure_dto.dart';
 
 class MockProcedureDataSourceImpl implements ProcedureDataSource {

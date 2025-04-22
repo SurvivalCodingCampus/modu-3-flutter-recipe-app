@@ -3,7 +3,7 @@ import 'package:recipe_app/data/dto/dto.dart';
 
 part 'recipe_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class RecipeDto {
   final String? category;
   final num? id;

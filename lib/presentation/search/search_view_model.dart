@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/model.dart';
 import 'package:recipe_app/domain/repository/repository.dart';
+import 'package:recipe_app/domain/use_case/search_recipe_use_case.dart';
 import 'package:recipe_app/presentation/search/search_state.dart';
 
 class SearchViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
+  final SearchRecipeRepository _searchRecipeRepository;
+  final SearchRecipeUseCase _searchRecipeUseCase;
+
   SearchState _state = const SearchState();
 
-  List<Recipe> _previousSearchedRecipes = [];
+  // final List<Recipe> _previousSearchedRecipes = [];
 
-  SearchViewModel({required RecipeRepository recipeRepository})
-    : _recipeRepository = recipeRepository;
+  SearchViewModel({
+    required SearchRecipeRepository searchRecipeRepository,
+    required SearchRecipeUseCase searchRecipeUseCase,
+  }) : _searchRecipeRepository = searchRecipeRepository,
+       _searchRecipeUseCase = searchRecipeUseCase;
 
   SearchState get state => _state;
 
@@ -18,66 +24,29 @@ class SearchViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    final recipes = await _recipeRepository.getRecipes();
+    final recipes = await _searchRecipeRepository.getRecipes();
     _state = state.copyWith(recipes: recipes);
     notifyListeners();
   }
 
-  void getSearchedRecipes(String text) async {
-    final allRecipes = await _recipeRepository.getRecipes();
-    if (text.isEmpty) {
-      _state = state.copyWith(
-        recipes: _previousSearchedRecipes,
-        title: 'Recent Search',
-        resultsCount: '',
-      );
-      notifyListeners();
-      return;
-    }
-    final searchedData =
-        allRecipes
-            .where(
-              (e) =>
-                  e.name.toLowerCase().contains(text.toLowerCase()) ||
-                  e.chef.toLowerCase().contains(text.toLowerCase()),
-            )
-            .toList();
+  Future<void> searchRecipes(String query) async {
+    _state = state.copyWith(isLoading: true);
+    notifyListeners();
 
-    _previousSearchedRecipes = searchedData;
+    final recipes = await _searchRecipeUseCase.execute(query, state.filter);
     _state = state.copyWith(
-      recipes: searchedData,
-      title: 'Search Result',
-      resultsCount: '${searchedData.length} results',
+      isLoading: false,
+      recipes: recipes,
+      title: "Search Result",
+      resultsCount: "${recipes.length} results",
+      query: query,
     );
     notifyListeners();
   }
 
-  void getFilteredRecipes(Filter filter) async {
-    final allRecipes =
-        _previousSearchedRecipes.isNotEmpty
-            ? _previousSearchedRecipes // 검색 결과가 있다면 그 결과만 필터링
-            : await _recipeRepository.getRecipes(); // 아니면 전체 레시피
-
-    final filteredData =
-        allRecipes
-            .where((e) {
-              if (filter.time == 'All') {
-                return true;
-              }
-              return e.totalTimeMinutes == filter.time;
-            })
-            .where((e) => e.rating >= filter.rate)
-            .where((e) {
-              if (filter.category == 'All') {
-                return true;
-              }
-              return filter.category == e.category;
-            })
-            .toList();
-
-    _previousSearchedRecipes = filteredData;
-
-    _state = state.copyWith(recipes: filteredData, filter: filter);
+  void onChangeFilter(Filter filter) async {
+    _state = state.copyWith(filter: filter);
+    await searchRecipes(state.query);
     notifyListeners();
   }
 }
