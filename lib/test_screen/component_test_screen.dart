@@ -16,6 +16,7 @@ import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart'
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/test_screen/button_screen.dart';
@@ -77,7 +78,7 @@ class ComponentTestScreen extends StatelessWidget {
                         MaterialPageRoute(
                           builder:
                               (context) =>
-                                  SearchRecipesScreen(viewModel: getIt()),
+                                  SearchRecipesScreenRoot(viewModel: getIt()),
                         ),
                       );
                     },

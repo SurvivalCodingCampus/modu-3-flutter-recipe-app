@@ -35,7 +35,8 @@ class SavedRecipesScreen extends StatelessWidget {
                 for (final recipe in state.recipes) ...[
                   GestureDetector(
                     onTap: () {
-                      context.push("/ingredient/${recipe.recipeId}");
+                      // context.push("/ingredient/${recipe.recipeId}");
+                      onAction(SavedRecipesAction.onTapRecipe(recipe.recipeId));
                     },
                     child: RecipeCard(
                       recipe: recipe,

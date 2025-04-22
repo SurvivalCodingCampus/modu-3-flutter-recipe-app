@@ -13,15 +13,6 @@ class SavedRecipesViewModel with ChangeNotifier {
     fetchRecipes();
   }
 
-  // List<Recipe> _recipes = [];
-  // List<Recipe> get recipes => List.unmodifiable(_recipes);
-
-  // List<int> _bookMarkList = [];
-  // List<int> get bookMarkList => List.unmodifiable(_bookMarkList);
-
-  // bool _isLoading = false;
-  // bool get isLoading => _isLoading;
-
   SavedRecipesState _state = const SavedRecipesState();
   SavedRecipesState get state => _state;
 

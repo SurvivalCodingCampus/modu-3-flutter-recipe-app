@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:http/http.dart' as http;
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/data/data_source/mock_recipe_data_source.dart';
-import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
-import 'package:recipe_app/presentation/bottom_navigation_bar/bottom_navigation_bar_screen.dart';
 import 'package:recipe_app/presentation/component/big_button.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
-import 'package:recipe_app/presentation/home/home_screen.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
@@ -38,9 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 isSearch: false,
                 onValueChange: (String value) {},
                 controller: TextEditingController(),
-                onTap: () {
-                  
-                },
+                onTap: () {},
               ),
               SizedBox(height: 30),
               InputField(
@@ -48,9 +40,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 placeHolder: 'Enter Password',
                 isSearch: false,
                 onValueChange: (String value) {},
-                onTap: () {
-                  
-                },
+                onTap: () {},
                 controller: TextEditingController(),
               ),
               SizedBox(height: 20),
