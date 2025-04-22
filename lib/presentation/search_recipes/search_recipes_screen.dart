@@ -6,6 +6,7 @@ import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model
 import '../component/search_input_field.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
+import 'filter_search_bottom_sheet/filter_search_bottom_sheet_screen.dart';
 
 class SearchRecipesScreen extends StatelessWidget {
   final SearchRecipesViewModel viewModel;
@@ -21,7 +22,7 @@ class SearchRecipesScreen extends StatelessWidget {
           alignment: Alignment.centerRight,
           child: GestureDetector(
             onTap: () {
-              context.pop();  // 지원된 기능 말고, 뒤로 돌아가기 구현.
+              context.pop(); // 지원된 기능 말고, 뒤로 돌아가기 구현.
             },
             child: SizedBox(
               width: 20,
@@ -30,7 +31,6 @@ class SearchRecipesScreen extends StatelessWidget {
                 'assets/icons/arrow-left.png',
                 fit: BoxFit.contain,
               ),
-
             ),
           ),
         ),
@@ -75,6 +75,19 @@ class SearchRecipesScreen extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {
                             // 버튼 클릭 시 동작
+                            showModalBottomSheet<void>(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              builder: (BuildContext context) {
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(55)),
+                                  child: Material(
+                                    color: Colors.white, // 모달 내부 배경색
+                                    child: FilterSearchBottomSheetScreen(),
+                                  ),
+                                );
+                              },
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: ColorStyle.primary100,
@@ -102,13 +115,15 @@ class SearchRecipesScreen extends StatelessWidget {
                         //왼쪽 텍스트
                         Text(
                           viewModel.state.searchKeyword.isNotEmpty
-                              ? 'Search Result' : 'Recent Search',
+                              ? 'Search Result'
+                              : 'Recent Search',
                           style: AppTextStyles.normalBold,
                         ),
                         //오른쪽
                         Text(
                           viewModel.state.searchKeyword.isNotEmpty
-                              ? '${viewModel.state.filteredRecipes.length} result' : '',
+                              ? '${viewModel.state.filteredRecipes.length} result'
+                              : '',
                           style: AppTextStyles.smallRegular.copyWith(
                             color: ColorStyle.gray3,
                           ),

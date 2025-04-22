@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 
-import '../../data/model/recipe.dart' show Recipe;
+import '../../domain/model/recipe.dart' show Recipe;
 import '../component/recipe_card.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
