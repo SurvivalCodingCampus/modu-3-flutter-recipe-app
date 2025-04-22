@@ -3,6 +3,7 @@ import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/info/get_recipe_info_use_case.dart';
+import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_action.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_state.dart';
 
 class RecipeInfoViewModel with ChangeNotifier {
@@ -13,7 +14,14 @@ class RecipeInfoViewModel with ChangeNotifier {
   RecipeInfoState _state = RecipeInfoState();
   RecipeInfoState get state => _state;
 
-  Future<void> getRecipeInfo(int id) async {
+  void onAction(RecipeInfoAction action) {
+    switch (action) {
+      case GetRecipeInfo():
+        _getRecipeInfo(action.id);
+    }
+  }
+
+  Future<void> _getRecipeInfo(int id) async {
     final result = await _getRecipeInfoUseCase.execute(id);
     switch (result) {
       case Success<Recipe>():
