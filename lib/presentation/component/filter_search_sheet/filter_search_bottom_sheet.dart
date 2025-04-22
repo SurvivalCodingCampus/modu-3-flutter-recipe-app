@@ -4,9 +4,9 @@ import 'package:recipe_app/core/enums/time_filter.dart';
 import 'package:recipe_app/core/ui/color_styles.dart';
 import 'package:recipe_app/core/ui/text_styles.dart';
 import 'package:recipe_app/presentation/component/button_widget.dart';
-import 'package:recipe_app/presentation/component/filter_button.dart';
-import 'package:recipe_app/presentation/component/filter_search_state.dart';
-import 'package:recipe_app/presentation/component/rating_button.dart';
+import 'package:recipe_app/presentation/component/filter_search_sheet/filter_button.dart';
+import 'package:recipe_app/presentation/component/filter_search_sheet/filter_search_state.dart';
+import 'package:recipe_app/presentation/component/filter_search_sheet/rating_button.dart';
 
 class FilterSearchBottomSheet extends StatefulWidget {
   final FilterSearchState state;

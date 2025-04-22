@@ -1,7 +1,7 @@
 import 'package:recipe_app/core/enums/category_filter.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/repository/recent_search_repository.dart';
-import 'package:recipe_app/presentation/component/filter_search_state.dart';
+import 'package:recipe_app/presentation/component/filter_search_sheet/filter_search_state.dart';
 
 class SearchRecipesUseCase {
   final RecentSearchRepository _recentSearchRepository;

@@ -4,7 +4,7 @@ import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/core/enums/category_filter.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
-import 'package:recipe_app/presentation/component/filter_search_state.dart';
+import 'package:recipe_app/presentation/component/filter_search_sheet/filter_search_state.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
