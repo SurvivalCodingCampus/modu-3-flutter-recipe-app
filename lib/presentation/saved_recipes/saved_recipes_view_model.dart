@@ -23,7 +23,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     _state = _state.copyWith(recipes: const UiState.loading());
     notifyListeners();
 
-    final stateResult = await _getBookmarkedRecipes();
+    final stateResult = await _getBookmarkedRecipes.execute();
     _state = _state.copyWith(recipes: stateResult);
 
     notifyListeners();

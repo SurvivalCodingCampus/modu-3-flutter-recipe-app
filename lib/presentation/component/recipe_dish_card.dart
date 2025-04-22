@@ -6,12 +6,14 @@ import 'package:recipe_app/presentation/component/image_component/app_image.dart
 
 class RecipeDishCard extends StatelessWidget {
   final Recipe recipe;
+  final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onTapFavorite;
 
   const RecipeDishCard({
     super.key,
     required this.recipe,
+    this.isFavorite = false,
     this.onTap,
     this.onTapFavorite,
   });
@@ -121,7 +123,7 @@ class RecipeDishCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          '${recipe.time}',
+                          recipe.time,
                           style: AppTextStyles.smallBold(
                             color: ColorStyle.gray1,
                           ),
@@ -146,11 +148,14 @@ class RecipeDishCard extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: ColorStyle.white,
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Icon(
                         Icons.bookmark_border,
                         size: 16,
-                        color: ColorStyle.gray4,
+                        color:
+                            isFavorite
+                                ? ColorStyle.primary100
+                                : ColorStyle.gray4,
                       ),
                     ),
                   ),

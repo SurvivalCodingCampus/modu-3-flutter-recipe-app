@@ -11,10 +11,12 @@ class HomeState with _$HomeState {
     this.recipes = const UiState.loading(),
     this.categories = const ['All'],
     this.selectedCategoryIndex = 0,
+    this.bookmarkedRecipeIds = const [],
   });
 
   final bool isLoading;
   final UiState<List<Recipe>> recipes;
   final List<String> categories;
   final int selectedCategoryIndex;
+  final List<int> bookmarkedRecipeIds;
 }

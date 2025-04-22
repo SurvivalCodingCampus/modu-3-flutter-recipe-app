@@ -172,7 +172,12 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(right: 15),
               child: SizedBox(
                 width: 150, // 카드 너비 고정
-                child: RecipeDishCard(recipe: recipe, onTapFavorite: () {}),
+                child: RecipeDishCard(
+                  recipe: recipe,
+                  isFavorite: state.bookmarkedRecipeIds.contains(recipe.id),
+                  onTapFavorite:
+                      () => onAction(HomeAction.toggleBookmark(recipe)),
+                ),
               ),
             );
           },
