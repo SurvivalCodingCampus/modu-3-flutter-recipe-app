@@ -15,8 +15,10 @@ import 'package:recipe_app/feature/receipe/domain/repository/search/search_recip
 import 'package:recipe_app/feature/receipe/domain/use_case/info/get_recipe_info_use_case.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/bookmark_recipes_use_case.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_recent_search_text_use_case.dart';
+import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_recipes_use_case.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/save_recent_search_text_use_case.dart';
+import 'package:recipe_app/feature/receipe/presentation/home/home_view_model.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_view_model.dart';
 import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_view_model.dart';
@@ -46,6 +48,7 @@ void diSetup() {
   getIt.registerSingleton(GetRecentSearchTextUseCase(getIt()));
   getIt.registerSingleton(BookmarkRecipesUseCase(getIt()));
   getIt.registerSingleton(SaveRecentSearchTextUseCase(getIt()));
+  getIt.registerSingleton(GetRecipesUseCase(getIt()));
 
   // 뷰모델
   getIt.registerFactory(
@@ -63,4 +66,5 @@ void diSetup() {
     ),
   );
   getIt.registerFactory(() => SplashViewModel());
+  getIt.registerFactory(() => HomeViewModel(getIt()));
 }
