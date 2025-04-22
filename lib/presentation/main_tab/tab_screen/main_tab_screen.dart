@@ -23,7 +23,10 @@ class MainTabScreen extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: _MainBottomNavBar(
         currentIndex: state.currentIndex,
-        onTap: (index) => onAction(MainTabAction.onTapTab(index)),
+        onTap: (index) {
+          onAction(MainTabAction.onTapTab(index));
+          navigationShell.goBranch(index);
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => onAction(const MainTabAction.onTapFAB()),

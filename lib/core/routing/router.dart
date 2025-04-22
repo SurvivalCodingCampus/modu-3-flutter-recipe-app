@@ -33,11 +33,6 @@ final appRouter = GoRouter(
     ),
 
     GoRoute(
-      path: Routes.search,
-      builder: (context, state) => SavedRecipesScreenRoot(viewModel: getIt()),
-    ),
-
-    GoRoute(
       path: Routes.ingredient,
       builder: (context, state) {
         final id = int.parse(state.pathParameters['id']!);
