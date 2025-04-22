@@ -1,13 +1,51 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
+import 'package:recipe_app/utils/ui_event/ui_event.dart';
 
 import '../../core/presentation/components/medium_button.dart'
     show MediumButton;
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
+  final SplashViewModel viewModel;
   final VoidCallback onStartCooking;
-  const SplashScreen({super.key, required this.onStartCooking});
+  const SplashScreen({
+    super.key,
+    required this.onStartCooking,
+    required this.viewModel,
+  });
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  StreamSubscription? _subscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _subscription = widget.viewModel.eventStream.listen((event) {
+      if (mounted) {
+        switch (event) {
+          case NetworkError():
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(event.message)));
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +93,7 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 64),
-            MediumButton(text: "Start Cooking", onClick: onStartCooking),
+            MediumButton(text: "Start Cooking", onClick: widget.onStartCooking),
             const SizedBox(height: 84),
           ],
         ),

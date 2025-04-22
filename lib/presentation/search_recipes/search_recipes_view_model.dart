@@ -47,19 +47,14 @@ class SearchRecipesViewModel with ChangeNotifier {
 
     query = query.toLowerCase();
 
-    final result = await _repository.findDatas();
+    final result = await _repository.findRecipeByQuery(query);
 
     switch (result) {
       case Success<List<Recipe>, RecipeErrorEnum>():
-        List<Recipe> recipes =
-            result.success
-                .where((e) => e.foodName.toLowerCase().contains(query))
-                .toList();
-
         _state = state.copyWith(
-          recipes: recipes,
+          recipes: result.success,
           isLoading: false,
-          count: recipes.length,
+          count: result.success.length,
         );
         notifyListeners();
       case Error<List<Recipe>, RecipeErrorEnum>():

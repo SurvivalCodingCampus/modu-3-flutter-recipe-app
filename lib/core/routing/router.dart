@@ -12,6 +12,7 @@ import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model
 import 'package:recipe_app/presentation/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 
 final router = GoRouter(
   initialLocation: Routes.splash,
@@ -19,7 +20,12 @@ final router = GoRouter(
     GoRoute(
       path: Routes.splash,
       builder: (context, state) {
+        final viewModel = getIt<SplashViewModel>();
+
+        viewModel.isNetworkConnect();
+
         return SplashScreen(
+          viewModel: viewModel,
           onStartCooking: () {
             context.go(Routes.signIn);
           },
@@ -57,7 +63,7 @@ final router = GoRouter(
       builder: (context, state) {
         final SearchRecipesViewModel viewModel = getIt();
 
-        viewModel.findRecipes();
+        viewModel.search('');
 
         return SearchRecipeRoot(viewModel: viewModel);
       },

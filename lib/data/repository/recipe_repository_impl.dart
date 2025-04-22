@@ -8,16 +8,22 @@ import 'package:recipe_app/utils/result/result.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource<RecipeDto> _dataSource;
+  List<Recipe> _cacheSearch = [];
 
-  const RecipeRepositoryImpl(RecipeDataSource<RecipeDto> dataSource)
+  RecipeRepositoryImpl(RecipeDataSource<RecipeDto> dataSource)
     : _dataSource = dataSource;
+
+  Future<List<Recipe>> _getRecipe() async {
+    final List<RecipeDto> dtos = await _dataSource.findDatas();
+    final List<Recipe> recipes = dtos.map((e) => e.toRecipe()).toList();
+
+    return recipes;
+  }
 
   @override
   Future<Result<List<Recipe>, RecipeErrorEnum>> findDatas() async {
     try {
-      final List<RecipeDto> dtos = await _dataSource.findDatas();
-
-      return Result.success(dtos.map((e) => e.toRecipe()).toList());
+      return Result.success(await _getRecipe());
     } on RecipeErrorEnum {
       return const Result.error(RecipeErrorEnum.networkerror);
     }
@@ -29,6 +35,32 @@ class RecipeRepositoryImpl implements RecipeRepository {
       final RecipeDto dto = await _dataSource.findData(id);
 
       return Result.success(dto.toRecipe());
+    } on RecipeErrorEnum {
+      return const Result.error(RecipeErrorEnum.networkerror);
+    }
+  }
+
+  @override
+  Future<Result<List<Recipe>, RecipeErrorEnum>> findRecipeByQuery(
+    String query,
+  ) async {
+    try {
+      List<Recipe> recipes = await _getRecipe();
+
+      if (query == '' && _cacheSearch.isEmpty) {
+        return Result.success(recipes);
+      } else if (query == '' && _cacheSearch.isNotEmpty) {
+        return Result.success(_cacheSearch);
+      }
+
+      recipes =
+          recipes
+              .where((e) => e.foodName.toLowerCase().contains(query))
+              .toList();
+
+      _cacheSearch = recipes;
+
+      return Result.success(_cacheSearch);
     } on RecipeErrorEnum {
       return const Result.error(RecipeErrorEnum.networkerror);
     }
