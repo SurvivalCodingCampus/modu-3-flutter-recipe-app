@@ -74,7 +74,7 @@ class SplashScreen extends StatelessWidget {
                   onClick: () {
                     context.go(Routes.signIn);
                   },
-                  buttons: Buttons(name: 'Start cooking'),
+                  buttonName: 'Start Cooking',
                 ),
               ],
             ),

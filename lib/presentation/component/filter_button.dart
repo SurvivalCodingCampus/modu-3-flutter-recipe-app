@@ -3,48 +3,41 @@ import 'package:flutter/material.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
 
-class Button {
+
+class FilterButton extends StatelessWidget {
   final String text;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  const Button({required this.text});
-}
-
-class RatingButton extends StatefulWidget {
-  final Button buttons;
-
-  const RatingButton({super.key, required this.buttons});
-
-  @override
-  State<RatingButton> createState() => _RatingButtonState();
-}
-
-class _RatingButtonState extends State<RatingButton> {
-  bool isSelected = false;
-
-  void onChanged() {
-    setState(() {
-      isSelected = !isSelected;
-    });
-  }
+  const FilterButton({
+    required this.text,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onChanged,
-      child: Container(
-        width: 50,
-        height: 28,
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-          color: isSelected ? ColorStyles.primary80 : Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 1, color: ColorStyles.primary80),
+      onTap: onTap,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          minWidth: 50,
+          maxWidth: double.infinity,
         ),
-        child: Text(
-          widget.buttons.text,
-          style: TextStyles.smallerTextRegular.copyWith(
-            color: isSelected ? Colors.white : ColorStyles.primary80,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: isSelected ? ColorStyles.primary80 : Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 1, color: ColorStyles.primary80),
+          ),
+          child: Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyles.smallerTextRegular.copyWith(
+              color: isSelected ? Colors.white : ColorStyles.primary80,
+            ),
           ),
         ),
       ),
@@ -52,28 +45,22 @@ class _RatingButtonState extends State<RatingButton> {
   }
 }
 
-class FilterButton extends StatefulWidget {
-  final Button buttons;
+class RateButton extends StatelessWidget {
+  final String text;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  const FilterButton({super.key, required this.buttons});
-
-  @override
-  State<FilterButton> createState() => _FilterButtonState();
-}
-
-class _FilterButtonState extends State<FilterButton> {
-  bool isSelected = false;
-
-  void onChanged() {
-    setState(() {
-      isSelected = !isSelected;
-    });
-  }
+  const RateButton({
+    super.key,
+    required this.text,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onChanged,
+      onTap: onTap,
       child: Container(
         width: 50,
         height: 28,
@@ -87,7 +74,7 @@ class _FilterButtonState extends State<FilterButton> {
         child: Row(
           children: [
             Text(
-              widget.buttons.text,
+              text,
               style: TextStyles.smallerTextRegular.copyWith(
                 color: isSelected ? Colors.white : ColorStyles.primary80,
               ),

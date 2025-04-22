@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/presentation/filter/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
 import '../component/buttons.dart';
@@ -77,17 +79,22 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       widget.searchRecipesViewModel.updateKeyword(value);
                     },
                   ),
-                  Container(
-                    width: 40,
-                    height: 40,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: ColorStyles.primary100,
-                    ),
-                    child: Image.asset(
-                      'assets/icons/outline_setting.png',
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: (){
+                      FilterSearchBottom();
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: ColorStyles.primary100,
+                      ),
+                      child: Image.asset(
+                        'assets/icons/outline_setting.png',
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],

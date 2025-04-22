@@ -91,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 onClick: () {
                   context.go(Routes.home);
                 },
-                buttons: Buttons(name: 'Sign In'),
+                buttonName:'Sign In'
               ),
               SizedBox(height: 20),
               Container(

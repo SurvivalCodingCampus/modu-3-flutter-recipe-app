@@ -3,17 +3,13 @@ import 'package:flutter/material.dart';
 import '../ui/color_styles.dart';
 import '../ui/text_styles.dart';
 
-class Buttons {
-  final String name;
 
-  const Buttons({required this.name});
-}
 
 class BigButtonsWidget extends StatefulWidget {
   final VoidCallback onClick;
-  final Buttons buttons;
+  final String buttonName;
 
-  const BigButtonsWidget({required this.onClick, required this.buttons});
+  const BigButtonsWidget({required this.onClick, required this.buttonName});
 
   @override
   State<BigButtonsWidget> createState() => _BigButtonsWidgetState();
@@ -53,7 +49,7 @@ class _BigButtonsWidgetState extends State<BigButtonsWidget> {
           child: Row(
             children: [
               Text(
-                widget.buttons.name,
+                widget.buttonName,
                 style: TextStyles.mediumTextBold.copyWith(color: Colors.white),
               ),
               const Spacer(),
@@ -68,9 +64,9 @@ class _BigButtonsWidgetState extends State<BigButtonsWidget> {
 
 class MediumButtonsWidget extends StatefulWidget {
   final VoidCallback onClick;
-  final Buttons buttons;
+  final String buttonName;
 
-  const MediumButtonsWidget({required this.onClick, required this.buttons});
+  const MediumButtonsWidget({required this.onClick, required this.buttonName});
 
   @override
   State<MediumButtonsWidget> createState() => _MediumButtonsWidgetState();
@@ -112,7 +108,7 @@ class _MediumButtonsWidgetState extends State<MediumButtonsWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                widget.buttons.name,
+                widget.buttonName,
                 style: TextStyles.normalTextBold.copyWith(color: Colors.white),
               ),
               Spacer(),
@@ -127,9 +123,9 @@ class _MediumButtonsWidgetState extends State<MediumButtonsWidget> {
 
 class SmallButtonsWidget extends StatefulWidget {
   final VoidCallback onClick;
-  final Buttons buttons;
+  final String buttonName;
 
-  const SmallButtonsWidget({required this.onClick, required this.buttons});
+  const SmallButtonsWidget({required this.onClick, required this.buttonName});
 
   @override
   State<SmallButtonsWidget> createState() => _SmallButtonsWidgetState();
@@ -169,7 +165,7 @@ class _SmallButtonsWidgetState extends State<SmallButtonsWidget> {
           child: Row(
             children: [
               Text(
-                widget.buttons.name,
+                widget.buttonName,
                 style: TextStyles.smallerTextBold.copyWith(color: Colors.white),
               ),
               const Spacer(),

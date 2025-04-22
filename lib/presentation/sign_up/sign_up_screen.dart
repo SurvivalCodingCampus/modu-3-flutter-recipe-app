@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onClick: () {
                     context.go(Routes.home);
                   },
-                  buttons: Buttons(name: 'Sign Up'),
+                  buttonName: 'Sign Up'
                 ),
                 SizedBox(height: 20),
                 Container(
