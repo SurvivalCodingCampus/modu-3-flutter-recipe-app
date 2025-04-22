@@ -19,6 +19,8 @@ import 'package:recipe_app/domain/usecase/set_recipe_rating_use_case.dart';
 import 'package:recipe_app/domain/usecase/toggle_bookmark_use_case.dart';
 import 'package:recipe_app/domain/usecase/update_search_data_use_case.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
+import 'package:recipe_app/presentation/main_tab/home/home_view_model.dart';
+import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_view_model.dart';
@@ -62,6 +64,9 @@ void diSetup() {
   getIt.registerSingleton<UpdateSearchDataUseCase>(
     UpdateSearchDataUseCase(getIt()),
   );
+
+  getIt.registerFactory<MainTabViewModel>(() => MainTabViewModel());
+  getIt.registerFactory<HomeViewModel>(() => HomeViewModel());
 
   getIt.registerFactory<SavedRecipesViewModel>(
     () => SavedRecipesViewModel(

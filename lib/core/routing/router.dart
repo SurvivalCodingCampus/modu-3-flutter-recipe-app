@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/dev_components.dart';
-import 'package:recipe_app/presentation/dev_home_screen.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_screen.dart';
 import 'package:recipe_app/presentation/login/login_screen.dart';
-import 'package:recipe_app/presentation/main_tab/main_tab_screen.dart';
+import 'package:recipe_app/presentation/main_tab/home/home_screen_root.dart';
+import 'package:recipe_app/presentation/main_tab/home/home_view_model.dart';
+import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_screen_root.dart';
+import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
@@ -30,18 +32,6 @@ final appRouter = GoRouter(
       builder: (context, state) => const DevComponents(),
     ),
 
-    // StatefulShellRoute.indexedStack(
-    //   builder: (context, state, StatefulNavigationShell shell) {
-    //     return shell;
-    //   },
-    //   branches: [
-    //     StatefulShellBranch(
-    //       routes: [
-    //
-    //       ],
-    //     ),
-    //   ],
-    // ),
     GoRoute(
       path: Routes.search,
       builder: (context, state) => SavedRecipesScreenRoot(viewModel: getIt()),
@@ -57,19 +47,25 @@ final appRouter = GoRouter(
 
     // 로그인 이후의 메인 탭 구조
     StatefulShellRoute.indexedStack(
-      builder: (context, state, shell) {
-        return MainTabScreen(navigationShell: shell);
-      },
+      builder:
+          (context, state, shell) => MainTabScreenRoot(
+            viewModel: getIt<MainTabViewModel>(),
+            navigationShell: shell,
+          ),
       branches: [
+        // 홈 탭
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.devHome,
-              builder: (context, state) => const DevHomeScreen(),
+              path: Routes.mainHome,
+              builder:
+                  (context, state) =>
+                      HomeScreenRoot(viewModel: getIt<HomeViewModel>()),
             ),
           ],
         ),
 
+        // 북마크 탭
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -80,6 +76,8 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+
+        // 생성 탭
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -91,6 +89,8 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+
+        // 알림 탭
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -102,6 +102,8 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+
+        // 프로필 탭
         StatefulShellBranch(
           routes: [
             GoRoute(
