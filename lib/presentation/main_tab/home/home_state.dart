@@ -5,8 +5,15 @@ part 'home_state.freezed.dart';
 
 @freezed
 class HomeState with _$HomeState {
-  const HomeState({required this.isLoading, required this.recipes});
+  const HomeState({
+    this.isLoading = false,
+    this.recipes = const [],
+    this.categories = const [],
+    this.selectedCategoryIndex = 0,
+  });
 
   final bool isLoading;
   final List<Recipe> recipes;
+  final List<String> categories;
+  final int selectedCategoryIndex;
 }

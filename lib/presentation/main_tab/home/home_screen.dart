@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
+import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_button.dart';
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
 
@@ -27,16 +28,10 @@ class HomeScreen extends StatelessWidget {
         const SizedBox(height: 20),
         _buildSearchHeader(context),
         const SizedBox(height: 20),
-        Expanded(
-          child: ListView(
-            children:
-                state.recipes.map((r) {
-                  return ListTile(
-                    title: Text(r.name),
-                    onTap: () => onAction(HomeAction.tapRecipe(r.id)),
-                  );
-                }).toList(),
-          ),
+        _buildCategoryFilter(
+          categories: state.categories,
+          selectedIndex: state.selectedCategoryIndex,
+          onTap: (index) => onAction(HomeAction.selectCategory(index)),
         ),
       ],
     );
@@ -130,6 +125,30 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryFilter({
+    required List<String> categories,
+    required int selectedIndex,
+    required void Function(int) onTap,
+  }) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        children: List.generate(
+          categories.length,
+          (index) => Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: FilterButton(
+              title: categories[index],
+              isSelected: selectedIndex == index,
+              onPressed: () => onTap(index),
+            ),
+          ),
+        ),
       ),
     );
   }

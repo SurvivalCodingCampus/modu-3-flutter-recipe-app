@@ -66,7 +66,7 @@ void diSetup() {
   );
 
   getIt.registerFactory<MainTabViewModel>(() => MainTabViewModel());
-  getIt.registerFactory<HomeViewModel>(() => HomeViewModel());
+  getIt.registerFactory<HomeViewModel>(() => HomeViewModel(getIt()));
 
   getIt.registerFactory<SavedRecipesViewModel>(
     () => SavedRecipesViewModel(
