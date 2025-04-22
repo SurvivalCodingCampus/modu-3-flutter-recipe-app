@@ -27,4 +27,14 @@ class RecipeRepositoryImpl implements RecipeRepository {
       );
     }).toList();
   }
+
+  @override
+  Future<Recipe> getRecipe(int recipeId) async {
+    final recipeDto = await _recipeDataSource.getRecipe(recipeId);
+    final stepDto = await _stepsDataSource.getStepsbyId(recipeId);
+
+    return recipeDto.toRecipe().copyWith(
+      step: stepDto.map((e) => e.toStep()).toList(),
+    );
+  }
 }

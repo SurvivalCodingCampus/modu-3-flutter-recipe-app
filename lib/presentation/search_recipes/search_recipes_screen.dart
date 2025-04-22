@@ -169,7 +169,7 @@ class FilterBottomSheet extends StatelessWidget {
                           listenable: _viewModel,
                           builder: (context, snapshot) {
                             return FilterButton(
-                              text: time.name,
+                              text: time.label,
                               isSelected: _viewModel.state.time == time,
                               onChanged: () {
                                 _viewModel.updateSelectedTime(time);
@@ -200,7 +200,7 @@ class FilterBottomSheet extends StatelessWidget {
                           listenable: _viewModel,
                           builder: (context, snapshot) {
                             return FilterButton(
-                              text: fromStar(star).toString(),
+                              text: star.minRating.toInt().toString(),
                               isSelected: _viewModel.state.star == star,
                               onChanged: () {
                                 _viewModel.updateSelectedStar(star);
@@ -231,7 +231,7 @@ class FilterBottomSheet extends StatelessWidget {
                           listenable: _viewModel,
                           builder: (context, snapshot) {
                             return FilterButton(
-                              text: category.name,
+                              text: category.label,
                               isSelected:
                                   _viewModel.state.categoryType == category,
                               onChanged: () {

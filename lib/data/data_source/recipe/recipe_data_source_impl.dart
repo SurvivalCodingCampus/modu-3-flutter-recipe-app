@@ -12,4 +12,14 @@ class RecipeDataSourceImpl implements RecipeDataSource {
 
     return recipes.map((recipe) => RecipeDto.fromJson(recipe)).toList();
   }
+
+  @override
+  Future<RecipeDto> getRecipe(int recipeId) async {
+    final jsonString = await rootBundle.loadString('assets/json/recipe.json');
+    final List<Map<String, dynamic>> recipes = jsonDecode(jsonString);
+
+    return recipes
+        .map((e) => RecipeDto.fromJson(e))
+        .singleWhere((element) => element.id == recipeId);
+  }
 }

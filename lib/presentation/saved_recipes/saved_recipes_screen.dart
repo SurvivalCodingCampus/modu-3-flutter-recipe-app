@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
@@ -48,7 +50,9 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
                         .bookmarkedRecipes
                         .contains(recipe.id);
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.push('${Routes.savedDetail}/${recipe.id}');
+                      },
                       child: RecipeCard(
                         recipe: recipe,
                         isBookmarked: isBookmarked,
