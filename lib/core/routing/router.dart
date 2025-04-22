@@ -4,10 +4,12 @@ import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/recipes/recipe_data_source.dart';
 import 'package:recipe_app/data/data_source/recipes/recipe_data_source_impl.dart';
+import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/common/component/nav_bar_component.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/page/home/home_screen.dart';
+import 'package:recipe_app/presentation/page/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/page/home/home_view_model.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_view_model.dart';
@@ -34,11 +36,11 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.search,
       builder: (context, state) {
-        final data = (state.extra as List).cast<Map<String, dynamic>>();
+        final data = (state.extra as List).cast<Recipe>();
 
         return SearchRecipesScreen(
           viewModel: getIt(),
-          searchResult: data ?? [],
+          searchResult: data ?? <Recipe>[],
         );
       },
     ),
@@ -71,7 +73,7 @@ final GoRouter router = GoRouter(
               path: Routes.home,
               pageBuilder:
                   (context, state) => NoTransitionPage(
-                    child: HomeScreen(viewModel: HomeViewModel()),
+                    child: HomeScreenRoot(viewModel: HomeViewModel()),
                   ),
             ),
             GoRoute(

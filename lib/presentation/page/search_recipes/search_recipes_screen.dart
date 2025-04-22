@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/presentation/common/component/recipe_search_card.dart';
 import 'package:recipe_app/presentation/common/enum/image_type.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
@@ -12,7 +13,7 @@ import 'package:recipe_app/presentation/page/search_recipes/search_recipes_view_
 
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
-  final List<Map<String, dynamic>> searchResult;
+  final List<Recipe> searchResult;
   const SearchRecipesScreen({
     super.key,
     required this.viewModel,

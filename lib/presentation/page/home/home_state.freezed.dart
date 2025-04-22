@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- List<Map<String, dynamic>> get searchData;
+ List<Recipe> get searchData;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,7 +46,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- List<Map<String, dynamic>> searchData
+ List<Recipe> searchData
 });
 
 
@@ -66,7 +66,7 @@ class _$HomeStateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? searchData = null,}) {
   return _then(HomeState(
 searchData: null == searchData ? _self.searchData : searchData // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>,
+as List<Recipe>,
   ));
 }
 

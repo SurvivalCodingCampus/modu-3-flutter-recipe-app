@@ -23,7 +23,7 @@ class SearchRecipesViewModel with ChangeNotifier {
   SearchRecipesState get state => _state;
 
   void getRecipes({
-    required List<Map<String, dynamic>> beforeSearchList,
+    required List<Recipe> beforeSearchList,
   }) async {
     _state = _state.copyWith(isSearchLoading: true);
     notifyListeners();
@@ -35,8 +35,7 @@ class SearchRecipesViewModel with ChangeNotifier {
       );
     } else {
       _state = _state.copyWith(
-        recipes:
-            beforeSearchList.map((items) => Recipe.fromJson(items)).toList(),
+        recipes:beforeSearchList,
         isSearchLoading: false,
       );
     }
