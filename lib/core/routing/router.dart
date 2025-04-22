@@ -14,7 +14,10 @@ import 'package:recipe_app/presentation/page/home/home_view_model.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/page/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/page/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/page/search_recipes/search_recipes_state.dart';
 import 'package:recipe_app/presentation/page/search_recipes/search_recipes_view_model.dart';
+import 'package:recipe_app/presentation/page/search_recipes/search_screen.dart';
+import 'package:recipe_app/presentation/page/search_recipes/search_screen_root.dart';
 import 'package:recipe_app/presentation/page/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/page/sign_up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/page/splash/splash_screen.dart';
@@ -37,11 +40,13 @@ final GoRouter router = GoRouter(
       path: Routes.search,
       builder: (context, state) {
         final data = (state.extra as List).cast<Recipe>();
-
-        return SearchRecipesScreen(
-          viewModel: getIt(),
-          searchResult: data ?? <Recipe>[],
-        );
+        
+        return SearchScreenRoot(viewModel: getIt(),lastSearchData: data,);
+        
+        // return SearchRecipesScreen(
+        //   viewModel: getIt(),
+        //   searchResult: data ?? <Recipe>[],
+        // );
       },
     ),
     StatefulShellRoute.indexedStack(
