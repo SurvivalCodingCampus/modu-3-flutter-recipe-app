@@ -5,8 +5,15 @@ class FFilterButtons extends StatefulWidget {
   final List<String> allFilters;
   final List<bool> hasStars;
   final void Function(int) onTap;
+  final int beforeSelectedIndex;
 
-  const FFilterButtons({super.key, required this.allFilters, required this.onTap, required this.hasStars});
+  const FFilterButtons({
+    super.key,
+    required this.allFilters,
+    required this.onTap,
+    required this.hasStars,
+    required this.beforeSelectedIndex,
+  });
 
   @override
   State<FFilterButtons> createState() => _FFilterButtonsState();
@@ -14,6 +21,12 @@ class FFilterButtons extends StatefulWidget {
 
 class _FFilterButtonsState extends State<FFilterButtons> {
   int _selectedFilterIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedFilterIndex = widget.beforeSelectedIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

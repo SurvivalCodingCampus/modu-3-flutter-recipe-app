@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:recipe_app/domain/model/type/category_filter_type.dart';
 
 part 'recipe.freezed.dart';
 
@@ -14,9 +15,11 @@ abstract class Recipe with _$Recipe {
     required String makeUserImageUrl,
     String? videoUrl,
     required String imageUrl,
+    required DateTime createdAt,
+    required CategoryFilterType category,
   }) = _Recipe;
 
-  static const empty = Recipe(
+  static final empty = Recipe(
     id: '',
     name: '',
     estimatedTime: 0,
@@ -25,6 +28,8 @@ abstract class Recipe with _$Recipe {
     makeUserName: '',
     makeUserImageUrl: '',
     imageUrl: '',
+    createdAt: DateTime.fromMicrosecondsSinceEpoch(0), // 기본 날짜 사용
+    category: CategoryFilterType.all, // 기본 카테고리
   );
 
   static const dummyImageUrl = 'https://cdn.pixabay.com/photo/2017/01/26/02/06/christmas-wallpaper-2009590_1280.jpg';

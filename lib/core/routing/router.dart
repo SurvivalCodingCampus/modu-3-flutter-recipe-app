@@ -10,20 +10,25 @@ import 'package:recipe_app/presentation/notifications/notifications_screen.dart'
 import 'package:recipe_app/presentation/profile/profile_screen.dart';
 import 'package:recipe_app/presentation/saved_recipe/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipe/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign_up/sign_up_screen.dart';
-import 'package:recipe_app/presentation/splash_screen/view/splash_screen.dart';
+import 'package:recipe_app/presentation/splash_screen/splash_screen.dart';
+import 'package:recipe_app/presentation/splash_screen/splash_view_model.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.favorites,
+    initialLocation: Routes.splash,
     routes: [
-      GoRoute(path: Routes.splash, builder: (context, state) => SplashScreen()),
-
       GoRoute(
-        path: Routes.signIn,
-        builder: (context, state) => const SignInScreen(),
+        path: Routes.splash,
+        builder:
+            (context, state) =>
+                SplashScreen(splashViewModel: getIt<SplashViewModel>()),
       ),
+
+      GoRoute(path: Routes.signIn, builder: (context, state) => SignInScreen()),
 
       GoRoute(
         path: Routes.signUp,
@@ -43,6 +48,13 @@ class AppRouter {
             return const NotFoundScreen();
           }
         },
+      ),
+
+      GoRoute(
+        path: Routes.search,
+        builder:
+            (context, state) =>
+                SearchRecipesScreen(viewModel: getIt<SearchRecipesViewModel>()),
       ),
 
       StatefulShellRoute.indexedStack(

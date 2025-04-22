@@ -1,16 +1,50 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/components/f_medium_button.dart';
-import 'package:recipe_app/presentation/saved_recipe/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/saved_recipe/saved_recipes_view_model.dart';
+import 'package:recipe_app/presentation/splash_screen/splash_event.dart';
+import 'package:recipe_app/presentation/splash_screen/splash_view_model.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
+  final SplashViewModel splashViewModel;
 
-  const SplashScreen({super.key});
+  const SplashScreen({super.key, required this.splashViewModel});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  StreamSubscription<SplashEvent>? _subscription;
+
+  @override
+  void initState() {
+    super.initState();
+    bindSplashEvent();
+    widget.splashViewModel.getSettings();
+  }
+
+  void bindSplashEvent() {
+    _subscription = widget.splashViewModel.eventStream.listen((event) {
+      if (mounted) {
+        switch (event) {
+          case ShowErrorMessage():
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(event.message)));
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

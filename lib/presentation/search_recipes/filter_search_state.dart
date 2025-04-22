@@ -13,7 +13,7 @@ abstract class FilterSearchState with _$FilterSearchState {
     @Default(CategoryFilterType.values) List<CategoryFilterType> categoryFilterTypes,
 
     @Default(TimeFilterType.all) TimeFilterType selectedTimeFilterType,
-    @Default(RateType.five) RateType selectedRateType,
+    @Default(RateType.one) RateType selectedRateType,
     @Default(CategoryFilterType.all) CategoryFilterType selectedCategoryFilterType,
   }) = _FilterSearchState;
 }

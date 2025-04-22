@@ -3,6 +3,7 @@ abstract class Routes {
   static const signIn = '/signIn';
   static const signUp = '/signUp';
   static const ingredient = '/ingredient/:${RoutesParameters.ingredientRecipeIdParameter}';
+  static const search = '/search';
 
   static const home = '/home';
   static const favorites = '/favorites';

@@ -68,7 +68,6 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
                     child: GestureDetector(
                       onTap: () {
                         final basePath = Routes.ingredient.split('/:')[0];
-                        print('$basePath/${recipe.id}');
                         context.push('$basePath/${recipe.id}');
                       },
                       child: FRecipeCard(

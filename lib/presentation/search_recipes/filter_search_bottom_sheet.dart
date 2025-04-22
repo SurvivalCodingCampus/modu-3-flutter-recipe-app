@@ -70,10 +70,10 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                           selectedTimeFilterType: _state.timeFilterTypes[index],
                         );
                       });
-                      print(index);
                     },
                     hasStars:
                         _state.timeFilterTypes.map((e) => e.hasStar).toList(),
+                    beforeSelectedIndex: _state.selectedTimeFilterType.index,
                   ),
                 ),
                 SizedBox(height: 20),
@@ -94,9 +94,9 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                           selectedRateType: _state.rateTypes[index],
                         );
                       });
-                      print(index);
                     },
                     hasStars: _state.rateTypes.map((e) => e.hasStar).toList(),
+                    beforeSelectedIndex: _state.selectedRateType.index,
                   ),
                 ),
                 SizedBox(height: 20),
@@ -119,12 +119,12 @@ class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
                               _state.categoryFilterTypes[index],
                         );
                       });
-                      print(index);
                     },
                     hasStars:
                         _state.categoryFilterTypes
                             .map((e) => e.hasStar)
                             .toList(),
+                    beforeSelectedIndex: _state.selectedCategoryFilterType.index,
                   ),
                 ),
                 SizedBox(height: 20),

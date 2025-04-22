@@ -34,3 +34,34 @@ enum CategoryFilterType {
     };
   }
 }
+
+extension CategoryFilterTypeExtension on CategoryFilterType {
+  static CategoryFilterType fromString(String value) {
+    final normalized = value.trim();
+
+    switch (normalized) {
+      case 'Cereal':
+        return CategoryFilterType.cereal;
+      case 'Vegetables':
+        return CategoryFilterType.vegetables;
+      case 'Dinner':
+        return CategoryFilterType.dinner;
+      case 'Chinese':
+        return CategoryFilterType.chinese;
+      case 'Local Dish':
+        return CategoryFilterType.localDish;
+      case 'Fruit':
+        return CategoryFilterType.fruit;
+      case 'BreakFast':
+        return CategoryFilterType.breakFast;
+      case 'Spanish':
+        return CategoryFilterType.spanish;
+      case 'Lunch':
+        return CategoryFilterType.lunch;
+      case 'All':
+        return CategoryFilterType.all;
+      default:
+        return CategoryFilterType.all;
+    }
+  }
+}

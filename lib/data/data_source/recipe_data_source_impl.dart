@@ -2,6 +2,9 @@ import 'package:recipe_app/data/data_source/recipe_data_source.dart';
 import 'package:recipe_app/data/dto/ingredient_dto.dart';
 import 'package:recipe_app/data/dto/recipe_dto.dart';
 import 'package:recipe_app/data/dto/recipe_info_dto.dart';
+import 'package:recipe_app/domain/model/type/category_filter_type.dart';
+import 'package:recipe_app/domain/model/type/rate_type.dart';
+import 'package:recipe_app/domain/model/type/time_filter_type.dart';
 
 
 class RecipeDataSourceImpl implements RecipeDataSource {
@@ -13,214 +16,232 @@ class RecipeDataSourceImpl implements RecipeDataSource {
       isFavorite: true,
       rate: 4.8,
       makeUserName: "최chef",
-      makeUserImageUrl:
-          "https://images.pexels.com/photos/3814446/pexels-photo-3814446.jpeg",
-      videoUrl:
-          "https://player.vimeo.com/external/414879105.sd.mp4?s=9ec2ec4a3f95584bba0a30b8c5c33232e79c6aee&profile_id=139&oauth2_token_id=57447761",
+      makeUserImageUrl: "https://images.pexels.com/photos/3814446/pexels-photo-3814446.jpeg",
+      videoUrl: "https://player.vimeo.com/external/414879105.sd.mp4?s=9ec2ec4a3f95584bba0a30b8c5c33232e79c6aee&profile_id=139&oauth2_token_id=57447761",
       imageUrl: "https://picsum.photos/200?random=11",
+      createdAt: "2023-11-15T10:30:00",
+      category: "Dinner",
     ),
-
     RecipeDto(
       id: "recipe_002",
-      name: "불고기",
+      name: "Bulgogi",
       estimatedTime: 45,
       isFavorite: true,
       rate: 4.9,
       makeUserName: "한식마스터",
-      makeUserImageUrl:
-          "https://images.pexels.com/photos/3771807/pexels-photo-3771807.jpeg",
-      videoUrl:
-          "https://player.vimeo.com/external/371867463.sd.mp4?s=76edaeefdb9eb67734ca388c5889e202137dd11a&profile_id=139&oauth2_token_id=57447761",
+      makeUserImageUrl: "https://images.pexels.com/photos/3771807/pexels-photo-3771807.jpeg",
+      videoUrl: "https://player.vimeo.com/external/371867463.sd.mp4?s=76edaeefdb9eb67734ca388c5889e202137dd11a&profile_id=139&oauth2_token_id=57447761",
       imageUrl: "https://picsum.photos/200?random=12",
+      createdAt: "2023-10-22T14:15:30",
+      category: "Local Dish",
     ),
-
     RecipeDto(
       id: "recipe_003",
-      name: "파스타 카르보나라",
+      name: "Pasta Carbonara",
       estimatedTime: 20,
       isFavorite: false,
       rate: 4.5,
       makeUserName: "파스타장인",
-      makeUserImageUrl:
-          "https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg",
+      makeUserImageUrl: "https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg",
       videoUrl: null,
       imageUrl: "https://picsum.photos/200?random=13",
+      createdAt: "2023-09-05T18:45:00",
+      category: "Dinner",
     ),
-
     RecipeDto(
       id: "recipe_004",
-      name: "베이컨 아보카도 샐러드",
+      name: "Bacon Avocado Salad",
       estimatedTime: 15,
       isFavorite: true,
       rate: 4.3,
       makeUserName: "건강식연구소",
-      makeUserImageUrl:
-          "https://images.pexels.com/photos/1197132/pexels-photo-1197132.jpeg",
-      videoUrl:
-          "https://player.vimeo.com/external/403283608.sd.mp4?s=e749a56d72da7809f57b6a865073b6b199326e19&profile_id=139&oauth2_token_id=57447761",
+      makeUserImageUrl: "https://images.pexels.com/photos/1197132/pexels-photo-1197132.jpeg",
+      videoUrl: "https://player.vimeo.com/external/403283608.sd.mp4?s=e749a56d72da7809f57b6a865073b6b199326e19&profile_id=139&oauth2_token_id=57447761",
       imageUrl: "https://picsum.photos/200?random=14",
+      createdAt: "2023-12-03T12:00:00",
+      category: "Vegetables",
     ),
-
     RecipeDto(
       id: "recipe_005",
-      name: "스팸 김치 볶음밥",
+      name: "Spam Kimchi Fried Rice",
       estimatedTime: 25,
       isFavorite: false,
       rate: 4.7,
       makeUserName: "집밥요리사",
-      makeUserImageUrl:
-          "https://images.pexels.com/photos/3771089/pexels-photo-3771089.jpeg",
+      makeUserImageUrl: "https://images.pexels.com/photos/3771089/pexels-photo-3771089.jpeg",
       videoUrl: null,
       imageUrl: "https://picsum.photos/200?random=15",
+      createdAt: "2023-11-27T19:30:00",
+      category: "Local Dish",
     ),
-
     RecipeDto(
       id: "recipe_006",
-      name: "초코 머핀",
+      name: "Chocolate Muffin",
       estimatedTime: 60,
       isFavorite: true,
       rate: 4.6,
       makeUserName: "베이킹마스터",
-      makeUserImageUrl:
-          "https://images.pexels.com/photos/4148961/pexels-photo-4148961.jpeg",
-      videoUrl:
-          "https://player.vimeo.com/external/368767165.sd.mp4?s=0797a7c9b25ae2a1f192a1ded04a7f335774cb91&profile_id=139&oauth2_token_id=57447761",
+      makeUserImageUrl: "https://images.pexels.com/photos/4148961/pexels-photo-4148961.jpeg",
+      videoUrl: "https://player.vimeo.com/external/368767165.sd.mp4?s=0797a7c9b25ae2a1f192a1ded04a7f335774cb91&profile_id=139&oauth2_token_id=57447761",
       imageUrl: "https://picsum.photos/200?random=16",
+      createdAt: "2023-08-14T08:15:00",
+      category: "BreakFast",
     ),
-
     RecipeDto(
       id: "recipe_007",
-      name: "닭갈비",
+      name: "Dakgalbi",
       estimatedTime: 40,
       isFavorite: false,
       rate: 4.4,
       makeUserName: "춘천요리사",
-      makeUserImageUrl:
-          "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-      videoUrl:
-          "https://player.vimeo.com/external/352320117.sd.mp4?s=81764d11ab83a6c46901e1054221fed80a26f073&profile_id=139&oauth2_token_id=57447761",
+      makeUserImageUrl: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
+      videoUrl: "https://player.vimeo.com/external/352320117.sd.mp4?s=81764d11ab83a6c46901e1054221fed80a26f073&profile_id=139&oauth2_token_id=57447761",
       imageUrl: "https://picsum.photos/200?random=17",
+      createdAt: "2023-10-10T17:45:00",
+      category: "Local Dish",
     ),
     RecipeDto(
-      id: "recipe_001",
-      name: "김치볶음밥",
+      id: "recipe_008",
+      name: "Kimchi Fried Rice",
       estimatedTime: 20,
       isFavorite: false,
       rate: 4.2,
       makeUserName: "한식달인",
       makeUserImageUrl: "https://randomuser.me/api/portraits/men/1.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=1",
+      createdAt: "2023-07-25T13:20:00",
+      category: "Local Dish",
     ),
     RecipeDto(
-      id: "recipe_002",
-      name: "된장찌개",
+      id: "recipe_009",
+      name: "Doenjang Jjigae",
       estimatedTime: 30,
       isFavorite: true,
       rate: 4.5,
       makeUserName: "시골할머니",
       makeUserImageUrl: "https://randomuser.me/api/portraits/women/2.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=2",
+      createdAt: "2023-11-05T11:30:00",
+      category: "Local Dish",
     ),
     RecipeDto(
-      id: "recipe_003",
-      name: "비빔밥",
+      id: "recipe_010",
+      name: "Bibimbap",
       estimatedTime: 25,
       isFavorite: true,
       rate: 4.8,
       makeUserName: "전주요리사",
       makeUserImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=3",
+      createdAt: "2023-10-15T15:45:00",
+      category: "Local Dish",
     ),
     RecipeDto(
-      id: "recipe_004",
-      name: "불고기",
+      id: "recipe_011",
+      name: "Paella",
       estimatedTime: 35,
       isFavorite: false,
       rate: 4.6,
-      makeUserName: "서울셰프",
+      makeUserName: "스페인셰프",
       makeUserImageUrl: "https://randomuser.me/api/portraits/men/4.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=4",
+      createdAt: "2023-12-20T18:30:00",
+      category: "Spanish",
     ),
     RecipeDto(
-      id: "recipe_005",
-      name: "잡채",
+      id: "recipe_012",
+      name: "Japchae",
       estimatedTime: 40,
       isFavorite: false,
       rate: 4.3,
       makeUserName: "명절마스터",
       makeUserImageUrl: "https://randomuser.me/api/portraits/women/5.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=5",
+      createdAt: "2023-09-28T14:20:00",
+      category: "Local Dish",
     ),
     RecipeDto(
-      id: "recipe_006",
-      name: "떡볶이",
+      id: "recipe_013",
+      name: "Fruit Granola",
       estimatedTime: 15,
       isFavorite: true,
       rate: 4.7,
-      makeUserName: "분식왕",
+      makeUserName: "건강식연구가",
       makeUserImageUrl: "https://randomuser.me/api/portraits/men/6.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=6",
+      createdAt: "2023-11-12T07:45:00",
+      category: "BreakFast",
     ),
     RecipeDto(
-      id: "recipe_007",
-      name: "닭갈비",
+      id: "recipe_014",
+      name: "Kung Pao Chicken",
       estimatedTime: 40,
       isFavorite: false,
       rate: 4.4,
-      makeUserName: "춘천요리사",
-      makeUserImageUrl:
-          "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-      videoUrl:
-          "https://player.vimeo.com/external/352320117.sd.mp4?s=81764d11ab83a6c46901e1054221fed80a26f073&profile_id=139&oauth2_token_id=57447761",
+      makeUserName: "중식셰프",
+      makeUserImageUrl: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
+      videoUrl: "https://player.vimeo.com/external/352320117.sd.mp4?s=81764d11ab83a6c46901e1054221fed80a26f073&profile_id=139&oauth2_token_id=57447761",
       imageUrl: "https://picsum.photos/200?random=7",
+      createdAt: "2023-08-30T19:15:00",
+      category: "Chinese",
     ),
     RecipeDto(
-      id: "recipe_008",
-      name: "갈비찜",
+      id: "recipe_015",
+      name: "Cereal Milk Ice Cream",
       estimatedTime: 50,
       isFavorite: false,
       rate: 4.9,
-      makeUserName: "명절셰프",
+      makeUserName: "디저트셰프",
       makeUserImageUrl: "https://randomuser.me/api/portraits/women/7.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=8",
+      createdAt: "2023-12-01T16:30:00",
+      category: "Cereal",
     ),
     RecipeDto(
-      id: "recipe_009",
-      name: "콩나물국밥",
+      id: "recipe_016",
+      name: "Vegetable Stir Fry",
       estimatedTime: 20,
       isFavorite: true,
       rate: 4.1,
-      makeUserName: "해장국장인",
+      makeUserName: "채식요리사",
       makeUserImageUrl: "https://randomuser.me/api/portraits/men/9.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=9",
+      createdAt: "2023-11-18T12:45:00",
+      category: "Vegetables",
     ),
     RecipeDto(
-      id: "recipe_010",
-      name: "오징어볶음",
+      id: "recipe_017",
+      name: "Fruit Salad",
       estimatedTime: 30,
       isFavorite: false,
       rate: 4.0,
-      makeUserName: "해물셰프",
+      makeUserName: "과일셰프",
       makeUserImageUrl: "https://randomuser.me/api/portraits/men/10.jpg",
-      videoUrl:
-          "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
       imageUrl: "https://picsum.photos/200?random=10",
+      createdAt: "2023-10-05T09:30:00",
+      category: "Fruit",
+    ),
+    RecipeDto(
+      id: "recipe_018",
+      name: "Club Sandwich",
+      estimatedTime: 15,
+      isFavorite: true,
+      rate: 4.2,
+      makeUserName: "런치마스터",
+      makeUserImageUrl: "https://randomuser.me/api/portraits/women/11.jpg",
+      videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      imageUrl: "https://picsum.photos/200?random=18",
+      createdAt: "2023-09-12T12:30:00",
+      category: "Lunch",
     ),
   ];
   final List<RecipeInfoDto> _mockRecipesInfo = [
@@ -686,12 +707,52 @@ class RecipeDataSourceImpl implements RecipeDataSource {
   ];
 
   @override
-  Future<List<RecipeDto>> fetchSavedRecipes({String query = ''}) async {
-    final mockRecipesDto =
-        _mockRecipes
-            .where((e) => query.isNotEmpty ? e.name.contains(query) : true) // 서버 비즈니스 로직
-            .toList();
-    return await Future.value(mockRecipesDto);
+  Future<List<RecipeDto>> fetchSavedRecipes({
+    String query = '',
+    TimeFilterType? timeFilterType,
+    RateType? rateType,
+    CategoryFilterType? categoryFilterType,
+  }) async {
+    // 기본 쿼리 필터링
+    var filteredRecipes = _mockRecipes.where((e) =>
+    query.isEmpty || e.name.toLowerCase().contains(query.toLowerCase())
+    ).toList();
+
+    // 시간 필터링
+    if (timeFilterType != null && timeFilterType != TimeFilterType.all) {
+      filteredRecipes = filteredRecipes.where((recipe) {
+        switch (timeFilterType) {
+          case TimeFilterType.newest:
+            return DateTime.parse(recipe.createdAt).isAfter(
+                DateTime.now().subtract(const Duration(days: 7))
+            );
+          case TimeFilterType.oldest:
+            return DateTime.parse(recipe.createdAt).isBefore(
+                DateTime.now().subtract(const Duration(days: 30))
+            );
+          case TimeFilterType.popularity:
+            return recipe.rate > 4.0; // 인기도 기준 (높은 평점)
+          default:
+            return true;
+        }
+      }).toList();
+    }
+
+    // 평점 필터링
+    if (rateType != null && rateType != RateType.one) {
+      filteredRecipes = filteredRecipes.where((recipe) {
+        return recipe.rate >= rateType.rate;
+      }).toList();
+    }
+
+    // 카테고리 필터링
+    if (categoryFilterType != null && categoryFilterType != CategoryFilterType.all) {
+      filteredRecipes = filteredRecipes.where((recipe) {
+        return recipe.category.toLowerCase() == categoryFilterType.name.toLowerCase();
+      }).toList();
+    }
+
+    return await Future.value(filteredRecipes);
   }
 
   @override

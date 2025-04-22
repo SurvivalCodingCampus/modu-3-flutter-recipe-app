@@ -13,6 +13,8 @@ class RecipeDto {
   String makeUserImageUrl;
   String? videoUrl;
   String imageUrl;
+  String createdAt;
+  String category;
 
   RecipeDto({
     required this.id,
@@ -24,10 +26,11 @@ class RecipeDto {
     required this.makeUserImageUrl,
     this.videoUrl,
     required this.imageUrl,
+    required this.createdAt,
+    required this.category,
   });
 
   factory RecipeDto.fromJson(Map<String, dynamic> json) => _$RecipeDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$RecipeDtoToJson(this);
-
 }
