@@ -13,6 +13,8 @@ class InputField extends StatefulWidget {
   final double? height;
   final double? inputHorizontalPadding;
   final void Function(String)? onValueChange;
+  final VoidCallback? onTap;
+  final bool? readOnly;
 
   const InputField({
     super.key,
@@ -23,6 +25,8 @@ class InputField extends StatefulWidget {
     this.iconWidget,
     this.height = 55,
     this.inputHorizontalPadding = 20,
+    this.onTap,
+    this.readOnly = false,
   });
 
   @override
@@ -87,7 +91,9 @@ class _InputFieldState extends State<InputField> {
           child: TextField(
             controller: _controller,
             onChanged: widget.onValueChange,
+            onTap: widget.onTap,
             style: AppTextStyles.extraSmallRegular(color: ColorStyle.black),
+            readOnly: widget.readOnly ?? false,
             decoration: InputDecoration(
               hintText: widget.placeholderText,
               hintStyle: AppTextStyles.smallRegular(color: ColorStyle.gray4),
