@@ -10,6 +10,7 @@ import 'package:recipe_app/presentation/main_tab/home/home_view_model.dart';
 import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_screen_root.dart';
 import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
 final appRouter = GoRouter(
@@ -38,6 +39,11 @@ final appRouter = GoRouter(
         final id = int.parse(state.pathParameters['id']!);
         return IngredientScreen(recipeId: id, viewModel: getIt());
       },
+    ),
+
+    GoRoute(
+      path: Routes.search,
+      builder: (context, state) => SearchRecipesScreenRoot(viewModel: getIt()),
     ),
 
     // 로그인 이후의 메인 탭 구조
