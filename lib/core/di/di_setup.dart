@@ -13,6 +13,8 @@ import 'package:recipe_app/domain/repository/user_repository.dart';
 import 'package:recipe_app/domain/usecase/check_network_error_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_bookmarked_recipes_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_recipe_by_id_use_case.dart';
+import 'package:recipe_app/domain/usecase/get_recipe_categories_use_case.dart';
+import 'package:recipe_app/domain/usecase/get_recipes_by_category_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_recipes_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_search_data_use_case.dart';
 import 'package:recipe_app/domain/usecase/set_recipe_rating_use_case.dart';
@@ -65,8 +67,15 @@ void diSetup() {
     UpdateSearchDataUseCase(getIt()),
   );
 
+  getIt.registerSingleton<GetRecipeCategoriesUseCase>(
+    GetRecipeCategoriesUseCase(getIt()),
+  );
+  getIt.registerSingleton<GetRecipesByCategoryUseCase>(
+    GetRecipesByCategoryUseCase(getIt()),
+  );
+
   getIt.registerFactory<MainTabViewModel>(() => MainTabViewModel());
-  getIt.registerFactory<HomeViewModel>(() => HomeViewModel(getIt()));
+  getIt.registerFactory<HomeViewModel>(() => HomeViewModel(getIt(), getIt()));
 
   getIt.registerFactory<SavedRecipesViewModel>(
     () => SavedRecipesViewModel(

@@ -134,21 +134,21 @@ class HomeScreen extends StatelessWidget {
     required int selectedIndex,
     required void Function(int) onTap,
   }) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Row(
-        children: List.generate(
-          categories.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: FilterButton(
-              title: categories[index],
-              isSelected: selectedIndex == index,
-              onPressed: () => onTap(index),
+    return SizedBox(
+      height: 40,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        itemCount: categories.length,
+        itemBuilder:
+            (context, index) => Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: FilterButton(
+                title: categories[index],
+                isSelected: selectedIndex == index,
+                onPressed: () => onTap(index),
+              ),
             ),
-          ),
-        ),
       ),
     );
   }
