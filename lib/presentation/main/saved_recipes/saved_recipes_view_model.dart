@@ -14,19 +14,6 @@ class SavedRecipesViewModel with ChangeNotifier {
 
   SavedRecipesState get state => _state;
 
-  // // ======================== 임시 나중에 처리할 것 ===============================
-  // final User _user = User(
-  //   id: 1,
-  //   name: 'Human',
-  //   image: '',
-  //   address: '',
-  //   bookmarks: [],
-  // );
-  //
-  // User get user => _user;
-  //
-  // // ======================== 임시 나중에 처리할 것 ===============================
-
   SavedRecipesViewModel({
     required GetSavedRecipesUseCase getSavedRecipesUseCase,
     required ToggleBookmarkUseCase toggleBookmarkUseCase,
