@@ -18,7 +18,10 @@ final GoRouter router = GoRouter(
   initialLocation: Routes.splash,
   routes: [
     // 인증관련 화면
-    GoRoute(path: Routes.splash, builder: (conttext, state) => SplashScreen()),
+    GoRoute(
+      path: Routes.splash,
+      builder: (conttext, state) => SplashScreen(viewModel: getIt()),
+    ),
     GoRoute(path: Routes.signIn, builder: (conttext, state) => SignInScreen()),
     GoRoute(path: Routes.signUp, builder: (conttext, state) => SignUpScreen()),
 
@@ -66,9 +69,26 @@ final GoRouter router = GoRouter(
       ],
     ),
 
-    GoRoute(
-      path: Routes.search,
-      builder: (conttext, state) => SearchRecipesScreen(viewModel: getIt()),
+    // 상태 유지
+    StatefulShellRoute.indexedStack(
+      builder: (
+        context,
+        GoRouterState state,
+        StatefulNavigationShell navigationShell,
+      ) {
+        return navigationShell;
+      },
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.search,
+              builder:
+                  (context, state) => SearchRecipesScreen(viewModel: getIt()),
+            ),
+          ],
+        ),
+      ],
     ),
 
     // 레시피 상세화면

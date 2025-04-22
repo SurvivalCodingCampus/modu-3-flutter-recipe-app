@@ -1,19 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
-import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/core/component/buttons.dart';
-import 'package:recipe_app/presentation/example_screen/preview_main.dart';
-
-import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_screen.dart';
-import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
+import 'package:recipe_app/presentation/screen/splash/splash_event.dart';
+import 'package:recipe_app/presentation/screen/splash/splash_view_model.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final SplashViewModel viewModel;
+
+  const SplashScreen({super.key, required this.viewModel});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -21,6 +21,11 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
+  // 스트림 구독
+  StreamSubscription? _subscription;
+  bool _isButtonEnabled = false;
+
+  // 애니메이트 컨트롤러
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -33,6 +38,24 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+    widget.viewModel.fetchNetworkError();
+    // 비행기 모드시 네트워크 에러 표시
+    _subscription = widget.viewModel.eventStream.listen((event) {
+      if (mounted) {
+        switch (event) {
+          case networkError():
+            setState(() {
+              _isButtonEnabled = true;
+            });
+            final snackBar = SnackBar(content: Text(event.message));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          case goHome():
+            // 홈으로 이동
+            context.replace(Routes.home);
+            break;
+        }
+      }
+    });
 
     // 애니메이션 컨트롤러 확대
     _controller = AnimationController(
@@ -65,6 +88,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
+    _subscription?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -129,7 +153,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                       const SizedBox(height: 8),
                       Text(
-                        '100K+ Premium Recipe',
+                        '100K+ Premium Recipes',
                         style: AppTextStyles.mediumBold(
                           color: ColorStyle.white,
                         ),
@@ -175,8 +199,10 @@ class _SplashScreenState extends State<SplashScreen>
                           text: 'Start Cooking',
                           icon: Icons.arrow_forward,
                           size: ButtonSize.medium,
+                          isDisabled: _isButtonEnabled,
                           onPressed: () {
-                            context.replace(Routes.signIn);
+                            // context.replace(Routes.signIn);
+                            widget.viewModel.goHome();
                           },
                         ),
                         const SizedBox(height: 12),

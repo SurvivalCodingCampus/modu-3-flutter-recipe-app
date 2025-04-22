@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/filter/filter_enum.dart';
-import 'package:recipe_app/domain/model/recipe/recipe.dart';
-import 'package:recipe_app/domain/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/use_case/filter_serch_recipe_use_case.dart';
+import 'package:recipe_app/domain/use_case/get_search_recipe_use_case.dart';
+import 'package:recipe_app/domain/use_case/save_serch_recipe_use_case.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/state/search_recipe_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _repository;
+  final GetSearchRecipeUseCase _GetSearchRecipeUseCase;
+  final SaveSerchRecipeUseCase _saveSerchRecipeUseCase;
+  final FilterSerchRecipeUseCase _filterSerchRecipeUseCase;
 
-  SearchRecipesViewModel({required RecipeRepository repository})
-    : _repository = repository;
+  SearchRecipesViewModel({
+    required GetSearchRecipeUseCase GetSearchRecipeUseCase,
+    required SaveSerchRecipeUseCase saveSerchRecipeUseCase,
+    required FilterSerchRecipeUseCase filterSerchRecipeUseCase,
+  }) : _saveSerchRecipeUseCase = saveSerchRecipeUseCase,
+       _GetSearchRecipeUseCase = GetSearchRecipeUseCase,
+       _filterSerchRecipeUseCase = filterSerchRecipeUseCase;
 
   SearchRecipeState _state = SearchRecipeState();
   SearchRecipeState get state => _state;
@@ -18,7 +26,7 @@ class SearchRecipesViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    final searchRecipes = await _repository.getRecipes();
+    final searchRecipes = await _GetSearchRecipeUseCase.execute();
 
     _state = state.copyWith(
       isLoading: false,
@@ -34,16 +42,10 @@ class SearchRecipesViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: true, keyword: keyword);
     notifyListeners();
 
-    _state = state.copyWith(
-      isLoading: false,
-      filterRecipes:
-          state.searchRecipes
-              .where(
-                (recipe) =>
-                    recipe.title.toLowerCase().contains(keyword.toLowerCase()),
-              )
-              .toList(),
-    );
+    // 검색된 레시피 내용 저장후 상태 변경
+    final filterRecipes = await _saveSerchRecipeUseCase.execute(state.keyword);
+    _state = state.copyWith(isLoading: false, filterRecipes: filterRecipes);
+
     notifyListeners();
   }
 
@@ -65,54 +67,14 @@ class SearchRecipesViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    List<Recipe> filteredRecipes = state.searchRecipes;
-
-    // 1. 키워드 필터링
-    if (state.keyword.isNotEmpty) {
-      filteredRecipes =
-          filteredRecipes.where((recipe) {
-            return recipe.title.toLowerCase().contains(
-              state.keyword.toLowerCase(),
-            );
-          }).toList();
-    }
-
-    // 2. 별점 필터링
-    if (state.filterSearchState.rate > 0) {
-      filteredRecipes =
-          filteredRecipes.where((recipe) {
-            // 필터에서 선택된 rate 값
-            final rate = state.filterSearchState.rate.toDouble();
-
-            // 범위: rate ≤ adjustedRating < rate + 1
-            return recipe.rating >= rate && recipe.rating < rate + 1;
-          }).toList();
-    }
-
-    // 3. 시간 정렬 (최신순, 오래된순, 인기순)
-    switch (state.filterSearchState.time) {
-      case Time.newest:
-        filteredRecipes.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-        break;
-      case Time.oldest:
-        filteredRecipes.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-        break;
-      case Time.popularity:
-        filteredRecipes.sort((b, a) => a.rating.compareTo(b.rating));
-        break;
-      default:
-        break;
-    }
-
-    // 4 카테고리 필터링
-    if (state.filterSearchState.category != Category.all) {
-      filteredRecipes =
-          filteredRecipes.where((recipe) {
-            return recipe.category == state.filterSearchState.category;
-          }).toList();
-    }
-
-    _state = state.copyWith(isLoading: false, filterRecipes: filteredRecipes);
+    final filterRecipes = await _filterSerchRecipeUseCase.execute(
+      recipes: state.searchRecipes,
+      keyword: state.keyword,
+      rate: state.filterSearchState.rate.toDouble(),
+      sortTime: state.filterSearchState.time,
+      category: state.filterSearchState.category,
+    );
+    _state = state.copyWith(isLoading: false, filterRecipes: filterRecipes);
     notifyListeners();
   }
 }

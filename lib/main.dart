@@ -5,6 +5,7 @@ import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 
 void main() {
+  // mockNetworkError();
   diSetup();
   runApp(const MyApp());
 }
