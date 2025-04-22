@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
               const FilterIconButton(),
             ],
           ),
-          const SizedBox(width: 15),
+          const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: RecipeCategorySelector(

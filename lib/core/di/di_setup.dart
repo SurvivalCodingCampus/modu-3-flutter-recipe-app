@@ -4,6 +4,8 @@ import 'package:recipe_app/data/remote_data_source/remote_data_source.dart';
 import 'package:recipe_app/data/repository/repository.dart';
 import 'package:recipe_app/data/repository/search_recipe_repository_impl.dart';
 import 'package:recipe_app/domain/repository/repository.dart';
+import 'package:recipe_app/domain/use_case/get_all_categories_use_case.dart';
+import 'package:recipe_app/domain/use_case/get_recipes_by_category_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/use_case.dart';
 import 'package:recipe_app/presentation/home/home_view_model.dart';
@@ -50,6 +52,17 @@ void diSetUp() {
     ),
   );
 
+  getIt.registerSingleton<GetAllCategoriesUseCase>(
+    GetAllCategoriesUseCase(recipeRepository: getIt()),
+  );
+
+  getIt.registerSingleton(
+    GetRecipesByCategoryUseCase(
+      recipeRepository: getIt(),
+      bookmarkRepository: getIt(),
+    ),
+  );
+
   getIt.registerSingleton<SearchRecipeUseCase>(
     SearchRecipeUseCase(
       recipeRepository: getIt(),
@@ -84,9 +97,9 @@ void diSetUp() {
 
   getIt.registerFactory<HomeViewModel>(
     () => HomeViewModel(
-      recipeRepository: getIt(),
       toggleBookmarkRecipeUseCase: getIt(),
-      bookmarkRepository: getIt(),
+      getAllCategoriesUseCase: getIt(),
+      getRecipesByCategoryUseCase: getIt(),
     ),
   );
 }

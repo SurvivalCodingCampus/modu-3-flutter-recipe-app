@@ -37,7 +37,7 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
                     context.push(Routes.search);
                   case OnTapCategory():
                     widget.viewModel.onTapCategory(action.category);
-                  case OnTapRecipe():
+                  case OnTapFavorite():
                     widget.viewModel.onTapFavorite(action.recipe);
                 }
               },

@@ -7,5 +7,5 @@ part 'home_action.freezed.dart';
 sealed class HomeAction with _$HomeAction {
   const factory HomeAction.onTapSearch() = OnTapSearch;
   const factory HomeAction.onTapCategory(String category) = OnTapCategory;
-  const factory HomeAction.onTapFavorite(Recipe recipe) = OnTapRecipe;
+  const factory HomeAction.onTapFavorite(Recipe recipe) = OnTapFavorite;
 }
