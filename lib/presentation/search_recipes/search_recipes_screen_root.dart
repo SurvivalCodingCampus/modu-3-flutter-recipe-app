@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
@@ -37,33 +38,34 @@ class _SearchRecipesScreenRootState extends State<SearchRecipesScreenRoot> {
 
         return SearchRecipesScreen(
           state: state,
-          onQueryChange: widget.viewModel.updateQuery,
-          onApplyFilter: widget.viewModel.applyFilter,
-          onOpenFilterSheet: () async {
-            FocusScope.of(context).unfocus();
-            final result = await showModalBottomSheet<FilterSearchState>(
-              context: context,
-              isScrollControlled: true,
-              backgroundColor: ColorStyle.white,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
-              ),
-              builder:
-                  (_) =>
-                      FilterSearchBottomSheet(state: state.filterSearchState),
-            );
-            if (result != null) {
-              widget.viewModel.applyFilter(result);
+          onAction: (action) async {
+            switch (action) {
+              case OnOpenFilterSheet():
+                FocusScope.of(context).unfocus();
+                final result = await showModalBottomSheet<FilterSearchState>(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: ColorStyle.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(50),
+                    ),
+                  ),
+                  builder:
+                      (_) => FilterSearchBottomSheet(
+                        state: state.filterSearchState,
+                      ),
+                );
+                if (result != null) {
+                  widget.viewModel.onAction(
+                    SearchRecipesAction.onApplyFilter(result),
+                  );
+                }
+                break;
+
+              default:
+                widget.viewModel.onAction(action);
             }
-          },
-          onClearFilter: () {
-            FocusScope.of(context).unfocus();
-            widget.viewModel.applyFilter(const FilterSearchState());
-          },
-          onRetry: widget.viewModel.load,
-          onRecipeTap: (recipe) {
-            FocusScope.of(context).unfocus();
-            debugPrint('지금은 없어~~');
           },
         );
       },

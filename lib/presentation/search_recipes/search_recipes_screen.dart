@@ -2,31 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/core/error/ui_state.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
-import 'package:recipe_app/domain/model/recipe.dart';
-import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
 import 'package:recipe_app/presentation/component/image_component/app_image.dart';
 import 'package:recipe_app/presentation/component/input_field.dart';
 import 'package:recipe_app/presentation/component/recipe_component/recipe_card.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesScreen extends StatelessWidget {
   final SearchRecipesState state;
-  final void Function(String) onQueryChange;
-  final void Function(FilterSearchState) onApplyFilter;
-  final VoidCallback onOpenFilterSheet;
-  final VoidCallback onClearFilter;
-  final VoidCallback onRetry;
-  final void Function(Recipe) onRecipeTap;
+  final void Function(SearchRecipesAction action) onAction;
 
   const SearchRecipesScreen({
     super.key,
     required this.state,
-    required this.onQueryChange,
-    required this.onApplyFilter,
-    required this.onOpenFilterSheet,
-    required this.onClearFilter,
-    required this.onRetry,
-    required this.onRecipeTap,
+    required this.onAction,
   });
 
   @override
@@ -54,7 +43,10 @@ class SearchRecipesScreen extends StatelessWidget {
                       labelTitle: '',
                       placeholderText: 'Search recipe',
                       value: query,
-                      onValueChange: onQueryChange,
+                      onValueChange:
+                          (value) => onAction(
+                            SearchRecipesAction.onQueryChange(value),
+                          ),
                       iconWidget: InputField.searchIcon(),
                       height: 40,
                       inputHorizontalPadding: 10,
@@ -71,7 +63,10 @@ class SearchRecipesScreen extends StatelessWidget {
                       Positioned(
                         top: 6,
                         child: GestureDetector(
-                          onTap: onOpenFilterSheet,
+                          onTap:
+                              () => onAction(
+                                const SearchRecipesAction.onOpenFilterSheet(),
+                              ),
                           child: Container(
                             width: 40,
                             height: 40,
@@ -96,7 +91,10 @@ class SearchRecipesScreen extends StatelessWidget {
                           top: 0,
                           right: -6,
                           child: GestureDetector(
-                            onTap: onClearFilter,
+                            onTap:
+                                () => onAction(
+                                  const SearchRecipesAction.onClearFilter(),
+                                ),
                             child: Container(
                               padding: const EdgeInsets.all(2),
                               decoration: const BoxDecoration(
@@ -174,7 +172,10 @@ class SearchRecipesScreen extends StatelessWidget {
                           isFavorite: false,
                           showCookTime: false,
                           showFavorite: false,
-                          onTap: () => onRecipeTap,
+                          onTap:
+                              () => onAction(
+                                SearchRecipesAction.onTapRecipe(recipe),
+                              ),
                         );
                       },
                     );
@@ -190,7 +191,8 @@ class SearchRecipesScreen extends StatelessWidget {
                       Text('에러 발생: $msg'),
                       const SizedBox(height: 16),
                       ElevatedButton(
-                        onPressed: onRetry,
+                        onPressed:
+                            () => onAction(const SearchRecipesAction.onRetry()),
                         child: const Text('다시 시도'),
                       ),
                     ],
