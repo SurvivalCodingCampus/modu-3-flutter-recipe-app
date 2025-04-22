@@ -1,47 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/components.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:recipe_app/presentation/splash/splash_action.dart';
 import '../../ui/ui.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   static const String hatIconImageUrl = 'assets/images/hat.png';
   static const String backgroundImageUrl = 'assets/images/splash.png';
+  final void Function(SplashAction action) onAction;
 
-  const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  final connectionChecker = InternetConnectionChecker.instance;
-
-  @override
-  void initState() {
-    super.initState();
-
-    connectionChecker.onStatusChange.listen((InternetConnectionStatus status) {
-      if (mounted) {
-        if (status == InternetConnectionStatus.disconnected) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('네트워크 에러'),
-              showCloseIcon: true,
-              duration: Duration(days: 1),
-            ),
-          );
-        }
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    connectionChecker.dispose();
-    super.dispose();
-  }
+  const SplashScreen({super.key, required this.onAction});
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              SplashScreen.backgroundImageUrl,
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(backgroundImageUrl, fit: BoxFit.cover),
           ),
 
           Positioned.fill(
@@ -79,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 children: [
                   const SizedBox(height: 60),
-                  Image.asset(SplashScreen.hatIconImageUrl, width: 79),
+                  Image.asset(hatIconImageUrl, width: 79),
                   const SizedBox(height: 14),
                   Text(
                     '100K+ Premium Recipe',
@@ -105,9 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   const SizedBox(height: 60),
                   BigButton(
                     text: 'Start Cooking',
-                    onPressed: () {
-                      context.go(Routes.login);
-                    },
+                    onPressed: () => onAction(const SplashAction.onTapStart()),
                   ),
                   const SizedBox(height: 84),
                 ],
