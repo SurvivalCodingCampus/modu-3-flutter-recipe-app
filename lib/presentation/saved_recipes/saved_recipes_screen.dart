@@ -2,29 +2,23 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/error/ui_state.dart';
 import 'package:recipe_app/core/ui/text_style.dart';
-import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/presentation/component/recipe_component/recipe_card.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_action.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
   final SavedRecipesState state;
-  final void Function() onRetry;
-  final void Function(int recipeId) onTapFavorite;
-  final void Function(Recipe recipe) onTapRecipe;
-  final void Function()? onClearError;
+  final void Function(SavedRecipesAction action) onAction;
 
   const SavedRecipesScreen({
     super.key,
     required this.state,
-    required this.onRetry,
-    required this.onTapFavorite,
-    required this.onTapRecipe,
-    this.onClearError,
+    required this.onAction,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (state.errorMessage != null && onClearError != null) {
+    if (state.errorMessage != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -32,7 +26,7 @@ class SavedRecipesScreen extends StatelessWidget {
             duration: const Duration(seconds: 2),
           ),
         );
-        onClearError?.call();
+        onAction(const SavedRecipesAction.onClearError());
       });
     }
     return Scaffold(
@@ -56,8 +50,9 @@ class SavedRecipesScreen extends StatelessWidget {
                 authorName: recipe.chef,
                 rating: recipe.rating,
                 isFavorite: true,
-                onTap: () => onTapRecipe,
-                onFavoriteTap: () => onTapFavorite(recipe.id),
+                onTap: () => onAction(SavedRecipesAction.onTapRecipe(recipe)),
+                onFavoriteTap:
+                    () => onAction(SavedRecipesAction.onTapFavorite(recipe.id)),
               ),
             );
           },
@@ -72,7 +67,10 @@ class SavedRecipesScreen extends StatelessWidget {
             children: [
               Text('에러 발생: $msg'),
               const SizedBox(height: 16),
-              ElevatedButton(onPressed: onRetry, child: const Text('다시 시도')),
+              ElevatedButton(
+                onPressed: () => onAction(const SavedRecipesAction.onRetry()),
+                child: const Text('다시 시도'),
+              ),
             ],
           ),
         ),
