@@ -5,10 +5,23 @@ import '../../component/rating_button.dart';
 import '../../component/small_button.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
+import 'filter_search_state.dart';
 
-class FilterSearchBottomSheetScreen extends StatelessWidget {
-  const FilterSearchBottomSheetScreen({super.key});
+class FilterSearchBottomSheetScreen extends StatefulWidget {
+  FilterSearchBottomSheetScreen({super.key});
 
+  FilterSearchState _state = const FilterSearchState();
+
+
+  FilterSearchState get state => _state;
+
+  @override
+  State<FilterSearchBottomSheetScreen> createState() =>
+      _FilterSearchBottomSheetScreenState();
+}
+
+class _FilterSearchBottomSheetScreenState
+    extends State<FilterSearchBottomSheetScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
