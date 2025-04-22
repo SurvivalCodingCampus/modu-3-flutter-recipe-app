@@ -20,6 +20,7 @@ import 'package:recipe_app/domain/use_case/search_recipe/get_search_recipes_use_
 import 'package:recipe_app/domain/use_case/search_recipe/save_recent_recipes_use_case.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
+import 'package:recipe_app/presentation/splash/splash_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -42,6 +43,7 @@ void diSetup() {
   getIt.registerFactory(
     () => SearchRecipesViewModel(getIt(), getIt(), getIt(), getIt()),
   );
+  getIt.registerFactory(() => SplashViewModel());
 
   // UseCase
   getIt.registerSingleton(
