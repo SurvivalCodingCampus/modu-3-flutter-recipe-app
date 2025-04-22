@@ -30,7 +30,7 @@ class RecipeScreenViewModel with ChangeNotifier {
 
     try {
       final recipe = await _getRecipe.execute(recipeId);
-      final ingredients = await _getIngredients.excute(recipeId);
+      final ingredients = await _getIngredients.execute(recipeId);
       final procedures = await _getProcedures.execute(recipeId);
 
       _state = _state.copyWith(

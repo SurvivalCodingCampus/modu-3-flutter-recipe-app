@@ -1,11 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:recipe_app/core/di/get_it.dart';
 import 'package:recipe_app/data/repository/recipe_repository/mock_recipe_repository_impl.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
 void main() {
   group('SavedRecipeViewModel test', () {
     final mockRepository = MockRecipeRepositoryImpl();
-    final viewModel = SearchRecipesViewModel(mockRepository);
+    final viewModel = SearchRecipesViewModel(getIt());
 
     test('initial state ', () async {
       expect(viewModel.state.keyword, '');
@@ -15,7 +16,6 @@ void main() {
       expect(viewModel.state.filteredRecipes, []);
     });
     test('no keyword ', () async {
-      await viewModel.fetchRecipes();
       expect(viewModel.state.recipes.length, 3);
     });
     test('keyword chicken', () async {

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/filter_small_button.dart';
-import 'package:recipe_app/presentation/filter_screen/filter_screen_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 import '../component/recipe_card.dart';
 import '../filter_screen/filter_screen.dart';
+import '../filter_screen/filter_screen_view_model.dart';
 
 class SearchRecipesScreen extends StatefulWidget {
-  final FilterScreenViewModel filterScreenViewModel;
   final SearchRecipesViewModel viewModel;
+  final FilterScreenViewModel filterScreenViewModel;
 
   const SearchRecipesScreen({
     super.key,
@@ -26,40 +27,50 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   @override
   void initState() {
     super.initState();
-    widget.viewModel.fetchSearchRecipes();
+    widget.viewModel.restoreLastSearch();
   }
 
   @override
   void dispose() {
+    widget.viewModel.resetFilters();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Search recipes'), centerTitle: true),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_outlined),
+          onPressed: () => context.pop(),
+        ),
+        title: const Text('Search recipes'),
+        centerTitle: true,
+      ),
       body: ListenableBuilder(
         listenable: widget.viewModel,
-        builder: (BuildContext context, Widget? child) {
+        builder: (context, child) {
           final state = widget.viewModel.state;
+          final isFiltered = state.isFiltered;
+
           if (state.isLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
+
           if (state.recipes.isEmpty) {
-            return Center(child: Text('No recipes found.'));
+            return const Center(child: Text('No recipes found.'));
           }
 
           return SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 검색창 + 필터 버튼
                 Row(
                   children: [
                     Expanded(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 45),
+                        constraints: const BoxConstraints(maxHeight: 45),
                         child: TextField(
                           style: TextStyles.smallerRegular.copyWith(
                             fontSize: 11,
@@ -88,62 +99,54 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                 width: 1.3,
                               ),
                             ),
-                            contentPadding: EdgeInsets.all(10),
+                            contentPadding: const EdgeInsets.all(10),
                           ),
-                          onChanged: (value) {
-                            widget.viewModel.updateKeyword(value);
-                          },
+                          onChanged: widget.viewModel.updateKeyword,
                         ),
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     FilterSmallButton(
-                      onTap: () {
-                        showModalBottomSheet(
+                      onTap: () async {
+                        final result = await showModalBottomSheet<FilterResult>(
                           context: context,
                           isScrollControlled: true,
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(50),
                             ),
                           ),
-                          builder: (context) {
-                            return FilterScreen(
-                              viewModel: widget.filterScreenViewModel,
-                              searchRecipesViewModel: widget.viewModel,
-                            );
-                          },
-                        ).then((_) {
-                          // filter 적용 검색 결과 반영
+                          builder:
+                              (context) => FilterScreen(
+                                viewModel: widget.filterScreenViewModel,
+                              ),
+                        );
+
+                        if (result != null) {
                           widget.viewModel.updateFilters(
-                            time:
-                                widget.filterScreenViewModel.state.selectedTime,
-                            rate: widget.filterScreenViewModel.state.rate,
-                            category:
-                                widget
-                                    .filterScreenViewModel
-                                    .state
-                                    .selectedCategory,
+                            time: result.time,
+                            rate: result.rate,
+                            category: result.category,
                           );
-                        });
+                        }
                       },
                     ),
                   ],
                 ),
 
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
 
                 Row(
                   children: [
                     Text(
-                      widget.viewModel.state.keyword.isNotEmpty
+                      state.keyword.isNotEmpty
                           ? 'Search Result'
                           : 'Recent Search',
                       style: TextStyles.normalBold.copyWith(fontSize: 16),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      widget.viewModel.state.keyword.isNotEmpty
+                      state.keyword.isNotEmpty
                           ? '${state.filteredRecipes.length} results'
                           : '',
                       style: TextStyles.normalRegular.copyWith(
@@ -154,25 +157,24 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                   ],
                 ),
 
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                // 레시피 카드 목록
                 GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
                     childAspectRatio: 1.0,
                   ),
                   itemCount:
-                      state.keyword.isNotEmpty
+                      isFiltered
                           ? state.filteredRecipes.length
                           : state.recipes.length,
                   itemBuilder: (context, index) {
                     final recipe =
-                        state.keyword.isNotEmpty
+                        isFiltered
                             ? state.filteredRecipes[index]
                             : state.recipes[index];
                     return RecipeCard(

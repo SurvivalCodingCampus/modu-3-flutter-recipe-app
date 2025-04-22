@@ -1,96 +1,128 @@
 import 'package:flutter/material.dart';
 
+import '../../data/model/recipe_model.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
 class NewRecipeCard extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String chefName;
-  final String time;
-  final double rating;
+  final Recipe recipe;
 
-  const NewRecipeCard({
-    super.key,
-    required this.imageUrl,
-    required this.title,
-    required this.chefName,
-    required this.time,
-    required this.rating,
-  });
+  const NewRecipeCard({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 220,
-      margin: const EdgeInsets.only(right: 12),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(20),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
+    return SizedBox(
+      width: 251,
+      height: 127,
+      child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          // 레시피 썸네일
-          ClipOval(
-            child: Image.network(
-              imageUrl,
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(width: 12),
-          // 텍스트 영역
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyles.normalBold.copyWith(fontSize: 13),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'By $chefName',
-                  style: TextStyles.smallerRegular.copyWith(
-                    fontSize: 11,
-                    color: ColorStyles.gray4,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(Icons.schedule, size: 14, color: Colors.grey),
-                    const SizedBox(width: 4),
-                    Text(
-                      time,
-                      style: TextStyles.smallerRegular.copyWith(fontSize: 10),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 6),
-          // 별점
-          Row(
-            children: [
-              const Icon(Icons.star, color: Colors.orange, size: 14),
-              Text(
-                rating.toStringAsFixed(1),
-                style: TextStyles.smallerRegular.copyWith(fontSize: 12),
+          // 카드 본체
+          Positioned(
+            top: 20,
+            child: Container(
+              width: 251,
+              height: 107,
+              padding: const EdgeInsets.only(
+                top: 35,
+                left: 12,
+                right: 12,
+                bottom: 12,
               ),
-            ],
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 251 * 2 / 3,
+                        child: Text(
+                          recipe.name,
+                          style: TextStyles.normalBold.copyWith(fontSize: 13),
+                          textAlign: TextAlign.left,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+
+                      // 별점
+                      Row(
+                        children: List.generate(
+                          5,
+                          (index) => Icon(
+                            Icons.star,
+                            size: 14,
+                            color:
+                                index < recipe.rating.round()
+                                    ? Colors.orange
+                                    : Colors.grey[300],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+
+                      // 셰프
+                      Text(
+                        'By ${recipe.chef}',
+                        style: TextStyles.smallerRegular.copyWith(
+                          fontSize: 11,
+                          color: ColorStyles.gray4,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.schedule,
+                          size: 14,
+                          color: Colors.grey,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          recipe.time,
+                          style: TextStyles.smallerRegular.copyWith(
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // 이미지
+          Positioned(
+            top: 0,
+            right: 10,
+            child: ClipOval(
+              child: Image.network(
+                recipe.imageUrl,
+                width: 70,
+                height: 70,
+                fit: BoxFit.cover,
+                errorBuilder:
+                    (_, __, ___) => const Icon(Icons.broken_image, size: 50),
+              ),
+            ),
           ),
         ],
       ),

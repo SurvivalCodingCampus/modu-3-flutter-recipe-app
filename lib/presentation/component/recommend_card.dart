@@ -1,136 +1,138 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/ui/color_styles.dart';
 
+import '../../data/model/recipe_model.dart';
+import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
 class RecommendCard extends StatelessWidget {
-  final String category;
-  final String imageUrl;
-  final String name;
-  final double rating;
-  final String time;
+  final Recipe recipe;
   final bool isBookMarked;
   final VoidCallback onTap;
 
   const RecommendCard({
-    required this.category,
     super.key,
-    required this.imageUrl,
-    required this.name,
-    required this.rating,
-    required this.time,
     required this.isBookMarked,
     required this.onTap,
+    required this.recipe,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: SizedBox(
+        height: 220,
         width: 150,
-        margin: const EdgeInsets.only(right: 10),
-        decoration: BoxDecoration(
-          color: ColorStyles.gray4,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+          clipBehavior: Clip.none,
           children: [
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    imageUrl,
-                    height: 120,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: ColorStyles.secondary40,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: ColorStyles.secondary100,
-                          size: 14,
-                        ),
-                        const SizedBox(width: 2),
-                        Text(
-                          rating.toStringAsFixed(1),
-                          style: TextStyles.smallerRegular.copyWith(
-                            fontSize: 11,
-                            color: ColorStyles.secondary100,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            // 이름
-            Padding(
-              padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
-              child: Text(
-                name,
-                style: TextStyles.smallerRegular.copyWith(fontSize: 11),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              padding: const EdgeInsets.only(
+                top: 50,
+                left: 12,
+                right: 12,
+                bottom: 12,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 6),
+              decoration: BoxDecoration(
+                color: ColorStyles.gray4,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.06),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Time',
-                    style: TextStyles.smallerRegular.copyWith(
-                      fontSize: 8,
-                      color: ColorStyles.gray4,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 22),
+                    child: Text(
+                      recipe.name,
+                      style: TextStyles.normalBold.copyWith(fontSize: 12),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 19),
+
+                  Text(
+                    'Time',
+                    style: TextStyle(fontSize: 9, color: ColorStyles.gray2),
+                  ),
+                  const SizedBox(height: 2),
                   Row(
                     children: [
-                      Icon(
-                        Icons.schedule,
-                        size: 12,
-                        color: ColorStyles.secondary100,
-                      ),
+                      const Icon(Icons.schedule, size: 12, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
-                        '$time min',
-                        style: TextStyles.smallerRegular.copyWith(
-                          fontSize: 9,
-                          color: ColorStyles.gray4,
-                        ),
+                        recipe.time,
+                        style: TextStyles.mediumBold.copyWith(fontSize: 10),
                       ),
                       const Spacer(),
-                      Icon(
-                        isBookMarked ? Icons.bookmark : Icons.bookmark_border,
-                        color: ColorStyles.primary100,
-                        size: 14,
+                      Container(
+                        width: 24,
+                        height: 24,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          isBookMarked ? Icons.bookmark : Icons.bookmark_border,
+                          color: ColorStyles.primary100,
+                          size: 14,
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+
+            Positioned(
+              top: 0,
+              left: 24,
+              child: ClipOval(
+                child: Image.network(
+                  recipe.imageUrl,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  errorBuilder:
+                      (_, __, ___) => const Icon(Icons.broken_image, size: 50),
+                ),
+              ),
+            ),
+
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade100,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      size: 12,
+                      color: ColorStyles.secondary100,
+                    ),
+                    const SizedBox(width: 2),
+                    Text(
+                      recipe.rating.toStringAsFixed(1),
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

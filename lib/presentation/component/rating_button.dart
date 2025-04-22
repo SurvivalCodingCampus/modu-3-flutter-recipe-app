@@ -1,94 +1,59 @@
 import 'package:flutter/material.dart';
-
 import '../../ui/color_styles.dart';
-import '../../ui/text_styles.dart';
 
-class RatingButton extends StatefulWidget {
+class RatingButton extends StatelessWidget {
   final int rate;
+  final int selectedItem;
   final ValueChanged<List<int>>? onSelected;
 
-  const RatingButton({super.key, required this.rate, this.onSelected});
-
-  @override
-  State<RatingButton> createState() => _RatingButtonState();
-}
-
-class _RatingButtonState extends State<RatingButton> {
-  late List<bool> isSelectedList;
-
-  @override
-  void initState() {
-    super.initState();
-    isSelectedList = List.filled(widget.rate, false);
-  }
-
-  void toggleSelect(int index) {
-    setState(() {
-      isSelectedList[index] = !isSelectedList[index];
-    });
-
-    if (widget.onSelected != null) {
-      final selectedRatings = <int>[];
-      for (int i = 0; i < widget.rate; i++) {
-        if (isSelectedList[i]) selectedRatings.add(i + 1);
-      }
-      widget.onSelected!(selectedRatings);
-    }
-  }
+  const RatingButton({
+    super.key,
+    required this.rate,
+    required this.selectedItem,
+    this.onSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children:
-          List.generate(widget.rate, (index) {
-            return Expanded(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
-                color: Colors.transparent,
-                child: GestureDetector(
-                  onTap: () => toggleSelect(index),
-                  child: Container(
-                    width: 50,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: ColorStyles.primary100,
-                        width: 1,
-                      ),
-                      color:
-                          isSelectedList[index]
-                              ? ColorStyles.primary100
-                              : ColorStyles.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${index + 1}',
-                          style: TextStyles.smallerRegular.copyWith(
-                            color:
-                                isSelectedList[index]
-                                    ? ColorStyles.white
-                                    : ColorStyles.primary80,
-                            fontSize: 11,
-                          ),
-                        ),
-                        Icon(
-                          Icons.star,
-                          color:
-                              isSelectedList[index]
-                                  ? ColorStyles.white
-                                  : ColorStyles.primary80,
-                        ),
-                      ],
+      children: List.generate(rate, (index) {
+        final starIndex = index + 1;
+        final isSelected = selectedItem >= starIndex;
+
+        return Expanded(
+          child: GestureDetector(
+            onTap: () => onSelected?.call([starIndex]),
+            child: Container(
+              height: 28,
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              decoration: BoxDecoration(
+                color: isSelected ? ColorStyles.primary100 : ColorStyles.white,
+                border: Border.all(color: ColorStyles.primary100, width: 1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '$starIndex',
+                    style: TextStyle(
+                      color: isSelected ? Colors.white : ColorStyles.primary80,
+                      fontSize: 11,
                     ),
                   ),
-                ),
+                  const SizedBox(width: 4),
+                  Icon(
+                    Icons.star,
+                    size: 16,
+                    color: isSelected ? Colors.white : ColorStyles.primary80,
+                  ),
+                ],
               ),
-            );
-          }).toList(),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -1,116 +1,113 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
-import '../../data/repository/recipe_repository/recipe_repository.dart';
+import '../../domain/use_case/fetch_search_recipe_use_case.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
-  final RecipeRepository _recipeRepository;
+  final FetchSearchRecipeUseCase _useCase;
 
-  SearchRecipesViewModel(this._recipeRepository);
+  SearchRecipesViewModel(this._useCase);
 
   SearchRecipesState _state = const SearchRecipesState();
 
   SearchRecipesState get state => _state;
 
+  final _stateController = StreamController<SearchRecipesState>.broadcast();
+
+  Stream<SearchRecipesState> get stateStream => _stateController.stream;
+
   String? _categoryFilter;
   int? _rateFilter;
-  String? _TimeFilter;
+  String? _timeFilter;
+
+  void resetFilters() {
+    _categoryFilter = null;
+    _rateFilter = 1;
+    _timeFilter = null;
+  }
+
+  Future<void> restoreLastSearch() async {
+    final cached = _useCase.lastCachedResults;
+
+    if (cached == null) {
+      await fetchInitialRecipes();
+      return;
+    }
+
+    _state = _state.copyWith(
+      recipes: cached,
+      filteredRecipes: cached,
+      isFiltered: false,
+      isLoading: false,
+    );
+    _stateController.add(_state);
+    notifyListeners();
+  }
+
+  Future<void> fetchInitialRecipes() async {
+    _state = _state.copyWith(isLoading: true);
+    notifyListeners();
+
+    final results = await _useCase.execute('');
+    _state = _state.copyWith(
+      isLoading: false,
+      recipes: results,
+      filteredRecipes: results,
+      isFiltered: false,
+    );
+    _stateController.add(_state);
+    notifyListeners();
+  }
+
+  Future<void> updateKeyword(String keyword) async {
+    _state = _state.copyWith(keyword: keyword, isLoading: true);
+    notifyListeners();
+
+    final results = await _useCase.execute(keyword);
+    _state = _state.copyWith(
+      isLoading: false,
+      recipes: results,
+      filteredRecipes: results,
+    );
+    _stateController.add(_state);
+    notifyListeners();
+  }
 
   Future<void> updateFilters({
     String? category,
     required int? rate,
     String? time,
   }) async {
-    _categoryFilter = category;
+    _categoryFilter = category == 'All' ? null : category;
     _rateFilter = rate;
-    _TimeFilter = time;
+    _timeFilter = time == 'All' ? null : time;
+
     await fetchFilteredRecipes();
   }
 
   Future<void> fetchFilteredRecipes() async {
-    _state = _state.copyWith(isLoading: true);
-    notifyListeners();
+    final recipes = _useCase.lastCachedResults ?? [];
 
-    try {
-      final recipes = await _recipeRepository.searchRecipes(state.keyword);
-      final keyword = state.keyword.toLowerCase();
+    final filtered =
+        recipes.where((recipe) {
+          final matchesCategory =
+              _categoryFilter == null || recipe.category == _categoryFilter;
+          final matchesTime =
+              _timeFilter == null || recipe.time.contains(_timeFilter!);
+          final matchesRate =
+              _rateFilter == null || recipe.rating >= _rateFilter!;
 
-      final filtered =
-          recipes.where((recipe) {
-            final matchesCategory =
-                _categoryFilter == null || recipe.category == _categoryFilter;
-            final matchesTime =
-                _TimeFilter == null || recipe.time == _TimeFilter;
-            final matchesRate =
-                _rateFilter == null || recipe.rating >= _rateFilter!;
+          return matchesCategory && matchesTime && matchesRate;
+        }).toList();
 
-            return matchesCategory && matchesTime && matchesRate;
-          }).toList();
-      _state = _state.copyWith(
-        isLoading: false,
-        recipes: recipes,
-        filteredRecipes: filtered,
-        isFiltered:
-            keyword.isNotEmpty ||
-            _categoryFilter != null ||
-            _TimeFilter != null ||
-            _rateFilter != null,
-      );
-    } catch (e) {
-      _state = _state.copyWith(isLoading: false);
-      print('Error fetching recipes: $e');
-    }
+    _state = _state.copyWith(filteredRecipes: filtered, isFiltered: true);
+    _stateController.add(_state);
     notifyListeners();
   }
 
-  Future<void> fetchSearchRecipes() async {
-    _state = _state.copyWith(isLoading: true);
-    notifyListeners();
-
-    try {
-      final recipes = await _recipeRepository.searchRecipes(state.keyword);
-
-      final keyword = state.keyword.toLowerCase();
-      final filtered =
-          keyword.isEmpty
-              ? recipes
-              : recipes
-                  .where(
-                    (recipe) => recipe.name.toLowerCase().contains(keyword),
-                  )
-                  .toList();
-
-      _state = _state.copyWith(
-        isLoading: false,
-        recipes: recipes,
-        filteredRecipes: filtered,
-        isFiltered: keyword.isNotEmpty,
-      );
-    } catch (e) {
-      _state = _state.copyWith(isLoading: false);
-      print('Error fetching recipes: $e');
-    }
-
-    notifyListeners();
-  }
-
-  Future<void> fetchRecipes() async {
-    _state = _state.copyWith(isLoading: true);
-    notifyListeners();
-
-    try {
-      final recipes = await _recipeRepository.searchRecipes(state.keyword);
-      _state = _state.copyWith(recipes: recipes, isLoading: false);
-    } catch (e) {
-      _state = _state.copyWith(isLoading: false);
-
-      print('Error fetching recipes: $e');
-    }
-    notifyListeners();
-  }
-
-  Future<void> updateKeyword(String keyword) async {
-    _state = _state.copyWith(keyword: keyword);
-    await fetchSearchRecipes();
+  void dispose() {
+    _stateController.close();
   }
 }

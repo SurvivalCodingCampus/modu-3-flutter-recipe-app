@@ -6,7 +6,8 @@ class GetRecipeUseCase {
 
   GetRecipeUseCase(this.repository);
 
-  Future<List<Recipe>> execute() {
-    return repository.getRecipes();
+  Future<List<Recipe>> execute() async {
+    final recipe = await repository.getRecipes();
+    return recipe;
   }
 }

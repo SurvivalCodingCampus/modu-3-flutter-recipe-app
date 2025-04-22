@@ -30,155 +30,160 @@ class _Home extends State<Home> {
     final recipes = widget.viewModel.state.recipes;
     final filteredRecipes = widget.viewModel.state.filteredRecipes;
 
-    return Scaffold(
-      body: ListenableBuilder(
-        listenable: widget.viewModel,
-        builder: (BuildContext context, Widget? child) {
-          return ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            children: [
-              const SizedBox(height: 90),
+    return ListenableBuilder(
+      listenable: widget.viewModel,
+      builder: (BuildContext context, Widget? child) {
+        return ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          children: [
+            const SizedBox(height: 90),
 
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hello Jega',
-                        style: TextStyles.largeBold.copyWith(fontSize: 20),
-                      ),
-                      Text(
-                        'what are you cooking today?',
-                        style: TextStyles.smallerRegular.copyWith(fontSize: 11),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: ColorStyles.secondary40,
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hello Jega',
+                      style: TextStyles.largeBold.copyWith(fontSize: 20),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        'assets/images/men.png',
-                        fit: BoxFit.contain,
-                      ),
+                    Text(
+                      'what are you cooking today?',
+                      style: TextStyles.smallerRegular.copyWith(fontSize: 11),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorStyles.secondary40,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      'assets/images/men.png',
+                      fit: BoxFit.contain,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
 
-              const SizedBox(height: 40),
+            const SizedBox(height: 40),
 
-              Row(
-                children: [
-                  Expanded(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxHeight: 45),
-                      child: TextField(
-                        style: TextStyles.smallerRegular.copyWith(fontSize: 11),
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          hintText: 'Search recipe',
-                          hintStyle: TextStyles.smallerRegular.copyWith(
-                            color: ColorStyles.gray4,
+            Row(
+              children: [
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 45),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.push('/search');
+                      },
+                      child: AbsorbPointer(
+                        child: TextField(
+                          readOnly: true,
+                          style: TextStyles.smallerRegular.copyWith(
                             fontSize: 11,
                           ),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: ColorStyles.gray4,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            hintText: 'Search recipe',
+                            hintStyle: TextStyles.smallerRegular.copyWith(
                               color: ColorStyles.gray4,
-                              width: 1.3,
+                              fontSize: 11,
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: ColorStyles.gray4,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: ColorStyles.gray4,
+                                width: 1.3,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: ColorStyles.gray4),
+                            ),
+                            contentPadding: const EdgeInsets.all(10),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: ColorStyles.gray4),
-                          ),
-                          contentPadding: const EdgeInsets.all(10),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  FilterSmallButton(onTap: () {}),
-                ],
-              ),
+                ),
+                const SizedBox(width: 12),
+                FilterSmallButton(onTap: () {}),
+              ],
+            ),
 
-              const SizedBox(height: 30),
+            const SizedBox(height: 30),
 
-              CategoryTabs(
-                categories: widget.viewModel.state.categoryList,
-                onSelected: (category) {
-                  widget.viewModel.updateCategory(category);
+            CategoryTabs(
+              categories: widget.viewModel.state.categoryList,
+              onSelected: (category) {
+                widget.viewModel.updateCategory(category);
+              },
+            ),
+
+            const SizedBox(height: 30),
+
+            SizedBox(
+              height: 220,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: filteredRecipes.length,
+                itemBuilder: (context, index) {
+                  final recipe = filteredRecipes[index];
+                  return RecommendCard(
+                    isBookMarked: recipe.isBookMarked,
+                    onTap: () {
+                      context.push('/detail', extra: recipe);
+                    },
+                    recipe: recipe,
+                  );
                 },
               ),
+            ),
 
-              const SizedBox(height: 30),
+            const SizedBox(height: 30),
 
-              SizedBox(
-                height: 220,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: filteredRecipes.length,
-                  itemBuilder: (context, index) {
-                    final recipe = filteredRecipes[index];
-                    return RecommendCard(
-                      category: recipe.category,
-                      imageUrl: recipe.imageUrl,
-                      name: recipe.name,
-                      rating: recipe.rating,
-                      time: recipe.time,
-                      isBookMarked: recipe.isBookMarked,
-                      onTap: () {
-                        context.push('/detail', extra: recipe);
-                      },
-                    );
-                  },
-                ),
-              ),
+            Text(
+              'New Recipes',
+              style: TextStyles.largeBold.copyWith(fontSize: 18),
+            ),
 
-              const SizedBox(height: 30),
+            const SizedBox(height: 16),
 
-              Text(
-                'New Recipes',
-                style: TextStyles.largeBold.copyWith(fontSize: 18),
-              ),
+            SizedBox(
+              height: 150,
+              child:
+                  recipes.isEmpty
+                      ? const Center(child: Text('No new recipes'))
+                      : ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        itemCount: recipes.length,
+                        separatorBuilder: (_, __) => const SizedBox(width: 12),
+                        itemBuilder: (context, index) {
+                          final recipe = recipes[index];
+                          return Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: NewRecipeCard(recipe: recipe),
+                          );
+                        },
+                      ),
+            ),
 
-              const SizedBox(height: 16),
-
-              SizedBox(
-                height: 90,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: recipes.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 12),
-                  itemBuilder: (context, index) {
-                    final recipe = recipes[index];
-                    return NewRecipeCard(
-                      imageUrl: recipe.imageUrl,
-                      title: recipe.name,
-                      chefName: recipe.chef,
-                      time: '${recipe.time} mins',
-                      rating: recipe.rating,
-                    );
-                  },
-                ),
-              ),
-
-              const SizedBox(height: 40),
-            ],
-          );
-        },
-      ),
+            const SizedBox(height: 40),
+          ],
+        );
+      },
     );
   }
 }

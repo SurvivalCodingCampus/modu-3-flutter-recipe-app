@@ -5,18 +5,11 @@ import '../../ui/text_styles.dart';
 import '../component/filter_button.dart';
 import '../component/rating_button.dart';
 import '../component/small_button.dart';
-import '../search_recipes/search_recipes_view_model.dart';
 import 'filter_screen_view_model.dart';
 
 class FilterScreen extends StatelessWidget {
   final FilterScreenViewModel viewModel;
-  final SearchRecipesViewModel searchRecipesViewModel;
-
-  const FilterScreen({
-    super.key,
-    required this.viewModel,
-    required this.searchRecipesViewModel,
-  });
+  const FilterScreen({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -34,107 +27,47 @@ class FilterScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Text(
-                  'Filter Search',
-                  style: TextStyles.smallBold.copyWith(fontSize: 14),
-                ),
-              ),
-              SizedBox(height: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Time
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, right: 30, bottom: 10),
-                    child: Text(
-                      'Time',
-                      style: TextStyles.smallBold.copyWith(fontSize: 14),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Wrap(
-                      children:
-                          viewModel.state.timeList.map((time) {
-                            return FilterButton(
-                              text: [time],
-                              onSelected: (selectedTime) {
-                                viewModel.updateTime(selectedTime.first);
-                              },
-                            );
-                          }).toList(),
-                    ),
-                  ),
+              Center(child: Text('Filter Search', style: TextStyles.smallBold)),
+              const SizedBox(height: 16),
 
-                  // Rate
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 10,
-                      right: 30,
-                      bottom: 10,
-                      top: 10,
-                    ),
-                    child: Text(
-                      'Rate',
-                      style: TextStyles.smallBold.copyWith(fontSize: 14),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: RatingButton(
-                      rate: 5,
-                      onSelected: (selectedRate) {
-                        viewModel.updateRate(selectedRate.first);
-                      },
-                    ),
-                  ),
-
-                  // Category
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 10,
-                      right: 30,
-                      bottom: 10,
-                      top: 10,
-                    ),
-                    child: Text(
-                      'Category',
-                      style: TextStyles.smallBold.copyWith(fontSize: 14),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Wrap(
-                      spacing: 2,
-                      runSpacing: 10,
-                      children:
-                          viewModel.state.categoryList.map((category) {
-                            return FilterButton(
-                              text: [category],
-                              onSelected: (selectedCategory) {
-                                viewModel.updateCategory(
-                                  selectedCategory.first,
-                                );
-                              },
-                            );
-                          }).toList(),
-                    ),
-                  ),
-                ],
+              // Time
+              _SectionTitle('Time'),
+              _FilterWrap(
+                items: viewModel.state.timeList,
+                selectedItem: viewModel.state.selectedTime,
+                onSelected: (v) => viewModel.updateTime(v.first),
               ),
+
+              // Rate
+              _SectionTitle('Rate'),
+              RatingButton(
+                rate: 5,
+                selectedItem: viewModel.state.rate,
+                onSelected: (v) => viewModel.updateRate(v.first),
+              ),
+
+              // Category
+              _SectionTitle('Category'),
+              _FilterWrap(
+                items: viewModel.state.categoryList,
+                selectedItem: viewModel.state.selectedCategory,
+                onSelected: (v) => viewModel.updateCategory(v.first),
+              ),
+
               Center(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 10),
+                  padding: const EdgeInsets.only(top: 30, bottom: 10),
                   child: SmallButton(
                     text: 'Filter',
                     onClick: () {
-                      searchRecipesViewModel.updateFilters(
-                        category: viewModel.state.selectedCategory,
-                        rate: viewModel.state.rate,
-                        time: viewModel.state.selectedTime,
+                      Navigator.pop(
+                        context,
+                        FilterResult(
+                          category: viewModel.state.selectedCategory,
+                          rate: viewModel.state.rate,
+                          time: viewModel.state.selectedTime,
+                        ),
                       );
-                      Navigator.pop(context);
                     },
                   ),
                 ),
@@ -145,4 +78,56 @@ class FilterScreen extends StatelessWidget {
       },
     );
   }
+}
+
+class _SectionTitle extends StatelessWidget {
+  final String text;
+
+  const _SectionTitle(this.text);
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+    child: Text(text, style: TextStyles.smallBold),
+  );
+}
+
+class _FilterWrap extends StatelessWidget {
+  final List<String> items;
+  final String? selectedItem;
+  final Function(List<String>) onSelected;
+
+  const _FilterWrap({
+    required this.items,
+    required this.onSelected,
+    this.selectedItem,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Wrap(
+        spacing: 6,
+        children:
+            items
+                .map(
+                  (item) => FilterButton(
+                    text: [item],
+                    isSelected: item == selectedItem,
+                    onSelected: onSelected,
+                  ),
+                )
+                .toList(),
+      ),
+    );
+  }
+}
+
+class FilterResult {
+  final String? category;
+  final int? rate;
+  final String? time;
+
+  FilterResult({this.category, this.rate, this.time});
 }
