@@ -9,16 +9,13 @@ class HomeViewModel with ChangeNotifier {
 
   void onAction(HomeAction action) {
     switch (action) {
-      case Init():
-        _load();
-        break;
       case TapRecipe(:final recipeId):
         // TODO: 상세 화면 이동 등 처리
         break;
     }
   }
 
-  void _load() async {
+  void load() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 

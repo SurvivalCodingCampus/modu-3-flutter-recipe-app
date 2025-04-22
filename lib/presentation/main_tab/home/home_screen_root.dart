@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'home_action.dart';
 import 'home_screen.dart';
 import 'home_view_model.dart';
 
@@ -17,7 +16,7 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
   @override
   void initState() {
     super.initState();
-    widget.viewModel.onAction(const HomeAction.init());
+    widget.viewModel.load();
   }
 
   @override
