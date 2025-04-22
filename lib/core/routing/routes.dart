@@ -16,7 +16,7 @@ import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_screen.
 final router = GoRouter(
   initialLocation: Routes.splash,
   routes: [
-    GoRoute(path: Routes.splash, builder: (context, state) => SplashScreen()),
+    GoRoute(path: Routes.splash, builder: (context, state) => SplashScreen(viewModel: getIt(),)),
     GoRoute(path: Routes.signIn, builder: (context, state) => SignInScreen()),
     GoRoute(path: Routes.signUp, builder: (context, state) => SignUpScreen()),
     GoRoute(
