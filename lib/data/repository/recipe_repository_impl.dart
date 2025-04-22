@@ -88,4 +88,35 @@ class RecipeRepositoryImpl implements RecipeRepository {
       return Result.error(Failure('레시피 평점을 저장하는 데 실패했습니다.', cause: e2));
     }
   }
+
+  @override
+  Future<Result<List<String>>> getRecipeCategories() async {
+    try {
+      final data = await localDataSource.fetchRecipes();
+
+      final categories =
+          data.map((e) => e.category).whereType<String>().toSet().toList();
+
+      return Result.success(categories);
+    } catch (e) {
+      return Result.error(Failure(e.toString(), cause: e));
+    }
+  }
+
+  @override
+  Future<Result<List<Recipe>>> getRecipesByCategory(String category) async {
+    try {
+      final data = await localDataSource.fetchRecipes();
+
+      final filtered =
+          data
+              .where((e) => e.category == category)
+              .map((e) => e.toRecipe())
+              .toList();
+
+      return Result.success(filtered);
+    } catch (e) {
+      return Result.error(Failure(e.toString(), cause: e));
+    }
+  }
 }

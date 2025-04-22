@@ -5,4 +5,6 @@ abstract interface class RecipeRepository {
   Future<Result<List<Recipe>>> getRecipes();
   Future<Result<Recipe>> getRecipeById(int id);
   Future<Result<void>> setRecipeRating(int recipeId, double rating);
+  Future<Result<List<String>>> getRecipeCategories();
+  Future<Result<List<Recipe>>> getRecipesByCategory(String category);
 }
