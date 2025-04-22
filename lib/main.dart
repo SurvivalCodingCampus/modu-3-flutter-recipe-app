@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
-import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
 import 'core/routing/router.dart';
 

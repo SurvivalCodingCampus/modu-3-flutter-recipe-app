@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/main/custom_bottom_navigation_bar.dart';
 import '../../core/routing/router.dart';
-import '../../data/repository/mock_recipe_repository_impl.dart';
-import '../saved_recipes/saved_recipes_screen.dart';
-import '../saved_recipes/saved_recipes_view_model.dart';
 
 class AppScaffold extends StatelessWidget {
   final StatefulNavigationShell shell;

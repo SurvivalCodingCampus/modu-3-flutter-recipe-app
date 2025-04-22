@@ -32,7 +32,10 @@ final router = GoRouter(
         ),
       ]
     ),
-
+    GoRoute(
+      path: Routes.searchRecipes,
+      builder: (context, state) => SearchRecipesScreen(viewModel: getIt()),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return AppScaffold(shell: navigationShell);
@@ -44,10 +47,7 @@ final router = GoRouter(
               path: Routes.home,
               pageBuilder: (context, state) => const NoTransitionPage(child: HomeScreen()),
             ),
-            GoRoute(
-              path: Routes.searchRecipes,
-              builder: (context, state) => SearchRecipesScreen(viewModel: getIt()),
-            ),
+
           ],
         ),
         StatefulShellBranch(
