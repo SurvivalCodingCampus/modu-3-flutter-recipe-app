@@ -25,7 +25,6 @@ class RecipeDishCard extends StatelessWidget {
         final double imageOverlap = imageSize / 2;
         final double kRatingBadgeHeight = maxHeight * (23 / 231);
         final double kRatingBadgeOffset = imageOverlap - kRatingBadgeHeight;
-        print('kRatingBadgeOffset = $kRatingBadgeOffset');
         return GestureDetector(
           onTap: onTap,
           child: Stack(
