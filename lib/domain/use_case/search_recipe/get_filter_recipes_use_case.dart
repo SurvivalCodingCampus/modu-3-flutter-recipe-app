@@ -14,42 +14,8 @@ class GetFilterRecipesUseCase {
     required CategoryType category,
     required Star star,
     required Time time,
+    required String inputText,
   }) async {
-    final List<Recipe> allRecipes = await _recipeRepository.getRecipes();
-
-    final categoryFilter =
-        category == CategoryType.all
-            ? allRecipes
-            : allRecipes
-                .where(
-                  (recipe) =>
-                      recipe.category.name.toLowerCase() ==
-                      category.name.toLowerCase(),
-                )
-                .toList();
-    final starFilter =
-        categoryFilter
-            .where(
-              (recipe) =>
-                  recipe.rating >= star.minRating &&
-                  recipe.rating < star.maxRating,
-            )
-            .toList();
-
-    List<Recipe> sorted = [...starFilter];
-    switch (time) {
-      case Time.all:
-        break;
-      case Time.newest:
-        sorted.sort((a, b) => b.id.compareTo(a.id));
-        break;
-      case Time.oldest:
-        sorted.sort((a, b) => a.id.compareTo(b.id));
-        break;
-      case Time.popularity:
-        sorted.sort((a, b) => b.rating.compareTo(a.rating));
-        break;
-    }
-    return sorted;
+    return _recipeRepository.getFilterRecipes(category, star, time, inputText);
   }
 }

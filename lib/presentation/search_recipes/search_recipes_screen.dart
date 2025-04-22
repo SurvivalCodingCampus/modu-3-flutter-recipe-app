@@ -48,6 +48,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                       placeholder: 'Search recipes',
                       onValueChange: (value) {
                         widget._viewModel.searchRecipes(value);
+                        widget._viewModel.saveRecentRecipes(value);
                       },
                       onTap: () {},
                     ),
@@ -259,6 +260,7 @@ class FilterBottomSheet extends StatelessWidget {
                       _viewModel.state.categoryType,
                       _viewModel.state.star,
                       _viewModel.state.time,
+                      _viewModel.state.text,
                     );
                     Navigator.pop(context);
                   },
