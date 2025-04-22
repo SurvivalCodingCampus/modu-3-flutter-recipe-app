@@ -1,17 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/component/small_button.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
+import 'package:recipe_app/presentation/ingredient/ingredient_state.dart';
 
-import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 
 class IngredientScreen extends StatefulWidget {
-  final IngredientViewModel viewModel;
-  const IngredientScreen({super.key, required this.viewModel});
+  final IngredientState state;
+  const IngredientScreen({super.key, required this.state});
 
   @override
   State<IngredientScreen> createState() => _IngredientScreenState();
@@ -21,10 +19,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: widget.viewModel,
-      builder: (context, child) {
-        return SafeArea(
+    return SafeArea(
           child: Scaffold(
             appBar: AppBar(),
             body: SingleChildScrollView(
@@ -33,7 +28,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
                 child: Column(
                   children: [
                     RecipeCard(
-                      recipe: widget.viewModel.recipe,
+                      recipe: widget.state.recipe,
                       isBig: true,
                       isBookmarked: true,
                       isIngredient: true,
@@ -46,7 +41,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.5,
                           child: Text(
-                            widget.viewModel.recipe.title,
+                            widget.state.recipe.title,
                             maxLines: 2,
                             style: TextStyles.smallTextBold,
                           ),
@@ -68,9 +63,18 @@ class _IngredientScreenState extends State<IngredientScreen> {
                             children: [
                               CircleAvatar(
                                 backgroundImage:
-                                    widget.viewModel.userModel.image.isNotEmpty
+                                    widget
+                                            
+                                            .state
+                                            .userModel
+                                            .image
+                                            .isNotEmpty
                                         ? NetworkImage(
-                                          widget.viewModel.userModel.image,
+                                          widget
+                                              
+                                              .state
+                                              .userModel
+                                              .image,
                                         )
                                         : null,
                               ),
@@ -79,7 +83,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    widget.viewModel.userModel.name,
+                                    widget.state.userModel.name,
                                     style: TextStyles.smallTextBold,
                                   ),
                                   Row(
@@ -89,7 +93,11 @@ class _IngredientScreenState extends State<IngredientScreen> {
                                         color: ColorStyles.primary100,
                                       ),
                                       Text(
-                                        widget.viewModel.userModel.address,
+                                        widget
+                                            
+                                            .state
+                                            .userModel
+                                            .address,
                                         style: TextStyles.smallerTextRegular
                                             .copyWith(color: ColorStyles.gray3),
                                       ),
@@ -123,9 +131,8 @@ class _IngredientScreenState extends State<IngredientScreen> {
                       labels: ["Ingredient", "Procedure"],
                       selectedIndex: 0,
                       onValueChange: (int value) {
-                        selectedIndex = value;
                         setState(() {
-                          print(selectedIndex);
+                          selectedIndex = value;
                         });
                       },
                     ),
@@ -150,7 +157,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
                           ),
                         ),
                         Text(
-                          "${widget.viewModel.recipe.ingredients.length} Items",
+                          "${widget.state.recipe.ingredients.length} Items",
                           style: TextStyles.smallerTextRegular.copyWith(
                             color: ColorStyles.gray3,
                           ),
@@ -158,11 +165,6 @@ class _IngredientScreenState extends State<IngredientScreen> {
                       ],
                     ),
                     SizedBox(height: 20),
-                    // for (final ingredients
-                    //     in widget.viewModel.recipe.ingredients) ...[
-                    //   IngredientItem(ingredients: ingredients),
-                    //   SizedBox(height: 10),
-                    // ],
                     if (selectedIndex == 0)
                       ListView.separated(
                         shrinkWrap: true,
@@ -170,13 +172,18 @@ class _IngredientScreenState extends State<IngredientScreen> {
                         itemBuilder: (context, index) {
                           return IngredientItem(
                             ingredients:
-                                widget.viewModel.recipe.ingredients[index],
+                                widget
+                                    
+                                    .state
+                                    .recipe
+                                    .ingredients[index],
                           );
                         },
                         separatorBuilder: (context, index) {
                           return SizedBox(height: 10);
                         },
-                        itemCount: widget.viewModel.recipe.ingredients.length,
+                        itemCount:
+                            widget.state.recipe.ingredients.length,
                       ),
                   ],
                 ),
@@ -184,7 +191,6 @@ class _IngredientScreenState extends State<IngredientScreen> {
             ),
           ),
         );
-      },
-    );
+
   }
 }
