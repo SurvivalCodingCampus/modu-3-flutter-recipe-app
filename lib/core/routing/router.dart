@@ -78,7 +78,7 @@ final GoRouter router = GoRouter(
               path: Routes.home,
               pageBuilder:
                   (context, state) => NoTransitionPage(
-                    child: HomeScreenRoot(viewModel: HomeViewModel()),
+                    child: HomeScreenRoot(viewModel: HomeViewModel(recipeRepository: getIt())),
                   ),
             ),
             GoRoute(
