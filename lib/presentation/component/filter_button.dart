@@ -29,7 +29,7 @@ class _FilterButtonState extends State<FilterButton> {
         widget.onPressed(widget.isSelected);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5.5),
         decoration: BoxDecoration(
           color: widget.isSelected ? ColorStyle.primary100 : ColorStyle.white,
           borderRadius: BorderRadius.circular(11.0),
