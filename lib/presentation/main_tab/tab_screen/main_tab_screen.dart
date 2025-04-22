@@ -63,7 +63,6 @@ class _MainBottomNavBar extends StatelessWidget {
 
   Widget _buildIcon(int index, String name) {
     final isSelected = currentIndex == index;
-    print('currentIndex($currentIndex) isSelected: $isSelected');
     final imageName = isSelected ? '${name}_active' : name;
     final path = 'assets/images/icons/$imageName.png';
 
