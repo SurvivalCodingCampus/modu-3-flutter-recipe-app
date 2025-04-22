@@ -4,6 +4,7 @@ import 'package:recipe_app/domain/error/recipe_error.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
 import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_sheet_state.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
@@ -14,6 +15,16 @@ class SearchRecipesViewModel with ChangeNotifier {
   SearchRecipesViewModel(this._searchRecipesUseCase);
 
   SearchRecipesState get state => _state;
+
+  void onAction(SearchRecipesAction action) {
+    switch (action) {
+      case OnSubmitSearch():
+        _searchRecipes(action.query);
+      case OnApplyFilter():
+        _setSearchFilter(action.state);
+      case OnTapBackArrow():
+    }
+  }
 
   Future<void> fetchAll() async {
     _state = _state.copyWith(isLoading: true);
@@ -27,12 +38,12 @@ class SearchRecipesViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setSearchFilter(FilterSearchBottomSheetState state) async {
+  Future<void> _setSearchFilter(FilterSearchBottomSheetState state) async {
     _state = _state.copyWith(bottomSheetFilter: state);
     notifyListeners();
   }
 
-  Future<void> searchRecipes(String query) async {
+  Future<void> _searchRecipes(String query) async {
     _state = _state.copyWith(query: query, isLoading: true);
     notifyListeners();
 
