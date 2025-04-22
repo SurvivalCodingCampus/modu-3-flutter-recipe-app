@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/core/ui/color_style.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
@@ -62,7 +64,9 @@ class _SearchRecipesScreenRootState extends State<SearchRecipesScreenRoot> {
                   );
                 }
                 break;
-
+              case OnTapRecipe(:final recipe):
+                await context.push(Routes.recipeDetailPath(recipe.id));
+                break;
               default:
                 widget.viewModel.onAction(action);
             }

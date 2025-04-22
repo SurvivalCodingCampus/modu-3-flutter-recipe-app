@@ -33,7 +33,7 @@ class _SavedRecipesScreenRootState extends State<SavedRecipesScreenRoot> {
           onAction: (action) async {
             switch (action) {
               case OnTapRecipe(:final recipe):
-                await context.push(Routes.ingredientPath(recipe.id));
+                await context.push(Routes.recipeDetailPath(recipe.id));
                 widget.viewModel.load(); // 돌아왔을 때 다시 로딩
               default:
                 widget.viewModel.onAction(action);

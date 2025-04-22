@@ -8,4 +8,5 @@ sealed class HomeAction with _$HomeAction {
   const factory HomeAction.tapRecipe(int recipeId) = TapRecipe;
   const factory HomeAction.selectCategory(int index) = SelectCategory;
   const factory HomeAction.toggleBookmark(Recipe recipe) = ToggleBookmark;
+  const factory HomeAction.searchTouch() = SearchTouch;
 }

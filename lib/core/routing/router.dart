@@ -13,6 +13,9 @@ import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
+final _homeNavigatorKey = GlobalKey<NavigatorState>();
+final _searchNavigatorKey = GlobalKey<NavigatorState>();
+
 final appRouter = GoRouter(
   initialLocation: Routes.splash,
   routes: [
@@ -34,16 +37,11 @@ final appRouter = GoRouter(
     ),
 
     GoRoute(
-      path: Routes.ingredient,
+      path: Routes.recipeDetail,
       builder: (context, state) {
         final id = int.parse(state.pathParameters['id']!);
         return RecipeDetailScreenRoot(recipeId: id, viewModel: getIt());
       },
-    ),
-
-    GoRoute(
-      path: Routes.search,
-      builder: (context, state) => SearchRecipesScreenRoot(viewModel: getIt()),
     ),
 
     // 로그인 이후의 메인 탭 구조
@@ -53,15 +51,25 @@ final appRouter = GoRouter(
             viewModel: getIt<MainTabViewModel>(),
             navigationShell: shell,
           ),
+
       branches: [
         // 홈 탭
         StatefulShellBranch(
+          navigatorKey: _homeNavigatorKey,
           routes: [
             GoRoute(
               path: Routes.mainHome,
               builder:
                   (context, state) =>
                       HomeScreenRoot(viewModel: getIt<HomeViewModel>()),
+              routes: [
+                GoRoute(
+                  path: Routes.search,
+                  builder:
+                      (context, state) =>
+                          SearchRecipesScreenRoot(viewModel: getIt()),
+                ),
+              ],
             ),
           ],
         ),
@@ -115,6 +123,17 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+        // StatefulShellBranch(
+        //   navigatorKey: _searchNavigatorKey,
+        //   routes: [
+        //     GoRoute(
+        //       path: Routes.search,
+        //       builder:
+        //           (context, state) =>
+        //               SearchRecipesScreenRoot(viewModel: getIt()),
+        //     ),
+        //   ],
+        // ),
       ],
     ),
   ],

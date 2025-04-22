@@ -97,10 +97,7 @@ class HomeScreen extends StatelessWidget {
                 inputHorizontalPadding: 10,
                 iconWidget: InputField.searchIcon(),
                 onValueChange: null,
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                  context.push(Routes.search);
-                },
+                onTap: () => onAction(const HomeAction.searchTouch()),
                 readOnly: true,
               ),
             ),
@@ -177,6 +174,7 @@ class HomeScreen extends StatelessWidget {
                   isFavorite: state.bookmarkedRecipeIds.contains(recipe.id),
                   onTapFavorite:
                       () => onAction(HomeAction.toggleBookmark(recipe)),
+                  onTap: () => onAction(HomeAction.tapRecipe(recipe.id)),
                 ),
               ),
             );

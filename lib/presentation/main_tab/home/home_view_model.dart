@@ -32,7 +32,10 @@ class HomeViewModel with ChangeNotifier {
   void onAction(HomeAction action) {
     switch (action) {
       case TapRecipe():
-        // TODO: 상세 화면 이동
+        // Root에서 처리
+        break;
+      case SearchTouch():
+        // Root에서 처리
         break;
 
       case SelectCategory():

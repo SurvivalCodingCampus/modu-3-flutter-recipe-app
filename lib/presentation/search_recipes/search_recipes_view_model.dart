@@ -75,8 +75,12 @@ class SearchRecipesViewModel with ChangeNotifier {
         applyFilter(const FilterSearchState());
       case OnRetry():
         load();
-      case OnTapRecipe(:final recipe):
-        debugPrint('선택된 레시피: ${recipe.name}');
+      case OnTapRecipe():
+      // _updateSearchDataUseCase.execute(
+      //   query: _state.query,
+      //   rate: _state.filterSearchState.rate,
+      //   categories: _state.filterSearchState.categories,
+      // );
       // 상세페이지 이동 로직은 Root에서
       case OnOpenFilterSheet():
       // Root에서 처리할 콜백

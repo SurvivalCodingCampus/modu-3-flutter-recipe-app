@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
+import 'package:recipe_app/presentation/main_tab/home/home_action.dart';
 
 import 'home_screen.dart';
 import 'home_view_model.dart';
@@ -25,7 +28,21 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
       listenable: widget.viewModel,
       builder: (context, _) {
         final state = widget.viewModel.state;
-        return HomeScreen(state: state, onAction: widget.viewModel.onAction);
+        return HomeScreen(
+          state: state,
+          onAction: (action) async {
+            switch (action) {
+              case TapRecipe(:final recipeId):
+                await context.push(Routes.recipeDetailPath(recipeId));
+              case SearchTouch():
+                await context.push(Routes.homeSearch);
+                widget.viewModel.load(); // 돌아왔을 때 다시 로딩
+                break;
+              default:
+                widget.viewModel.onAction(action);
+            }
+          },
+        );
       },
     );
   }
