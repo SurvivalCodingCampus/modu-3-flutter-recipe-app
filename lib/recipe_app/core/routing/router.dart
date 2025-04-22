@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen.dart';
+import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_root.dart';
 import 'package:recipe_app/recipe_app/presentation/ingredient_screen/ingredient_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/main_screen/bottom_navigation_bar_scaffold.dart';
 import 'package:recipe_app/recipe_app/presentation/my_page/my_page_screen.dart';
@@ -57,9 +57,8 @@ final router = GoRouter(
         GoRoute(
           path: Routes.homeScreen,
           pageBuilder:
-              (context, state) => NoTransitionPage(
-                child: HomeScreen(filterSearchViewModel: getIt()),
-              ),
+              (context, state) =>
+                  NoTransitionPage(child: HomeScreenRoot(viewModel: getIt())),
         ),
         GoRoute(
           path: Routes.savedRecipes,

@@ -20,7 +20,7 @@ class FilterSearchBottomSheet extends StatefulWidget {
 }
 
 class _FilterSearchBottomSheetState extends State<FilterSearchBottomSheet> {
-  String selectedTimeFilter = 'All';
+  int selectedTimeFilter = 0;
   String? selectedCategoryFilter;
   int? selectedRatingFilter;
   late int selectedIndexButton;

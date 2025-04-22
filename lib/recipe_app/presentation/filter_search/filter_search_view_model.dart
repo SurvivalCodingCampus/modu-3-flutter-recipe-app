@@ -47,7 +47,7 @@ class FilterSearchViewModel with ChangeNotifier {
 
   //view에서 검색어가 포함된 레시피 가져오는 메서드
   Future<void> filterRecipesByCategory(
-    String time,
+    int time,
     int rate,
     String category,
   ) async {

@@ -1,35 +1,42 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_screen_event.dart';
 import 'package:recipe_app/recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
-  SearchRecipesState _searchRecipesState = const SearchRecipesState();
+  SearchRecipesState _state = const SearchRecipesState();
 
   RecipeRepository get recipeRepository => _recipeRepository;
 
   SearchRecipesViewModel(this._recipeRepository);
 
-  SearchRecipesState get searchRecipesState => _searchRecipesState;
+  SearchRecipesState get state => _state;
+
+  final _eventController = StreamController<SearchRecipesScreenEvent>();
+
+  Stream<SearchRecipesScreenEvent> get eventStream => _eventController.stream;
 
   //view에서 모든 레시피 가져오는 메서드, 따로 usecase처리 필요 없음
   Future<void> fetchRecipes() async {
-    _searchRecipesState = searchRecipesState.copyWith(isRecipesLoading: true);
+    _state = state.copyWith(isRecipesLoading: true);
     notifyListeners();
-    _searchRecipesState = _searchRecipesState.copyWith(
+    _state = _state.copyWith(
       recipes: await recipeRepository.fetchRecipes(),
       isRecipesLoading: false,
     );
-    print('${_searchRecipesState.recipes.length} 기본 레시피 갯수');
+    print('${_state.recipes.length} 기본 레시피 갯수');
 
     notifyListeners();
   }
 
   //view에서 검색어가 포함된 레시피 가져오는 메서드
   Future<void> searchRecipes(String keyword) async {
-    _searchRecipesState = searchRecipesState.copyWith(isRecipesLoading: true);
+    _state = _state.copyWith(isRecipesLoading: true);
     notifyListeners();
-    _searchRecipesState = _searchRecipesState.copyWith(
+    _state = _state.copyWith(
       recipes: await recipeRepository.searchRecipes(keyword),
       isRecipesLoading: false,
     );

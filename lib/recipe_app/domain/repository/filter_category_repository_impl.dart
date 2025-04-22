@@ -10,19 +10,24 @@ class FilterCategoryRepositoryImpl implements FilterCategoryRepository {
 
   @override
   Future<List<Recipe>> filterRecipesByCategory(
-    String? time,
+    int? time,
     int? rate,
     String? category,
   ) async {
     final recipeList = await _recipeDataSource.getRecipeData();
+
     final recipesByCategory =
-        recipeList
-            .where(
-              (e) =>
-                  e.rate.toInt() == rate &&
-                  e.category.toLowerCase() == category!.toLowerCase(),
-            )
-            .toList();
+        recipeList.where((e) {
+          final matchesRate = rate == null || e.rate.toInt() == rate;
+          final matchesCategory =
+              category == null ||
+              e.category.toLowerCase() == category.toLowerCase();
+          final matchesTime =
+              time == null || time == 'All' || e.time.toInt() == time.toInt();
+
+          return matchesRate && matchesCategory && matchesTime;
+        }).toList();
+
     return recipesByCategory;
   }
 }

@@ -1,0 +1,61 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:recipe_app/recipe_app/domain/use_case/select_category_use_case.dart';
+import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_event.dart';
+import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_state.dart';
+
+import '../../data/model/recipe.dart';
+
+class HomeScreenViewModel with ChangeNotifier {
+  SelectCategoryUseCase useCase;
+
+  HomeScreenViewModel({required this.useCase});
+
+  List<Recipe> get recipes => _recipes;
+  List<Recipe> _recipes = [];
+
+  HomeScreenState _state = const HomeScreenState();
+
+  HomeScreenState get state => _state;
+
+  final _eventController = StreamController<HomeScreenEvent>();
+
+  Stream<HomeScreenEvent> get eventStream => _eventController.stream;
+
+  Future<List<Recipe>> getCategoryRecipes() async {
+    final category = _state.selectedCategory;
+
+    _state = _state.copyWith(isRecipesLoading: true);
+    notifyListeners();
+
+    try {
+      final result = await useCase.execute(category);
+      _recipes = result;
+
+      _state = _state.copyWith(
+        recipes: result,
+        isRecipesLoading: false,
+        errorMessage: '',
+        selectedCategory: category,
+      );
+      print(recipes);
+      notifyListeners();
+      return result;
+    } catch (e) {
+      _state = _state.copyWith(
+        isRecipesLoading: false,
+        errorMessage: '레시피 불러오기 실패',
+      );
+    }
+    notifyListeners();
+    return [];
+  }
+
+  void onSelectedCategory(String category) {
+    _state = _state.copyWith(selectedCategory: category);
+
+    getCategoryRecipes(); // 선택된 카테고리 기준으로 레시피 불러오기
+    notifyListeners();
+  }
+}

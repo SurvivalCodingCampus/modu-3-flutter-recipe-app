@@ -37,7 +37,6 @@ class SavedRecipesViewModel with ChangeNotifier {
 
     _recipes = await _getSavedRecipesUseCase.execute();
     _state = _state.copyWith(isRecipesLoading: false);
-    print(_recipes);
     notifyListeners();
     return _recipes.toList();
   }
