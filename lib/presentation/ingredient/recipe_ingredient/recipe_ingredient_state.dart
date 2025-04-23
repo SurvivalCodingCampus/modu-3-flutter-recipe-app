@@ -12,6 +12,7 @@ part 'recipe_ingredient_state.freezed.dart';
 class RecipeIngredientState with _$RecipeIngredientState{
   final Recipe recipe;
   final Chef chef;
+  final int tabSelectedIndex;
   final bool isLoading;
   final bool isBookmarked;
   final List<IngredientWithAmount> ingredientList;
@@ -20,6 +21,7 @@ class RecipeIngredientState with _$RecipeIngredientState{
   const RecipeIngredientState({
     this.isLoading = false,
     this.isBookmarked = false,
+    this.tabSelectedIndex = 0,
     this.chef = const Chef(
       id: 0,
       name: '',

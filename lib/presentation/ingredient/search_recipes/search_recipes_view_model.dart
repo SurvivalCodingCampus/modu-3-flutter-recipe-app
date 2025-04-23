@@ -25,6 +25,7 @@ class SearchRecipesViewModel with ChangeNotifier {
        _recentSearchRepository = recentSearchRepository,
        _searchRecipesUseCase = searchRecipesUseCase {
     _state = state.copyWith(isLoading: true);
+    fetchRecipes();
   }
 
   void fetchRecipes() async {

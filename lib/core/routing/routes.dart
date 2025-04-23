@@ -1,11 +1,14 @@
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/router.dart';
 import 'package:recipe_app/presentation/ingredient/auth/sign_in_screen.dart';
 import 'package:recipe_app/presentation/ingredient/auth/sign_up_screen.dart';
 import 'package:recipe_app/presentation/ingredient/recipe_ingredient/recipe_ingredient_screen.dart';
+import 'package:recipe_app/presentation/ingredient/recipe_ingredient/recipe_ingredient_screen_root.dart';
 import 'package:recipe_app/presentation/ingredient/recipe_ingredient/recipe_ingredient_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/ingredient/splash/splash_screen.dart';
 import 'package:recipe_app/presentation/main/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
@@ -21,13 +24,13 @@ final router = GoRouter(
     GoRoute(path: Routes.signUp, builder: (context, state) => SignUpScreen()),
     GoRoute(
       path: Routes.search,
-      builder: (context, state) => SearchRecipesScreen(viewModel: getIt()),
+      builder: (context, state) => SearchRecipesScreenRoot(viewModel: getIt())
     ),
     GoRoute(
       path: Routes.ingredient,
       builder: (context, state) {
         final recipeId = int.parse(state.pathParameters['recipeId'] ?? '-1');
-        return RecipeIngredientScreen(
+        return RecipeIngredientScreenRoot(
           viewModel: RecipeIngredientViewModel(
             recipeId: recipeId,
             recipeRepository: getIt(),
