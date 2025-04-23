@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/presentation/component/ingredient_more_button.dart';
+import 'package:recipe_app/presentation/component/rating_dialog.dart';
 import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_action.dart';
 import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen.dart';
 import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_view_model.dart';
@@ -19,6 +22,8 @@ class RecipeIngredientScreenRoot extends StatefulWidget {
 
 class _RecipeIngredientScreenRootState
     extends State<RecipeIngredientScreenRoot> {
+  IngredientMore selectedItem = IngredientMore.share;
+
   @override
   void initState() {
     super.initState();
@@ -32,9 +37,25 @@ class _RecipeIngredientScreenRootState
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Image.asset('assets/icons/more.png', width: 24, height: 24),
+          IngredientMoreButton(
+            selectedItem: selectedItem,
+            onSelected: (value) {
+              setState(() {
+                selectedItem = value;
+              });
+            },
+            onTapRateRecipe: () {
+              showDialog(
+                context: context,
+                builder:
+                    (context) => RatingDialog(
+                      title: 'Rate recipe',
+                      onTap: (rate) {
+                        context.pop();
+                      },
+                    ),
+              );
+            },
           ),
         ],
       ),
