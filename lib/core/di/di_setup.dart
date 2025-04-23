@@ -55,9 +55,6 @@ void diSetup() {
   getIt.registerSingleton(
     SetBookmarkUseCase(userRepository: getIt(), bookmarkRepository: getIt()),
   );
-  getIt.registerSingleton(
-    SetBookmarkUseCase(userRepository: getIt(), bookmarkRepository: getIt()),
-  );
   getIt.registerSingleton(GetRecipeByIdUseCase(recipeRepository: getIt()));
   getIt.registerSingleton(GetUserModelUseCase(userRepository: getIt()));
 
@@ -80,6 +77,10 @@ void diSetup() {
   );
   getIt.registerFactory(() => SplashViewModel());
   getIt.registerFactory(
-    () => HomeViewModel(userRepository: getIt(), recipeRepository: getIt()),
+    () => HomeViewModel(
+      getUserModelUseCase: getIt(),
+      recipeRepository: getIt(),
+      setBookmarkUseCase: getIt(),
+    ),
   );
 }
