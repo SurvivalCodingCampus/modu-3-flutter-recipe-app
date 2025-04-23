@@ -6,6 +6,7 @@ import 'package:recipe_app/domain/usecase/get_recipes_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_search_data_use_case.dart';
 import 'package:recipe_app/domain/usecase/update_search_data_use_case.dart';
 import 'package:recipe_app/presentation/component/filter_search_bottom_sheet/filter_search_state.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
@@ -62,6 +63,28 @@ class SearchRecipesViewModel with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  void onAction(SearchRecipesAction action) {
+    switch (action) {
+      case OnQueryChange(:final query):
+        updateQuery(query);
+      case OnApplyFilter(:final filter):
+        applyFilter(filter);
+      case OnClearFilter():
+        applyFilter(const FilterSearchState());
+      case OnRetry():
+        load();
+      case OnTapRecipe():
+      // _updateSearchDataUseCase.execute(
+      //   query: _state.query,
+      //   rate: _state.filterSearchState.rate,
+      //   categories: _state.filterSearchState.categories,
+      // );
+      // 상세페이지 이동 로직은 Root에서
+      case OnOpenFilterSheet():
+      // Root에서 처리할 콜백
+    }
   }
 
   void _loadSearchData(SearchData data) {

@@ -3,6 +3,7 @@ import 'package:recipe_app/core/error/ui_state.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/usecase/get_bookmarked_recipes_use_case.dart';
 import 'package:recipe_app/domain/usecase/toggle_bookmark_use_case.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_action.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
@@ -22,10 +23,27 @@ class SavedRecipesViewModel with ChangeNotifier {
     _state = _state.copyWith(recipes: const UiState.loading());
     notifyListeners();
 
-    final stateResult = await _getBookmarkedRecipes();
+    final stateResult = await _getBookmarkedRecipes.execute();
     _state = _state.copyWith(recipes: stateResult);
 
     notifyListeners();
+  }
+
+  void onAction(SavedRecipesAction action) {
+    switch (action) {
+      case OnTapFavorite(:final recipeId):
+        toggleBookmark(recipeId);
+
+      case OnRetry():
+        load();
+
+      case OnClearError():
+        clearError();
+
+      // push 처리 등의 액션은 Root에서 처리하므로 무시
+      case OnTapRecipe():
+        break;
+    }
   }
 
   Future<void> toggleBookmark(int recipeId) async {

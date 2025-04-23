@@ -9,9 +9,10 @@ abstract class Routes {
   // 레시피 화면
   static const String savedRecipes = '/saved-recipes';
   static const String filter = '/filter';
-  static const String search = '/search';
-  static const String ingredient = '/ingredient/:id';
-  static String ingredientPath(int id) => '/ingredient/$id';
+  static const String search = 'search';
+  static const String homeSearch = '$mainHome/$search';
+  static const String recipeDetail = '/recipe-detail/:id';
+  static String recipeDetailPath(int id) => '/recipe-detail/$id';
 
   static const String mainHome = '/home';
   static const String mainCreate = '/create';

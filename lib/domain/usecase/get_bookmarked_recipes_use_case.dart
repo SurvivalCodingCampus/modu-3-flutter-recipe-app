@@ -13,7 +13,7 @@ class GetBookmarkedRecipesUseCase {
     required this.recipeRepository,
   });
 
-  Future<UiState<List<Recipe>>> call() async {
+  Future<UiState<List<Recipe>>> execute() async {
     final userResult = await userRepository.getCurrentUser();
     final recipeResult = await recipeRepository.getRecipes();
 

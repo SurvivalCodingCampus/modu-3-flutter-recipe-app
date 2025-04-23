@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 25),
                   BigButton(
                     title: isSignUp ? 'Sign Up' : 'Sign In',
-                    onTap: () => context.go(Routes.devHome),
+                    onTap: () => context.go(Routes.mainHome),
                   ),
                   const SizedBox(height: 32),
                   Column(

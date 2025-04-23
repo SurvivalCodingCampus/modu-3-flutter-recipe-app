@@ -11,14 +11,19 @@ import 'package:recipe_app/data/repository/user_repository_impl.dart';
 import 'package:recipe_app/domain/repository/search_data_repository.dart';
 import 'package:recipe_app/domain/repository/user_repository.dart';
 import 'package:recipe_app/domain/usecase/check_network_error_use_case.dart';
+import 'package:recipe_app/domain/usecase/get_bookmarked_recipeIds_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_bookmarked_recipes_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_recipe_by_id_use_case.dart';
+import 'package:recipe_app/domain/usecase/get_recipe_categories_use_case.dart';
+import 'package:recipe_app/domain/usecase/get_recipes_by_category_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_recipes_use_case.dart';
 import 'package:recipe_app/domain/usecase/get_search_data_use_case.dart';
 import 'package:recipe_app/domain/usecase/set_recipe_rating_use_case.dart';
 import 'package:recipe_app/domain/usecase/toggle_bookmark_use_case.dart';
 import 'package:recipe_app/domain/usecase/update_search_data_use_case.dart';
-import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
+import 'package:recipe_app/presentation/main_tab/home/home_view_model.dart';
+import 'package:recipe_app/presentation/main_tab/tab_screen/main_tab_view_model.dart';
+import 'package:recipe_app/presentation/recipe_detail/recipe_detail_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_view_model.dart';
@@ -63,6 +68,26 @@ void diSetup() {
     UpdateSearchDataUseCase(getIt()),
   );
 
+  getIt.registerSingleton<GetRecipeCategoriesUseCase>(
+    GetRecipeCategoriesUseCase(getIt()),
+  );
+  getIt.registerSingleton<GetRecipesByCategoryUseCase>(
+    GetRecipesByCategoryUseCase(getIt()),
+  );
+  getIt.registerSingleton<GetBookmarkedRecipeIdsUseCase>(
+    GetBookmarkedRecipeIdsUseCase(getIt()),
+  );
+
+  getIt.registerFactory<MainTabViewModel>(() => MainTabViewModel());
+  getIt.registerFactory<HomeViewModel>(
+    () => HomeViewModel(
+      getCategories: getIt(),
+      getRecipesByCategory: getIt(),
+      toggleBookmark: getIt(),
+      getBookmarkedRecipeIds: getIt(),
+    ),
+  );
+
   getIt.registerFactory<SavedRecipesViewModel>(
     () => SavedRecipesViewModel(
       getBookmarkedRecipes: getIt(),
@@ -76,8 +101,9 @@ void diSetup() {
       getSearchDataUseCase: getIt(),
     ),
   );
-  getIt.registerFactory<IngredientViewModel>(
-    () => IngredientViewModel(getRecipeById: getIt(), setRecipeRating: getIt()),
+  getIt.registerFactory<RecipeDetailViewModel>(
+    () =>
+        RecipeDetailViewModel(getRecipeById: getIt(), setRecipeRating: getIt()),
   );
 
   getIt.registerFactory<SplashViewModel>(() => SplashViewModel(getIt()));

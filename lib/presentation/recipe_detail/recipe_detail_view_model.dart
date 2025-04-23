@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/core/error/ui_state.dart';
 import 'package:recipe_app/domain/usecase/get_recipe_by_id_use_case.dart';
 import 'package:recipe_app/domain/usecase/set_recipe_rating_use_case.dart';
-import 'package:recipe_app/presentation/ingredient/ingredient_state.dart';
+import 'package:recipe_app/presentation/recipe_detail/recipe_detail_action.dart';
+import 'package:recipe_app/presentation/recipe_detail/recipe_detail_state.dart';
 
-class IngredientViewModel with ChangeNotifier {
+class RecipeDetailViewModel with ChangeNotifier {
   final GetRecipeByIdUseCase _getRecipeById;
   final SetRecipeRatingUseCase _setRecipeRating;
 
-  IngredientState _state = const IngredientState();
-  IngredientState get state => _state;
+  RecipeDetailState _state = const RecipeDetailState();
 
-  IngredientViewModel({
+  RecipeDetailState get state => _state;
+
+  RecipeDetailViewModel({
     required GetRecipeByIdUseCase getRecipeById,
     required SetRecipeRatingUseCase setRecipeRating,
   }) : _getRecipeById = getRecipeById,
@@ -25,6 +27,20 @@ class IngredientViewModel with ChangeNotifier {
     _state = _state.copyWith(recipe: stateResult);
 
     notifyListeners();
+  }
+
+  void onAction(RecipeDetailAction action, {int? recipeId}) {
+    switch (action) {
+      case OnRate(:final rating):
+        if (recipeId != null) updateRating(recipeId, rating.toDouble());
+        break;
+      case OnRetry():
+        if (recipeId != null) load(recipeId);
+        break;
+      case OnSelectTab(:final index):
+        _state = _state.copyWith(selectedTabIndex: index);
+        notifyListeners();
+    }
   }
 
   Future<void> updateRating(int recipeId, double rating) async {
