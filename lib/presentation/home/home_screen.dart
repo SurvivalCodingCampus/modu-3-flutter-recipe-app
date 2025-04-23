@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/buttons/box_icon_button.dart';
+import 'package:recipe_app/presentation/component/dish_card.dart';
 import 'package:recipe_app/presentation/component/form/search_bar.dart';
+import 'package:recipe_app/presentation/component/recipe_category_selector.dart';
+import 'package:recipe_app/presentation/home/home_action.dart';
+import 'package:recipe_app/presentation/home/home_screen_state.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  final HomeScreenState state;
+  final void Function(HomeAction action) onAction;
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  const HomeScreen({super.key, required this.state, required this.onAction});
 
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,9 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: SearchInput(
-                  onTap: () {
-                    context.push(Routes.search);
-                  },
+                  onTap: () => onAction(const HomeAction.onTapSearchBar()),
                   hintText: 'Search recipes',
                   onSubmitted: (value) {},
                 ),
@@ -69,6 +67,39 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           const SizedBox(height: 15),
+          SizedBox(
+            height: 37,
+            child: RecipeCategorySelector(
+              categories: const [
+                'All',
+                'Indian',
+                'Italian',
+                'Asian',
+                'Chinese',
+              ],
+              onSelect: (category) {
+                onAction(HomeAction.onTapCategory(category));
+              },
+            ),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            height: 231,
+            child: Builder(
+              builder: (context) {
+                if (state.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  return DishCard(
+                    recipes: state.savedRecipes,
+                    onTapBookmark:
+                        (int recipeId) =>
+                            onAction(HomeAction.onTapBookmark(recipeId)),
+                  );
+                }
+              },
+            ),
+          ),
         ],
       ),
     );
