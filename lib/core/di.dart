@@ -5,9 +5,11 @@ import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
 import 'package:recipe_app/data/repository/recipe_repository_impl.dart';
 import 'package:recipe_app/domain/repository/bookmark_repository.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
+import 'package:recipe_app/domain/use_case/get_recent_search_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/remove_saved_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/save_recent_search_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_screen_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
@@ -29,7 +31,15 @@ void diSetUp() {
     () => SavedRecipesViewModel(getIt(), getIt()),
   );
   getIt.registerFactory<SearchRecipesViewModel>(
-    () => SearchRecipesViewModel(getIt()),
+    () => SearchRecipesViewModel(getIt(), getIt(), getIt()),
+  );
+
+  getIt.registerSingleton<GetRecentSearchRecipesUseCase>(
+    GetRecentSearchRecipesUseCase(getIt()),
+  );
+
+  getIt.registerSingleton<SaveRecentSearchRecipesUseCase>(
+    SaveRecentSearchRecipesUseCase(getIt()),
   );
 
   getIt.registerSingleton<SearchRecipesUseCase>(SearchRecipesUseCase(getIt()));

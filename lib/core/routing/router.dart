@@ -8,7 +8,6 @@ import 'package:recipe_app/presentation/ingredient/ingredient_screen.dart';
 import 'package:recipe_app/presentation/login/login_screen.dart';
 import 'package:recipe_app/presentation/register/register_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/splash/splash_screen_root.dart';
 

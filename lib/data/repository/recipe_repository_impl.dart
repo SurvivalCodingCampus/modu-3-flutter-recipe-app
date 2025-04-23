@@ -7,8 +7,9 @@ import 'package:recipe_app/domain/repository/recipe_repository.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final RecipeDataSource _dataSource;
+  final List<Recipe> _recentSearchRecipes = [];
 
-  const RecipeRepositoryImpl(this._dataSource);
+  RecipeRepositoryImpl(this._dataSource);
 
   @override
   Future<Result<List<Recipe>, RecipeError>> findAll() async {
@@ -48,5 +49,17 @@ class RecipeRepositoryImpl implements RecipeRepository {
     }
 
     return Success(result.where(predicate).toList());
+  }
+
+  @override
+  Future<void> addRecentSearchRecipe(List<Recipe> recipes) async {
+    final recentSet = _recentSearchRecipes.toSet();
+    final newRecipes = recipes.where((recipe) => !recentSet.contains(recipe));
+    _recentSearchRecipes.addAll(newRecipes);
+  }
+
+  @override
+  Future<Result<List<Recipe>, RecipeError>> getRecentSearchRecipes() async {
+    return Success(_recentSearchRecipes);
   }
 }

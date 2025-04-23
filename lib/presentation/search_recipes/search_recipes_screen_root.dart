@@ -17,7 +17,7 @@ class _SearchRecipesScreenRootState extends State<SearchRecipesScreenRoot> {
   @override
   void initState() {
     super.initState();
-    widget.viewModel.fetchAll();
+    widget.viewModel.fetchRecentRecipes();
   }
 
   @override

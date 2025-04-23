@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/result.dart';
+import 'package:recipe_app/core/result_extension.dart';
 import 'package:recipe_app/domain/error/recipe_error.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/domain/use_case/get_recent_search_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
 import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_sheet_state.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
@@ -9,10 +11,20 @@ import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart
 
 class SearchRecipesViewModel with ChangeNotifier {
   final SearchRecipesUseCase _searchRecipesUseCase;
+  final GetRecentSearchRecipesUseCase _getRecentSearchRecipesUseCase;
 
-  SearchRecipesState _state = const SearchRecipesState();
+  SearchRecipesState _state = const SearchRecipesState(
+    bottomSheetFilter: FilterSearchBottomSheetState(
+      categoryIndicies: [0],
+      rateIndex: 1,
+      timeIndex: 0,
+    ),
+  );
 
-  SearchRecipesViewModel(this._searchRecipesUseCase);
+  SearchRecipesViewModel(
+    this._searchRecipesUseCase,
+    this._getRecentSearchRecipesUseCase,
+  );
 
   SearchRecipesState get state => _state;
 
@@ -23,16 +35,24 @@ class SearchRecipesViewModel with ChangeNotifier {
       case OnApplyFilter():
         _setSearchFilter(action.state);
       case OnTapBackArrow():
+        break;
     }
   }
 
-  Future<void> fetchAll() async {
+  Future<void> fetchRecentRecipes() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    _state = _state.copyWith(
-      recipes: _searchRecipesUseCase.recentRecipes,
-      isLoading: false,
+    final Result<List<Recipe>, RecipeError> result =
+        await _getRecentSearchRecipesUseCase.execute();
+
+    result.handle(
+      onSuccess: (data) {
+        _state = _state.copyWith(recipes: data, isLoading: false);
+      },
+      onError: (error) {
+        _state = _state.copyWith(error: error, isLoading: false);
+      },
     );
 
     notifyListeners();
@@ -47,31 +67,17 @@ class SearchRecipesViewModel with ChangeNotifier {
     _state = _state.copyWith(query: query, isLoading: true);
     notifyListeners();
 
-    final Result<List<Recipe>, RecipeError> result = await _searchRecipesUseCase
-        .execute(
-          query,
-          FilterSearchBottomSheetState.rates[state.bottomSheetFilter.rateIndex],
-        );
+    final Result<List<Recipe>, RecipeError> searchResult =
+        await _searchRecipesUseCase.execute(query, _state.bottomSheetFilter);
 
-    switch (result) {
-      case Success(:final List<Recipe> data):
-        final recipes =
-            data
-                .where(
-                  (recipe) =>
-                      recipe.rating ==
-                      FilterSearchBottomSheetState.rates[state
-                          .bottomSheetFilter
-                          .rateIndex],
-                )
-                .toList();
-
-        _state = _state.copyWith(recipes: recipes, isLoading: false);
-        break;
-      case Failure(:final RecipeError error):
+    searchResult.handle(
+      onSuccess: (data) {
+        _state = _state.copyWith(recipes: data, isLoading: false);
+      },
+      onError: (error) {
         _state = _state.copyWith(error: error, isLoading: false);
-        break;
-    }
+      },
+    );
 
     notifyListeners();
   }
