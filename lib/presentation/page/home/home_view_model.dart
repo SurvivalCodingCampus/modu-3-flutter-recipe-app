@@ -21,7 +21,9 @@ class HomeViewModel with ChangeNotifier {
 
   void filterCategoryList({required String category}) async {
     final List<Recipe> data = await _recipeRepository.getAllRecipeList();
-    if (category.toLowerCase() == "all") {
+
+    if (category.toLowerCase() == 'all' ||
+        state.selectCategory.toLowerCase() == 'all') {
       _state = _state.copyWith(
         categoryFilterRecipeList: data,
         selectCategory: category,
@@ -40,10 +42,14 @@ class HomeViewModel with ChangeNotifier {
 
   void getImageSize({required GlobalKey imageKey}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final renderBox = imageKey.currentContext?.findRenderObject() as RenderBox?;
+      final renderBox =
+          imageKey.currentContext?.findRenderObject() as RenderBox?;
       if (renderBox != null) {
         final size = renderBox.size;
-        _state = _state.copyWith(imageWidth: size.width, imageHeight: size.height);
+        _state = _state.copyWith(
+          imageWidth: size.width,
+          imageHeight: size.height,
+        );
         notifyListeners();
       }
     });
@@ -57,8 +63,8 @@ class HomeViewModel with ChangeNotifier {
       case OnTapCategoryBadge():
         filterCategoryList(category: action.selectString);
 
-      case OnLoadGetImageSized():
-        getImageSize(imageKey: action.imageKey);
+      case onLoadPageLoadEvent():
+        filterCategoryList(category: 'ALL');
     }
   }
 }

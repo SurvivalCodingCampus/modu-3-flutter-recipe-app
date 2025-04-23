@@ -7,6 +7,8 @@ abstract class Routes {
   // 메인 탭 경로
   static const String home = '/home';
   static const String savedRecipes = '/saved-recipes';
+  static const String detailRecipes = '/detail-recipes';
+
   static const String notifications = '/notifications';
   static const String profile = '/profile';
 

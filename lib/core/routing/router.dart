@@ -4,10 +4,12 @@ import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/recipes/recipe_data_source.dart';
 import 'package:recipe_app/data/data_source/recipes/recipe_data_source_impl.dart';
+import 'package:recipe_app/data/dto/recipes/recipes_dto.dart';
 import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/common/component/nav_bar_component.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
+import 'package:recipe_app/presentation/page/detail_recipes/detail_recipes_screen.dart';
 import 'package:recipe_app/presentation/page/home/home_screen.dart';
 import 'package:recipe_app/presentation/page/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/page/home/home_view_model.dart';
@@ -40,18 +42,18 @@ final GoRouter router = GoRouter(
       path: Routes.search,
       builder: (context, state) {
         final data = (state.extra as List).cast<Recipe>();
-        
-        return SearchScreenRoot(viewModel: getIt(),lastSearchData: data,);
-        
-        // return SearchRecipesScreen(
-        //   viewModel: getIt(),
-        //   searchResult: data ?? <Recipe>[],
-        // );
+        return SearchScreenRoot(viewModel: getIt(), lastSearchData: data);
+      },
+    ),
+    GoRoute(
+      path: Routes.detailRecipes,
+      builder: (context, state) {
+        final data = state.extra as Recipe;
+        return DetailRecipesScreen(recipesData: data);
       },
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-
         return Scaffold(
           resizeToAvoidBottomInset: true,
           backgroundColor: ColorStyle.white,
@@ -78,7 +80,9 @@ final GoRouter router = GoRouter(
               path: Routes.home,
               pageBuilder:
                   (context, state) => NoTransitionPage(
-                    child: HomeScreenRoot(viewModel: HomeViewModel(recipeRepository: getIt())),
+                    child: HomeScreenRoot(
+                      viewModel: HomeViewModel(recipeRepository: getIt()),
+                    ),
                   ),
             ),
             GoRoute(

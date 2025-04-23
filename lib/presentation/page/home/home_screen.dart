@@ -12,10 +12,28 @@ import 'package:recipe_app/presentation/page/home/home_screen_action.dart';
 import 'package:recipe_app/presentation/page/home/home_state.dart';
 import 'package:recipe_app/presentation/page/home/home_view_model.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final HomeState state;
   final void Function(HomeScreenAction action) onAction;
   const HomeScreen({super.key, required this.state, required this.onAction});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    if(mounted){
+      widget.onAction(HomeScreenAction.onLoadPageLoadEvent());
+      setState(() {
+
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +81,14 @@ class HomeScreen extends StatelessWidget {
                   child: TextField(
                     autofocus: false,
                     onTap: () {
-                      print("state.searchData ${state.searchData}");
-                      context.push("/search", extra: state.searchData).then((
+                      print("state.searchData ${widget.state.searchData}");
+                      context.push("/search", extra: widget.state.searchData).then((
                         value,
                       ) {
                         if (value != null) {
                           final result = (value as List).cast<Recipe>();
 
-                          onAction(
+                          widget.onAction(
                             HomeScreenAction.onTapSearchBar(searchData: result),
                           );
 
@@ -149,18 +167,18 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 spacing: 15,
                 children:
-                    state.categoryList
+                    widget.state.categoryList
                         .map(
                           (items) => FilterButton(
                             onTap: () {
-                              onAction(
+                              widget.onAction(
                                 HomeScreenAction.onTapCategoryBadge(
                                   selectString: items,
                                 ),
                               );
                             },
                             text: items,
-                            isSelected: items == state.selectCategory,
+                            isSelected: items == widget.state.selectCategory,
                           ),
                         )
                         .toList(),
@@ -171,95 +189,100 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 spacing: 15,
                 children:
-                    state.categoryFilterRecipeList.map((items) {
+                    widget.state.categoryFilterRecipeList.map((items) {
                       return SizedBox(
                         width:
                             (MediaQuery.of(context).size.width - 40 - 15 * 3) /
                             2,
-                        child: ColumnSuper(
-                          alignment: Alignment.center,
-                          invert: true,
-                          innerDistance: -55,
-                          children: [
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                width: 109,
-                                height: 110,
-                                // margin: EdgeInsets.symmetric(horizontal: 30),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: NetworkImage(items.image),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            AspectRatio(
-                              aspectRatio: 1 / 1.2,
-                              child: AspectRatio(
-                                aspectRatio: 1,
+                        child: GestureDetector(
+                          onTap: (){
+                            context.push('/detail-recipes', extra: items);
+                          },
+                          child: ColumnSuper(
+                            alignment: Alignment.center,
+                            invert: true,
+                            innerDistance: -55,
+                            children: [
+                              Align(
+                                alignment: Alignment.topCenter,
                                 child: Container(
-                                  padding: EdgeInsets.only(
-                                    top: 66,
-                                    left: 10,
-                                    right: 10,
-                                    bottom: 10,
-                                  ),
+                                  width: 109,
+                                  height: 110,
+                                  // margin: EdgeInsets.symmetric(horizontal: 30),
                                   decoration: BoxDecoration(
-                                    color: ColorStyle.gray4,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      Text(
-                                        items.name,
-                                        textAlign: TextAlign.center,
-                                        style: AppTextStyles.smallBold(
-                                          color: ColorStyle.gray1,
-                                        ),
-                                      ),
-                                      Expanded(child: SizedBox()),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Time',
-                                                style:
-                                                    AppTextStyles.smallRegular(
-                                                      color: ColorStyle.gray3,
-                                                    ),
-                                              ),
-                                              Text(
-                                                items.time,
-                                                style:
-                                                AppTextStyles.smallBold(
-                                                  color: ColorStyle.gray1,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: NetworkImage(items.image),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                              AspectRatio(
+                                aspectRatio: 1 / 1.2,
+                                child: AspectRatio(
+                                  aspectRatio: 1,
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                      top: 66,
+                                      left: 10,
+                                      right: 10,
+                                      bottom: 10,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: ColorStyle.gray4,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Text(
+                                          items.name,
+                                          textAlign: TextAlign.center,
+                                          style: AppTextStyles.smallBold(
+                                            color: ColorStyle.gray1,
+                                          ),
+                                        ),
+                                        Expanded(child: SizedBox()),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Time',
+                                                  style:
+                                                      AppTextStyles.smallRegular(
+                                                        color: ColorStyle.gray3,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  items.time,
+                                                  style:
+                                                  AppTextStyles.smallBold(
+                                                    color: ColorStyle.gray1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }).toList(),

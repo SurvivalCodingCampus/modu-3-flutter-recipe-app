@@ -14,7 +14,5 @@ sealed class HomeScreenAction with _$HomeScreenAction {
     required String selectString,
   }) = OnTapCategoryBadge;
 
-  const factory HomeScreenAction.onLoadGetImageSized({
-    required GlobalKey imageKey,
-  }) = OnLoadGetImageSized;
+  const factory HomeScreenAction.onLoadPageLoadEvent() = onLoadPageLoadEvent;
 }

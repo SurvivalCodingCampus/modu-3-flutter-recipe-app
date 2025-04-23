@@ -183,67 +183,33 @@ as String,
 /// @nodoc
 
 
-class OnLoadGetImageSized implements HomeScreenAction {
-  const OnLoadGetImageSized({required this.imageKey});
+class onLoadPageLoadEvent implements HomeScreenAction {
+  const onLoadPageLoadEvent();
   
 
- final  GlobalKey imageKey;
 
-/// Create a copy of HomeScreenAction
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$OnLoadGetImageSizedCopyWith<OnLoadGetImageSized> get copyWith => _$OnLoadGetImageSizedCopyWithImpl<OnLoadGetImageSized>(this, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnLoadGetImageSized&&(identical(other.imageKey, imageKey) || other.imageKey == imageKey));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is onLoadPageLoadEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,imageKey);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeScreenAction.onLoadGetImageSized(imageKey: $imageKey)';
+  return 'HomeScreenAction.onLoadPageLoadEvent()';
 }
 
 
 }
 
-/// @nodoc
-abstract mixin class $OnLoadGetImageSizedCopyWith<$Res> implements $HomeScreenActionCopyWith<$Res> {
-  factory $OnLoadGetImageSizedCopyWith(OnLoadGetImageSized value, $Res Function(OnLoadGetImageSized) _then) = _$OnLoadGetImageSizedCopyWithImpl;
-@useResult
-$Res call({
- GlobalKey imageKey
-});
 
 
-
-
-}
-/// @nodoc
-class _$OnLoadGetImageSizedCopyWithImpl<$Res>
-    implements $OnLoadGetImageSizedCopyWith<$Res> {
-  _$OnLoadGetImageSizedCopyWithImpl(this._self, this._then);
-
-  final OnLoadGetImageSized _self;
-  final $Res Function(OnLoadGetImageSized) _then;
-
-/// Create a copy of HomeScreenAction
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? imageKey = null,}) {
-  return _then(OnLoadGetImageSized(
-imageKey: null == imageKey ? _self.imageKey : imageKey // ignore: cast_nullable_to_non_nullable
-as GlobalKey,
-  ));
-}
-
-
-}
 
 // dart format on
