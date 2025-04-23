@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/recipe_app/data/model/procedure.dart';
-import 'package:recipe_app/recipe_app/data/repository/ingredients_repository.dart';
-import 'package:recipe_app/recipe_app/data/repository/procedure_repository.dart';
-import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/presentation/component/detail_recipe.dart';
 import 'package:recipe_app/recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/recipe_app/presentation/component/procedure_step.dart';
@@ -13,6 +10,7 @@ import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_r
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_view_model.dart';
 
 import '../../core/di/di_setup.dart';
+import '../../ui/button_styles.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
@@ -36,19 +34,10 @@ class _DetailScreenState extends State<DetailScreen> {
     getProcedureUseCase: getIt(),
     ingredientsRepository: getIt(),
   );
-  final repository = RecipeRepository;
-  final procedureRepository = ProcedureRepository;
-  final ingredientRepository = IngredientsRepository;
+
   late int id;
   SelectedTab _selectedTab = SelectedTab.ingredients;
   ActionItem? selectedMenu;
-
-  @override
-  void initState() {
-    super.initState();
-    //  viewModel.getIngredients();
-    print("Loaded ingredients: ${widget.state.ingredient}");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,27 +108,34 @@ class _DetailScreenState extends State<DetailScreen> {
         ],
         actionsPadding: EdgeInsets.only(right: 10),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 10),
-          _buildBody(),
-          SizedBox(height: 15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildTabButton('Ingredients', SelectedTab.ingredients),
-              SizedBox(width: 10),
-              _buildTabButton('Procedure', SelectedTab.procedure),
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildBody(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildTabButton('Ingredients', SelectedTab.ingredients),
+                    SizedBox(width: 10),
+                    _buildTabButton('Procedure', SelectedTab.procedure),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child:
+                      _selectedTab == SelectedTab.ingredients
+                          ? _buildIngredientBody()
+                          : _buildProcedureBody(),
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: 20),
-          Expanded(
-            child:
-                _selectedTab == SelectedTab.ingredients
-                    ? _buildIngredientBody()
-                    : _buildProcedureBody(),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -147,29 +143,37 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget _buildTabButton(String title, SelectedTab tab) {
     final bool isSelected = _selectedTab == tab;
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.black : Colors.grey[300],
-        foregroundColor: isSelected ? Colors.white : Colors.black,
-      ),
+      style:
+          isSelected
+              ? ButtonStyles.detailSelectedButton
+              : ButtonStyles.detailUnSelectedButton,
       onPressed: () {
         setState(() {
           _selectedTab = tab;
         });
       },
-      child: Text(title),
+      child: Text(
+        title,
+        style:
+            isSelected
+                ? TextStyles.smallerTextBold.copyWith(color: Colors.white)
+                : TextStyles.smallerTextBold.copyWith(
+                  color: ColorStyles.primary80,
+                ),
+      ),
     );
   }
 
   Widget _buildBody() {
     return Padding(
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.all(10),
       child: DetailRecipe(recipe: widget.state.recipe!),
     );
   }
 
   Widget _buildProcedureBody() {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: Column(
         children: [
           Row(
@@ -195,15 +199,15 @@ class _DetailScreenState extends State<DetailScreen> {
             ],
           ),
           SizedBox(height: 15),
-          Expanded(
-            child: ListView.separated(
-              itemCount: widget.state.procedure.length,
-              itemBuilder: (context, index) {
-                final Procedure procedure = widget.state.procedure[index];
-                return ProcedureStep(procedure: procedure);
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-            ),
+          ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: widget.state.procedure.length,
+            itemBuilder: (context, index) {
+              final Procedure procedure = widget.state.procedure[index];
+              return ProcedureStep(procedure: procedure);
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
           ),
         ],
       ),
@@ -212,7 +216,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Widget _buildIngredientBody() {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: Column(
         children: [
           Row(
@@ -238,15 +242,15 @@ class _DetailScreenState extends State<DetailScreen> {
             ],
           ),
           SizedBox(height: 15),
-          Expanded(
-            child: ListView.separated(
-              itemCount: widget.state.ingredient.length,
-              itemBuilder: (context, index) {
-                final Ingredient ingredient = widget.state.ingredient[index];
-                return IngredientItem(ingredient: ingredient);
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-            ),
+          ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: widget.state.ingredient.length,
+            itemBuilder: (context, index) {
+              final Ingredient ingredient = widget.state.ingredient[index];
+              return IngredientItem(ingredient: ingredient);
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
           ),
         ],
       ),
