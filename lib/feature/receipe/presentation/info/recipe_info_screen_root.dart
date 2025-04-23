@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/presentation/pages/base_screen.dart';
 import 'package:recipe_app/core/style/app_color.dart';
+import 'package:recipe_app/core/utils/app_show_dialog.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_action.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_state.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_view_model.dart';
 
 class RecipeInfoScreenRoot extends StatefulWidget {
@@ -32,7 +34,57 @@ class _RecipeInfoScreenRootState extends State<RecipeInfoScreenRoot> {
       child: BaseScreen(
         appBar: AppBar(
           backgroundColor: AppColor.white,
-          actions: const [Icon(Icons.more_horiz), SizedBox(width: 20)],
+          actions: [
+            PopupMenuButton<InfoPopupState>(
+              initialValue: widget.viewModel.state.popupState,
+              onSelected: (InfoPopupState item) {},
+              itemBuilder:
+                  (BuildContext context) => <PopupMenuEntry<InfoPopupState>>[
+                    const PopupMenuItem(
+                      value: InfoPopupState.share,
+                      child: Row(
+                        children: [
+                          Icon(Icons.share_outlined),
+                          SizedBox(width: 12),
+                          Text('Share'),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      onTap: () => AppShowDialog.ratingDialog(context),
+                      value: InfoPopupState.rate,
+                      child: const Row(
+                        children: [
+                          Icon(Icons.star),
+                          SizedBox(width: 12),
+                          Text('Rate Recipe'),
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: InfoPopupState.review,
+                      child: Row(
+                        children: [
+                          Icon(Icons.chat),
+                          SizedBox(width: 12),
+                          Text('Review'),
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: InfoPopupState.unsave,
+                      child: Row(
+                        children: [
+                          Icon(Icons.bookmark),
+                          SizedBox(width: 12),
+                          Text('Unsave'),
+                        ],
+                      ),
+                    ),
+                  ],
+            ),
+            const SizedBox(width: 20),
+          ],
         ),
         child: ListenableBuilder(
           listenable: widget.viewModel,

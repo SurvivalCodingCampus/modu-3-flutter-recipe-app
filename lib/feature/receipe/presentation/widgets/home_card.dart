@@ -5,10 +5,12 @@ import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 
 class HomeCard extends StatelessWidget {
   final Recipe recipe;
-  const HomeCard(this.recipe, {super.key});
+  final VoidCallback bookmarkTap;
+  const HomeCard({required this.recipe, required this.bookmarkTap, super.key});
 
   @override
   Widget build(BuildContext context) {
+    print('home card status : ${recipe.bookmarkStatus}');
     return SizedBox(
       height: 230,
       child: Stack(
@@ -52,15 +54,20 @@ class HomeCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.white,
-                      ),
-                      child: const Icon(
-                        Icons.bookmark_outline,
-                        color: AppColor.primary100,
+                    GestureDetector(
+                      onTap: bookmarkTap,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColor.white,
+                        ),
+                        child: Icon(
+                          recipe.bookmarkStatus
+                              ? Icons.bookmark
+                              : Icons.bookmark_outline,
+                          color: AppColor.primary100,
+                        ),
                       ),
                     ),
                   ],
