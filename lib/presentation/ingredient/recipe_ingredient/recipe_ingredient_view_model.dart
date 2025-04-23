@@ -80,6 +80,7 @@ class RecipeIngredientViewModel with ChangeNotifier {
   }
 
   void onRating(int rateValue) {
-    print('별점: ${'⭐' * rateValue}');
+    _state = state.copyWith(recipe: state.recipe.copyWith(rating: rateValue.toDouble()));
+    notifyListeners();
   }
 }
