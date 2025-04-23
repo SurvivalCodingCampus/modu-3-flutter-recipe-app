@@ -24,6 +24,7 @@ import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/toggle_bookmark_use_case.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/splash/splash_view_model.dart';
+import 'package:recipe_app/presentation/main/home/home_view_model.dart';
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_view_model.dart';
 
 final getIt = GetIt.instance;
@@ -52,4 +53,5 @@ void diSetup() {
   getIt.registerFactory(() => SavedRecipesViewModel(getSavedRecipesUseCase: getIt(), toggleBookmarkUseCase: getIt()));
   getIt.registerFactory(() => SearchRecipesViewModel(recipeRepository: getIt(), recentSearchRepository: getIt(), searchRecipesUseCase: getIt()));
   getIt.registerFactory(() => SplashViewModel(settingRepository: getIt()));
+  getIt.registerFactory(() => HomeViewModel(recipeRepository: getIt(), userRepository: getIt(), toggleBookmarkUseCase: getIt()));
 }

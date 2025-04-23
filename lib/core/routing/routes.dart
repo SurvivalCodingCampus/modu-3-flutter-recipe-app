@@ -7,11 +7,12 @@ import 'package:recipe_app/presentation/ingredient/recipe_ingredient/recipe_ingr
 import 'package:recipe_app/presentation/ingredient/recipe_ingredient/recipe_ingredient_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/ingredient/splash/splash_screen.dart';
-import 'package:recipe_app/presentation/main/home/home_screen.dart';
+import 'package:recipe_app/presentation/main/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/main/notification/notification_screen.dart';
 import 'package:recipe_app/presentation/main/profile/profile_screen.dart';
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_screen_root.dart';
 
 final router = GoRouter(
   initialLocation: Routes.splash,
@@ -49,7 +50,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.home,
-              builder: (context, state) => HomeScreen(),
+              builder: (context, state) => HomeScreenRoot(viewModel: getIt()),
             ),
           ],
         ),
@@ -58,7 +59,7 @@ final router = GoRouter(
             GoRoute(
               path: Routes.savedRecipes,
               builder:
-                  (context, state) => SavedRecipesScreen(viewModel: getIt()),
+                  (context, state) => SavedRecipesScreenRoot(viewModel: getIt()),
             ),
           ],
         ),

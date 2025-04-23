@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:recipe_app/presentation/component/button_widget.dart';
 import 'package:recipe_app/presentation/component/filter_button.dart';
-import 'package:recipe_app/presentation/component/rating_button.dart';
+import 'package:recipe_app/presentation/component/filter_search_sheet/rating_button.dart';
 import 'package:recipe_app/presentation/component/rating_dialog.dart';
 
 void main() {
