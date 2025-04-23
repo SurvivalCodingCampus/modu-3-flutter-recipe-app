@@ -10,7 +10,12 @@ import 'package:recipe_app/data/repository/mock_user_repository_impl.dart';
 import 'package:recipe_app/domain/repository/bookmark_repository.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/domain/repository/user_repository.dart';
+import 'package:recipe_app/domain/use_case/get_recipe_by_id_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/get_user_id_use_case.dart';
+import 'package:recipe_app/domain/use_case/get_user_model_use_case.dart';
+import 'package:recipe_app/domain/use_case/set_bookmark_use_case.dart';
+import 'package:recipe_app/presentation/home/home_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/filter_search_view_model.dart';
@@ -46,15 +51,35 @@ void diSetup() {
       bookmarkRepository: getIt(),
     ),
   );
+  getIt.registerSingleton(GetUserIdUseCase());
+  getIt.registerSingleton(
+    SetBookmarkUseCase(userRepository: getIt(), bookmarkRepository: getIt()),
+  );
+  getIt.registerSingleton(
+    SetBookmarkUseCase(userRepository: getIt(), bookmarkRepository: getIt()),
+  );
+  getIt.registerSingleton(GetRecipeByIdUseCase(recipeRepository: getIt()));
+  getIt.registerSingleton(GetUserModelUseCase(userRepository: getIt()));
 
   // 뷰모델 등록
   getIt.registerFactory(
-    () => SavedRecipesViewModel(getSavedRecipesUseCase: getIt()),
+    () => SavedRecipesViewModel(
+      getSavedRecipesUseCase: getIt(),
+      getUserIdUseCase: getIt(),
+      setBookmarkUseCase: getIt(),
+    ),
   );
   getIt.registerFactory(() => FilterSearchViewModel());
   getIt.registerSingleton(SearchRecipesViewModel(recipeRepository: getIt()));
   getIt.registerFactory(
-    () => IngredientViewModel(getSavedRecipesUseCase: getIt()),
+    () => IngredientViewModel(
+      getSavedRecipesUseCase: getIt(),
+      getRecipeByIdUseCase: getIt(),
+      getUserModelUseCase: getIt(),
+    ),
   );
   getIt.registerFactory(() => SplashViewModel());
+  getIt.registerFactory(
+    () => HomeViewModel(userRepository: getIt(), recipeRepository: getIt()),
+  );
 }
