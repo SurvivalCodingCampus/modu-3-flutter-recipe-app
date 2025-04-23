@@ -20,6 +20,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       label: '',
                       placeHolder: 'Search recipe',
                       isSearch: true,
-                      controller: TextEditingController(text: ''),
+                      controller: _textEditingController,
                       onValueChange: (String value) async {},
                       onTap: () {
                         widget.onAction(HomeAction.onSearchTap());
