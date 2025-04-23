@@ -34,6 +34,7 @@ class SearchRecipesScreen extends StatelessWidget {
     return AppBar(
       title: const Text('Search Recipes', style: TextStyles.mediumTextBold),
       centerTitle: true,
+      scrolledUnderElevation: 0,
       leading: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: IconButton(
