@@ -80,13 +80,36 @@ class DishCard extends StatelessWidget {
             ),
           ),
         ),
-
         Positioned(
           top: 0,
           left: 20,
           child: CircleAvatar(
             radius: 55,
             foregroundImage: NetworkImage(recipe.imageUrl),
+          ),
+        ),
+        Positioned(
+          top: 30,
+          right: 0,
+          child: Container(
+            height: 23,
+            width: 45,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: ColorStyles.secondary20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.star, color: ColorStyles.rating, size: 10),
+                SizedBox(width: 2.0),
+                Text(
+                  recipe.rating.toString(),
+                  style: TextStyles.smallerTextRegular,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
         ),
       ],
