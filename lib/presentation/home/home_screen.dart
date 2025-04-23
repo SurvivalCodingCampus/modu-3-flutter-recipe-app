@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/util/category_enum.dart';
-import 'package:recipe_app/presentation/component/filter_list.dart';
-import 'package:recipe_app/presentation/component/input_field.dart';
-import 'package:recipe_app/presentation/component/recipe_category_selector.dart';
+import 'package:recipe_app/presentation/components/filter_list.dart';
+import 'package:recipe_app/presentation/components/input_field.dart';
+import 'package:recipe_app/presentation/components/recipe_category_selector.dart';
 import 'package:recipe_app/presentation/home/components/dish_card.dart';
 import 'package:recipe_app/presentation/home/home_action.dart';
 import 'package:recipe_app/presentation/home/home_state.dart';

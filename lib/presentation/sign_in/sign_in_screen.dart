@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/presentation/component/big_button.dart';
-import 'package:recipe_app/presentation/component/input_field.dart';
+import 'package:recipe_app/presentation/components/big_button.dart';
+import 'package:recipe_app/presentation/components/input_field.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 

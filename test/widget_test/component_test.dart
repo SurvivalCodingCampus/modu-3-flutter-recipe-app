@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/presentation/component/big_button.dart';
-import 'package:recipe_app/presentation/component/input_field.dart';
-import 'package:recipe_app/presentation/component/medium_button.dart';
-import 'package:recipe_app/presentation/component/small_button.dart';
-import 'package:recipe_app/presentation/component/tabs.dart';
+import 'package:recipe_app/presentation/components/big_button.dart';
+import 'package:recipe_app/presentation/components/input_field.dart';
+import 'package:recipe_app/presentation/components/medium_button.dart';
+import 'package:recipe_app/presentation/components/small_button.dart';
+import 'package:recipe_app/presentation/components/tabs.dart';
 
 void main() {
   group('컴포넌트 테스트', () {

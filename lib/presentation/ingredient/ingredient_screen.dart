@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/ingredient_item.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
-import 'package:recipe_app/presentation/component/tabs.dart';
+import 'package:recipe_app/presentation/components/ingredient_item.dart';
+import 'package:recipe_app/presentation/components/recipe_card.dart';
+import 'package:recipe_app/presentation/components/tabs.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_state.dart';
 
 import 'package:recipe_app/ui/color_style.dart';

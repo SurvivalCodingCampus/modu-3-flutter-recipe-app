@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
-import 'package:recipe_app/presentation/component/filter_list.dart';
-import 'package:recipe_app/presentation/component/input_field.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/presentation/components/filter_list.dart';
+import 'package:recipe_app/presentation/components/input_field.dart';
+import 'package:recipe_app/presentation/components/recipe_card.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 import 'package:recipe_app/ui/color_style.dart';

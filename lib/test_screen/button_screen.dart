@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/util/category_enum.dart';
 import 'package:recipe_app/data/util/time_enum.dart';
-import 'package:recipe_app/presentation/component/big_button.dart';
-import 'package:recipe_app/presentation/component/filter_button.dart';
-import 'package:recipe_app/presentation/component/medium_button.dart';
-import 'package:recipe_app/presentation/component/rating_button.dart';
-import 'package:recipe_app/presentation/component/small_button.dart';
+import 'package:recipe_app/presentation/components/big_button.dart';
+import 'package:recipe_app/presentation/components/filter_button.dart';
+import 'package:recipe_app/presentation/components/medium_button.dart';
+import 'package:recipe_app/presentation/components/rating_button.dart';
+import 'package:recipe_app/presentation/components/small_button.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_style.dart';
 

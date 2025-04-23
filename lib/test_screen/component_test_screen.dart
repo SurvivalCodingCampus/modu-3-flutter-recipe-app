@@ -9,11 +9,11 @@ import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
 import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
 import 'package:recipe_app/data/repository/mock_user_repository_impl.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
-import 'package:recipe_app/presentation/component/big_button.dart';
+import 'package:recipe_app/presentation/components/big_button.dart';
 
-import 'package:recipe_app/presentation/component/input_field.dart';
+import 'package:recipe_app/presentation/components/input_field.dart';
 
-import 'package:recipe_app/presentation/component/tabs.dart';
+import 'package:recipe_app/presentation/components/tabs.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
