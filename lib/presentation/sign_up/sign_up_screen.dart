@@ -40,6 +40,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   placeHolder: 'Enter Name',
                   isSearch: false,
                   onValueChange: (String value) {},
+                  onTap: () {
+                  
+                },
                   controller: TextEditingController(),
                 ),
                 SizedBox(height: 20),
@@ -48,6 +51,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   placeHolder: 'Enter Email',
                   isSearch: false,
                   onValueChange: (String value) {},
+                  onTap: () {
+                    
+                  },
                   controller: TextEditingController(),
                 ),
                 SizedBox(height: 20),
@@ -56,6 +62,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   placeHolder: 'Enter Password',
                   isSearch: false,
                   onValueChange: (String value) {},
+                  onTap: () {
+                    
+                  },
                   controller: TextEditingController(),
                 ),
                 SizedBox(height: 20),
@@ -64,6 +73,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   placeHolder: 'Retype Password',
                   isSearch: false,
                   onValueChange: (String value) {},
+                  onTap: () {
+                    
+                  },
                   controller: TextEditingController(),
                 ),
                 SizedBox(height: 20),

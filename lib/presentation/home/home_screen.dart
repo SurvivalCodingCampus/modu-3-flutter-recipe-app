@@ -78,6 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           onValueChange: (String value) async {
                             await widget.viewModel.fetchSearchedRecipes(value);
                           },
+                          onTap: () {
+                            context.push(Routes.search);
+                          },
                         ),
                       ),
                       FilterList(

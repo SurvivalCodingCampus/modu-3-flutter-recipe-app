@@ -71,6 +71,9 @@ void main() {
             isSearch: false,
             controller: TextEditingController(),
             onValueChange: (value) => updatedValue = value,
+            onTap: () {
+              
+            },
           ),
         ),
       ),

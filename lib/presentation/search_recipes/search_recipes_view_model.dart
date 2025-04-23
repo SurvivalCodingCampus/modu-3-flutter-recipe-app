@@ -3,6 +3,7 @@ import 'package:recipe_app/domain/model/filter.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/data/util/rate_enum.dart';
 import 'package:recipe_app/data/util/time_enum.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
@@ -14,6 +15,15 @@ class SearchRecipesViewModel with ChangeNotifier {
     : _recipeRepository = recipeRepository;
 
   SearchRecipesState get state => _state;
+
+  void onAction(SearchRecipesAction action) {
+    switch (action) {
+      case OnFilterTap():
+        break;
+      case OnValueChange():
+        fetchSearchedRecipes(action.value);
+    }
+  }
 
   void whenOpenScreen() {
     _state = _state.copyWith(isLoading: false, isSearched: false);

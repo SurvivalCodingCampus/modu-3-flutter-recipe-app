@@ -23,9 +23,9 @@ class MockRecipeDataSource implements RecipeDataSource {
     final List<Map<String, dynamic>> result =
         recipeList.map((e) {
           String category = e["category"];
-          String imageUrl = e["image"];
+          // String imageUrl = e["image"];
           e["category"] = category.toLowerCase();
-          
+
           return e as Map<String, dynamic>;
         }).toList();
     return result;
