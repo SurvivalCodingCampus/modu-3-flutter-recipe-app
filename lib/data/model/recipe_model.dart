@@ -21,7 +21,7 @@ class Recipe {
     required this.time,
     required this.rating,
     required this.ingredients,
-    this.isBookMarked = true,
+    this.isBookMarked = false,
   });
 
   @override

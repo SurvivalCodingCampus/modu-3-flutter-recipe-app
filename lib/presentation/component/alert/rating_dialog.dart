@@ -28,7 +28,7 @@ class _RatingDialogState extends State<RatingDialog> {
   Widget build(BuildContext context) {
     return Container(
       // padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-      width: 170,
+      width: 120,
       height: 91,
       decoration: BoxDecoration(
         color: ColorStyles.white,
@@ -40,7 +40,7 @@ class _RatingDialogState extends State<RatingDialog> {
         children: [
           Text(
             widget.title,
-            style: TextStyles.smallerRegular.copyWith(
+            style: TextStyles.smallerBold.copyWith(
               color: ColorStyles.black,
               fontSize: 11,
             ),
@@ -54,7 +54,6 @@ class _RatingDialogState extends State<RatingDialog> {
                   setState(() {
                     _selectedStar = index + 1;
                   });
-                  widget.onChange?.call(_selectedStar!);
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 5),
@@ -72,24 +71,32 @@ class _RatingDialogState extends State<RatingDialog> {
               );
             }),
           ),
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(vertical: 10),
-            width: 61,
-            height: 20,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color:
-                  _selectedStar != null
-                      ? ColorStyles.rating
-                      : ColorStyles.gray4,
-            ),
-            child: Text(
-              widget.actionName,
-              textAlign: TextAlign.center,
-              style: TextStyles.smallerRegular.copyWith(
-                color: ColorStyles.white,
-                fontSize: 8,
+          GestureDetector(
+            onTap: () {
+              if (_selectedStar != null) {
+                widget.onChange?.call(_selectedStar!);
+                Navigator.of(context).pop();
+              }
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              width: 61,
+              height: 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color:
+                    _selectedStar != null
+                        ? ColorStyles.rating
+                        : ColorStyles.gray4,
+              ),
+              child: Text(
+                widget.actionName,
+                textAlign: TextAlign.center,
+                style: TextStyles.smallerRegular.copyWith(
+                  color: ColorStyles.white,
+                  fontSize: 8,
+                ),
               ),
             ),
           ),

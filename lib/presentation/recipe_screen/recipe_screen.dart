@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/component/alert/add_pop_up.dart';
 import 'package:recipe_app/presentation/component/tabs.dart';
 import 'package:recipe_app/presentation/recipe_screen/recipe_screen_view_model.dart';
 
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
+import '../component/alert/rating_dialog.dart';
 import '../component/ingredient_list.dart';
 import '../component/recipe_card.dart';
 import '../too_small_button.dart';
@@ -13,15 +15,82 @@ class RecipeScreen extends StatelessWidget {
 
   const RecipeScreen({super.key, required this.viewModel});
 
+  void _showRatingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => Dialog(
+            backgroundColor: Colors.transparent,
+            insetPadding: const EdgeInsets.symmetric(horizontal: 80),
+            child: Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: 170,
+                child: RatingDialog(
+                  title: 'Rate recipe',
+                  actionName: 'Send',
+                  onChange: (rating) {},
+                ),
+              ),
+            ),
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
         actions: [
-          IconButton(
-            icon: Image.asset('assets/images/more.png'),
-            onPressed: () {},
+          AddPopup(
+            onSelected: (value) {
+              if (value == 'star') {
+                _showRatingDialog(context);
+              }
+            },
+            items: const [
+              const PopupMenuItem(
+                value: 'share',
+                child: Row(
+                  children: [
+                    Icon(Icons.share, size: 18),
+                    SizedBox(width: 8),
+                    Text('Share'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'star',
+                child: Row(
+                  children: [
+                    Icon(Icons.star, size: 18),
+                    SizedBox(width: 8),
+                    Text('Rate Recipe'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'review',
+                child: Row(
+                  children: [
+                    Icon(Icons.reviews, size: 18),
+                    SizedBox(width: 8),
+                    Text('Review'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'bookmark',
+                child: Row(
+                  children: [
+                    Icon(Icons.book, size: 18),
+                    SizedBox(width: 8),
+                    Text('Unsave'),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
         elevation: 0,

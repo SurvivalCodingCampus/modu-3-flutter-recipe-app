@@ -12,54 +12,54 @@ class RecipeRepositoryImpl implements RecipeRepository {
 
   @override
   Future<List<Recipe>> getRecipes() async {
-    try {
-      return await dataSource.getRecipes();
-    } catch (e) {
-      rethrow;
+    if (_recipes.isEmpty) {
+      _recipes = await dataSource.getRecipes();
     }
+    return _recipes;
   }
 
   @override
   Future<List<Recipe>> searchRecipes(String keyword) async {
-    try {
-      return await dataSource.searchRecipes(keyword);
-    } catch (e) {
-      rethrow;
+    if (_recipes.isEmpty) {
+      _recipes = await dataSource.getRecipes();
     }
+    return _recipes.where((r) => r.name.contains(keyword)).toList();
   }
 
   @override
   Future<void> toggleBookMarkRecipe(Recipe recipe) async {
     _recipes =
         _recipes.map((r) {
-          return r == recipe
-              ? recipe.copyWith(isBookMarked: !recipe.isBookMarked)
+          return r.id == recipe.id
+              ? r.copyWith(isBookMarked: !r.isBookMarked)
               : r;
         }).toList();
   }
 
   @override
   Future<Recipe> getRecipeById(int id) async {
-    final all = await dataSource.getRecipes();
-    return all.firstWhere((recipe) => recipe.id == id);
+    if (_recipes.isEmpty) {
+      _recipes = await dataSource.getRecipes();
+    }
+    return _recipes.firstWhere((recipe) => recipe.id == id);
   }
-
-  // Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
-  //   final recipes = await dataSource.getRecipes();
-  //   final recipe = recipes.firstWhere((recipe) => recipe.id == recipeId);
-  //   return recipe.procedures;
-  // }
 
   @override
   Future<List<RecipeIngredient>> getIngredientsByRecipe(int id) async {
-    final recipes = await dataSource.getRecipes();
-    final recipe = recipes.firstWhere((recipe) => recipe.id == id);
+    final recipe = await getRecipeById(id);
     return recipe.ingredients;
   }
 
   @override
-  Future<List<Recipe>> getRecipesByIngredient(String ingredient) {
-    // TODO: implement getRecipesByIngredient
-    throw UnimplementedError();
+  Future<List<Recipe>> getRecipesByIngredient(String ingredient) async {
+    if (_recipes.isEmpty) {
+      _recipes = await dataSource.getRecipes();
+    }
+    return _recipes
+        .where(
+          (r) =>
+              r.ingredients.any((i) => i.ingredient.name.contains(ingredient)),
+        )
+        .toList();
   }
 }

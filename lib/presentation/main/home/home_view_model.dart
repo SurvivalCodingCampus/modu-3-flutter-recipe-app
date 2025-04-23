@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/domain/use_case/toggle_book_mark_use_case.dart';
 
 import '../../../data/model/recipe_model.dart';
 import '../../../domain/use_case/get_recipe_use_case.dart';
@@ -6,8 +7,9 @@ import 'home_state.dart';
 
 class HomeViewModel with ChangeNotifier {
   final GetRecipeUseCase getRecipeUseCase;
+  final ToggleBookMarkUseCase toggleBookMarkUseCase;
 
-  HomeViewModel(this.getRecipeUseCase);
+  HomeViewModel(this.getRecipeUseCase, this.toggleBookMarkUseCase);
 
   HomeState _state = const HomeState();
 
@@ -45,20 +47,16 @@ class HomeViewModel with ChangeNotifier {
         .toList();
   }
 
-  void toggleBookmark(Recipe recipe) {
-    final updatedAll =
-        _state.recipes.map((r) {
-          return r == recipe ? r.copyWith(isBookMarked: !r.isBookMarked) : r;
-        }).toList();
+  Future<void> toggleBookmark(Recipe recipe) async {
+    await toggleBookMarkUseCase.toggleBookmark(recipe);
 
-    final updatedFiltered = _filterByCategory(
-      updatedAll,
-      _state.selectedCategory ?? 'All',
-    );
-
+    final updated = await getRecipeUseCase.execute();
     _state = _state.copyWith(
-      recipes: updatedAll,
-      filteredRecipes: updatedFiltered,
+      recipes: [...updated],
+      filteredRecipes: _filterByCategory(
+        updated,
+        _state.selectedCategory ?? 'All',
+      ),
     );
     notifyListeners();
   }

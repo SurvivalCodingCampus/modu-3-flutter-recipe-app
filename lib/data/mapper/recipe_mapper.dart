@@ -4,7 +4,7 @@ import '../model/recipe_ingredient.dart';
 import '../model/recipe_model.dart';
 
 class ToRecipe {
-  static Recipe fromDto(RecipeDto dto, {bool isBookMarked = false}) {
+  static Recipe fromDto(RecipeDto dto, {bool isBookMarked = true}) {
     return Recipe(
       id: dto.id ?? 0,
       category: dto.category ?? '',
