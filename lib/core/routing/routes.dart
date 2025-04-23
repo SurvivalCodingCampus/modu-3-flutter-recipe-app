@@ -11,7 +11,6 @@ import 'package:recipe_app/presentation/main/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/main/notification/notification_screen.dart';
 import 'package:recipe_app/presentation/main/profile/profile_screen.dart';
-import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/main/saved_recipes/saved_recipes_screen_root.dart';
 
 final router = GoRouter(
@@ -41,45 +40,30 @@ final router = GoRouter(
       },
     ),
 
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
-        return MainScreen(navigationShell: navigationShell);
+    ShellRoute(
+      builder: (context, state, child) {
+        return MainScreen(child: child);
       },
-      branches: [
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.home,
-              builder: (context, state) => HomeScreenRoot(viewModel: getIt()),
-            ),
-          ],
+      routes: [
+        GoRoute(
+          path: Routes.home,
+          builder: (context, state) =>
+              HomeScreenRoot(viewModel: getIt()),
         ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.savedRecipes,
-              builder:
-                  (context, state) => SavedRecipesScreenRoot(viewModel: getIt()),
-            ),
-          ],
+        GoRoute(
+          path: Routes.savedRecipes,
+          builder: (context, state) =>
+              SavedRecipesScreenRoot(viewModel: getIt()),
         ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.notifications,
-              builder: (context, state) => NotificationScreen(),
-            ),
-          ],
+        GoRoute(
+          path: Routes.notifications,
+          builder: (context, state) => NotificationScreen(),
         ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.profile,
-              builder: (context, state) => ProfileScreen(),
-            ),
-          ],
+        GoRoute(
+          path: Routes.profile,
+          builder: (context, state) => ProfileScreen(),
         ),
       ],
-    ),
+    )
   ],
 );
