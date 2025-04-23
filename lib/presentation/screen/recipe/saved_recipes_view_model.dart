@@ -5,6 +5,7 @@ import 'package:recipe_app/domain/usecase/unbookmark_recipe_usecase.dart';
 import 'package:recipe_app/domain/repository/bookmark_repository.dart';
 import 'package:recipe_app/presentation/screen/recipe/recipes_state.dart';
 import 'package:recipe_app/presentation/screen/recipe/recipes_ui_model.dart';
+import 'package:recipe_app/presentation/screen/recipe/saved_recipes_action.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
   final GetSavedRecipesUseCase _getSavedRecipesUseCase;
@@ -40,8 +41,8 @@ class SavedRecipesViewModel with ChangeNotifier {
         }
         _hasInitialized = true; // ✅ 한 번만 실행되게 차단
       }
-      
-      // 이 부분 추가 - 항상 초기화 플래그를 true로 설정하여 
+
+      // 이 부분 추가 - 항상 초기화 플래그를 true로 설정하여
       // 이후에는 자동 저장이 발생하지 않도록 함
       _hasInitialized = true;
 
@@ -81,19 +82,36 @@ class SavedRecipesViewModel with ChangeNotifier {
     await _loadAllRecipes();
   }
 
+  void onAction(SavedRecipesAction action) {
+    switch (action) {
+      case ToggleBookmark(:final recipe):
+        toggleBookmark(recipe);
+        break;
+      case UpdateSearchQuery(:final query):
+        updateQuery(query);
+        break;
+      case RefreshRecipes():
+        _loadAllRecipes();
+        break;
+    }
+  }
+
   void updateQuery(String query) {
-    final filtered = query.isEmpty
-        ? _state.allRecipes.where((uiModel) => uiModel.isBookmarked).toList()
-        : _state.allRecipes.where((uiModel) {
-            return uiModel.isBookmarked && 
+    final filtered =
+        query.isEmpty
+            ? _state.allRecipes
+                .where((uiModel) => uiModel.isBookmarked)
+                .toList()
+            : _state.allRecipes.where((uiModel) {
+              return uiModel.isBookmarked &&
                   uiModel.recipe.name.toLowerCase().contains(
                     query.toLowerCase(),
                   );
-          }).toList();
+            }).toList();
 
     _updateState(
       _state.copyWith(
-        searchQuery: query, 
+        searchQuery: query,
         filteredRecipes: filtered,
         isEmpty: filtered.isEmpty, // 검색 결과가 비었는지 상태 갱신
       ),

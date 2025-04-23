@@ -3,7 +3,7 @@ import 'package:recipe_app/data/repository_impl/bookmark_repository_impl.dart';
 import 'package:recipe_app/domain/usecase/get_saved_recipes_usecase_impl.dart';
 import 'package:recipe_app/domain/usecase/unbookmark_recipe_usecase_impl.dart';
 import 'package:recipe_app/presentation/screen/home/home_screen.dart';
-import 'package:recipe_app/presentation/screen/recipe/recipes_screen.dart';
+import 'package:recipe_app/presentation/screen/recipe/recipes_screen_root.dart';
 import 'package:recipe_app/presentation/screen/recipe/saved_recipes_view_model.dart';
 import 'package:recipe_app/data/repository_impl/recipe_repository_impl.dart';
 import 'package:recipe_app/data/data_source/recipe_data_source_impl.dart';
@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final pages = [
       const HomeScreen(), // 홈
-      RecipesScreen(viewModel: viewModel),
+      RecipesScreenRoot(viewModel: viewModel),
       const Placeholder(), // 즐겨찾기
       const Placeholder(), // 설정
     ];

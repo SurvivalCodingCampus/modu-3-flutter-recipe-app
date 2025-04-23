@@ -1,70 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:recipe_app/app/routing/router_path.dart';
-import 'package:recipe_app/app/ui/app_text_styles.dart';
-import 'package:recipe_app/presentation/screen/recipe/saved_recipes_view_model.dart';
-import 'package:recipe_app/presentation/widget/recipe_card.dart'; // 카드 위젯
+import 'package:recipe_app/domain/entity/recipe_model.dart';
+import 'package:recipe_app/presentation/widget/recipe_card.dart';
+import 'package:recipe_app/presentation/screen/recipe/recipes_state.dart';
 
 class RecipesScreen extends StatelessWidget {
-  final SavedRecipesViewModel viewModel;
+  final RecipesState state;
+  final Future<void> Function(Recipe recipe) onBookmarkToggle;
+  final void Function(Recipe recipe) onTapRecipe;
 
-  const RecipesScreen({super.key, required this.viewModel});
+  const RecipesScreen({
+    super.key,
+    required this.state,
+    required this.onBookmarkToggle,
+    required this.onTapRecipe,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: viewModel.init(), // ✅ 여기서 한 번만 호출
-      builder: (context, snapshot) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              'Saved recipes',
-              style: AppTextStyles.mediumBold(color: Colors.black),
-            ),
-          ),
-          body: ListenableBuilder(
-            listenable: viewModel,
-            builder: (context, child) {
-              final state = viewModel.state;
+    if (state.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-              if (state.isLoading) {
-                return const Center(child: CircularProgressIndicator());
-              }
+    final recipes = state.filteredRecipes;
 
-              final recipes = state.filteredRecipes;
+    if (recipes.isEmpty) {
+      return const Center(child: Text("저장된 레시피가 없습니다."));
+    }
 
-              if (recipes.isEmpty) {
-                return const Center(child: Text("저장된 레시피가 없습니다."));
-              }
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      itemCount: recipes.length,
+      itemBuilder: (context, index) {
+        final uiModel = recipes[index];
+        final recipe = uiModel.recipe;
 
-              return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                itemCount: recipes.length,
-                itemBuilder: (context, index) {
-                  final uiModel = recipes[index];
-                  final recipe = uiModel.recipe;
-
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: RecipeCard(
-                      recipeName: recipe.name,
-                      chefName: recipe.chef,
-                      recipeImgUrl: recipe.image,
-                      recipeTime: _extractMinutes(recipe.time),
-                      recipeRating: recipe.rating,
-                      isBookmarked: uiModel.isBookmarked,
-                      onBookmarkTap: () async {
-                        await viewModel.toggleBookmark(recipe);
-                      },
-                      onTap: () {
-                        context.push(RouterPath.ingredient, extra: recipe);
-                      },
-                    ),
-                  );
-                },
-              );
-            },
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: RecipeCard(
+            recipeName: recipe.name,
+            chefName: recipe.chef,
+            recipeImgUrl: recipe.image,
+            recipeTime: _extractMinutes(recipe.time),
+            recipeRating: recipe.rating,
+            isBookmarked: uiModel.isBookmarked,
+            onBookmarkTap: () => onBookmarkToggle(recipe),
+            onTap: () => onTapRecipe(recipe),
           ),
         );
       },
