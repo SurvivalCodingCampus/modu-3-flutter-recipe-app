@@ -35,7 +35,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    final recipes = await _getSavedRecipesUseCase.excute();
+    final recipes = await _getSavedRecipesUseCase.execute();
     final bookMarkList = List.generate(
       recipes.length,
       (index) => recipes[index].recipeId,
@@ -53,9 +53,9 @@ class SavedRecipesViewModel with ChangeNotifier {
     notifyListeners();
 
     // print("세이브 레시피 뷰모델.bookmarkRecipe 실행 recipeId : $recipeId");
-    final bookmarkList = await _setBookmarkUseCase.excute(4, recipeId);
+    final bookmarkList = await _setBookmarkUseCase.execute(4, recipeId);
     // print("북마크리스트 갱신 완료");
-    final recipes = await _getSavedRecipesUseCase.excute();
+    final recipes = await _getSavedRecipesUseCase.execute();
     // print("북마크 후 수정된 recipes : ${_recipes.map((e) => "${e.recipeId} :")}");
 
     _state = _state.copyWith(

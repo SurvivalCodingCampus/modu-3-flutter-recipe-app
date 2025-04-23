@@ -24,7 +24,7 @@ class IngredientViewModel with ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    final recipe = await _getRecipeByIdUseCase.excute(recipeId);
+    final recipe = await _getRecipeByIdUseCase.execute(recipeId);
     _state = _state.copyWith(isLoading: false, recipe: recipe);
     notifyListeners();
   }
@@ -33,7 +33,7 @@ class IngredientViewModel with ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    final userModel = await _getUserModelUseCase.excute(userId);
+    final userModel = await _getUserModelUseCase.execute(userId);
     _state = _state.copyWith(isLoading: false, userModel: userModel);
     notifyListeners();
   }

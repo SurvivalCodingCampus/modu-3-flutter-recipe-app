@@ -7,7 +7,7 @@ class GetRecipeByIdUseCase {
   GetRecipeByIdUseCase({required RecipeRepository recipeRepository})
     : _recipeRepository = recipeRepository;
 
-  Future<Recipe> excute(int recipeId) async {
+  Future<Recipe> execute(int recipeId) async {
     final recipes = await _recipeRepository.getRecipes();
     final recipe = recipes.firstWhere(
       (element) => element.recipeId == recipeId,

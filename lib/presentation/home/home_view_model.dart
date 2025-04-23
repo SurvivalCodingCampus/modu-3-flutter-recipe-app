@@ -41,7 +41,7 @@ class HomeViewModel with ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    final bookmarkList = await _setBookmarkUseCase.excute(4, recipeId);
+    final bookmarkList = await _setBookmarkUseCase.execute(4, recipeId);
     _state = _state.copyWith(bookmarkList: bookmarkList, isLoading: false);
     notifyListeners();
   }
@@ -51,7 +51,7 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
 
     final recipes = await _recipeRepository.getRecipes();
-    final userModel = await _getUserModelUseCase.excute(4);
+    final userModel = await _getUserModelUseCase.execute(4);
     _state = _state.copyWith(
       allRecipes: recipes,
       isLoading: false,

@@ -11,7 +11,7 @@ class SetBookmarkUseCase {
   }) : _userRepository = userRepository,
        _bookmarkRepository = bookmarkRepository;
 
-  Future<List<int>> excute(int userId, int recipeId) async {
+  Future<List<int>> execute(int userId, int recipeId) async {
     // print('useCase setBookmark 진입');
     final userModel = await _userRepository.getUserData(userId);
     // print('useCase setBookmark 끝남 userModel : $userModel');

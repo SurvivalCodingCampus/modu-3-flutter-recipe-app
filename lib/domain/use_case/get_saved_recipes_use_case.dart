@@ -18,7 +18,7 @@ class GetSavedRecipesUseCase {
 
 
 
-  Future<List<Recipe>> excute() async {
+  Future<List<Recipe>> execute() async {
     final recipes = await _recipeRepository.getRecipes();
     final userModel = await _userRepository.getUserData(4);
     final result =
