@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/recipe_app/data_source/mock/mock_recipe_data_impl.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
@@ -28,7 +27,6 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   final TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
   String keyword = '';
-  final mockDataSource = MockRecipeDataImpl();
 
   @override
   void initState() {
@@ -174,7 +172,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                             child: Text(
                               _isSearching == false
                                   ? ''
-                                  : '${widget.searchRecipesViewModel.searchRecipesState.recipes.length} results',
+                                  : '${widget.searchRecipesViewModel.state.recipes.length} results',
                               style: TextStyles.smallerTextRegular.copyWith(
                                 color: ColorStyles.gray3,
                               ),
@@ -190,10 +188,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                         ]),
                         builder: (context, child) {
                           final allRecipes =
-                              widget
-                                  .searchRecipesViewModel
-                                  .searchRecipesState
-                                  .recipes;
+                              widget.searchRecipesViewModel.state.recipes;
                           final filteredByCategory =
                               widget
                                   .filterSearchViewModel
