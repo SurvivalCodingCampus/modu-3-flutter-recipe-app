@@ -60,7 +60,8 @@ class HomeViewModel with ChangeNotifier {
     switch (result) {
       case Success<bool>():
         _state = state.copyWith(
-          recipes:
+          state: ViewState.complete,
+          filteredRecipes:
               state.recipes
                   .map(
                     (e) =>

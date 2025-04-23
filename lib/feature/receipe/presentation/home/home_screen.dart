@@ -108,7 +108,11 @@ class HomeScreen extends StatelessWidget {
                           (e) => Padding(
                             padding: const EdgeInsets.only(right: 12),
                             child: HomeCard(
-                              recipe: e,
+                              id: e.id,
+                              name: e.name,
+                              imgUrl: e.image,
+                              bookmarkStatus: e.bookmarkStatus,
+                              time: e.time,
                               bookmarkTap:
                                   () => onAction(HomeAction.bookmarkTap(e.id)),
                             ),
