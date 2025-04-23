@@ -13,9 +13,6 @@ import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 
-final _homeNavigatorKey = GlobalKey<NavigatorState>();
-final _searchNavigatorKey = GlobalKey<NavigatorState>();
-
 final appRouter = GoRouter(
   initialLocation: Routes.splash,
   routes: [
@@ -55,7 +52,6 @@ final appRouter = GoRouter(
       branches: [
         // 홈 탭
         StatefulShellBranch(
-          navigatorKey: _homeNavigatorKey,
           routes: [
             GoRoute(
               path: Routes.mainHome,

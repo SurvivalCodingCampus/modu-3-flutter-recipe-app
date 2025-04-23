@@ -36,7 +36,7 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
                 await context.push(Routes.recipeDetailPath(recipeId));
               case SearchTouch():
                 await context.push(Routes.homeSearch);
-                widget.viewModel.load(); // 돌아왔을 때 다시 로딩
+                // widget.viewModel.load(); // 돌아왔을 때 다시 로딩
                 break;
               default:
                 widget.viewModel.onAction(action);
