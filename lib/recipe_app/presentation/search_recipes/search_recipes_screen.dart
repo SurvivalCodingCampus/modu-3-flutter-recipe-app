@@ -225,6 +225,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                         onToggleBookMark: () {
                                           false;
                                         },
+                                        showNameAndChef: true,
                                       ),
                                     )
                                     .toList(),

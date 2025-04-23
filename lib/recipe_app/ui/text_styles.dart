@@ -105,4 +105,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w600,
     color: Colors.black,
   );
+
+  static TextStyle regular = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: ColorStyles.gray3,
+  );
 }

@@ -63,6 +63,7 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
             onToggleBookMark: () {
               widget.onAction(SavedRecipesAction.removeBookMark(recipe.id));
             },
+            showNameAndChef: true,
           );
         },
         separatorBuilder: (context, index) => const SizedBox(height: 20),

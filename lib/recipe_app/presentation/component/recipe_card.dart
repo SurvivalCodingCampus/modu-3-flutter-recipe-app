@@ -7,6 +7,7 @@ import '../../data/model/recipe.dart';
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
   final bool showTimerAndBookmark;
+  final bool showNameAndChef;
   final VoidCallback onToggleBookMark;
   final VoidCallback onTapCard;
 
@@ -16,6 +17,7 @@ class RecipeCard extends StatelessWidget {
     required this.showTimerAndBookmark,
     required this.onToggleBookMark,
     required this.onTapCard,
+    required this.showNameAndChef,
   });
 
   @override
@@ -77,33 +79,36 @@ class RecipeCard extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            left: 12,
-            bottom: 15,
-            right: showTimerAndBookmark ? 110 : 70,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  recipe.name,
-                  style:
-                      showTimerAndBookmark
-                          ? TextStyles.menuIntroduceText
-                          : TextStyles.menuIntroduceText.copyWith(fontSize: 11),
-                  maxLines: 2,
-                  overflow: TextOverflow.visible,
-                ),
-                SizedBox(height: 3),
-                Text(
-                  'By ${recipe.chef}',
-                  style:
-                      showTimerAndBookmark
-                          ? TextStyles.chefNameText
-                          : TextStyles.chefNameText.copyWith(fontSize: 8),
-                ),
-              ],
+          if (showNameAndChef == true)
+            Positioned(
+              left: 12,
+              bottom: 15,
+              right: showTimerAndBookmark ? 110 : 70,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    recipe.name,
+                    style:
+                        showTimerAndBookmark
+                            ? TextStyles.menuIntroduceText
+                            : TextStyles.menuIntroduceText.copyWith(
+                              fontSize: 11,
+                            ),
+                    maxLines: 2,
+                    overflow: TextOverflow.visible,
+                  ),
+                  SizedBox(height: 3),
+                  Text(
+                    'By ${recipe.chef}',
+                    style:
+                        showTimerAndBookmark
+                            ? TextStyles.chefNameText
+                            : TextStyles.chefNameText.copyWith(fontSize: 8),
+                  ),
+                ],
+              ),
             ),
-          ),
           if (showTimerAndBookmark == true)
             Positioned(
               right: 12,
