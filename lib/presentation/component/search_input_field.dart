@@ -6,12 +6,15 @@ import 'package:recipe_app/ui/text_font_style.dart';
 class SearchInputField extends StatelessWidget {
   final String placeholder;
   final void Function(String value) onValueChange;
+  final VoidCallback onTap;
+  final bool isRead;
 
   const SearchInputField({
     super.key,
-
     required this.placeholder,
     required this.onValueChange,
+    required this.onTap,
+    required this.isRead,
   });
 
   @override
@@ -20,6 +23,8 @@ class SearchInputField extends StatelessWidget {
       width: 240,
       height: 44,
       child: TextField(
+        onTap: onTap,
+        readOnly: isRead,
         style: TextFontStyle.smallRegular(color: ColorStyle.black),
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search, color: ColorStyle.gray4),

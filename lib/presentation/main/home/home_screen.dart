@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/search_input_field.dart';
 import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
@@ -44,9 +46,18 @@ class HomeScreen extends StatelessWidget {
             Row(
               spacing: 20,
               children: [
-                SearchInputField(
-                  placeholder: 'Search recipe',
-                  onValueChange: (value) {},
+                Hero(
+                  tag: 'Search',
+                  child: Material(
+                    child: SearchInputField(
+                      isRead: true,
+                      placeholder: 'Search recipe',
+                      onValueChange: (value) {},
+                      onTap: () {
+                        context.push(Routes.search);
+                      },
+                    ),
+                  ),
                 ),
                 Container(
                   height: 40,

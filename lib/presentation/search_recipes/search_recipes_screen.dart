@@ -40,11 +40,19 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
             Row(
               spacing: 20,
               children: [
-                SearchInputField(
-                  placeholder: 'Search recipes',
-                  onValueChange: (value) {
-                    widget._viewModel.searchRecipes(value);
-                  },
+                Hero(
+                  tag: 'Search',
+                  child: Material(
+                    child: SearchInputField(
+                      isRead: false,
+                      placeholder: 'Search recipes',
+                      onValueChange: (value) {
+                        widget._viewModel.searchRecipes(value);
+                        widget._viewModel.saveRecentRecipes(value);
+                      },
+                      onTap: () {},
+                    ),
+                  ),
                 ),
                 Container(
                   height: 40,
@@ -162,7 +170,7 @@ class FilterBottomSheet extends StatelessWidget {
                           listenable: _viewModel,
                           builder: (context, snapshot) {
                             return FilterButton(
-                              text: time.name,
+                              text: time.label,
                               isSelected: _viewModel.state.time == time,
                               onChanged: () {
                                 _viewModel.updateSelectedTime(time);
@@ -193,7 +201,7 @@ class FilterBottomSheet extends StatelessWidget {
                           listenable: _viewModel,
                           builder: (context, snapshot) {
                             return FilterButton(
-                              text: fromStar(star).toString(),
+                              text: star.minRating.toInt().toString(),
                               isSelected: _viewModel.state.star == star,
                               onChanged: () {
                                 _viewModel.updateSelectedStar(star);
@@ -224,7 +232,7 @@ class FilterBottomSheet extends StatelessWidget {
                           listenable: _viewModel,
                           builder: (context, snapshot) {
                             return FilterButton(
-                              text: category.name,
+                              text: category.label,
                               isSelected:
                                   _viewModel.state.categoryType == category,
                               onChanged: () {
@@ -252,6 +260,7 @@ class FilterBottomSheet extends StatelessWidget {
                       _viewModel.state.categoryType,
                       _viewModel.state.star,
                       _viewModel.state.time,
+                      _viewModel.state.text,
                     );
                     Navigator.pop(context);
                   },
