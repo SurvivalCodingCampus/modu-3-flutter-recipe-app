@@ -106,7 +106,7 @@ class DishCard extends StatelessWidget {
                           size: 16,
                         ),
                         Text(
-                          '4.5',
+                          '${recipes[index].rating}',
                           style: TextStyles.smallTextRegular.copyWith(
                             color: ColorStyles.black,
                           ),
