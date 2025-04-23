@@ -145,6 +145,9 @@ class HomeScreen extends StatelessWidget {
                     onTapFavorite: (int id) {
                       onAction(HomeAction.onTapFavorite(id));
                     },
+                    onClick: (int id) {
+                      onAction(HomeAction.onDishTap(id));
+                    },
                     recipe: state.filteredRecipes[index],
                     isBookmarked: state.userBookmarks.contains(
                       state.filteredRecipes[index].id,
