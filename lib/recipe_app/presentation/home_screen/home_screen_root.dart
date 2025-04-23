@@ -36,6 +36,9 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
         }
       }
     });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      viewModel.onSelectedCategory('All');
+    });
   }
 
   @override
@@ -52,7 +55,17 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
         return HomeScreen(
           state: state,
           onAction: (HomeScreenAction action) {
-            viewModel.onSelectedCategory(action.category);
+            switch (action) {
+              case SelectCategory():
+                viewModel.onSelectedCategory(action.category);
+                break;
+              case RemoveBookMark():
+                viewModel.removeBookmark(action.id);
+                break;
+              case AddBookMark():
+                viewModel.addBookmark(action.recipe);
+                break;
+            }
           },
         );
       },

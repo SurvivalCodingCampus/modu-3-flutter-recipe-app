@@ -11,9 +11,11 @@ import 'package:recipe_app/recipe_app/domain/repository/select_category_reposito
 import 'package:recipe_app/recipe_app/domain/repository/select_category_repository_impl.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/add_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/filter_category_use_case.dart';
+import 'package:recipe_app/recipe_app/domain/use_case/get_recipe_id_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/remove_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/select_category_use_case.dart';
+import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_recipes_view_model.dart';
@@ -52,6 +54,9 @@ void diSetUp() {
   getIt.registerSingleton<SelectCategoryUseCase>(
     SelectCategoryUseCase(repository: getIt()),
   );
+  getIt.registerSingleton<GetRecipeIdUseCase>(
+    GetRecipeIdUseCase(repository: getIt()),
+  );
   //VieModel
   getIt.registerFactory<SavedRecipesViewModel>(
     () => SavedRecipesViewModel(getIt(), getIt(), getIt()),
@@ -63,7 +68,14 @@ void diSetUp() {
     () => SearchRecipesViewModel(getIt()),
   );
   getIt.registerFactory<HomeScreenViewModel>(
-    () => HomeScreenViewModel(useCase: getIt()),
+    () => HomeScreenViewModel(
+      useCase: getIt(),
+      addBookmarkUseCase: getIt(),
+      removeBookmarkUseCase: getIt(),
+    ),
   );
   getIt.registerFactory<SplashScreenViewModel>(() => SplashScreenViewModel());
+  getIt.registerFactory<DetailRecipeViewModel>(
+    () => DetailRecipeViewModel(repository: getIt(), useCase: getIt()),
+  );
 }

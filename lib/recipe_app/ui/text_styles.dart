@@ -55,6 +55,11 @@ abstract class TextStyles {
     fontWeight: FontWeight.w400,
     color: ColorStyles.titleBlackColor,
   );
+  static TextStyle smallTextBold = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: ColorStyles.gray1,
+  );
   static TextStyle smallerTextRegular = GoogleFonts.poppins(
     fontSize: 11,
     fontWeight: FontWeight.w400,

@@ -49,7 +49,7 @@ class _SavedRecipesScreenRootState extends State<SavedRecipesScreenRoot> {
       listenable: widget.viewModel,
       builder: (_, _) {
         return SavedRecipesScreen(
-          state: state,
+          state: widget.viewModel.state,
           onAction: (SavedRecipesAction action) {
             switch (action) {
               case RemoveBookMark():

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/core/routing/routes.dart';
+import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_screen_root.dart';
 import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_root.dart';
 import 'package:recipe_app/recipe_app/presentation/ingredient_screen/ingredient_screen.dart';
 import 'package:recipe_app/recipe_app/presentation/main_screen/bottom_navigation_bar_scaffold.dart';
@@ -38,6 +39,13 @@ final router = GoRouter(
       path: Routes.ingredientScreen,
       name: 'IngredientScreen',
       builder: (context, state) => const IngredientScreen(),
+    ),
+    GoRoute(
+      path: Routes.detailScreenRoot,
+      builder: (context, state) {
+        final id = int.parse(state.pathParameters['id']!);
+        return DetailScreenRoot(viewModel: getIt(), recipeId: id);
+      },
     ),
     GoRoute(
       path: Routes.searchRecipes,
