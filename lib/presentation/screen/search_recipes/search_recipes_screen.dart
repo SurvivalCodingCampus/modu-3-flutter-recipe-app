@@ -1,53 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/domain/model/filter/filter_enum.dart';
 import 'package:recipe_app/core/component/recipe_card.dart';
 import 'package:recipe_app/core/component/search_field.dart';
 import 'package:recipe_app/core/component/skeleton_effect.dart';
-import 'package:recipe_app/presentation/screen/search_recipes/filter_search_bottom_sheet.dart';
-import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_view_model.dart';
-import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
+import 'package:recipe_app/presentation/screen/search_recipes/action/search_recipe_action.dart';
+import 'package:recipe_app/presentation/screen/search_recipes/state/search_recipe_state.dart';
 
 class SearchRecipesScreen extends StatefulWidget {
-  final SearchRecipesViewModel viewModel;
+  final SearchRecipeState state;
+  // final void Function(String keyword) searchRecipe;
+  // final VoidCallback showFilter;
+  final void Function(SearchRecipeAction action) onAction;
 
-  const SearchRecipesScreen({super.key, required this.viewModel});
+  const SearchRecipesScreen({
+    super.key,
+    required this.state,
+    // required this.searchRecipe,
+    // required this.showFilter,
+    required this.onAction,
+  });
 
   @override
   State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
 }
 
 class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
-  @override
-  void initState() {
-    super.initState();
-    widget.viewModel.fetchRecipe(); // 초기 상태에서 검색 호출
-  }
-
-  void _showFilterBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true, // 전체 화면 조절 가능 모드
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(50.0), // 상단 모서리를 둥글게 처리
-        ),
-      ),
-      builder: (context) {
-        return Wrap(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: FilterSearchBottomSheet(
-                viewModel: widget.viewModel,
-              ), // 자식 위젯 추가
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,120 +53,99 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
             // 검색 필드
             SearchField(
               placeHolder: 'Search recipe',
-              value: '',
+              value: widget.state.keyword,
               onValueChange: (value) {
-                widget.viewModel.searchRecipe(value); // 키워드 업데이트
+                widget.onAction(
+                  SearchRecipeAction.searchRecipe(value),
+                ); // 키워드 업데이트
               },
               onFilterPressed: () {
-                _showFilterBottomSheet(context);
+                widget.onAction(SearchRecipeAction.showFilter());
               },
             ),
             const SizedBox(height: 20),
 
-            // ListenableBuilder 필수!
-            ListenableBuilder(
-              listenable: widget.viewModel,
-              builder: (context, child) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.viewModel.state.keyword.isEmpty &&
-                              widget
-                                      .viewModel
-                                      .state
-                                      .filterSearchState
-                                      .category ==
-                                  Category.all &&
-                              widget.viewModel.state.filterSearchState.rate ==
-                                  0 &&
-                              widget.viewModel.state.filterSearchState.time ==
-                                  Time.all
-                          ? 'Recent Search'
-                          : 'Search recipe',
-                      style: AppTextStyles.normalBold(),
-                    ),
+            subHeader(),
 
-                    widget.viewModel.state.keyword.isEmpty &&
-                            widget.viewModel.state.filterSearchState.category ==
-                                Category.all &&
-                            widget.viewModel.state.filterSearchState.rate ==
-                                0 &&
-                            widget.viewModel.state.filterSearchState.time ==
-                                Time.all
-                        ? const SizedBox.shrink() // null 대신 사용:
-                        : Text(
-                          '${widget.viewModel.state.filterRecipes.length} results',
-                          style: AppTextStyles.smallRegular(
-                            color: ColorStyle.gray3,
-                          ),
-                        ),
-                  ],
-                );
-              },
-            ),
             const SizedBox(height: 20),
 
-            Expanded(
-              child: ListenableBuilder(
-                listenable: widget.viewModel,
-                builder: (context, child) {
-                  final recipes = widget.viewModel.state.filterRecipes;
-                  // 로딩 상태
-                  if (widget.viewModel.state.isLoading) {
-                    return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // 2열 레이아웃
-                            mainAxisSpacing: 16.0, // 세로 간격
-                            crossAxisSpacing: 16.0, // 가로 간격
-                            childAspectRatio: 0.8, // 아이템의 가로/세로 비율
-                          ),
-                      itemCount: 6,
-                      itemBuilder:
-                          (context, index) => const SkeletonEffect(
-                            width: double.infinity,
-                            height: 150,
-                          ),
-                    );
-                  }
-
-                  // 검색 결과 없음
-                  if (recipes.isEmpty) {
-                    return Center(
-                      child: Text(
-                        '레시피가 없습니다🥹',
-                        style: AppTextStyles.mediumRegular(),
-                      ),
-                    );
-                  }
-
-                  // 검색 결과 표시
-                  return GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 16.0,
-                          crossAxisSpacing: 16.0,
-                          childAspectRatio: 0.8,
-                        ),
-                    itemCount: recipes.length,
-
-                    itemBuilder: (context, index) {
-                      final recipe = recipes[index];
-                      return RecipeCard(
-                        recipe: recipe,
-                        isNotIconArea: true,
-                        onBookMarkTap: () {},
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
+            Expanded(child: buildReasult()),
           ],
         ),
       ),
+    );
+  }
+
+  Widget subHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          widget.state.keyword.isEmpty &&
+                  widget.state.filterSearchState.category == Category.all &&
+                  widget.state.filterSearchState.rate == 0 &&
+                  widget.state.filterSearchState.time == Time.all
+              ? 'Recent Search'
+              : 'Search recipe',
+          style: AppTextStyles.normalBold(),
+        ),
+
+        widget.state.keyword.isEmpty &&
+                widget.state.filterSearchState.category == Category.all &&
+                widget.state.filterSearchState.rate == 0 &&
+                widget.state.filterSearchState.time == Time.all
+            ? const SizedBox.shrink() // null 대신 사용:
+            : Text(
+              '${widget.state.filterRecipes.length} results',
+              style: AppTextStyles.smallRegular(color: ColorStyle.gray3),
+            ),
+      ],
+    );
+  }
+
+  Widget buildReasult() {
+    final recipes = widget.state.filterRecipes;
+    // 로딩 상태
+    if (widget.state.isLoading) {
+      return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // 2열 레이아웃
+          mainAxisSpacing: 16.0, // 세로 간격
+          crossAxisSpacing: 16.0, // 가로 간격
+          childAspectRatio: 0.8, // 아이템의 가로/세로 비율
+        ),
+        itemCount: 6,
+        itemBuilder:
+            (context, index) =>
+                const SkeletonEffect(width: double.infinity, height: 150),
+      );
+    }
+
+    // 검색 결과 없음
+    if (recipes.isEmpty) {
+      return Center(
+        child: Text('레시피가 없습니다🥹', style: AppTextStyles.mediumRegular()),
+      );
+    }
+
+    // 검색 결과 표시
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 16.0,
+        crossAxisSpacing: 16.0,
+        childAspectRatio: 0.8,
+      ),
+      itemCount: recipes.length,
+
+      itemBuilder: (context, index) {
+        final recipe = recipes[index];
+        return RecipeCard(
+          recipe: recipe,
+          isNotIconArea: true,
+          onBookMarkTap: () {},
+        );
+      },
     );
   }
 }

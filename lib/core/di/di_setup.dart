@@ -23,6 +23,7 @@ import 'package:recipe_app/domain/repository/procedure_repository.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/domain/repository/user_repository.dart';
 import 'package:recipe_app/domain/use_case/fetch_recipe_use_case.dart';
+import 'package:recipe_app/domain/use_case/fetch_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/filter_serch_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_book_marked_recipes_id_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_login_user_info_use_case.dart';
@@ -31,6 +32,7 @@ import 'package:recipe_app/domain/use_case/get_recipes_by_ids_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_search_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_user_info_use_case.dart';
 import 'package:recipe_app/domain/use_case/save_serch_recipe_use_case.dart';
+import 'package:recipe_app/presentation/screen/main_naivation_bar/home/home_view_model.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/recipe_detail_view_model.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_view_model.dart';
@@ -82,6 +84,9 @@ void diSetup() {
   getIt.registerSingleton<FetchRecipeUseCase>(
     FetchRecipeUseCase(repository: getIt<RecipeRepository>()),
   );
+  getIt.registerSingleton<FetchRecipesUseCase>(
+    FetchRecipesUseCase(repository: getIt<RecipeRepository>()),
+  );
   getIt.registerSingleton<GetBookMarkedRecipesIdUseCase>(
     GetBookMarkedRecipesIdUseCase(repository: getIt<BookMarkRepository>()),
   );
@@ -98,6 +103,14 @@ void diSetup() {
     FilterSerchRecipeUseCase(repository: getIt<RecipeRepository>()),
   );
 
+  // 홈 화면
+  getIt.registerFactory(
+    () => HomeViewModel(
+      getLoginUserInfo: getIt<GetLoginUserInfoUseCase>(),
+      fetchRecipesUseCase: getIt<FetchRecipesUseCase>(),
+    ),
+  );
+
   // 저장된 레시피 화면
   getIt.registerFactory(
     () => SavedRecipesViewModel(
@@ -109,7 +122,7 @@ void diSetup() {
   // 레시피 검색화면
   getIt.registerFactory(
     () => SearchRecipesViewModel(
-      GetSearchRecipeUseCase: getIt<GetSearchRecipeUseCase>(),
+      getSearchRecipeUseCase: getIt<GetSearchRecipeUseCase>(),
       saveSerchRecipeUseCase: getIt<SaveSerchRecipeUseCase>(),
       filterSerchRecipeUseCase: getIt<FilterSerchRecipeUseCase>(),
     ),
@@ -200,7 +213,7 @@ void mockNetworkError() {
   // 레시피 검색화면
   getIt.registerFactory(
     () => SearchRecipesViewModel(
-      GetSearchRecipeUseCase: getIt<GetSearchRecipeUseCase>(),
+      getSearchRecipeUseCase: getIt<GetSearchRecipeUseCase>(),
       saveSerchRecipeUseCase: getIt<SaveSerchRecipeUseCase>(),
       filterSerchRecipeUseCase: getIt<FilterSerchRecipeUseCase>(),
     ),

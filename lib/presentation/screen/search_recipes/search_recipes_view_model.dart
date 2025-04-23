@@ -1,21 +1,24 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/filter/filter_enum.dart';
 import 'package:recipe_app/domain/use_case/filter_serch_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/get_search_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/save_serch_recipe_use_case.dart';
+
 import 'package:recipe_app/presentation/screen/search_recipes/state/search_recipe_state.dart';
 
 class SearchRecipesViewModel with ChangeNotifier {
-  final GetSearchRecipeUseCase _GetSearchRecipeUseCase;
+  final GetSearchRecipeUseCase _getSearchRecipeUseCase;
   final SaveSerchRecipeUseCase _saveSerchRecipeUseCase;
   final FilterSerchRecipeUseCase _filterSerchRecipeUseCase;
 
   SearchRecipesViewModel({
-    required GetSearchRecipeUseCase GetSearchRecipeUseCase,
+    required GetSearchRecipeUseCase getSearchRecipeUseCase,
     required SaveSerchRecipeUseCase saveSerchRecipeUseCase,
     required FilterSerchRecipeUseCase filterSerchRecipeUseCase,
   }) : _saveSerchRecipeUseCase = saveSerchRecipeUseCase,
-       _GetSearchRecipeUseCase = GetSearchRecipeUseCase,
+       _getSearchRecipeUseCase = getSearchRecipeUseCase,
        _filterSerchRecipeUseCase = filterSerchRecipeUseCase;
 
   SearchRecipeState _state = SearchRecipeState();
@@ -26,7 +29,7 @@ class SearchRecipesViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    final searchRecipes = await _GetSearchRecipeUseCase.execute();
+    final searchRecipes = await _getSearchRecipeUseCase.execute();
 
     _state = state.copyWith(
       isLoading: false,
@@ -45,7 +48,6 @@ class SearchRecipesViewModel with ChangeNotifier {
     // 검색된 레시피 내용 저장후 상태 변경
     final filterRecipes = await _saveSerchRecipeUseCase.execute(state.keyword);
     _state = state.copyWith(isLoading: false, filterRecipes: filterRecipes);
-
     notifyListeners();
   }
 

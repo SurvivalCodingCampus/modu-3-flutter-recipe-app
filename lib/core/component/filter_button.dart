@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
@@ -7,6 +8,7 @@ class FilterButton extends StatelessWidget {
   final bool isSelected;
   final IconData? icon;
   final VoidCallback onChange;
+  final bool isReil;
 
   const FilterButton({
     super.key,
@@ -14,6 +16,7 @@ class FilterButton extends StatelessWidget {
     this.isSelected = false,
     this.icon,
     required this.onChange,
+    this.isReil = false,
   });
 
   @override
@@ -35,7 +38,10 @@ class FilterButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: borderColor),
+          border:
+              isReil
+                  ? Border.all(color: Colors.transparent)
+                  : Border.all(color: borderColor),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

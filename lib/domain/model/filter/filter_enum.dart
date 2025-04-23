@@ -36,43 +36,36 @@ Time timeSwitch(String? time) {
 
 enum Category {
   all,
-  cereal,
-  vegetables,
-  dinner,
+  indian,
+  asian,
   chinese,
-  localDish,
-  fruit,
+  japanese,
+  british,
+  italian,
   breakfast,
-  spanish,
-  lunch,
+  french,
 }
 
 Category categorySwitch(String? categroy) {
   switch (categroy) {
     case 'All':
       return Category.all;
-    case 'Cereal':
-      return Category.cereal;
-    case 'Vegetables':
-      return Category.vegetables;
-    case 'Dinner':
-      return Category.dinner;
-    case 'c':
+    case 'Indian':
+      return Category.indian;
+    case 'Asian':
+      return Category.asian;
+    case 'Chinese':
       return Category.chinese;
-    case 'localDish':
-      return Category.localDish;
-    case 'fruit':
-      return Category.fruit;
+    case 'Japanese':
+      return Category.japanese;
+    case 'British':
+      return Category.british;
+    case 'Italian':
+      return Category.italian;
     case 'BreakFast':
       return Category.breakfast;
-    case 'spanish':
-      return Category.spanish;
-    case 'lunch':
-      return Category.lunch;
-    case '':
-      return Category.all;
-    case null:
-      return Category.all;
+    case 'French':
+      return Category.french;
     default:
       return Category.all;
   }

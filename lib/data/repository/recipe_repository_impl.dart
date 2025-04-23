@@ -51,7 +51,6 @@ class RecipeRepositoryImpl implements RecipeRepository {
   Future<List<Recipe>> saveSearchRecipes(List<Recipe> recipes) async {
     final List<Recipe> newRecipes = List.from(recipes);
     _savedSearchRecipes.clear(); // 기존 데이터를 삭제
-    _savedSearchRecipes.addAll(recipes); // 새 데이터를 추가
     _savedSearchRecipes.addAll(newRecipes); // 새 데이터를 추가
     return _savedSearchRecipes; // 업데이트된 리스트 반환
   }

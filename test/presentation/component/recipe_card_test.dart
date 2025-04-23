@@ -17,22 +17,9 @@ void main() {
         ],
         time: 20,
         rating: 4.0,
-        user: User(
-          name: "Mark Kelvin",
-          id: 1,
-          userId: 'user1',
-          email: 'user1@email.com',
-          address: '',
-          password: 'pass123',
-          imageUrl: 'assets/images/tomatos.png',
-        ),
+
         category: Category.breakfast,
-        media: Media(
-          imageId: 'imageId',
-          thumbNailUrl: 'assets/images/tomatos.png',
-          imageUrl: 'imageUrl',
-          recipeVideoUrl: 'recipeVideoUrl',
-        ),
+
         recipeId: 1,
         createdAt: DateTime.now(),
         userName: 'Mark Kelvin',

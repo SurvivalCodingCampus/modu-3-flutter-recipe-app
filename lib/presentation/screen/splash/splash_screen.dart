@@ -7,7 +7,7 @@ import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/core/component/buttons.dart';
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
-import 'package:recipe_app/presentation/screen/splash/splash_event.dart';
+import 'package:recipe_app/presentation/screen/splash/event/splash_event.dart';
 import 'package:recipe_app/presentation/screen/splash/splash_view_model.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/repository/network_error_repository.dart';
-import 'package:recipe_app/presentation/screen/splash/splash_event.dart';
+import 'package:recipe_app/presentation/screen/splash/event/splash_event.dart';
 
 class SplashViewModel with ChangeNotifier {
   final NetworkErrorRepository _errorRepository;

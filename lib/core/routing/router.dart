@@ -3,11 +3,13 @@ import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/example_screen/preview_main.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/home/home_screen.dart';
+import 'package:recipe_app/presentation/screen/main_naivation_bar/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/main_navigation_bar.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/profile/profile_screen.dart';
-import 'package:recipe_app/presentation/screen/main_naivation_bar/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/screen/recipe_detail/recipe_detail_screen.dart';
+import 'package:recipe_app/presentation/screen/main_naivation_bar/saved_recipes/saved_recipes_screen_root.dart';
+import 'package:recipe_app/presentation/screen/recipe_detail/recipe_detail_screen_root.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/screen/search_recipes/search_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/screen/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/screen/sign_up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/screen/splash/splash_screen.dart';
@@ -35,7 +37,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: Routes.home,
               builder: (context, state) {
-                return HomeScreen();
+                return HomeScreenRoot(viewModel: getIt());
               },
             ),
           ],
@@ -45,7 +47,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: Routes.savedRecipe,
               builder: (context, state) {
-                return SavedRecipesScreen(viewModel: getIt());
+                return SavedRecipesScreenRoot(viewModel: getIt());
               },
             ),
           ],
@@ -84,7 +86,8 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: Routes.search,
               builder:
-                  (context, state) => SearchRecipesScreen(viewModel: getIt()),
+                  (context, state) =>
+                      SearchRecipesScreenRoot(viewModel: getIt()),
             ),
           ],
         ),
@@ -96,7 +99,7 @@ final GoRouter router = GoRouter(
       path: Routes.recipeDetail,
       builder: (context, state) {
         final recipeId = state.pathParameters['recipeId'];
-        return RecipeDetailScreen(
+        return RecipeDetailScreenRoot(
           recipeId: int.parse(recipeId!),
           viewModel: getIt(),
         );
