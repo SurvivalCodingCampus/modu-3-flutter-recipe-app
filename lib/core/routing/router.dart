@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/presentation/home/home_screen.dart';
+import 'package:recipe_app/presentation/home/home_screen_root.dart';
+import 'package:recipe_app/presentation/home/home_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_scene.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
@@ -14,7 +15,7 @@ import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dar
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign_up/sign_up_screen.dart';
-import 'package:recipe_app/presentation/splash_screen/splash_screen.dart';
+import 'package:recipe_app/presentation/splash_screen/splash_screen_root.dart';
 import 'package:recipe_app/presentation/splash_screen/splash_view_model.dart';
 
 class AppRouter {
@@ -25,7 +26,7 @@ class AppRouter {
         path: Routes.splash,
         builder:
             (context, state) =>
-                SplashScreen(splashViewModel: getIt<SplashViewModel>()),
+                SplashScreenRoot(viewModel: getIt<SplashViewModel>()),
       ),
 
       GoRoute(path: Routes.signIn, builder: (context, state) => SignInScreen()),
@@ -39,7 +40,9 @@ class AppRouter {
         path: Routes.ingredient,
         builder: (context, state) {
           try {
-            final id = state.pathParameters[RoutesParameters.ingredientRecipeIdParameter]!;
+            final id =
+                state.pathParameters[RoutesParameters
+                    .ingredientRecipeIdParameter]!;
             return IngredientScreen(
               viewModel: getIt<IngredientViewModel>(param1: id),
             );
@@ -66,7 +69,9 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: Routes.home,
-                builder: (context, state) => const HomeScreen(),
+                builder:
+                    (context, state) =>
+                        HomeScreenRoot(viewModel: getIt<HomeViewModel>()),
               ),
             ],
           ),
