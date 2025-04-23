@@ -1,27 +1,23 @@
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/core/routing/routes.dart';
-import 'package:recipe_app/presentation/home/home_screen.dart';
-import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen.dart';
+import 'package:recipe_app/presentation/home/home_screen_root.dart';
+import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen_root.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
 import 'package:recipe_app/presentation/my/my_screen.dart';
 import 'package:recipe_app/presentation/notification/notification_screen.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
-import 'package:recipe_app/presentation/search/search_screen.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
+import 'package:recipe_app/presentation/search/search_screen_root.dart';
 import 'package:recipe_app/presentation/sign-in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign-up/sign_up_screen.dart';
-import 'package:recipe_app/presentation/splash/splash_screen.dart';
+import 'package:recipe_app/presentation/splash/splash_screen_root.dart';
 
 final router = GoRouter(
   initialLocation: Routes.splash,
   routes: [
     GoRoute(
       path: Routes.splash,
-      builder:
-          (context, state) => SplashScreen(
-            viewModel: getIt(),
-            onTapStart: () => context.go(Routes.signIn),
-          ),
+      builder: (context, state) => SplashScreenRoot(viewModel: getIt()),
     ),
     GoRoute(
       path: Routes.signIn,
@@ -39,13 +35,13 @@ final router = GoRouter(
     ),
     GoRoute(
       path: Routes.search,
-      builder: (context, state) => SearchScreen(viewModel: getIt()),
+      builder: (context, state) => SearchScreenRoot(viewModel: getIt()),
     ),
     GoRoute(
       path: Routes.recipeIngredient,
       builder: (context, state) {
         final id = state.pathParameters['recipeId'];
-        return RecipeIngredientScreen(recipeId: id!, viewModel: getIt());
+        return RecipeIngredientScreenRoot(recipeId: id!, viewModel: getIt());
       },
     ),
     StatefulShellRoute.indexedStack(
@@ -66,10 +62,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.home,
-              builder:
-                  (context, state) => HomeScreen(
-                    onTapSearch: () => context.push(Routes.search),
-                  ),
+              builder: (context, state) => HomeScreenRoot(viewModel: getIt()),
             ),
           ],
         ),
@@ -78,7 +71,8 @@ final router = GoRouter(
             GoRoute(
               path: Routes.save,
               builder:
-                  (context, state) => SavedRecipesScreen(viewModel: getIt()),
+                  (context, state) =>
+                      SavedRecipesScreenRoot(viewModel: getIt()),
             ),
           ],
         ),

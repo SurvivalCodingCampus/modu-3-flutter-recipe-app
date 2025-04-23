@@ -4,8 +4,11 @@ import 'package:recipe_app/data/remote_data_source/remote_data_source.dart';
 import 'package:recipe_app/data/repository/repository.dart';
 import 'package:recipe_app/data/repository/search_recipe_repository_impl.dart';
 import 'package:recipe_app/domain/repository/repository.dart';
+import 'package:recipe_app/domain/use_case/get_all_categories_use_case.dart';
+import 'package:recipe_app/domain/use_case/get_recipes_by_category_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/use_case.dart';
+import 'package:recipe_app/presentation/home/home_view_model.dart';
 import 'package:recipe_app/presentation/recipe_ingredient/recipe_ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes.dart';
 import 'package:recipe_app/presentation/search/search.dart';
@@ -49,6 +52,17 @@ void diSetUp() {
     ),
   );
 
+  getIt.registerSingleton<GetAllCategoriesUseCase>(
+    GetAllCategoriesUseCase(recipeRepository: getIt()),
+  );
+
+  getIt.registerSingleton(
+    GetRecipesByCategoryUseCase(
+      recipeRepository: getIt(),
+      bookmarkRepository: getIt(),
+    ),
+  );
+
   getIt.registerSingleton<SearchRecipeUseCase>(
     SearchRecipeUseCase(
       recipeRepository: getIt(),
@@ -80,6 +94,14 @@ void diSetUp() {
   getIt.registerFactory<SplashViewModel>(
     () => SplashViewModel(networkRepository: getIt()),
   );
+
+  getIt.registerFactory<HomeViewModel>(
+    () => HomeViewModel(
+      toggleBookmarkRecipeUseCase: getIt(),
+      getAllCategoriesUseCase: getIt(),
+      getRecipesByCategoryUseCase: getIt(),
+    ),
+  );
 }
 
 void networkErrorDiSetup() {
@@ -99,6 +121,9 @@ void networkErrorDiSetup() {
     ProcedureRepositoryImpl(procedureDataSource: getIt()),
   );
   getIt.registerSingleton<NetworkRepository>(FailNetworkRepositoryImpl());
+  getIt.registerSingleton<SearchRecipeRepository>(
+    SearchRecipeRepositoryImpl(localSearchResultDataSource: getIt()),
+  );
 
   // UseCase
   getIt.registerSingleton<GetSavedRecipesUseCase>(

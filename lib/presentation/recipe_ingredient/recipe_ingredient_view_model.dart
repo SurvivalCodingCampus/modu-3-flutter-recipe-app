@@ -32,4 +32,9 @@ class RecipeIngredientViewModel with ChangeNotifier {
     );
     notifyListeners();
   }
+
+  void onTapTabItem(int index) {
+    _state = state.copyWith(selectedTabIndex: index);
+    notifyListeners();
+  }
 }
