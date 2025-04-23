@@ -57,7 +57,7 @@ class _RecipeCategorySelectorState extends State<RecipeCategorySelector> {
         separatorBuilder: (context, index) {
           return SizedBox(width: 10);
         },
-        itemCount: Categories.values.length,
+        itemCount: widget.categories.length,
       ),
     );
   }
