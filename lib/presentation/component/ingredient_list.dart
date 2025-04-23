@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../data/model/recipe_ingredient.dart';
+import '../../data/model/recipe_model.dart';
 
 class IngredientList extends StatelessWidget {
-  final List<RecipeIngredient> ingredients;
+  final Recipe recipe;
 
-  const IngredientList({super.key, required this.ingredients});
+  const IngredientList({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: ingredients.length,
+      itemCount: recipe.ingredients.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        final item = ingredients[index];
+        final item = recipe.ingredients[index];
 
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 6),

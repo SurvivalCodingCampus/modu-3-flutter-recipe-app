@@ -40,12 +40,11 @@ class RecipeRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<Recipe> getRecipeById(String recipeId) async {
+  Future<Recipe> getRecipeById(int id) async {
     final all = await dataSource.getRecipes();
-    return all.firstWhere((recipe) => recipe.id == recipeId);
+    return all.firstWhere((recipe) => recipe.id == id);
   }
 
-  @override
   Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
     final recipes = await dataSource.getRecipes();
     final recipe = recipes.firstWhere((recipe) => recipe.id == recipeId);
@@ -53,9 +52,15 @@ class RecipeRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<List<RecipeIngredient>> getIngredientsByRecipe(String recipeId) async {
+  Future<List<RecipeIngredient>> getIngredientsByRecipe(int id) async {
     final recipes = await dataSource.getRecipes();
-    final recipe = recipes.firstWhere((recipe) => recipe.id == recipeId);
+    final recipe = recipes.firstWhere((recipe) => recipe.id == id);
     return recipe.ingredients;
+  }
+
+  @override
+  Future<List<Recipe>> getRecipesByIngredient(String ingredient) {
+    // TODO: implement getRecipesByIngredient
+    throw UnimplementedError();
   }
 }

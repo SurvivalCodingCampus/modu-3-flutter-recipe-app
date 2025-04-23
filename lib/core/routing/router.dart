@@ -38,9 +38,7 @@ final router = GoRouter(
       path: Routes.recipeScreen,
       builder: (context, state) {
         final recipe = state.extra as Recipe;
-        return RecipeScreen(
-          viewModel: RecipeScreenViewModel(getIt(), getIt(), getIt()),
-        );
+        return RecipeScreen(viewModel: RecipeScreenViewModel(recipe));
       },
     ),
     GoRoute(

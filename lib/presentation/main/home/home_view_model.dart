@@ -24,11 +24,9 @@ class HomeViewModel with ChangeNotifier {
   }
 
   void updateCategory(String category) {
-    print('호출: $category');
     _state = _state.copyWith(selectedCategory: category);
 
     final filtered = _filterByCategory(_state.recipes, category);
-    print('필터링된 레시피 수: ${filtered.length}');
     _state = _state.copyWith(filteredRecipes: filtered);
     notifyListeners();
   }

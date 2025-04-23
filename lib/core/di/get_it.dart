@@ -6,7 +6,6 @@ import '../../data/data_source/recipe/recipe_data_source_impl.dart';
 import '../../data/repository/recipe_repository/recipe_repository.dart';
 import '../../data/repository/recipe_repository/recipe_repository_impl.dart';
 import '../../domain/use_case/get_ingredient_by_use_case.dart';
-import '../../domain/use_case/get_procedure_by_use_case.dart';
 import '../../domain/use_case/get_recipe_by_use_case.dart';
 import '../../domain/use_case/get_recipe_use_case.dart';
 import '../../domain/use_case/get_saved_recipes_use_case.dart';
@@ -32,9 +31,9 @@ void diSetup() {
   getIt.registerSingleton<GetIngredientByUseCase>(
     GetIngredientByUseCase(getIt()),
   );
-  getIt.registerSingleton<GetProceduresByRecipeUseCase>(
-    GetProceduresByRecipeUseCase(getIt()),
-  );
+  // getIt.registerSingleton<GetProceduresByRecipeUseCase>(
+  //   GetProceduresByRecipeUseCase(getIt()),
+  // );
   getIt.registerSingleton<ToggleBookMarkUseCase>(
     ToggleBookMarkUseCase(getIt()),
   );
@@ -48,7 +47,7 @@ void diSetup() {
   // viewModel
   getIt.registerSingleton<HomeViewModel>(HomeViewModel(getIt()));
   getIt.registerFactory<RecipeScreenViewModel>(
-    () => RecipeScreenViewModel(getIt(), getIt(), getIt()),
+    () => RecipeScreenViewModel(getIt()),
   );
   getIt.registerFactory<SavedRecipeViewModel>(
     () => SavedRecipeViewModel(getIt(), getIt()),

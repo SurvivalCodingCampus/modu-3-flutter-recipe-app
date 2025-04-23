@@ -92,22 +92,28 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<Recipe> getRecipeById(String recipeId) async {
+  Future<Recipe> getRecipeById(int id) async {
     await Future.delayed(Duration(seconds: 1));
-    return _recipes.firstWhere((recipe) => recipe.id.toString() == recipeId);
+    return _recipes.firstWhere((recipe) => recipe.id == id);
   }
 
   @override
-  Future<List<RecipeIngredient>> getIngredientsByRecipe(String recipeId) async {
+  Future<List<RecipeIngredient>> getIngredientsByRecipe(int id) async {
     await Future.delayed(Duration(seconds: 1));
-    final recipe = await getRecipeById(recipeId);
+    final recipe = await getRecipeById(id);
     return recipe.ingredients;
   }
 
   @override
-  Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
-    await Future.delayed(Duration(seconds: 1));
-    final recipe = await getRecipeById(recipeId);
-    return recipe.procedures;
+  Future<List<Recipe>> getRecipesByIngredient(String ingredient) {
+    // TODO: implement getRecipesByIngredient
+    throw UnimplementedError();
   }
+
+  // @override
+  // Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
+  //   await Future.delayed(Duration(seconds: 1));
+  //   final recipe = await getRecipeById(recipeId);
+  //   return recipe.procedures;
+  // }
 }
