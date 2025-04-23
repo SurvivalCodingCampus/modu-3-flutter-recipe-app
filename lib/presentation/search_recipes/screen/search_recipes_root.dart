@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/presentation/components/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/presentation/search_recipes/screen/search_recipes_screen.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 
 class SearchRecipeRoot extends StatefulWidget {
@@ -27,9 +28,7 @@ class _SearchRecipeRootState extends State<SearchRecipeRoot> {
       builder: (BuildContext context, Widget? child) {
         return SearchRecipesSreen(
           controller: controller,
-          onChange: (value) {
-            widget.viewModel.search(value);
-          },
+          onAction: widget.viewModel.action,
           onSettingsClick: () {
             showModalBottomSheet(
               context: context,
@@ -38,10 +37,14 @@ class _SearchRecipeRootState extends State<SearchRecipeRoot> {
                 return FilterSearchBottomSheet(
                   state: widget.viewModel.state.filtetState,
                   onfilterClick: (filterState) {
-                    widget.viewModel.searchFilter(filterState);
+                    widget.viewModel.action(
+                      SearchRecipesAction.searchFilter(filterState),
+                    );
                   },
                   onCancelClick: (filterState) {
-                    widget.viewModel.findRecipes();
+                    widget.viewModel.action(
+                      const SearchRecipesAction.findRecipes(),
+                    );
                   },
                 );
               },

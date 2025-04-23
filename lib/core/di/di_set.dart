@@ -12,6 +12,7 @@ import 'package:recipe_app/domain/repository/bookmark_repository.dart';
 import 'package:recipe_app/domain/repository/procedure_repository.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/presentation/home/home_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
@@ -41,4 +42,5 @@ void di() {
   getIt.registerFactory(() => SavedRecipesViewModel(getIt()));
   getIt.registerFactory(() => IngredientViewModel(getIt(), getIt()));
   getIt.registerFactory(() => SplashViewModel());
+  getIt.registerFactory(() => HomeViewModel(getIt(), getIt()));
 }

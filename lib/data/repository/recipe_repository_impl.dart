@@ -65,4 +65,25 @@ class RecipeRepositoryImpl implements RecipeRepository {
       return const Result.error(RecipeErrorEnum.networkerror);
     }
   }
+
+  @override
+  Future<Result<List<Recipe>, RecipeErrorEnum>> findRecipeByCategory(
+    String category,
+  ) async {
+    try {
+      List<Recipe> recipes = await _getRecipe();
+
+      if (category == 'All') {
+        return Result.success(recipes);
+      }
+
+      return Result.success(
+        recipes
+            .where((r) => r.category.name == category.toLowerCase())
+            .toList(),
+      );
+    } catch (e) {
+      return const Result.error(RecipeErrorEnum.networkerror);
+    }
+  }
 }

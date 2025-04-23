@@ -7,4 +7,7 @@ abstract interface class RecipeRepository
     implements BaseRepository<Recipe, RecipeErrorEnum> {
   Future<Result<Recipe, RecipeErrorEnum>> findRecipeById(int id);
   Future<Result<List<Recipe>, RecipeErrorEnum>> findRecipeByQuery(String query);
+  Future<Result<List<Recipe>, RecipeErrorEnum>> findRecipeByCategory(
+    String category,
+  );
 }

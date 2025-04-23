@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/presentation/components/recipe_tile.dart';
 import 'package:recipe_app/core/presentation/components/search_zone.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
 class SearchRecipesSreen extends StatelessWidget {
-  final void Function(String value) onChange;
+  final void Function(SearchRecipesAction action) onAction;
   final SearchRecipesState state;
   final TextEditingController controller;
   final VoidCallback onSettingsClick;
 
   const SearchRecipesSreen({
     super.key,
-    required this.onChange,
+    required this.onAction,
     required this.state,
     required this.controller,
     required this.onSettingsClick,
@@ -32,7 +33,9 @@ class SearchRecipesSreen extends StatelessWidget {
           spacing: 20,
           children: [
             SearchZone(
-              onChange: onChange,
+              onChange: (value) {
+                onAction(SearchRecipesAction.search(value));
+              },
               controller: controller,
               onSettingsClick: onSettingsClick,
             ),

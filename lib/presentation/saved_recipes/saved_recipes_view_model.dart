@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_action.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 import 'package:recipe_app/utils/errors/recipe_error_enum.dart';
 import 'package:recipe_app/utils/result/result.dart';
@@ -13,7 +14,18 @@ class SavedRecipesViewModel with ChangeNotifier {
 
   SavedRecipesViewModel(this._savedRecipesUseCase);
 
-  Future<void> findRecipes() async {
+  Future<void> action(SavedRecipesAction action) async {
+    switch (action) {
+      case OnBookmarkClick():
+        _removeBookmark(action.bookmarkId);
+      case FindRecipes():
+        _findRecipes();
+      case OnCardClick():
+        break;
+    }
+  }
+
+  Future<void> _findRecipes() async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
@@ -29,14 +41,14 @@ class SavedRecipesViewModel with ChangeNotifier {
     }
   }
 
-  Future<void> addBookmark(int id) async {
+  Future<void> _addBookmark(int id) async {
     await _savedRecipesUseCase.bookmarkRepository.save(id);
     notifyListeners();
   }
 
-  Future<void> removeBookmark(int id) async {
+  Future<void> _removeBookmark(int id) async {
     await _savedRecipesUseCase.bookmarkRepository.unSave(id);
-    await findRecipes();
+    await _findRecipes();
     notifyListeners();
   }
 }

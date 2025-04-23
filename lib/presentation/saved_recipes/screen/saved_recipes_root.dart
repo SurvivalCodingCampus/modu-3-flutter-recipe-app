@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_action.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/screen/saved_recipes_screen.dart';
 
@@ -23,11 +24,17 @@ class SavedRecipeRoot extends StatelessWidget {
         }
 
         return SavedRecipeScreen(
-          recipes: viewModel.state.recipes,
-          onBookmarkClick: (value) {
-            viewModel.removeBookmark(value);
+          recipes: viewModel.state,
+          onAction: (action) {
+            switch (action) {
+              case OnCardClick():
+                onCardClick(action.cardId);
+              case OnBookmarkClick():
+                viewModel.action(action);
+              case FindRecipes():
+                viewModel.action(action);
+            }
           },
-          onCardClick: onCardClick,
         );
       },
       listenable: viewModel,

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/presentation/components/recipe_card.dart';
-import 'package:recipe_app/domain/model/recipe.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_action.dart';
+import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 import 'package:recipe_app/ui/text_styles.dart';
 
 class SavedRecipeScreen extends StatelessWidget {
-  final List<Recipe> recipes;
-  final void Function(int value) onBookmarkClick;
-  final void Function(int value) onCardClick;
+  final SavedRecipesState recipes;
+  final void Function(SavedRecipesAction action) onAction;
 
   const SavedRecipeScreen({
     super.key,
     required this.recipes,
-    required this.onBookmarkClick,
-    required this.onCardClick,
+    required this.onAction,
   });
 
   @override
@@ -27,12 +26,16 @@ class SavedRecipeScreen extends StatelessWidget {
         child: ListView.builder(
           itemBuilder: (BuildContext context, int index) {
             return RecipeCard(
-              onCardClick: onCardClick,
-              onBookmarkClick: onBookmarkClick,
-              recipe: recipes[index],
+              onCardClick: (value) {
+                onAction(SavedRecipesAction.onCardClick(value));
+              },
+              onBookmarkClick: (value) {
+                onAction(SavedRecipesAction.onBookmarkClick(value));
+              },
+              recipe: recipes.recipes[index],
             );
           },
-          itemCount: recipes.length,
+          itemCount: recipes.recipes.length,
         ),
       ),
     );

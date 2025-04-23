@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipes_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_state.dart';
 import 'package:recipe_app/utils/errors/recipe_error_enum.dart';
 import 'package:recipe_app/utils/result/result.dart';
@@ -16,7 +17,18 @@ class SearchRecipesViewModel with ChangeNotifier {
   SearchRecipesViewModel(RecipeRepository repository)
     : _repository = repository;
 
-  Future<void> findRecipes() async {
+  Future<void> action(SearchRecipesAction action) async {
+    switch (action) {
+      case Search():
+        _search(action.value);
+      case SearchFilter():
+        _searchFilter(action.state);
+      case FindRecipes():
+        _findRecipes();
+    }
+  }
+
+  Future<void> _findRecipes() async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
@@ -41,7 +53,7 @@ class SearchRecipesViewModel with ChangeNotifier {
     }
   }
 
-  Future<void> search(String query) async {
+  Future<void> _search(String query) async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
@@ -63,7 +75,7 @@ class SearchRecipesViewModel with ChangeNotifier {
     }
   }
 
-  Future<void> searchFilter(FilterState filterState) async {
+  Future<void> _searchFilter(FilterState filterState) async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
