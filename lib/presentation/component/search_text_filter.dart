@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/search_recipes/search_recipe_view_model.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipe_state.dart';
 import 'package:recipe_app/ui/color.dart';
 
 import '../../ui/text.dart';
 
 class SearchTextFilter extends StatelessWidget {
-  final SearchRecipeViewModel viewModel;
+  final SearchRecipeState state;
+  final void Function(String) onKeywordChanged;
 
 
-  const SearchTextFilter({super.key, required this.viewModel});
+  const SearchTextFilter({super.key, required this.state, required this.onKeywordChanged, });
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,7 @@ class SearchTextFilter extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onChanged: (text) {
-                    viewModel.searchKeyword(text);
-                  },
+                  onChanged: onKeywordChanged,
                 ),
               ),
               SizedBox(width: 10,),
@@ -62,11 +61,11 @@ class SearchTextFilter extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                viewModel.state.keyword.isEmpty ? 'Recent Search' : 'Search Result',
+                state.keyword.isEmpty ? 'Recent Search' : 'Search Result',
                 style: TextStyles.normalTextBold,
               ),
-              if (viewModel.state.keyword.isNotEmpty)
-                Text('${viewModel.state.filterRecipes.length} results',
+              if (state.keyword.isNotEmpty)
+                Text('${state.filterRecipes.length} results',
                 style: TextStyles.smallerTextRegular.copyWith(
                   color: Colors.grey,
                 ),)

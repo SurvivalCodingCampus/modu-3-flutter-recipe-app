@@ -19,6 +19,7 @@ import '../presentation/recipe_detail/recipe_detail_screen.dart';
 import '../presentation/saved_recipe/saved_recipe_screen.dart';
 import '../presentation/saved_recipe/saved_recipe_view_model.dart';
 import '../presentation/search_recipes/search_recipe_screen.dart';
+import '../presentation/search_recipes/search_recipe_screen_root.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -77,7 +78,7 @@ final router = GoRouter(
             GoRoute(
               path: Routes.search,
               builder:
-                  (context, state) => SearchRecipeScreen(
+                  (context, state) => SearchRecipeScreenRoot(
                 viewModel: getIt<SearchRecipeViewModel>(),
               ),
             ),

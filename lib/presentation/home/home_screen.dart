@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/search_text_filter.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipe_action.dart';
 
 import '../../ui/color.dart';
 import '../../ui/text.dart';
@@ -66,7 +67,14 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                SearchTextFilter(viewModel: viewModel)
+                SearchTextFilter(
+                  state: viewModel.state,
+                  onKeywordChanged: (keyword) {
+                    viewModel.onAction(
+                      SearchRecipeAction.onKeywordChanged(keyword)
+                    );
+                  },
+                )
               ],
             ),
           ),

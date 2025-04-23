@@ -32,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen> {
       if (mounted) {
         switch (event) {
           case networkSuccess():
-            print('succeeeeee');
             context.go(Routes.signIn);
           case networkError():
             ScaffoldMessenger.of(context).showSnackBar(
@@ -112,7 +111,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   MediumButton(
                     onClick: () {
                       widget.viewModel.onSuccess();
-                      print('쿠ㅡ릭');
                       // context.go(Routes.signIn);
                     }, name: 'Start Cooking',
                   )

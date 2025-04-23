@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/presentation/filter_search_bottom_sheet/filter_search_state.dart';
+import 'package:recipe_app/presentation/search_recipes/search_recipe_action.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipe_state.dart';
 
 
@@ -21,8 +22,19 @@ class SearchRecipeViewModel with ChangeNotifier {
   FilterSearchState _filterSearchState = FilterSearchState();
   FilterSearchState get filterSearchState => _filterSearchState;
 
+  void onAction(SearchRecipeAction action) {
+    switch (action) {
+      case OnFetchAll():
+        _fetchAll();
+        break;
+      case OnKeywordChanged(:final keyword):
+        _searchKeyword(keyword);
+        break;
+    }
+  }
 
-  Future<void> fetchAll() async {
+
+  Future<void> _fetchAll() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
@@ -33,7 +45,7 @@ class SearchRecipeViewModel with ChangeNotifier {
 
     notifyListeners();
   }
-  void searchKeyword(String keyword) {
+  void _searchKeyword(String keyword) {
     _state = _state.copyWith(keyword: keyword);
     selectedFilter();
   }
