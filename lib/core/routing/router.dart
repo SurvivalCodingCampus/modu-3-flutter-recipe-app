@@ -10,6 +10,9 @@ import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/presentation/common/component/nav_bar_component.dart';
 import 'package:recipe_app/presentation/common/ui/color_style.dart';
 import 'package:recipe_app/presentation/page/detail_recipes/detail_recipes_screen.dart';
+import 'package:recipe_app/presentation/page/detail_recipes/detail_recipes_screen_root.dart';
+import 'package:recipe_app/presentation/page/detail_recipes/detail_recipes_state.dart';
+import 'package:recipe_app/presentation/page/detail_recipes/detail_recipes_view_model.dart';
 import 'package:recipe_app/presentation/page/home/home_screen.dart';
 import 'package:recipe_app/presentation/page/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/page/home/home_view_model.dart';
@@ -49,7 +52,7 @@ final GoRouter router = GoRouter(
       path: Routes.detailRecipes,
       builder: (context, state) {
         final data = state.extra as Recipe;
-        return DetailRecipesScreen(recipesData: data);
+        return DetailRecipesScreenRoot(recipesData: data);
       },
     ),
     StatefulShellRoute.indexedStack(
