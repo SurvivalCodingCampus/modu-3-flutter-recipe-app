@@ -13,11 +13,10 @@ import 'package:recipe_app/presentation/page/search_recipes/search_recipes_view_
 
 class SearchRecipesScreen extends StatefulWidget {
   final SearchRecipesViewModel viewModel;
-  final List<Recipe> searchResult;
+
   const SearchRecipesScreen({
     super.key,
     required this.viewModel,
-    required this.searchResult,
   });
   @override
   State<SearchRecipesScreen> createState() => _SearchRecipesScreenState();
@@ -31,7 +30,7 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
   void initState() {
     super.initState();
     _controller.addListener(_onTextChanged);
-    widget.viewModel.getRecipes(beforeSearchList: widget.searchResult);
+    // widget.viewModel.getRecipes(beforeSearchList: widget.searchResult);
   }
 
   void _onTextChanged() async {

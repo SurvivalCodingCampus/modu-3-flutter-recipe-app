@@ -3,24 +3,15 @@ import 'package:recipe_app/domain/model/recipe/recipe.dart';
 
 part 'search_recipes_state.freezed.dart';
 
-@freezed
-class SearchRecipesState with _$SearchRecipesState {
-  @override
-  final List<Recipe> recipes;
-  @override
-  final List<Recipe> filterRecipes;
-  @override
-  final String searchKeyWord;
-  @override
-  final bool searchState;
-  @override
-  final bool isSearchLoading;
 
-  const SearchRecipesState({
-    this.recipes = const [],
-    this.filterRecipes = const [],
-    this.searchState = false,
-    this.searchKeyWord = '',
-    this.isSearchLoading = false,
-  });
+@freezed
+abstract class SearchRecipesState with _$SearchRecipesState {
+  const factory SearchRecipesState({
+    @Default([]) List<Recipe> recipes,
+    @Default([]) List<Recipe> filterRecipes,
+    @Default([]) List<Recipe> beforeSearchRecipes,
+    @Default('') String searchKeyWord,
+    @Default(false) bool searchState,
+    @Default(false) bool isSearchLoading,
+  }) = _SearchRecipesState;
 }
