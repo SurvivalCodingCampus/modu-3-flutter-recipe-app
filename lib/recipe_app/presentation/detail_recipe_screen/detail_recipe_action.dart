@@ -5,4 +5,6 @@ part 'detail_recipe_action.freezed.dart';
 @freezed
 sealed class DetailRecipeAction with _$DetailRecipeAction {
   const factory DetailRecipeAction.getRecipeById(int id) = GetRecipeById;
+
+  const factory DetailRecipeAction.getProcedureById(int id) = GetProcedureById;
 }

@@ -3,7 +3,7 @@ import 'package:recipe_app/recipe_app/data/mapper/procedure_mapper.dart';
 import 'package:recipe_app/recipe_app/data/model/procedure.dart';
 import 'package:recipe_app/recipe_app/data_source/procedure_data_source.dart';
 
-class MockRecipeDataImpl implements ProcedureDataSource {
+class MockProcedureDataImpl implements ProcedureDataSource {
   @override
   Future<List<Procedure>> getProcedureData() async {
     Map<String, dynamic> json = mockProcedures;

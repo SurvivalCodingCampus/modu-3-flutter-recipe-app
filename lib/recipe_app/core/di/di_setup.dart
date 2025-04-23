@@ -1,7 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:recipe_app/recipe_app/data/repository/procedure_repository.dart';
+import 'package:recipe_app/recipe_app/data/repository/procedure_repository_impl.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/recipe_app/data_source/mock/mock_procedure_data_impl.dart';
 import 'package:recipe_app/recipe_app/data_source/mock/mock_recipe_data_impl.dart';
+import 'package:recipe_app/recipe_app/data_source/procedure_data_source.dart';
 import 'package:recipe_app/recipe_app/data_source/recipe_data_source.dart';
 import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository.dart';
 import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository_impl.dart';
@@ -11,6 +15,7 @@ import 'package:recipe_app/recipe_app/domain/repository/select_category_reposito
 import 'package:recipe_app/recipe_app/domain/repository/select_category_repository_impl.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/add_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/filter_category_use_case.dart';
+import 'package:recipe_app/recipe_app/domain/use_case/get_procedure_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_recipe_id_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/remove_bookmark_use_case.dart';
@@ -27,9 +32,13 @@ final getIt = GetIt.instance;
 void diSetUp() {
   //DataSource
   getIt.registerSingleton<RecipeDataSource>(MockRecipeDataImpl());
+  getIt.registerSingleton<ProcedureDataSource>(MockProcedureDataImpl());
   // Repository
   getIt.registerSingleton<RecipeRepository>(
     RecipeRepositoryImpl(recipeDataSource: getIt()),
+  );
+  getIt.registerSingleton<ProcedureRepository>(
+    ProcedureRepositoryImpl(dataSource: getIt()),
   );
   getIt.registerSingleton<BookMarkRepository>(
     BookMarkRepositoryImpl(recipeDataSource: getIt()),
@@ -57,6 +66,9 @@ void diSetUp() {
   getIt.registerSingleton<GetRecipeIdUseCase>(
     GetRecipeIdUseCase(repository: getIt()),
   );
+  getIt.registerSingleton<GetProcedureUseCase>(
+    GetProcedureUseCase(repository: getIt()),
+  );
   //VieModel
   getIt.registerFactory<SavedRecipesViewModel>(
     () => SavedRecipesViewModel(getIt(), getIt(), getIt()),
@@ -76,6 +88,6 @@ void diSetUp() {
   );
   getIt.registerFactory<SplashScreenViewModel>(() => SplashScreenViewModel());
   getIt.registerFactory<DetailRecipeViewModel>(
-    () => DetailRecipeViewModel(repository: getIt(), useCase: getIt()),
+    () => DetailRecipeViewModel(useCase: getIt(), getProcedureUseCase: getIt()),
   );
 }
