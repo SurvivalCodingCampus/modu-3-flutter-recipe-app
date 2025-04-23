@@ -92,6 +92,9 @@ class HomeScreen extends StatelessWidget {
                 } else {
                   return DishCard(
                     recipes: state.savedRecipes,
+                    onTapCard:
+                        (int recipeId) =>
+                            onAction(HomeAction.onTapCard(recipeId)),
                     onTapBookmark:
                         (int recipeId) =>
                             onAction(HomeAction.onTapBookmark(recipeId)),

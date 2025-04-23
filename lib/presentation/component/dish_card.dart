@@ -5,7 +5,8 @@ import 'package:recipe_app/ui/text_styles.dart';
 
 class DishCard extends StatelessWidget {
   static const String _bookmarkIcon = "assets/icons/bookmark.png";
-  final Function(int recipeId) onTapBookmark;
+  final void Function(int recipeId) onTapBookmark;
+  final void Function(int recipeId) onTapCard;
 
   final List<Recipe> recipes;
 
@@ -13,6 +14,7 @@ class DishCard extends StatelessWidget {
     super.key,
     required this.recipes,
     required this.onTapBookmark,
+    required this.onTapCard,
   });
 
   @override
@@ -28,11 +30,14 @@ class DishCard extends StatelessWidget {
               children: [
                 Positioned.fill(
                   top: 55,
-                  child: Container(
-                    height: 176,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: ColorStyles.gray4.withValues(alpha: 0.5),
+                  child: GestureDetector(
+                    onTap: () => onTapCard(recipes[index].id),
+                    child: Container(
+                      height: 176,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: ColorStyles.gray4.withValues(alpha: 0.5),
+                      ),
                     ),
                   ),
                 ),

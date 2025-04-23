@@ -32,10 +32,16 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
             switch (action) {
               case OnTapBookmark():
                 widget.viewModel.onAction(action);
+                break;
               case OnTapSearchBar():
                 context.push(Routes.search);
+                break;
               case OnTapCategory():
                 widget.viewModel.onAction(action);
+                break;
+              case OnTapCard(:final int recipeId):
+                context.push('/ingredient/$recipeId');
+                break;
             }
           },
         );

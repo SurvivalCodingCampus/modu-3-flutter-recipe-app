@@ -20,9 +20,11 @@ class HomeViewModel with ChangeNotifier {
       case OnTapBookmark(:final int recipeId):
         _removeRecipe(recipeId);
         break;
-      case OnTapCategory(:final String category):
+      case OnTapCategory():
         break;
       case OnTapSearchBar():
+        break;
+      case OnTapCard():
         break;
     }
   }
