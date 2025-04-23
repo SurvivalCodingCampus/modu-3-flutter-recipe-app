@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/use_case/get_procedure_by_use_case.dart';
 import 'package:recipe_app/presentation/recipe_screen/recipe_screen_state.dart';
 
+import '../../data/model/recipe_model.dart';
 import '../../domain/use_case/get_ingredient_by_use_case.dart';
-import '../../domain/use_case/get_recipe_by_use_case.dart';
 
 class RecipeScreenViewModel with ChangeNotifier {
-  final String recipeId;
-  final GetRecipeByUseCase _getRecipe;
+  final Recipe recipe;
+
   final GetIngredientByUseCase _getIngredients;
   final GetProceduresByRecipeUseCase _getProcedures;
 
@@ -16,11 +16,11 @@ class RecipeScreenViewModel with ChangeNotifier {
   RecipeScreenState get state => _state;
 
   RecipeScreenViewModel(
-    this.recipeId,
-    this._getRecipe,
+    this.recipe,
     this._getIngredients,
     this._getProcedures,
   ) {
+    _state = _state.copyWith(recipe: recipe);
     loadData();
   }
 
@@ -29,12 +29,10 @@ class RecipeScreenViewModel with ChangeNotifier {
     notifyListeners();
 
     try {
-      final recipe = await _getRecipe.execute(recipeId);
-      final ingredients = await _getIngredients.execute(recipeId);
-      final procedures = await _getProcedures.execute(recipeId);
+      final ingredients = await _getIngredients.execute(recipe.id.toString());
+      final procedures = await _getProcedures.execute(recipe.id.toString());
 
       _state = _state.copyWith(
-        recipe: recipe,
         ingredients: ingredients,
         procedures: procedures,
         isLoading: false,

@@ -3,16 +3,19 @@ import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/first/splash_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 
+import '../../data/model/recipe_model.dart';
 import '../../presentation/first/splash_screen_view_model.dart';
 import '../../presentation/main/home/home.dart';
+import '../../presentation/main/home/home_action.dart';
 import '../../presentation/main/home/home_tab.dart';
+import '../../presentation/main/home/home_view_model.dart';
 import '../../presentation/main/sign_in/sign_in.dart';
 import '../../presentation/main/sign_in/sign_in_view_model.dart';
 import '../../presentation/main/sign_up/sign_up.dart';
 import '../../presentation/main/sign_up/sign_up_view_model.dart';
 import '../../presentation/recipe_screen/recipe_screen.dart';
 import '../../presentation/recipe_screen/recipe_screen_view_model.dart';
-import '../../presentation/saved_recipe/saved_recipe_screen.dart';
+import '../../presentation/saved_recipe/saved_recipe_screen_root.dart';
 import '../di/get_it.dart';
 
 final router = GoRouter(
@@ -34,9 +37,9 @@ final router = GoRouter(
     GoRoute(
       path: Routes.recipeScreen,
       builder: (context, state) {
-        final recipeId = state.pathParameters['id']!;
+        final recipe = state.extra as Recipe;
         return RecipeScreen(
-          viewModel: RecipeScreenViewModel(getIt(), getIt(), getIt(), getIt()),
+          viewModel: RecipeScreenViewModel(getIt(), getIt(), getIt()),
         );
       },
     ),
@@ -50,7 +53,6 @@ final router = GoRouter(
       },
     ),
 
-    // ShellRoute로 bottom nav 구조 관리
     ShellRoute(
       builder: (context, state, child) {
         return HomeTab(child: child);
@@ -58,12 +60,20 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: Routes.home,
-          builder: (context, state) => Home(viewModel: getIt()),
+          builder:
+              (context, state) => Home(
+                viewModel: getIt(),
+                onAction: (action) {
+                  if (action is OnSelectCategory) {
+                    getIt<HomeViewModel>().updateCategory(action.category);
+                  }
+                },
+              ),
         ),
         GoRoute(
           path: Routes.savedRecipes,
           builder: (context, state) {
-            return SavedRecipeScreen(viewModel: getIt());
+            return SavedRecipeScreenRoot(viewModel: getIt());
           },
         ),
         // GoRoute(

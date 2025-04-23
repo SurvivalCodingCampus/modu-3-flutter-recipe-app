@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/data_source/recipe/recipe_data_source_impl.dart';
-import 'package:recipe_app/presentation/component/new_recipe_card.dart';
-import 'package:recipe_app/presentation/component/recommend_card.dart';
+import 'package:recipe_app/presentation/component/dish_card.dart';
+import 'package:recipe_app/presentation/main/home/home_action.dart';
 
 import 'data/model/recipe_model.dart';
 import 'data/repository/recipe_repository/recipe_repository_impl.dart';
@@ -56,12 +56,13 @@ class _RecipeCardTestScreenState extends State<RecipeCardTestScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('NewRecipeCard 테스트')),
       body: Center(
-        child: RecommendCard(
+        child: DishCard(
           recipe: _recipe,
           isBookMarked: _recipe!.isBookMarked,
           onTap: () {
             print('카드 클릭됨!');
           },
+          onAction: (HomeAction action) {},
         ),
       ),
     );

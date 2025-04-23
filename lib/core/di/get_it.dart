@@ -48,7 +48,7 @@ void diSetup() {
   // viewModel
   getIt.registerSingleton<HomeViewModel>(HomeViewModel(getIt()));
   getIt.registerFactory<RecipeScreenViewModel>(
-    () => RecipeScreenViewModel(getIt(), getIt(), getIt(), getIt()),
+    () => RecipeScreenViewModel(getIt(), getIt(), getIt()),
   );
   getIt.registerFactory<SavedRecipeViewModel>(
     () => SavedRecipeViewModel(getIt(), getIt()),

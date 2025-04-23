@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 
 import '../../ui/text_styles.dart';
+import '../main/home/home_action.dart';
 
 class CategoryTabs extends StatefulWidget {
   final List<String> categories;
   final Function(String) onSelected;
+  final void Function(HomeAction action) onAction;
 
   const CategoryTabs({
     super.key,
     required this.categories,
     required this.onSelected,
+    required this.onAction,
   });
 
   @override
