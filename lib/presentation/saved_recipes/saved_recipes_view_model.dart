@@ -26,8 +26,6 @@ class SavedRecipesViewModel with ChangeNotifier {
     final Result<List<Recipe>, RecipeError> result =
         await _getSavedRecipesUseCase.execute();
 
-    print(result);
-
     switch (result) {
       case Success(:final data):
         _state = _state.copyWith(recipes: data, isLoading: false);
