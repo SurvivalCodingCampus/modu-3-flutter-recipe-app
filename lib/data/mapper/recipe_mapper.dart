@@ -1,41 +1,31 @@
-import 'package:recipe_app/data/dto/ingredient_item_dto.dart';
-import 'package:recipe_app/data/mapper/procedure_mapper.dart';
-import 'package:recipe_app/data/mapper/recipe_ingredient_mapper.dart';
-import '../dto/procedure_dto.dart';
 import '../dto/recipe_dto.dart';
+import '../model/ingredients_model.dart';
+import '../model/recipe_ingredient.dart';
 import '../model/recipe_model.dart';
 
-extension RecipeMapper on RecipeDto {
-  Recipe toRecipe(
-    List<ProcedureStepDto> allProcedures,
-    List<RecipeIngredientDto> allIngredients,
-  ) {
-    final procedures = ProcedureMapper.fromDtoList(allProcedures, id ?? 0);
-    final ingredients = RecipeIngredientMapper.fromDtoList(
-      allIngredients,
-      id ?? 0,
-    );
-
+class ToRecipe {
+  static Recipe fromDto(RecipeDto dto, {bool isBookMarked = false}) {
     return Recipe(
-      id: id ?? 0,
-      category: category ?? '',
-      name: name ?? '',
-      imageUrl: image ?? '',
-      chef: chef ?? '',
-      time: time ?? '',
-      rating: rating ?? 0.0,
-      ingredients: ingredients,
-      procedures: procedures,
+      id: dto.id ?? 0,
+      category: dto.category ?? '',
+      name: dto.name ?? '',
+      imageUrl: dto.image ?? '',
+      chef: dto.chef ?? '',
+      time: dto.time ?? '',
+      rating: dto.rating ?? 0.0,
+      ingredients:
+          (dto.ingredients ?? []).map((e) {
+            final ing = e.ingredient;
+            return RecipeIngredient(
+              ingredient: Ingredient(
+                id: ing?.id ?? 0,
+                name: ing?.name ?? '',
+                imageUrl: ing?.image ?? '',
+              ),
+              amount: e.amount ?? 0,
+            );
+          }).toList(),
+      isBookMarked: isBookMarked,
     );
-  }
-
-  static List<Recipe> fromDtoList(
-    List<RecipeDto> dtos,
-    List<ProcedureStepDto> allProcedures,
-    List<RecipeIngredientDto> allIngredients,
-  ) {
-    return dtos
-        .map((dto) => dto.toRecipe(allProcedures, allIngredients))
-        .toList();
   }
 }

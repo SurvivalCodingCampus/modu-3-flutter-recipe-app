@@ -1,7 +1,6 @@
 import 'package:recipe_app/data/repository/recipe_repository/recipe_repository.dart';
 
 import '../../data_source/recipe/recipe_data_source.dart';
-import '../../model/procedure_model.dart';
 import '../../model/recipe_ingredient.dart';
 import '../../model/recipe_model.dart';
 
@@ -45,11 +44,11 @@ class RecipeRepositoryImpl implements RecipeRepository {
     return all.firstWhere((recipe) => recipe.id == id);
   }
 
-  Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
-    final recipes = await dataSource.getRecipes();
-    final recipe = recipes.firstWhere((recipe) => recipe.id == recipeId);
-    return recipe.procedures;
-  }
+  // Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
+  //   final recipes = await dataSource.getRecipes();
+  //   final recipe = recipes.firstWhere((recipe) => recipe.id == recipeId);
+  //   return recipe.procedures;
+  // }
 
   @override
   Future<List<RecipeIngredient>> getIngredientsByRecipe(int id) async {
