@@ -11,6 +11,7 @@ import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/remove_saved_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/save_recent_search_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipes_use_case.dart';
+import 'package:recipe_app/presentation/home/home_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_screen_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
@@ -33,6 +34,8 @@ void diSetUp() {
   getIt.registerFactory<SearchRecipesViewModel>(
     () => SearchRecipesViewModel(getIt(), getIt()),
   );
+
+  getIt.registerFactory<HomeViewModel>(() => HomeViewModel(getIt(), getIt()));
 
   getIt.registerSingleton<GetRecentSearchRecipesUseCase>(
     GetRecentSearchRecipesUseCase(getIt()),

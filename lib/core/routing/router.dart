@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di.dart';
 import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/presentation/component/bottom_navigation_bar_scaffold.dart';
-import 'package:recipe_app/presentation/home/home_screen.dart';
+import 'package:recipe_app/presentation/home/home_screen_root.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_screen.dart';
 import 'package:recipe_app/presentation/login/login_screen.dart';
 import 'package:recipe_app/presentation/register/register_screen.dart';
@@ -47,7 +47,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.home,
-              builder: (context, state) => const HomeScreen(),
+              builder: (context, state) => HomeScreenRoot(viewModel: getIt()),
             ),
             GoRoute(
               path: Routes.bookmarks,
