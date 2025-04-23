@@ -16,6 +16,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Chef John",
         "time": "20 min",
         "rating": 4.0,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {
@@ -64,6 +65,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Mark Kelvin",
         "time": "20 min",
         "rating": 4.0,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {
@@ -112,6 +114,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Spicy Nelly",
         "time": "20 min",
         "rating": 4.0,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {
@@ -151,6 +154,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Kim Dahee",
         "time": "30 min",
         "rating": 5.0,
+        "bookmarkStatus": true,
         "ingredients": [],
       },
       {
@@ -162,6 +166,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Alice Johnson",
         "time": "25 min",
         "rating": 4.5,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {
@@ -192,6 +197,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Gordon Ramsay",
         "time": "45 min",
         "rating": 5.0,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {
@@ -222,6 +228,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Mario Batali",
         "time": "15 min",
         "rating": 4.3,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {
@@ -243,6 +250,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Jiro Ono",
         "time": "60 min",
         "rating": 4.8,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {
@@ -273,6 +281,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Julia Child",
         "time": "40 min",
         "rating": 4.6,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {
@@ -294,6 +303,7 @@ class MockSearchRecipeDataSourceImpl implements SearchRecipeDataSource {
         "chef": "Paul Hollywood",
         "time": "30 min",
         "rating": 4.9,
+        "bookmarkStatus": true,
         "ingredients": [
           {
             "ingredient": {

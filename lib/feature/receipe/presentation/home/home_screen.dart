@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/core/router/routes.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
 import 'package:recipe_app/core/presentation/pages/base_screen.dart';
 import 'package:recipe_app/core/presentation/widgets/textfield/search_textfield.dart';
+import 'package:recipe_app/feature/receipe/presentation/home/home_action.dart';
+import 'package:recipe_app/feature/receipe/presentation/home/home_state.dart';
+import 'package:recipe_app/feature/receipe/presentation/widgets/filter_button.dart';
 import 'package:recipe_app/feature/receipe/presentation/widgets/filter_search_button.dart';
+import 'package:recipe_app/feature/receipe/presentation/widgets/home_card.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  final HomeState state;
+  final void Function(HomeAction action) onAction;
+  const HomeScreen({required this.state, required this.onAction, super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final _search = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    if (state.state == ViewState.loading) {
+      return const BaseScreen(
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
     return BaseScreen(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -60,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     child: SearchTextfield(
-                      controller: _search,
+                      controller: TextEditingController(),
                       onChanged: (val) {},
                       enabled: false,
                     ),
@@ -70,9 +76,58 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  children:
+                      _categories
+                          .map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: FilterButton(
+                                text: e,
+                                isSelected: state.filter == e,
+                                onTap: () {
+                                  onAction(HomeAction.sortRecipes(e));
+                                },
+                              ),
+                            ),
+                          )
+                          .toList(),
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children:
+                    state.filteredRecipes
+                        .map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: HomeCard(e),
+                          ),
+                        )
+                        .toList(),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
+  List<String> get _categories => [
+    'All',
+    'Indian',
+    'Asian',
+    'Chinese',
+    'Japanese',
+    'American',
+    'British',
+    'Italian',
+    'French',
+  ];
 }

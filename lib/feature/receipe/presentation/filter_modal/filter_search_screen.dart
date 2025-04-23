@@ -96,7 +96,6 @@ class FilterSearch extends StatelessWidget {
                 child: AppButton(
                   text: 'Filter',
                   onClick: () {
-                    viewModel.filterData();
                     Navigator.pop(context);
                   },
                   type: ButtonType.small,

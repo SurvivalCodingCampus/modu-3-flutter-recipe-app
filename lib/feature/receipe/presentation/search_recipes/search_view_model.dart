@@ -5,6 +5,7 @@ import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_recent_search_text_use_case.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/saved_recipes/save_recent_search_text_use_case.dart';
+import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_action.dart';
 import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_state.dart';
 
 class SearchViewModel with ChangeNotifier {
@@ -26,7 +27,24 @@ class SearchViewModel with ChangeNotifier {
   // UI 변경 유무 상태값
   bool get isChangeUI => _state.isFiltered || _state.searchText.isNotEmpty;
 
-  void fetchSearchData() async {
+  void onAction(SearchAction action) {
+    switch (action) {
+      case FetchSearchData():
+        _fetchSearchData();
+      case FilterData():
+        _filterData(
+          time: action.time,
+          rate: action.rate,
+          category: action.category,
+        );
+      case SearchData():
+        _searchData(action.text);
+      case GetRecentSearchText():
+        _getRecentSearchText();
+    }
+  }
+
+  void _fetchSearchData() async {
     try {
       _state = state.copyWith(viewState: ViewState.loading);
       notifyListeners();
@@ -47,7 +65,7 @@ class SearchViewModel with ChangeNotifier {
     }
   }
 
-  void filterData({
+  void _filterData({
     required String time,
     required int rate,
     required String category,
@@ -76,7 +94,7 @@ class SearchViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void searchData(String text) {
+  void _searchData(String text) {
     _state = state.copyWith(searchText: text);
     // 현재 필터링됐는지 안됐는지에 따라
     // 다르게 기본 베이스 데이터를 설정
@@ -91,12 +109,12 @@ class SearchViewModel with ChangeNotifier {
         data: baseData.where((e) => e.name.contains(text)).toList(),
         viewState: ViewState.complete,
       );
-      saveSearchText(text);
+      _saveSearchText(text);
     }
     notifyListeners();
   }
 
-  void getRecentSearchText() async {
+  void _getRecentSearchText() async {
     final result = await _getRecentSearchTextUseCase.execute();
     switch (result) {
       case Success<List<String>>():
@@ -110,7 +128,7 @@ class SearchViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void saveSearchText(String text) async {
+  void _saveSearchText(String text) async {
     final result = await _saveRecentSearchTextUseCase.execute(text);
     switch (result) {
       case Success<List<String>>():

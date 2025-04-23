@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/feature/receipe/presentation/filter_modal/filter_search_state.dart';
-import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_view_model.dart';
 
 class FilterSearchViewModel with ChangeNotifier {
-  final SearchViewModel _searchViewModel;
-  FilterSearchViewModel(this._searchViewModel);
+  FilterSearchViewModel();
 
   FilterSearchState _originalState = const FilterSearchState();
   FilterSearchState _state = const FilterSearchState();
@@ -33,16 +31,5 @@ class FilterSearchViewModel with ChangeNotifier {
   // 데이터 리셋
   void resetData() {
     _state = _originalState.copyWith();
-  }
-
-  // 데이터 필터링
-  void filterData() {
-    changeOriginalData();
-    notifyListeners();
-    _searchViewModel.filterData(
-      time: _state.time,
-      rate: _state.rate,
-      category: _state.category,
-    );
   }
 }

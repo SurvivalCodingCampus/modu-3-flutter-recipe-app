@@ -6,15 +6,15 @@ import 'package:recipe_app/core/presentation/pages/root_tab.dart';
 import 'package:recipe_app/core/presentation/pages/splash/splash_view_model.dart';
 import 'package:recipe_app/feature/auth/presentation/pages/sign_up_screen.dart';
 import 'package:recipe_app/feature/auth/presentation/pages/sing_in_screen.dart';
-import 'package:recipe_app/feature/receipe/presentation/home/home_screen.dart';
 import 'package:recipe_app/feature/notification/presentation/pages/notification_screen.dart';
 import 'package:recipe_app/feature/profile/presentation/pages/profile_screen.dart';
-import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/home/home_screen_root.dart';
+import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_screen_root.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_view_model.dart';
-import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_screen_root.dart';
 import 'package:recipe_app/feature/receipe/presentation/saved_recipes/saved_recipes_view_model.dart';
-import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_screen.dart';
 import 'package:recipe_app/core/presentation/pages/splash/splash_screen.dart';
+import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_screen_root.dart';
 import 'package:recipe_app/feature/receipe/presentation/search_recipes/search_view_model.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -51,7 +51,7 @@ final routes = [
     path: AppRoutes.search,
     builder: (context, state) {
       final SearchViewModel viewModel = getIt();
-      return SearchScreen(viewModel);
+      return SearchScreenRoot(viewModel);
     },
   ),
 
@@ -61,7 +61,7 @@ final routes = [
     builder: (context, state) {
       final id = state.pathParameters['id']!;
       final RecipeInfoViewModel viewModel = getIt();
-      return RecipeInfoScreen(id: int.parse(id), viewModel: viewModel);
+      return RecipeInfoScreenRoot(id: int.parse(id), viewModel: viewModel);
     },
   ),
 
@@ -74,14 +74,14 @@ final routes = [
       GoRoute(
         path: AppRoutes.home,
         builder: (context, state) {
-          return const HomeScreen();
+          return HomeScreenRoot(getIt());
         },
       ),
       GoRoute(
         path: AppRoutes.savedRecipes,
         builder: (context, state) {
           final SavedRecipesViewModel viewModel = getIt();
-          return SavedRecipesScreen(viewModel);
+          return SavedRecipesScreenRoot(viewModel);
         },
       ),
 

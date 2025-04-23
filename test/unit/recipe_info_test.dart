@@ -9,6 +9,7 @@ import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/domain/repository/info/recipe_info_repository.dart';
 import 'package:recipe_app/feature/receipe/data/dto/recipe_dto.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/info/get_recipe_info_use_case.dart';
+import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_action.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_view_model.dart';
 
 void main() {
@@ -33,7 +34,7 @@ void main() {
       final RecipeInfoViewModel viewModel = RecipeInfoViewModel(
         GetRecipeInfoUseCase(repository),
       );
-      await viewModel.getRecipeInfo(1);
+      viewModel.onAction(const RecipeInfoAction.getRecipeInfo(1));
       expect(viewModel.state.recipe, equals(isA<Recipe>()));
       expect(viewModel.state.recipe, equals(mock.toRecipe()));
     });
