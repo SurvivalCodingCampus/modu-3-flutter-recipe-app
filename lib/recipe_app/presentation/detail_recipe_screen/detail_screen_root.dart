@@ -32,6 +32,7 @@ class _DetailScreenRootState extends State<DetailScreenRoot> {
     super.initState();
     widget.viewModel.getRecipeById(widget.recipeId);
     widget.viewModel.getProcedureById(widget.recipeId);
+    widget.viewModel.getIngredients();
     _subscription = vieModel.eventStream.listen((event) {
       if (mounted) {
         switch (event) {
@@ -68,6 +69,8 @@ class _DetailScreenRootState extends State<DetailScreenRoot> {
                 vieModel.getRecipeById(action.id);
               case GetProcedureById():
                 vieModel.getProcedureById(action.id);
+              case GetIngredients():
+                vieModel.getIngredients();
             }
           },
         );

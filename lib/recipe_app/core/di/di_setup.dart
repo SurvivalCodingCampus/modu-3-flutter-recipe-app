@@ -1,8 +1,12 @@
 import 'package:get_it/get_it.dart';
+import 'package:recipe_app/recipe_app/data/repository/ingredients_repository.dart';
+import 'package:recipe_app/recipe_app/data/repository/ingredients_repository_impl.dart';
 import 'package:recipe_app/recipe_app/data/repository/procedure_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/procedure_repository_impl.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository_impl.dart';
+import 'package:recipe_app/recipe_app/data_source/ingredient_data_source.dart';
+import 'package:recipe_app/recipe_app/data_source/mock/mock_ingredients_data_impl.dart';
 import 'package:recipe_app/recipe_app/data_source/mock/mock_procedure_data_impl.dart';
 import 'package:recipe_app/recipe_app/data_source/mock/mock_recipe_data_impl.dart';
 import 'package:recipe_app/recipe_app/data_source/procedure_data_source.dart';
@@ -33,6 +37,7 @@ void diSetUp() {
   //DataSource
   getIt.registerSingleton<RecipeDataSource>(MockRecipeDataImpl());
   getIt.registerSingleton<ProcedureDataSource>(MockProcedureDataImpl());
+  getIt.registerSingleton<IngredientDataSource>(MockIngredientsDataImpl());
   // Repository
   getIt.registerSingleton<RecipeRepository>(
     RecipeRepositoryImpl(recipeDataSource: getIt()),
@@ -48,6 +53,9 @@ void diSetUp() {
   );
   getIt.registerSingleton<SelectCategoryRepository>(
     SelectCategoryRepositoryImpl(recipeDataSource: getIt()),
+  );
+  getIt.registerSingleton<IngredientsRepository>(
+    IngredientsRepositoryImpl(dataSource: getIt()),
   );
   //UseCase
   getIt.registerSingleton<AddBookmarkUseCase>(AddBookmarkUseCase(getIt()));
@@ -88,6 +96,10 @@ void diSetUp() {
   );
   getIt.registerFactory<SplashScreenViewModel>(() => SplashScreenViewModel());
   getIt.registerFactory<DetailRecipeViewModel>(
-    () => DetailRecipeViewModel(useCase: getIt(), getProcedureUseCase: getIt()),
+    () => DetailRecipeViewModel(
+      useCase: getIt(),
+      getProcedureUseCase: getIt(),
+      ingredientsRepository: getIt(),
+    ),
   );
 }

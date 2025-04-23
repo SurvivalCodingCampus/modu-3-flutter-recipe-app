@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/recipe_app/data/model/procedure.dart';
+import 'package:recipe_app/recipe_app/data/repository/ingredients_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/procedure_repository.dart';
 import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
 import 'package:recipe_app/recipe_app/presentation/component/detail_recipe.dart';
+import 'package:recipe_app/recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/recipe_app/presentation/component/procedure_step.dart';
 import 'package:recipe_app/recipe_app/presentation/component/rating_dialog.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_action.dart';
@@ -25,16 +28,27 @@ class DetailScreen extends StatefulWidget {
 
 enum ActionItem { itemOne, itemTwo, itemThree, itemFour }
 
+enum SelectedTab { ingredients, procedure }
+
 class _DetailScreenState extends State<DetailScreen> {
   final viewModel = DetailRecipeViewModel(
     useCase: getIt(),
     getProcedureUseCase: getIt(),
+    ingredientsRepository: getIt(),
   );
   final repository = RecipeRepository;
   final procedureRepository = ProcedureRepository;
+  final ingredientRepository = IngredientsRepository;
   late int id;
-
+  SelectedTab _selectedTab = SelectedTab.ingredients;
   ActionItem? selectedMenu;
+
+  @override
+  void initState() {
+    super.initState();
+    //  viewModel.getIngredients();
+    print("Loaded ingredients: ${widget.state.ingredient}");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,11 +121,42 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
       body: Column(
         children: [
+          SizedBox(height: 10),
           _buildBody(),
+          SizedBox(height: 15),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildTabButton('Ingredients', SelectedTab.ingredients),
+              SizedBox(width: 10),
+              _buildTabButton('Procedure', SelectedTab.procedure),
+            ],
+          ),
           SizedBox(height: 20),
-          Expanded(child: _buildProcedureBody()),
+          Expanded(
+            child:
+                _selectedTab == SelectedTab.ingredients
+                    ? _buildIngredientBody()
+                    : _buildProcedureBody(),
+          ),
         ],
       ),
+    );
+  }
+
+  Widget _buildTabButton(String title, SelectedTab tab) {
+    final bool isSelected = _selectedTab == tab;
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.black : Colors.grey[300],
+        foregroundColor: isSelected ? Colors.white : Colors.black,
+      ),
+      onPressed: () {
+        setState(() {
+          _selectedTab = tab;
+        });
+      },
+      child: Text(title),
     );
   }
 
@@ -156,6 +201,49 @@ class _DetailScreenState extends State<DetailScreen> {
               itemBuilder: (context, index) {
                 final Procedure procedure = widget.state.procedure[index];
                 return ProcedureStep(procedure: procedure);
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildIngredientBody() {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Image.asset('assets/images/food.png', height: 20, width: 20),
+                  Text(
+                    '1 serve',
+                    style: TextStyles.smallerTextRegular.copyWith(
+                      color: ColorStyles.gray3,
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                '${widget.state.ingredient.length} Items',
+                style: TextStyles.smallerTextRegular.copyWith(
+                  color: ColorStyles.gray3,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 15),
+          Expanded(
+            child: ListView.separated(
+              itemCount: widget.state.ingredient.length,
+              itemBuilder: (context, index) {
+                final Ingredient ingredient = widget.state.ingredient[index];
+                return IngredientItem(ingredient: ingredient);
               },
               separatorBuilder: (context, index) => const SizedBox(height: 10),
             ),

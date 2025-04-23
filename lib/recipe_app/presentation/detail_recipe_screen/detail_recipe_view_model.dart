@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:recipe_app/recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/recipe_app/data/model/procedure.dart';
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
-import 'package:recipe_app/recipe_app/data/repository/recipe_repository.dart';
+import 'package:recipe_app/recipe_app/data/repository/ingredients_repository.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_recipe_id_use_case.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_screen_event.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_state.dart';
@@ -13,12 +14,15 @@ import '../../domain/use_case/get_procedure_use_case.dart';
 class DetailRecipeViewModel with ChangeNotifier {
   final GetRecipeIdUseCase _useCase;
   final GetProcedureUseCase _getProcedureUseCase;
+  final IngredientsRepository _ingredientsRepository;
 
   DetailRecipeViewModel({
     required GetRecipeIdUseCase useCase,
     required GetProcedureUseCase getProcedureUseCase,
+    required IngredientsRepository ingredientsRepository,
   }) : _useCase = useCase,
-       _getProcedureUseCase = getProcedureUseCase;
+       _getProcedureUseCase = getProcedureUseCase,
+       _ingredientsRepository = ingredientsRepository;
 
   DetailRecipeState _state = const DetailRecipeState();
 
@@ -47,6 +51,25 @@ class DetailRecipeViewModel with ChangeNotifier {
     }
   }
 
+  Future<List<Ingredient>> getIngredients() async {
+    _state = _state.copyWith(isRecipeLoading: true);
+    notifyListeners();
+
+    try {
+      final ingredients = await _ingredientsRepository.getIngredients();
+      _state = _state.copyWith(isRecipeLoading: false, ingredient: ingredients);
+      notifyListeners();
+      return ingredients;
+    } catch (e) {
+      _state = _state.copyWith(isRecipeLoading: false);
+      notifyListeners();
+      _eventController.add(
+        DetailRecipeScreenEvent.showError("레시피를 불러오지 못했습니다."),
+      );
+      rethrow;
+    }
+  }
+
   Future<List<Procedure>> getProcedureById(int id) async {
     _state = _state.copyWith(isRecipeLoading: true);
     notifyListeners();
@@ -55,6 +78,7 @@ class DetailRecipeViewModel with ChangeNotifier {
       final procedure = await _getProcedureUseCase.execute(id);
       _state = _state.copyWith(isRecipeLoading: false, procedure: procedure);
       notifyListeners();
+
       return procedure;
     } catch (e) {
       _state = _state.copyWith(isRecipeLoading: false);

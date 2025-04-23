@@ -33,14 +33,12 @@ class RecipeRepositoryImpl implements RecipeRepository {
   @override
   Future<Recipe> fetchRecipeById(int id) async {
     final recipeList = await _recipeDataSource.getRecipeData();
-    print(recipeList);
     final recipeDto = recipeList.firstWhere(
       (e) => e.id == id,
       orElse: () {
         return throw Exception('레시피없음');
       },
     );
-    print(recipeDto);
     return recipeDto;
   }
 }
