@@ -1,4 +1,4 @@
-import '../../data/model/recipe_ingredient.dart';
+import '../../data/model/recipe_model.dart';
 import '../../data/repository/recipe_repository/recipe_repository.dart';
 
 class GetIngredientByUseCase {
@@ -6,7 +6,8 @@ class GetIngredientByUseCase {
 
   GetIngredientByUseCase(this.repository);
 
-  Future<List<RecipeIngredient>> execute(String recipeId) async {
-    return await repository.getIngredientsByRecipe(recipeId);
+  Future<List<Recipe>> execute(int id) async {
+    // return await repository.getIngredientsByRecipe(id);
+    return await repository.getRecipesByIngredient(id.toString());
   }
 }

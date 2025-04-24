@@ -1,4 +1,3 @@
-import 'package:recipe_app/data/model/procedure_model.dart';
 import 'package:recipe_app/data/model/recipe_model.dart';
 import 'package:recipe_app/data/repository/recipe_repository/recipe_repository.dart';
 
@@ -24,9 +23,9 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
             amount: 10,
           ),
         ],
-        procedures: [
-          Procedure(recipeId: 1, steps: ['Step 1', 'Step 2']),
-        ],
+        // procedures: [
+        //   Procedure(recipeId: 1, steps: ['Step 1', 'Step 2']),
+        // ],
         id: 1,
       ),
       Recipe(
@@ -43,9 +42,9 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
             amount: 10,
           ),
         ],
-        procedures: [
-          Procedure(recipeId: 2, steps: ['Step 1', 'Step 2']),
-        ],
+        // procedures: [
+        //   Procedure(recipeId: 2, steps: ['Step 1', 'Step 2']),
+        // ],
         id: 2,
       ),
       Recipe(
@@ -62,9 +61,9 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
             amount: 10,
           ),
         ],
-        procedures: [
-          Procedure(recipeId: 3, steps: ['Step 1', 'Step 2']),
-        ],
+        // procedures: [
+        //   Procedure(recipeId: 3, steps: ['Step 1', 'Step 2']),
+        // ],
         id: 3,
       ),
     ]);
@@ -92,22 +91,28 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<Recipe> getRecipeById(String recipeId) async {
+  Future<Recipe> getRecipeById(int id) async {
     await Future.delayed(Duration(seconds: 1));
-    return _recipes.firstWhere((recipe) => recipe.id.toString() == recipeId);
+    return _recipes.firstWhere((recipe) => recipe.id == id);
   }
 
   @override
-  Future<List<RecipeIngredient>> getIngredientsByRecipe(String recipeId) async {
+  Future<List<RecipeIngredient>> getIngredientsByRecipe(int id) async {
     await Future.delayed(Duration(seconds: 1));
-    final recipe = await getRecipeById(recipeId);
+    final recipe = await getRecipeById(id);
     return recipe.ingredients;
   }
 
   @override
-  Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
-    await Future.delayed(Duration(seconds: 1));
-    final recipe = await getRecipeById(recipeId);
-    return recipe.procedures;
+  Future<List<Recipe>> getRecipesByIngredient(String ingredient) {
+    // TODO: implement getRecipesByIngredient
+    throw UnimplementedError();
   }
+
+  // @override
+  // Future<List<Procedure>> getProceduresByRecipe(String recipeId) async {
+  //   await Future.delayed(Duration(seconds: 1));
+  //   final recipe = await getRecipeById(recipeId);
+  //   return recipe.procedures;
+  // }
 }

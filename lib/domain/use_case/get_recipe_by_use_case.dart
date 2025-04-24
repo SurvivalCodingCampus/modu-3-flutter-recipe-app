@@ -6,7 +6,7 @@ class GetRecipeByUseCase {
 
   GetRecipeByUseCase(this.repository);
 
-  Future<Recipe> execute(String recipeId) async {
-    return await repository.getRecipeById(recipeId);
+  Future<Recipe> execute(int id) async {
+    return await repository.getRecipeById(id);
   }
 }

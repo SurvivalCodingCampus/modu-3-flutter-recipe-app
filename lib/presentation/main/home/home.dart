@@ -161,7 +161,7 @@ class _Home extends State<Home> {
                   return DishCard(
                     isBookMarked: recipe.isBookMarked,
                     onTap: () {
-                      context.push('/detail', extra: recipe);
+                      context.push('/recipe', extra: recipe);
                     },
                     recipe: recipe,
                     onAction: (action) {

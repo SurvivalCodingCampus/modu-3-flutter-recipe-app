@@ -10,7 +10,6 @@ class Recipe {
   final String time;
   final double rating;
   final List<RecipeIngredient> ingredients;
-  final List<Procedure> procedures;
   final bool isBookMarked;
 
   const Recipe({
@@ -22,8 +21,7 @@ class Recipe {
     required this.time,
     required this.rating,
     required this.ingredients,
-    required this.procedures,
-    this.isBookMarked = true,
+    this.isBookMarked = false,
   });
 
   @override
@@ -38,8 +36,7 @@ class Recipe {
           chef == other.chef &&
           time == other.time &&
           rating == other.rating &&
-          ingredients == other.ingredients &&
-          procedures == other.procedures;
+          ingredients == other.ingredients;
 
   @override
   int get hashCode =>
@@ -50,8 +47,7 @@ class Recipe {
       chef.hashCode ^
       time.hashCode ^
       rating.hashCode ^
-      ingredients.hashCode ^
-      procedures.hashCode;
+      ingredients.hashCode;
 
   Recipe copyWith({
     String? category,
@@ -74,13 +70,12 @@ class Recipe {
       time: time ?? this.time,
       rating: rating ?? this.rating,
       ingredients: ingredients ?? this.ingredients,
-      procedures: procedures ?? this.procedures,
       isBookMarked: isBookMarked ?? this.isBookMarked,
     );
   }
 
   @override
   String toString() {
-    return 'Recipe{category: $category, id: $id, name: $name, imageUrl: $imageUrl, chef: $chef, time: $time, rating: $rating, ingredients: $ingredients, procedures: $procedures}';
+    return 'Recipe{category: $category, id: $id, name: $name, imageUrl: $imageUrl, chef: $chef, time: $time, rating: $rating, ingredients: $ingredients,}';
   }
 }
