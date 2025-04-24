@@ -13,7 +13,7 @@ class FilterSearchBottomSheetScreen extends StatefulWidget {
   FilterSearchState _state = const FilterSearchState();
 
 
-  FilterSearchState get state => _state;
+  FilterSearchState get state  => _state;
 
   @override
   State<FilterSearchBottomSheetScreen> createState() =>
