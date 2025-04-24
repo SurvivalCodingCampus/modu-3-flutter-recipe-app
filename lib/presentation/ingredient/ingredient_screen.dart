@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/component/components.dart';
+import 'package:recipe_app/presentation/component/pop_up_menu_button.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_screen_view_model.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
@@ -47,9 +48,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
                           child: const Icon(Icons.arrow_back, size: 20),
                           onTap: () => context.pop(context),
                         ),
-                        GestureDetector(
-                          child: const Icon(Icons.more_horiz, size: 24),
-                        ),
+                        const IngredientPopupMenuButton(),
                       ],
                     ),
                     const SizedBox(height: 10),

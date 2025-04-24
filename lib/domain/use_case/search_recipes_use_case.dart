@@ -2,41 +2,22 @@ import 'package:recipe_app/core/result.dart';
 import 'package:recipe_app/domain/error/recipe_error.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/repository/recipe_repository.dart';
+import 'package:recipe_app/presentation/search_recipes/filter_search_bottom_sheet_state.dart';
 
 class SearchRecipesUseCase {
   final RecipeRepository _recipeRepository;
-  List<Recipe> _recentRecipes = [];
 
-  SearchRecipesUseCase(this._recipeRepository);
-
-  List<Recipe> get recentRecipes => _recentRecipes;
+  const SearchRecipesUseCase(this._recipeRepository);
 
   Future<Result<List<Recipe>, RecipeError>> execute(
     String query,
-    int rating,
+    FilterSearchBottomSheetState filterState,
   ) async {
-    Result<List<Recipe>, RecipeError> recipes = await _recipeRepository
-        .findAllByFilter(
-          (e) =>
-              e.name.toLowerCase().contains(query.toLowerCase()) &&
-              e.rating >= rating,
-        );
-
-    switch (recipes) {
-      case Success(:final List<Recipe> data):
-        final merged = [..._recentRecipes, ...data];
-
-        final deduplicated =
-            {for (var recipe in merged) recipe.id: recipe}.values.toList();
-
-        _recentRecipes =
-            deduplicated.length > 8
-                ? deduplicated.sublist(deduplicated.length - 8)
-                : deduplicated;
-
-        return recipes;
-      case Failure(:final error):
-        return Failure(error);
-    }
+    return await _recipeRepository.findAllByFilter(
+      (recipe) =>
+          recipe.name.toLowerCase().contains(query.toLowerCase()) &&
+          recipe.rating >=
+              FilterSearchBottomSheetState.rates[filterState.rateIndex],
+    );
   }
 }
