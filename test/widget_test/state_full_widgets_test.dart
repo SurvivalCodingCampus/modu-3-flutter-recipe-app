@@ -5,11 +5,11 @@ import 'package:recipe_app/domain/model/ingredients.dart';
 import 'package:recipe_app/domain/model/media.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/data/util/time_enum.dart';
-import 'package:recipe_app/presentation/component/filter_button.dart';
-import 'package:recipe_app/presentation/component/ingredient_item.dart';
-import 'package:recipe_app/presentation/component/rating_button.dart';
-import 'package:recipe_app/presentation/component/rating_dialog.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/presentation/components/filter_button.dart';
+import 'package:recipe_app/presentation/components/ingredient_item.dart';
+import 'package:recipe_app/presentation/components/rating_button.dart';
+import 'package:recipe_app/presentation/components/rating_dialog.dart';
+import 'package:recipe_app/presentation/components/recipe_card.dart';
 
 void main() {
   group('컴포넌트 테스트', () {

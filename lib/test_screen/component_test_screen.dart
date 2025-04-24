@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/core/di/di_setup.dart';
+import 'package:recipe_app/core/routing/routes.dart';
 import 'package:recipe_app/data/data_source/mock_recipe_data_source.dart';
 import 'package:recipe_app/data/data_source/mock_user_data_source.dart';
 import 'package:recipe_app/data/repository/bookmark_repository_impl.dart';
 import 'package:recipe_app/data/repository/mock_recipe_repository_impl.dart';
 import 'package:recipe_app/data/repository/mock_user_repository_impl.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
-import 'package:recipe_app/presentation/component/big_button.dart';
+import 'package:recipe_app/presentation/components/big_button.dart';
 
-import 'package:recipe_app/presentation/component/input_field.dart';
+import 'package:recipe_app/presentation/components/input_field.dart';
 
-import 'package:recipe_app/presentation/component/tabs.dart';
+import 'package:recipe_app/presentation/components/tabs.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen_root.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
@@ -40,6 +42,15 @@ class ComponentTestScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 36),
+                  BigButton(
+                    name: 'HomeScreen',
+                    color: ColorStyles.secondary100,
+                    icon: Icons.arrow_forward,
+                    onClick: () {
+                      context.go(Routes.home);
+                    },
+                  ),
+                  SizedBox(height: 12),
                   BigButton(
                     name: 'SavedRecipes',
                     color: ColorStyles.secondary100,

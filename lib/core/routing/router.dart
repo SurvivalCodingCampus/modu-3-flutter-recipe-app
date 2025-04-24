@@ -6,6 +6,7 @@ import 'package:recipe_app/core/routing/routes.dart';
 
 import 'package:recipe_app/presentation/bottom_navigation_bar/bottom_navigation_bar_screen.dart';
 import 'package:recipe_app/presentation/home/home_screen.dart';
+import 'package:recipe_app/presentation/home/home_screen_root.dart';
 
 import 'package:recipe_app/presentation/ingredient/ingredient_screen_root.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
@@ -44,7 +45,7 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: Routes.home,
-          builder: (context, state) => HomeScreen(viewModel: getIt()),
+          builder: (context, state) => HomeScreenRoot(viewModel: getIt()),
         ),
         GoRoute(
           path: Routes.savedRecipes,

@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/get_user_id_use_case.dart';
+import 'package:recipe_app/domain/use_case/set_bookmark_use_case.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_action.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
   final GetSavedRecipesUseCase _getSavedRecipesUseCase;
+  final GetUserIdUseCase _getUserIdUseCase;
+  final SetBookmarkUseCase _setBookmarkUseCase;
 
   SavedRecipesViewModel({
     required GetSavedRecipesUseCase getSavedRecipesUseCase,
-  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase {
-    fetchRecipes();
-  }
+    required GetUserIdUseCase getUserIdUseCase,
+    required SetBookmarkUseCase setBookmarkUseCase,
+  }) : _getSavedRecipesUseCase = getSavedRecipesUseCase,
+       _getUserIdUseCase = getUserIdUseCase,
+       _setBookmarkUseCase = setBookmarkUseCase;
 
   SavedRecipesState _state = const SavedRecipesState();
   SavedRecipesState get state => _state;
 
-  void onAction(SavedRecipesAction action) {
+  void onAction(SavedRecipesAction action) async {
     switch (action) {
       case OnTapRecipe():
         break;
       case OnTapBookmark():
-        throw UnimplementedError();
+        await bookmarkRecipe(action.recipeId);
     }
   }
 
@@ -29,7 +35,7 @@ class SavedRecipesViewModel with ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    final recipes = await _getSavedRecipesUseCase.getSavedRecipes();
+    final recipes = await _getSavedRecipesUseCase.execute();
     final bookMarkList = List.generate(
       recipes.length,
       (index) => recipes[index].recipeId,
@@ -47,9 +53,9 @@ class SavedRecipesViewModel with ChangeNotifier {
     notifyListeners();
 
     // print("세이브 레시피 뷰모델.bookmarkRecipe 실행 recipeId : $recipeId");
-    final bookmarkList = await _getSavedRecipesUseCase.setBookmark(4, recipeId);
+    final bookmarkList = await _setBookmarkUseCase.execute(4, recipeId);
     // print("북마크리스트 갱신 완료");
-    final recipes = await _getSavedRecipesUseCase.getSavedRecipes();
+    final recipes = await _getSavedRecipesUseCase.execute();
     // print("북마크 후 수정된 recipes : ${_recipes.map((e) => "${e.recipeId} :")}");
 
     _state = _state.copyWith(
@@ -61,12 +67,7 @@ class SavedRecipesViewModel with ChangeNotifier {
   }
 
   Future<int> getUserId() async {
-    final userId = await _getSavedRecipesUseCase.getUserId();
+    final userId = await _getUserIdUseCase.execute();
     return userId;
-  }
-
-  Future<List<int>> getSavedRecipeIds() async {
-    final recipes = await _getSavedRecipesUseCase.getSavedRecipes();
-    return List.generate(recipes.length, (index) => recipes[index].recipeId);
   }
 }

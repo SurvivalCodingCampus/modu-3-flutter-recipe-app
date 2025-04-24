@@ -15,6 +15,14 @@ class SavedRecipesScreenRoot extends StatefulWidget {
 
 class _SavedRecipesScreenRootState extends State<SavedRecipesScreenRoot> {
   @override
+  void initState() {
+    super.initState();
+    if (mounted) {
+      widget.viewModel.fetchRecipes();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: widget.viewModel,
@@ -27,7 +35,7 @@ class _SavedRecipesScreenRootState extends State<SavedRecipesScreenRoot> {
                 context.push("/ingredient/${action.recipeId}");
 
               case OnTapBookmark():
-                widget.viewModel.bookmarkRecipe(action.recipeId);
+                widget.viewModel.onAction(action);
             }
           },
         );

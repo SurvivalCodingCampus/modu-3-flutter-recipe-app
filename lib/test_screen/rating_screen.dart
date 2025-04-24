@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/presentation/component/rating_dialog.dart';
-import 'package:recipe_app/presentation/component/small_button.dart';
+import 'package:recipe_app/presentation/components/rating_dialog.dart';
+import 'package:recipe_app/presentation/components/small_button.dart';
 import 'package:recipe_app/ui/color_style.dart';
 
 class RatingScreen extends StatelessWidget {

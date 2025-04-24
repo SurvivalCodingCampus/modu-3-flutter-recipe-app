@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/media.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 import 'package:recipe_app/domain/model/user.dart';
-import 'package:recipe_app/presentation/component/recipe_card.dart';
+import 'package:recipe_app/presentation/components/recipe_card.dart';
 
 class RecipeCardScreen extends StatelessWidget {
   const RecipeCardScreen({super.key});

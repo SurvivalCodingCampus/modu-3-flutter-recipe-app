@@ -7,21 +7,18 @@ import 'package:recipe_app/domain/repository/user_repository.dart';
 class GetSavedRecipesUseCase {
   final RecipeRepository _recipeRepository;
   final UserRepository _userRepository;
-  final BookmarkRepository _bookmarkRepository;
+  
 
   GetSavedRecipesUseCase({
     required RecipeRepository recipeRepository,
     required UserRepository userRepository,
     required BookmarkRepository bookmarkRepository,
   }) : _recipeRepository = recipeRepository,
-       _userRepository = userRepository,
-       _bookmarkRepository = bookmarkRepository;
+       _userRepository = userRepository;
 
-  Future<int> getUserId() async {
-    return 4;
-  }
 
-  Future<List<Recipe>> getSavedRecipes() async {
+
+  Future<List<Recipe>> execute() async {
     final recipes = await _recipeRepository.getRecipes();
     final userModel = await _userRepository.getUserData(4);
     final result =
@@ -32,22 +29,4 @@ class GetSavedRecipesUseCase {
     return result;
   }
 
-  Future<List<int>> setBookmark(int userId, int recipeId) async {
-    // print('useCase setBookmark 진입');
-    final userModel = await _userRepository.getUserData(userId);
-    // print('useCase setBookmark 끝남 userModel : $userModel');
-    return await _bookmarkRepository.setBookmark(userModel, recipeId);
-  }
-
-  Future<Recipe> getRecipeWithId(int recipeId) async {
-    final recipes = await _recipeRepository.getRecipes();
-    final recipe = recipes.firstWhere(
-      (element) => element.recipeId == recipeId,
-    );
-    return recipe;
-  }
-
-  Future<User> getUserModel(int userId) async {
-    return await _userRepository.getUserData(userId);
-  }
 }

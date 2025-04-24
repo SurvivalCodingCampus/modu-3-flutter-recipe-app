@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/ingredient.dart';
 import 'package:recipe_app/domain/model/ingredients.dart';
-import 'package:recipe_app/presentation/component/ingredient_item.dart';
+import 'package:recipe_app/presentation/components/ingredient_item.dart';
 
 class IngredientScreen extends StatelessWidget {
   const IngredientScreen({super.key});
