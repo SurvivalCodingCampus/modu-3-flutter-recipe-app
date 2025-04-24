@@ -8,6 +8,7 @@ abstract class HomeState with _$HomeState {
   const factory HomeState({
     @Default([]) List<Recipe> recipes,
     @Default('All') String selectedCategory,
+    @Default([]) List<int> bookmarkIds,
     @Default(false) bool isLoading,
   }) = _HomeState;
 }

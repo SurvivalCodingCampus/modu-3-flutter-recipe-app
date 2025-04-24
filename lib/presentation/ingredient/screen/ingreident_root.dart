@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/core/presentation/components/rating_dialog_drag.dart';
+import 'package:recipe_app/presentation/ingredient/ingredient_action.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/ingredient/screen/ingredient_screen.dart';
 
@@ -21,11 +23,27 @@ class _IngredientRootState extends State<IngredientRoot> {
         return IngredientScreen(
           recipe: widget.viewModel.value,
           currentIndex: currentIndex,
-          onTapClick: (int value) {
-            setState(() {
-              currentIndex = value;
-            });
+          onAction: (action) {
+            switch (action) {
+              case OnTapClick():
+                setState(() {
+                  currentIndex = action.tabIndex;
+                });
+              case OnMenuClick():
+                if (action.menuIndex == 1) {
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => RatingDialogDrag(
+                          title: 'Rate recipe',
+                          actionName: 'send',
+                          onChange: (int) {},
+                        ),
+                  );
+                }
+            }
           },
+          menuItemList: const ['share', 'Rate Recipe', 'Review', 'Unsave'],
         );
       },
     );

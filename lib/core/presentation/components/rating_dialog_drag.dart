@@ -60,6 +60,7 @@ class _RatingDialogDragState extends State<RatingDialogDrag> {
           },
         ),
       ),
+      actionsAlignment: MainAxisAlignment.center,
       actions: [
         SmallButton(
           text: widget.actionName,

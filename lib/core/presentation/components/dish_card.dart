@@ -6,10 +6,12 @@ import 'package:recipe_app/ui/text_styles.dart';
 class DishCard extends StatelessWidget {
   final Recipe recipe;
   final void Function(int value) onBookmarkClick;
+  final bool isBookmark;
   const DishCard({
     super.key,
     required this.recipe,
     required this.onBookmarkClick,
+    required this.isBookmark,
   });
 
   @override
@@ -99,12 +101,12 @@ class DishCard extends StatelessWidget {
             onTap: () {
               onBookmarkClick(recipe.id);
             },
-            child: const SizedBox(
+            child: SizedBox(
               width: 24,
               child: CircleAvatar(
                 backgroundColor: ColorStyle.white,
                 child: Icon(
-                  Icons.bookmark_outline,
+                  !isBookmark ? Icons.bookmark_outline : Icons.bookmark,
                   color: ColorStyle.primary100,
                   size: 14,
                 ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/presentation/components/ingredient_item.dart';
@@ -7,6 +9,7 @@ import 'package:recipe_app/core/presentation/components/small_button.dart';
 import 'package:recipe_app/core/presentation/components/step_item.dart';
 import 'package:recipe_app/domain/model/ingredients.dart';
 import 'package:recipe_app/domain/model/procedure.dart';
+import 'package:recipe_app/presentation/ingredient/ingredient_action.dart';
 import 'package:recipe_app/presentation/ingredient/ingredient_state.dart';
 import 'package:recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/ui/text_styles.dart';
@@ -14,12 +17,14 @@ import 'package:recipe_app/ui/text_styles.dart';
 class IngredientScreen extends StatelessWidget {
   final IngredientState recipe;
   final int currentIndex;
-  final void Function(int value) onTapClick;
+  final void Function(IngredientAction action) onAction;
+  final List<String> menuItemList;
   const IngredientScreen({
     super.key,
     required this.recipe,
     required this.currentIndex,
-    required this.onTapClick,
+    required this.onAction,
+    required this.menuItemList,
   });
 
   @override
@@ -36,7 +41,42 @@ class IngredientScreen extends StatelessWidget {
           ),
         ),
         actionsPadding: const EdgeInsets.symmetric(horizontal: 30),
-        actions: const [Icon(Icons.menu)],
+        actions: [
+          MenuAnchor(
+            alignmentOffset: const Offset(-56, 0),
+            style: MenuStyle(
+              backgroundColor: const WidgetStatePropertyAll<Color>(
+                ColorStyle.white,
+              ),
+              shape: WidgetStatePropertyAll<OutlinedBorder>(
+                ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              alignment: Alignment.bottomLeft,
+            ),
+            builder: (context, controller, child) {
+              return IconButton(
+                icon: const Icon(Icons.more_horiz),
+                onPressed: () {
+                  if (controller.isOpen) {
+                    controller.close();
+                  } else {
+                    controller.open();
+                  }
+                },
+              );
+            },
+            menuChildren: List.generate(menuItemList.length, (index) {
+              return MenuItemButton(
+                onPressed: () {
+                  onAction(IngredientAction.onMenuClick(index));
+                },
+                child: Text(menuItemList[index]),
+              );
+            }),
+          ),
+        ],
       ),
       body: SafeArea(
         child:
@@ -76,7 +116,9 @@ class IngredientScreen extends StatelessWidget {
                           child: MultiTabs(
                             labels: const ['Ingredient', 'Procedure'],
                             selectedIndex: currentIndex,
-                            onValueChange: onTapClick,
+                            onValueChange: (value) {
+                              onAction(IngredientAction.onTapClick(value));
+                            },
                           ),
                         ),
                         const SizedBox(height: 12),

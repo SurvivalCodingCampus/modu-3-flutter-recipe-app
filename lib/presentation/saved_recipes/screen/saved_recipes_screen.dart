@@ -21,21 +21,27 @@ class SavedRecipeScreen extends StatelessWidget {
         title: Text('Saved Recipes', style: AppTextStyles.mediumBold),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return RecipeCard(
-              onCardClick: (value) {
-                onAction(SavedRecipesAction.onCardClick(value));
-              },
-              onBookmarkClick: (value) {
-                onAction(SavedRecipesAction.onBookmarkClick(value));
-              },
-              recipe: recipes.recipes[index],
-            );
-          },
-          itemCount: recipes.recipes.length,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future<void>.delayed(const Duration(seconds: 1));
+          onAction(const SavedRecipesAction.findRecipes());
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return RecipeCard(
+                onCardClick: (value) {
+                  onAction(SavedRecipesAction.onCardClick(value));
+                },
+                onBookmarkClick: (value) {
+                  onAction(SavedRecipesAction.onBookmarkClick(value));
+                },
+                recipe: recipes.recipes[index],
+              );
+            },
+            itemCount: recipes.recipes.length,
+          ),
         ),
       ),
     );

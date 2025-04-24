@@ -28,6 +28,10 @@ class HomeViewModel with ChangeNotifier {
         break;
     }
 
+    _state = state.copyWith(
+      bookmarkIds: await _bookmarkRepository.getBookmarkIds(),
+    );
+
     notifyListeners();
   }
 
