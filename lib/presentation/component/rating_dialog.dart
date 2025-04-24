@@ -28,7 +28,7 @@ class _RatingDialogState extends State<RatingDialog> {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(widget.title, style: TextStyles.smallRegular()),
+        Text(widget.title, style: TextStyles.smallBold()),
         SizedBox(height: 10),
         Row(
           children: List.generate(5, (index) {

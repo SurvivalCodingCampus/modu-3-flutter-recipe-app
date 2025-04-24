@@ -25,6 +25,13 @@ class HomeScreenRoot extends StatelessWidget {
                 viewModel.toggleBookmark(action.id);
               case OnSearchTap():
                 context.push(Routes.search);
+              case OnDishTap():
+                context.push(
+                  Routes.ingredient.replaceAll(
+                    ':recipeId',
+                    action.id.toString(),
+                  ),
+                );
             }
           }
         );

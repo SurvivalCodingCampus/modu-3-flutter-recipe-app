@@ -73,4 +73,14 @@ class RecipeIngredientViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: false);
     notifyListeners();
   }
+
+  void onTabSelect(int index) {
+    _state = state.copyWith(tabSelectedIndex: index);
+    notifyListeners();
+  }
+
+  void onRating(int rateValue) {
+    _state = state.copyWith(recipe: state.recipe.copyWith(rating: rateValue.toDouble()));
+    notifyListeners();
+  }
 }

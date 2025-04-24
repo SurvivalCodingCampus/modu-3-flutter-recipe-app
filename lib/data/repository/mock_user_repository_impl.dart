@@ -8,7 +8,7 @@ class MockUserRepositoryImpl implements UserRepository {
       name: '홍길동',
       image: 'https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png',
       address: 'Lagos, Nigeria',
-      bookmarks: [1, 2, 3, 4]
+      bookmarks: []
   );
 
   @override

@@ -8,4 +8,5 @@ sealed class HomeAction with _$HomeAction {
   const factory HomeAction.onSelectCategory(CategoryFilter categoryFilter) = OnSelectCategory;
   const factory HomeAction.onTapFavorite(int id) = OnTapFavorite;
   const factory HomeAction.onSearchTap() = OnSearchTap;
+  const factory HomeAction.onDishTap(int id) = OnDishTap;
 }
