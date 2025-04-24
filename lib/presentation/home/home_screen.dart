@@ -8,11 +8,16 @@ import '../../ui/ui.dart';
 import '../component/filter_icon_button.dart';
 import '../component/search_text_field.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final HomeState state;
   final void Function(HomeAction action) onAction;
   const HomeScreen({super.key, required this.state, required this.onAction});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,7 +54,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: () => onAction(const HomeAction.onTapSearch()),
+                  onTap: () => widget.onAction(const HomeAction.onTapSearch()),
                   behavior: HitTestBehavior.opaque,
                   child: const IgnorePointer(
                     child: SizedBox(
@@ -70,10 +75,11 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: RecipeCategorySelector(
-              categories: state.categories,
-              selectedCategory: state.category,
+              categories: widget.state.categories,
+              selectedCategory: widget.state.category,
               onSelected:
-                  (category) => onAction(HomeAction.onTapCategory(category)),
+                  (category) =>
+                      widget.onAction(HomeAction.onTapCategory(category)),
             ),
           ),
           const SizedBox(height: 15),
@@ -83,12 +89,14 @@ class HomeScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children:
-                    state.recipes
+                    widget.state.recipes
                         .map(
                           (e) => DishCard(
                             recipe: e,
                             onTapFavorite: (e) {
-                              onAction(HomeAction.onTapFavorite(e));
+                              setState(() {
+                                widget.onAction(HomeAction.onTapFavorite(e));
+                              });
                             },
                           ),
                         )

@@ -1,12 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:recipe_app/ui/ui.dart';
 
 class RatingDialog extends StatefulWidget {
   final String title;
-  final VoidCallback? onTap;
-  const RatingDialog({super.key, required this.title, this.onTap});
+  final void Function(int rate) onTap;
+  const RatingDialog({super.key, required this.title, required this.onTap});
 
   @override
   State<RatingDialog> createState() => _RatingDialogState();
@@ -64,7 +63,7 @@ class _RatingDialogState extends State<RatingDialog> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
-                    onTap: widget.onTap,
+                    onTap: () => widget.onTap(selectedIndex),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,

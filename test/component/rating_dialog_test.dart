@@ -7,7 +7,7 @@ void main() {
     int count = 0;
     final ratingDialog = RatingDialog(
       title: 'Rate Recipe',
-      onTap: () {
+      onTap: (rating) {
         count++;
       },
     );
