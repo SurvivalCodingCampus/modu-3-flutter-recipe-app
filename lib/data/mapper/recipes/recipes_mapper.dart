@@ -10,6 +10,7 @@ extension RecipesMapper on Recipes {
       rating: rating ?? 0.0,
       image: image ?? '',
       category: category ?? '',
+      ingredients: ingredients ?? []
     );
   }
 

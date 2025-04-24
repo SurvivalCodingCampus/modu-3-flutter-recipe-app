@@ -16,9 +16,9 @@ class HomeState with _$HomeState {
     this.searchData = const [],
     this.imageWidth = 0.0,
     this.imageHeight = 0.0,
-    this.selectCategory = 'All',
+    this.selectCategory = 'ALL',
     this.categoryList = const [
-      'All',
+      'ALL',
       'Cereal',
       'Vegetables',
       'Dinner',

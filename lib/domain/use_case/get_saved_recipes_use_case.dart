@@ -18,6 +18,7 @@ class GetSavedRecipesUseCase {
             rating: items.rating,
             image: items.image,
             category: items.category,
+            ingredients: items.ingredients
           ),
         )
         .toList();
