@@ -22,7 +22,7 @@ class DetailScreenRoot extends StatefulWidget {
 }
 
 class _DetailScreenRootState extends State<DetailScreenRoot> {
-  DetailRecipeViewModel get vieModel => widget.viewModel;
+  DetailRecipeViewModel get viewModel => widget.viewModel;
 
   DetailRecipeState get state => widget.viewModel.state;
   StreamSubscription? _subscription;
@@ -33,7 +33,7 @@ class _DetailScreenRootState extends State<DetailScreenRoot> {
     widget.viewModel.getRecipeById(widget.recipeId);
     widget.viewModel.getProcedureById(widget.recipeId);
     widget.viewModel.getIngredients();
-    _subscription = vieModel.eventStream.listen((event) {
+    _subscription = viewModel.eventStream.listen((event) {
       if (mounted) {
         switch (event) {
           case ShowMessageBar():
@@ -66,11 +66,11 @@ class _DetailScreenRootState extends State<DetailScreenRoot> {
           onAction: (DetailRecipeAction action) {
             switch (action) {
               case GetRecipeById():
-                vieModel.getRecipeById(action.id);
+                widget.viewModel.getRecipeById(action.id);
               case GetProcedureById():
-                vieModel.getProcedureById(action.id);
+                widget.viewModel.getProcedureById(action.id);
               case GetIngredients():
-                vieModel.getIngredients();
+                widget.viewModel.getIngredients();
             }
           },
         );

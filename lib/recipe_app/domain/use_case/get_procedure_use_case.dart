@@ -8,6 +8,10 @@ class GetProcedureUseCase {
     : _repository = repository;
 
   Future<List<Procedure>> execute(int id) async {
-    return await _repository.fetchProcedure(id);
+    try {
+      return await _repository.fetchProcedure(id);
+    } catch (e) {
+      throw Exception('단계 오류 실패');
+    }
   }
 }

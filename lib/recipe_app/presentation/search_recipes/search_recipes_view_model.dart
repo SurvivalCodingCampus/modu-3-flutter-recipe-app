@@ -19,6 +19,12 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   Stream<SearchRecipesScreenEvent> get eventStream => _eventController.stream;
 
+  @override
+  void dispose() {
+    _eventController.close();
+    super.dispose();
+  }
+
   //view에서 모든 레시피 가져오는 메서드, 따로 usecase처리 필요 없음
   Future<void> fetchRecipes() async {
     _state = state.copyWith(isRecipesLoading: true);

@@ -32,6 +32,12 @@ class DetailRecipeViewModel with ChangeNotifier {
 
   Stream<DetailRecipeScreenEvent> get eventStream => _eventController.stream;
 
+  @override
+  void dispose() {
+    _eventController.close();
+    super.dispose();
+  }
+
   Future<Recipe> getRecipeById(int id) async {
     _state = _state.copyWith(isRecipeLoading: true);
     notifyListeners();

@@ -18,7 +18,7 @@ class SavedRecipesScreenRoot extends StatefulWidget {
 }
 
 class _SavedRecipesScreenRootState extends State<SavedRecipesScreenRoot> {
-  SavedRecipesViewModel get vieModel => widget.viewModel;
+  SavedRecipesViewModel get viewModel => widget.viewModel;
 
   SavedRecipesState get state => widget.viewModel.state;
   StreamSubscription? _subscription;
@@ -26,7 +26,7 @@ class _SavedRecipesScreenRootState extends State<SavedRecipesScreenRoot> {
   @override
   void initState() {
     super.initState();
-    _subscription = vieModel.eventStream.listen((event) {
+    _subscription = viewModel.eventStream.listen((event) {
       if (mounted) {
         switch (event) {
           case ShowSnackbar():
@@ -53,9 +53,9 @@ class _SavedRecipesScreenRootState extends State<SavedRecipesScreenRoot> {
           onAction: (SavedRecipesAction action) {
             switch (action) {
               case RemoveBookMark():
-                vieModel.removeBookmark(action.id);
+                widget.viewModel.removeBookmark(action.id);
               case AddBookMark():
-                vieModel.addBookmark(action.recipe);
+                widget.viewModel.addBookmark(action.recipe);
             }
           },
         );

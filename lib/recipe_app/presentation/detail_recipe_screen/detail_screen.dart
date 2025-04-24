@@ -7,9 +7,7 @@ import 'package:recipe_app/recipe_app/presentation/component/procedure_step.dart
 import 'package:recipe_app/recipe_app/presentation/component/rating_dialog.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_action.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_state.dart';
-import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_view_model.dart';
 
-import '../../core/di/di_setup.dart';
 import '../../ui/button_styles.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
@@ -29,12 +27,6 @@ enum ActionItem { itemOne, itemTwo, itemThree, itemFour }
 enum SelectedTab { ingredients, procedure }
 
 class _DetailScreenState extends State<DetailScreen> {
-  final viewModel = DetailRecipeViewModel(
-    useCase: getIt(),
-    getProcedureUseCase: getIt(),
-    ingredientsRepository: getIt(),
-  );
-
   late int id;
   SelectedTab _selectedTab = SelectedTab.ingredients;
   ActionItem? selectedMenu;

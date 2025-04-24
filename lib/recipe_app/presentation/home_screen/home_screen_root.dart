@@ -57,13 +57,13 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
           onAction: (HomeScreenAction action) {
             switch (action) {
               case SelectCategory():
-                viewModel.onSelectedCategory(action.category);
+                widget.viewModel.onSelectedCategory(action.category);
                 break;
               case RemoveBookMark():
-                viewModel.removeBookmark(action.id);
+                widget.viewModel.removeBookmark(action.id);
                 break;
               case AddBookMark():
-                viewModel.addBookmark(action.recipe);
+                widget.viewModel.addBookmark(action.recipe);
                 break;
             }
           },
