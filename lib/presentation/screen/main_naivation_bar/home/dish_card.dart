@@ -4,16 +4,42 @@ import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 import 'package:recipe_app/domain/model/recipe/recipe.dart';
 
-class DishCard extends StatelessWidget {
+class DishCard extends StatefulWidget {
   final Recipe recipe;
+  final Function(int recipeId) onClickBookMark;
 
-  const DishCard({super.key, required this.recipe});
+  const DishCard({
+    super.key,
+    required this.recipe,
+    required this.onClickBookMark,
+  });
+
+  @override
+  State<DishCard> createState() => _DishCardState();
+}
+
+class _DishCardState extends State<DishCard> {
+  late bool isBookmarked;
+
+  @override
+  void initState() {
+    super.initState();
+    isBookmarked = widget.recipe.isBookmarked; // 초기 값 설정
+  }
+
+  void toggleBookmark() {
+    setState(() {
+      isBookmarked = !isBookmarked; // 상태 토글
+    });
+
+    widget.onClickBookMark(widget.recipe.recipeId); // 상위 위젯에 변경 알림
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/recipe-detail/${recipe.recipeId}');
+        context.push('/recipe-detail/${widget.recipe.recipeId}');
       },
       child: Stack(
         children: [
@@ -32,7 +58,7 @@ class DishCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      recipe.title,
+                      widget.recipe.title,
                       style: AppTextStyles.smallBold(),
                       textAlign: TextAlign.center,
                       maxLines: 2,
@@ -54,7 +80,7 @@ class DishCard extends StatelessWidget {
                   style: AppTextStyles.smallRegular(color: ColorStyle.gray3),
                 ),
                 Text(
-                  '${recipe.time.toString()} Mins',
+                  '${widget.recipe.time.toString()} Mins',
                   style: AppTextStyles.smallBold(color: ColorStyle.gray1),
                 ),
               ],
@@ -64,7 +90,7 @@ class DishCard extends StatelessWidget {
             width: 150,
             child: CircleAvatar(
               maxRadius: 55,
-              backgroundImage: NetworkImage(recipe.thumbNailUrl),
+              backgroundImage: NetworkImage(widget.recipe.thumbNailUrl),
             ),
           ),
           Positioned(
@@ -77,12 +103,11 @@ class DishCard extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               child: Row(
-                spacing: 3,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.star, color: ColorStyle.rating, size: 12),
                   Text(
-                    recipe.rating.toString(),
+                    widget.recipe.rating.toString(),
                     style: AppTextStyles.smallRegular(),
                   ),
                 ],
@@ -93,15 +118,16 @@ class DishCard extends StatelessWidget {
             bottom: 0,
             right: 10,
             child: GestureDetector(
-              onTap: () {
-                print('북마크');
-              },
-              child: const SizedBox(
+              onTap: toggleBookmark,
+              child: SizedBox(
                 width: 24,
                 child: CircleAvatar(
                   backgroundColor: ColorStyle.white,
                   child: Icon(
-                    Icons.bookmark_outline,
+                    isBookmarked
+                        ? Icons
+                            .bookmark // 북마크된 경우
+                        : Icons.bookmark_outline, // 북마크되지 않은 경우
                     color: ColorStyle.primary100,
                     size: 14,
                   ),

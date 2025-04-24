@@ -15,25 +15,6 @@ Time timeSwitch(String? time) {
   }
 }
 
-// enum Rate { one, two, three, four, five, all }
-
-// Rate rateSwitch(String? rate) {
-//   switch (rate) {
-//     case '1':
-//       return Rate.one;
-//     case '2':
-//       return Rate.two;
-//     case '3':
-//       return Rate.three;
-//     case '4':
-//       return Rate.four;
-//     case '5':
-//       return Rate.five;
-//     default:
-//       return Rate.all;
-//   }
-// }
-
 enum Category {
   all,
   indian,

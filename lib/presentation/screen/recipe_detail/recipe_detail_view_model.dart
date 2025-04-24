@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/domain/use_case/fetch_recipe_use_case.dart';
-import 'package:recipe_app/domain/use_case/get_recipe_procedure_use_case.dart';
-import 'package:recipe_app/domain/use_case/get_user_info_use_case.dart';
+import 'package:recipe_app/domain/use_case/recipe/fetch_recipe_use_case.dart';
+import 'package:recipe_app/domain/use_case/recipe/get_recipe_procedure_use_case.dart';
+import 'package:recipe_app/domain/use_case/user/get_user_info_use_case.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/state/recipe_detail_state.dart';
 
 class RecipeDetailViewModel with ChangeNotifier {

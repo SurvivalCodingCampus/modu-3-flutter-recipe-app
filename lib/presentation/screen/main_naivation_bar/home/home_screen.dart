@@ -11,11 +11,13 @@ import 'package:recipe_app/presentation/screen/main_naivation_bar/home/state/hom
 class HomeScreen extends StatelessWidget {
   final HomeState state;
   final Function(Category category) onCategorySelected;
+  final Function(int recipeId) onClickBookMark;
 
   const HomeScreen({
     super.key,
     required this.state,
     required this.onCategorySelected,
+    required this.onClickBookMark,
   });
 
   @override
@@ -157,7 +159,10 @@ class HomeScreen extends StatelessWidget {
                       left: index == 0 ? 30 : 0,
                       right: 10,
                     ),
-                    child: DishCard(recipe: state.selectRecipes[index]),
+                    child: DishCard(
+                      recipe: state.selectRecipes[index],
+                      onClickBookMark: onClickBookMark,
+                    ),
                   );
                 },
               ),

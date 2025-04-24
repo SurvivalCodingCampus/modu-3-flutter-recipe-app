@@ -6,6 +6,7 @@ import 'package:recipe_app/core/component/tabs.dart';
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/action/recipe_detail_action.dart';
+import 'package:recipe_app/presentation/screen/recipe_detail/recipe_popup_menu.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/state/recipe_detail_state.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
@@ -57,12 +58,13 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   child: Icon(Icons.arrow_back, color: ColorStyle.label),
                 ),
 
-                GestureDetector(
-                  onTap: () {
-                    print('모달들어올자리');
-                  },
-                  child: Icon(Icons.more_horiz, color: ColorStyle.label),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     print('모달들어올자리');
+                //   },
+                //   child: Icon(Icons.more_horiz, color: ColorStyle.label),
+                // ),
+                RecipePopupMenu(),
               ],
             ),
             const SizedBox(height: 10),

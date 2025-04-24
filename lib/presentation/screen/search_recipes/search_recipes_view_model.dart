@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/filter/filter_enum.dart';
-import 'package:recipe_app/domain/use_case/filter_serch_recipe_use_case.dart';
-import 'package:recipe_app/domain/use_case/get_search_recipe_use_case.dart';
-import 'package:recipe_app/domain/use_case/save_serch_recipe_use_case.dart';
+import 'package:recipe_app/domain/use_case/recipe/filter_serch_recipe_use_case.dart';
+import 'package:recipe_app/domain/use_case/recipe/get_search_recipe_use_case.dart';
+import 'package:recipe_app/domain/use_case/recipe/save_serch_recipe_use_case.dart';
 
 import 'package:recipe_app/presentation/screen/search_recipes/state/search_recipe_state.dart';
 

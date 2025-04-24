@@ -21,8 +21,6 @@ class Recipe with _$Recipe {
   final DateTime createdAt;
   final Category category;
   final bool isBookmarked;
-  // final List<Category> categoryList;
-  // final List<Review> reviews;
 
   const Recipe({
     required this.recipeId,
