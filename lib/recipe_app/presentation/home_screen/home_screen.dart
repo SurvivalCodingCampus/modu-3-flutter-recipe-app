@@ -136,6 +136,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                   ),
                   CategoryButton(
+                    categoryName: 'Asian',
+                    selectedCategory: state.selectedCategory,
+                    onTap:
+                        () => widget.onAction(
+                          HomeScreenAction.selectCategory('Asian'),
+                        ),
+                  ),
+                  CategoryButton(
                     categoryName: 'Korean',
                     selectedCategory: state.selectedCategory,
                     onTap:
@@ -160,6 +168,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                   ),
                   CategoryButton(
+                    categoryName: 'Indian',
+                    selectedCategory: state.selectedCategory,
+                    onTap:
+                        () => widget.onAction(
+                          HomeScreenAction.selectCategory('Indian'),
+                        ),
+                  ),
+                  CategoryButton(
                     categoryName: 'British',
                     selectedCategory: state.selectedCategory,
                     onTap:
@@ -167,17 +183,37 @@ class _HomeScreenState extends State<HomeScreen> {
                           HomeScreenAction.selectCategory('British'),
                         ),
                   ),
+                  CategoryButton(
+                    categoryName: 'French',
+                    selectedCategory: state.selectedCategory,
+                    onTap:
+                        () => widget.onAction(
+                          HomeScreenAction.selectCategory('French'),
+                        ),
+                  ),
                 ],
               ),
             ),
-            Column(
-              children:
-                  widget.state.recipes.map((recipe) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: DishCard(recipe: recipe, onTapFavorite: () {}),
-                    );
-                  }).toList(),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children:
+                    widget.state.recipes.map((recipe) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10, right: 15),
+                        child: DishCard(
+                          recipe: recipe,
+                          onTapFavorite: () {
+                            widget.onAction(
+                              recipe.bookMarked
+                                  ? HomeScreenAction.removeBookMark(recipe.id)
+                                  : HomeScreenAction.addBookMark(recipe),
+                            );
+                          },
+                        ),
+                      );
+                    }).toList(),
+              ),
             ),
           ],
         ),

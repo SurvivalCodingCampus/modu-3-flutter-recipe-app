@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/data/model/recipe.dart';
 import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository_impl.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
@@ -56,10 +57,13 @@ class _SavedRecipesScreenState extends State<SavedRecipesScreen> {
           return RecipeCard(
             recipe: recipe,
             showTimerAndBookmark: true,
+            onTapCard: () {
+              context.push('/detail-screen-root/${recipe.id}');
+            },
             onToggleBookMark: () {
               widget.onAction(SavedRecipesAction.removeBookMark(recipe.id));
-              //viewModel.removeBookmarkUseCase(recipe.id);
             },
+            showNameAndChef: true,
           );
         },
         separatorBuilder: (context, index) => const SizedBox(height: 20),

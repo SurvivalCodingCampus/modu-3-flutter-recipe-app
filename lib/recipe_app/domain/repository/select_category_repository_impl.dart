@@ -14,14 +14,10 @@ class SelectCategoryRepositoryImpl implements SelectCategoryRepository {
   Future<List<Recipe>> selectCategoryRecipes(String category) async {
     final recipeList = await _recipeDataSource.getRecipeData();
     if (category.toLowerCase() == 'all') {
-      print('All Category Recipes: $recipeList');
-      print('선택된 카테고리: $category');
       return recipeList;
     }
     final categoryRecipes =
         recipeList.where((e) => e.category == category).toList();
-
-    print('Filtered [$category] Recipes: $categoryRecipes');
     return categoryRecipes;
   }
 }

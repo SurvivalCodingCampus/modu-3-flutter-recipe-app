@@ -4,6 +4,8 @@ abstract class RecipeRepository {
   Future<List<Recipe>> fetchRecipes();
 
   Future<List<Recipe>> searchRecipes(String keyword);
+
+  Future<Recipe> fetchRecipeById(int id);
 }
 
 //구현체 data , domain 인터페이스

@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:recipe_app/recipe_app/domain/use_case/add_bookmark_use_case.dart';
+import 'package:recipe_app/recipe_app/domain/use_case/remove_bookmark_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/select_category_use_case.dart';
 import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_event.dart';
 import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_state.dart';
@@ -9,8 +11,14 @@ import '../../data/model/recipe.dart';
 
 class HomeScreenViewModel with ChangeNotifier {
   SelectCategoryUseCase useCase;
+  AddBookmarkUseCase addBookmarkUseCase;
+  RemoveBookmarkUseCase removeBookmarkUseCase;
 
-  HomeScreenViewModel({required this.useCase});
+  HomeScreenViewModel({
+    required this.useCase,
+    required this.addBookmarkUseCase,
+    required this.removeBookmarkUseCase,
+  });
 
   List<Recipe> get recipes => _recipes;
   List<Recipe> _recipes = [];
@@ -56,6 +64,18 @@ class HomeScreenViewModel with ChangeNotifier {
     _state = _state.copyWith(selectedCategory: category);
 
     getCategoryRecipes(); // 선택된 카테고리 기준으로 레시피 불러오기
+    notifyListeners();
+  }
+
+  void removeBookmark(int id) async {
+    _eventController.add(HomeScreenEvent.showSnackbar('제거실패'));
+    removeBookmarkUseCase.execute(id);
+    notifyListeners();
+  }
+
+  void addBookmark(Recipe recipe) {
+    addBookmarkUseCase.execute(recipe);
+    _recipes.add(recipe.copyWith(bookMarked: true));
     notifyListeners();
   }
 }

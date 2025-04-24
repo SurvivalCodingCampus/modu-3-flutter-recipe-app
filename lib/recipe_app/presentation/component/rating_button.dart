@@ -18,7 +18,7 @@ class _RatingButtonState extends State<RatingButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       spacing: 5,
       children: [
         _ratingButtonWidget(5),
@@ -34,6 +34,7 @@ class _RatingButtonState extends State<RatingButton> {
     final bool isSelected = selectedRate == rate;
     return SizedBox(
       height: 30,
+
       child: ElevatedButton(
         onPressed: () {
           setState(() {
@@ -60,7 +61,7 @@ class _RatingButtonState extends State<RatingButton> {
             Icon(
               Icons.star,
               color: isSelected ? Colors.white : ColorStyles.primary80,
-              size: 18,
+              size: 12,
             ),
           ],
         ),

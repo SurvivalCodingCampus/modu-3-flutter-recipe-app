@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
-class IngredientItem extends StatelessWidget {
-  final String imagePath;
-  final String ingredient;
-  final String amount;
+class IngredientItem extends StatefulWidget {
+  final Ingredient ingredient;
 
-  const IngredientItem({
-    super.key,
-    required this.imagePath,
-    required this.ingredient,
-    required this.amount,
-  });
+  const IngredientItem({super.key, required this.ingredient});
 
+  @override
+  State<IngredientItem> createState() => _IngredientItemState();
+}
+
+class _IngredientItemState extends State<IngredientItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,14 +38,14 @@ class IngredientItem extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: Image.asset(imagePath),
+                    child: Image.network(widget.ingredient.image),
                   ),
                   SizedBox(width: 12),
-                  Text(ingredient, style: TextStyles.normalText),
+                  Text(widget.ingredient.name, style: TextStyles.normalText),
                 ],
               ),
             ),
-            Text(amount, style: TextStyles.amountText),
+            Text('500g', style: TextStyles.amountText),
           ],
         ),
       ),

@@ -221,9 +221,11 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                       (recipe) => RecipeCard(
                                         recipe: recipe,
                                         showTimerAndBookmark: false,
+                                        onTapCard: () {},
                                         onToggleBookMark: () {
                                           false;
                                         },
+                                        showNameAndChef: true,
                                       ),
                                     )
                                     .toList(),
