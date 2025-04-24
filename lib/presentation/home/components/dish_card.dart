@@ -45,7 +45,7 @@ class DishCard extends StatelessWidget {
           bottom: 10,
           left: 10,
           child: SizedBox(
-            width: 40,
+            width: 50,
             height: 40,
             child: Column(
               children: [
