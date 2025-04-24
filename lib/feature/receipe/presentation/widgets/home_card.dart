@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/style/app_color.dart';
 import 'package:recipe_app/core/style/app_textstyle.dart';
-import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 
 class HomeCard extends StatelessWidget {
-  final Recipe recipe;
-  const HomeCard(this.recipe, {super.key});
+  final int id;
+  final String name;
+  final String imgUrl;
+  final bool bookmarkStatus;
+  final String time;
+  final VoidCallback bookmarkTap;
+  const HomeCard({
+    required this.id,
+    required this.name,
+    required this.imgUrl,
+    required this.bookmarkStatus,
+    required this.time,
+    required this.bookmarkTap,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +39,7 @@ class HomeCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  recipe.name,
+                  name,
                   style: AppTextStyle.smallerBold,
                   textAlign: TextAlign.center,
                 ),
@@ -45,22 +57,27 @@ class HomeCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          recipe.time,
+                          time,
                           style: AppTextStyle.smallerBold.copyWith(
                             color: AppColor.grey2,
                           ),
                         ),
                       ],
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.white,
-                      ),
-                      child: const Icon(
-                        Icons.bookmark_outline,
-                        color: AppColor.primary100,
+                    GestureDetector(
+                      onTap: bookmarkTap,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColor.white,
+                        ),
+                        child: Icon(
+                          bookmarkStatus
+                              ? Icons.bookmark
+                              : Icons.bookmark_outline,
+                          color: AppColor.primary100,
+                        ),
                       ),
                     ),
                   ],
@@ -77,7 +94,7 @@ class HomeCard extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: NetworkImage(recipe.image),
+                  image: NetworkImage(imgUrl),
                   fit: BoxFit.cover,
                 ),
               ),

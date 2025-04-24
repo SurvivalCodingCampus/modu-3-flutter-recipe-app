@@ -30,4 +30,19 @@ class RecipeRepositoryImpl implements RecipeRepository {
             .bookmarkStatus;
     return Future.value(Result.success(!resp!));
   }
+
+  @override
+  Future<Result<List<Recipe>>> getSavedRecipes() async {
+    try {
+      final resp = await _dataSource.getRecipes();
+      final recipes =
+          resp
+              .map((e) => e.toRecipe())
+              .where((e) => e.bookmarkStatus == true)
+              .toList();
+      return Result.success(recipes);
+    } catch (e) {
+      return const Result.error(NetworkException());
+    }
+  }
 }

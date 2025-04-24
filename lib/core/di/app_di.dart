@@ -66,5 +66,5 @@ void diSetup() {
     ),
   );
   getIt.registerFactory(() => SplashViewModel());
-  getIt.registerFactory(() => HomeViewModel(getIt()));
+  getIt.registerFactory(() => HomeViewModel(getIt(), getIt()));
 }

@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:recipe_app/core/enum/state_enum.dart';
 import 'package:recipe_app/core/modules/error_handling/result.dart';
 import 'package:recipe_app/feature/receipe/domain/model/recipe.dart';
 import 'package:recipe_app/feature/receipe/domain/use_case/info/get_recipe_info_use_case.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_action.dart';
+import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_event.dart';
 import 'package:recipe_app/feature/receipe/presentation/info/recipe_info_state.dart';
 
 class RecipeInfoViewModel with ChangeNotifier {
@@ -13,6 +15,9 @@ class RecipeInfoViewModel with ChangeNotifier {
 
   RecipeInfoState _state = RecipeInfoState();
   RecipeInfoState get state => _state;
+
+  final _controller = StreamController<RecipeInfoEvent>();
+  Stream<RecipeInfoEvent> get eventStream => _controller.stream;
 
   void onAction(RecipeInfoAction action) {
     switch (action) {
