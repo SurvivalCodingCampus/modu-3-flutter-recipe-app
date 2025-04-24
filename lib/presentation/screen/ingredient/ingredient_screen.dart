@@ -7,9 +7,11 @@ import 'package:recipe_app/data/data_source/chef_data_source_impl.dart';
 import 'package:recipe_app/domain/entity/chef.dart';
 import 'package:recipe_app/domain/entity/recipe_model.dart';
 import 'package:recipe_app/presentation/widget/ingredient_item.dart';
+import 'package:recipe_app/presentation/widget/recipe_action_menu.dart';
 import 'package:recipe_app/presentation/widget/recipe_card.dart';
 
-class IngredientScreen extends StatefulWidget { // StatefulWidget으로 변경
+class IngredientScreen extends StatefulWidget {
+  // StatefulWidget으로 변경
   final Recipe recipe;
 
   const IngredientScreen({super.key, required this.recipe});
@@ -33,13 +35,19 @@ class _IngredientScreenState extends State<IngredientScreen> {
     // 레시피에 저장된 chef 이름을 기반으로 chef ID를 검색
     // 실제 구현에서는 Recipe 모델에 chefId가 포함되어 있을 것입니다
     final chefs = await _chefDataSource.getAllChefs();
-    
+
     // 이름으로 chef 찾기 (실제로는 ID로 찾아야 함)
     final matchedChef = chefs.firstWhere(
       (c) => c.name == widget.recipe.chef,
-      orElse: () => Chef(id: 0, name: widget.recipe.chef, image: '', address: '위치 정보 없음'),
+      orElse:
+          () => Chef(
+            id: 0,
+            name: widget.recipe.chef,
+            image: '',
+            address: '위치 정보 없음',
+          ),
     );
-    
+
     setState(() {
       chef = matchedChef;
       isLoading = false;
@@ -68,7 +76,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () => context.pop(),
                 ),
-                IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
+                const RecipeActionMenu(), // ✅ 여기에 한 줄로 삽입
               ],
             ),
             const SizedBox(height: 10),
@@ -111,65 +119,80 @@ class _IngredientScreenState extends State<IngredientScreen> {
                 children: [
                   isLoading
                       ? const SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Center(
-                            child: SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(strokeWidth: 5),
-                            ),
+                        width: 40,
+                        height: 40,
+                        child: Center(
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 5),
                           ),
-                        )
+                        ),
+                      )
                       : Row(
-                          children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.blue.shade200),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(7),
-                                child: chef?.image != null && chef!.image.isNotEmpty
-                                    ? Image.network(
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.blue.shade200),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(7),
+                              child:
+                                  chef?.image != null && chef!.image.isNotEmpty
+                                      ? Image.network(
                                         chef!.image,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) {
-                                          return const Icon(Icons.person, color: Colors.grey);
+                                        errorBuilder: (
+                                          context,
+                                          error,
+                                          stackTrace,
+                                        ) {
+                                          return const Icon(
+                                            Icons.person,
+                                            color: Colors.grey,
+                                          );
                                         },
                                       )
-                                    : const Icon(Icons.person, color: Colors.grey),
+                                      : const Icon(
+                                        Icons.person,
+                                        color: Colors.grey,
+                                      ),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                chef!.name,
+                                style: AppTextStyles.smallBold(
+                                  color: ColorStyle.black1,
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 10),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  chef!.name,
-                                  style: AppTextStyles.smallBold(color: ColorStyle.black1),
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.location_on,
-                                      size: 14,
-                                      color: ColorStyle.primary80,
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on,
+                                    size: 14,
+                                    color: ColorStyle.primary80,
+                                  ),
+                                  const SizedBox(width: 2),
+                                  Text(
+                                    chef!.address,
+                                    style: AppTextStyles.extraSmallRegular(
+                                      color: ColorStyle.gray2,
                                     ),
-                                    const SizedBox(width: 2),
-                                    Text(
-                                      chef!.address,
-                                      style: AppTextStyles.extraSmallRegular(color: ColorStyle.gray2),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -178,7 +201,10 @@ class _IngredientScreenState extends State<IngredientScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                     ),
                     child: const Text('Follow'),
                   ),
@@ -190,18 +216,19 @@ class _IngredientScreenState extends State<IngredientScreen> {
             /// 🔽 recipe.ingredients를 그대로 출력
             Expanded(
               child: ListView(
-                children: widget.recipe.ingredients
-                    .map(
-                      (ri) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: IngredientItem(
-                          ingredientName: ri.ingredient.name,
-                          ingredientImgUrl: ri.ingredient.image,
-                          ingredientWeight: ri.amount,
-                        ),
-                      ),
-                    )
-                    .toList(),
+                children:
+                    widget.recipe.ingredients
+                        .map(
+                          (ri) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: IngredientItem(
+                              ingredientName: ri.ingredient.name,
+                              ingredientImgUrl: ri.ingredient.image,
+                              ingredientWeight: ri.amount,
+                            ),
+                          ),
+                        )
+                        .toList(),
               ),
             ),
           ],

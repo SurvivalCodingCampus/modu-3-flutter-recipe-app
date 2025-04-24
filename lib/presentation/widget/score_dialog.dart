@@ -54,7 +54,7 @@ class _ScoreWidgetState extends State<ScoreDialog> {
                 icon: Icon(
                   Icons.star,
                   size: 36,
-                  color: isSelected ? Colors.amber : Colors.white,
+                  color: isSelected ? Colors.amber : Colors.grey,
                 ),
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,

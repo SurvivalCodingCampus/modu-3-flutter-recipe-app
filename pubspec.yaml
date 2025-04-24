@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
   get_it: ^7.6.0
+  adaptive_dialog: ^2.4.1
 
 dev_dependencies:
   flutter_test:
