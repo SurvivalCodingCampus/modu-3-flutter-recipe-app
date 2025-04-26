@@ -1,11 +1,19 @@
 import 'package:recipe_app/recipe_app/domain/repository/copy_link_repository.dart';
 
-class CopyLinkUseCase{
+class CopyLinkUseCase {
   final CopyLinkRepository copyLinkRepository;
 
   CopyLinkUseCase({required this.copyLinkRepository});
 
-  void execute(int id){
+  //링크 텍스트로 받아옴
+  Future<String> getLink(int id) async {
+    final String link = await copyLinkRepository.getLink(id);
+    print(link);
+    return link;
+  }
+
+  //링크 복사
+  void copyLink(int id) {
     copyLinkRepository.copyLink(id);
   }
 }

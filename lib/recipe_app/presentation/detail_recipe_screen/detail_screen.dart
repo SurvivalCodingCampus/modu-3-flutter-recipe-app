@@ -15,9 +15,16 @@ import '../../ui/text_styles.dart';
 
 class DetailScreen extends StatefulWidget {
   final DetailRecipeState state;
-  final void Function(DetailRecipeAction action) onAction;
 
-  const DetailScreen({super.key, required this.state, required this.onAction});
+  final Function(DetailRecipeAction action) onAction;
+  final int id;
+
+  const DetailScreen({
+    super.key,
+    required this.state,
+    required this.onAction,
+    required this.id,
+  });
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -28,7 +35,6 @@ enum ActionItem { itemOne, itemTwo, itemThree, itemFour }
 enum SelectedTab { ingredients, procedure }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late int id;
   SelectedTab _selectedTab = SelectedTab.ingredients;
   ActionItem? selectedMenu;
 
@@ -56,7 +62,21 @@ class _DetailScreenState extends State<DetailScreen> {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return CopyLinkButton();
+                    final link =
+                        widget.onAction(
+                              DetailRecipeAction.getCopyLink(widget.id),
+                            )
+                            as String? ??
+                        'app.Recipe.co/1';
+
+                    return CopyLinkButton(
+                      recipe: widget.state.recipe!,
+                      link: link,
+                      copyLink:
+                          () => widget.onAction(
+                            DetailRecipeAction.copyLink(widget.id),
+                          ),
+                    );
                   },
                 );
               }

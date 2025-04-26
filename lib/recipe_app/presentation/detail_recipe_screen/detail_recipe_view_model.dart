@@ -18,7 +18,8 @@ class DetailRecipeViewModel with ChangeNotifier {
   final IngredientsRepository _ingredientsRepository;
   final CopyLinkUseCase _copyLinkUseCase;
 
-  DetailRecipeViewModel(this._copyLinkUseCase, {
+  DetailRecipeViewModel(
+    this._copyLinkUseCase, {
     required GetRecipeIdUseCase useCase,
     required GetProcedureUseCase getProcedureUseCase,
     required IngredientsRepository ingredientsRepository,
@@ -98,17 +99,33 @@ class DetailRecipeViewModel with ChangeNotifier {
     }
   }
 
-  Future<void> getCopyLink(int id) async
-  {
+  Future<void> copyLink(int id) async {
     _state = _state.copyWith(isRecipeLoading: true);
     notifyListeners();
-    try{
-      final copyLink = _copyLinkUseCase.execute(id);
+    try {
+      final copyLink = _copyLinkUseCase.copyLink(id);
       _state = _state.copyWith(isRecipeLoading: false);
       notifyListeners();
       return copyLink;
+    } catch (e) {
+      _state = _state.copyWith(isRecipeLoading: false);
+      notifyListeners();
+      _eventController.add(
+        DetailRecipeScreenEvent.showError("링크를 불러오지 못했습니다."),
+      );
+      rethrow;
     }
-    catch (e) {
+  }
+
+  Future<String> getCopyLink(int id) async {
+    _state = _state.copyWith(isRecipeLoading: true);
+    notifyListeners();
+    try {
+      final copyLink = _copyLinkUseCase.getLink(id);
+      _state = _state.copyWith(isRecipeLoading: false);
+      notifyListeners();
+      return copyLink;
+    } catch (e) {
       _state = _state.copyWith(isRecipeLoading: false);
       notifyListeners();
       _eventController.add(
