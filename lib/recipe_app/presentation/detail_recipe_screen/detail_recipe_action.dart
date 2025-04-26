@@ -10,4 +10,6 @@ sealed class DetailRecipeAction with _$DetailRecipeAction {
   const factory DetailRecipeAction.getProcedureById(int id) = GetProcedureById;
 
   const factory DetailRecipeAction.getIngredients() = GetIngredients;
+
+  const factory DetailRecipeAction.getCopyLink(int id) = GetCopyLink;
 }

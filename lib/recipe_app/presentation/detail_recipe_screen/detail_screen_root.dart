@@ -71,6 +71,8 @@ class _DetailScreenRootState extends State<DetailScreenRoot> {
                 widget.viewModel.getProcedureById(action.id);
               case GetIngredients():
                 widget.viewModel.getIngredients();
+              case GetCopyLink():
+                widget.viewModel.getCopyLink(action.id);
             }
           },
         );
