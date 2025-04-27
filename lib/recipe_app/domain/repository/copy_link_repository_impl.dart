@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:recipe_app/recipe_app/data_source/recipe_data_source.dart';
 import 'package:recipe_app/recipe_app/domain/repository/copy_link_repository.dart';
@@ -10,9 +11,12 @@ class CopyLinkRepositoryImpl implements CopyLinkRepository {
 
   //링크 텍스트로 반환
   @override
-  Future<String> getLink(int id) async {
+  Future<String?> getLink(int id) async {
     final recipes = await _recipeDataSource.getRecipeData();
-    final recipe = recipes.firstWhere((e) => e.id == id);
+    final recipe = recipes.firstWhereOrNull((e) => e.id == id);
+    if (recipe == null) {
+      return 'app.Recipe.co/default';
+    }
     return 'app.Recipe.co/${recipe.id}';
   }
 

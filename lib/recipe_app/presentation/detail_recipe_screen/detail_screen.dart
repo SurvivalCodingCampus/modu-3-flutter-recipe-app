@@ -46,7 +46,7 @@ class _DetailScreenState extends State<DetailScreen> {
         actions: <Widget>[
           PopupMenuButton(
             icon: Icon(Icons.more_horiz),
-            onSelected: (ActionItem item) {
+            onSelected: (ActionItem item) async {
               if (item == ActionItem.itemTwo) {
                 showDialog(
                   context: context,
@@ -185,6 +185,9 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Widget _buildBody() {
+    if (widget.state.recipe == null) {
+      return Center(child: Text('Recipe not available.'));
+    }
     return Padding(
       padding: const EdgeInsets.all(10),
       child: DetailRecipe(recipe: widget.state.recipe!),

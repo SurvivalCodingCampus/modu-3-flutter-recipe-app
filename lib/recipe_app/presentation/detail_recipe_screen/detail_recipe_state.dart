@@ -13,5 +13,6 @@ abstract class DetailRecipeState with _$DetailRecipeState {
     @Default(<Ingredient>[]) List<Ingredient> ingredient,
     @Default(false) bool isRecipeLoading,
     @Default('') String errorMessage,
+    @Default('') String url,
   }) = _DetailRecipeState;
 }

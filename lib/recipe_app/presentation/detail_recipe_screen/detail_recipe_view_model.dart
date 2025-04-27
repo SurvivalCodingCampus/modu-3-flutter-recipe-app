@@ -117,12 +117,13 @@ class DetailRecipeViewModel with ChangeNotifier {
     }
   }
 
-  Future<String> getCopyLink(int id) async {
+  Future<String?> getCopyLink(int id) async {
     _state = _state.copyWith(isRecipeLoading: true);
     notifyListeners();
     try {
-      final copyLink = _copyLinkUseCase.getLink(id);
-      _state = _state.copyWith(isRecipeLoading: false);
+      final copyLink = await _copyLinkUseCase.getLink(id);
+      _state = _state.copyWith(isRecipeLoading: false, url: copyLink!);
+      print('viewModel $copyLink');
       notifyListeners();
       return copyLink;
     } catch (e) {
