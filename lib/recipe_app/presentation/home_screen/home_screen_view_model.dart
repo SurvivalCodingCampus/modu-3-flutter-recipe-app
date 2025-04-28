@@ -47,7 +47,6 @@ class HomeScreenViewModel with ChangeNotifier {
         errorMessage: '',
         selectedCategory: category,
       );
-      print(recipes);
       notifyListeners();
       return result;
     } catch (e) {
@@ -74,8 +73,21 @@ class HomeScreenViewModel with ChangeNotifier {
   }
 
   void addBookmark(Recipe recipe) {
-    addBookmarkUseCase.execute(recipe);
-    _recipes.add(recipe.copyWith(bookMarked: true));
+    try {
+      addBookmarkUseCase.execute(recipe);
+      _recipes =
+          _recipes
+              .map(
+                (item) =>
+                    item.id == recipe.id
+                        ? item.copyWith(bookMarked: true)
+                        : item,
+              )
+              .toList();
+      _eventController.add(HomeScreenEvent.showSnackbar('북마크 추가됨'));
+    } catch (e) {
+      _eventController.add(HomeScreenEvent.showSnackbar('북마크 실패'));
+    }
     notifyListeners();
   }
 }

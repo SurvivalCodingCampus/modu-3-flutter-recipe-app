@@ -7,18 +7,23 @@ import 'package:recipe_app/recipe_app/presentation/component/procedure_step.dart
 import 'package:recipe_app/recipe_app/presentation/component/rating_dialog.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_action.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_state.dart';
-import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_view_model.dart';
 
-import '../../core/di/di_setup.dart';
 import '../../ui/button_styles.dart';
 import '../../ui/color_styles.dart';
 import '../../ui/text_styles.dart';
 
 class DetailScreen extends StatefulWidget {
   final DetailRecipeState state;
-  final void Function(DetailRecipeAction action) onAction;
 
-  const DetailScreen({super.key, required this.state, required this.onAction});
+  final void Function(DetailRecipeAction action) onAction;
+  final int id;
+
+  const DetailScreen({
+    super.key,
+    required this.state,
+    required this.onAction,
+    required this.id,
+  });
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -29,13 +34,6 @@ enum ActionItem { itemOne, itemTwo, itemThree, itemFour }
 enum SelectedTab { ingredients, procedure }
 
 class _DetailScreenState extends State<DetailScreen> {
-  final viewModel = DetailRecipeViewModel(
-    useCase: getIt(),
-    getProcedureUseCase: getIt(),
-    ingredientsRepository: getIt(),
-  );
-
-  late int id;
   SelectedTab _selectedTab = SelectedTab.ingredients;
   ActionItem? selectedMenu;
 
@@ -47,7 +45,7 @@ class _DetailScreenState extends State<DetailScreen> {
         actions: <Widget>[
           PopupMenuButton(
             icon: Icon(Icons.more_horiz),
-            onSelected: (ActionItem item) {
+            onSelected: (ActionItem item) async {
               if (item == ActionItem.itemTwo) {
                 showDialog(
                   context: context,
@@ -59,6 +57,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     );
                   },
                 );
+              } else if (item == ActionItem.itemOne) {
+                widget.onAction(DetailRecipeAction.getCopyLink(widget.id));
               }
             },
             itemBuilder:
@@ -165,6 +165,9 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Widget _buildBody() {
+    if (widget.state.recipe == null) {
+      return Center(child: Text('Recipe not available.'));
+    }
     return Padding(
       padding: const EdgeInsets.all(10),
       child: DetailRecipe(recipe: widget.state.recipe!),

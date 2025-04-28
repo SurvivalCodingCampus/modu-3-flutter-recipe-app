@@ -13,11 +13,14 @@ import 'package:recipe_app/recipe_app/data_source/procedure_data_source.dart';
 import 'package:recipe_app/recipe_app/data_source/recipe_data_source.dart';
 import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository.dart';
 import 'package:recipe_app/recipe_app/domain/repository/book_mark_repository_impl.dart';
+import 'package:recipe_app/recipe_app/domain/repository/copy_link_repository.dart';
+import 'package:recipe_app/recipe_app/domain/repository/copy_link_repository_impl.dart';
 import 'package:recipe_app/recipe_app/domain/repository/filter_category_repository.dart';
 import 'package:recipe_app/recipe_app/domain/repository/filter_category_repository_impl.dart';
 import 'package:recipe_app/recipe_app/domain/repository/select_category_repository.dart';
 import 'package:recipe_app/recipe_app/domain/repository/select_category_repository_impl.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/add_bookmark_use_case.dart';
+import 'package:recipe_app/recipe_app/domain/use_case/copy_link_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/filter_category_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_procedure_use_case.dart';
 import 'package:recipe_app/recipe_app/domain/use_case/get_recipe_id_use_case.dart';
@@ -57,6 +60,9 @@ void diSetUp() {
   getIt.registerSingleton<IngredientsRepository>(
     IngredientsRepositoryImpl(dataSource: getIt()),
   );
+  getIt.registerSingleton<CopyLinkRepository>(
+    CopyLinkRepositoryImpl(recipeDataSource: getIt()),
+  );
   //UseCase
   getIt.registerSingleton<AddBookmarkUseCase>(AddBookmarkUseCase(getIt()));
   getIt.registerSingleton<RemoveBookmarkUseCase>(
@@ -76,6 +82,9 @@ void diSetUp() {
   );
   getIt.registerSingleton<GetProcedureUseCase>(
     GetProcedureUseCase(repository: getIt()),
+  );
+  getIt.registerSingleton<CopyLinkUseCase>(
+    CopyLinkUseCase(copyLinkRepository: getIt()),
   );
   //VieModel
   getIt.registerFactory<SavedRecipesViewModel>(
@@ -97,6 +106,7 @@ void diSetUp() {
   getIt.registerFactory<SplashScreenViewModel>(() => SplashScreenViewModel());
   getIt.registerFactory<DetailRecipeViewModel>(
     () => DetailRecipeViewModel(
+      getIt(),
       useCase: getIt(),
       getProcedureUseCase: getIt(),
       ingredientsRepository: getIt(),

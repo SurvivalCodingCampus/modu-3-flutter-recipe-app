@@ -7,11 +7,13 @@ import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_r
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_screen.dart';
 
+import '../component/copy_link_button.dart';
+
 class DetailScreenRoot extends StatefulWidget {
-  DetailRecipeViewModel viewModel;
+  final DetailRecipeViewModel viewModel;
   final int recipeId;
 
-  DetailScreenRoot({
+  const DetailScreenRoot({
     super.key,
     required this.viewModel,
     required this.recipeId,
@@ -22,7 +24,7 @@ class DetailScreenRoot extends StatefulWidget {
 }
 
 class _DetailScreenRootState extends State<DetailScreenRoot> {
-  DetailRecipeViewModel get vieModel => widget.viewModel;
+  DetailRecipeViewModel get viewModel => widget.viewModel;
 
   DetailRecipeState get state => widget.viewModel.state;
   StreamSubscription? _subscription;
@@ -33,7 +35,7 @@ class _DetailScreenRootState extends State<DetailScreenRoot> {
     widget.viewModel.getRecipeById(widget.recipeId);
     widget.viewModel.getProcedureById(widget.recipeId);
     widget.viewModel.getIngredients();
-    _subscription = vieModel.eventStream.listen((event) {
+    _subscription = viewModel.eventStream.listen((event) {
       if (mounted) {
         switch (event) {
           case ShowMessageBar():
@@ -66,13 +68,31 @@ class _DetailScreenRootState extends State<DetailScreenRoot> {
           onAction: (DetailRecipeAction action) {
             switch (action) {
               case GetRecipeById():
-                vieModel.getRecipeById(action.id);
+                widget.viewModel.getRecipeById(action.id);
               case GetProcedureById():
-                vieModel.getProcedureById(action.id);
+                widget.viewModel.getProcedureById(action.id);
               case GetIngredients():
-                vieModel.getIngredients();
+                widget.viewModel.getIngredients();
+              case CopyLink():
+                widget.viewModel.copyLink(action.id);
+              case GetCopyLink():
+                widget.viewModel.getCopyLink(action.id).then((_) {
+                  if (mounted) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CopyLinkButton(
+                          recipe: viewModel.state.recipe!,
+                          link: viewModel.state.url,
+                          copyLink: () => viewModel.copyLink(action.id),
+                        );
+                      },
+                    );
+                  }
+                });
             }
           },
+          id: widget.recipeId,
         );
       },
     );

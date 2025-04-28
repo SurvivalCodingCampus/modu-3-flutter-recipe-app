@@ -3,9 +3,9 @@ import 'package:recipe_app/recipe_app/ui/color_styles.dart';
 import 'package:recipe_app/recipe_app/ui/text_styles.dart';
 
 class RatingDialog extends StatefulWidget {
-  void Function(int) onChange;
+  final void Function(int) onChange;
 
-  RatingDialog({super.key, required this.onChange});
+  const RatingDialog({super.key, required this.onChange});
 
   @override
   _RatingDialogState createState() => _RatingDialogState();

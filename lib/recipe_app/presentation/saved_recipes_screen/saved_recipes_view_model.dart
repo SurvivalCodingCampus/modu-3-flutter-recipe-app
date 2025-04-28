@@ -31,6 +31,12 @@ class SavedRecipesViewModel with ChangeNotifier {
 
   Stream<SavedRecipesScreenEvent> get eventStream => _eventController.stream;
 
+  @override
+  void dispose() {
+    _eventController.close();
+    super.dispose();
+  }
+
   Future<List<Recipe>> getSavedRecipes() async {
     _state = _state.copyWith(isRecipesLoading: true);
     notifyListeners();

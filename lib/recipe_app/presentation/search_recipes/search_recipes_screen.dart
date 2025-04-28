@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/presentation/component/recipe_card.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_view_model.dart';
@@ -221,7 +222,11 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                       (recipe) => RecipeCard(
                                         recipe: recipe,
                                         showTimerAndBookmark: false,
-                                        onTapCard: () {},
+                                        onTapCard: () {
+                                          context.push(
+                                            '/detail-screen-root/${recipe.id}',
+                                          );
+                                        },
                                         onToggleBookMark: () {
                                           false;
                                         },

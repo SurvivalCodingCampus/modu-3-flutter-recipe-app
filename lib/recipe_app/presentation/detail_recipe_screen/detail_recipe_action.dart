@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recipe_app/recipe_app/data/model/ingredient.dart';
 
 part 'detail_recipe_action.freezed.dart';
 
@@ -10,4 +9,8 @@ sealed class DetailRecipeAction with _$DetailRecipeAction {
   const factory DetailRecipeAction.getProcedureById(int id) = GetProcedureById;
 
   const factory DetailRecipeAction.getIngredients() = GetIngredients;
+
+  const factory DetailRecipeAction.copyLink(int id) = CopyLink;
+
+  const factory DetailRecipeAction.getCopyLink(int id) = GetCopyLink;
 }

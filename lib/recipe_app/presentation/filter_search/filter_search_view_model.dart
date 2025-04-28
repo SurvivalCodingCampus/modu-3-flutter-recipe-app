@@ -27,9 +27,6 @@ class FilterSearchViewModel with ChangeNotifier {
 
   Stream<FilterSearchEvent> get eventStream => _eventController.stream;
 
-  List<Recipe> get recipes => _recipes;
-  List<Recipe> _recipes = [];
-
   List<Recipe> get filteredRecipes => _filteredRecipes;
   List<Recipe> _filteredRecipes = [];
 
@@ -47,16 +44,15 @@ class FilterSearchViewModel with ChangeNotifier {
 
   //view에서 검색어가 포함된 레시피 가져오는 메서드
   Future<void> filterRecipesByCategory(
-    int time,
-    int rate,
-    String category,
+    String? time,
+    int? rate,
+    String? category,
   ) async {
     try {
       _filterSearchState = filterSearchState.copyWith(isRecipesLoading: true);
       notifyListeners();
 
       final filtered = await _useCase.execute(time, rate, category);
-      _filteredRecipes = filtered;
       _filterSearchState = _filterSearchState.copyWith(
         filteredRecipes: filtered,
         isRecipesLoading: false,
@@ -67,6 +63,6 @@ class FilterSearchViewModel with ChangeNotifier {
       _eventController.add(FilterSearchEvent.showErrorMessage('필터링 오류'));
     }
 
-    print('${_filterSearchState.filteredRecipes.length}개 존재');
+    debugPrint('${_filterSearchState.filteredRecipes.length}개 존재');
   }
 }

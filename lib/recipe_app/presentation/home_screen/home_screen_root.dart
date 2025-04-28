@@ -9,9 +9,9 @@ import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_view_
 import 'home_screen_event.dart';
 
 class HomeScreenRoot extends StatefulWidget {
-  HomeScreenViewModel viewModel;
+  final HomeScreenViewModel viewModel;
 
-  HomeScreenRoot({super.key, required this.viewModel});
+  const HomeScreenRoot({super.key, required this.viewModel});
 
   @override
   State<HomeScreenRoot> createState() => _HomeScreenRootState();
@@ -57,13 +57,13 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
           onAction: (HomeScreenAction action) {
             switch (action) {
               case SelectCategory():
-                viewModel.onSelectedCategory(action.category);
+                widget.viewModel.onSelectedCategory(action.category);
                 break;
               case RemoveBookMark():
-                viewModel.removeBookmark(action.id);
+                widget.viewModel.removeBookmark(action.id);
                 break;
               case AddBookMark():
-                viewModel.addBookmark(action.recipe);
+                widget.viewModel.addBookmark(action.recipe);
                 break;
             }
           },
