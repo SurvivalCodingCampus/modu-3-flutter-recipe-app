@@ -234,7 +234,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   final recipe = widget.state.recipes[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 10, right: 15),
-                    child: NewRecipeButton(recipe: recipe),
+                    child: GestureDetector(
+                      onTap: () async {
+                        await context
+                            .push('/detail-screen-root/${recipe.id}')
+                            .then((value) {});
+                      },
+                      child: NewRecipeButton(recipe: recipe),
+                    ),
                   );
                 },
               ),
