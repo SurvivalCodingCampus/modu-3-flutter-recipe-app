@@ -58,7 +58,7 @@ class CopyLinkButton extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () async {
-                        copyLink;
+                        copyLink();
                         ScaffoldMessenger.of(
                           context,
                         ).showSnackBar(SnackBar(content: Text('링크가 복사되었습니다!')));
