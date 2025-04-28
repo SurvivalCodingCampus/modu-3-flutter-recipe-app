@@ -117,7 +117,7 @@ class DetailRecipeViewModel with ChangeNotifier {
     }
   }
 
-  Future<String?> getCopyLink(int id) async {
+  Future<void> getCopyLink(int id) async {
     _state = _state.copyWith(isRecipeLoading: true);
     notifyListeners();
     try {
@@ -125,14 +125,12 @@ class DetailRecipeViewModel with ChangeNotifier {
       _state = _state.copyWith(isRecipeLoading: false, url: copyLink!);
       print('viewModel $copyLink');
       notifyListeners();
-      return copyLink;
     } catch (e) {
       _state = _state.copyWith(isRecipeLoading: false);
       notifyListeners();
       _eventController.add(
         DetailRecipeScreenEvent.showError("링크를 불러오지 못했습니다."),
       );
-      rethrow;
     }
   }
 }
