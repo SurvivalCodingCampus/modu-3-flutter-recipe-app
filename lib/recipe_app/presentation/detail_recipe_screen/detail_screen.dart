@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe_app/data/model/ingredient.dart';
 import 'package:recipe_app/recipe_app/data/model/procedure.dart';
-import 'package:recipe_app/recipe_app/presentation/component/copy_link_button.dart';
 import 'package:recipe_app/recipe_app/presentation/component/detail_recipe.dart';
 import 'package:recipe_app/recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/recipe_app/presentation/component/procedure_step.dart';

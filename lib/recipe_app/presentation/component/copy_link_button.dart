@@ -6,10 +6,10 @@ import '../../ui/text_styles.dart';
 
 class CopyLinkButton extends StatelessWidget {
   final Recipe recipe;
-  String link;
+  final String link;
   final VoidCallback copyLink;
 
-  CopyLinkButton({
+  const CopyLinkButton({
     super.key,
     required this.recipe,
     required this.link,

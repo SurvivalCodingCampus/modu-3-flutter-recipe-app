@@ -9,9 +9,9 @@ import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_view_
 import 'home_screen_event.dart';
 
 class HomeScreenRoot extends StatefulWidget {
-  HomeScreenViewModel viewModel;
+  final HomeScreenViewModel viewModel;
 
-  HomeScreenRoot({super.key, required this.viewModel});
+  const HomeScreenRoot({super.key, required this.viewModel});
 
   @override
   State<HomeScreenRoot> createState() => _HomeScreenRootState();

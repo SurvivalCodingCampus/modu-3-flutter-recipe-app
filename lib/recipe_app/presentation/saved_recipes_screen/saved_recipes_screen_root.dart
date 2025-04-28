@@ -9,9 +9,9 @@ import 'package:recipe_app/recipe_app/presentation/saved_recipes_screen/saved_re
 import 'saved_recipes_screen_event.dart';
 
 class SavedRecipesScreenRoot extends StatefulWidget {
-  SavedRecipesViewModel viewModel;
+  final SavedRecipesViewModel viewModel;
 
-  SavedRecipesScreenRoot({super.key, required this.viewModel});
+  const SavedRecipesScreenRoot({super.key, required this.viewModel});
 
   @override
   State<SavedRecipesScreenRoot> createState() => _SavedRecipesScreenRootState();

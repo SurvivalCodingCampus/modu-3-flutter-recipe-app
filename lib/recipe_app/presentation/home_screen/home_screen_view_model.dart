@@ -47,7 +47,6 @@ class HomeScreenViewModel with ChangeNotifier {
         errorMessage: '',
         selectedCategory: category,
       );
-      print(recipes);
       notifyListeners();
       return result;
     } catch (e) {

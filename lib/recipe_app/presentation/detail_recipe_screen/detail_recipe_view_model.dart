@@ -123,7 +123,6 @@ class DetailRecipeViewModel with ChangeNotifier {
     try {
       final copyLink = await _copyLinkUseCase.getLink(id);
       _state = _state.copyWith(isRecipeLoading: false, url: copyLink!);
-      print('viewModel $copyLink');
       notifyListeners();
     } catch (e) {
       _state = _state.copyWith(isRecipeLoading: false);

@@ -8,7 +8,6 @@ class CopyLinkUseCase {
   //링크 텍스트로 받아옴
   Future<String?> getLink(int id) async {
     final link = await copyLinkRepository.getLink(id);
-    print('Usecase에서 ${link}');
     return link;
   }
 
