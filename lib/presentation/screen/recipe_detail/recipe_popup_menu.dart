@@ -1,38 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/component/rating_dialog.dart';
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 enum PopupItem { share, rateRecipe, review, unsave }
 
-class RecipePopupMenu extends StatefulWidget {
-  const RecipePopupMenu({super.key});
+class RecipePopupMenu extends StatelessWidget {
+  final int recipeId;
+  final void Function(PopupItem item) onTabMenu;
 
-  @override
-  State<RecipePopupMenu> createState() => _RecipePopupMenuState();
-}
-
-class _RecipePopupMenuState extends State<RecipePopupMenu> {
-  void _showRatingDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return RatingDialog(
-          title: 'Rating recipe',
-          buttonTitle: 'Send',
-          onChange: (int rating) {
-            print('선택한 별점: $rating');
-          },
-        );
-      },
-    );
-  }
+  const RecipePopupMenu({
+    super.key,
+    required this.recipeId,
+    required this.onTabMenu,
+  });
 
   void showPopupMenu(BuildContext context) {
     showDialog(
       context: context,
       barrierDismissible: true, // 배경 클릭시 창 닫기 허용
-      barrierColor: Colors.black.withOpacity(0.5), // 배경 어둡게 설정
+      barrierColor: Colors.black.withValues(alpha: 0.5), // 배경 어둡게 설정
       builder: (BuildContext context) {
         return Material(
           type: MaterialType.transparency, // 배경을 투명하게 설정
@@ -59,7 +45,7 @@ class _RecipePopupMenuState extends State<RecipePopupMenu> {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1), // 그림자 표현
+            color: Colors.black.withValues(alpha: 0.1), // 그림자 표현
             blurRadius: 10,
             spreadRadius: 2,
             offset: const Offset(0, 4),
@@ -75,8 +61,7 @@ class _RecipePopupMenuState extends State<RecipePopupMenu> {
               icon: Icons.share,
               text: 'Share',
               onTap: () {
-                print('Share selected');
-                Navigator.pop(context);
+                onTabMenu(PopupItem.share);
               },
             ),
 
@@ -84,16 +69,14 @@ class _RecipePopupMenuState extends State<RecipePopupMenu> {
               icon: Icons.star,
               text: 'Rate Recipe',
               onTap: () {
-                Navigator.pop(context);
-                _showRatingDialog(context);
+                onTabMenu(PopupItem.rateRecipe);
               },
             ),
             _buildPopupMenuItem(
               icon: Icons.comment,
               text: 'Review',
               onTap: () {
-                print('Review selected');
-                Navigator.pop(context);
+                onTabMenu(PopupItem.review);
               },
             ),
 
@@ -102,8 +85,7 @@ class _RecipePopupMenuState extends State<RecipePopupMenu> {
               text: 'Unsave',
               iconColor: ColorStyle.label,
               onTap: () {
-                print('Unsave selected');
-                Navigator.pop(context);
+                onTabMenu(PopupItem.unsave);
               },
             ),
           ],
@@ -138,9 +120,18 @@ class _RecipePopupMenuState extends State<RecipePopupMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => showPopupMenu(context),
-      child: Icon(Icons.more_horiz, color: ColorStyle.label),
+    return Material(
+      type: MaterialType.transparency, // 배경을 투명하게 설정
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          Positioned(
+            top: 20, // 팝업 메뉴 위치: 상단으로 조정 (이미지와 유사하게)
+            right: 24,
+            child: _buildPopupMenu(context),
+          ),
+        ],
+      ),
     );
   }
 }

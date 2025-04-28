@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/domain/repository/clipboard_repository.dart';
 import 'package:recipe_app/domain/use_case/recipe/fetch_recipe_use_case.dart';
 import 'package:recipe_app/domain/use_case/recipe/get_recipe_procedure_use_case.dart';
 import 'package:recipe_app/domain/use_case/user/get_user_info_use_case.dart';
@@ -8,16 +9,20 @@ class RecipeDetailViewModel with ChangeNotifier {
   final FetchRecipeUseCase _fetchRecipeUseCase;
   final GetUserInfoUseCase _getUserInfoUseCase;
   final GetRecipeProcedureUseCase _getRecipeProcedureUseCase;
+  final ClipboardRepository _clipboardRepository;
 
   RecipeDetailViewModel({
     required FetchRecipeUseCase fetchRecipeUseCase,
     required GetUserInfoUseCase getUserInfoUseCase,
     required GetRecipeProcedureUseCase getRecipeProcedureUseCase,
+    required ClipboardRepository clipboardRepository,
   }) : _fetchRecipeUseCase = fetchRecipeUseCase,
        _getUserInfoUseCase = getUserInfoUseCase,
-       _getRecipeProcedureUseCase = getRecipeProcedureUseCase;
+       _getRecipeProcedureUseCase = getRecipeProcedureUseCase,
+       _clipboardRepository = clipboardRepository;
 
   RecipeDetailState _state = RecipeDetailState();
+
   RecipeDetailState get state => _state;
 
   Future<void> fetchRecipe(int recipeId) async {
@@ -45,5 +50,9 @@ class RecipeDetailViewModel with ChangeNotifier {
   Future<void> changeTabIndex(int index) async {
     _state = state.copyWith(selectedTabIndex: index);
     notifyListeners();
+  }
+
+  void onTapCopyLink(String link) {
+    _clipboardRepository.copy(link);
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/presentation/screen/main_naivation_bar/home/action/home_action.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/home/home_screen.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/home/home_view_model.dart';
+import 'package:recipe_app/presentation/screen/main_naivation_bar/home/state/home_state.dart';
 
 class HomeScreenRoot extends StatefulWidget {
   final HomeViewModel viewModel;
@@ -12,6 +14,9 @@ class HomeScreenRoot extends StatefulWidget {
 }
 
 class _HomeScreenRootState extends State<HomeScreenRoot> {
+  HomeViewModel get viewModel => widget.viewModel;
+  HomeState get state => widget.viewModel.state;
+
   @override
   void initState() {
     super.initState();
@@ -25,11 +30,13 @@ class _HomeScreenRootState extends State<HomeScreenRoot> {
       builder: (context, child) {
         return HomeScreen(
           state: widget.viewModel.state,
-          onCategorySelected: (category) {
-            widget.viewModel.updateSelectedCategory(category);
-          },
-          onClickBookMark: (recipeId) {
-            widget.viewModel.onClickBookMark(recipeId);
+          onAction: (HomeAction action) {
+            switch (action) {
+              case UpdateSelectedCategory():
+                viewModel.updateSelectedCategory(action.category);
+              case OnClickBookMark():
+                viewModel.onClickBookMark(action.recipeId);
+            }
           },
         );
       },

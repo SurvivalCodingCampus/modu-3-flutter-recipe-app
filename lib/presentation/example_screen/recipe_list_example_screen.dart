@@ -4,7 +4,7 @@ import 'package:recipe_app/domain/model/ingredient/ingredient.dart';
 import 'package:recipe_app/domain/model/media/media.dart';
 import 'package:recipe_app/domain/model/recipe/recipe.dart';
 import 'package:recipe_app/domain/model/user/user.dart';
-import 'package:recipe_app/core/component/recipe_card.dart';
+import 'package:recipe_app/core/component/item_card/recipe_card.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class RecipeListExampleScreen extends StatelessWidget {

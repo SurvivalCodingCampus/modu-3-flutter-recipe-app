@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/core/component/input_field.dart';
+import 'package:recipe_app/core/component/text_field/input_field.dart';
 
 void main() {
   group('InputField widget test', () {

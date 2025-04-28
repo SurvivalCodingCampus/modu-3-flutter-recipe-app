@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:recipe_app/core/component/image_roader.dart';
+import 'package:recipe_app/core/component/image/image_roader.dart';
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 import 'package:recipe_app/domain/model/recipe/recipe.dart';

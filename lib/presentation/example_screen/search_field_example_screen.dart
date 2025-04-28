@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/component/search_field.dart';
+import 'package:recipe_app/core/component/text_field/search_field.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 

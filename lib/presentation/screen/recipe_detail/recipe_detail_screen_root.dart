@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/action/recipe_detail_action.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/recipe_detail_screen.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/recipe_detail_view_model.dart';
+import 'package:recipe_app/presentation/screen/recipe_detail/recipe_popup_menu.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/state/recipe_detail_state.dart';
+
+import '../../../core/component/rating_dialog.dart';
+import '../../../core/component/share_dialog.dart';
 
 class RecipeDetailScreenRoot extends StatefulWidget {
   final int recipeId;
@@ -44,6 +48,41 @@ class _RecipeDetailScreenRootState extends State<RecipeDetailScreenRoot> {
                 viewModel.fetchRecipe(action.recipeId);
               case ChangeTabIndex():
                 viewModel.changeTabIndex(action.index);
+              case OnTapMenu():
+                switch(action.menu) {
+                  case PopupItem.share:
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return ShareDialog(
+                          url: 'app.Recipe.co/recipe/$recipeId',
+                          onTab: (String link) {
+                            viewModel.onTapCopyLink(link);
+                            Navigator.pop(context);
+                          },
+                        );
+                      },
+                    );
+                  case PopupItem.rateRecipe:
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return RatingDialog(
+                          title: 'Rating recipe',
+                          buttonTitle: 'Send',
+                          onChange: (int rating) {
+                            print('선택한 별점: $rating');
+                          },
+                        );
+                      },
+                    );
+                  case PopupItem.review:
+                    print('Review selected');
+                    Navigator.pop(context);
+                  case PopupItem.unsave:
+                    print('Unsave selected');
+                    Navigator.pop(context);
+                }
             }
           },
         );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/domain/model/filter/filter_enum.dart';
-import 'package:recipe_app/core/component/recipe_card.dart';
-import 'package:recipe_app/core/component/search_field.dart';
-import 'package:recipe_app/core/component/skeleton_effect.dart';
+import 'package:recipe_app/core/component/item_card/recipe_card.dart';
+import 'package:recipe_app/core/component/text_field/search_field.dart';
+import 'package:recipe_app/core/component/image/skeleton_effect.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/action/search_recipe_action.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/state/search_recipe_state.dart';

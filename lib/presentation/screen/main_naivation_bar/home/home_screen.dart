@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:recipe_app/domain/model/filter/filter_enum.dart';
+
+import 'package:recipe_app/presentation/screen/main_naivation_bar/home/action/home_action.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/home/dish_card.dart';
 import 'package:recipe_app/presentation/screen/main_naivation_bar/home/recipe_category_selector.dart';
 import 'package:recipe_app/core/routing/routes.dart';
@@ -10,15 +11,11 @@ import 'package:recipe_app/presentation/screen/main_naivation_bar/home/state/hom
 
 class HomeScreen extends StatelessWidget {
   final HomeState state;
-  final Function(Category category) onCategorySelected;
-  final Function(int recipeId) onClickBookMark;
+  // final Function(Category category) onCategorySelected;
+  // final Function(int recipeId) onClickBookMark;
+  final void Function(HomeAction action) onAction;
 
-  const HomeScreen({
-    super.key,
-    required this.state,
-    required this.onCategorySelected,
-    required this.onClickBookMark,
-  });
+  const HomeScreen({super.key, required this.state, required this.onAction});
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +140,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             RecipeCategorySelector(
-              onCategorySelected: onCategorySelected,
+              onCategorySelected:
+                  (category) => onAction(UpdateSelectedCategory(category)),
               selectedCategory: state.category!,
             ),
             const SizedBox(height: 20),
@@ -161,7 +159,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                     child: DishCard(
                       recipe: state.selectRecipes[index],
-                      onClickBookMark: onClickBookMark,
+                      onClickBookMark:
+                          (recipeId) => onAction(OnClickBookMark(recipeId)),
                     ),
                   );
                 },

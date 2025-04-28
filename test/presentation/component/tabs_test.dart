@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/core/component/tabs.dart';
+import 'package:recipe_app/core/component/tabs/tabs.dart';
 
 void main() {
   group('Tabs widget test', () {

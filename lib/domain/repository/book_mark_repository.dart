@@ -4,4 +4,5 @@ abstract interface class BookMarkRepository {
   Future<BookMark> getSavedRecipe(int id);
   Future<void> addBookMark(int recipeId);
   Future<void> removeBookMark(int recipeId);
+  Stream<BookMark> streamBookmark(int userId);
 }

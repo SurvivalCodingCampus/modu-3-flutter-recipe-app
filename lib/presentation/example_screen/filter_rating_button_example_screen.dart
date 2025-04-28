@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/component/filter_button.dart';
+import 'package:recipe_app/core/component/buttons/filter_button.dart';
 
-import 'package:recipe_app/core/component/rating_button.dart';
+import 'package:recipe_app/core/component/buttons/rating_button.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class FilterRatingButtonExampleScreen extends StatefulWidget {

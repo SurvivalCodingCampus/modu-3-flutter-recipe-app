@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/ingredient/ingredient.dart';
-import 'package:recipe_app/core/component/ingredient_item.dart';
+import 'package:recipe_app/core/component/item_card/ingredient_item.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class IngredientListExampleScreen extends StatelessWidget {

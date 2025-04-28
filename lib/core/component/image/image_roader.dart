@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/component/skeleton_effect.dart';
+import 'package:recipe_app/core/component/image/skeleton_effect.dart';
 
 class RecipeImageLoader extends StatefulWidget {
   final String imageUrl;

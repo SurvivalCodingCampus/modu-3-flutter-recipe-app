@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/core/component/filter_button.dart';
-import 'package:recipe_app/core/component/rating_button.dart';
+import 'package:recipe_app/core/component/buttons/filter_button.dart';
+import 'package:recipe_app/core/component/buttons/rating_button.dart';
 
 void main() {
   group('RatingButton FilterButton Widget Test', () {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/domain/model/filter/filter_enum.dart';
-import 'package:recipe_app/core/component/buttons.dart';
-import 'package:recipe_app/core/component/filter_button.dart';
-import 'package:recipe_app/core/component/rating_button.dart';
+import 'package:recipe_app/core/component/buttons/buttons.dart';
+import 'package:recipe_app/core/component/buttons/filter_button.dart';
+import 'package:recipe_app/core/component/buttons/rating_button.dart';
 
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 import 'package:recipe_app/presentation/screen/search_recipes/state/search_recipe_state.dart';

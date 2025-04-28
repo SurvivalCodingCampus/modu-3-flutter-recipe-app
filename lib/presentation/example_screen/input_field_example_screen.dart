@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/component/input_field.dart';
+import 'package:recipe_app/core/component/text_field/input_field.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class InputFieldExampleScreen extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/component/tabs.dart';
+import 'package:recipe_app/core/component/tabs/tabs.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 
 class TabsExampleScreen extends StatefulWidget {

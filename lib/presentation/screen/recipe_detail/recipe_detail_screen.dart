@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/component/buttons.dart';
-import 'package:recipe_app/core/component/ingredient_item.dart';
-import 'package:recipe_app/core/component/recipe_card.dart';
-import 'package:recipe_app/core/component/tabs.dart';
+import 'package:recipe_app/core/component/buttons/buttons.dart';
+import 'package:recipe_app/core/component/item_card/ingredient_item.dart';
+import 'package:recipe_app/core/component/item_card/recipe_card.dart';
+import 'package:recipe_app/core/component/tabs/tabs.dart';
 import 'package:recipe_app/core/ui_styles/color_styles.dart';
 import 'package:recipe_app/core/ui_styles/text_styles.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/action/recipe_detail_action.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/recipe_popup_menu.dart';
 import 'package:recipe_app/presentation/screen/recipe_detail/state/recipe_detail_state.dart';
 
-class RecipeDetailScreen extends StatefulWidget {
+class RecipeDetailScreen extends StatelessWidget {
   final int recipeId;
   final RecipeDetailState state;
   final void Function(RecipeDetailAction action) onAction;
@@ -22,17 +22,12 @@ class RecipeDetailScreen extends StatefulWidget {
   });
 
   @override
-  State<RecipeDetailScreen> createState() => _RecipeDetailScreenState();
-}
-
-class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(body: buildBody());
+    return Scaffold(body: buildBody(context));
   }
 
-  Widget buildBody() {
-    if (widget.state.isLoading || widget.state.recipe == null) {
+  Widget buildBody(BuildContext context) {
+    if (state.isLoading || state.recipe == null) {
       return Center(
         child: CircularProgressIndicator(
           color: ColorStyle.gray4,
@@ -57,19 +52,27 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   },
                   child: Icon(Icons.arrow_back, color: ColorStyle.label),
                 ),
-
-                // GestureDetector(
-                //   onTap: () {
-                //     print('모달들어올자리');
-                //   },
-                //   child: Icon(Icons.more_horiz, color: ColorStyle.label),
-                // ),
-                RecipePopupMenu(),
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true, // 배경 클릭시 창 닫기 허용
+                      barrierColor: Colors.black.withOpacity(0.5), // 배경 어둡게 설정
+                      builder: (BuildContext context) {
+                        return RecipePopupMenu(
+                          recipeId: recipeId,
+                          onTabMenu: (menu) => onAction(RecipeDetailAction.onTapMenu(menu)),
+                        );
+                      },
+                    );
+                  },
+                  child: Icon(Icons.more_horiz, color: ColorStyle.label),
+                ),
               ],
             ),
             const SizedBox(height: 10),
             RecipeCard(
-              recipe: widget.state.recipe!,
+              recipe: state.recipe!,
               isNotTitleArea: true,
               onBookMarkTap: () {
                 print('토글기능구현 예정');
@@ -82,7 +85,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 // 제목: 자동 줄바꿈, 오른쪽 공간까지 최대 사용
                 Expanded(
                   child: Text(
-                    widget.state.recipe!.title,
+                    state.recipe!.title,
                     style: AppTextStyles.smallBold(),
                     softWrap: true,
                   ),
@@ -106,10 +109,9 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                     color: ColorStyle.gray4,
                     image: DecorationImage(
                       image:
-                          widget.state.user!.imageUrl?.startsWith('http') ==
-                                  true
-                              ? NetworkImage(widget.state.user!.imageUrl!)
-                              : AssetImage(widget.state.user!.imageUrl ?? '')
+                          state.user!.imageUrl?.startsWith('http') == true
+                              ? NetworkImage(state.user!.imageUrl!)
+                              : AssetImage(state.user!.imageUrl ?? '')
                                   as ImageProvider,
                       fit: BoxFit.cover,
                     ),
@@ -119,10 +121,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.state.user!.name,
-                      style: AppTextStyles.smallBold(),
-                    ),
+                    Text(state.user!.name, style: AppTextStyles.smallBold()),
                     const SizedBox(height: 4),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,7 +134,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          widget.state.user!.address,
+                          state.user!.address,
                           style: AppTextStyles.smallRegular(
                             color: ColorStyle.gray3,
                           ),
@@ -160,15 +159,15 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             const SizedBox(height: 13),
             Tabs(
               labels: const ['Ingrident', 'Procedure'],
-              selectIndex: widget.state.selectedTabIndex,
+              selectIndex: state.selectedTabIndex,
               onValueChange: (index) {
-                widget.onAction(RecipeDetailAction.changeTabIndex(index));
+                onAction(RecipeDetailAction.changeTabIndex(index));
               },
             ),
             const SizedBox(height: 20),
             Expanded(
               child: IndexedStack(
-                index: widget.state.selectedTabIndex,
+                index: state.selectedTabIndex,
                 children: [
                   SingleChildScrollView(
                     child: Column(
@@ -189,7 +188,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                               ],
                             ),
                             Text(
-                              '${widget.state.recipe!.ingredient.length} Items',
+                              '${state.recipe!.ingredient.length} Items',
                               style: AppTextStyles.smallRegular(
                                 color: ColorStyle.gray3,
                               ),
@@ -199,14 +198,14 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                         const SizedBox(height: 20),
                         ListView.builder(
                           padding: const EdgeInsets.only(bottom: 12),
-                          itemCount: widget.state.recipe!.ingredient.length,
-                          shrinkWrap: true, // 내부 높이 계산 허용
-                          physics:
-                              NeverScrollableScrollPhysics(), // 스크롤 비활성화 (SingleChildScrollView로만)
+                          itemCount: state.recipe!.ingredient.length,
+                          shrinkWrap: true,
+                          // 내부 높이 계산 허용
+                          physics: NeverScrollableScrollPhysics(),
+                          // 스크롤 비활성화 (SingleChildScrollView로만)
                           itemBuilder: (context, index) {
                             return IngredientItem(
-                              ingredient:
-                                  widget.state.recipe!.ingredient[index],
+                              ingredient: state.recipe!.ingredient[index],
                             );
                           },
                         ),
@@ -221,11 +220,11 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                         Text('Cooking Steps', style: AppTextStyles.smallBold()),
                         const SizedBox(height: 16),
                         ListView.builder(
-                          itemCount: widget.state.procedure!.length,
+                          itemCount: state.procedure!.length,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
-                            final step = widget.state.procedure![index];
+                            final step = state.procedure![index];
                             return Container(
                               margin: const EdgeInsets.only(bottom: 12),
                               padding: const EdgeInsets.all(16),

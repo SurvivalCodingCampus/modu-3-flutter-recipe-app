@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe_app/core/component/buttons.dart';
+import 'package:recipe_app/core/component/buttons/buttons.dart';
 
 void main() {
   group('Buttons Widget Test', () {
