@@ -59,16 +59,44 @@ class HomeScreenViewModel with ChangeNotifier {
     return [];
   }
 
-  void onSelectedCategory(String category) {
+  Future<List<Recipe>> refreshScreen() async {
+    final category = _state.selectedCategory;
+
+    _state = _state.copyWith(isRecipesLoading: true);
+    notifyListeners();
+
+    try {
+      final result = await useCase.execute(category);
+      _recipes = result;
+
+      _state = _state.copyWith(
+        recipes: result,
+        isRecipesLoading: false,
+        errorMessage: '',
+        selectedCategory: category,
+      );
+      notifyListeners();
+      return result;
+    } catch (e) {
+      _state = _state.copyWith(
+        isRecipesLoading: false,
+        errorMessage: '레시피 불러오기 실패',
+      );
+    }
+    notifyListeners();
+    return [];
+  }
+
+  void onSelectedCategory(String category) async {
     _state = _state.copyWith(selectedCategory: category);
 
-    getCategoryRecipes(); // 선택된 카테고리 기준으로 레시피 불러오기
+    await getCategoryRecipes(); // 선택된 카테고리 기준으로 레시피 불러오기
     notifyListeners();
   }
 
   void removeBookmark(int id) async {
     _eventController.add(HomeScreenEvent.showSnackbar('제거실패'));
-    removeBookmarkUseCase.execute(id);
+    await removeBookmarkUseCase.execute(id);
     notifyListeners();
   }
 

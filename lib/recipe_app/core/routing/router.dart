@@ -17,29 +17,39 @@ import '../di/di_setup.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: Routes.splash,
   routes: [
+    // Splash 화면
     GoRoute(
       path: Routes.splash,
       builder: (context, state) => SplashScreen(viewModel: getIt()),
     ),
+
+    // 로그인 화면
     GoRoute(
       path: Routes.signIn,
       name: 'SignIn',
       builder: (context, state) => const SignInScreen(),
     ),
+
+    // 회원가입 화면
     GoRoute(
       path: Routes.signUp,
       name: 'SignUp',
       builder: (context, state) => const SignUpScreen(),
     ),
+
+    // 재료 화면 (필요 시)
     GoRoute(
       path: Routes.ingredientScreen,
       name: 'IngredientScreen',
       builder: (context, state) => const IngredientScreen(),
     ),
+
+    // 디테일 화면
     GoRoute(
       path: Routes.detailScreenRoot,
       builder: (context, state) {
@@ -47,6 +57,8 @@ final router = GoRouter(
         return DetailScreenRoot(viewModel: getIt(), recipeId: id);
       },
     ),
+
+    // 검색 화면
     GoRoute(
       path: Routes.searchRecipes,
       name: 'SearchRecipesScreen',
@@ -57,33 +69,59 @@ final router = GoRouter(
             savedRecipesViewModel: getIt(),
           ),
     ),
-    ShellRoute(
-      navigatorKey: _shellNavigatorKey,
-      builder:
-          (context, state, child) => BottomNavigationBarScaffold(child: child),
-      routes: [
-        GoRoute(
-          path: Routes.homeScreen,
-          pageBuilder:
-              (context, state) =>
-                  NoTransitionPage(child: HomeScreenRoot(viewModel: getIt())),
+
+    // ✅ 로그인 성공하면 들어올 메인화면 (BottomNavigationBar)
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return BottomNavigationBarScaffold(child: navigationShell);
+      },
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.homeScreen,
+              builder: (context, state) => HomeScreenRoot(viewModel: getIt()),
+            ),
+          ],
         ),
-        GoRoute(
-          path: Routes.savedRecipes,
-          pageBuilder:
-              (context, state) => NoTransitionPage(
-                child: SavedRecipesScreenRoot(viewModel: getIt()),
-              ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.savedRecipes,
+              builder:
+                  (context, state) =>
+                      SavedRecipesScreenRoot(viewModel: getIt()),
+            ),
+          ],
         ),
-        GoRoute(
-          path: Routes.notificationScreen,
-          pageBuilder:
-              (context, state) => NoTransitionPage(child: NotificationScreen()),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.searchRecipes,
+              builder:
+                  (context, state) => SearchRecipesScreen(
+                    searchRecipesViewModel: getIt(),
+                    filterSearchViewModel: getIt(),
+                    savedRecipesViewModel: getIt(),
+                  ),
+            ),
+          ],
         ),
-        GoRoute(
-          path: Routes.myPageScreen,
-          pageBuilder:
-              (context, state) => NoTransitionPage(child: MyPageScreen()),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.notificationScreen,
+              builder: (context, state) => NotificationScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.myPageScreen,
+              builder: (context, state) => MyPageScreen(),
+            ),
+          ],
         ),
       ],
     ),

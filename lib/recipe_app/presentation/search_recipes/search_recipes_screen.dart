@@ -223,9 +223,11 @@ class _SearchRecipesScreenState extends State<SearchRecipesScreen> {
                                         recipe: recipe,
                                         showTimerAndBookmark: false,
                                         onTapCard: () {
-                                          context.push(
-                                            '/detail-screen-root/${recipe.id}',
-                                          );
+                                          context
+                                              .push(
+                                                '/detail-screen-root/${recipe.id}',
+                                              )
+                                              .then((value) {});
                                         },
                                         onToggleBookMark: () {
                                           false;

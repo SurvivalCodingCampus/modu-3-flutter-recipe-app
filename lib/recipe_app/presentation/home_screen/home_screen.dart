@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/recipe_app/presentation/component/dish_card.dart';
+import 'package:recipe_app/recipe_app/presentation/component/new_recipe_button.dart';
 import 'package:recipe_app/recipe_app/presentation/filter_search/filter_search_bottom_sheet.dart';
 import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_action.dart';
 import 'package:recipe_app/recipe_app/presentation/home_screen/home_screen_state.dart';
@@ -22,10 +23,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void changedCategoryFilter(String? category) {
-    widget.onAction(HomeScreenAction.selectCategory(category ?? ''));
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(body: _buildBody(context)));
@@ -194,25 +191,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children:
-                    widget.state.recipes.map((recipe) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 10, right: 15),
-                        child: DishCard(
-                          recipe: recipe,
-                          onTapFavorite: () {
-                            widget.onAction(
-                              recipe.bookMarked
-                                  ? HomeScreenAction.removeBookMark(recipe.id)
-                                  : HomeScreenAction.addBookMark(recipe),
-                            );
-                          },
-                        ),
-                      );
-                    }).toList(),
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.state.recipes.length,
+                itemBuilder: (context, index) {
+                  final recipe = widget.state.recipes[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10, right: 15),
+                    child: GestureDetector(
+                      onTap: () async {
+                        await context
+                            .push('/detail-screen-root/${recipe.id}')
+                            .then((value) {});
+                      },
+                      child: DishCard(
+                        recipe: recipe,
+                        onTapFavorite: () {
+                          widget.onAction(
+                            recipe.bookMarked
+                                ? HomeScreenAction.removeBookMark(recipe.id)
+                                : HomeScreenAction.addBookMark(recipe),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Text(
+              'New Recipes',
+              style: TextStyles.normalTextBold.copyWith(color: Colors.black),
+            ),
+            SizedBox(
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.state.recipes.length,
+                itemBuilder: (context, index) {
+                  final recipe = widget.state.recipes[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10, right: 15),
+                    child: NewRecipeButton(recipe: recipe),
+                  );
+                },
               ),
             ),
           ],

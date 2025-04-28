@@ -6,7 +6,7 @@ class RemoveBookmarkUseCase {
   RemoveBookmarkUseCase({required BookMarkRepository bookMarkRepository})
     : _bookMarkRepository = bookMarkRepository;
 
-  void execute(int id) {
-    _bookMarkRepository.removeBookMark(id);
+  Future<void> execute(int id) async {
+    await _bookMarkRepository.removeBookMark(id);
   }
 }
