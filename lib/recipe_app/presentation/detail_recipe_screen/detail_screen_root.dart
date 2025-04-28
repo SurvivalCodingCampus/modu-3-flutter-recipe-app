@@ -7,11 +7,13 @@ import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_r
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_recipe_view_model.dart';
 import 'package:recipe_app/recipe_app/presentation/detail_recipe_screen/detail_screen.dart';
 
+import '../component/copy_link_button.dart';
+
 class DetailScreenRoot extends StatefulWidget {
-  DetailRecipeViewModel viewModel;
+  final DetailRecipeViewModel viewModel;
   final int recipeId;
 
-  DetailScreenRoot({
+  const DetailScreenRoot({
     super.key,
     required this.viewModel,
     required this.recipeId,
@@ -74,7 +76,20 @@ class _DetailScreenRootState extends State<DetailScreenRoot> {
               case CopyLink():
                 widget.viewModel.copyLink(action.id);
               case GetCopyLink():
-                widget.viewModel.getCopyLink(action.id);
+                widget.viewModel.getCopyLink(action.id).then((_) {
+                  if (mounted) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CopyLinkButton(
+                          recipe: viewModel.state.recipe!,
+                          link: viewModel.state.url,
+                          copyLink: () => viewModel.copyLink(action.id),
+                        );
+                      },
+                    );
+                  }
+                });
             }
           },
           id: widget.recipeId,

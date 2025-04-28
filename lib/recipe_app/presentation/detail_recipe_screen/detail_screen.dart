@@ -16,7 +16,7 @@ import '../../ui/text_styles.dart';
 class DetailScreen extends StatefulWidget {
   final DetailRecipeState state;
 
-  final Function(DetailRecipeAction action) onAction;
+  final void Function(DetailRecipeAction action) onAction;
   final int id;
 
   const DetailScreen({
@@ -59,26 +59,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   },
                 );
               } else if (item == ActionItem.itemOne) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    final link =
-                        widget.onAction(
-                              DetailRecipeAction.getCopyLink(widget.id),
-                            )
-                            as String? ??
-                        'app.Recipe.co/1';
-
-                    return CopyLinkButton(
-                      recipe: widget.state.recipe!,
-                      link: link,
-                      copyLink:
-                          () => widget.onAction(
-                            DetailRecipeAction.copyLink(widget.id),
-                          ),
-                    );
-                  },
-                );
+                widget.onAction(DetailRecipeAction.getCopyLink(widget.id));
               }
             },
             itemBuilder:
